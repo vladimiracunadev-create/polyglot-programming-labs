@@ -5,7 +5,7 @@
 Programa secuencial de **176 clases** en **12 partes**. La numeración es
 global (001→…) y el orden importa: cada clase asume la anterior.
 
-**Estado:** 106 clases construidas · 70 planificadas · núcleo de 10 lenguajes.
+**Estado:** 122 clases construidas · 54 planificadas · núcleo de 10 lenguajes.
 Leyenda: ✅ construida · 🚧 planificada.
 
 ---
@@ -171,22 +171,22 @@ Leyenda: ✅ construida · 🚧 planificada.
 
 | # | Clase |
 |---|---|
-| 🚧 107 | [Qué es un paradigma y por qué importa](parte-7-paradigmas/107-que-es-un-paradigma-y-por-que-importa/README.md) |
-| 🚧 108 | [Imperativo y estructurado](parte-7-paradigmas/108-imperativo-y-estructurado/README.md) |
-| 🚧 109 | [Procedimental y modular](parte-7-paradigmas/109-procedimental-y-modular/README.md) |
-| 🚧 110 | [Orientado a objetos: clases, objetos y estado](parte-7-paradigmas/110-orientado-a-objetos-clases-objetos-y-estado/README.md) |
-| 🚧 111 | [Herencia, composición y polimorfismo](parte-7-paradigmas/111-herencia-composicion-y-polimorfismo/README.md) |
-| 🚧 112 | [Interfaces, traits y clases abstractas](parte-7-paradigmas/112-interfaces-traits-y-clases-abstractas/README.md) |
-| 🚧 113 | [OO basado en prototipos (JavaScript)](parte-7-paradigmas/113-oo-basado-en-prototipos-javascript/README.md) |
-| 🚧 114 | [Funcional I: inmutabilidad y funciones puras](parte-7-paradigmas/114-funcional-i-inmutabilidad-y-funciones-puras/README.md) |
-| 🚧 115 | [Funcional II: composición, currying y aplicación parcial](parte-7-paradigmas/115-funcional-ii-composicion-currying-y-aplicacion-parcial/README.md) |
-| 🚧 116 | [Funcional III: functores, mónadas y efectos (visión práctica)](parte-7-paradigmas/116-funcional-iii-functores-monadas-y-efectos-vision-practica/README.md) |
-| 🚧 117 | [Declarativo: consultas y transformación (SQL)](parte-7-paradigmas/117-declarativo-consultas-y-transformacion-sql/README.md) |
-| 🚧 118 | [Lógico: reglas, hechos y unificación (Prolog)](parte-7-paradigmas/118-logico-reglas-hechos-y-unificacion-prolog/README.md) |
-| 🚧 119 | [Orientado a eventos y callbacks](parte-7-paradigmas/119-orientado-a-eventos-y-callbacks/README.md) |
-| 🚧 120 | [Reactivo y flujos de datos (streams)](parte-7-paradigmas/120-reactivo-y-flujos-de-datos-streams/README.md) |
-| 🚧 121 | [Concurrente: hilos, tareas y canales](parte-7-paradigmas/121-concurrente-hilos-tareas-y-canales/README.md) |
-| 🚧 122 | [Asíncrono: async/await y promesas](parte-7-paradigmas/122-asincrono-async-await-y-promesas/README.md) |
+| ✅ 107 | [Qué es un paradigma y por qué importa](parte-7-paradigmas/107-que-es-un-paradigma-y-por-que-importa/README.md) |
+| ✅ 108 | [Imperativo y estructurado](parte-7-paradigmas/108-imperativo-y-estructurado/README.md) |
+| ✅ 109 | [Procedimental y modular](parte-7-paradigmas/109-procedimental-y-modular/README.md) |
+| ✅ 110 | [Orientado a objetos: clases, objetos y estado](parte-7-paradigmas/110-orientado-a-objetos-clases-objetos-y-estado/README.md) |
+| ✅ 111 | [Herencia, composición y polimorfismo](parte-7-paradigmas/111-herencia-composicion-y-polimorfismo/README.md) |
+| ✅ 112 | [Interfaces, traits y clases abstractas](parte-7-paradigmas/112-interfaces-traits-y-clases-abstractas/README.md) |
+| ✅ 113 | [OO basado en prototipos (JavaScript)](parte-7-paradigmas/113-oo-basado-en-prototipos-javascript/README.md) |
+| ✅ 114 | [Funcional I: inmutabilidad y funciones puras](parte-7-paradigmas/114-funcional-i-inmutabilidad-y-funciones-puras/README.md) |
+| ✅ 115 | [Funcional II: composición, currying y aplicación parcial](parte-7-paradigmas/115-funcional-ii-composicion-currying-y-aplicacion-parcial/README.md) |
+| ✅ 116 | [Funcional III: functores, mónadas y efectos (visión práctica)](parte-7-paradigmas/116-funcional-iii-functores-monadas-y-efectos-vision-practica/README.md) |
+| ✅ 117 | [Declarativo: consultas y transformación (SQL)](parte-7-paradigmas/117-declarativo-consultas-y-transformacion-sql/README.md) |
+| ✅ 118 | [Lógico: reglas, hechos y unificación (Prolog)](parte-7-paradigmas/118-logico-reglas-hechos-y-unificacion-prolog/README.md) |
+| ✅ 119 | [Orientado a eventos y callbacks](parte-7-paradigmas/119-orientado-a-eventos-y-callbacks/README.md) |
+| ✅ 120 | [Reactivo y flujos de datos (streams)](parte-7-paradigmas/120-reactivo-y-flujos-de-datos-streams/README.md) |
+| ✅ 121 | [Concurrente: hilos, tareas y canales](parte-7-paradigmas/121-concurrente-hilos-tareas-y-canales/README.md) |
+| ✅ 122 | [Asíncrono: async/await y promesas](parte-7-paradigmas/122-asincrono-async-await-y-promesas/README.md) |
 
 ## Parte 8 — Cómo funcionan los lenguajes · clases 123–138
 

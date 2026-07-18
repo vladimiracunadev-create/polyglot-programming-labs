@@ -1,0 +1,19 @@
+{
+  "descripcion": "Sumar los enteros de 1 a n, como ejemplo mínimo para hablar de paradigmas.",
+  "contrato": "stdin: un entero `n` (n >= 1) → stdout: `suma=<1+2+...+n>`",
+  "formula": "suma = 1 + 2 + ... + n",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "suma=15"
+    },
+    {
+      "stdin": "3",
+      "esperado": "suma=6"
+    },
+    {
+      "stdin": "1",
+      "esperado": "suma=1"
+    }
+  ]
+}

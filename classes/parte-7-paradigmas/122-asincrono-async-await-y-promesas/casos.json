@@ -1,0 +1,19 @@
+{
+  "descripcion": "Obtener el doble de un número mediante una tarea asíncrona (async/await).",
+  "contrato": "stdin: un entero `n` → stdout: `resultado=<2n>`",
+  "formula": "await doble(n) = 2n",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "resultado=10"
+    },
+    {
+      "stdin": "0",
+      "esperado": "resultado=0"
+    },
+    {
+      "stdin": "6",
+      "esperado": "resultado=12"
+    }
+  ]
+}

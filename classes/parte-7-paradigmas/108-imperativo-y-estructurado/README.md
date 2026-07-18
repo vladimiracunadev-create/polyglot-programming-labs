@@ -1,20 +1,63 @@
 # Clase 108 — Imperativo y estructurado
 
-> Parte **7 — Paradigmas** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **7 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **imperativo y estructurado**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Practicar el **paradigma imperativo y estructurado**: describir la solución como una secuencia de pasos que modifican el estado (un acumulador), usando bucles y condiciones.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Resolver con estado mutable y bucles.
+2. Reconocer la secuencia de pasos.
+3. Contrastar con el estilo funcional.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Imperativo | Pasos que cambian el estado |
+| 2 | Estructurado | Secuencia, selección, iteración |
+| 3 | Estado mutable | Variables que cambian |
+
+## 📖 Definiciones y características
+
+- **Imperativo** — paradigma que describe cómo cambiar el estado paso a paso. Clave: bucles y asignaciones.
+- **Estructurado** — usa solo secuencia, selección e iteración (sin goto). Clave: código claro.
+- **Estado mutable** — variables que cambian durante la ejecución. Clave: el acumulador.
+
+## 🧩 Situación
+
+El estilo imperativo es el más cercano a cómo funciona la máquina: 'haz esto, luego esto'. Sumar con un acumulador y un bucle es su ejemplo puro.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea con enteros separados por espacio
+- **Salida** (stdout): `suma=<suma de todos>`
+- **Regla:** acumular la suma recorriendo la lista
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `1 2 3` | `suma=6` |
+| `5` | `suma=5` |
+| `10 20` | `suma=30` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+suma <- 0 ; PARA CADA x: suma <- suma + x
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | Bucle explícito en todos los imperativos. |
+| Semántica | Modifica un acumulador; el estado evoluciona. |
+| Paradigmática | El funcional evitaría el acumulador mutable con reduce. |
+
+## 🧬 El concepto en la familia
+
+Casi todos los lenguajes del núcleo soportan el estilo imperativo de forma nativa.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 108
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **No inicializar el acumulador** → causa: resultado incorrecto → solución: empezar en 0
+- **Efectos secundarios ocultos** → causa: estado difícil de seguir → solución: mantener el estado local y claro
+
+## ❓ Preguntas frecuentes
+
+- **¿Imperativo o funcional?** Imperativo es directo y eficiente; funcional es más declarativo. Depende.
+- **¿Estructurado significa sin goto?** Sí: solo secuencia, selección e iteración.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

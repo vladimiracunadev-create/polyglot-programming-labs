@@ -1,0 +1,19 @@
+{
+  "descripcion": "Emitir un evento por cada número de 1 a n y recolectar en un manejador (callback) el orden de llegada.",
+  "contrato": "stdin: un entero `n` (número de eventos, n >= 1) → stdout: `eventos=<1-2-...-n>` (orden en que llegaron)",
+  "formula": "por cada i en 1..n, emitir evento i; el callback lo recolecta",
+  "casos": [
+    {
+      "stdin": "3",
+      "esperado": "eventos=1-2-3"
+    },
+    {
+      "stdin": "1",
+      "esperado": "eventos=1"
+    },
+    {
+      "stdin": "4",
+      "esperado": "eventos=1-2-3-4"
+    }
+  ]
+}

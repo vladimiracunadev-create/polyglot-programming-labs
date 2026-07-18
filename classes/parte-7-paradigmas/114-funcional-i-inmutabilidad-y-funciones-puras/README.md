@@ -1,20 +1,63 @@
 # Clase 114 — Funcional I: inmutabilidad y funciones puras
 
-> Parte **7 — Paradigmas** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **7 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **funcional i: inmutabilidad y funciones puras**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Practicar el paradigma **funcional (I)**: inmutabilidad y funciones puras. Transformar una lista con `map` produce una lista nueva sin alterar la original ni usar estado mutable.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Transformar una colección sin mutarla.
+2. Reconocer la inmutabilidad.
+3. Usar map en lugar de un bucle con estado.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Inmutabilidad | No modificar, crear nuevo |
+| 2 | map | Transformar cada elemento |
+| 3 | Sin estado mutable | Sin acumuladores |
+
+## 📖 Definiciones y características
+
+- **Funcional** — paradigma basado en funciones puras e inmutabilidad. Clave: sin efectos ni estado mutable.
+- **Inmutabilidad** — los datos no cambian; las transformaciones crean nuevos. Clave: más seguro.
+- **map** — aplica una función a cada elemento y devuelve una colección nueva. Clave: no muta.
+
+## 🧩 Situación
+
+En vez de recorrer y mutar, el estilo funcional describe la transformación: 'la lista de los dobles'. La original queda intacta, lo que evita errores por estado compartido.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea con enteros separados por espacio
+- **Salida** (stdout): `doblados=<cada x·2 unidos por ->`
+- **Regla:** doblados = map(x → 2x, lista)
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `1 2 3` | `doblados=2-4-6` |
+| `5` | `doblados=10` |
+| `2 4` | `doblados=4-8` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+doblados <- MAP(x -> 2x, lista) ; ESCRIBIR unidos por -
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | `map` (Python/JS/Rust), streams (Java), LINQ Select (C#). |
+| Semántica | No muta la lista original; devuelve otra. |
+| Paradigmática | SQL transforma en el SELECT, sin mutar. |
+
+## 🧬 El concepto en la familia
+
+En Haskell `map (*2) xs` es el ejemplo puro. Casi todos ofrecen map.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 114
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Mutar dentro del map** → causa: efecto secundario → solución: mantener la transformación pura
+- **Confundir map con for-each** → causa: map devuelve; for-each no → solución: usar map cuando quieres el resultado
+
+## ❓ Preguntas frecuentes
+
+- **¿Map es más lento que un bucle?** Generalmente comparable; y evita errores de estado.
+- **¿Inmutabilidad no gasta memoria?** Crea nuevos datos, pero permite compartir y razonar mejor.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

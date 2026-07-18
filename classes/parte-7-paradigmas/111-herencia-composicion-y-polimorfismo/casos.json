@@ -1,0 +1,19 @@
+{
+  "descripcion": "Dado el tipo de animal, producir su sonido mediante polimorfismo.",
+  "contrato": "stdin: una palabra: `perro`, `gato` o `vaca` → stdout: `sonido=<guau|miau|muu>`",
+  "formula": "cada tipo devuelve su propio sonido",
+  "casos": [
+    {
+      "stdin": "perro",
+      "esperado": "sonido=guau"
+    },
+    {
+      "stdin": "gato",
+      "esperado": "sonido=miau"
+    },
+    {
+      "stdin": "vaca",
+      "esperado": "sonido=muu"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "descripcion": "Calcular el promedio (división entera) de una lista usando un procedimiento reutilizable.",
+  "contrato": "stdin: una línea con enteros separados por espacio → stdout: `promedio=<suma dividida entre la cantidad, entera>`",
+  "formula": "promedio = suma / cantidad (división entera)",
+  "casos": [
+    {
+      "stdin": "2 4 6",
+      "esperado": "promedio=4"
+    },
+    {
+      "stdin": "10",
+      "esperado": "promedio=10"
+    },
+    {
+      "stdin": "3 5",
+      "esperado": "promedio=4"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "descripcion": "Calcular el área de una figura a través de una interfaz común con método area().",
+  "contrato": "stdin: una línea: `cuadrado <lado>` o `rectangulo <ancho> <alto>` → stdout: `area=<área>`",
+  "formula": "cada figura implementa area() a su manera",
+  "casos": [
+    {
+      "stdin": "cuadrado 5",
+      "esperado": "area=25"
+    },
+    {
+      "stdin": "rectangulo 3 4",
+      "esperado": "area=12"
+    },
+    {
+      "stdin": "cuadrado 6",
+      "esperado": "area=36"
+    }
+  ]
+}

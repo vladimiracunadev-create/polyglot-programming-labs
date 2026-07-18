@@ -1,0 +1,19 @@
+{
+  "descripcion": "Duplicar cada elemento de una lista sin mutar la original (estilo funcional).",
+  "contrato": "stdin: una línea con enteros separados por espacio → stdout: `doblados=<cada x·2 unidos por ->`",
+  "formula": "doblados = map(x → 2x, lista)",
+  "casos": [
+    {
+      "stdin": "1 2 3",
+      "esperado": "doblados=2-4-6"
+    },
+    {
+      "stdin": "5",
+      "esperado": "doblados=10"
+    },
+    {
+      "stdin": "2 4",
+      "esperado": "doblados=4-8"
+    }
+  ]
+}

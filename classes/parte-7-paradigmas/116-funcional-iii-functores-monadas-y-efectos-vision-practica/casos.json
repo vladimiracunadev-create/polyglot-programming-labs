@@ -1,0 +1,19 @@
+{
+  "descripcion": "Aplicar una operación a un valor solo si existe (positivo); si no, indicar ausencia. Modelo Option/Maybe.",
+  "contrato": "stdin: un entero `n` → stdout: `resultado=<2n>` si n>0 (hay valor), o `resultado=nada` si no",
+  "formula": "Option(n si n>0).map(x → 2x)",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "resultado=10"
+    },
+    {
+      "stdin": "0",
+      "esperado": "resultado=nada"
+    },
+    {
+      "stdin": "-3",
+      "esperado": "resultado=nada"
+    }
+  ]
+}

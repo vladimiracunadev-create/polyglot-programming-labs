@@ -1,20 +1,63 @@
 # Clase 111 — Herencia, composición y polimorfismo
 
-> Parte **7 — Paradigmas** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **7 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **herencia, composición y polimorfismo**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Practicar **herencia, composición y polimorfismo**: distintos tipos que comparten una interfaz común (`sonido`) y responden cada uno a su manera. Llamar al mismo método da resultados distintos según el tipo real.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Reconocer el polimorfismo (mismo método, distinto comportamiento).
+2. Distinguir herencia de composición.
+3. Despachar según el tipo real.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Herencia | Un tipo deriva de otro |
+| 2 | Polimorfismo | Mismo método, comportamiento distinto |
+| 3 | Composición | Construir con partes, alternativa a heredar |
+
+## 📖 Definiciones y características
+
+- **Herencia** — un tipo hereda estado/comportamiento de otro. Clave: reutiliza y especializa.
+- **Polimorfismo** — el mismo método se comporta distinto según el tipo real. Clave: `animal.sonido()`.
+- **Composición** — construir un objeto a partir de otros (tiene-un) en vez de heredar (es-un). Clave: más flexible.
+
+## 🧩 Situación
+
+Perro, gato y vaca son animales, pero cada uno suena distinto. El polimorfismo permite tratarlos igual (`animal.sonido()`) y obtener la respuesta correcta según el tipo.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una palabra: `perro`, `gato` o `vaca`
+- **Salida** (stdout): `sonido=<guau|miau|muu>`
+- **Regla:** cada tipo devuelve su propio sonido
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `perro` | `sonido=guau` |
+| `gato` | `sonido=miau` |
+| `vaca` | `sonido=muu` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER tipo ; crear animal ; ESCRIBIR animal.sonido()
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | Herencia/interfaces (Java/C#), traits (Rust), interfaces (Go), duck typing (Python/JS). |
+| Semántica | El despacho es dinámico: se decide en ejecución por el tipo real. |
+| Paradigmática | SQL usa CASE; no hay despacho polimórfico. |
+
+## 🧬 El concepto en la familia
+
+En Ruby el polimorfismo es por duck typing. En Kotlin, interfaces y clases selladas.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 111
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Abusar de la herencia profunda** → causa: jerarquías frágiles → solución: preferir composición cuando encaje
+- **Olvidar un tipo** → causa: caso sin manejar → solución: cubrir todos o usar un default
+
+## ❓ Preguntas frecuentes
+
+- **¿Herencia o composición?** Composición por defecto; herencia cuando hay un 'es-un' real y estable.
+- **¿Qué es duck typing?** Si suena como pato, es pato: importa el método, no el tipo declarado.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

@@ -1,0 +1,19 @@
+{
+  "descripcion": "Sumar una lista dividiendo el trabajo (visión concurrente); el resultado es la suma total.",
+  "contrato": "stdin: una línea con enteros separados por espacio → stdout: `suma=<suma total>`",
+  "formula": "repartir la lista, sumar por partes, combinar",
+  "casos": [
+    {
+      "stdin": "1 2 3 4",
+      "esperado": "suma=10"
+    },
+    {
+      "stdin": "5",
+      "esperado": "suma=5"
+    },
+    {
+      "stdin": "10 20 30",
+      "esperado": "suma=60"
+    }
+  ]
+}

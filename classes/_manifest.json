@@ -14,8 +14,8 @@
   "php"
  ],
  "total_planned": 176,
- "total_built": 106,
- "parts_built": 7,
+ "total_built": 122,
+ "parts_built": 8,
  "parts_planned": 12,
  "parts": [
   {
@@ -744,97 +744,97 @@
      "num": 107,
      "title": "Qué es un paradigma y por qué importa",
      "slug": "107-que-es-un-paradigma-y-por-que-importa",
-     "built": false
+     "built": true
     },
     {
      "num": 108,
      "title": "Imperativo y estructurado",
      "slug": "108-imperativo-y-estructurado",
-     "built": false
+     "built": true
     },
     {
      "num": 109,
      "title": "Procedimental y modular",
      "slug": "109-procedimental-y-modular",
-     "built": false
+     "built": true
     },
     {
      "num": 110,
      "title": "Orientado a objetos: clases, objetos y estado",
      "slug": "110-orientado-a-objetos-clases-objetos-y-estado",
-     "built": false
+     "built": true
     },
     {
      "num": 111,
      "title": "Herencia, composición y polimorfismo",
      "slug": "111-herencia-composicion-y-polimorfismo",
-     "built": false
+     "built": true
     },
     {
      "num": 112,
      "title": "Interfaces, traits y clases abstractas",
      "slug": "112-interfaces-traits-y-clases-abstractas",
-     "built": false
+     "built": true
     },
     {
      "num": 113,
      "title": "OO basado en prototipos (JavaScript)",
      "slug": "113-oo-basado-en-prototipos-javascript",
-     "built": false
+     "built": true
     },
     {
      "num": 114,
      "title": "Funcional I: inmutabilidad y funciones puras",
      "slug": "114-funcional-i-inmutabilidad-y-funciones-puras",
-     "built": false
+     "built": true
     },
     {
      "num": 115,
      "title": "Funcional II: composición, currying y aplicación parcial",
      "slug": "115-funcional-ii-composicion-currying-y-aplicacion-parcial",
-     "built": false
+     "built": true
     },
     {
      "num": 116,
      "title": "Funcional III: functores, mónadas y efectos (visión práctica)",
      "slug": "116-funcional-iii-functores-monadas-y-efectos-vision-practica",
-     "built": false
+     "built": true
     },
     {
      "num": 117,
      "title": "Declarativo: consultas y transformación (SQL)",
      "slug": "117-declarativo-consultas-y-transformacion-sql",
-     "built": false
+     "built": true
     },
     {
      "num": 118,
      "title": "Lógico: reglas, hechos y unificación (Prolog)",
      "slug": "118-logico-reglas-hechos-y-unificacion-prolog",
-     "built": false
+     "built": true
     },
     {
      "num": 119,
      "title": "Orientado a eventos y callbacks",
      "slug": "119-orientado-a-eventos-y-callbacks",
-     "built": false
+     "built": true
     },
     {
      "num": 120,
      "title": "Reactivo y flujos de datos (streams)",
      "slug": "120-reactivo-y-flujos-de-datos-streams",
-     "built": false
+     "built": true
     },
     {
      "num": 121,
      "title": "Concurrente: hilos, tareas y canales",
      "slug": "121-concurrente-hilos-tareas-y-canales",
-     "built": false
+     "built": true
     },
     {
      "num": 122,
      "title": "Asíncrono: async/await y promesas",
      "slug": "122-asincrono-async-await-y-promesas",
-     "built": false
+     "built": true
     }
    ]
   },

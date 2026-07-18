@@ -1,0 +1,19 @@
+{
+  "descripcion": "Componer dos funciones (doblar y luego sumar uno) y aplicarlas a un número.",
+  "contrato": "stdin: un entero `n` → stdout: `resultado=<2n+1>` (doblar y luego incrementar)",
+  "formula": "resultado = incrementar(doblar(n)) = 2n + 1",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "resultado=11"
+    },
+    {
+      "stdin": "0",
+      "esperado": "resultado=1"
+    },
+    {
+      "stdin": "3",
+      "esperado": "resultado=7"
+    }
+  ]
+}

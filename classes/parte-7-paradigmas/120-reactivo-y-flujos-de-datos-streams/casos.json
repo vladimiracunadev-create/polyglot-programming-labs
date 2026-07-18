@@ -1,0 +1,19 @@
+{
+  "descripcion": "Procesar una lista como un flujo (stream): filtrar los pares y duplicarlos.",
+  "contrato": "stdin: una línea con enteros separados por espacio (al menos un par) → stdout: `stream=<pares duplicados, unidos por ->`",
+  "formula": "flujo: filtrar pares, luego map x → 2x",
+  "casos": [
+    {
+      "stdin": "1 2 3 4",
+      "esperado": "stream=4-8"
+    },
+    {
+      "stdin": "2 4",
+      "esperado": "stream=4-8"
+    },
+    {
+      "stdin": "6 7 8",
+      "esperado": "stream=12-16"
+    }
+  ]
+}

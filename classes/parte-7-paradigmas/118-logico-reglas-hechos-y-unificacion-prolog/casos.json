@@ -1,0 +1,19 @@
+{
+  "descripcion": "Determinar si un número divide a otro, expresado como una regla lógica.",
+  "contrato": "stdin: una línea `a b` (dos enteros, a != 0) → stdout: `divisor=<true|false>` (¿a divide a b?)",
+  "formula": "divisor = (b mod a == 0)",
+  "casos": [
+    {
+      "stdin": "3 12",
+      "esperado": "divisor=true"
+    },
+    {
+      "stdin": "5 12",
+      "esperado": "divisor=false"
+    },
+    {
+      "stdin": "4 12",
+      "esperado": "divisor=true"
+    }
+  ]
+}

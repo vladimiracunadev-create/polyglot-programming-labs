@@ -1,0 +1,19 @@
+{
+  "descripcion": "Sumar una lista de enteros con un estilo imperativo: un acumulador y un bucle explícito.",
+  "contrato": "stdin: una línea con enteros separados por espacio → stdout: `suma=<suma de todos>`",
+  "formula": "acumular la suma recorriendo la lista",
+  "casos": [
+    {
+      "stdin": "1 2 3",
+      "esperado": "suma=6"
+    },
+    {
+      "stdin": "5",
+      "esperado": "suma=5"
+    },
+    {
+      "stdin": "10 20",
+      "esperado": "suma=30"
+    }
+  ]
+}

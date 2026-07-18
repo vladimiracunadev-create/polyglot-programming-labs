@@ -1,0 +1,19 @@
+{
+  "descripcion": "Crear un objeto con un método doble() y usarlo, ilustrando el modelo de prototipos de JavaScript.",
+  "contrato": "stdin: un entero `n` → stdout: `resultado=<2n>`",
+  "formula": "objeto.doble() = valor·2",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "resultado=10"
+    },
+    {
+      "stdin": "0",
+      "esperado": "resultado=0"
+    },
+    {
+      "stdin": "7",
+      "esperado": "resultado=14"
+    }
+  ]
+}

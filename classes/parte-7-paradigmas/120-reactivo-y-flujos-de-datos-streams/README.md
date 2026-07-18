@@ -1,20 +1,63 @@
 # Clase 120 — Reactivo y flujos de datos (streams)
 
-> Parte **7 — Paradigmas** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **7 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **reactivo y flujos de datos (streams)**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Practicar el paradigma **reactivo / de flujos (streams)**: procesar datos como una corriente que pasa por operadores (filtrar, mapear) encadenados. Aquí un flujo filtra pares y los duplica.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Encadenar operadores sobre un flujo.
+2. Filtrar y transformar en pipeline.
+3. Reconocer el estilo reactivo.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Flujo (stream) | Datos como corriente |
+| 2 | Operadores encadenados | filter, map, … |
+| 3 | Pipeline | El dato fluye por pasos |
+
+## 📖 Definiciones y características
+
+- **Flujo/stream** — secuencia de datos procesada por etapas. Clave: filter/map encadenados.
+- **Operador** — etapa que transforma el flujo (filter, map). Clave: se encadenan.
+- **Reactivo** — reaccionar a datos que llegan con el tiempo. Clave: streams y observables.
+
+## 🧩 Situación
+
+Procesar eventos que llegan, filas de un archivo grande o mensajes en tiempo real: el estilo de flujos encadena operadores (filtrar → transformar) sin materializar todo a la vez.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea con enteros separados por espacio (al menos un par)
+- **Salida** (stdout): `stream=<pares duplicados, unidos por ->`
+- **Regla:** flujo: filtrar pares, luego map x → 2x
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `1 2 3 4` | `stream=4-8` |
+| `2 4` | `stream=4-8` |
+| `6 7 8` | `stream=12-16` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+flujo(lista) |> filtrar(par) |> mapear(x->2x) |> recolectar
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | `.filter().map()` (JS/Rust), Streams (Java), LINQ (C#), generadores (Python). |
+| Semántica | Los operadores se encadenan; el dato fluye por el pipeline. |
+| Paradigmática | SQL encadena WHERE + SELECT, un pipeline declarativo. |
+
+## 🧬 El concepto en la familia
+
+En Java, la API Streams; en el frontend, RxJS y observables son puro estilo reactivo.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 120
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Materializar todo en cada paso** → causa: gasto de memoria → solución: encadenar operadores perezosos cuando se pueda
+- **Orden de operadores equivocado** → causa: resultado distinto → solución: filtrar antes de mapear si conviene
+
+## ❓ Preguntas frecuentes
+
+- **¿Stream o bucle?** El stream es más declarativo y componible; el bucle da control fino.
+- **¿Reactivo es solo frontend?** No: también backend (Reactor, Akka Streams) y procesamiento de datos.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

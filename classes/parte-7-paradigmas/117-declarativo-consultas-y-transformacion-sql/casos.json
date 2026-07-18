@@ -1,0 +1,19 @@
+{
+  "descripcion": "Sumar solo los números pares de una lista, en estilo declarativo.",
+  "contrato": "stdin: una línea con enteros separados por espacio → stdout: `suma_pares=<suma de los pares>`",
+  "formula": "suma de los x tales que x es par",
+  "casos": [
+    {
+      "stdin": "1 2 3 4",
+      "esperado": "suma_pares=6"
+    },
+    {
+      "stdin": "2 4 6",
+      "esperado": "suma_pares=12"
+    },
+    {
+      "stdin": "1 3 5",
+      "esperado": "suma_pares=0"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "descripcion": "Crear un objeto Contador y aumentarlo n veces, mostrando su estado final.",
+  "contrato": "stdin: un entero `n` (número de incrementos) → stdout: `cuenta=<n>`",
+  "formula": "contador incrementado n veces desde 0",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "cuenta=5"
+    },
+    {
+      "stdin": "0",
+      "esperado": "cuenta=0"
+    },
+    {
+      "stdin": "3",
+      "esperado": "cuenta=3"
+    }
+  ]
+}

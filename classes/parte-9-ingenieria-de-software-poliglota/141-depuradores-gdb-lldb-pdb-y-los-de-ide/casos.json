@@ -1,0 +1,19 @@
+{
+  "descripcion": "Mostrar la traza de sumas acumuladas de 1 a n, como al avanzar paso a paso en un depurador.",
+  "contrato": "stdin: un entero `n` (n >= 1) → stdout: `traza=<sumas acumuladas 1..n unidas por ->`",
+  "formula": "traza[i] = 1 + 2 + ... + i",
+  "casos": [
+    {
+      "stdin": "3",
+      "esperado": "traza=1-3-6"
+    },
+    {
+      "stdin": "1",
+      "esperado": "traza=1"
+    },
+    {
+      "stdin": "4",
+      "esperado": "traza=1-3-6-10"
+    }
+  ]
+}

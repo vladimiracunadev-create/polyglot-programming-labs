@@ -1,0 +1,19 @@
+{
+  "descripcion": "Refactorizar el cálculo del doble (de n*2 a n+n) y verificar que el comportamiento no cambia.",
+  "contrato": "stdin: un entero `n` → stdout: `equivalente=<true|false> resultado=<2n>`",
+  "formula": "viejo = n*2 ; nuevo = n+n ; equivalente si coinciden",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "equivalente=true resultado=10"
+    },
+    {
+      "stdin": "0",
+      "esperado": "equivalente=true resultado=0"
+    },
+    {
+      "stdin": "7",
+      "esperado": "equivalente=true resultado=14"
+    }
+  ]
+}

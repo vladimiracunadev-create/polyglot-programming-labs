@@ -1,20 +1,63 @@
 # Clase 144 — Compilación reproducible y empaquetado
 
-> Parte **9 — Ingeniería de software políglota** · ⏱️ Duración estimada: **90 min** · Nivel: **Avanzado**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **9 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **compilación reproducible y empaquetado**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Entender la **compilación reproducible y el empaquetado**: una build reproducible produce siempre el mismo artefacto para la misma entrada, comprobable con una suma de verificación (checksum). Aquí el checksum es la suma de los valores.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Calcular una suma de comprobación.
+2. Explicar la reproducibilidad.
+3. Relacionar el checksum con la verificación de artefactos.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Reproducibilidad | Misma entrada, mismo artefacto |
+| 2 | Checksum | Huella de los datos |
+| 3 | Verificación | Detectar cambios |
+
+## 📖 Definiciones y características
+
+- **Compilación reproducible** — produce un artefacto idéntico byte a byte para la misma entrada. Clave: confianza y auditoría.
+- **Checksum** — valor derivado de los datos que cambia si estos cambian. Clave: detecta alteraciones.
+- **Artefacto** — salida de la build (binario, paquete). Clave: se verifica con su checksum.
+
+## 🧩 Situación
+
+Al descargar un binario, su checksum publicado permite verificar que no fue alterado. Una build reproducible da siempre el mismo checksum, lo que hace auditable la cadena de suministro.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea con enteros separados por espacio
+- **Salida** (stdout): `checksum=<suma de los valores>`
+- **Regla:** checksum = suma de los valores
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `1 2 3` | `checksum=6` |
+| `5` | `checksum=5` |
+| `10 20 30` | `checksum=60` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER lista ; checksum <- suma ; ESCRIBIR checksum
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | Suma en cada lenguaje (un checksum real usaría un hash). |
+| Semántica | La misma entrada da el mismo checksum: reproducibilidad. |
+| Paradigmática | SQL suma con SUM. |
+
+## 🧬 El concepto en la familia
+
+Los gestores de paquetes verifican con SHA-256; aquí una suma simple ilustra el concepto.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 144
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Confiar en un checksum débil** → causa: colisiones → solución: usar hashes criptográficos para seguridad real
+- **Builds no reproducibles** → causa: checksums que cambian sin motivo → solución: eliminar fuentes de no-determinismo (fechas, orden)
+
+## ❓ Preguntas frecuentes
+
+- **¿Suma o hash?** Para integridad real se usa un hash (SHA-256); la suma solo ilustra.
+- **¿Por qué builds reproducibles?** Auditar que el binario proviene del código y no fue manipulado.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

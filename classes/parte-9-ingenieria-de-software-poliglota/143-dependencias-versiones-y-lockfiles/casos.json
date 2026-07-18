@@ -1,0 +1,19 @@
+{
+  "descripcion": "Descomponer una versión semántica 'mayor.menor.parche' en sus tres números.",
+  "contrato": "stdin: una línea con una versión `mayor.menor.parche` → stdout: `mayor=<M> menor=<m> parche=<p>`",
+  "formula": "separar la versión por puntos",
+  "casos": [
+    {
+      "stdin": "1.2.3",
+      "esperado": "mayor=1 menor=2 parche=3"
+    },
+    {
+      "stdin": "0.5.10",
+      "esperado": "mayor=0 menor=5 parche=10"
+    },
+    {
+      "stdin": "2.0.0",
+      "esperado": "mayor=2 menor=0 parche=0"
+    }
+  ]
+}

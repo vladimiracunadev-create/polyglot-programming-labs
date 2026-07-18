@@ -1,0 +1,19 @@
+{
+  "descripcion": "Aplicar una operación (suma, resta o producto) elegida por nombre: el patrón Estrategia.",
+  "contrato": "stdin: una línea `estrategia a b` (estrategia ∈ {suma, resta, producto}) → stdout: `resultado=<a estrategia b>`",
+  "formula": "aplicar la estrategia elegida a a y b",
+  "casos": [
+    {
+      "stdin": "suma 3 4",
+      "esperado": "resultado=7"
+    },
+    {
+      "stdin": "resta 10 3",
+      "esperado": "resultado=7"
+    },
+    {
+      "stdin": "producto 5 6",
+      "esperado": "resultado=30"
+    }
+  ]
+}

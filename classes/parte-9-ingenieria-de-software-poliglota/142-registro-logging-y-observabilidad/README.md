@@ -1,20 +1,63 @@
 # Clase 142 — Registro (logging) y observabilidad
 
-> Parte **9 — Ingeniería de software políglota** · ⏱️ Duración estimada: **90 min** · Nivel: **Avanzado**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **9 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **registro (logging) y observabilidad**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Practicar el **registro (logging) y la observabilidad**: dejar rastros de lo que hace el programa para poder diagnosticarlo en producción, donde no hay depurador. Un log con nivel y datos es la unidad básica.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Emitir un registro con nivel.
+2. Explicar la observabilidad.
+3. Distinguir niveles de log.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Logging | Dejar rastros de la ejecución |
+| 2 | Nivel | INFO, WARN, ERROR |
+| 3 | Observabilidad | Entender el sistema desde fuera |
+
+## 📖 Definiciones y características
+
+- **Log** — mensaje que registra un evento del programa. Clave: diagnóstico en producción.
+- **Nivel de log** — gravedad del mensaje (DEBUG, INFO, WARN, ERROR). Clave: filtrar el ruido.
+- **Observabilidad** — capacidad de entender el estado interno desde las salidas (logs, métricas, trazas). Clave: operar en producción.
+
+## 🧩 Situación
+
+En producción no puedes pausar el programa; te guías por los logs. Un registro estructurado ('[INFO] procesados=5') permite saber qué pasó sin estar delante.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): un entero `n` (elementos procesados)
+- **Salida** (stdout): `log=[INFO] procesados=<n>`
+- **Regla:** emitir un registro de nivel INFO con el conteo
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `5` | `log=[INFO] procesados=5` |
+| `0` | `log=[INFO] procesados=0` |
+| `3` | `log=[INFO] procesados=3` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER n ; ESCRIBIR log de nivel INFO con procesados=n
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | logging (Python), console/log4j (JS/Java), slog (Go). |
+| Semántica | El nivel permite filtrar; el formato estructurado facilita el análisis. |
+| Paradigmática | SQL registra con tablas de auditoría. |
+
+## 🧬 El concepto en la familia
+
+log4j/SLF4J (Java), logging (Python), Serilog (.NET), zap/slog (Go): mismo concepto de niveles.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 142
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Loggear demasiado** → causa: ruido que oculta lo importante → solución: usar niveles y registrar lo relevante
+- **Loggear datos sensibles** → causa: fuga de información → solución: no registrar contraseñas ni datos personales
+
+## ❓ Preguntas frecuentes
+
+- **¿Log o depurador?** El depurador para desarrollo; el log para producción.
+- **¿Qué es observabilidad?** Logs, métricas y trazas que permiten entender el sistema en marcha.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

@@ -1,0 +1,19 @@
+{
+  "descripcion": "Calcular una suma de comprobación (checksum) sumando los valores de una lista.",
+  "contrato": "stdin: una línea con enteros separados por espacio → stdout: `checksum=<suma de los valores>`",
+  "formula": "checksum = suma de los valores",
+  "casos": [
+    {
+      "stdin": "1 2 3",
+      "esperado": "checksum=6"
+    },
+    {
+      "stdin": "5",
+      "esperado": "checksum=5"
+    },
+    {
+      "stdin": "10 20 30",
+      "esperado": "checksum=60"
+    }
+  ]
+}

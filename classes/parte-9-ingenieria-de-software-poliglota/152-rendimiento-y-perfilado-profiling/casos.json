@@ -1,0 +1,19 @@
+{
+  "descripcion": "Sumar 1 a n contando cuántas operaciones se realizan, como en un perfilado.",
+  "contrato": "stdin: un entero `n` (n >= 1) → stdout: `operaciones=<n> resultado=<1+...+n>`",
+  "formula": "sumar 1..n contando cada suma",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "operaciones=5 resultado=15"
+    },
+    {
+      "stdin": "1",
+      "esperado": "operaciones=1 resultado=1"
+    },
+    {
+      "stdin": "3",
+      "esperado": "operaciones=3 resultado=6"
+    }
+  ]
+}

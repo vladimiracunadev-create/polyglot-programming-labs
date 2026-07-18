@@ -1,0 +1,19 @@
+{
+  "descripcion": "Verificar si un identificador cumple el estándar de estar en minúsculas (revisión de estilo).",
+  "contrato": "stdin: una palabra (identificador, solo letras) → stdout: `valido=<true|false>` (true si está todo en minúsculas)",
+  "formula": "valido si todos los caracteres son minúsculas",
+  "casos": [
+    {
+      "stdin": "total",
+      "esperado": "valido=true"
+    },
+    {
+      "stdin": "Total",
+      "esperado": "valido=false"
+    },
+    {
+      "stdin": "abc",
+      "esperado": "valido=true"
+    }
+  ]
+}

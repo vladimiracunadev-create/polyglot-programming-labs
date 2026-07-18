@@ -5,7 +5,7 @@
 Programa secuencial de **176 clases** en **12 partes**. La numeración es
 global (001→…) y el orden importa: cada clase asume la anterior.
 
-**Estado:** 138 clases construidas · 38 planificadas · núcleo de 10 lenguajes.
+**Estado:** 154 clases construidas · 22 planificadas · núcleo de 10 lenguajes.
 Leyenda: ✅ construida · 🚧 planificada.
 
 ---
@@ -217,22 +217,22 @@ Leyenda: ✅ construida · 🚧 planificada.
 
 | # | Clase |
 |---|---|
-| 🚧 139 | [Pruebas unitarias por lenguaje](parte-9-ingenieria-de-software-poliglota/139-pruebas-unitarias-por-lenguaje/README.md) |
-| 🚧 140 | [Pruebas de integración y el verificador de equivalencia](parte-9-ingenieria-de-software-poliglota/140-pruebas-de-integracion-y-el-verificador-de-equivalencia/README.md) |
-| 🚧 141 | [Depuradores: gdb, lldb, pdb y los de IDE](parte-9-ingenieria-de-software-poliglota/141-depuradores-gdb-lldb-pdb-y-los-de-ide/README.md) |
-| 🚧 142 | [Registro (logging) y observabilidad](parte-9-ingenieria-de-software-poliglota/142-registro-logging-y-observabilidad/README.md) |
-| 🚧 143 | [Dependencias, versiones y lockfiles](parte-9-ingenieria-de-software-poliglota/143-dependencias-versiones-y-lockfiles/README.md) |
-| 🚧 144 | [Compilación reproducible y empaquetado](parte-9-ingenieria-de-software-poliglota/144-compilacion-reproducible-y-empaquetado/README.md) |
-| 🚧 145 | [Git y control de versiones para proyectos políglotas](parte-9-ingenieria-de-software-poliglota/145-git-y-control-de-versiones-para-proyectos-poliglotas/README.md) |
-| 🚧 146 | [Revisión de código y estándares](parte-9-ingenieria-de-software-poliglota/146-revision-de-codigo-y-estandares/README.md) |
-| 🚧 147 | [Integración continua (CI) multi-lenguaje](parte-9-ingenieria-de-software-poliglota/147-integracion-continua-ci-multi-lenguaje/README.md) |
-| 🚧 148 | [Entrega y despliegue](parte-9-ingenieria-de-software-poliglota/148-entrega-y-despliegue/README.md) |
-| 🚧 149 | [Diseño y arquitectura comparada](parte-9-ingenieria-de-software-poliglota/149-diseno-y-arquitectura-comparada/README.md) |
-| 🚧 150 | [Refactorización segura](parte-9-ingenieria-de-software-poliglota/150-refactorizacion-segura/README.md) |
-| 🚧 151 | [Patrones de diseño comparados entre lenguajes](parte-9-ingenieria-de-software-poliglota/151-patrones-de-diseno-comparados-entre-lenguajes/README.md) |
-| 🚧 152 | [Rendimiento y perfilado (profiling)](parte-9-ingenieria-de-software-poliglota/152-rendimiento-y-perfilado-profiling/README.md) |
-| 🚧 153 | [Seguridad: entradas, memoria y dependencias](parte-9-ingenieria-de-software-poliglota/153-seguridad-entradas-memoria-y-dependencias/README.md) |
-| 🚧 154 | [Mantenibilidad, documentación y deuda técnica](parte-9-ingenieria-de-software-poliglota/154-mantenibilidad-documentacion-y-deuda-tecnica/README.md) |
+| ✅ 139 | [Pruebas unitarias por lenguaje](parte-9-ingenieria-de-software-poliglota/139-pruebas-unitarias-por-lenguaje/README.md) |
+| ✅ 140 | [Pruebas de integración y el verificador de equivalencia](parte-9-ingenieria-de-software-poliglota/140-pruebas-de-integracion-y-el-verificador-de-equivalencia/README.md) |
+| ✅ 141 | [Depuradores: gdb, lldb, pdb y los de IDE](parte-9-ingenieria-de-software-poliglota/141-depuradores-gdb-lldb-pdb-y-los-de-ide/README.md) |
+| ✅ 142 | [Registro (logging) y observabilidad](parte-9-ingenieria-de-software-poliglota/142-registro-logging-y-observabilidad/README.md) |
+| ✅ 143 | [Dependencias, versiones y lockfiles](parte-9-ingenieria-de-software-poliglota/143-dependencias-versiones-y-lockfiles/README.md) |
+| ✅ 144 | [Compilación reproducible y empaquetado](parte-9-ingenieria-de-software-poliglota/144-compilacion-reproducible-y-empaquetado/README.md) |
+| ✅ 145 | [Git y control de versiones para proyectos políglotas](parte-9-ingenieria-de-software-poliglota/145-git-y-control-de-versiones-para-proyectos-poliglotas/README.md) |
+| ✅ 146 | [Revisión de código y estándares](parte-9-ingenieria-de-software-poliglota/146-revision-de-codigo-y-estandares/README.md) |
+| ✅ 147 | [Integración continua (CI) multi-lenguaje](parte-9-ingenieria-de-software-poliglota/147-integracion-continua-ci-multi-lenguaje/README.md) |
+| ✅ 148 | [Entrega y despliegue](parte-9-ingenieria-de-software-poliglota/148-entrega-y-despliegue/README.md) |
+| ✅ 149 | [Diseño y arquitectura comparada](parte-9-ingenieria-de-software-poliglota/149-diseno-y-arquitectura-comparada/README.md) |
+| ✅ 150 | [Refactorización segura](parte-9-ingenieria-de-software-poliglota/150-refactorizacion-segura/README.md) |
+| ✅ 151 | [Patrones de diseño comparados entre lenguajes](parte-9-ingenieria-de-software-poliglota/151-patrones-de-diseno-comparados-entre-lenguajes/README.md) |
+| ✅ 152 | [Rendimiento y perfilado (profiling)](parte-9-ingenieria-de-software-poliglota/152-rendimiento-y-perfilado-profiling/README.md) |
+| ✅ 153 | [Seguridad: entradas, memoria y dependencias](parte-9-ingenieria-de-software-poliglota/153-seguridad-entradas-memoria-y-dependencias/README.md) |
+| ✅ 154 | [Mantenibilidad, documentación y deuda técnica](parte-9-ingenieria-de-software-poliglota/154-mantenibilidad-documentacion-y-deuda-tecnica/README.md) |
 
 ## Parte 10 — Interoperabilidad y fronteras entre lenguajes · clases 155–164
 

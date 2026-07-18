@@ -1,0 +1,19 @@
+{
+  "descripcion": "Contar cuántos commits (mensajes) hay en un historial.",
+  "contrato": "stdin: una línea con mensajes de commit (palabras separadas por espacio) → stdout: `commits=<cantidad>`",
+  "formula": "contar los mensajes",
+  "casos": [
+    {
+      "stdin": "fix add refactor",
+      "esperado": "commits=3"
+    },
+    {
+      "stdin": "init",
+      "esperado": "commits=1"
+    },
+    {
+      "stdin": "a b c d",
+      "esperado": "commits=4"
+    }
+  ]
+}

@@ -1,20 +1,63 @@
 # Clase 151 — Patrones de diseño comparados entre lenguajes
 
-> Parte **9 — Ingeniería de software políglota** · ⏱️ Duración estimada: **90 min** · Nivel: **Avanzado**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **9 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **patrones de diseño comparados entre lenguajes**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Practicar los **patrones de diseño comparados**: el patrón **Estrategia** encapsula algoritmos intercambiables tras una interfaz común. Elegir la operación por su nombre selecciona la estrategia a aplicar.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Aplicar el patrón Estrategia.
+2. Seleccionar un algoritmo en ejecución.
+3. Reconocer patrones en cada lenguaje.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Patrón de diseño | Solución reutilizable a un problema común |
+| 2 | Estrategia | Algoritmos intercambiables |
+| 3 | Selección en ejecución | Elegir el comportamiento al vuelo |
+
+## 📖 Definiciones y características
+
+- **Patrón de diseño** — solución probada y reutilizable a un problema de diseño recurrente. Clave: vocabulario común.
+- **Estrategia** — patrón que encapsula algoritmos intercambiables tras una interfaz. Clave: cambiar el comportamiento sin condicionales dispersos.
+- **Despacho** — seleccionar qué código ejecutar según un valor. Clave: aquí, por el nombre de la operación.
+
+## 🧩 Situación
+
+Un sistema de cobro puede usar distintas estrategias (tarjeta, transferencia). El patrón Estrategia las hace intercambiables. Aquí, la operación se elige por su nombre y se aplica.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea `estrategia a b` (estrategia ∈ {suma, resta, producto})
+- **Salida** (stdout): `resultado=<a estrategia b>`
+- **Regla:** aplicar la estrategia elegida a a y b
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `suma 3 4` | `resultado=7` |
+| `resta 10 3` | `resultado=7` |
+| `producto 5 6` | `resultado=30` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER estrategia, a, b ; seleccionar operación ; aplicar
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | map de funciones, interfaz o switch en cada lenguaje. |
+| Semántica | La estrategia se elige en ejecución. |
+| Paradigmática | SQL usa CASE. |
+
+## 🧬 El concepto en la familia
+
+Estrategia, Observer, Factory, Singleton son patrones clásicos (GoF) presentes en todos los lenguajes OO.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 151
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Condicionales gigantes en vez de estrategias** → causa: código rígido → solución: encapsular cada algoritmo tras una interfaz común
+- **Sobre-aplicar patrones** → causa: complejidad innecesaria → solución: usar el patrón solo cuando aporta
+
+## ❓ Preguntas frecuentes
+
+- **¿Estrategia o if/else?** Estrategia cuando los algoritmos cambian o crecen; if/else para casos simples y fijos.
+- **¿Los patrones son obligatorios?** No: son herramientas; aplícalos cuando resuelven un problema real.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

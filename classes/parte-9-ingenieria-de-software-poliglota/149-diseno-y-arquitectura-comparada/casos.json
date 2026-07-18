@@ -1,0 +1,19 @@
+{
+  "descripcion": "Contar las capas (componentes) de una arquitectura descrita por sus nombres.",
+  "contrato": "stdin: una línea con nombres de capas (palabras separadas por espacio) → stdout: `capas=<cantidad>`",
+  "formula": "contar los nombres de capa",
+  "casos": [
+    {
+      "stdin": "web api datos",
+      "esperado": "capas=3"
+    },
+    {
+      "stdin": "cli",
+      "esperado": "capas=1"
+    },
+    {
+      "stdin": "web api datos cache",
+      "esperado": "capas=4"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "descripcion": "Calcular una métrica de mantenibilidad simple: el número de módulos de un sistema.",
+  "contrato": "stdin: una línea con nombres de módulos (palabras separadas por espacio) → stdout: `complejidad=<número de módulos>`",
+  "formula": "contar los módulos",
+  "casos": [
+    {
+      "stdin": "a b c",
+      "esperado": "complejidad=3"
+    },
+    {
+      "stdin": "x",
+      "esperado": "complejidad=1"
+    },
+    {
+      "stdin": "a b c d e",
+      "esperado": "complejidad=5"
+    }
+  ]
+}

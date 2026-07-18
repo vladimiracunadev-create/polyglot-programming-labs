@@ -1,0 +1,19 @@
+{
+  "descripcion": "Preparar el despliegue de una versión, prefijándola con 'v'.",
+  "contrato": "stdin: una línea con una versión `mayor.menor.parche` → stdout: `desplegado=v<versión>`",
+  "formula": "prefijar la versión con 'v'",
+  "casos": [
+    {
+      "stdin": "1.2.3",
+      "esperado": "desplegado=v1.2.3"
+    },
+    {
+      "stdin": "0.9.0",
+      "esperado": "desplegado=v0.9.0"
+    },
+    {
+      "stdin": "2.1.5",
+      "esperado": "desplegado=v2.1.5"
+    }
+  ]
+}

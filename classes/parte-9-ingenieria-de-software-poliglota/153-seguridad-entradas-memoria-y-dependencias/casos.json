@@ -1,0 +1,19 @@
+{
+  "descripcion": "Validar que una entrada solo contiene caracteres alfanuméricos (seguridad de entradas).",
+  "contrato": "stdin: una palabra (entrada a validar) → stdout: `seguro=<true|false>` (true si es alfanumérica)",
+  "formula": "seguro si todos los caracteres son letras o dígitos",
+  "casos": [
+    {
+      "stdin": "abc",
+      "esperado": "seguro=true"
+    },
+    {
+      "stdin": "a;b",
+      "esperado": "seguro=false"
+    },
+    {
+      "stdin": "hola123",
+      "esperado": "seguro=true"
+    }
+  ]
+}

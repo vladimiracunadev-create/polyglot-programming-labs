@@ -1,20 +1,63 @@
 # Clase 143 — Dependencias, versiones y lockfiles
 
-> Parte **9 — Ingeniería de software políglota** · ⏱️ Duración estimada: **90 min** · Nivel: **Avanzado**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **9 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **dependencias, versiones y lockfiles**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Entender **dependencias, versiones y lockfiles**: el versionado semántico (SemVer) 'mayor.menor.parche' comunica compatibilidad. Descomponerlo es el primer paso para gestionar dependencias con criterio.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Parsear una versión semántica.
+2. Explicar qué significa cada componente.
+3. Reconocer el papel del lockfile.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | SemVer | mayor.menor.parche |
+| 2 | Compatibilidad | Qué implica cada número |
+| 3 | Lockfile | Versiones exactas fijadas |
+
+## 📖 Definiciones y características
+
+- **Versionado semántico** — esquema mayor.menor.parche donde cada número señala el tipo de cambio. Clave: comunica compatibilidad.
+- **Mayor/menor/parche** — cambios incompatibles / nuevas features / correcciones. Clave: guían las actualizaciones.
+- **Lockfile** — archivo con las versiones exactas resueltas. Clave: builds reproducibles.
+
+## 🧩 Situación
+
+Al depender de una librería '^1.4.2', importa si sube a 1.5.0 (compatible) o a 2.0.0 (posible ruptura). El lockfile fija la versión exacta para que todos obtengan lo mismo.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea con una versión `mayor.menor.parche`
+- **Salida** (stdout): `mayor=<M> menor=<m> parche=<p>`
+- **Regla:** separar la versión por puntos
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `1.2.3` | `mayor=1 menor=2 parche=3` |
+| `0.5.10` | `mayor=0 menor=5 parche=10` |
+| `2.0.0` | `mayor=2 menor=0 parche=0` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER version ; separar por '.' ; ESCRIBIR componentes
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | split por '.' en cada lenguaje. |
+| Semántica | Cada número tiene un significado de compatibilidad. |
+| Paradigmática | SQL separa con funciones de texto. |
+
+## 🧬 El concepto en la familia
+
+npm, cargo, pip, composer usan SemVer y lockfiles (package-lock.json, Cargo.lock).
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 143
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **No commitear el lockfile** → causa: builds distintos por máquina → solución: versionar el lockfile
+- **Fijar a 'latest'** → causa: roturas por actualizaciones → solución: acotar rangos y confiar en el lock
+
+## ❓ Preguntas frecuentes
+
+- **¿Qué sube en un parche?** Solo correcciones compatibles; no rompe nada.
+- **¿Por qué el lockfile?** Garantiza que todos instalen exactamente las mismas versiones.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

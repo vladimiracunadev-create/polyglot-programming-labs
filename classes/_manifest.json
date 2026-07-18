@@ -14,8 +14,8 @@
   "php"
  ],
  "total_planned": 176,
- "total_built": 138,
- "parts_built": 9,
+ "total_built": 154,
+ "parts_built": 10,
  "parts_planned": 12,
  "parts": [
   {
@@ -958,97 +958,97 @@
      "num": 139,
      "title": "Pruebas unitarias por lenguaje",
      "slug": "139-pruebas-unitarias-por-lenguaje",
-     "built": false
+     "built": true
     },
     {
      "num": 140,
      "title": "Pruebas de integración y el verificador de equivalencia",
      "slug": "140-pruebas-de-integracion-y-el-verificador-de-equivalencia",
-     "built": false
+     "built": true
     },
     {
      "num": 141,
      "title": "Depuradores: gdb, lldb, pdb y los de IDE",
      "slug": "141-depuradores-gdb-lldb-pdb-y-los-de-ide",
-     "built": false
+     "built": true
     },
     {
      "num": 142,
      "title": "Registro (logging) y observabilidad",
      "slug": "142-registro-logging-y-observabilidad",
-     "built": false
+     "built": true
     },
     {
      "num": 143,
      "title": "Dependencias, versiones y lockfiles",
      "slug": "143-dependencias-versiones-y-lockfiles",
-     "built": false
+     "built": true
     },
     {
      "num": 144,
      "title": "Compilación reproducible y empaquetado",
      "slug": "144-compilacion-reproducible-y-empaquetado",
-     "built": false
+     "built": true
     },
     {
      "num": 145,
      "title": "Git y control de versiones para proyectos políglotas",
      "slug": "145-git-y-control-de-versiones-para-proyectos-poliglotas",
-     "built": false
+     "built": true
     },
     {
      "num": 146,
      "title": "Revisión de código y estándares",
      "slug": "146-revision-de-codigo-y-estandares",
-     "built": false
+     "built": true
     },
     {
      "num": 147,
      "title": "Integración continua (CI) multi-lenguaje",
      "slug": "147-integracion-continua-ci-multi-lenguaje",
-     "built": false
+     "built": true
     },
     {
      "num": 148,
      "title": "Entrega y despliegue",
      "slug": "148-entrega-y-despliegue",
-     "built": false
+     "built": true
     },
     {
      "num": 149,
      "title": "Diseño y arquitectura comparada",
      "slug": "149-diseno-y-arquitectura-comparada",
-     "built": false
+     "built": true
     },
     {
      "num": 150,
      "title": "Refactorización segura",
      "slug": "150-refactorizacion-segura",
-     "built": false
+     "built": true
     },
     {
      "num": 151,
      "title": "Patrones de diseño comparados entre lenguajes",
      "slug": "151-patrones-de-diseno-comparados-entre-lenguajes",
-     "built": false
+     "built": true
     },
     {
      "num": 152,
      "title": "Rendimiento y perfilado (profiling)",
      "slug": "152-rendimiento-y-perfilado-profiling",
-     "built": false
+     "built": true
     },
     {
      "num": 153,
      "title": "Seguridad: entradas, memoria y dependencias",
      "slug": "153-seguridad-entradas-memoria-y-dependencias",
-     "built": false
+     "built": true
     },
     {
      "num": 154,
      "title": "Mantenibilidad, documentación y deuda técnica",
      "slug": "154-mantenibilidad-documentacion-y-deuda-tecnica",
-     "built": false
+     "built": true
     }
    ]
   },

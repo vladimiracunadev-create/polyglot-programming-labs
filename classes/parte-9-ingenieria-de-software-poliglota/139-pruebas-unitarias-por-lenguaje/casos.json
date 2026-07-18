@@ -1,0 +1,19 @@
+{
+  "descripcion": "Ejecutar una prueba unitaria: verificar que a + b es igual al valor esperado.",
+  "contrato": "stdin: una línea `a b esperado` → stdout: `test=<pasa|falla>`",
+  "formula": "pasa si a + b == esperado",
+  "casos": [
+    {
+      "stdin": "3 4 7",
+      "esperado": "test=pasa"
+    },
+    {
+      "stdin": "2 2 5",
+      "esperado": "test=falla"
+    },
+    {
+      "stdin": "10 5 15",
+      "esperado": "test=pasa"
+    }
+  ]
+}

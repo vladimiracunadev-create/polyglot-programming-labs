@@ -1,0 +1,19 @@
+{
+  "descripcion": "Emitir un registro (log) informando cuántos elementos se procesaron.",
+  "contrato": "stdin: un entero `n` (elementos procesados) → stdout: `log=[INFO] procesados=<n>`",
+  "formula": "emitir un registro de nivel INFO con el conteo",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "log=[INFO] procesados=5"
+    },
+    {
+      "stdin": "0",
+      "esperado": "log=[INFO] procesados=0"
+    },
+    {
+      "stdin": "3",
+      "esperado": "log=[INFO] procesados=3"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "descripcion": "Determinar si un pipeline de CI está verde: todos los pasos (0 o 1) deben ser 1.",
+  "contrato": "stdin: una línea con 0 y 1 (resultado de cada paso; 1 = pasó) → stdout: `ci=<verde|rojo>`",
+  "formula": "verde si todos los pasos son 1",
+  "casos": [
+    {
+      "stdin": "1 1 1",
+      "esperado": "ci=verde"
+    },
+    {
+      "stdin": "1 0 1",
+      "esperado": "ci=rojo"
+    },
+    {
+      "stdin": "1 1",
+      "esperado": "ci=verde"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "descripcion": "Comprobar si dos resultados son equivalentes (prueba de integración/equivalencia).",
+  "contrato": "stdin: una línea `x y` (dos resultados a comparar) → stdout: `equivalente=<true|false>`",
+  "formula": "equivalente si x == y",
+  "casos": [
+    {
+      "stdin": "6 6",
+      "esperado": "equivalente=true"
+    },
+    {
+      "stdin": "5 7",
+      "esperado": "equivalente=false"
+    },
+    {
+      "stdin": "0 0",
+      "esperado": "equivalente=true"
+    }
+  ]
+}

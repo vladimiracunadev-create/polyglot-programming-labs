@@ -1,38 +1,71 @@
 # Clase 034 — Compilar y construir: gcc/clang, cargo, go build, javac, dotnet build
 
-> Parte **2 — Herramientas, toolchains y anatomía de comandos** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **2 — Herramientas, toolchains y anatomía de comandos** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **compilar y construir: gcc/clang, cargo, go build, javac, dotnet build**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Distinguir 'ejecutar' de 'construir': construir produce un artefacto (binario, jar, dll) listo para distribuir o desplegar, sin ejecutarlo. Cada lenguaje compilado tiene su comando de construcción, y los proyectos reales se apoyan en un sistema de construcción (cargo, gradle, msbuild) que gestiona dependencias y pasos.
 
-## 🧮 Modelo
+## 📚 Resultados de aprendizaje
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+Al finalizar, podrás:
 
-## 🌐 Implementaciones idiomáticas (previstas)
+1. Diferenciar ejecutar de construir/compilar a un artefacto.
+2. Usar el comando de construcción de cada lenguaje del núcleo.
+3. Explicar el papel de un sistema de construcción (build system).
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+## 🗺️ Temas
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Ejecutar vs. construir | Correr ahora vs. producir un artefacto |
+| 2 | Compilador directo | gcc/clang, javac, rustc |
+| 3 | Sistema de construcción | cargo, go build, dotnet build, gradle |
+| 4 | Artefactos | Binarios, .jar, .dll listos para desplegar |
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 📖 Definiciones y características
+
+- **Construir (build)** — producir el artefacto final (ejecutable, librería) a partir del código. Clave: el resultado se distribuye o despliega.
+- **Artefacto** — salida de la construcción: binario, .jar, .dll, wheel. Clave: es lo que se entrega, no el código fuente.
+- **Sistema de construcción** — herramienta que orquesta compilación y dependencias (cargo, gradle, msbuild). Clave: automatiza builds reproducibles.
+- **Compilación separada** — compilar módulos por separado y enlazarlos. Clave: acelera recompilaciones (solo lo que cambió).
+
+## 🧩 Situación
+
+Durante el desarrollo usas `go run`; para desplegar en el servidor usas `go build`, que produce un binario que copias y ejecutas sin necesitar el toolchain. Ejecutar y construir sirven a momentos distintos.
+
+## 🔎 Ejemplo
+
+Comandos de construcción del núcleo:
+
+```text
+C:     gcc main.c -o programa
+Rust:  cargo build --release      → target/release/programa
+Go:    go build -o programa
+Java:  javac Main.java            → Main.class
+C#:    dotnet build -c Release    → bin/Release/...
+```
+
+## ✍️ Práctica
+
+Si tienes Go o Rust, construye un binario y ejecútalo directamente (sin `run`). Observa que ya no necesitas el código fuente para correrlo.
+
+## ⚠️ Errores comunes
+
+- **Desplegar el código fuente en vez del artefacto** → causa: confundir build con run → solución: construir y distribuir el binario/artefacto, no las fuentes
+- **Recompilar todo cada vez** → causa: no aprovechar la compilación incremental → solución: dejar que el build system recompile solo lo cambiado
+
+## ❓ Preguntas frecuentes
+
+- **¿Cuál es la diferencia entre debug y release?** Release optimiza y quita información de depuración: más rápido, más difícil de depurar.
+- **¿Los interpretados se 'construyen'?** Suelen empaquetarse (wheel, tarball) más que compilarse; el concepto de artefacto sigue aplicando.
+
+## 🔗 Referencias
+
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 

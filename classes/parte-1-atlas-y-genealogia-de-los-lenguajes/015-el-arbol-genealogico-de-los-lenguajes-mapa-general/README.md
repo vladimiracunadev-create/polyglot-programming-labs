@@ -1,38 +1,73 @@
 # Clase 015 — El árbol genealógico de los lenguajes: mapa general
 
-> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **el árbol genealógico de los lenguajes: mapa general**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Ver el mapa completo de las familias de lenguajes y sus antepasados comunes. Casi todos los lenguajes actuales descienden de tres troncos de los años 50-60: Fortran (cálculo), Lisp (funcional/simbólico) y ALGOL (estructurado, del que nace la familia de llaves). Entender el árbol convierte 'decenas de lenguajes' en 'unas pocas familias con variaciones'.
 
-## 🧮 Modelo
+## 📚 Resultados de aprendizaje
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+Al finalizar, podrás:
 
-## 🌐 Implementaciones idiomáticas (previstas)
+1. Ubicar los tres troncos históricos (Fortran, Lisp, ALGOL) y qué aportó cada uno.
+2. Situar cada lenguaje del núcleo en su rama del árbol.
+3. Explicar por qué conocer una familia acelera aprender a sus miembros.
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+## 🗺️ Temas
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Los tres troncos | Fortran, Lisp y ALGOL originan casi todo lo demás |
+| 2 | Ramas principales | Llaves, dinámicos, funcionales, declarativos, lógicos |
+| 3 | Herencia de rasgos | Sintaxis, tipos y paradigma se heredan de los ancestros |
+| 4 | Representante y primos | Un lenguaje del núcleo por rama abre la puerta a las demás |
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 📖 Definiciones y características
+
+- **Tronco** — lenguaje raíz del que desciende una familia (Fortran, Lisp, ALGOL). Clave: define rasgos que perduran décadas.
+- **Familia** — grupo de lenguajes con ancestro y rasgos comunes. Clave: aprender uno facilita los demás.
+- **ALGOL** — lenguaje de 1958-60 que introdujo la programación estructurada y los bloques. Clave: padre de C, y por tanto de casi toda la sintaxis de llaves.
+- **Influencia** — rasgo que un lenguaje toma de otro sin ser de su familia (p. ej. Rust toma tipos de ML). Clave: el árbol tiene cruces, no solo ramas.
+
+## 🧩 Situación
+
+Un principiante ve una lista de 50 lenguajes y se abruma. Un veterano ve cinco familias y sabe que dominar un representante de cada una cubre el 90% de lo que encontrará. El árbol es lo que separa una visión de la otra.
+
+## 🔎 Ejemplo
+
+Árbol simplificado (año de nacimiento aproximado):
+
+```text
+Fortran (1957) ── cálculo numérico ── Fortran, MATLAB, Julia
+Lisp (1958) ───── simbólico/funcional ─ Scheme, Clojure, (influye en ML)
+ALGOL (1958) ──── estructurado ──┬── C (1972) ── C++, Java, C#, Go, Rust
+                                 ├── Pascal (1970)
+                                 └── (influye en casi todo)
+ML (1973) ─────── funcional tipado ── OCaml, Haskell, F#, (influye en Rust)
+Prolog (1972) ─── lógico ──────────── Datalog
+```
+
+## ✍️ Práctica
+
+Dibuja tu propio árbol con los 10 lenguajes del núcleo. ¿Cuáles comparten la sintaxis de llaves de C? ¿Cuál no encaja en ninguna rama imperativa? (Pista: SQL.)
+
+## ⚠️ Errores comunes
+
+- **Tratar cada lenguaje como algo aislado y nuevo** → causa: no ver la familia → solución: identificar el ancestro y estudiar los rasgos heredados
+- **Creer que el árbol son ramas puras sin cruces** → causa: ignorar las influencias → solución: recordar que Rust toma de C y de ML a la vez
+
+## ❓ Preguntas frecuentes
+
+- **¿Hay un árbol 'oficial'?** No único, pero las relaciones históricas son bien conocidas y consistentes entre fuentes.
+- **¿Dónde va SQL?** Fuera del tronco imperativo: es declarativo, primo de la rama lógica (Prolog).
+
+## 🔗 Referencias
+
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 

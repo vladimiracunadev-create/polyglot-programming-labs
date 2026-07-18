@@ -1,38 +1,70 @@
 # Clase 017 — Familia C y de las llaves: C, C++, Objective-C
 
-> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **familia c y de las llaves: c, c++, objective-c**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Conocer la familia más influyente en la sintaxis actual: C y sus descendientes directos. C (1972) definió las llaves `{}`, el `;`, los tipos y la cercanía a la memoria que hoy reconoces en Java, C#, JavaScript, Go y muchos más. Aprender a leer C es aprender a leer media programación.
 
-## 🧮 Modelo
+## 📚 Resultados de aprendizaje
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+Al finalizar, podrás:
 
-## 🌐 Implementaciones idiomáticas (previstas)
+1. Reconocer los rasgos de C que heredaron docenas de lenguajes.
+2. Distinguir C de C++ (OO + plantillas) y Objective-C (mensajes al estilo Smalltalk).
+3. Explicar por qué 'saber C' facilita leer casi cualquier lenguaje de llaves.
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+## 🗺️ Temas
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | C: el ancestro | Llaves, punteros, memoria manual, tipos primitivos |
+| 2 | C++: C con objetos | Clases, plantillas y RAII sobre la base de C |
+| 3 | Objective-C: C con mensajes | OO al estilo Smalltalk; base de macOS/iOS clásico |
+| 4 | La herencia sintáctica | Por qué Java, C#, JS y Go 'se parecen a C' |
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 📖 Definiciones y características
+
+- **C** — lenguaje de 1972 (Dennis Ritchie, Bell Labs) para sistemas. Clave: control total de la memoria; en el núcleo del curso.
+- **C++** — extensión de C (1985, Bjarne Stroustrup) con OO, plantillas y RAII. Clave: potencia y complejidad; primo directo.
+- **Objective-C** — C + mensajería estilo Smalltalk (1984, Brad Cox). Clave: lenguaje histórico de Apple, hoy sustituido por Swift.
+- **Sintaxis de llaves** — bloques delimitados por `{}` y sentencias con `;`. Clave: la marca de la familia, heredada por decenas de lenguajes.
+
+## 🧩 Situación
+
+Alguien que solo sabe JavaScript abre por primera vez código en C y, para su sorpresa, entiende los bucles, los `if`, las llaves y las funciones. No es casualidad: JavaScript heredó esa sintaxis de C a través de Java.
+
+## 🔎 Ejemplo
+
+El mismo bucle revela el parentesco de la familia de llaves:
+
+```text
+C:     for (int i = 0; i < 3; i++) { printf("%d", i); }
+C++:   for (int i = 0; i < 3; i++) { std::cout << i; }
+Java:  for (int i = 0; i < 3; i++) { System.out.print(i); }
+JS:    for (let i = 0; i < 3; i++) { console.log(i); }
+```
+
+## ✍️ Práctica
+
+Toma un `for` en un lenguaje que conozcas y reescríbelo en C mentalmente. ¿Qué cambia (semántica) más allá de la escritura (sintaxis)?
+
+## ⚠️ Errores comunes
+
+- **Creer que C++ es 'solo C con clases'** → causa: subestimar su complejidad (plantillas, RAII, sobrecarga) → solución: tratarlo como un lenguaje propio, no como C decorado
+- **Asumir que llaves iguales = comportamiento igual** → causa: confundir sintaxis con semántica → solución: verificar la gestión de memoria y tipos de cada miembro
+
+## ❓ Preguntas frecuentes
+
+- **¿Por qué C sigue vivo tras 50 años?** Es la base de sistemas operativos, drivers y del runtime de casi todo. Rápido y portable.
+- **¿Objective-C está muerto?** En desuso frente a Swift, pero aún corre en mucho software de Apple existente.
+
+## 🔗 Referencias
+
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 

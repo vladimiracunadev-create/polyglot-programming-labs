@@ -1,38 +1,70 @@
 # Clase 021 — Familia JavaScript y web: JS, TypeScript, Dart
 
-> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **familia javascript y web: js, typescript, dart**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Conocer los lenguajes de la web. JavaScript (1995) nació para animar páginas y hoy corre en todas partes; TypeScript le añade tipos estáticos; Dart (Google) es su primo para apps (Flutter). Comparten sintaxis de llaves y un modelo asíncrono basado en eventos.
 
-## 🧮 Modelo
+## 📚 Resultados de aprendizaje
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+Al finalizar, podrás:
 
-## 🌐 Implementaciones idiomáticas (previstas)
+1. Explicar por qué JavaScript es omnipresente (navegador, servidor, móvil).
+2. Entender qué añade TypeScript sobre JavaScript y por qué.
+3. Reconocer el modelo asíncrono/eventos común a la familia.
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+## 🗺️ Temas
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | JavaScript: el lenguaje de la web | Único en el navegador; también en servidor (Node) |
+| 2 | TypeScript: tipos sobre JS | Comprobación estática que transpila a JS |
+| 3 | Prototipos y asincronía | Herencia por prototipos; eventos y promesas |
+| 4 | Dart y otros primos | Alternativas que compilan a/para la web y móvil |
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 📖 Definiciones y características
+
+- **JavaScript** — 1995 (Brendan Eich, Netscape), dinámico y basado en prototipos. Clave: el único lenguaje nativo del navegador; núcleo del curso.
+- **TypeScript** — 2012 (Microsoft), superset de JS con tipos estáticos. Clave: se comprueba al compilar y transpila a JS; núcleo del curso.
+- **Dart** — 2011 (Google), tipado y compilable a JS o nativo. Clave: motor de Flutter para apps multiplataforma.
+- **Prototipos** — modelo de OO donde los objetos heredan de otros objetos, no de clases. Clave: rasgo distintivo de JavaScript.
+
+## 🧩 Situación
+
+Un proyecto JavaScript crece a 50.000 líneas y los errores de 'undefined is not a function' se disparan. Adoptar TypeScript hace que el compilador atrape esos fallos antes de ejecutar: la misma familia, con red de seguridad.
+
+## 🔎 Ejemplo
+
+TypeScript es JavaScript con tipos: mismo código, más garantías.
+
+```text
+JavaScript:  function doble(x) { return x * 2; }
+TypeScript:  function doble(x: number): number { return x * 2; }
+```
+
+El segundo falla al compilar si alguien llama `doble("hola")`.
+
+## ✍️ Práctica
+
+TypeScript infiere y comprueba tipos como Java o Rust, pero desaparece al ejecutar (transpila a JS). ¿A qué modelo del núcleo se parece más y en qué se diferencia?
+
+## ⚠️ Errores comunes
+
+- **Creer que TypeScript es un lenguaje distinto de JS** → causa: no ver que es un superset → solución: recordar que todo JS válido es TS válido; TS solo añade tipos
+- **Ignorar la asincronía** → causa: programar como si todo fuera secuencial → solución: entender el bucle de eventos, callbacks y async/await desde el inicio
+
+## ❓ Preguntas frecuentes
+
+- **¿TypeScript reemplaza a JavaScript?** No: lo complementa. Al final se convierte en JavaScript para poder ejecutarse.
+- **¿Por qué JS corre en el servidor?** Node.js incrustó el motor V8 fuera del navegador; hizo de JS un lenguaje de propósito general.
+
+## 🔗 Referencias
+
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 

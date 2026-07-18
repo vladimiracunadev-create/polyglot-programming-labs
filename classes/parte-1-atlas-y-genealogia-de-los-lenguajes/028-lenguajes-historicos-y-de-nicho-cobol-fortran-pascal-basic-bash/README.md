@@ -1,38 +1,71 @@
 # Clase 028 — Lenguajes históricos y de nicho: COBOL, Fortran, Pascal, BASIC, Bash
 
-> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **lenguajes históricos y de nicho: cobol, fortran, pascal, basic, bash**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Cerrar el Atlas con lenguajes que marcaron época o dominan un nicho. COBOL aún mueve bancos; Fortran, la ciencia; Pascal enseñó a generaciones; BASIC democratizó programar; y Bash sigue siendo el pegamento de la administración de sistemas. Conocerlos da perspectiva histórica y práctica.
 
-## 🧮 Modelo
+## 📚 Resultados de aprendizaje
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+Al finalizar, podrás:
 
-## 🌐 Implementaciones idiomáticas (previstas)
+1. Situar cada lenguaje en su época y su nicho actual.
+2. Explicar por qué algunos 'viejos' siguen en producción crítica.
+3. Reconocer Bash como habilidad transferible imprescindible hoy.
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+## 🗺️ Temas
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | COBOL: la banca | Miles de millones de líneas aún en producción |
+| 2 | Pascal y BASIC | Enseñaron a programar a generaciones enteras |
+| 3 | Fortran: la ciencia | El pionero que no se jubila |
+| 4 | Bash: el pegamento vivo | Automatización y orquestación en Unix |
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 📖 Definiciones y características
+
+- **COBOL** — 1959 (comité CODASYL, Grace Hopper influyente), para negocios. Clave: aún sostiene núcleos bancarios y de seguros.
+- **Pascal** — 1970 (Niklaus Wirth), diseñado para enseñar programación estructurada. Clave: claridad; padre de Delphi.
+- **BASIC** — 1964 (Kemeny y Kurtz), pensado para principiantes. Clave: llevó la programación a los ordenadores personales.
+- **Bash** — 1989 (Brian Fox, GNU), shell de Unix. Clave: automatización viva; su modelo de tuberías y procesos es muy transferible.
+
+## 🧩 Situación
+
+Un banco descubre que su sistema central corre en COBOL y quedan pocos que lo mantengan. No es una curiosidad: entender por qué el software 'viejo' persiste es entender la realidad de la industria.
+
+## 🔎 Ejemplo
+
+Bash es el más vigente de este grupo: su modelo de tuberías es puro y transferible.
+
+```text
+# Contar cuántos archivos .md hay, en una línea:
+ls *.md | wc -l
+
+# Tubería: la salida de un comando es la entrada del siguiente
+cat notas.txt | grep "TODO" | sort | uniq
+```
+
+## ✍️ Práctica
+
+Escribe una tubería de Bash que, dado un archivo de texto, cuente cuántas líneas contienen la palabra 'error'. (Pista: `grep` y `wc`.)
+
+## ⚠️ Errores comunes
+
+- **Despreciar los lenguajes 'viejos'** → causa: creer que lo antiguo es inútil → solución: reconocer que COBOL y Fortran mueven infraestructura crítica hoy
+- **Subestimar Bash** → causa: verlo como comandos sueltos → solución: aprender su modelo de tuberías/procesos: es habilidad diaria del desarrollador
+
+## ❓ Preguntas frecuentes
+
+- **¿Vale la pena aprender COBOL?** Como nicho bien pagado por la escasez de expertos, puede tener sentido; como base, no.
+- **¿Bash cuenta como lenguaje?** Sí: tiene variables, control de flujo y funciones; y su modelo de procesos es muy transferible.
+
+## 🔗 Referencias
+
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 

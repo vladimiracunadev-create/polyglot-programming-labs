@@ -1,38 +1,69 @@
 # Clase 020 — Familia .NET: C#, F#, VB.NET
 
-> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **familia .net: c#, f#, vb.net**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Conocer la plataforma .NET de Microsoft y sus tres lenguajes: C# (el representante del núcleo, multiparadigma), F# (funcional) y VB.NET (heredero de Visual Basic). Todos compilan a un lenguaje intermedio común (IL) que corre sobre el CLR, el equivalente de la JVM en el mundo Microsoft.
 
-## 🧮 Modelo
+## 📚 Resultados de aprendizaje
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+Al finalizar, podrás:
 
-## 🌐 Implementaciones idiomáticas (previstas)
+1. Explicar el rol del CLR y el IL (análogo a la JVM y su bytecode).
+2. Distinguir C# (multiparadigma), F# (funcional) y VB.NET (accesible).
+3. Entender qué significa que .NET hoy sea multiplataforma y de código abierto.
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+## 🗺️ Temas
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | El CLR y el IL | Runtime y lenguaje intermedio comunes a los tres |
+| 2 | C#: el buque insignia | Multiparadigma, moderno, gran ecosistema |
+| 3 | F#: el funcional | ML sobre .NET: inmutabilidad y tipos algebraicos |
+| 4 | .NET multiplataforma | De Windows a Linux/macOS, open source |
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 📖 Definiciones y características
+
+- **CLR** — Common Language Runtime: la máquina virtual de .NET. Clave: ejecuta el IL, gestiona memoria (GC); análogo a la JVM.
+- **C#** — 2000 (Anders Hejlsberg, Microsoft), multiparadigma sobre el CLR. Clave: núcleo del curso; empresa, juegos (Unity) y web.
+- **F#** — 2005 (Don Syme), funcional tipado derivado de OCaml, sobre .NET. Clave: pureza y tipos algebraicos en la plataforma Microsoft.
+- **IL (bytecode de .NET)** — código intermedio al que compilan todos los lenguajes .NET. Clave: permite mezclarlos en una solución.
+
+## 🧩 Situación
+
+Un estudio de videojuegos usa Unity, cuyo scripting es C#. El mismo lenguaje sirve luego para el backend web con ASP.NET y para una herramienta de escritorio: una plataforma, muchos destinos.
+
+## 🔎 Ejemplo
+
+Los tres lenguajes .NET, mismo runtime:
+
+```text
+C#:      int r = a + b;
+F#:      let r = a + b            // funcional, inmutable por defecto
+VB.NET:  Dim r As Integer = a + b  ' sintaxis verbosa, accesible
+```
+
+## ✍️ Práctica
+
+F# es a .NET lo que Kotlin/Clojure son a la JVM: otro paradigma sobre el mismo runtime. Enumera dos lenguajes del núcleo comparables a C# por su modelo (Pista: Java).
+
+## ⚠️ Errores comunes
+
+- **Creer que .NET es solo Windows** → causa: quedarse con la imagen antigua → solución: recordar que .NET moderno corre en Linux y macOS y es open source
+- **Confundir C# con Java por parecerse** → causa: asumir que son intercambiables → solución: notar diferencias reales: propiedades, LINQ, structs por valor
+
+## ❓ Preguntas frecuentes
+
+- **¿C# o Java?** Muy parecidos en modelo; la elección suele depender del ecosistema (Microsoft vs. JVM) y del equipo.
+- **¿VB.NET sigue vivo?** En mantenimiento: existe y funciona, pero Microsoft ya no lo evoluciona activamente.
+
+## 🔗 Referencias
+
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 

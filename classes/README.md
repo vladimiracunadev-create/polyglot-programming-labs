@@ -5,7 +5,7 @@
 Programa secuencial de **176 clases** en **12 partes**. La numeración es
 global (001→…) y el orden importa: cada clase asume la anterior.
 
-**Estado:** 15 clases construidas · 161 planificadas · núcleo de 10 lenguajes.
+**Estado:** 41 clases construidas · 135 planificadas · núcleo de 10 lenguajes.
 Leyenda: ✅ construida · 🚧 planificada.
 
 ---
@@ -37,20 +37,20 @@ Leyenda: ✅ construida · 🚧 planificada.
 
 | # | Clase |
 |---|---|
-| 🚧 015 | [El árbol genealógico de los lenguajes: mapa general](parte-1-atlas-y-genealogia-de-los-lenguajes/015-el-arbol-genealogico-de-los-lenguajes-mapa-general/README.md) |
-| 🚧 016 | [Cómo nace y evoluciona un lenguaje: estándares, versiones y ecosistemas](parte-1-atlas-y-genealogia-de-los-lenguajes/016-como-nace-y-evoluciona-un-lenguaje-estandares-versiones-y-ecosistemas/README.md) |
-| 🚧 017 | [Familia C y de las llaves: C, C++, Objective-C](parte-1-atlas-y-genealogia-de-los-lenguajes/017-familia-c-y-de-las-llaves-c-c-plus-plus-objective-c/README.md) |
-| 🚧 018 | [Familia scripting dinámico: Python, Ruby, Perl, PHP, Lua](parte-1-atlas-y-genealogia-de-los-lenguajes/018-familia-scripting-dinamico-python-ruby-perl-php-lua/README.md) |
-| 🚧 019 | [Familia JVM: Java, Kotlin, Scala, Groovy, Clojure](parte-1-atlas-y-genealogia-de-los-lenguajes/019-familia-jvm-java-kotlin-scala-groovy-clojure/README.md) |
-| 🚧 020 | [Familia .NET: C#, F#, VB.NET](parte-1-atlas-y-genealogia-de-los-lenguajes/020-familia-net-c-sharp-f-sharp-vb-net/README.md) |
-| 🚧 021 | [Familia JavaScript y web: JS, TypeScript, Dart](parte-1-atlas-y-genealogia-de-los-lenguajes/021-familia-javascript-y-web-js-typescript-dart/README.md) |
-| 🚧 022 | [Familia funcional tipada (ML): Haskell, OCaml, F# y la influencia en Rust](parte-1-atlas-y-genealogia-de-los-lenguajes/022-familia-funcional-tipada-ml-haskell-ocaml-f-sharp-y-la-influencia-en-rust/README.md) |
-| 🚧 023 | [Familia Lisp: Scheme, Racket, Clojure, Emacs Lisp](parte-1-atlas-y-genealogia-de-los-lenguajes/023-familia-lisp-scheme-racket-clojure-emacs-lisp/README.md) |
-| 🚧 024 | [Familia lógica y declarativa: SQL, Prolog, Datalog](parte-1-atlas-y-genealogia-de-los-lenguajes/024-familia-logica-y-declarativa-sql-prolog-datalog/README.md) |
-| 🚧 025 | [Familia concurrente/actor: Erlang, Elixir y el CSP de Go](parte-1-atlas-y-genealogia-de-los-lenguajes/025-familia-concurrente-actor-erlang-elixir-y-el-csp-de-go/README.md) |
-| 🚧 026 | [Familia de sistemas: C, C++, Rust, Zig](parte-1-atlas-y-genealogia-de-los-lenguajes/026-familia-de-sistemas-c-c-plus-plus-rust-zig/README.md) |
-| 🚧 027 | [Familia array y científica: APL, R, Julia, Fortran, MATLAB](parte-1-atlas-y-genealogia-de-los-lenguajes/027-familia-array-y-cientifica-apl-r-julia-fortran-matlab/README.md) |
-| 🚧 028 | [Lenguajes históricos y de nicho: COBOL, Fortran, Pascal, BASIC, Bash](parte-1-atlas-y-genealogia-de-los-lenguajes/028-lenguajes-historicos-y-de-nicho-cobol-fortran-pascal-basic-bash/README.md) |
+| ✅ 015 | [El árbol genealógico de los lenguajes: mapa general](parte-1-atlas-y-genealogia-de-los-lenguajes/015-el-arbol-genealogico-de-los-lenguajes-mapa-general/README.md) |
+| ✅ 016 | [Cómo nace y evoluciona un lenguaje: estándares, versiones y ecosistemas](parte-1-atlas-y-genealogia-de-los-lenguajes/016-como-nace-y-evoluciona-un-lenguaje-estandares-versiones-y-ecosistemas/README.md) |
+| ✅ 017 | [Familia C y de las llaves: C, C++, Objective-C](parte-1-atlas-y-genealogia-de-los-lenguajes/017-familia-c-y-de-las-llaves-c-c-plus-plus-objective-c/README.md) |
+| ✅ 018 | [Familia scripting dinámico: Python, Ruby, Perl, PHP, Lua](parte-1-atlas-y-genealogia-de-los-lenguajes/018-familia-scripting-dinamico-python-ruby-perl-php-lua/README.md) |
+| ✅ 019 | [Familia JVM: Java, Kotlin, Scala, Groovy, Clojure](parte-1-atlas-y-genealogia-de-los-lenguajes/019-familia-jvm-java-kotlin-scala-groovy-clojure/README.md) |
+| ✅ 020 | [Familia .NET: C#, F#, VB.NET](parte-1-atlas-y-genealogia-de-los-lenguajes/020-familia-net-c-sharp-f-sharp-vb-net/README.md) |
+| ✅ 021 | [Familia JavaScript y web: JS, TypeScript, Dart](parte-1-atlas-y-genealogia-de-los-lenguajes/021-familia-javascript-y-web-js-typescript-dart/README.md) |
+| ✅ 022 | [Familia funcional tipada (ML): Haskell, OCaml, F# y la influencia en Rust](parte-1-atlas-y-genealogia-de-los-lenguajes/022-familia-funcional-tipada-ml-haskell-ocaml-f-sharp-y-la-influencia-en-rust/README.md) |
+| ✅ 023 | [Familia Lisp: Scheme, Racket, Clojure, Emacs Lisp](parte-1-atlas-y-genealogia-de-los-lenguajes/023-familia-lisp-scheme-racket-clojure-emacs-lisp/README.md) |
+| ✅ 024 | [Familia lógica y declarativa: SQL, Prolog, Datalog](parte-1-atlas-y-genealogia-de-los-lenguajes/024-familia-logica-y-declarativa-sql-prolog-datalog/README.md) |
+| ✅ 025 | [Familia concurrente/actor: Erlang, Elixir y el CSP de Go](parte-1-atlas-y-genealogia-de-los-lenguajes/025-familia-concurrente-actor-erlang-elixir-y-el-csp-de-go/README.md) |
+| ✅ 026 | [Familia de sistemas: C, C++, Rust, Zig](parte-1-atlas-y-genealogia-de-los-lenguajes/026-familia-de-sistemas-c-c-plus-plus-rust-zig/README.md) |
+| ✅ 027 | [Familia array y científica: APL, R, Julia, Fortran, MATLAB](parte-1-atlas-y-genealogia-de-los-lenguajes/027-familia-array-y-cientifica-apl-r-julia-fortran-matlab/README.md) |
+| ✅ 028 | [Lenguajes históricos y de nicho: COBOL, Fortran, Pascal, BASIC, Bash](parte-1-atlas-y-genealogia-de-los-lenguajes/028-lenguajes-historicos-y-de-nicho-cobol-fortran-pascal-basic-bash/README.md) |
 
 ## Parte 2 — Herramientas, toolchains y anatomía de comandos · clases 029–040
 
@@ -58,18 +58,18 @@ Leyenda: ✅ construida · 🚧 planificada.
 
 | # | Clase |
 |---|---|
-| 🚧 029 | [Qué es un toolchain: del código fuente al programa que corre](parte-2-herramientas-toolchains-y-anatomia-de-comandos/029-que-es-un-toolchain-del-codigo-fuente-al-programa-que-corre/README.md) |
-| 🚧 030 | [Compilado vs. interpretado vs. transpilado vs. bytecode/VM](parte-2-herramientas-toolchains-y-anatomia-de-comandos/030-compilado-vs-interpretado-vs-transpilado-vs-bytecode-vm/README.md) |
-| 🚧 031 | [Anatomía de un comando: nombre, subcomando, flags, argumentos y esquema](parte-2-herramientas-toolchains-y-anatomia-de-comandos/031-anatomia-de-un-comando-nombre-subcomando-flags-argumentos-y-esquema/README.md) |
-| 🚧 032 | [Instalación y gestión de versiones (pyenv, nvm, rustup, SDKMAN, phpenv)](parte-2-herramientas-toolchains-y-anatomia-de-comandos/032-instalacion-y-gestion-de-versiones-pyenv-nvm-rustup-sdkman-phpenv/README.md) |
-| 🚧 033 | [Ejecutar: python, node, tsx, java, dotnet, go run, rustc, cc, php, sqlite3](parte-2-herramientas-toolchains-y-anatomia-de-comandos/033-ejecutar-python-node-tsx-java-dotnet-go-run-rustc-cc-php-sqlite3/README.md) |
-| 🚧 034 | [Compilar y construir: gcc/clang, cargo, go build, javac, dotnet build](parte-2-herramientas-toolchains-y-anatomia-de-comandos/034-compilar-y-construir-gcc-clang-cargo-go-build-javac-dotnet-build/README.md) |
-| 🚧 035 | [Paquetes y dependencias: pip, pnpm, cargo, maven/gradle, nuget, go mod, composer](parte-2-herramientas-toolchains-y-anatomia-de-comandos/035-paquetes-y-dependencias-pip-pnpm-cargo-maven-gradle-nuget-go-mod-composer/README.md) |
-| 🚧 036 | [REPL e intérpretes interactivos por lenguaje](parte-2-herramientas-toolchains-y-anatomia-de-comandos/036-repl-e-interpretes-interactivos-por-lenguaje/README.md) |
-| 🚧 037 | [Formateadores y linters: black, prettier, gofmt, rustfmt, clang-format, php-cs-fixer](parte-2-herramientas-toolchains-y-anatomia-de-comandos/037-formateadores-y-linters-black-prettier-gofmt-rustfmt-clang-format-php-cs-fixer/README.md) |
-| 🚧 038 | [Pruebas desde la terminal: pytest, node --test, go test, cargo test, dotnet test, phpunit](parte-2-herramientas-toolchains-y-anatomia-de-comandos/038-pruebas-desde-la-terminal-pytest-node-test-go-test-cargo-test-dotnet-test-phpunit/README.md) |
-| 🚧 039 | [Empaquetado y distribución: wheels, jars, binarios, contenedores](parte-2-herramientas-toolchains-y-anatomia-de-comandos/039-empaquetado-y-distribucion-wheels-jars-binarios-contenedores/README.md) |
-| 🚧 040 | [Variables de entorno, rutas y el PATH en Windows y Unix](parte-2-herramientas-toolchains-y-anatomia-de-comandos/040-variables-de-entorno-rutas-y-el-path-en-windows-y-unix/README.md) |
+| ✅ 029 | [Qué es un toolchain: del código fuente al programa que corre](parte-2-herramientas-toolchains-y-anatomia-de-comandos/029-que-es-un-toolchain-del-codigo-fuente-al-programa-que-corre/README.md) |
+| ✅ 030 | [Compilado vs. interpretado vs. transpilado vs. bytecode/VM](parte-2-herramientas-toolchains-y-anatomia-de-comandos/030-compilado-vs-interpretado-vs-transpilado-vs-bytecode-vm/README.md) |
+| ✅ 031 | [Anatomía de un comando: nombre, subcomando, flags, argumentos y esquema](parte-2-herramientas-toolchains-y-anatomia-de-comandos/031-anatomia-de-un-comando-nombre-subcomando-flags-argumentos-y-esquema/README.md) |
+| ✅ 032 | [Instalación y gestión de versiones (pyenv, nvm, rustup, SDKMAN, phpenv)](parte-2-herramientas-toolchains-y-anatomia-de-comandos/032-instalacion-y-gestion-de-versiones-pyenv-nvm-rustup-sdkman-phpenv/README.md) |
+| ✅ 033 | [Ejecutar: python, node, tsx, java, dotnet, go run, rustc, cc, php, sqlite3](parte-2-herramientas-toolchains-y-anatomia-de-comandos/033-ejecutar-python-node-tsx-java-dotnet-go-run-rustc-cc-php-sqlite3/README.md) |
+| ✅ 034 | [Compilar y construir: gcc/clang, cargo, go build, javac, dotnet build](parte-2-herramientas-toolchains-y-anatomia-de-comandos/034-compilar-y-construir-gcc-clang-cargo-go-build-javac-dotnet-build/README.md) |
+| ✅ 035 | [Paquetes y dependencias: pip, pnpm, cargo, maven/gradle, nuget, go mod, composer](parte-2-herramientas-toolchains-y-anatomia-de-comandos/035-paquetes-y-dependencias-pip-pnpm-cargo-maven-gradle-nuget-go-mod-composer/README.md) |
+| ✅ 036 | [REPL e intérpretes interactivos por lenguaje](parte-2-herramientas-toolchains-y-anatomia-de-comandos/036-repl-e-interpretes-interactivos-por-lenguaje/README.md) |
+| ✅ 037 | [Formateadores y linters: black, prettier, gofmt, rustfmt, clang-format, php-cs-fixer](parte-2-herramientas-toolchains-y-anatomia-de-comandos/037-formateadores-y-linters-black-prettier-gofmt-rustfmt-clang-format-php-cs-fixer/README.md) |
+| ✅ 038 | [Pruebas desde la terminal: pytest, node --test, go test, cargo test, dotnet test, phpunit](parte-2-herramientas-toolchains-y-anatomia-de-comandos/038-pruebas-desde-la-terminal-pytest-node-test-go-test-cargo-test-dotnet-test-phpunit/README.md) |
+| ✅ 039 | [Empaquetado y distribución: wheels, jars, binarios, contenedores](parte-2-herramientas-toolchains-y-anatomia-de-comandos/039-empaquetado-y-distribucion-wheels-jars-binarios-contenedores/README.md) |
+| ✅ 040 | [Variables de entorno, rutas y el PATH en Windows y Unix](parte-2-herramientas-toolchains-y-anatomia-de-comandos/040-variables-de-entorno-rutas-y-el-path-en-windows-y-unix/README.md) |
 
 ## Parte 3 — Valores, tipos y variables · clases 041–056
 

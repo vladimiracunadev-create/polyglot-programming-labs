@@ -1,38 +1,72 @@
 # Clase 037 — Formateadores y linters: black, prettier, gofmt, rustfmt, clang-format, php-cs-fixer
 
-> Parte **2 — Herramientas, toolchains y anatomía de comandos** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **2 — Herramientas, toolchains y anatomía de comandos** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **formateadores y linters: black, prettier, gofmt, rustfmt, clang-format, php-cs-fixer**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Conocer dos herramientas que elevan la calidad sin esfuerzo manual: el formateador, que reescribe el código con un estilo consistente, y el linter, que detecta problemas y malas prácticas. Automatizan la legibilidad e idiomática que estudiaste en la Parte 0, y evitan discusiones de estilo en los equipos.
 
-## 🧮 Modelo
+## 📚 Resultados de aprendizaje
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+Al finalizar, podrás:
 
-## 🌐 Implementaciones idiomáticas (previstas)
+1. Distinguir formateador de linter.
+2. Nombrar el formateador de cada lenguaje del núcleo.
+3. Explicar por qué automatizar el estilo mejora el trabajo en equipo.
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+## 🗺️ Temas
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Formateador | Reescribe el código con un estilo único |
+| 2 | Linter | Detecta errores probables y malas prácticas |
+| 3 | Herramientas por lenguaje | black, prettier, gofmt, rustfmt, clippy… |
+| 4 | Integración | En el editor y en el CI |
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 📖 Definiciones y características
+
+- **Formateador** — herramienta que reescribe el código con un estilo consistente (black, gofmt). Clave: elimina las discusiones de formato.
+- **Linter** — analiza el código en busca de errores probables y anti-patrones (clippy, ESLint). Clave: previene bugs antes de ejecutar.
+- **Estilo consistente** — que todo el código luzca igual sin importar quién lo escribió. Clave: facilita leer y revisar.
+- **gofmt** — formateador oficial de Go; no admite configuración. Clave: un solo estilo para toda la comunidad Go.
+
+## 🧩 Situación
+
+En una revisión de código, medio equipo discute si usar 2 o 4 espacios. Con un formateador (gofmt, black) la pregunta desaparece: la herramienta decide y todos aceptan. La energía se dedica a la lógica, no al formato.
+
+## 🔎 Ejemplo
+
+Formateador y linter por lenguaje:
+
+```text
+Python   black (formato)      + ruff/flake8 (lint)
+JS/TS    prettier             + eslint
+Go       gofmt                + go vet
+Rust     rustfmt              + clippy
+C/C++    clang-format
+PHP      php-cs-fixer
+```
+
+## ✍️ Práctica
+
+Si tienes uno instalado, pasa un formateador por un archivo desordenado y observa el 'antes y después'. ¿Qué reglas aplicó?
+
+## ⚠️ Errores comunes
+
+- **Formatear a mano** → causa: perder tiempo y ser inconsistente → solución: delegar el formato al formateador, integrado en el editor
+- **Ignorar los avisos del linter** → causa: dejar pasar bugs latentes → solución: tratar los avisos como pistas y resolverlos o justificarlos
+
+## ❓ Preguntas frecuentes
+
+- **¿Formateador y linter son lo mismo?** No: el formateador cambia el aspecto; el linter señala problemas de fondo. Se usan juntos.
+- **¿gofmt se puede configurar?** No, a propósito: Go impone un único estilo para toda la comunidad.
+
+## 🔗 Referencias
+
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 

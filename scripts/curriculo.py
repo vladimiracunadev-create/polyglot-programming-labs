@@ -466,6 +466,854 @@ P0 = [
 ]
 
 # --------------------------------------------------------------------------- #
+# Parte 1 — Atlas y genealogía de los lenguajes (tipo "metodo")
+# --------------------------------------------------------------------------- #
+
+P1 = [
+    ("El árbol genealógico de los lenguajes: mapa general", {
+        "tipo": "metodo",
+        "objetivo": "Ver el mapa completo de las familias de lenguajes y sus antepasados comunes. Casi todos los lenguajes actuales descienden de tres troncos de los años 50-60: Fortran (cálculo), Lisp (funcional/simbólico) y ALGOL (estructurado, del que nace la familia de llaves). Entender el árbol convierte 'decenas de lenguajes' en 'unas pocas familias con variaciones'.",
+        "resultados": [
+            "Ubicar los tres troncos históricos (Fortran, Lisp, ALGOL) y qué aportó cada uno.",
+            "Situar cada lenguaje del núcleo en su rama del árbol.",
+            "Explicar por qué conocer una familia acelera aprender a sus miembros.",
+        ],
+        "temas": [
+            ("Los tres troncos", "Fortran, Lisp y ALGOL originan casi todo lo demás"),
+            ("Ramas principales", "Llaves, dinámicos, funcionales, declarativos, lógicos"),
+            ("Herencia de rasgos", "Sintaxis, tipos y paradigma se heredan de los ancestros"),
+            ("Representante y primos", "Un lenguaje del núcleo por rama abre la puerta a las demás"),
+        ],
+        "definiciones": [
+            ("Tronco", "lenguaje raíz del que desciende una familia (Fortran, Lisp, ALGOL). Clave: define rasgos que perduran décadas."),
+            ("Familia", "grupo de lenguajes con ancestro y rasgos comunes. Clave: aprender uno facilita los demás."),
+            ("ALGOL", "lenguaje de 1958-60 que introdujo la programación estructurada y los bloques. Clave: padre de C, y por tanto de casi toda la sintaxis de llaves."),
+            ("Influencia", "rasgo que un lenguaje toma de otro sin ser de su familia (p. ej. Rust toma tipos de ML). Clave: el árbol tiene cruces, no solo ramas."),
+        ],
+        "situacion": "Un principiante ve una lista de 50 lenguajes y se abruma. Un veterano ve cinco familias y sabe que dominar un representante de cada una cubre el 90% de lo que encontrará. El árbol es lo que separa una visión de la otra.",
+        "ejemplo": "Árbol simplificado (año de nacimiento aproximado):\n\n```text\nFortran (1957) ── cálculo numérico ── Fortran, MATLAB, Julia\nLisp (1958) ───── simbólico/funcional ─ Scheme, Clojure, (influye en ML)\nALGOL (1958) ──── estructurado ──┬── C (1972) ── C++, Java, C#, Go, Rust\n                                 ├── Pascal (1970)\n                                 └── (influye en casi todo)\nML (1973) ─────── funcional tipado ── OCaml, Haskell, F#, (influye en Rust)\nProlog (1972) ─── lógico ──────────── Datalog\n```",
+        "practica": "Dibuja tu propio árbol con los 10 lenguajes del núcleo. ¿Cuáles comparten la sintaxis de llaves de C? ¿Cuál no encaja en ninguna rama imperativa? (Pista: SQL.)",
+        "errores": [
+            ("Tratar cada lenguaje como algo aislado y nuevo", "no ver la familia", "identificar el ancestro y estudiar los rasgos heredados"),
+            ("Creer que el árbol son ramas puras sin cruces", "ignorar las influencias", "recordar que Rust toma de C y de ML a la vez"),
+        ],
+        "faq": [
+            ("¿Hay un árbol 'oficial'?", "No único, pero las relaciones históricas son bien conocidas y consistentes entre fuentes."),
+            ("¿Dónde va SQL?", "Fuera del tronco imperativo: es declarativo, primo de la rama lógica (Prolog)."),
+        ],
+    }),
+    ("Cómo nace y evoluciona un lenguaje: estándares, versiones y ecosistemas", {
+        "tipo": "metodo",
+        "objetivo": "Entender que un lenguaje no es estático: nace por una necesidad, se estandariza, publica versiones y crece con un ecosistema (librerías, herramientas, comunidad). Saber leer 'C11', 'ES2023' o 'Python 3.12' te dice qué features puedes usar y qué compatibilidad esperar.",
+        "resultados": [
+            "Distinguir el lenguaje (estándar) de su implementación (compilador/intérprete).",
+            "Interpretar una versión y saber qué implica para la compatibilidad.",
+            "Explicar el papel del ecosistema y la gobernanza (PEP, JEP, ECMA, RFC).",
+        ],
+        "temas": [
+            ("Estándar vs. implementación", "El lenguaje se especifica; varios compiladores lo implementan"),
+            ("Versionado", "Mayor/menor indica compatibilidad y features nuevas"),
+            ("Gobernanza", "Quién decide los cambios (comités, fundaciones, empresas)"),
+            ("Ecosistema", "Librerías y herramientas que hacen útil al lenguaje"),
+        ],
+        "definiciones": [
+            ("Estándar", "documento que define el lenguaje (ISO C, ECMAScript). Clave: separa la idea de sus implementaciones."),
+            ("Implementación", "compilador o intérprete concreto (GCC, CPython, V8). Clave: puede haber varias del mismo estándar."),
+            ("Proceso de evolución", "mecanismo formal de cambios (PEP en Python, JEP en Java, TC39 en JS). Clave: el lenguaje cambia con reglas, no al azar."),
+            ("Ecosistema", "conjunto de librerías, gestores de paquetes y comunidad. Clave: a menudo decide la elección más que el lenguaje."),
+        ],
+        "situacion": "Copias un ejemplo de internet y no compila: usa una feature de C++20 y tu compilador aún es C++17. El problema no es tu código: es la versión. Saber esto ahorra horas.",
+        "ejemplo": "Cómo se nombran y gobiernan algunos lenguajes:\n\n```text\nLenguaje    Estándar/versión   Gobernanza         Implementación\n--------    ----------------   ----------------   --------------\nC           ISO C23            comité ISO/WG14    GCC, Clang\nJavaScript  ECMAScript 2023    TC39 (Ecma)        V8, SpiderMonkey\nPython      3.12 (PEP)         Steering Council   CPython, PyPy\nJava        JDK 21 (JEP)       OpenJDK / Oracle   HotSpot, GraalVM\nRust        edición 2021       RFC / Rust team    rustc\n```",
+        "practica": "Averigua la última versión estable de dos lenguajes del núcleo y una feature que introdujeron. ¿Cómo se propuso ese cambio (PEP, JEP, RFC…)?",
+        "errores": [
+            ("Confundir el lenguaje con su compilador", "creer que 'C = GCC'", "recordar que un estándar tiene varias implementaciones"),
+            ("Ignorar la versión al copiar código", "asumir que todo el código de un lenguaje es intercambiable", "verificar la versión mínima que exige un ejemplo"),
+        ],
+        "faq": [
+            ("¿Por qué hay varias implementaciones?", "Distintos objetivos: rendimiento, portabilidad, tamaño. Todas siguen el mismo estándar."),
+            ("¿'Edición' de Rust es una versión?", "Es un mecanismo de compatibilidad: permite cambios sin romper código viejo."),
+        ],
+    }),
+    ("Familia C y de las llaves: C, C++, Objective-C", {
+        "tipo": "metodo",
+        "objetivo": "Conocer la familia más influyente en la sintaxis actual: C y sus descendientes directos. C (1972) definió las llaves `{}`, el `;`, los tipos y la cercanía a la memoria que hoy reconoces en Java, C#, JavaScript, Go y muchos más. Aprender a leer C es aprender a leer media programación.",
+        "resultados": [
+            "Reconocer los rasgos de C que heredaron docenas de lenguajes.",
+            "Distinguir C de C++ (OO + plantillas) y Objective-C (mensajes al estilo Smalltalk).",
+            "Explicar por qué 'saber C' facilita leer casi cualquier lenguaje de llaves.",
+        ],
+        "temas": [
+            ("C: el ancestro", "Llaves, punteros, memoria manual, tipos primitivos"),
+            ("C++: C con objetos", "Clases, plantillas y RAII sobre la base de C"),
+            ("Objective-C: C con mensajes", "OO al estilo Smalltalk; base de macOS/iOS clásico"),
+            ("La herencia sintáctica", "Por qué Java, C#, JS y Go 'se parecen a C'"),
+        ],
+        "definiciones": [
+            ("C", "lenguaje de 1972 (Dennis Ritchie, Bell Labs) para sistemas. Clave: control total de la memoria; en el núcleo del curso."),
+            ("C++", "extensión de C (1985, Bjarne Stroustrup) con OO, plantillas y RAII. Clave: potencia y complejidad; primo directo."),
+            ("Objective-C", "C + mensajería estilo Smalltalk (1984, Brad Cox). Clave: lenguaje histórico de Apple, hoy sustituido por Swift."),
+            ("Sintaxis de llaves", "bloques delimitados por `{}` y sentencias con `;`. Clave: la marca de la familia, heredada por decenas de lenguajes."),
+        ],
+        "situacion": "Alguien que solo sabe JavaScript abre por primera vez código en C y, para su sorpresa, entiende los bucles, los `if`, las llaves y las funciones. No es casualidad: JavaScript heredó esa sintaxis de C a través de Java.",
+        "ejemplo": "El mismo bucle revela el parentesco de la familia de llaves:\n\n```text\nC:     for (int i = 0; i < 3; i++) { printf(\"%d\", i); }\nC++:   for (int i = 0; i < 3; i++) { std::cout << i; }\nJava:  for (int i = 0; i < 3; i++) { System.out.print(i); }\nJS:    for (let i = 0; i < 3; i++) { console.log(i); }\n```",
+        "practica": "Toma un `for` en un lenguaje que conozcas y reescríbelo en C mentalmente. ¿Qué cambia (semántica) más allá de la escritura (sintaxis)?",
+        "errores": [
+            ("Creer que C++ es 'solo C con clases'", "subestimar su complejidad (plantillas, RAII, sobrecarga)", "tratarlo como un lenguaje propio, no como C decorado"),
+            ("Asumir que llaves iguales = comportamiento igual", "confundir sintaxis con semántica", "verificar la gestión de memoria y tipos de cada miembro"),
+        ],
+        "faq": [
+            ("¿Por qué C sigue vivo tras 50 años?", "Es la base de sistemas operativos, drivers y del runtime de casi todo. Rápido y portable."),
+            ("¿Objective-C está muerto?", "En desuso frente a Swift, pero aún corre en mucho software de Apple existente."),
+        ],
+    }),
+    ("Familia scripting dinámico: Python, Ruby, Perl, PHP, Lua", {
+        "tipo": "metodo",
+        "objetivo": "Conocer la familia de los lenguajes dinámicos: sin declarar tipos, interpretados, pensados para escribir rápido. Python y PHP están en el núcleo; Ruby, Perl y Lua son sus primos. Comparten la filosofía 'el programador antes que la máquina', con distintos acentos.",
+        "resultados": [
+            "Explicar qué comparte esta familia (tipado dinámico, interpretado, expresividad).",
+            "Distinguir el acento de cada uno (claridad, felicidad del dev, texto, web, embebido).",
+            "Reconocer código de un primo apoyándote en Python o PHP.",
+        ],
+        "temas": [
+            ("Rasgos comunes", "Tipado dinámico, interpretado, poca ceremonia"),
+            ("Python y PHP", "Los representantes del núcleo: claridad y web"),
+            ("Ruby, Perl, Lua", "Felicidad del dev, procesamiento de texto, embebido"),
+            ("Cuándo brillan", "Prototipos, scripting, web, automatización"),
+        ],
+        "definiciones": [
+            ("Python", "1991 (Guido van Rossum), prioriza la legibilidad. Clave: núcleo del curso; el más usado para enseñar y para datos."),
+            ("Ruby", "1995 (Matz), diseñado para la felicidad del programador. Clave: bloques y metaprogramación; base de Rails."),
+            ("Perl", "1987 (Larry Wall), rey del procesamiento de texto y las expresiones regulares. Clave: 'hay más de una forma de hacerlo'."),
+            ("Lua", "1993 (PUC-Rio), minimalista y embebible. Clave: tablas como única estructura; scripting en juegos y sistemas embebidos."),
+        ],
+        "situacion": "Un equipo necesita un script para renombrar 10.000 archivos. Nadie propone C: se hace en Python en 10 líneas. Esa inmediatez es la razón de ser de toda la familia dinámica.",
+        "ejemplo": "'Hola, X' revela el aire de familia (todos dinámicos, sin declarar tipos):\n\n```text\nPython:  nombre = \"Ada\"; print(f\"Hola, {nombre}\")\nRuby:    nombre = \"Ada\"; puts \"Hola, #{nombre}\"\nPHP:     $nombre = \"Ada\"; echo \"Hola, $nombre\";\nLua:     nombre = \"Ada\"; print(\"Hola, \" .. nombre)\n```",
+        "practica": "Compara la interpolación de cadenas en Python (`f\"{x}\"`), Ruby (`#{x}`) y PHP (`$x`). ¿De qué clase es la diferencia entre ellas?",
+        "errores": [
+            ("Creer que 'dinámico' significa 'sin reglas'", "confundir tipado dinámico con débil", "recordar que Python es dinámico pero fuerte: no suma texto y número sin más"),
+            ("Usar la familia para todo", "ignorar su coste en rendimiento", "reservarla para scripting/prototipos, no para núcleos críticos"),
+        ],
+        "faq": [
+            ("¿Python es lento?", "Comparado con C/Rust, sí; pero para la mayoría de tareas su velocidad de desarrollo compensa."),
+            ("¿Por qué PHP tiene mala fama?", "Por su historia caótica; las versiones modernas (8.x) son un lenguaje sólido y tipado opcionalmente."),
+        ],
+    }),
+    ("Familia JVM: Java, Kotlin, Scala, Groovy, Clojure", {
+        "tipo": "metodo",
+        "objetivo": "Conocer los lenguajes que corren sobre la Máquina Virtual de Java (JVM). Java es el representante del núcleo; Kotlin, Scala, Groovy y Clojure comparten la misma plataforma (bytecode, GC, librerías) pero ofrecen paradigmas distintos. Un mismo runtime, varias formas de programar.",
+        "resultados": [
+            "Explicar qué comparten los lenguajes JVM (bytecode, GC, interoperabilidad).",
+            "Distinguir el paradigma de cada uno (OO nominal, moderno, funcional-OO, Lisp).",
+            "Entender por qué se puede mezclar Java y Kotlin en un mismo proyecto.",
+        ],
+        "temas": [
+            ("La JVM como plataforma", "Compilan a bytecode; comparten GC y librerías"),
+            ("Java: el estándar", "OO nominal, verboso pero robusto"),
+            ("Kotlin y Scala", "Java moderno (null-safety, corrutinas) y funcional-OO"),
+            ("Clojure", "Un Lisp sobre la JVM: datos inmutables y macros"),
+        ],
+        "definiciones": [
+            ("JVM", "máquina virtual que ejecuta bytecode Java. Clave: da portabilidad ('escribe una vez, corre en todas partes') y GC."),
+            ("Java", "1995 (Gosling, Sun), OO nominal sobre la JVM. Clave: núcleo del curso; pilar del backend empresarial."),
+            ("Kotlin", "2011 (JetBrains), Java moderno con null-safety y corrutinas. Clave: oficial para Android; interopera 100% con Java."),
+            ("Clojure", "2007 (Rich Hickey), dialecto de Lisp sobre la JVM. Clave: inmutabilidad y homoiconicidad en una plataforma mainstream."),
+        ],
+        "situacion": "Un proyecto Android en Java quiere adoptar corrutinas y null-safety sin reescribir todo. Migra archivo a archivo a Kotlin, que convive con Java en el mismo proyecto porque ambos compilan al mismo bytecode.",
+        "ejemplo": "Cuatro maneras de sumar sobre la MISMA plataforma:\n\n```text\nJava:    int r = a + b;\nKotlin:  val r = a + b            // inferencia, inmutable\nScala:   val r = a + b            // funcional-OO\nClojure: (def r (+ a b))          // Lisp: paréntesis y prefijo\n```",
+        "practica": "Kotlin usa `val` (inmutable) y `var` (mutable). ¿A qué lenguaje del núcleo se parece esa distinción? (Pista: Rust.)",
+        "errores": [
+            ("Creer que 'lenguaje JVM' = 'Java'", "ignorar la diversidad de paradigmas sobre la misma VM", "recordar que Clojure (Lisp) y Java conviven en la JVM"),
+            ("Asumir arranque instantáneo", "la JVM tiene tiempo de calentamiento", "considerarlo en herramientas de línea de comandos de vida corta"),
+        ],
+        "faq": [
+            ("¿Puedo llamar a Java desde Kotlin?", "Sí, y viceversa: comparten bytecode y librerías; la interoperabilidad es total."),
+            ("¿Clojure es raro?", "Su sintaxis Lisp asusta al principio, pero su modelo de datos inmutables es muy elegante."),
+        ],
+    }),
+    ("Familia .NET: C#, F#, VB.NET", {
+        "tipo": "metodo",
+        "objetivo": "Conocer la plataforma .NET de Microsoft y sus tres lenguajes: C# (el representante del núcleo, multiparadigma), F# (funcional) y VB.NET (heredero de Visual Basic). Todos compilan a un lenguaje intermedio común (IL) que corre sobre el CLR, el equivalente de la JVM en el mundo Microsoft.",
+        "resultados": [
+            "Explicar el rol del CLR y el IL (análogo a la JVM y su bytecode).",
+            "Distinguir C# (multiparadigma), F# (funcional) y VB.NET (accesible).",
+            "Entender qué significa que .NET hoy sea multiplataforma y de código abierto.",
+        ],
+        "temas": [
+            ("El CLR y el IL", "Runtime y lenguaje intermedio comunes a los tres"),
+            ("C#: el buque insignia", "Multiparadigma, moderno, gran ecosistema"),
+            ("F#: el funcional", "ML sobre .NET: inmutabilidad y tipos algebraicos"),
+            (".NET multiplataforma", "De Windows a Linux/macOS, open source"),
+        ],
+        "definiciones": [
+            ("CLR", "Common Language Runtime: la máquina virtual de .NET. Clave: ejecuta el IL, gestiona memoria (GC); análogo a la JVM."),
+            ("C#", "2000 (Anders Hejlsberg, Microsoft), multiparadigma sobre el CLR. Clave: núcleo del curso; empresa, juegos (Unity) y web."),
+            ("F#", "2005 (Don Syme), funcional tipado derivado de OCaml, sobre .NET. Clave: pureza y tipos algebraicos en la plataforma Microsoft."),
+            ("IL (bytecode de .NET)", "código intermedio al que compilan todos los lenguajes .NET. Clave: permite mezclarlos en una solución."),
+        ],
+        "situacion": "Un estudio de videojuegos usa Unity, cuyo scripting es C#. El mismo lenguaje sirve luego para el backend web con ASP.NET y para una herramienta de escritorio: una plataforma, muchos destinos.",
+        "ejemplo": "Los tres lenguajes .NET, mismo runtime:\n\n```text\nC#:      int r = a + b;\nF#:      let r = a + b            // funcional, inmutable por defecto\nVB.NET:  Dim r As Integer = a + b  ' sintaxis verbosa, accesible\n```",
+        "practica": "F# es a .NET lo que Kotlin/Clojure son a la JVM: otro paradigma sobre el mismo runtime. Enumera dos lenguajes del núcleo comparables a C# por su modelo (Pista: Java).",
+        "errores": [
+            ("Creer que .NET es solo Windows", "quedarse con la imagen antigua", "recordar que .NET moderno corre en Linux y macOS y es open source"),
+            ("Confundir C# con Java por parecerse", "asumir que son intercambiables", "notar diferencias reales: propiedades, LINQ, structs por valor"),
+        ],
+        "faq": [
+            ("¿C# o Java?", "Muy parecidos en modelo; la elección suele depender del ecosistema (Microsoft vs. JVM) y del equipo."),
+            ("¿VB.NET sigue vivo?", "En mantenimiento: existe y funciona, pero Microsoft ya no lo evoluciona activamente."),
+        ],
+    }),
+    ("Familia JavaScript y web: JS, TypeScript, Dart", {
+        "tipo": "metodo",
+        "objetivo": "Conocer los lenguajes de la web. JavaScript (1995) nació para animar páginas y hoy corre en todas partes; TypeScript le añade tipos estáticos; Dart (Google) es su primo para apps (Flutter). Comparten sintaxis de llaves y un modelo asíncrono basado en eventos.",
+        "resultados": [
+            "Explicar por qué JavaScript es omnipresente (navegador, servidor, móvil).",
+            "Entender qué añade TypeScript sobre JavaScript y por qué.",
+            "Reconocer el modelo asíncrono/eventos común a la familia.",
+        ],
+        "temas": [
+            ("JavaScript: el lenguaje de la web", "Único en el navegador; también en servidor (Node)"),
+            ("TypeScript: tipos sobre JS", "Comprobación estática que transpila a JS"),
+            ("Prototipos y asincronía", "Herencia por prototipos; eventos y promesas"),
+            ("Dart y otros primos", "Alternativas que compilan a/para la web y móvil"),
+        ],
+        "definiciones": [
+            ("JavaScript", "1995 (Brendan Eich, Netscape), dinámico y basado en prototipos. Clave: el único lenguaje nativo del navegador; núcleo del curso."),
+            ("TypeScript", "2012 (Microsoft), superset de JS con tipos estáticos. Clave: se comprueba al compilar y transpila a JS; núcleo del curso."),
+            ("Dart", "2011 (Google), tipado y compilable a JS o nativo. Clave: motor de Flutter para apps multiplataforma."),
+            ("Prototipos", "modelo de OO donde los objetos heredan de otros objetos, no de clases. Clave: rasgo distintivo de JavaScript."),
+        ],
+        "situacion": "Un proyecto JavaScript crece a 50.000 líneas y los errores de 'undefined is not a function' se disparan. Adoptar TypeScript hace que el compilador atrape esos fallos antes de ejecutar: la misma familia, con red de seguridad.",
+        "ejemplo": "TypeScript es JavaScript con tipos: mismo código, más garantías.\n\n```text\nJavaScript:  function doble(x) { return x * 2; }\nTypeScript:  function doble(x: number): number { return x * 2; }\n```\n\nEl segundo falla al compilar si alguien llama `doble(\"hola\")`.",
+        "practica": "TypeScript infiere y comprueba tipos como Java o Rust, pero desaparece al ejecutar (transpila a JS). ¿A qué modelo del núcleo se parece más y en qué se diferencia?",
+        "errores": [
+            ("Creer que TypeScript es un lenguaje distinto de JS", "no ver que es un superset", "recordar que todo JS válido es TS válido; TS solo añade tipos"),
+            ("Ignorar la asincronía", "programar como si todo fuera secuencial", "entender el bucle de eventos, callbacks y async/await desde el inicio"),
+        ],
+        "faq": [
+            ("¿TypeScript reemplaza a JavaScript?", "No: lo complementa. Al final se convierte en JavaScript para poder ejecutarse."),
+            ("¿Por qué JS corre en el servidor?", "Node.js incrustó el motor V8 fuera del navegador; hizo de JS un lenguaje de propósito general."),
+        ],
+    }),
+    ("Familia funcional tipada (ML): Haskell, OCaml, F# y la influencia en Rust", {
+        "tipo": "metodo",
+        "objetivo": "Conocer la familia ML: lenguajes funcionales con sistemas de tipos potentes e inferencia. Aunque ninguno está en el núcleo, su influencia sí: Rust tomó de aquí los tipos algebraicos, el `match` y `Option`/`Result`. Entender ML explica por qué Rust se siente distinto a C.",
+        "resultados": [
+            "Explicar los rasgos de la familia ML (funciones puras, inmutabilidad, inferencia, ADT).",
+            "Reconocer qué tomó Rust de ML frente a lo que tomó de C.",
+            "Leer una expresión funcional simple (match sobre un tipo suma).",
+        ],
+        "temas": [
+            ("Raíces: ML (1973)", "Inferencia de tipos y funciones como valores"),
+            ("Haskell: pureza y pereza", "Sin efectos secundarios por defecto; evaluación perezosa"),
+            ("OCaml y F#", "ML práctico; F# lleva ML a .NET"),
+            ("La huella en Rust", "ADT, match exhaustivo, Option/Result"),
+        ],
+        "definiciones": [
+            ("ML", "familia de 1973 (Robin Milner) con inferencia de tipos Hindley-Milner. Clave: raíz de OCaml, Haskell y F#."),
+            ("Haskell", "1990, funcional puro y perezoso. Clave: los efectos se modelan con tipos (mónadas); el más 'purista' de la familia."),
+            ("Tipo algebraico (ADT)", "tipo compuesto por alternativas (suma) o productos. Clave: Rust los tomó de aquí como `enum`."),
+            ("Inferencia de tipos", "el compilador deduce los tipos sin anotarlos. Clave: rasgo de ML heredado por Rust, Kotlin, Go y otros."),
+        ],
+        "situacion": "Un programador de C prueba Rust y se sorprende con `match` exhaustivo y `Option<T>` en vez de punteros nulos. Eso no viene de C: viene de ML. Reconocer la herencia hace que Rust deje de parecer arbitrario.",
+        "ejemplo": "El `match` sobre un tipo suma, de ML a Rust:\n\n```text\nHaskell:  case forma of\n            Circulo r -> pi * r * r\n            Cuadrado l -> l * l\nRust:     match forma {\n            Forma::Circulo(r) => PI * r * r,\n            Forma::Cuadrado(l) => l * l,\n          }\n```",
+        "practica": "Busca en la clase 041 (o en material de Rust) un `Option`/`Result`. Explica por qué esa idea es más segura que un puntero nulo, y de qué familia proviene.",
+        "errores": [
+            ("Ver Rust como 'C moderno' solamente", "ignorar su mitad ML", "reconocer que su seguridad de tipos viene de la familia funcional"),
+            ("Creer que funcional = académico e inútil", "prejuicio", "notar que sus ideas ya están en lenguajes mainstream (Rust, Kotlin, Swift)"),
+        ],
+        "faq": [
+            ("¿Necesito aprender Haskell?", "No para el núcleo, pero entender sus ideas mejora tu Rust, tu Kotlin y tu forma de pensar."),
+            ("¿Qué es la 'pereza' de Haskell?", "Evalúa una expresión solo cuando se necesita su valor; permite listas infinitas, entre otras cosas."),
+        ],
+    }),
+    ("Familia Lisp: Scheme, Racket, Clojure, Emacs Lisp", {
+        "tipo": "metodo",
+        "objetivo": "Conocer la familia más antigua todavía viva: Lisp (1958). Su rasgo único es la homoiconicidad: el código se escribe con la misma estructura que los datos (listas entre paréntesis), lo que permite macros que reescriben el propio lenguaje. Ninguno está en el núcleo, pero sus ideas (funciones de primera clase, GC, REPL) hoy están en todos.",
+        "resultados": [
+            "Explicar la homoiconicidad y por qué habilita macros potentes.",
+            "Leer una expresión Lisp (notación prefija entre paréntesis).",
+            "Reconocer ideas nacidas en Lisp que hoy son universales.",
+        ],
+        "temas": [
+            ("Homoiconicidad", "Código y datos comparten forma (listas)"),
+            ("Notación prefija", "(operador operando operando)"),
+            ("Macros", "Programas que escriben programas"),
+            ("Herencia universal", "GC, REPL, funciones de primera clase nacieron aquí"),
+        ],
+        "definiciones": [
+            ("Lisp", "1958 (John McCarthy), segundo lenguaje de alto nivel más antiguo. Clave: introdujo ideas hoy universales (GC, funciones de primera clase)."),
+            ("Homoiconicidad", "el código tiene la misma estructura que los datos que manipula. Clave: permite macros que transforman el lenguaje."),
+            ("Scheme", "1975, dialecto minimalista y elegante de Lisp. Clave: usado en enseñanza (SICP)."),
+            ("Clojure", "2007, Lisp moderno sobre la JVM. Clave: acerca la familia Lisp al mundo mainstream con datos inmutables."),
+        ],
+        "situacion": "Un programador ve `(+ 1 2 3)` y lo descarta por 'raro'. Pero esa uniformidad —todo es una lista— es justo lo que permite a Lisp extenderse con macros que otros lenguajes no pueden igualar.",
+        "ejemplo": "La notación prefija: el operador va primero, todo entre paréntesis.\n\n```text\nInfija (C):    (1 + 2) * 3\nLisp:          (* (+ 1 2) 3)\nDefinir función (Scheme):\n               (define (doble x) (* x 2))\n```",
+        "practica": "Traduce `(* (+ 2 3) (- 10 4))` a notación infija y calcula el resultado. (Respuesta: (2+3)*(10-4) = 30.)",
+        "errores": [
+            ("Rechazar Lisp por los paréntesis", "juzgar la forma, no las ideas", "ver que su uniformidad es su superpoder (macros)"),
+            ("Creer que Lisp es cosa del pasado", "ignorar Clojure y Racket", "reconocer que sigue vivo e influyente"),
+        ],
+        "faq": [
+            ("¿Para qué sirve hoy?", "Clojure en backend/datos, Racket y Scheme en enseñanza e investigación, Emacs Lisp en el editor Emacs."),
+            ("¿Qué idea de Lisp uso sin saberlo?", "Las funciones de primera clase (pasar funciones como valores) y el recolector de basura."),
+        ],
+    }),
+    ("Familia lógica y declarativa: SQL, Prolog, Datalog", {
+        "tipo": "metodo",
+        "objetivo": "Conocer los lenguajes donde describes QUÉ quieres, no CÓMO obtenerlo. SQL (en el núcleo) describe conjuntos de datos; Prolog describe hechos y reglas y deja que el motor deduzca. Es el salto paradigmático más grande respecto de los lenguajes imperativos del curso.",
+        "resultados": [
+            "Distinguir programación declarativa de imperativa con un ejemplo.",
+            "Explicar el modelo de SQL (consultas sobre conjuntos) y de Prolog (hechos, reglas, unificación).",
+            "Reconocer cuándo el enfoque declarativo simplifica un problema.",
+        ],
+        "temas": [
+            ("Declarativo vs. imperativo", "Describir el resultado vs. describir los pasos"),
+            ("SQL: consultas sobre datos", "El motor decide cómo ejecutar la consulta"),
+            ("Prolog: hechos y reglas", "Deducción por unificación y backtracking"),
+            ("Datalog", "Subconjunto de Prolog para consultas de datos"),
+        ],
+        "definiciones": [
+            ("Declarativo", "paradigma en el que se describe el resultado deseado, no el algoritmo. Clave: el motor decide el 'cómo'."),
+            ("SQL", "1974 (IBM), lenguaje de consulta de bases de datos relacionales. Clave: núcleo del curso; declarativo sobre conjuntos."),
+            ("Prolog", "1972 (Colmerauer, Kowalski), programación lógica. Clave: describes hechos y reglas; el motor deduce por unificación."),
+            ("Unificación", "mecanismo que hace coincidir términos para satisfacer una consulta lógica. Clave: motor de la deducción en Prolog."),
+        ],
+        "situacion": "Para obtener 'los clientes con más de 3 pedidos', un lenguaje imperativo recorre listas y acumula contadores. SQL lo dice en una frase (`GROUP BY ... HAVING COUNT(*) > 3`) y el motor se encarga del cómo. Ese cambio de mentalidad es el corazón de lo declarativo.",
+        "ejemplo": "Mismo objetivo, dos mentalidades:\n\n```text\nImperativo (pseudocódigo):\n  PARA cada cliente: contar pedidos; SI > 3, añadir a resultado\n\nDeclarativo (SQL):\n  SELECT cliente FROM pedidos GROUP BY cliente HAVING COUNT(*) > 3;\n\nLógico (Prolog):\n  abuelo(X, Z) :- padre(X, Y), padre(Y, Z).\n```",
+        "practica": "Escribe en una frase, sin código, qué resultado pides (no cómo). Luego nota que eso es 'pensar declarativamente'. Compáralo con cómo lo harías con un bucle.",
+        "errores": [
+            ("Programar SQL como si fuera imperativo", "querer controlar el 'cómo'", "confiar en el optimizador y describir solo el 'qué'"),
+            ("Creer que lo declarativo sirve para todo", "forzarlo donde el control paso a paso es necesario", "usarlo donde el problema es 'describir un resultado'"),
+        ],
+        "faq": [
+            ("¿SQL es 'de verdad' un lenguaje de programación?", "Es un lenguaje declarativo especializado; Turing-completo con extensiones, pero su fuerte es consultar datos."),
+            ("¿Dónde se usa Prolog hoy?", "IA simbólica, sistemas expertos, análisis de lenguaje y verificación; nicho pero potente."),
+        ],
+    }),
+    ("Familia concurrente/actor: Erlang, Elixir y el CSP de Go", {
+        "tipo": "metodo",
+        "objetivo": "Conocer los lenguajes diseñados para hacer muchas cosas a la vez de forma segura. Erlang y Elixir usan el modelo de actores (procesos aislados que se comunican por mensajes, con supervisión y 'let it crash'); Go (en el núcleo) usa CSP (goroutines y canales). Dos respuestas al mismo problema: la concurrencia.",
+        "resultados": [
+            "Explicar el modelo de actores y por qué favorece la tolerancia a fallos.",
+            "Distinguir actores (Erlang/Elixir) de CSP (Go).",
+            "Entender la filosofía 'let it crash' y la supervisión.",
+        ],
+        "temas": [
+            ("El problema de la concurrencia", "Hacer muchas cosas a la vez sin corromper datos"),
+            ("Modelo de actores", "Procesos aislados que solo se comunican por mensajes"),
+            ("Let it crash y supervisión", "Dejar morir un proceso y reiniciarlo desde arriba"),
+            ("CSP en Go", "Goroutines y canales: 'comparte comunicando'"),
+        ],
+        "definiciones": [
+            ("Modelo de actores", "concurrencia mediante procesos aislados que intercambian mensajes. Clave: sin memoria compartida, no hay condiciones de carrera."),
+            ("Erlang", "1986 (Ericsson, Joe Armstrong) para telecomunicaciones. Clave: tolerancia a fallos extrema; corre sobre la máquina BEAM."),
+            ("Elixir", "2011 (José Valim), sintaxis moderna sobre la BEAM de Erlang. Clave: actores + productividad; base de Phoenix."),
+            ("CSP", "Communicating Sequential Processes (Hoare, 1978): procesos que se sincronizan por canales. Clave: modelo de la concurrencia de Go."),
+        ],
+        "situacion": "Un sistema de mensajería debe seguir funcionando aunque parte de él falle. En vez de evitar todos los errores, Erlang deja que un proceso muera y un supervisor lo reinicia limpio. La resiliencia nace de aislar, no de blindar.",
+        "ejemplo": "Dos modelos de concurrencia:\n\n```text\nActores (Elixir):  send(pid, {:hola, \"Ada\"})     # mensaje a un proceso\nCSP (Go):          canal <- \"hola\"                // enviar por un canal\n                   msg := <-canal                 // recibir\n```",
+        "practica": "Go está en el núcleo y usa CSP. Busca 'goroutine' y 'channel'. ¿En qué se parece un canal de Go a enviar un mensaje a un actor, y en qué se diferencia?",
+        "errores": [
+            ("Compartir memoria entre hilos sin protección", "condiciones de carrera", "preferir el paso de mensajes (actores/canales) al estado compartido"),
+            ("Intentar prevenir todos los fallos", "código defensivo frágil", "adoptar 'let it crash': aislar y supervisar en vez de blindar"),
+        ],
+        "faq": [
+            ("¿Qué es la BEAM?", "La máquina virtual de Erlang/Elixir, optimizada para millones de procesos ligeros y tolerancia a fallos."),
+            ("¿Go es de actores?", "No exactamente: usa CSP (canales), un primo cercano del modelo de actores."),
+        ],
+    }),
+    ("Familia de sistemas: C, C++, Rust, Zig", {
+        "tipo": "metodo",
+        "objetivo": "Conocer los lenguajes para escribir software cercano a la máquina: sistemas operativos, drivers, motores y runtimes. C, C++ y Rust están en el núcleo o son primos directos; Zig es el recién llegado. Comparten el control de la memoria y la ausencia (o control) de recolector de basura.",
+        "resultados": [
+            "Explicar qué distingue a un lenguaje de sistemas (control de memoria, sin GC obligatorio).",
+            "Comparar cómo cada uno gestiona la seguridad de memoria.",
+            "Situar a Rust y Zig como respuestas modernas a los peligros de C.",
+        ],
+        "temas": [
+            ("Qué es un lenguaje de sistemas", "Control fino de memoria y rendimiento predecible"),
+            ("C y C++: potencia sin red", "Máximo control, máxima responsabilidad"),
+            ("Rust: seguridad sin GC", "Propiedad y préstamos comprobados al compilar"),
+            ("Zig: C moderno", "Simplicidad, comptime, sin GC"),
+        ],
+        "definiciones": [
+            ("Lenguaje de sistemas", "diseñado para software cercano al hardware, con control de memoria y sin GC obligatorio. Clave: rendimiento predecible."),
+            ("Rust", "2010/2015 (Mozilla, Graydon Hoare), seguridad de memoria sin GC vía propiedad. Clave: núcleo del curso; evita clases enteras de bugs."),
+            ("Zig", "2016 (Andrew Kelley), alternativa moderna y minimalista a C. Clave: `comptime`, sin GC, gestión manual explícita."),
+            ("Seguridad de memoria", "garantía de no acceder a memoria inválida (use-after-free, desbordamientos). Clave: C no la da; Rust sí, al compilar."),
+        ],
+        "situacion": "El 70% de las vulnerabilidades graves en software de sistemas son errores de memoria de C/C++. Rust nació para eliminarlos de raíz: el compilador rechaza el código inseguro antes de ejecutarlo, sin coste en tiempo de ejecución.",
+        "ejemplo": "Cómo cada familia gestiona la memoria:\n\n```text\nC:     malloc/free manuales        → potente, propenso a errores\nC++:   RAII (destructores)         → automático dentro de su ámbito\nRust:  propiedad + préstamos       → comprobado por el compilador\nZig:   asignadores explícitos      → manual pero visible y seguro-por-defecto\n```",
+        "practica": "Busca en la implementación en C de la clase 041 dónde se reserva y libera memoria (o dónde podría hacer falta). ¿Qué garantiza Rust que C no?",
+        "errores": [
+            ("Creer que 'sistemas' = 'difícil e innecesario'", "evitar entender la memoria", "reconocer que estos lenguajes sostienen todo lo demás"),
+            ("Pensar que Rust es 'C más lento'", "asumir que la seguridad cuesta rendimiento", "notar que sus comprobaciones son en tiempo de compilación, no de ejecución"),
+        ],
+        "faq": [
+            ("¿Rust reemplazará a C?", "En proyectos nuevos gana terreno, pero C está en tantos cimientos que convivirán décadas."),
+            ("¿Por qué sin recolector de basura?", "El GC introduce pausas impredecibles, inaceptables en drivers o sistemas de tiempo real."),
+        ],
+    }),
+    ("Familia array y científica: APL, R, Julia, Fortran, MATLAB", {
+        "tipo": "metodo",
+        "objetivo": "Conocer los lenguajes hechos para el cálculo numérico y el trabajo con datos. Fortran (1957) inauguró la computación científica; MATLAB y R dominan ingeniería y estadística; Julia es la apuesta moderna; APL introdujo operar sobre arreglos completos de una vez. Ninguno está en el núcleo, pero definen un estilo: la vectorización.",
+        "resultados": [
+            "Explicar la vectorización (operar sobre arreglos completos sin bucles explícitos).",
+            "Situar Fortran, MATLAB, R y Julia según su dominio.",
+            "Reconocer por qué este estilo importa para datos y ciencia.",
+        ],
+        "temas": [
+            ("Vectorización", "Operar sobre todo un arreglo de una vez"),
+            ("Fortran: el pionero", "Cálculo numérico desde 1957, aún en HPC"),
+            ("R y MATLAB", "Estadística e ingeniería, orientados a matrices"),
+            ("Julia: lo moderno", "Rendimiento de C con comodidad de Python; multiple dispatch"),
+        ],
+        "definiciones": [
+            ("Vectorización", "aplicar una operación a un arreglo entero sin escribir el bucle. Clave: código más corto y a menudo más rápido."),
+            ("Fortran", "1957 (IBM, John Backus), primer lenguaje de alto nivel. Clave: sigue siendo rey del cálculo científico de alto rendimiento."),
+            ("R", "1993, especializado en estadística y visualización. Clave: enorme ecosistema de análisis de datos."),
+            ("Julia", "2012, cálculo científico con rendimiento cercano a C. Clave: multiple dispatch como paradigma central."),
+        ],
+        "situacion": "Un análisis en Python con un bucle sobre un millón de números tarda segundos; reescrito con operaciones vectorizadas (estilo de esta familia) tarda milisegundos. Pensar en arreglos completos, no en elementos, cambia el rendimiento.",
+        "ejemplo": "Sumar dos vectores: con bucle vs. vectorizado.\n\n```text\nCon bucle (imperativo):\n  PARA i: c[i] <- a[i] + b[i]\n\nVectorizado (estilo array, p. ej. R/Julia/NumPy):\n  c <- a + b        # una sola operación sobre todo el arreglo\n```",
+        "practica": "Piensa cómo calcular el promedio de un millón de números 'a la manera de bucle' y 'a la manera vectorizada'. ¿Cuál expresa mejor la intención?",
+        "errores": [
+            ("Escribir bucles donde cabe vectorizar", "traer la mentalidad imperativa a datos", "pensar en operaciones sobre arreglos completos"),
+            ("Creer que estos lenguajes son 'de matemáticos'", "descartarlos", "reconocer que dominan datos, ciencia y buena parte de la IA"),
+        ],
+        "faq": [
+            ("¿Fortran sigue en uso?", "Sí: mucho software de clima, física y HPC corre sobre Fortran altamente optimizado."),
+            ("¿Julia sustituye a Python en datos?", "Compite en rendimiento; Python gana en ecosistema. Conviven según el caso."),
+        ],
+    }),
+    ("Lenguajes históricos y de nicho: COBOL, Fortran, Pascal, BASIC, Bash", {
+        "tipo": "metodo",
+        "objetivo": "Cerrar el Atlas con lenguajes que marcaron época o dominan un nicho. COBOL aún mueve bancos; Fortran, la ciencia; Pascal enseñó a generaciones; BASIC democratizó programar; y Bash sigue siendo el pegamento de la administración de sistemas. Conocerlos da perspectiva histórica y práctica.",
+        "resultados": [
+            "Situar cada lenguaje en su época y su nicho actual.",
+            "Explicar por qué algunos 'viejos' siguen en producción crítica.",
+            "Reconocer Bash como habilidad transferible imprescindible hoy.",
+        ],
+        "temas": [
+            ("COBOL: la banca", "Miles de millones de líneas aún en producción"),
+            ("Pascal y BASIC", "Enseñaron a programar a generaciones enteras"),
+            ("Fortran: la ciencia", "El pionero que no se jubila"),
+            ("Bash: el pegamento vivo", "Automatización y orquestación en Unix"),
+        ],
+        "definiciones": [
+            ("COBOL", "1959 (comité CODASYL, Grace Hopper influyente), para negocios. Clave: aún sostiene núcleos bancarios y de seguros."),
+            ("Pascal", "1970 (Niklaus Wirth), diseñado para enseñar programación estructurada. Clave: claridad; padre de Delphi."),
+            ("BASIC", "1964 (Kemeny y Kurtz), pensado para principiantes. Clave: llevó la programación a los ordenadores personales."),
+            ("Bash", "1989 (Brian Fox, GNU), shell de Unix. Clave: automatización viva; su modelo de tuberías y procesos es muy transferible."),
+        ],
+        "situacion": "Un banco descubre que su sistema central corre en COBOL y quedan pocos que lo mantengan. No es una curiosidad: entender por qué el software 'viejo' persiste es entender la realidad de la industria.",
+        "ejemplo": "Bash es el más vigente de este grupo: su modelo de tuberías es puro y transferible.\n\n```text\n# Contar cuántos archivos .md hay, en una línea:\nls *.md | wc -l\n\n# Tubería: la salida de un comando es la entrada del siguiente\ncat notas.txt | grep \"TODO\" | sort | uniq\n```",
+        "practica": "Escribe una tubería de Bash que, dado un archivo de texto, cuente cuántas líneas contienen la palabra 'error'. (Pista: `grep` y `wc`.)",
+        "errores": [
+            ("Despreciar los lenguajes 'viejos'", "creer que lo antiguo es inútil", "reconocer que COBOL y Fortran mueven infraestructura crítica hoy"),
+            ("Subestimar Bash", "verlo como comandos sueltos", "aprender su modelo de tuberías/procesos: es habilidad diaria del desarrollador"),
+        ],
+        "faq": [
+            ("¿Vale la pena aprender COBOL?", "Como nicho bien pagado por la escasez de expertos, puede tener sentido; como base, no."),
+            ("¿Bash cuenta como lenguaje?", "Sí: tiene variables, control de flujo y funciones; y su modelo de procesos es muy transferible."),
+        ],
+    }),
+]
+
+
+# --------------------------------------------------------------------------- #
+# Parte 2 — Herramientas, toolchains y anatomía de comandos (tipo "metodo")
+# --------------------------------------------------------------------------- #
+
+P2 = [
+    ("Qué es un toolchain: del código fuente al programa que corre", {
+        "tipo": "metodo",
+        "objetivo": "Entender la cadena de herramientas (toolchain) que convierte el texto que escribes en un programa que se ejecuta: editor, compilador o intérprete, enlazador, gestor de paquetes y runtime. Cada lenguaje tiene su cadena, pero las etapas se repiten. Verlas como un flujo evita tratar los comandos como 'magia'.",
+        "resultados": [
+            "Nombrar las etapas típicas de un toolchain.",
+            "Ubicar dónde encaja cada herramienta (compilador, enlazador, runtime, gestor de paquetes).",
+            "Explicar por qué un mismo programa necesita pasos distintos en distintos lenguajes.",
+        ],
+        "temas": [
+            ("Fuente → ejecutable", "Las etapas entre escribir y ejecutar"),
+            ("Compilador/intérprete", "Traduce o ejecuta el código fuente"),
+            ("Enlazador y dependencias", "Junta tu código con librerías"),
+            ("Runtime", "El entorno donde el programa finalmente corre"),
+        ],
+        "definiciones": [
+            ("Toolchain", "conjunto de herramientas que llevan el código fuente a un programa ejecutable. Clave: cada lenguaje tiene la suya, con etapas similares."),
+            ("Compilador", "traduce el código fuente a otro lenguaje (máquina o bytecode) antes de ejecutar. Clave: los errores se ven en compilación."),
+            ("Enlazador (linker)", "combina tu código compilado con librerías en un ejecutable. Clave: resuelve referencias a funciones externas."),
+            ("Runtime", "entorno que ejecuta el programa (la CPU directamente, la JVM, Node…). Clave: define qué se necesita para correrlo."),
+        ],
+        "situacion": "Un principiante escribe `hola.c`, hace doble clic y no pasa nada. Le falta entender que C debe compilarse y enlazarse antes de existir como programa. Python sí 'se ejecuta al toque' porque su toolchain interpreta. La diferencia está en la cadena.",
+        "ejemplo": "La misma meta, dos cadenas distintas:\n\n```text\nC (compilado):\n  main.c --[compilador]--> main.o --[enlazador]--> ejecutable --> corre\n\nPython (interpretado):\n  main.py --[intérprete]--> corre directamente\n```",
+        "practica": "Para un lenguaje que uses, enumera qué herramienta interviene en cada etapa (editar, traducir, ejecutar). ¿Compila, interpreta o ambas?",
+        "errores": [
+            ("Tratar los comandos como magia", "no entender qué etapa ejecuta cada uno", "mapear cada comando a su etapa del toolchain"),
+            ("Esperar que todos los lenguajes se ejecuten igual", "generalizar desde uno", "reconocer que compilados e interpretados difieren en la cadena"),
+        ],
+        "faq": [
+            ("¿Python no se compila nunca?", "Compila a bytecode internamente (.pyc), pero lo hace de forma transparente al ejecutar."),
+            ("¿Por qué tantas etapas en C?", "El control fino tiene coste: cada etapa es un punto donde optimizar o fallar."),
+        ],
+    }),
+    ("Compilado vs. interpretado vs. transpilado vs. bytecode/VM", {
+        "tipo": "metodo",
+        "objetivo": "Clasificar cómo un lenguaje llega a ejecutarse: compilado a código máquina (C, Rust, Go), interpretado línea a línea (Python, PHP), transpilado a otro lenguaje (TypeScript → JavaScript) o compilado a bytecode para una máquina virtual (Java → JVM, C# → CLR). Esta clasificación explica el rendimiento, el arranque y los mensajes de error.",
+        "resultados": [
+            "Clasificar cada lenguaje del núcleo por su modelo de ejecución.",
+            "Relacionar el modelo con el rendimiento y el momento en que aparecen los errores.",
+            "Explicar qué es una máquina virtual y qué es transpilar.",
+        ],
+        "temas": [
+            ("Compilado a máquina", "Rápido, errores en compilación (C, Rust, Go)"),
+            ("Interpretado", "Flexible, errores en ejecución (Python, PHP)"),
+            ("Bytecode + VM", "Portable, con calentamiento (Java, C#)"),
+            ("Transpilado", "De un lenguaje a otro (TS → JS)"),
+        ],
+        "definiciones": [
+            ("Compilación a código máquina", "traducción directa a instrucciones de la CPU. Clave: máximo rendimiento; errores antes de ejecutar."),
+            ("Interpretación", "ejecución del código fuente sin traducirlo por adelantado. Clave: rápido de iterar; errores al llegar a la línea."),
+            ("Bytecode", "código intermedio que ejecuta una máquina virtual (JVM, CLR). Clave: portabilidad entre sistemas operativos."),
+            ("Transpilación", "compilar de un lenguaje de alto nivel a otro (TypeScript a JavaScript). Clave: aprovechar un runtime existente."),
+        ],
+        "situacion": "Un error tipográfico en un nombre de variable: en C, el compilador lo detiene antes de correr; en Python, el programa arranca y falla justo al llegar a esa línea. El modelo de ejecución decide cuándo te enteras del error.",
+        "ejemplo": "Clasificación del núcleo:\n\n```text\nModelo               Lenguajes del núcleo\n-------------------  ---------------------------\nCompilado a máquina  C, Rust, Go\nInterpretado         Python, PHP, JavaScript*\nBytecode + VM        Java (JVM), C# (CLR)\nTranspilado          TypeScript (→ JavaScript)\nDeclarativo/motor    SQL (lo ejecuta el motor de BD)\n```\n\n*JavaScript usa un JIT: interpreta y compila sobre la marcha.",
+        "practica": "Clasifica cada lenguaje que conozcas en una de las categorías. ¿Alguno encaja en más de una? (Pista: JavaScript y su JIT.)",
+        "errores": [
+            ("Creer que 'compilado' siempre es mejor", "ignorar el valor de iterar rápido", "elegir según el caso: rendimiento vs. velocidad de desarrollo"),
+            ("Pensar que interpretado = sin compilación alguna", "simplificar de más", "recordar que muchos interpretan a bytecode internamente"),
+        ],
+        "faq": [
+            ("¿Qué es un JIT?", "Just-In-Time: compila el código a máquina durante la ejecución, combinando flexibilidad y velocidad (V8, JVM)."),
+            ("¿Por qué Java 'tarda en arrancar'?", "La JVM debe cargar y calentar (JIT) antes de alcanzar su velocidad máxima."),
+        ],
+    }),
+    ("Anatomía de un comando: nombre, subcomando, flags, argumentos y esquema", {
+        "tipo": "metodo",
+        "objetivo": "Dominar la estructura universal de un comando de terminal para dejar de copiarlos a ciegas. Todo comando sigue el mismo esquema: nombre, subcomando opcional, opciones (flags) y argumentos. Entenderlo te permite leer, modificar y componer cualquier comando de cualquier toolchain.",
+        "resultados": [
+            "Descomponer un comando en nombre, subcomando, flags y argumentos.",
+            "Distinguir flags cortas (-v), largas (--verbose) y con valor (-o salida).",
+            "Leer la línea de uso ('usage') de la ayuda de un comando.",
+        ],
+        "temas": [
+            ("El esquema general", "nombre [subcomando] [flags] [argumentos]"),
+            ("Flags/opciones", "Cortas, largas, booleanas y con valor"),
+            ("Argumentos posicionales", "Los datos sobre los que actúa el comando"),
+            ("La ayuda como esquema", "--help revela la estructura exacta"),
+        ],
+        "definiciones": [
+            ("Comando", "instrucción para el sistema o una herramienta, escrita en la terminal. Clave: sigue un esquema regular."),
+            ("Subcomando", "acción específica dentro de una herramienta (git commit, dotnet build). Clave: agrupa funciones bajo un mismo programa."),
+            ("Flag/opción", "modificador que cambia el comportamiento (-v, --output). Clave: puede ser booleana o llevar un valor."),
+            ("Argumento posicional", "dato cuyo significado depende de su posición. Clave: distinto de las opciones con nombre."),
+        ],
+        "situacion": "Alguien copia `git commit -m \"fix\"` sin entenderlo y luego no sabe adaptarlo. Quien reconoce el esquema —programa `git`, subcomando `commit`, flag `-m` con valor— puede construir sus propios comandos con confianza.",
+        "ejemplo": "El mismo esquema en varias herramientas:\n\n```text\n  git      commit     -m \"mensaje\"        (sin argumento posicional)\n  \\_/      \\____/     \\_______________/\n nombre  subcomando   flag con valor\n\n  cc       main.c     -o main            (compilar C)\n  docker   run        -it   ubuntu bash\n  dotnet   build      -c Release\n```",
+        "practica": "Toma `rustc main.rs -o main` y etiqueta cada parte (nombre, argumento, flag, valor). Luego busca `git --help` y localiza el 'usage'.",
+        "errores": [
+            ("Copiar comandos sin entender sus partes", "no poder adaptarlos", "descomponer siempre en nombre/subcomando/flags/argumentos"),
+            ("Confundir un argumento con una flag", "errores de sintaxis del comando", "recordar que las flags empiezan por - o --"),
+        ],
+        "faq": [
+            ("¿Por qué unas flags llevan un guion y otras dos?", "Convención: un guion para la forma corta (-v), dos para la larga (--verbose)."),
+            ("¿Cómo sé qué acepta un comando?", "Con `comando --help` o `man comando`: muestran el esquema y todas las opciones."),
+        ],
+    }),
+    ("Instalación y gestión de versiones (pyenv, nvm, rustup, SDKMAN, phpenv)", {
+        "tipo": "metodo",
+        "objetivo": "Aprender a instalar cada lenguaje y, sobre todo, a manejar varias versiones en la misma máquina. Distintos proyectos necesitan distintas versiones; los gestores de versiones (pyenv, nvm, rustup, SDKMAN) permiten cambiar entre ellas sin conflictos. Es la base para no 'romper' tu entorno.",
+        "resultados": [
+            "Instalar un lenguaje del núcleo con su gestor recomendado.",
+            "Cambiar entre versiones por proyecto.",
+            "Explicar por qué un gestor de versiones evita conflictos.",
+        ],
+        "temas": [
+            ("El problema de las versiones", "Proyectos que exigen versiones distintas"),
+            ("Gestores por lenguaje", "pyenv, nvm, rustup, SDKMAN, phpenv"),
+            ("Versión global vs. por proyecto", "Fijar la versión donde corresponde"),
+            ("Entornos aislados", "Que un proyecto no afecte a otro"),
+        ],
+        "definiciones": [
+            ("Gestor de versiones", "herramienta que instala y alterna versiones de un lenguaje (pyenv, nvm). Clave: varias versiones conviven sin chocar."),
+            ("Versión por proyecto", "fijar qué versión usa una carpeta concreta (.python-version, .nvmrc). Clave: reproducibilidad entre máquinas."),
+            ("rustup", "instalador y gestor oficial de Rust (toolchains, componentes). Clave: estándar de facto de la comunidad Rust."),
+            ("SDKMAN", "gestor de versiones para el ecosistema JVM (Java, Kotlin, Gradle). Clave: cambia de JDK con un comando."),
+        ],
+        "situacion": "Un proyecto viejo necesita Node 16 y uno nuevo Node 22. Sin gestor, instalar uno rompe el otro. Con nvm, `nvm use 16` y `nvm use 22` conviven sin drama. Ese es el problema que resuelven los gestores.",
+        "ejemplo": "Cada ecosistema tiene su gestor:\n\n```text\nPython:  pyenv install 3.12.4   ; pyenv local 3.12.4\nNode:    nvm install 22        ; nvm use 22\nRust:    rustup default stable\nJava:    sdk install java 21-tem\nPHP:     phpenv install 8.3\n```",
+        "practica": "Comprueba qué versión de un lenguaje tienes instalada (`python --version`, `node --version`). Averigua cómo fijarías una versión distinta solo para un proyecto.",
+        "errores": [
+            ("Instalar una sola versión global para todo", "romper proyectos que exigen otra", "usar un gestor y fijar la versión por proyecto"),
+            ("Editar el PATH a mano sin control", "entorno frágil e irreproducible", "dejar que el gestor de versiones administre las rutas"),
+        ],
+        "faq": [
+            ("¿Necesito un gestor si solo tengo un proyecto?", "Aún así ayuda: cuando llegue el segundo proyecto, ya estarás preparado."),
+            ("¿Docker no resuelve esto?", "También aísla versiones, a otro nivel (todo el sistema). Se complementan."),
+        ],
+    }),
+    ("Ejecutar: python, node, tsx, java, dotnet, go run, rustc, cc, php, sqlite3", {
+        "tipo": "metodo",
+        "objetivo": "Aprender el comando de 'ejecutar un programa' en cada lenguaje del núcleo, y por qué difieren. Unos ejecutan la fuente directamente (python, node, php), otros compilan y corren en un paso (go run), y otros requieren compilar primero (rustc, cc). Es la tabla de referencia que usarás en cada clase.",
+        "resultados": [
+            "Ejecutar un 'hola mundo' en cada lenguaje del núcleo.",
+            "Explicar por qué unos comandos son de un paso y otros de dos.",
+            "Relacionar el comando de ejecución con el modelo (compilado/interpretado).",
+        ],
+        "temas": [
+            ("Ejecutar la fuente", "Interpretados: python, node, php"),
+            ("Compilar y ejecutar", "En un paso (go run) o en dos (rustc, cc)"),
+            ("Bytecode + VM", "java, dotnet run"),
+            ("El caso SQL", "Se ejecuta dentro de un motor (sqlite3)"),
+        ],
+        "definiciones": [
+            ("Ejecutar", "poner en marcha un programa. Clave: el comando exacto depende del modelo del lenguaje."),
+            ("Un paso vs. dos pasos", "compilar+correr juntos (go run) o separados (rustc; luego ./main). Clave: dos pasos dan un binario reutilizable."),
+            ("tsx", "ejecutor que compila y corre TypeScript al vuelo. Clave: evita transpilar a mano en desarrollo."),
+            ("sqlite3", "motor de base de datos que ejecuta SQL desde un archivo o la entrada estándar. Clave: cómo 'corre' SQL en el curso."),
+        ],
+        "situacion": "Al abrir la clase 041, cada implementación trae su comando de ejecución. Tenerlos memorizados —o a mano— convierte el estudio en algo fluido en vez de una búsqueda constante.",
+        "ejemplo": "La tabla de ejecución del núcleo (misma que en cada clase):\n\n```text\nPython      python main.py\nJavaScript  node main.mjs\nTypeScript  pnpm exec tsx main.ts\nJava        java Main.java\nC#          dotnet run\nGo          go run main.go\nRust        rustc main.rs -o main && ./main\nC           cc main.c -o main && ./main\nPHP         php main.php\nSQL         sqlite3 :memory: < main.sql\n```",
+        "practica": "Ejecuta el 'hola mundo' de dos lenguajes que tengas instalados. Fíjate cuál da un binario (archivo `main`) y cuál no.",
+        "errores": [
+            ("Buscar un binario tras `python main.py`", "esperar comportamiento de compilado", "recordar que los interpretados no generan ejecutable"),
+            ("Olvidar el segundo paso en Rust/C", "compilar y no ejecutar", "encadenar la ejecución (`&& ./main`) o correrlo aparte"),
+        ],
+        "faq": [
+            ("¿`java Main.java` no necesita compilar?", "Desde Java 11 puede ejecutar un único archivo fuente directamente; compila en memoria."),
+            ("¿Por qué `go run` y no `go build`?", "`run` compila y ejecuta al vuelo; `build` genera el binario para distribuir."),
+        ],
+    }),
+    ("Compilar y construir: gcc/clang, cargo, go build, javac, dotnet build", {
+        "tipo": "metodo",
+        "objetivo": "Distinguir 'ejecutar' de 'construir': construir produce un artefacto (binario, jar, dll) listo para distribuir o desplegar, sin ejecutarlo. Cada lenguaje compilado tiene su comando de construcción, y los proyectos reales se apoyan en un sistema de construcción (cargo, gradle, msbuild) que gestiona dependencias y pasos.",
+        "resultados": [
+            "Diferenciar ejecutar de construir/compilar a un artefacto.",
+            "Usar el comando de construcción de cada lenguaje del núcleo.",
+            "Explicar el papel de un sistema de construcción (build system).",
+        ],
+        "temas": [
+            ("Ejecutar vs. construir", "Correr ahora vs. producir un artefacto"),
+            ("Compilador directo", "gcc/clang, javac, rustc"),
+            ("Sistema de construcción", "cargo, go build, dotnet build, gradle"),
+            ("Artefactos", "Binarios, .jar, .dll listos para desplegar"),
+        ],
+        "definiciones": [
+            ("Construir (build)", "producir el artefacto final (ejecutable, librería) a partir del código. Clave: el resultado se distribuye o despliega."),
+            ("Artefacto", "salida de la construcción: binario, .jar, .dll, wheel. Clave: es lo que se entrega, no el código fuente."),
+            ("Sistema de construcción", "herramienta que orquesta compilación y dependencias (cargo, gradle, msbuild). Clave: automatiza builds reproducibles."),
+            ("Compilación separada", "compilar módulos por separado y enlazarlos. Clave: acelera recompilaciones (solo lo que cambió)."),
+        ],
+        "situacion": "Durante el desarrollo usas `go run`; para desplegar en el servidor usas `go build`, que produce un binario que copias y ejecutas sin necesitar el toolchain. Ejecutar y construir sirven a momentos distintos.",
+        "ejemplo": "Comandos de construcción del núcleo:\n\n```text\nC:     gcc main.c -o programa\nRust:  cargo build --release      → target/release/programa\nGo:    go build -o programa\nJava:  javac Main.java            → Main.class\nC#:    dotnet build -c Release    → bin/Release/...\n```",
+        "practica": "Si tienes Go o Rust, construye un binario y ejecútalo directamente (sin `run`). Observa que ya no necesitas el código fuente para correrlo.",
+        "errores": [
+            ("Desplegar el código fuente en vez del artefacto", "confundir build con run", "construir y distribuir el binario/artefacto, no las fuentes"),
+            ("Recompilar todo cada vez", "no aprovechar la compilación incremental", "dejar que el build system recompile solo lo cambiado"),
+        ],
+        "faq": [
+            ("¿Cuál es la diferencia entre debug y release?", "Release optimiza y quita información de depuración: más rápido, más difícil de depurar."),
+            ("¿Los interpretados se 'construyen'?", "Suelen empaquetarse (wheel, tarball) más que compilarse; el concepto de artefacto sigue aplicando."),
+        ],
+    }),
+    ("Paquetes y dependencias: pip, pnpm, cargo, maven/gradle, nuget, go mod, composer", {
+        "tipo": "metodo",
+        "objetivo": "Entender cómo cada lenguaje reutiliza código de terceros mediante un gestor de paquetes y un archivo de manifiesto que declara las dependencias. Nadie escribe todo desde cero: pip, pnpm, cargo, composer y sus primos descargan, versionan y bloquean librerías para que tu proyecto sea reproducible.",
+        "resultados": [
+            "Explicar qué es una dependencia y un gestor de paquetes.",
+            "Identificar el manifiesto y el lockfile de cada lenguaje del núcleo.",
+            "Entender por qué el lockfile garantiza builds reproducibles.",
+        ],
+        "temas": [
+            ("Dependencias", "Código de terceros que tu proyecto reutiliza"),
+            ("Manifiesto", "Declara qué dependencias y qué versiones"),
+            ("Lockfile", "Fija las versiones exactas para reproducibilidad"),
+            ("Repositorios de paquetes", "PyPI, npm, crates.io, Packagist…"),
+        ],
+        "definiciones": [
+            ("Gestor de paquetes", "herramienta que descarga e instala dependencias (pip, cargo, composer). Clave: automatiza reutilizar código ajeno."),
+            ("Manifiesto", "archivo que declara las dependencias (pyproject.toml, package.json, Cargo.toml). Clave: la lista de lo que el proyecto necesita."),
+            ("Lockfile", "archivo con las versiones exactas resueltas (package-lock.json, Cargo.lock). Clave: mismo resultado en toda máquina."),
+            ("Repositorio de paquetes", "servidor central de librerías (PyPI, npm, crates.io). Clave: de donde se descargan las dependencias."),
+        ],
+        "situacion": "Funciona en tu máquina pero falla en la del compañero: instalasteis versiones distintas de una librería. El lockfile resuelve exactamente esto, congelando las versiones para que ambos obtengáis lo mismo.",
+        "ejemplo": "Manifiesto y gestor por lenguaje:\n\n```text\nPython   pip / pyproject.toml      (repos: PyPI)\nJS/TS    pnpm / package.json       (repos: npm)\nRust     cargo / Cargo.toml        (repos: crates.io)\nJava     gradle o maven / pom.xml  (repos: Maven Central)\nC#       nuget / .csproj           (repos: NuGet)\nGo       go mod / go.mod           (repos: proxy de módulos)\nPHP      composer / composer.json  (repos: Packagist)\n```",
+        "practica": "Abre un manifiesto (package.json, Cargo.toml o pyproject.toml) de cualquier proyecto. Localiza la lista de dependencias y su versión. ¿Hay un lockfile al lado?",
+        "errores": [
+            ("No commitear el lockfile", "builds distintos en cada máquina", "versionar el lockfile junto al manifiesto"),
+            ("Fijar versiones a '*' o 'latest'", "roturas por actualizaciones inesperadas", "acotar rangos de versión y confiar en el lockfile"),
+        ],
+        "faq": [
+            ("¿pnpm o npm?", "Este curso usa pnpm en JS/TS por su eficiencia; el concepto (manifiesto + lockfile) es idéntico."),
+            ("¿Go no tiene lockfile?", "Usa go.mod y go.sum (este último fija los hashes exactos, cumpliendo el rol de lock)."),
+        ],
+    }),
+    ("REPL e intérpretes interactivos por lenguaje", {
+        "tipo": "metodo",
+        "objetivo": "Descubrir el REPL (Read-Eval-Print Loop): una consola interactiva donde escribes una expresión y ves su resultado al instante, sin crear un archivo ni compilar. Es la herramienta ideal para explorar, probar una idea o entender cómo se comporta un fragmento. Casi todos los lenguajes del núcleo tienen uno.",
+        "resultados": [
+            "Explicar qué es un REPL y cuándo usarlo.",
+            "Abrir el REPL de al menos dos lenguajes del núcleo.",
+            "Distinguir explorar en el REPL de escribir un programa en un archivo.",
+        ],
+        "temas": [
+            ("Qué es un REPL", "Leer, evaluar, imprimir, repetir"),
+            ("Para qué sirve", "Explorar y probar sin ceremonia"),
+            ("REPL por lenguaje", "python, node, irb, ghci, dotnet fsi…"),
+            ("Sus límites", "No sustituye a un archivo para programas reales"),
+        ],
+        "definiciones": [
+            ("REPL", "consola interactiva que lee una expresión, la evalúa, imprime el resultado y repite. Clave: retroalimentación inmediata."),
+            ("Evaluar", "calcular el valor de una expresión. Clave: en el REPL, cada línea se evalúa y muestra al instante."),
+            ("Sesión interactiva", "el estado que acumula el REPL mientras trabajas. Clave: las variables persisten hasta cerrarlo."),
+            ("Scratch/exploración", "uso del REPL para tantear ideas. Clave: complementa, no reemplaza, el código en archivos."),
+        ],
+        "situacion": "¿Qué devuelve `0.1 + 0.2` en JavaScript? En vez de escribir un archivo, abres el REPL de Node, lo tecleas y ves `0.30000000000000004` al instante. El REPL convierte una duda en un experimento de tres segundos.",
+        "ejemplo": "Abrir el REPL de cada lenguaje:\n\n```text\nPython   python           >>> 2 + 2\nNode     node             > 2 + 2\nGo       (no oficial; usar 'gore' o el playground)\nRuby     irb              irb> 2 + 2\nHaskell  ghci             ghci> 2 + 2\n```",
+        "practica": "Abre el REPL de Python o Node y prueba tres expresiones que te generen curiosidad (por ejemplo, mezclar tipos). Observa las respuestas al instante.",
+        "errores": [
+            ("Escribir un programa entero en el REPL", "perder el trabajo al cerrarlo", "usar el REPL para explorar; los programas van en archivos"),
+            ("Creer que todos tienen REPL nativo", "asumir uniformidad", "saber que algunos (Go, C) no lo traen de serie"),
+        ],
+        "faq": [
+            ("¿El REPL sirve para depurar?", "Para probar fragmentos, sí; para depurar un programa en marcha, se usa un debugger."),
+            ("¿C tiene REPL?", "No de forma nativa; existen herramientas experimentales, pero no es habitual."),
+        ],
+    }),
+    ("Formateadores y linters: black, prettier, gofmt, rustfmt, clang-format, php-cs-fixer", {
+        "tipo": "metodo",
+        "objetivo": "Conocer dos herramientas que elevan la calidad sin esfuerzo manual: el formateador, que reescribe el código con un estilo consistente, y el linter, que detecta problemas y malas prácticas. Automatizan la legibilidad e idiomática que estudiaste en la Parte 0, y evitan discusiones de estilo en los equipos.",
+        "resultados": [
+            "Distinguir formateador de linter.",
+            "Nombrar el formateador de cada lenguaje del núcleo.",
+            "Explicar por qué automatizar el estilo mejora el trabajo en equipo.",
+        ],
+        "temas": [
+            ("Formateador", "Reescribe el código con un estilo único"),
+            ("Linter", "Detecta errores probables y malas prácticas"),
+            ("Herramientas por lenguaje", "black, prettier, gofmt, rustfmt, clippy…"),
+            ("Integración", "En el editor y en el CI"),
+        ],
+        "definiciones": [
+            ("Formateador", "herramienta que reescribe el código con un estilo consistente (black, gofmt). Clave: elimina las discusiones de formato."),
+            ("Linter", "analiza el código en busca de errores probables y anti-patrones (clippy, ESLint). Clave: previene bugs antes de ejecutar."),
+            ("Estilo consistente", "que todo el código luzca igual sin importar quién lo escribió. Clave: facilita leer y revisar."),
+            ("gofmt", "formateador oficial de Go; no admite configuración. Clave: un solo estilo para toda la comunidad Go."),
+        ],
+        "situacion": "En una revisión de código, medio equipo discute si usar 2 o 4 espacios. Con un formateador (gofmt, black) la pregunta desaparece: la herramienta decide y todos aceptan. La energía se dedica a la lógica, no al formato.",
+        "ejemplo": "Formateador y linter por lenguaje:\n\n```text\nPython   black (formato)      + ruff/flake8 (lint)\nJS/TS    prettier             + eslint\nGo       gofmt                + go vet\nRust     rustfmt              + clippy\nC/C++    clang-format\nPHP      php-cs-fixer\n```",
+        "practica": "Si tienes uno instalado, pasa un formateador por un archivo desordenado y observa el 'antes y después'. ¿Qué reglas aplicó?",
+        "errores": [
+            ("Formatear a mano", "perder tiempo y ser inconsistente", "delegar el formato al formateador, integrado en el editor"),
+            ("Ignorar los avisos del linter", "dejar pasar bugs latentes", "tratar los avisos como pistas y resolverlos o justificarlos"),
+        ],
+        "faq": [
+            ("¿Formateador y linter son lo mismo?", "No: el formateador cambia el aspecto; el linter señala problemas de fondo. Se usan juntos."),
+            ("¿gofmt se puede configurar?", "No, a propósito: Go impone un único estilo para toda la comunidad."),
+        ],
+    }),
+    ("Pruebas desde la terminal: pytest, node --test, go test, cargo test, dotnet test, phpunit", {
+        "tipo": "metodo",
+        "objetivo": "Aprender a ejecutar pruebas automatizadas desde la línea de comandos en cada lenguaje. Las pruebas son código que verifica tu código: se corren con un comando y te dicen si algo se rompió. Es la base del verificador de equivalencia del curso y de cualquier proyecto profesional.",
+        "resultados": [
+            "Explicar qué es una prueba automatizada y para qué sirve.",
+            "Nombrar el runner de pruebas de cada lenguaje del núcleo.",
+            "Relacionar las pruebas con el verificador de equivalencia del curso.",
+        ],
+        "temas": [
+            ("Qué es una prueba", "Código que comprueba que otro código funciona"),
+            ("Runners por lenguaje", "pytest, go test, cargo test, dotnet test…"),
+            ("Rojo/verde", "La prueba pasa o falla; el CI lo automatiza"),
+            ("Conexión con el curso", "casos.json es una prueba de equivalencia"),
+        ],
+        "definiciones": [
+            ("Prueba automatizada", "código que verifica que otro código produce el resultado esperado. Clave: se ejecuta con un comando y no depende de revisión manual."),
+            ("Runner de pruebas", "herramienta que descubre y ejecuta las pruebas (pytest, cargo test). Clave: un comando corre todas."),
+            ("Aserción", "comprobación de que un valor es el esperado. Clave: si falla, la prueba se pone en rojo."),
+            ("Verde/rojo", "estado de la suite de pruebas: todo pasa (verde) o algo falla (rojo). Clave: el CI lo usa para bloquear cambios."),
+        ],
+        "situacion": "Cambias una función y no sabes si rompiste algo más. Ejecutas `pytest` y en segundos sabes si las 200 pruebas siguen en verde. Sin pruebas, ese cambio sería un salto de fe; con ellas, una comprobación.",
+        "ejemplo": "Comando de pruebas por lenguaje:\n\n```text\nPython   pytest\nJS       node --test\nGo       go test ./...\nRust     cargo test\nC#       dotnet test\nPHP      ./vendor/bin/phpunit\n```\n\nEn este curso, además: python scripts/verificar_equivalencia.py --all",
+        "practica": "El verificador de equivalencia es, en el fondo, una prueba: compara la salida real con la esperada. Ejecútalo sobre la clase 041 y observa el 'verde' de cada implementación.",
+        "errores": [
+            ("Probar solo a mano ejecutando el programa", "verificación lenta y no repetible", "escribir pruebas automatizadas que corran con un comando"),
+            ("No correr las pruebas antes de subir cambios", "romper el CI", "ejecutar la suite localmente antes de hacer push"),
+        ],
+        "faq": [
+            ("¿Cuántas pruebas necesito?", "Al menos una por comportamiento importante y por caso límite; la calidad importa más que la cantidad."),
+            ("¿casos.json es una prueba?", "Sí: define entradas y salidas esperadas; el verificador las comprueba como haría un runner."),
+        ],
+    }),
+    ("Empaquetado y distribución: wheels, jars, binarios, contenedores", {
+        "tipo": "metodo",
+        "objetivo": "Entender cómo se entrega un programa a quien lo va a usar. Según el lenguaje, el artefacto es una wheel (Python), un jar (Java), un binario (Go/Rust/C) o una imagen de contenedor (Docker) que empaqueta el programa con su entorno. Empaquetar bien es la diferencia entre 'funciona en mi máquina' y 'funciona en cualquier parte'.",
+        "resultados": [
+            "Nombrar el formato de distribución típico de cada lenguaje.",
+            "Explicar qué resuelve un contenedor frente a distribuir solo el artefacto.",
+            "Relacionar el empaquetado con la reproducibilidad.",
+        ],
+        "temas": [
+            ("Formatos de artefacto", "wheel, jar, binario, dll"),
+            ("El binario autocontenido", "Go y Rust producen un solo archivo"),
+            ("Contenedores", "Empaquetan el programa con su entorno"),
+            ("Distribución", "Repositorios, registries y releases"),
+        ],
+        "definiciones": [
+            ("Empaquetado", "preparar un programa y sus dependencias para distribuirlo. Clave: define cómo lo instala el usuario final."),
+            ("wheel/jar", "formatos empaquetados de Python y Java. Clave: instalables sin recompilar."),
+            ("Binario autocontenido", "un único ejecutable con todo dentro (típico de Go). Clave: se copia y corre sin instalar nada más."),
+            ("Contenedor", "imagen que incluye el programa y su sistema operativo mínimo (Docker). Clave: elimina el 'funciona en mi máquina'."),
+        ],
+        "situacion": "Un servicio en Python funciona en desarrollo pero falla en producción por una versión distinta de una librería del sistema. Empaquetarlo en un contenedor lleva el entorno entero consigo, y el problema desaparece.",
+        "ejemplo": "Formato de distribución por lenguaje:\n\n```text\nPython   wheel (.whl) / sdist       → pip install\nJava     jar (.jar)                → java -jar app.jar\nGo/Rust  binario único             → copiar y ejecutar\nC#       dll / ejecutable .NET\nCualquiera  imagen Docker          → docker run\n```",
+        "practica": "Piensa cómo entregarías un programa a alguien sin tu entorno: ¿un binario, una wheel, un contenedor? Justifica según el lenguaje.",
+        "errores": [
+            ("Distribuir el código fuente y pedir 'que lo compilen'", "trasladar la complejidad al usuario", "entregar un artefacto o imagen lista para usar"),
+            ("Asumir que el entorno destino es igual al tuyo", "el clásico 'en mi máquina funciona'", "empaquetar el entorno con un contenedor cuando importe"),
+        ],
+        "faq": [
+            ("¿Un contenedor es una máquina virtual?", "No: comparte el kernel del host, es más ligero; empaqueta el entorno, no un SO completo."),
+            ("¿Por qué Go es cómodo de distribuir?", "Compila a un binario estático único: se copia y funciona sin dependencias externas."),
+        ],
+    }),
+    ("Variables de entorno, rutas y el PATH en Windows y Unix", {
+        "tipo": "metodo",
+        "objetivo": "Entender el entorno donde corren tus comandos: las variables de entorno (configuración que el sistema pasa a los programas) y en especial el PATH, la lista de carpetas donde el sistema busca los ejecutables. Dominar esto explica el 90% de los errores tipo 'command not found' y las diferencias entre Windows y Unix.",
+        "resultados": [
+            "Explicar qué es una variable de entorno y para qué sirve el PATH.",
+            "Diagnosticar un 'command not found' a partir del PATH.",
+            "Reconocer las diferencias de rutas entre Windows y Unix.",
+        ],
+        "temas": [
+            ("Variables de entorno", "Configuración que reciben los programas"),
+            ("El PATH", "Dónde busca el sistema los ejecutables"),
+            ("Rutas Windows vs. Unix", "Separadores, mayúsculas, barras"),
+            ("Diagnóstico", "Por qué 'command not found' y cómo resolverlo"),
+        ],
+        "definiciones": [
+            ("Variable de entorno", "valor con nombre que el sistema pasa a los programas (PATH, HOME). Clave: configura sin tocar el código."),
+            ("PATH", "lista de carpetas donde se buscan los ejecutables. Clave: si un programa no está en el PATH, 'no se encuentra'."),
+            ("Ruta absoluta vs. relativa", "desde la raíz (/usr/bin) o desde la carpeta actual (./main). Clave: evita ambigüedad sobre qué se ejecuta."),
+            ("Separador de rutas", "':' en Unix y ';' en Windows para el PATH; '/' vs. '\\' en las rutas. Clave: fuente de errores multiplataforma."),
+        ],
+        "situacion": "Instalas una herramienta y la terminal responde 'command not found'. No está rota: simplemente su carpeta no está en el PATH, así que el sistema no sabe dónde buscarla. Añadirla al PATH lo resuelve.",
+        "ejemplo": "Ver y usar variables de entorno y el PATH:\n\n```text\nUnix (bash):\n  echo $PATH                    # ver el PATH\n  export API_KEY=\"abc123\"       # definir una variable\n\nWindows (PowerShell):\n  $env:PATH                     # ver el PATH\n  $env:API_KEY = \"abc123\"       # definir una variable\n```",
+        "practica": "Muestra tu PATH (`echo $PATH` o `$env:PATH`). Cuenta cuántas carpetas incluye. ¿Está la del lenguaje que instalaste?",
+        "errores": [
+            ("Culpar al programa por 'command not found'", "no revisar el PATH", "verificar si la carpeta del ejecutable está en el PATH"),
+            ("Escribir rutas con '/' en scripts de Windows (o al revés)", "ignorar el separador del sistema", "usar rutas relativas o herramientas que abstraigan el separador"),
+        ],
+        "faq": [
+            ("¿Dónde guardo secretos como una API key?", "En variables de entorno, no en el código; nunca las subas al repositorio."),
+            ("¿Por qué Windows y Unix difieren tanto?", "Herencias históricas distintas; por eso el curso muestra ambos y prefiere lo portable."),
+        ],
+    }),
+]
+
+
+# --------------------------------------------------------------------------- #
 # Estructura completa
 # --------------------------------------------------------------------------- #
 
@@ -476,39 +1324,11 @@ PARTES = [
 
     ("Atlas y genealogía de los lenguajes",
      "El árbol genealógico: cada lenguaje del núcleo es el representante de una familia y abre la puerta a decenas de primos.",
-     [
-        "El árbol genealógico de los lenguajes: mapa general",
-        "Cómo nace y evoluciona un lenguaje: estándares, versiones y ecosistemas",
-        "Familia C y de las llaves: C, C++, Objective-C",
-        "Familia scripting dinámico: Python, Ruby, Perl, PHP, Lua",
-        "Familia JVM: Java, Kotlin, Scala, Groovy, Clojure",
-        "Familia .NET: C#, F#, VB.NET",
-        "Familia JavaScript y web: JS, TypeScript, Dart",
-        "Familia funcional tipada (ML): Haskell, OCaml, F# y la influencia en Rust",
-        "Familia Lisp: Scheme, Racket, Clojure, Emacs Lisp",
-        "Familia lógica y declarativa: SQL, Prolog, Datalog",
-        "Familia concurrente/actor: Erlang, Elixir y el CSP de Go",
-        "Familia de sistemas: C, C++, Rust, Zig",
-        "Familia array y científica: APL, R, Julia, Fortran, MATLAB",
-        "Lenguajes históricos y de nicho: COBOL, Fortran, Pascal, BASIC, Bash",
-     ]),
+     P1),
 
     ("Herramientas, toolchains y anatomía de comandos",
      "Del código fuente al programa que corre: instalar, ejecutar, compilar, empaquetar y probar en cada lenguaje, con el esquema completo de cada comando.",
-     [
-        "Qué es un toolchain: del código fuente al programa que corre",
-        "Compilado vs. interpretado vs. transpilado vs. bytecode/VM",
-        "Anatomía de un comando: nombre, subcomando, flags, argumentos y esquema",
-        "Instalación y gestión de versiones (pyenv, nvm, rustup, SDKMAN, phpenv)",
-        "Ejecutar: python, node, tsx, java, dotnet, go run, rustc, cc, php, sqlite3",
-        "Compilar y construir: gcc/clang, cargo, go build, javac, dotnet build",
-        "Paquetes y dependencias: pip, pnpm, cargo, maven/gradle, nuget, go mod, composer",
-        "REPL e intérpretes interactivos por lenguaje",
-        "Formateadores y linters: black, prettier, gofmt, rustfmt, clang-format, php-cs-fixer",
-        "Pruebas desde la terminal: pytest, node --test, go test, cargo test, dotnet test, phpunit",
-        "Empaquetado y distribución: wheels, jars, binarios, contenedores",
-        "Variables de entorno, rutas y el PATH en Windows y Unix",
-     ]),
+     P2),
 
     ("Valores, tipos y variables",
      "La materia prima de todo programa: cómo cada lenguaje nombra, tipa, convierte y muta los valores.",

@@ -1,38 +1,71 @@
 # Clase 029 — Qué es un toolchain: del código fuente al programa que corre
 
-> Parte **2 — Herramientas, toolchains y anatomía de comandos** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **2 — Herramientas, toolchains y anatomía de comandos** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **qué es un toolchain: del código fuente al programa que corre**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Entender la cadena de herramientas (toolchain) que convierte el texto que escribes en un programa que se ejecuta: editor, compilador o intérprete, enlazador, gestor de paquetes y runtime. Cada lenguaje tiene su cadena, pero las etapas se repiten. Verlas como un flujo evita tratar los comandos como 'magia'.
 
-## 🧮 Modelo
+## 📚 Resultados de aprendizaje
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+Al finalizar, podrás:
 
-## 🌐 Implementaciones idiomáticas (previstas)
+1. Nombrar las etapas típicas de un toolchain.
+2. Ubicar dónde encaja cada herramienta (compilador, enlazador, runtime, gestor de paquetes).
+3. Explicar por qué un mismo programa necesita pasos distintos en distintos lenguajes.
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+## 🗺️ Temas
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Fuente → ejecutable | Las etapas entre escribir y ejecutar |
+| 2 | Compilador/intérprete | Traduce o ejecuta el código fuente |
+| 3 | Enlazador y dependencias | Junta tu código con librerías |
+| 4 | Runtime | El entorno donde el programa finalmente corre |
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 📖 Definiciones y características
+
+- **Toolchain** — conjunto de herramientas que llevan el código fuente a un programa ejecutable. Clave: cada lenguaje tiene la suya, con etapas similares.
+- **Compilador** — traduce el código fuente a otro lenguaje (máquina o bytecode) antes de ejecutar. Clave: los errores se ven en compilación.
+- **Enlazador (linker)** — combina tu código compilado con librerías en un ejecutable. Clave: resuelve referencias a funciones externas.
+- **Runtime** — entorno que ejecuta el programa (la CPU directamente, la JVM, Node…). Clave: define qué se necesita para correrlo.
+
+## 🧩 Situación
+
+Un principiante escribe `hola.c`, hace doble clic y no pasa nada. Le falta entender que C debe compilarse y enlazarse antes de existir como programa. Python sí 'se ejecuta al toque' porque su toolchain interpreta. La diferencia está en la cadena.
+
+## 🔎 Ejemplo
+
+La misma meta, dos cadenas distintas:
+
+```text
+C (compilado):
+  main.c --[compilador]--> main.o --[enlazador]--> ejecutable --> corre
+
+Python (interpretado):
+  main.py --[intérprete]--> corre directamente
+```
+
+## ✍️ Práctica
+
+Para un lenguaje que uses, enumera qué herramienta interviene en cada etapa (editar, traducir, ejecutar). ¿Compila, interpreta o ambas?
+
+## ⚠️ Errores comunes
+
+- **Tratar los comandos como magia** → causa: no entender qué etapa ejecuta cada uno → solución: mapear cada comando a su etapa del toolchain
+- **Esperar que todos los lenguajes se ejecuten igual** → causa: generalizar desde uno → solución: reconocer que compilados e interpretados difieren en la cadena
+
+## ❓ Preguntas frecuentes
+
+- **¿Python no se compila nunca?** Compila a bytecode internamente (.pyc), pero lo hace de forma transparente al ejecutar.
+- **¿Por qué tantas etapas en C?** El control fino tiene coste: cada etapa es un punto donde optimizar o fallar.
+
+## 🔗 Referencias
+
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 

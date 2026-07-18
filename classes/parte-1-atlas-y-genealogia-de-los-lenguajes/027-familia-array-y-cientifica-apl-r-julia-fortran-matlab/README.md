@@ -1,38 +1,71 @@
 # Clase 027 — Familia array y científica: APL, R, Julia, Fortran, MATLAB
 
-> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **familia array y científica: apl, r, julia, fortran, matlab**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Conocer los lenguajes hechos para el cálculo numérico y el trabajo con datos. Fortran (1957) inauguró la computación científica; MATLAB y R dominan ingeniería y estadística; Julia es la apuesta moderna; APL introdujo operar sobre arreglos completos de una vez. Ninguno está en el núcleo, pero definen un estilo: la vectorización.
 
-## 🧮 Modelo
+## 📚 Resultados de aprendizaje
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+Al finalizar, podrás:
 
-## 🌐 Implementaciones idiomáticas (previstas)
+1. Explicar la vectorización (operar sobre arreglos completos sin bucles explícitos).
+2. Situar Fortran, MATLAB, R y Julia según su dominio.
+3. Reconocer por qué este estilo importa para datos y ciencia.
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+## 🗺️ Temas
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Vectorización | Operar sobre todo un arreglo de una vez |
+| 2 | Fortran: el pionero | Cálculo numérico desde 1957, aún en HPC |
+| 3 | R y MATLAB | Estadística e ingeniería, orientados a matrices |
+| 4 | Julia: lo moderno | Rendimiento de C con comodidad de Python; multiple dispatch |
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 📖 Definiciones y características
+
+- **Vectorización** — aplicar una operación a un arreglo entero sin escribir el bucle. Clave: código más corto y a menudo más rápido.
+- **Fortran** — 1957 (IBM, John Backus), primer lenguaje de alto nivel. Clave: sigue siendo rey del cálculo científico de alto rendimiento.
+- **R** — 1993, especializado en estadística y visualización. Clave: enorme ecosistema de análisis de datos.
+- **Julia** — 2012, cálculo científico con rendimiento cercano a C. Clave: multiple dispatch como paradigma central.
+
+## 🧩 Situación
+
+Un análisis en Python con un bucle sobre un millón de números tarda segundos; reescrito con operaciones vectorizadas (estilo de esta familia) tarda milisegundos. Pensar en arreglos completos, no en elementos, cambia el rendimiento.
+
+## 🔎 Ejemplo
+
+Sumar dos vectores: con bucle vs. vectorizado.
+
+```text
+Con bucle (imperativo):
+  PARA i: c[i] <- a[i] + b[i]
+
+Vectorizado (estilo array, p. ej. R/Julia/NumPy):
+  c <- a + b        # una sola operación sobre todo el arreglo
+```
+
+## ✍️ Práctica
+
+Piensa cómo calcular el promedio de un millón de números 'a la manera de bucle' y 'a la manera vectorizada'. ¿Cuál expresa mejor la intención?
+
+## ⚠️ Errores comunes
+
+- **Escribir bucles donde cabe vectorizar** → causa: traer la mentalidad imperativa a datos → solución: pensar en operaciones sobre arreglos completos
+- **Creer que estos lenguajes son 'de matemáticos'** → causa: descartarlos → solución: reconocer que dominan datos, ciencia y buena parte de la IA
+
+## ❓ Preguntas frecuentes
+
+- **¿Fortran sigue en uso?** Sí: mucho software de clima, física y HPC corre sobre Fortran altamente optimizado.
+- **¿Julia sustituye a Python en datos?** Compite en rendimiento; Python gana en ecosistema. Conviven según el caso.
+
+## 🔗 Referencias
+
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 

@@ -1,38 +1,70 @@
 # Clase 018 — Familia scripting dinámico: Python, Ruby, Perl, PHP, Lua
 
-> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **familia scripting dinámico: python, ruby, perl, php, lua**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Conocer la familia de los lenguajes dinámicos: sin declarar tipos, interpretados, pensados para escribir rápido. Python y PHP están en el núcleo; Ruby, Perl y Lua son sus primos. Comparten la filosofía 'el programador antes que la máquina', con distintos acentos.
 
-## 🧮 Modelo
+## 📚 Resultados de aprendizaje
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+Al finalizar, podrás:
 
-## 🌐 Implementaciones idiomáticas (previstas)
+1. Explicar qué comparte esta familia (tipado dinámico, interpretado, expresividad).
+2. Distinguir el acento de cada uno (claridad, felicidad del dev, texto, web, embebido).
+3. Reconocer código de un primo apoyándote en Python o PHP.
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+## 🗺️ Temas
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Rasgos comunes | Tipado dinámico, interpretado, poca ceremonia |
+| 2 | Python y PHP | Los representantes del núcleo: claridad y web |
+| 3 | Ruby, Perl, Lua | Felicidad del dev, procesamiento de texto, embebido |
+| 4 | Cuándo brillan | Prototipos, scripting, web, automatización |
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 📖 Definiciones y características
+
+- **Python** — 1991 (Guido van Rossum), prioriza la legibilidad. Clave: núcleo del curso; el más usado para enseñar y para datos.
+- **Ruby** — 1995 (Matz), diseñado para la felicidad del programador. Clave: bloques y metaprogramación; base de Rails.
+- **Perl** — 1987 (Larry Wall), rey del procesamiento de texto y las expresiones regulares. Clave: 'hay más de una forma de hacerlo'.
+- **Lua** — 1993 (PUC-Rio), minimalista y embebible. Clave: tablas como única estructura; scripting en juegos y sistemas embebidos.
+
+## 🧩 Situación
+
+Un equipo necesita un script para renombrar 10.000 archivos. Nadie propone C: se hace en Python en 10 líneas. Esa inmediatez es la razón de ser de toda la familia dinámica.
+
+## 🔎 Ejemplo
+
+'Hola, X' revela el aire de familia (todos dinámicos, sin declarar tipos):
+
+```text
+Python:  nombre = "Ada"; print(f"Hola, {nombre}")
+Ruby:    nombre = "Ada"; puts "Hola, #{nombre}"
+PHP:     $nombre = "Ada"; echo "Hola, $nombre";
+Lua:     nombre = "Ada"; print("Hola, " .. nombre)
+```
+
+## ✍️ Práctica
+
+Compara la interpolación de cadenas en Python (`f"{x}"`), Ruby (`#{x}`) y PHP (`$x`). ¿De qué clase es la diferencia entre ellas?
+
+## ⚠️ Errores comunes
+
+- **Creer que 'dinámico' significa 'sin reglas'** → causa: confundir tipado dinámico con débil → solución: recordar que Python es dinámico pero fuerte: no suma texto y número sin más
+- **Usar la familia para todo** → causa: ignorar su coste en rendimiento → solución: reservarla para scripting/prototipos, no para núcleos críticos
+
+## ❓ Preguntas frecuentes
+
+- **¿Python es lento?** Comparado con C/Rust, sí; pero para la mayoría de tareas su velocidad de desarrollo compensa.
+- **¿Por qué PHP tiene mala fama?** Por su historia caótica; las versiones modernas (8.x) son un lenguaje sólido y tipado opcionalmente.
+
+## 🔗 Referencias
+
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 

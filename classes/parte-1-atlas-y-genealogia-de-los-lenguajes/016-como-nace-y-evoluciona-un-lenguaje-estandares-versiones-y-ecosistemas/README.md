@@ -1,38 +1,73 @@
 # Clase 016 — Cómo nace y evoluciona un lenguaje: estándares, versiones y ecosistemas
 
-> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **cómo nace y evoluciona un lenguaje: estándares, versiones y ecosistemas**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Entender que un lenguaje no es estático: nace por una necesidad, se estandariza, publica versiones y crece con un ecosistema (librerías, herramientas, comunidad). Saber leer 'C11', 'ES2023' o 'Python 3.12' te dice qué features puedes usar y qué compatibilidad esperar.
 
-## 🧮 Modelo
+## 📚 Resultados de aprendizaje
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+Al finalizar, podrás:
 
-## 🌐 Implementaciones idiomáticas (previstas)
+1. Distinguir el lenguaje (estándar) de su implementación (compilador/intérprete).
+2. Interpretar una versión y saber qué implica para la compatibilidad.
+3. Explicar el papel del ecosistema y la gobernanza (PEP, JEP, ECMA, RFC).
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+## 🗺️ Temas
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Estándar vs. implementación | El lenguaje se especifica; varios compiladores lo implementan |
+| 2 | Versionado | Mayor/menor indica compatibilidad y features nuevas |
+| 3 | Gobernanza | Quién decide los cambios (comités, fundaciones, empresas) |
+| 4 | Ecosistema | Librerías y herramientas que hacen útil al lenguaje |
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 📖 Definiciones y características
+
+- **Estándar** — documento que define el lenguaje (ISO C, ECMAScript). Clave: separa la idea de sus implementaciones.
+- **Implementación** — compilador o intérprete concreto (GCC, CPython, V8). Clave: puede haber varias del mismo estándar.
+- **Proceso de evolución** — mecanismo formal de cambios (PEP en Python, JEP en Java, TC39 en JS). Clave: el lenguaje cambia con reglas, no al azar.
+- **Ecosistema** — conjunto de librerías, gestores de paquetes y comunidad. Clave: a menudo decide la elección más que el lenguaje.
+
+## 🧩 Situación
+
+Copias un ejemplo de internet y no compila: usa una feature de C++20 y tu compilador aún es C++17. El problema no es tu código: es la versión. Saber esto ahorra horas.
+
+## 🔎 Ejemplo
+
+Cómo se nombran y gobiernan algunos lenguajes:
+
+```text
+Lenguaje    Estándar/versión   Gobernanza         Implementación
+--------    ----------------   ----------------   --------------
+C           ISO C23            comité ISO/WG14    GCC, Clang
+JavaScript  ECMAScript 2023    TC39 (Ecma)        V8, SpiderMonkey
+Python      3.12 (PEP)         Steering Council   CPython, PyPy
+Java        JDK 21 (JEP)       OpenJDK / Oracle   HotSpot, GraalVM
+Rust        edición 2021       RFC / Rust team    rustc
+```
+
+## ✍️ Práctica
+
+Averigua la última versión estable de dos lenguajes del núcleo y una feature que introdujeron. ¿Cómo se propuso ese cambio (PEP, JEP, RFC…)?
+
+## ⚠️ Errores comunes
+
+- **Confundir el lenguaje con su compilador** → causa: creer que 'C = GCC' → solución: recordar que un estándar tiene varias implementaciones
+- **Ignorar la versión al copiar código** → causa: asumir que todo el código de un lenguaje es intercambiable → solución: verificar la versión mínima que exige un ejemplo
+
+## ❓ Preguntas frecuentes
+
+- **¿Por qué hay varias implementaciones?** Distintos objetivos: rendimiento, portabilidad, tamaño. Todas siguen el mismo estándar.
+- **¿'Edición' de Rust es una versión?** Es un mecanismo de compatibilidad: permite cambios sin romper código viejo.
+
+## 🔗 Referencias
+
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 

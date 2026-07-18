@@ -1,38 +1,69 @@
 # Clase 025 — Familia concurrente/actor: Erlang, Elixir y el CSP de Go
 
-> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **familia concurrente/actor: erlang, elixir y el csp de go**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Conocer los lenguajes diseñados para hacer muchas cosas a la vez de forma segura. Erlang y Elixir usan el modelo de actores (procesos aislados que se comunican por mensajes, con supervisión y 'let it crash'); Go (en el núcleo) usa CSP (goroutines y canales). Dos respuestas al mismo problema: la concurrencia.
 
-## 🧮 Modelo
+## 📚 Resultados de aprendizaje
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+Al finalizar, podrás:
 
-## 🌐 Implementaciones idiomáticas (previstas)
+1. Explicar el modelo de actores y por qué favorece la tolerancia a fallos.
+2. Distinguir actores (Erlang/Elixir) de CSP (Go).
+3. Entender la filosofía 'let it crash' y la supervisión.
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+## 🗺️ Temas
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | El problema de la concurrencia | Hacer muchas cosas a la vez sin corromper datos |
+| 2 | Modelo de actores | Procesos aislados que solo se comunican por mensajes |
+| 3 | Let it crash y supervisión | Dejar morir un proceso y reiniciarlo desde arriba |
+| 4 | CSP en Go | Goroutines y canales: 'comparte comunicando' |
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 📖 Definiciones y características
+
+- **Modelo de actores** — concurrencia mediante procesos aislados que intercambian mensajes. Clave: sin memoria compartida, no hay condiciones de carrera.
+- **Erlang** — 1986 (Ericsson, Joe Armstrong) para telecomunicaciones. Clave: tolerancia a fallos extrema; corre sobre la máquina BEAM.
+- **Elixir** — 2011 (José Valim), sintaxis moderna sobre la BEAM de Erlang. Clave: actores + productividad; base de Phoenix.
+- **CSP** — Communicating Sequential Processes (Hoare, 1978): procesos que se sincronizan por canales. Clave: modelo de la concurrencia de Go.
+
+## 🧩 Situación
+
+Un sistema de mensajería debe seguir funcionando aunque parte de él falle. En vez de evitar todos los errores, Erlang deja que un proceso muera y un supervisor lo reinicia limpio. La resiliencia nace de aislar, no de blindar.
+
+## 🔎 Ejemplo
+
+Dos modelos de concurrencia:
+
+```text
+Actores (Elixir):  send(pid, {:hola, "Ada"})     # mensaje a un proceso
+CSP (Go):          canal <- "hola"                // enviar por un canal
+                   msg := <-canal                 // recibir
+```
+
+## ✍️ Práctica
+
+Go está en el núcleo y usa CSP. Busca 'goroutine' y 'channel'. ¿En qué se parece un canal de Go a enviar un mensaje a un actor, y en qué se diferencia?
+
+## ⚠️ Errores comunes
+
+- **Compartir memoria entre hilos sin protección** → causa: condiciones de carrera → solución: preferir el paso de mensajes (actores/canales) al estado compartido
+- **Intentar prevenir todos los fallos** → causa: código defensivo frágil → solución: adoptar 'let it crash': aislar y supervisar en vez de blindar
+
+## ❓ Preguntas frecuentes
+
+- **¿Qué es la BEAM?** La máquina virtual de Erlang/Elixir, optimizada para millones de procesos ligeros y tolerancia a fallos.
+- **¿Go es de actores?** No exactamente: usa CSP (canales), un primo cercano del modelo de actores.
+
+## 🔗 Referencias
+
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 

@@ -1,38 +1,71 @@
 # Clase 032 — Instalación y gestión de versiones (pyenv, nvm, rustup, SDKMAN, phpenv)
 
-> Parte **2 — Herramientas, toolchains y anatomía de comandos** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **2 — Herramientas, toolchains y anatomía de comandos** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **instalación y gestión de versiones (pyenv, nvm, rustup, sdkman, phpenv)**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Aprender a instalar cada lenguaje y, sobre todo, a manejar varias versiones en la misma máquina. Distintos proyectos necesitan distintas versiones; los gestores de versiones (pyenv, nvm, rustup, SDKMAN) permiten cambiar entre ellas sin conflictos. Es la base para no 'romper' tu entorno.
 
-## 🧮 Modelo
+## 📚 Resultados de aprendizaje
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+Al finalizar, podrás:
 
-## 🌐 Implementaciones idiomáticas (previstas)
+1. Instalar un lenguaje del núcleo con su gestor recomendado.
+2. Cambiar entre versiones por proyecto.
+3. Explicar por qué un gestor de versiones evita conflictos.
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+## 🗺️ Temas
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | El problema de las versiones | Proyectos que exigen versiones distintas |
+| 2 | Gestores por lenguaje | pyenv, nvm, rustup, SDKMAN, phpenv |
+| 3 | Versión global vs. por proyecto | Fijar la versión donde corresponde |
+| 4 | Entornos aislados | Que un proyecto no afecte a otro |
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 📖 Definiciones y características
+
+- **Gestor de versiones** — herramienta que instala y alterna versiones de un lenguaje (pyenv, nvm). Clave: varias versiones conviven sin chocar.
+- **Versión por proyecto** — fijar qué versión usa una carpeta concreta (.python-version, .nvmrc). Clave: reproducibilidad entre máquinas.
+- **rustup** — instalador y gestor oficial de Rust (toolchains, componentes). Clave: estándar de facto de la comunidad Rust.
+- **SDKMAN** — gestor de versiones para el ecosistema JVM (Java, Kotlin, Gradle). Clave: cambia de JDK con un comando.
+
+## 🧩 Situación
+
+Un proyecto viejo necesita Node 16 y uno nuevo Node 22. Sin gestor, instalar uno rompe el otro. Con nvm, `nvm use 16` y `nvm use 22` conviven sin drama. Ese es el problema que resuelven los gestores.
+
+## 🔎 Ejemplo
+
+Cada ecosistema tiene su gestor:
+
+```text
+Python:  pyenv install 3.12.4   ; pyenv local 3.12.4
+Node:    nvm install 22        ; nvm use 22
+Rust:    rustup default stable
+Java:    sdk install java 21-tem
+PHP:     phpenv install 8.3
+```
+
+## ✍️ Práctica
+
+Comprueba qué versión de un lenguaje tienes instalada (`python --version`, `node --version`). Averigua cómo fijarías una versión distinta solo para un proyecto.
+
+## ⚠️ Errores comunes
+
+- **Instalar una sola versión global para todo** → causa: romper proyectos que exigen otra → solución: usar un gestor y fijar la versión por proyecto
+- **Editar el PATH a mano sin control** → causa: entorno frágil e irreproducible → solución: dejar que el gestor de versiones administre las rutas
+
+## ❓ Preguntas frecuentes
+
+- **¿Necesito un gestor si solo tengo un proyecto?** Aún así ayuda: cuando llegue el segundo proyecto, ya estarás preparado.
+- **¿Docker no resuelve esto?** También aísla versiones, a otro nivel (todo el sistema). Se complementan.
+
+## 🔗 Referencias
+
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 

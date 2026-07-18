@@ -14,8 +14,8 @@
   "php"
  ],
  "total_planned": 176,
- "total_built": 15,
- "parts_built": 2,
+ "total_built": 41,
+ "parts_built": 4,
  "parts_planned": 12,
  "parts": [
   {
@@ -126,85 +126,85 @@
      "num": 15,
      "title": "El árbol genealógico de los lenguajes: mapa general",
      "slug": "015-el-arbol-genealogico-de-los-lenguajes-mapa-general",
-     "built": false
+     "built": true
     },
     {
      "num": 16,
      "title": "Cómo nace y evoluciona un lenguaje: estándares, versiones y ecosistemas",
      "slug": "016-como-nace-y-evoluciona-un-lenguaje-estandares-versiones-y-ecosistemas",
-     "built": false
+     "built": true
     },
     {
      "num": 17,
      "title": "Familia C y de las llaves: C, C++, Objective-C",
      "slug": "017-familia-c-y-de-las-llaves-c-c-plus-plus-objective-c",
-     "built": false
+     "built": true
     },
     {
      "num": 18,
      "title": "Familia scripting dinámico: Python, Ruby, Perl, PHP, Lua",
      "slug": "018-familia-scripting-dinamico-python-ruby-perl-php-lua",
-     "built": false
+     "built": true
     },
     {
      "num": 19,
      "title": "Familia JVM: Java, Kotlin, Scala, Groovy, Clojure",
      "slug": "019-familia-jvm-java-kotlin-scala-groovy-clojure",
-     "built": false
+     "built": true
     },
     {
      "num": 20,
      "title": "Familia .NET: C#, F#, VB.NET",
      "slug": "020-familia-net-c-sharp-f-sharp-vb-net",
-     "built": false
+     "built": true
     },
     {
      "num": 21,
      "title": "Familia JavaScript y web: JS, TypeScript, Dart",
      "slug": "021-familia-javascript-y-web-js-typescript-dart",
-     "built": false
+     "built": true
     },
     {
      "num": 22,
      "title": "Familia funcional tipada (ML): Haskell, OCaml, F# y la influencia en Rust",
      "slug": "022-familia-funcional-tipada-ml-haskell-ocaml-f-sharp-y-la-influencia-en-rust",
-     "built": false
+     "built": true
     },
     {
      "num": 23,
      "title": "Familia Lisp: Scheme, Racket, Clojure, Emacs Lisp",
      "slug": "023-familia-lisp-scheme-racket-clojure-emacs-lisp",
-     "built": false
+     "built": true
     },
     {
      "num": 24,
      "title": "Familia lógica y declarativa: SQL, Prolog, Datalog",
      "slug": "024-familia-logica-y-declarativa-sql-prolog-datalog",
-     "built": false
+     "built": true
     },
     {
      "num": 25,
      "title": "Familia concurrente/actor: Erlang, Elixir y el CSP de Go",
      "slug": "025-familia-concurrente-actor-erlang-elixir-y-el-csp-de-go",
-     "built": false
+     "built": true
     },
     {
      "num": 26,
      "title": "Familia de sistemas: C, C++, Rust, Zig",
      "slug": "026-familia-de-sistemas-c-c-plus-plus-rust-zig",
-     "built": false
+     "built": true
     },
     {
      "num": 27,
      "title": "Familia array y científica: APL, R, Julia, Fortran, MATLAB",
      "slug": "027-familia-array-y-cientifica-apl-r-julia-fortran-matlab",
-     "built": false
+     "built": true
     },
     {
      "num": 28,
      "title": "Lenguajes históricos y de nicho: COBOL, Fortran, Pascal, BASIC, Bash",
      "slug": "028-lenguajes-historicos-y-de-nicho-cobol-fortran-pascal-basic-bash",
-     "built": false
+     "built": true
     }
    ]
   },
@@ -221,73 +221,73 @@
      "num": 29,
      "title": "Qué es un toolchain: del código fuente al programa que corre",
      "slug": "029-que-es-un-toolchain-del-codigo-fuente-al-programa-que-corre",
-     "built": false
+     "built": true
     },
     {
      "num": 30,
      "title": "Compilado vs. interpretado vs. transpilado vs. bytecode/VM",
      "slug": "030-compilado-vs-interpretado-vs-transpilado-vs-bytecode-vm",
-     "built": false
+     "built": true
     },
     {
      "num": 31,
      "title": "Anatomía de un comando: nombre, subcomando, flags, argumentos y esquema",
      "slug": "031-anatomia-de-un-comando-nombre-subcomando-flags-argumentos-y-esquema",
-     "built": false
+     "built": true
     },
     {
      "num": 32,
      "title": "Instalación y gestión de versiones (pyenv, nvm, rustup, SDKMAN, phpenv)",
      "slug": "032-instalacion-y-gestion-de-versiones-pyenv-nvm-rustup-sdkman-phpenv",
-     "built": false
+     "built": true
     },
     {
      "num": 33,
      "title": "Ejecutar: python, node, tsx, java, dotnet, go run, rustc, cc, php, sqlite3",
      "slug": "033-ejecutar-python-node-tsx-java-dotnet-go-run-rustc-cc-php-sqlite3",
-     "built": false
+     "built": true
     },
     {
      "num": 34,
      "title": "Compilar y construir: gcc/clang, cargo, go build, javac, dotnet build",
      "slug": "034-compilar-y-construir-gcc-clang-cargo-go-build-javac-dotnet-build",
-     "built": false
+     "built": true
     },
     {
      "num": 35,
      "title": "Paquetes y dependencias: pip, pnpm, cargo, maven/gradle, nuget, go mod, composer",
      "slug": "035-paquetes-y-dependencias-pip-pnpm-cargo-maven-gradle-nuget-go-mod-composer",
-     "built": false
+     "built": true
     },
     {
      "num": 36,
      "title": "REPL e intérpretes interactivos por lenguaje",
      "slug": "036-repl-e-interpretes-interactivos-por-lenguaje",
-     "built": false
+     "built": true
     },
     {
      "num": 37,
      "title": "Formateadores y linters: black, prettier, gofmt, rustfmt, clang-format, php-cs-fixer",
      "slug": "037-formateadores-y-linters-black-prettier-gofmt-rustfmt-clang-format-php-cs-fixer",
-     "built": false
+     "built": true
     },
     {
      "num": 38,
      "title": "Pruebas desde la terminal: pytest, node --test, go test, cargo test, dotnet test, phpunit",
      "slug": "038-pruebas-desde-la-terminal-pytest-node-test-go-test-cargo-test-dotnet-test-phpunit",
-     "built": false
+     "built": true
     },
     {
      "num": 39,
      "title": "Empaquetado y distribución: wheels, jars, binarios, contenedores",
      "slug": "039-empaquetado-y-distribucion-wheels-jars-binarios-contenedores",
-     "built": false
+     "built": true
     },
     {
      "num": 40,
      "title": "Variables de entorno, rutas y el PATH en Windows y Unix",
      "slug": "040-variables-de-entorno-rutas-y-el-path-en-windows-y-unix",
-     "built": false
+     "built": true
     }
    ]
   },

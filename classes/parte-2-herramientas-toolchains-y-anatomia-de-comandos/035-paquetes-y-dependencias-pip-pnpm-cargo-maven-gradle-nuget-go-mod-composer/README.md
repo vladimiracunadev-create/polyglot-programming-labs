@@ -1,38 +1,73 @@
 # Clase 035 — Paquetes y dependencias: pip, pnpm, cargo, maven/gradle, nuget, go mod, composer
 
-> Parte **2 — Herramientas, toolchains y anatomía de comandos** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **2 — Herramientas, toolchains y anatomía de comandos** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **paquetes y dependencias: pip, pnpm, cargo, maven/gradle, nuget, go mod, composer**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Entender cómo cada lenguaje reutiliza código de terceros mediante un gestor de paquetes y un archivo de manifiesto que declara las dependencias. Nadie escribe todo desde cero: pip, pnpm, cargo, composer y sus primos descargan, versionan y bloquean librerías para que tu proyecto sea reproducible.
 
-## 🧮 Modelo
+## 📚 Resultados de aprendizaje
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+Al finalizar, podrás:
 
-## 🌐 Implementaciones idiomáticas (previstas)
+1. Explicar qué es una dependencia y un gestor de paquetes.
+2. Identificar el manifiesto y el lockfile de cada lenguaje del núcleo.
+3. Entender por qué el lockfile garantiza builds reproducibles.
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+## 🗺️ Temas
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Dependencias | Código de terceros que tu proyecto reutiliza |
+| 2 | Manifiesto | Declara qué dependencias y qué versiones |
+| 3 | Lockfile | Fija las versiones exactas para reproducibilidad |
+| 4 | Repositorios de paquetes | PyPI, npm, crates.io, Packagist… |
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 📖 Definiciones y características
+
+- **Gestor de paquetes** — herramienta que descarga e instala dependencias (pip, cargo, composer). Clave: automatiza reutilizar código ajeno.
+- **Manifiesto** — archivo que declara las dependencias (pyproject.toml, package.json, Cargo.toml). Clave: la lista de lo que el proyecto necesita.
+- **Lockfile** — archivo con las versiones exactas resueltas (package-lock.json, Cargo.lock). Clave: mismo resultado en toda máquina.
+- **Repositorio de paquetes** — servidor central de librerías (PyPI, npm, crates.io). Clave: de donde se descargan las dependencias.
+
+## 🧩 Situación
+
+Funciona en tu máquina pero falla en la del compañero: instalasteis versiones distintas de una librería. El lockfile resuelve exactamente esto, congelando las versiones para que ambos obtengáis lo mismo.
+
+## 🔎 Ejemplo
+
+Manifiesto y gestor por lenguaje:
+
+```text
+Python   pip / pyproject.toml      (repos: PyPI)
+JS/TS    pnpm / package.json       (repos: npm)
+Rust     cargo / Cargo.toml        (repos: crates.io)
+Java     gradle o maven / pom.xml  (repos: Maven Central)
+C#       nuget / .csproj           (repos: NuGet)
+Go       go mod / go.mod           (repos: proxy de módulos)
+PHP      composer / composer.json  (repos: Packagist)
+```
+
+## ✍️ Práctica
+
+Abre un manifiesto (package.json, Cargo.toml o pyproject.toml) de cualquier proyecto. Localiza la lista de dependencias y su versión. ¿Hay un lockfile al lado?
+
+## ⚠️ Errores comunes
+
+- **No commitear el lockfile** → causa: builds distintos en cada máquina → solución: versionar el lockfile junto al manifiesto
+- **Fijar versiones a '*' o 'latest'** → causa: roturas por actualizaciones inesperadas → solución: acotar rangos de versión y confiar en el lockfile
+
+## ❓ Preguntas frecuentes
+
+- **¿pnpm o npm?** Este curso usa pnpm en JS/TS por su eficiencia; el concepto (manifiesto + lockfile) es idéntico.
+- **¿Go no tiene lockfile?** Usa go.mod y go.sum (este último fija los hashes exactos, cumpliendo el rol de lock).
+
+## 🔗 Referencias
+
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 

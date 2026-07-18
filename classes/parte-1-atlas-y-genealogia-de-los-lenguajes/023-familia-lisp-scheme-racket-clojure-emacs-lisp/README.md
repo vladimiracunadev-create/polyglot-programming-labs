@@ -1,38 +1,70 @@
 # Clase 023 — Familia Lisp: Scheme, Racket, Clojure, Emacs Lisp
 
-> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **1 — Atlas y genealogía de los lenguajes** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **familia lisp: scheme, racket, clojure, emacs lisp**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Conocer la familia más antigua todavía viva: Lisp (1958). Su rasgo único es la homoiconicidad: el código se escribe con la misma estructura que los datos (listas entre paréntesis), lo que permite macros que reescriben el propio lenguaje. Ninguno está en el núcleo, pero sus ideas (funciones de primera clase, GC, REPL) hoy están en todos.
 
-## 🧮 Modelo
+## 📚 Resultados de aprendizaje
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+Al finalizar, podrás:
 
-## 🌐 Implementaciones idiomáticas (previstas)
+1. Explicar la homoiconicidad y por qué habilita macros potentes.
+2. Leer una expresión Lisp (notación prefija entre paréntesis).
+3. Reconocer ideas nacidas en Lisp que hoy son universales.
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+## 🗺️ Temas
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Homoiconicidad | Código y datos comparten forma (listas) |
+| 2 | Notación prefija | (operador operando operando) |
+| 3 | Macros | Programas que escriben programas |
+| 4 | Herencia universal | GC, REPL, funciones de primera clase nacieron aquí |
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 📖 Definiciones y características
+
+- **Lisp** — 1958 (John McCarthy), segundo lenguaje de alto nivel más antiguo. Clave: introdujo ideas hoy universales (GC, funciones de primera clase).
+- **Homoiconicidad** — el código tiene la misma estructura que los datos que manipula. Clave: permite macros que transforman el lenguaje.
+- **Scheme** — 1975, dialecto minimalista y elegante de Lisp. Clave: usado en enseñanza (SICP).
+- **Clojure** — 2007, Lisp moderno sobre la JVM. Clave: acerca la familia Lisp al mundo mainstream con datos inmutables.
+
+## 🧩 Situación
+
+Un programador ve `(+ 1 2 3)` y lo descarta por 'raro'. Pero esa uniformidad —todo es una lista— es justo lo que permite a Lisp extenderse con macros que otros lenguajes no pueden igualar.
+
+## 🔎 Ejemplo
+
+La notación prefija: el operador va primero, todo entre paréntesis.
+
+```text
+Infija (C):    (1 + 2) * 3
+Lisp:          (* (+ 1 2) 3)
+Definir función (Scheme):
+               (define (doble x) (* x 2))
+```
+
+## ✍️ Práctica
+
+Traduce `(* (+ 2 3) (- 10 4))` a notación infija y calcula el resultado. (Respuesta: (2+3)*(10-4) = 30.)
+
+## ⚠️ Errores comunes
+
+- **Rechazar Lisp por los paréntesis** → causa: juzgar la forma, no las ideas → solución: ver que su uniformidad es su superpoder (macros)
+- **Creer que Lisp es cosa del pasado** → causa: ignorar Clojure y Racket → solución: reconocer que sigue vivo e influyente
+
+## ❓ Preguntas frecuentes
+
+- **¿Para qué sirve hoy?** Clojure en backend/datos, Racket y Scheme en enseñanza e investigación, Emacs Lisp en el editor Emacs.
+- **¿Qué idea de Lisp uso sin saberlo?** Las funciones de primera clase (pasar funciones como valores) y el recolector de basura.
+
+## 🔗 Referencias
+
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 

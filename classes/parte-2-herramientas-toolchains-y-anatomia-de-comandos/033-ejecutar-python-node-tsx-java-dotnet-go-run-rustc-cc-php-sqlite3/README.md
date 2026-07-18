@@ -1,38 +1,76 @@
 # Clase 033 — Ejecutar: python, node, tsx, java, dotnet, go run, rustc, cc, php, sqlite3
 
-> Parte **2 — Herramientas, toolchains y anatomía de comandos** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **2 — Herramientas, toolchains y anatomía de comandos** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **ejecutar: python, node, tsx, java, dotnet, go run, rustc, cc, php, sqlite3**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Aprender el comando de 'ejecutar un programa' en cada lenguaje del núcleo, y por qué difieren. Unos ejecutan la fuente directamente (python, node, php), otros compilan y corren en un paso (go run), y otros requieren compilar primero (rustc, cc). Es la tabla de referencia que usarás en cada clase.
 
-## 🧮 Modelo
+## 📚 Resultados de aprendizaje
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+Al finalizar, podrás:
 
-## 🌐 Implementaciones idiomáticas (previstas)
+1. Ejecutar un 'hola mundo' en cada lenguaje del núcleo.
+2. Explicar por qué unos comandos son de un paso y otros de dos.
+3. Relacionar el comando de ejecución con el modelo (compilado/interpretado).
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+## 🗺️ Temas
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Ejecutar la fuente | Interpretados: python, node, php |
+| 2 | Compilar y ejecutar | En un paso (go run) o en dos (rustc, cc) |
+| 3 | Bytecode + VM | java, dotnet run |
+| 4 | El caso SQL | Se ejecuta dentro de un motor (sqlite3) |
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 📖 Definiciones y características
+
+- **Ejecutar** — poner en marcha un programa. Clave: el comando exacto depende del modelo del lenguaje.
+- **Un paso vs. dos pasos** — compilar+correr juntos (go run) o separados (rustc; luego ./main). Clave: dos pasos dan un binario reutilizable.
+- **tsx** — ejecutor que compila y corre TypeScript al vuelo. Clave: evita transpilar a mano en desarrollo.
+- **sqlite3** — motor de base de datos que ejecuta SQL desde un archivo o la entrada estándar. Clave: cómo 'corre' SQL en el curso.
+
+## 🧩 Situación
+
+Al abrir la clase 041, cada implementación trae su comando de ejecución. Tenerlos memorizados —o a mano— convierte el estudio en algo fluido en vez de una búsqueda constante.
+
+## 🔎 Ejemplo
+
+La tabla de ejecución del núcleo (misma que en cada clase):
+
+```text
+Python      python main.py
+JavaScript  node main.mjs
+TypeScript  pnpm exec tsx main.ts
+Java        java Main.java
+C#          dotnet run
+Go          go run main.go
+Rust        rustc main.rs -o main && ./main
+C           cc main.c -o main && ./main
+PHP         php main.php
+SQL         sqlite3 :memory: < main.sql
+```
+
+## ✍️ Práctica
+
+Ejecuta el 'hola mundo' de dos lenguajes que tengas instalados. Fíjate cuál da un binario (archivo `main`) y cuál no.
+
+## ⚠️ Errores comunes
+
+- **Buscar un binario tras `python main.py`** → causa: esperar comportamiento de compilado → solución: recordar que los interpretados no generan ejecutable
+- **Olvidar el segundo paso en Rust/C** → causa: compilar y no ejecutar → solución: encadenar la ejecución (`&& ./main`) o correrlo aparte
+
+## ❓ Preguntas frecuentes
+
+- **¿`java Main.java` no necesita compilar?** Desde Java 11 puede ejecutar un único archivo fuente directamente; compila en memoria.
+- **¿Por qué `go run` y no `go build`?** `run` compila y ejecuta al vuelo; `build` genera el binario para distribuir.
+
+## 🔗 Referencias
+
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 

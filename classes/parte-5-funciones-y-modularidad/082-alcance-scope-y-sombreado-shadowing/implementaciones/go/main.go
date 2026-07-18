@@ -11,9 +11,11 @@ import (
 func main() {
 	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
 	n, _ := strconv.Atoi(strings.TrimSpace(line))
-	x := n
+	x := n // externo
+	interno := 0
 	{
-		x := n + 10 // sombrea a la externa en este bloque
-		fmt.Printf("interno=%d externo=%d\n", x, n)
+		x := x + 10 // sombrea a la externa en este bloque
+		interno = x
 	}
+	fmt.Printf("interno=%d externo=%d\n", interno, x)
 }

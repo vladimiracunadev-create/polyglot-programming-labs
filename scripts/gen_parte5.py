@@ -1402,11 +1402,13 @@ import (
 func main() {
 	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
 	n, _ := strconv.Atoi(strings.TrimSpace(line))
-	x := n
+	x := n // externo
+	interno := 0
 	{
-		x := n + 10 // sombrea a la externa en este bloque
-		fmt.Printf("interno=%d externo=%d\n", x, n)
+		x := x + 10 // sombrea a la externa en este bloque
+		interno = x
 	}
+	fmt.Printf("interno=%d externo=%d\n", interno, x)
 }
 """,
         "rust": r"""use std::io::Read;
@@ -1961,12 +1963,13 @@ public class Main {
 """,
         "csharp": r"""using System;
 
+// En C# las sentencias top-level deben preceder a las declaraciones de tipo.
+int n = int.Parse(Console.In.ReadToEnd().Trim());
+Console.WriteLine($"resultado={Matematicas.Doble(n)}");
+
 static class Matematicas {
     public static int Doble(int n) => 2 * n;
 }
-
-int n = int.Parse(Console.In.ReadToEnd().Trim());
-Console.WriteLine($"resultado={Matematicas.Doble(n)}");
 """,
         "go": r"""package main
 
@@ -2137,17 +2140,18 @@ public class Main {
 """,
         "csharp": r"""using System;
 
-class Cuenta {
-    private long saldo = 0;
-    public void Depositar(long monto) => saldo += monto;
-    public long Saldo() => saldo;
-}
-
+// Las sentencias top-level van antes de la declaración del tipo.
 long n = long.Parse(Console.In.ReadToEnd().Trim());
 var c = new Cuenta();
 c.Depositar(n);
 c.Depositar(n);
 Console.WriteLine($"saldo={c.Saldo()}");
+
+class Cuenta {
+    private long saldo = 0;
+    public void Depositar(long monto) => saldo += monto;
+    public long Saldo() => saldo;
+}
 """,
         "go": r"""package main
 

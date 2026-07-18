@@ -1,0 +1,19 @@
+{
+  "descripcion": "Verificar que dos componentes son compatibles en su frontera comparando sus valores de contrato.",
+  "contrato": "stdin: una línea `a b` (los valores de contrato de cada componente) → stdout: `contrato=<compatible|incompatible>`",
+  "formula": "compatible si a == b",
+  "casos": [
+    {
+      "stdin": "5 5",
+      "esperado": "contrato=compatible"
+    },
+    {
+      "stdin": "5 6",
+      "esperado": "contrato=incompatible"
+    },
+    {
+      "stdin": "0 0",
+      "esperado": "contrato=compatible"
+    }
+  ]
+}

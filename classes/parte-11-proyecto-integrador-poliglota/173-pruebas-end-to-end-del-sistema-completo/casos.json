@@ -1,0 +1,19 @@
+{
+  "descripcion": "Prueba end-to-end: verificar que el sistema completo produce el resultado esperado para una entrada.",
+  "contrato": "stdin: una línea `a b esperado` → stdout: `e2e=<pasa|falla>`",
+  "formula": "pasa si el sistema (a + b) da el esperado",
+  "casos": [
+    {
+      "stdin": "3 4 7",
+      "esperado": "e2e=pasa"
+    },
+    {
+      "stdin": "2 2 5",
+      "esperado": "e2e=falla"
+    },
+    {
+      "stdin": "10 5 15",
+      "esperado": "e2e=pasa"
+    }
+  ]
+}

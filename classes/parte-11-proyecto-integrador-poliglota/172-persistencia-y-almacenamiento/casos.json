@@ -1,0 +1,19 @@
+{
+  "descripcion": "Persistencia: guardar un par clave/valor y confirmar lo almacenado.",
+  "contrato": "stdin: una línea `clave valor` → stdout: `guardado=<clave>=<valor>`",
+  "formula": "almacenar el par y confirmar",
+  "casos": [
+    {
+      "stdin": "x 5",
+      "esperado": "guardado=x=5"
+    },
+    {
+      "stdin": "nombre ada",
+      "esperado": "guardado=nombre=ada"
+    },
+    {
+      "stdin": "n 100",
+      "esperado": "guardado=n=100"
+    }
+  ]
+}

@@ -19,7 +19,7 @@ Leyenda: ✅ construida · 🏗️ en progreso · 🚧 planificada.
 | 8 | Cómo funcionan los lenguajes | 16 | ✅ construida (123–138) |
 | 9 | Ingeniería de software políglota | 16 | ✅ construida (139–154) |
 | 10 | Interoperabilidad y fronteras entre lenguajes | 10 | ✅ construida (155–164) |
-| 11 | Proyecto integrador políglota | 12 | 🚧 planificada |
+| 11 | Proyecto integrador políglota | 12 | ✅ construida (165–176) |
 
 ## Orden de construcción
 

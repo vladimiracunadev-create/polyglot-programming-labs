@@ -14,8 +14,8 @@
   "php"
  ],
  "total_planned": 176,
- "total_built": 164,
- "parts_built": 11,
+ "total_built": 176,
+ "parts_built": 12,
  "parts_planned": 12,
  "parts": [
   {
@@ -1136,73 +1136,73 @@
      "num": 165,
      "title": "El proyecto: un sistema con componentes en varios lenguajes",
      "slug": "165-el-proyecto-un-sistema-con-componentes-en-varios-lenguajes",
-     "built": false
+     "built": true
     },
     {
      "num": 166,
      "title": "Diseño: responsabilidades y contratos entre componentes",
      "slug": "166-diseno-responsabilidades-y-contratos-entre-componentes",
-     "built": false
+     "built": true
     },
     {
      "num": 167,
      "title": "Componente CLI (lenguaje de sistemas)",
      "slug": "167-componente-cli-lenguaje-de-sistemas",
-     "built": false
+     "built": true
     },
     {
      "num": 168,
      "title": "Componente de API/servicio (backend)",
      "slug": "168-componente-de-api-servicio-backend",
-     "built": false
+     "built": true
     },
     {
      "num": 169,
      "title": "Componente web/frontend (JS/TS)",
      "slug": "169-componente-web-frontend-js-ts",
-     "built": false
+     "built": true
     },
     {
      "num": 170,
      "title": "Componente de datos y consultas (SQL)",
      "slug": "170-componente-de-datos-y-consultas-sql",
-     "built": false
+     "built": true
     },
     {
      "num": 171,
      "title": "Componente de automatización/scripting",
      "slug": "171-componente-de-automatizacion-scripting",
-     "built": false
+     "built": true
     },
     {
      "num": 172,
      "title": "Persistencia y almacenamiento",
      "slug": "172-persistencia-y-almacenamiento",
-     "built": false
+     "built": true
     },
     {
      "num": 173,
      "title": "Pruebas end-to-end del sistema completo",
      "slug": "173-pruebas-end-to-end-del-sistema-completo",
-     "built": false
+     "built": true
     },
     {
      "num": 174,
      "title": "Empaquetado, contenedores y despliegue",
      "slug": "174-empaquetado-contenedores-y-despliegue",
-     "built": false
+     "built": true
     },
     {
      "num": 175,
      "title": "Documentación y defensa de las decisiones de lenguaje",
      "slug": "175-documentacion-y-defensa-de-las-decisiones-de-lenguaje",
-     "built": false
+     "built": true
     },
     {
      "num": 176,
      "title": "Cierre: retrospectiva y transferencia a nuevos lenguajes",
      "slug": "176-cierre-retrospectiva-y-transferencia-a-nuevos-lenguajes",
-     "built": false
+     "built": true
     }
    ]
   }

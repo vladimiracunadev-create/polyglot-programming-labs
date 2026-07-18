@@ -1,0 +1,19 @@
+{
+  "descripcion": "Componente CLI: parsear un comando y contar sus argumentos.",
+  "contrato": "stdin: una línea `comando arg1 arg2 ...` (al menos el comando) → stdout: `comando=<comando> args=<número de argumentos>`",
+  "formula": "primer token = comando; resto = argumentos",
+  "casos": [
+    {
+      "stdin": "run a b",
+      "esperado": "comando=run args=2"
+    },
+    {
+      "stdin": "build",
+      "esperado": "comando=build args=0"
+    },
+    {
+      "stdin": "deploy x y z",
+      "esperado": "comando=deploy args=3"
+    }
+  ]
+}

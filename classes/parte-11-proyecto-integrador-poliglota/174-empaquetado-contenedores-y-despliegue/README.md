@@ -1,20 +1,63 @@
 # Clase 174 — Empaquetado, contenedores y despliegue
 
-> Parte **11 — Proyecto integrador políglota** · ⏱️ Duración estimada: **90 min** · Nivel: **Avanzado**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **11 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **empaquetado, contenedores y despliegue**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Realizar el **empaquetado, los contenedores y el despliegue**: meter el sistema y su entorno en una imagen de contenedor reproducible. Aquí se construye el nombre de la imagen a partir de la versión.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Etiquetar una imagen de contenedor.
+2. Explicar qué resuelve un contenedor.
+3. Relacionar imagen con despliegue.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Contenedor | Programa + su entorno |
+| 2 | Imagen etiquetada | app:version |
+| 3 | Despliegue | Correr la imagen |
+
+## 📖 Definiciones y características
+
+- **Contenedor** — empaqueta el programa con su entorno mínimo. Clave: elimina el 'funciona en mi máquina'.
+- **Imagen** — plantilla de la que se crean contenedores, etiquetada con una versión. Clave: `app:1.2.3`.
+- **Despliegue** — poner en marcha la imagen en un entorno. Clave: reproducible y versionado.
+
+## 🧩 Situación
+
+El sistema políglota (frontend, backend, datos) se empaqueta en imágenes de contenedor etiquetadas por versión y se despliega. La imagen lleva el entorno consigo, así corre igual en cualquier lado.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea con una versión `mayor.menor.parche`
+- **Salida** (stdout): `imagen=app:<versión>`
+- **Regla:** construir el nombre de imagen app:version
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `1.2.3` | `imagen=app:1.2.3` |
+| `0.9.0` | `imagen=app:0.9.0` |
+| `2.1.5` | `imagen=app:2.1.5` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER version ; ESCRIBIR 'imagen=app:' + version
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | Concatenación en cada lenguaje. |
+| Semántica | La etiqueta identifica la versión de la imagen. |
+| Paradigmática | SQL concatena con \|\|. |
+
+## 🧬 El concepto en la familia
+
+Docker y OCI empaquetan en imágenes; Kubernetes las despliega y orquesta.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 174
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Imágenes sin versión (:latest)** → causa: no saber qué corre → solución: etiquetar con la versión concreta
+- **Imágenes enormes** → causa: despliegues lentos → solución: usar imágenes base mínimas y multi-stage
+
+## ❓ Preguntas frecuentes
+
+- **¿Contenedor o máquina virtual?** El contenedor comparte el kernel y es más ligero; empaqueta el entorno, no un SO completo.
+- **¿Por qué etiquetar?** Para saber exactamente qué versión está desplegada y poder revertir.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

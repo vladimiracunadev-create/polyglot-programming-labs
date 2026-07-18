@@ -1,0 +1,19 @@
+{
+  "descripcion": "Componente de API: responder a una petición con un código 200 y el dato solicitado.",
+  "contrato": "stdin: un entero `n` (el dato solicitado) → stdout: `respuesta=200 datos=<n>`",
+  "formula": "responder 200 con el dato",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "respuesta=200 datos=5"
+    },
+    {
+      "stdin": "0",
+      "esperado": "respuesta=200 datos=0"
+    },
+    {
+      "stdin": "42",
+      "esperado": "respuesta=200 datos=42"
+    }
+  ]
+}

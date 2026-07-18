@@ -21,7 +21,7 @@
 
 ---
 
-> 🧭 **Estado del programa.** Las **176 clases en 12 partes** existen con su estructura, **navegación ⏮️/⏭️ entre clases** e índice. El **contenido a fondo se escribe parte por parte**: hoy están completas las **Partes 0, 1 y 2** (40 clases de método — pensamiento computacional, Atlas de familias de lenguajes y toolchains/comandos, cada una con su tema propio, ejemplos, práctica, errores comunes y FAQ) más la **clase insignia 041** con las **10 implementaciones del núcleo verificadas**. Las **Partes 3 a 10** están **completas**: sus 124 clases (041–164) tienen las 10 implementaciones del núcleo verificadas. Las Partes 7–11 son páginas con estructura y navegación, marcadas 🚧, a la espera de contenido.
+> 🧭 **Estado del programa.** **Programa completo: las 176 clases en 12 partes están construidas** — de pensamiento computacional, el Atlas de familias y los toolchains a valores, control, funciones, datos, paradigmas, runtime, ingeniería, interoperabilidad y un proyecto integrador políglota. Cada clase de código trae sus **10 implementaciones del núcleo verificadas en CI** contra su `casos.json`; las partes 0, 1 y 2 son clases de método (pensar y comparar). Las Partes 0–2 no llevan implementaciones (son conceptuales); las Partes 3–11 sí.
 >
 > **Qué verifica una máquina y qué no**, para que sepas de qué te fías: el **[verificador de equivalencia](scripts/verificar_equivalencia.py)** ejecuta en CI las implementaciones de cada clase construida contra su `casos.json` y comprueba que **todas producen la misma salida**. El texto de las clases y el Atlas son material de lectura escrito a mano: **no** se ejecutan en CI. Si el badge de CI está verde, lo que garantiza es que las implementaciones equivalentes lo son de verdad.
 

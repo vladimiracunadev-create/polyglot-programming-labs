@@ -1,0 +1,19 @@
+{
+  "descripcion": "Empaquetar el sistema en una imagen de contenedor etiquetada con su versión.",
+  "contrato": "stdin: una línea con una versión `mayor.menor.parche` → stdout: `imagen=app:<versión>`",
+  "formula": "construir el nombre de imagen app:version",
+  "casos": [
+    {
+      "stdin": "1.2.3",
+      "esperado": "imagen=app:1.2.3"
+    },
+    {
+      "stdin": "0.9.0",
+      "esperado": "imagen=app:0.9.0"
+    },
+    {
+      "stdin": "2.1.5",
+      "esperado": "imagen=app:2.1.5"
+    }
+  ]
+}

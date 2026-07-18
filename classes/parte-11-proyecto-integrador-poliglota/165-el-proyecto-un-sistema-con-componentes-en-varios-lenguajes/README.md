@@ -1,20 +1,63 @@
 # Clase 165 — El proyecto: un sistema con componentes en varios lenguajes
 
-> Parte **11 — Proyecto integrador políglota** · ⏱️ Duración estimada: **90 min** · Nivel: **Avanzado**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **11 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **el proyecto: un sistema con componentes en varios lenguajes**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Arrancar el **proyecto integrador**: un sistema real hecho de componentes en varios lenguajes. El primer paso es inventariar los componentes que lo forman.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Inventariar los componentes de un sistema.
+2. Nombrar cada pieza.
+3. Entender el proyecto como suma de componentes.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Sistema | El todo integrado |
+| 2 | Componente | Cada pieza con su lenguaje |
+| 3 | Inventario | Qué partes lo forman |
+
+## 📖 Definiciones y características
+
+- **Sistema integrador** — producto compuesto por varios componentes que colaboran. Clave: cada uno en su lenguaje idóneo.
+- **Componente** — pieza con una responsabilidad. Clave: se integra con las demás.
+- **Inventario** — lista de las partes del sistema. Clave: primer paso del diseño.
+
+## 🧩 Situación
+
+Antes de construir, se enumeran los componentes: CLI, API, web, datos. Ese inventario define el alcance del proyecto integrador y qué lenguaje usará cada pieza.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea con nombres de componentes (palabras)
+- **Salida** (stdout): `componentes=<N> nombres=<unidos por ->`
+- **Regla:** contar y listar los componentes
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `cli api web` | `componentes=3 nombres=cli-api-web` |
+| `app` | `componentes=1 nombres=app` |
+| `web api datos cache` | `componentes=4 nombres=web-api-datos-cache` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER componentes ; ESCRIBIR conteo y nombres unidos
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | Contar y unir en cada lenguaje. |
+| Semántica | Cada componente puede estar en otro lenguaje. |
+| Paradigmática | SQL agrega con group_concat. |
+
+## 🧬 El concepto en la familia
+
+Todo sistema real es un inventario de componentes con responsabilidades y lenguajes propios.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 165
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Componentes sin responsabilidad clara** → causa: solapamientos → solución: una responsabilidad por componente
+- **Olvidar un componente** → causa: integración incompleta → solución: inventariar todas las piezas
+
+## ❓ Preguntas frecuentes
+
+- **¿Cuántos componentes?** Los que el problema justifique; ni de más ni de menos.
+- **¿Por dónde empezar?** Por el inventario y los contratos entre componentes.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

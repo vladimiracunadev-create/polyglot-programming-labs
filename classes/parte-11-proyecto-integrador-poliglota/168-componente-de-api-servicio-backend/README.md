@@ -1,20 +1,63 @@
 # Clase 168 — Componente de API/servicio (backend)
 
-> Parte **11 — Proyecto integrador políglota** · ⏱️ Duración estimada: **90 min** · Nivel: **Avanzado**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **11 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **componente de api/servicio (backend)**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Construir el **componente de API/servicio** (backend): recibe una petición y devuelve una respuesta con un código de estado y datos. Aquí responde 200 (OK) con el dato recibido.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Producir una respuesta de API con estado.
+2. Explicar el rol del backend.
+3. Reconocer los códigos de estado.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Servicio/API | Responde peticiones |
+| 2 | Código de estado | 200 OK, 404, 500 |
+| 3 | Respuesta | Estado + datos |
+
+## 📖 Definiciones y características
+
+- **Componente de API** — servicio que atiende peticiones y devuelve respuestas. Clave: la lógica del sistema.
+- **Código de estado** — número que indica el resultado (200 OK, 404 no encontrado). Clave: comunica el desenlace.
+- **Respuesta** — estado más datos que el servicio devuelve. Clave: lo que consume el cliente.
+
+## 🧩 Situación
+
+El frontend pide un dato; el backend responde `200` con el dato o un error. El componente de API es el cerebro del sistema, a menudo en Go, Java o C# por su rendimiento y ecosistema.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): un entero `n` (el dato solicitado)
+- **Salida** (stdout): `respuesta=200 datos=<n>`
+- **Regla:** responder 200 con el dato
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `5` | `respuesta=200 datos=5` |
+| `0` | `respuesta=200 datos=0` |
+| `42` | `respuesta=200 datos=42` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER n ; ESCRIBIR estado 200 y datos=n
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | Formatear la respuesta en cada lenguaje. |
+| Semántica | El código de estado comunica el resultado. |
+| Paradigmática | SQL devuelve filas, no códigos HTTP. |
+
+## 🧬 El concepto en la familia
+
+Express (JS), Spring (Java), ASP.NET (C#), Gin (Go), FastAPI (Python) construyen APIs.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 168
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Devolver 200 en un error** → causa: el cliente no detecta el fallo → solución: usar el código correcto (4xx/5xx)
+- **Respuestas sin formato acordado** → causa: el cliente no las interpreta → solución: seguir el contrato de la API
+
+## ❓ Preguntas frecuentes
+
+- **¿Qué código para 'no encontrado'?** 404; 200 es OK, 500 es error del servidor.
+- **¿Qué lenguaje para el backend?** Depende: Go/Java/C# por rendimiento; Python por rapidez de desarrollo.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

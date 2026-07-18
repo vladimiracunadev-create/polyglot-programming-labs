@@ -1,0 +1,19 @@
+{
+  "descripcion": "Componente de datos: agregar (sumar) los valores de una consulta.",
+  "contrato": "stdin: una línea con enteros separados por espacio (valores a agregar) → stdout: `total=<suma de los valores>`",
+  "formula": "total = suma de los valores",
+  "casos": [
+    {
+      "stdin": "10 20 30",
+      "esperado": "total=60"
+    },
+    {
+      "stdin": "5",
+      "esperado": "total=5"
+    },
+    {
+      "stdin": "1 2 3 4",
+      "esperado": "total=10"
+    }
+  ]
+}

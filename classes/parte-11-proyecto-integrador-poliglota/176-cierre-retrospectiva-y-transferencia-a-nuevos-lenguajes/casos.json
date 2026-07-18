@@ -1,0 +1,19 @@
+{
+  "descripcion": "Cierre del programa: informar cuántas lecciones se llevan y confirmar que el conocimiento es transferible.",
+  "contrato": "stdin: un entero `n` (número de lecciones que te llevas) → stdout: `lecciones=<n> transferible=si`",
+  "formula": "informar las lecciones y confirmar la transferibilidad",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "lecciones=5 transferible=si"
+    },
+    {
+      "stdin": "12",
+      "esperado": "lecciones=12 transferible=si"
+    },
+    {
+      "stdin": "1",
+      "esperado": "lecciones=1 transferible=si"
+    }
+  ]
+}

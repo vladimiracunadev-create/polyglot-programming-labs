@@ -1,0 +1,19 @@
+{
+  "descripcion": "Componente web/frontend: indicar cuántos elementos se renderizan y confirmar el render.",
+  "contrato": "stdin: un entero `n` (número de elementos a renderizar) → stdout: `items=<n> render=ok`",
+  "formula": "renderizar n elementos y confirmar",
+  "casos": [
+    {
+      "stdin": "3",
+      "esperado": "items=3 render=ok"
+    },
+    {
+      "stdin": "0",
+      "esperado": "items=0 render=ok"
+    },
+    {
+      "stdin": "10",
+      "esperado": "items=10 render=ok"
+    }
+  ]
+}

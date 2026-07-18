@@ -5,7 +5,7 @@
 Programa secuencial de **176 clases** en **12 partes**. La numeración es
 global (001→…) y el orden importa: cada clase asume la anterior.
 
-**Estado:** 164 clases construidas · 12 planificadas · núcleo de 10 lenguajes.
+**Estado:** 176 clases construidas · 0 planificadas · núcleo de 10 lenguajes.
 Leyenda: ✅ construida · 🚧 planificada.
 
 ---
@@ -257,15 +257,15 @@ Leyenda: ✅ construida · 🚧 planificada.
 
 | # | Clase |
 |---|---|
-| 🚧 165 | [El proyecto: un sistema con componentes en varios lenguajes](parte-11-proyecto-integrador-poliglota/165-el-proyecto-un-sistema-con-componentes-en-varios-lenguajes/README.md) |
-| 🚧 166 | [Diseño: responsabilidades y contratos entre componentes](parte-11-proyecto-integrador-poliglota/166-diseno-responsabilidades-y-contratos-entre-componentes/README.md) |
-| 🚧 167 | [Componente CLI (lenguaje de sistemas)](parte-11-proyecto-integrador-poliglota/167-componente-cli-lenguaje-de-sistemas/README.md) |
-| 🚧 168 | [Componente de API/servicio (backend)](parte-11-proyecto-integrador-poliglota/168-componente-de-api-servicio-backend/README.md) |
-| 🚧 169 | [Componente web/frontend (JS/TS)](parte-11-proyecto-integrador-poliglota/169-componente-web-frontend-js-ts/README.md) |
-| 🚧 170 | [Componente de datos y consultas (SQL)](parte-11-proyecto-integrador-poliglota/170-componente-de-datos-y-consultas-sql/README.md) |
-| 🚧 171 | [Componente de automatización/scripting](parte-11-proyecto-integrador-poliglota/171-componente-de-automatizacion-scripting/README.md) |
-| 🚧 172 | [Persistencia y almacenamiento](parte-11-proyecto-integrador-poliglota/172-persistencia-y-almacenamiento/README.md) |
-| 🚧 173 | [Pruebas end-to-end del sistema completo](parte-11-proyecto-integrador-poliglota/173-pruebas-end-to-end-del-sistema-completo/README.md) |
-| 🚧 174 | [Empaquetado, contenedores y despliegue](parte-11-proyecto-integrador-poliglota/174-empaquetado-contenedores-y-despliegue/README.md) |
-| 🚧 175 | [Documentación y defensa de las decisiones de lenguaje](parte-11-proyecto-integrador-poliglota/175-documentacion-y-defensa-de-las-decisiones-de-lenguaje/README.md) |
-| 🚧 176 | [Cierre: retrospectiva y transferencia a nuevos lenguajes](parte-11-proyecto-integrador-poliglota/176-cierre-retrospectiva-y-transferencia-a-nuevos-lenguajes/README.md) |
+| ✅ 165 | [El proyecto: un sistema con componentes en varios lenguajes](parte-11-proyecto-integrador-poliglota/165-el-proyecto-un-sistema-con-componentes-en-varios-lenguajes/README.md) |
+| ✅ 166 | [Diseño: responsabilidades y contratos entre componentes](parte-11-proyecto-integrador-poliglota/166-diseno-responsabilidades-y-contratos-entre-componentes/README.md) |
+| ✅ 167 | [Componente CLI (lenguaje de sistemas)](parte-11-proyecto-integrador-poliglota/167-componente-cli-lenguaje-de-sistemas/README.md) |
+| ✅ 168 | [Componente de API/servicio (backend)](parte-11-proyecto-integrador-poliglota/168-componente-de-api-servicio-backend/README.md) |
+| ✅ 169 | [Componente web/frontend (JS/TS)](parte-11-proyecto-integrador-poliglota/169-componente-web-frontend-js-ts/README.md) |
+| ✅ 170 | [Componente de datos y consultas (SQL)](parte-11-proyecto-integrador-poliglota/170-componente-de-datos-y-consultas-sql/README.md) |
+| ✅ 171 | [Componente de automatización/scripting](parte-11-proyecto-integrador-poliglota/171-componente-de-automatizacion-scripting/README.md) |
+| ✅ 172 | [Persistencia y almacenamiento](parte-11-proyecto-integrador-poliglota/172-persistencia-y-almacenamiento/README.md) |
+| ✅ 173 | [Pruebas end-to-end del sistema completo](parte-11-proyecto-integrador-poliglota/173-pruebas-end-to-end-del-sistema-completo/README.md) |
+| ✅ 174 | [Empaquetado, contenedores y despliegue](parte-11-proyecto-integrador-poliglota/174-empaquetado-contenedores-y-despliegue/README.md) |
+| ✅ 175 | [Documentación y defensa de las decisiones de lenguaje](parte-11-proyecto-integrador-poliglota/175-documentacion-y-defensa-de-las-decisiones-de-lenguaje/README.md) |
+| ✅ 176 | [Cierre: retrospectiva y transferencia a nuevos lenguajes](parte-11-proyecto-integrador-poliglota/176-cierre-retrospectiva-y-transferencia-a-nuevos-lenguajes/README.md) |

@@ -1,0 +1,19 @@
+{
+  "descripcion": "Componente de automatización: procesar n tareas y confirmar que se completaron.",
+  "contrato": "stdin: un entero `n` (número de tareas) → stdout: `tareas=<n> estado=completado`",
+  "formula": "procesar n tareas y confirmar",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "tareas=5 estado=completado"
+    },
+    {
+      "stdin": "0",
+      "esperado": "tareas=0 estado=completado"
+    },
+    {
+      "stdin": "3",
+      "esperado": "tareas=3 estado=completado"
+    }
+  ]
+}

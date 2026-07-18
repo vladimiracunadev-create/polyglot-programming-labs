@@ -1,0 +1,19 @@
+{
+  "descripcion": "Documentar el proyecto: informar cuántas secciones tiene la documentación.",
+  "contrato": "stdin: un entero `n` (número de secciones documentadas) → stdout: `documentado=<n> secciones`",
+  "formula": "informar el número de secciones",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "documentado=5 secciones"
+    },
+    {
+      "stdin": "1",
+      "esperado": "documentado=1 secciones"
+    },
+    {
+      "stdin": "8",
+      "esperado": "documentado=8 secciones"
+    }
+  ]
+}

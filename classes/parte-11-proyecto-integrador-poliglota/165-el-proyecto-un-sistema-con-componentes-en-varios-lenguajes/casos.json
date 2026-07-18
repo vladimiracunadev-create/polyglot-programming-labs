@@ -1,0 +1,19 @@
+{
+  "descripcion": "Describir el sistema: contar sus componentes y listar sus nombres.",
+  "contrato": "stdin: una línea con nombres de componentes (palabras) → stdout: `componentes=<N> nombres=<unidos por ->`",
+  "formula": "contar y listar los componentes",
+  "casos": [
+    {
+      "stdin": "cli api web",
+      "esperado": "componentes=3 nombres=cli-api-web"
+    },
+    {
+      "stdin": "app",
+      "esperado": "componentes=1 nombres=app"
+    },
+    {
+      "stdin": "web api datos cache",
+      "esperado": "componentes=4 nombres=web-api-datos-cache"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "descripcion": "Mostrar un entero no negativo en cuatro bases: decimal, hexadecimal, octal y binario.",
+  "contrato": "stdin: una línea `n` (entero no negativo) → stdout: `dec=<n> hex=<hex minúscula> oct=<octal> bin=<binario>`",
+  "formula": "misma n en base 10, 16, 8 y 2 (sin prefijos ni ceros a la izquierda)",
+  "casos": [
+    {
+      "stdin": "255",
+      "esperado": "dec=255 hex=ff oct=377 bin=11111111"
+    },
+    {
+      "stdin": "10",
+      "esperado": "dec=10 hex=a oct=12 bin=1010"
+    },
+    {
+      "stdin": "1",
+      "esperado": "dec=1 hex=1 oct=1 bin=1"
+    }
+  ]
+}

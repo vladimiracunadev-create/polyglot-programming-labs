@@ -14,7 +14,7 @@
   "php"
  ],
  "total_planned": 176,
- "total_built": 41,
+ "total_built": 46,
  "parts_built": 4,
  "parts_planned": 12,
  "parts": [
@@ -310,31 +310,31 @@
      "num": 42,
      "title": "Declaración, asignación e inicialización",
      "slug": "042-declaracion-asignacion-e-inicializacion",
-     "built": false
+     "built": true
     },
     {
      "num": 43,
      "title": "Tipos primitivos: enteros, reales, booleanos, caracteres",
      "slug": "043-tipos-primitivos-enteros-reales-booleanos-caracteres",
-     "built": false
+     "built": true
     },
     {
      "num": 44,
      "title": "Enteros: tamaño, signo, desbordamiento y bases",
      "slug": "044-enteros-tamano-signo-desbordamiento-y-bases",
-     "built": false
+     "built": true
     },
     {
      "num": 45,
      "title": "Números reales: punto flotante, precisión y decimales",
      "slug": "045-numeros-reales-punto-flotante-precision-y-decimales",
-     "built": false
+     "built": true
     },
     {
      "num": 46,
      "title": "Booleanos y valores de verdad",
      "slug": "046-booleanos-y-valores-de-verdad",
-     "built": false
+     "built": true
     },
     {
      "num": 47,

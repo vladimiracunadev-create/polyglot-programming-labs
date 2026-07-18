@@ -1,0 +1,19 @@
+{
+  "descripcion": "Dadas dos entradas booleanas (0 o 1), calcular su AND, su OR y la negación de la primera.",
+  "contrato": "stdin: una línea `a b` (cada uno 0 o 1) → stdout: `and=<true|false> or=<true|false> not_a=<true|false>`",
+  "formula": "and = a ∧ b ; or = a ∨ b ; not_a = ¬a (con a,b interpretados como booleanos)",
+  "casos": [
+    {
+      "stdin": "1 0",
+      "esperado": "and=false or=true not_a=false"
+    },
+    {
+      "stdin": "1 1",
+      "esperado": "and=true or=true not_a=false"
+    },
+    {
+      "stdin": "0 0",
+      "esperado": "and=false or=false not_a=true"
+    }
+  ]
+}

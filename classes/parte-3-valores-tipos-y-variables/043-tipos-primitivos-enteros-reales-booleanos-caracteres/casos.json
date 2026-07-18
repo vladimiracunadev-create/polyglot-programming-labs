@@ -1,0 +1,19 @@
+{
+  "descripcion": "A partir de un entero, mostrar su valor como entero, como real y una propiedad booleana (si es par).",
+  "contrato": "stdin: una línea `n` (un entero) → stdout: `entero=<n> real=<n con 1 decimal> par=<true|false>`",
+  "formula": "real = (double) n ; par = (n módulo 2 == 0)",
+  "casos": [
+    {
+      "stdin": "4",
+      "esperado": "entero=4 real=4.0 par=true"
+    },
+    {
+      "stdin": "7",
+      "esperado": "entero=7 real=7.0 par=false"
+    },
+    {
+      "stdin": "0",
+      "esperado": "entero=0 real=0.0 par=true"
+    }
+  ]
+}

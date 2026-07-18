@@ -5,7 +5,7 @@
 Programa secuencial de **176 clases** en **12 partes**. La numeración es
 global (001→…) y el orden importa: cada clase asume la anterior.
 
-**Estado:** 41 clases construidas · 135 planificadas · núcleo de 10 lenguajes.
+**Estado:** 46 clases construidas · 130 planificadas · núcleo de 10 lenguajes.
 Leyenda: ✅ construida · 🚧 planificada.
 
 ---
@@ -78,11 +78,11 @@ Leyenda: ✅ construida · 🚧 planificada.
 | # | Clase |
 |---|---|
 | ✅ 041 | [Literales, valores, variables y constantes](parte-3-valores-tipos-y-variables/041-literales-valores-variables-y-constantes/README.md) |
-| 🚧 042 | [Declaración, asignación e inicialización](parte-3-valores-tipos-y-variables/042-declaracion-asignacion-e-inicializacion/README.md) |
-| 🚧 043 | [Tipos primitivos: enteros, reales, booleanos, caracteres](parte-3-valores-tipos-y-variables/043-tipos-primitivos-enteros-reales-booleanos-caracteres/README.md) |
-| 🚧 044 | [Enteros: tamaño, signo, desbordamiento y bases](parte-3-valores-tipos-y-variables/044-enteros-tamano-signo-desbordamiento-y-bases/README.md) |
-| 🚧 045 | [Números reales: punto flotante, precisión y decimales](parte-3-valores-tipos-y-variables/045-numeros-reales-punto-flotante-precision-y-decimales/README.md) |
-| 🚧 046 | [Booleanos y valores de verdad](parte-3-valores-tipos-y-variables/046-booleanos-y-valores-de-verdad/README.md) |
+| ✅ 042 | [Declaración, asignación e inicialización](parte-3-valores-tipos-y-variables/042-declaracion-asignacion-e-inicializacion/README.md) |
+| ✅ 043 | [Tipos primitivos: enteros, reales, booleanos, caracteres](parte-3-valores-tipos-y-variables/043-tipos-primitivos-enteros-reales-booleanos-caracteres/README.md) |
+| ✅ 044 | [Enteros: tamaño, signo, desbordamiento y bases](parte-3-valores-tipos-y-variables/044-enteros-tamano-signo-desbordamiento-y-bases/README.md) |
+| ✅ 045 | [Números reales: punto flotante, precisión y decimales](parte-3-valores-tipos-y-variables/045-numeros-reales-punto-flotante-precision-y-decimales/README.md) |
+| ✅ 046 | [Booleanos y valores de verdad](parte-3-valores-tipos-y-variables/046-booleanos-y-valores-de-verdad/README.md) |
 | 🚧 047 | [Caracteres, texto y Unicode](parte-3-valores-tipos-y-variables/047-caracteres-texto-y-unicode/README.md) |
 | 🚧 048 | [Cadenas: representación, inmutabilidad e interpolación](parte-3-valores-tipos-y-variables/048-cadenas-representacion-inmutabilidad-e-interpolacion/README.md) |
 | 🚧 049 | [Conversión de tipos: casting explícito vs. coerción implícita](parte-3-valores-tipos-y-variables/049-conversion-de-tipos-casting-explicito-vs-coercion-implicita/README.md) |

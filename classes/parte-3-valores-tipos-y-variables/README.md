@@ -13,11 +13,11 @@ La materia prima de todo programa: cómo cada lenguaje nombra, tipa, convierte y
 | # | Clase |
 |---|---|
 | ✅ 041 | [Literales, valores, variables y constantes](041-literales-valores-variables-y-constantes/README.md) |
-| 🚧 042 | [Declaración, asignación e inicialización](042-declaracion-asignacion-e-inicializacion/README.md) |
-| 🚧 043 | [Tipos primitivos: enteros, reales, booleanos, caracteres](043-tipos-primitivos-enteros-reales-booleanos-caracteres/README.md) |
-| 🚧 044 | [Enteros: tamaño, signo, desbordamiento y bases](044-enteros-tamano-signo-desbordamiento-y-bases/README.md) |
-| 🚧 045 | [Números reales: punto flotante, precisión y decimales](045-numeros-reales-punto-flotante-precision-y-decimales/README.md) |
-| 🚧 046 | [Booleanos y valores de verdad](046-booleanos-y-valores-de-verdad/README.md) |
+| ✅ 042 | [Declaración, asignación e inicialización](042-declaracion-asignacion-e-inicializacion/README.md) |
+| ✅ 043 | [Tipos primitivos: enteros, reales, booleanos, caracteres](043-tipos-primitivos-enteros-reales-booleanos-caracteres/README.md) |
+| ✅ 044 | [Enteros: tamaño, signo, desbordamiento y bases](044-enteros-tamano-signo-desbordamiento-y-bases/README.md) |
+| ✅ 045 | [Números reales: punto flotante, precisión y decimales](045-numeros-reales-punto-flotante-precision-y-decimales/README.md) |
+| ✅ 046 | [Booleanos y valores de verdad](046-booleanos-y-valores-de-verdad/README.md) |
 | 🚧 047 | [Caracteres, texto y Unicode](047-caracteres-texto-y-unicode/README.md) |
 | 🚧 048 | [Cadenas: representación, inmutabilidad e interpolación](048-cadenas-representacion-inmutabilidad-e-interpolacion/README.md) |
 | 🚧 049 | [Conversión de tipos: casting explícito vs. coerción implícita](049-conversion-de-tipos-casting-explicito-vs-coercion-implicita/README.md) |

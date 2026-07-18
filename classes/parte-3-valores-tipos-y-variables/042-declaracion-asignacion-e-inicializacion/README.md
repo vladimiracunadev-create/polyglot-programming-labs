@@ -1,20 +1,67 @@
 # Clase 042 — Declaración, asignación e inicialización
 
 > Parte **3 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **declaración, asignación e inicialización**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Distinguir tres actos que a menudo se confunden: **declarar** (introducir un nombre), **inicializar** (darle su primer valor) y **asignar** (cambiarlo después). El intercambio de dos variables los ejercita todos y revela cómo cada lenguaje los expresa (variable temporal vs. asignación múltiple).
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Diferenciar declaración, inicialización y (re)asignación.
+2. Intercambiar dos variables con y sin temporal según el lenguaje.
+3. Reconocer la asignación múltiple (desestructuración) donde existe.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Declarar vs. inicializar | Introducir un nombre no es lo mismo que darle valor |
+| 2 | Reasignación | Cambiar el valor de una variable ya inicializada |
+| 3 | Variable temporal | El patrón clásico para intercambiar |
+| 4 | Asignación múltiple | a, b = b, a donde el lenguaje lo permite |
+
+## 📖 Definiciones y características
+
+- **Declaración** — introducir un nombre en un ámbito. Clave: en lenguajes estáticos fija el tipo.
+- **Inicialización** — dar el primer valor a una variable. Clave: usarla sin inicializar es un error clásico.
+- **Asignación** — cambiar el valor de una variable existente. Clave: solo posible si es mutable.
+- **Asignación múltiple** — asignar varias variables a la vez (a, b = b, a). Clave: evita la temporal en Python, JS, Go, Rust.
+
+## 🧩 Situación
+
+Intercambiar dos valores parece trivial, pero es donde se ve si un lenguaje ofrece asignación múltiple (Python, Go, Rust, JS) o exige la variable temporal de toda la vida (C, Java).
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea `a b` (dos enteros)
+- **Salida** (stdout): `a=<nuevo a> b=<nuevo b>` tras intercambiar
+- **Regla:** intercambiar a y b
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `3 7` | `a=7 b=3` |
+| `0 5` | `a=5 b=0` |
+| `-2 9` | `a=9 b=-2` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER a, b
+tmp <- a ; a <- b ; b <- tmp   (o bien: a, b <- b, a)
+ESCRIBIR "a=" a " b=" b
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +76,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | `a, b = b, a` (Python/JS/Go/Rust) vs. `tmp=a;a=b;b=tmp;` (C/Java). |
+| Semántica | La asignación múltiple evalúa el lado derecho antes de asignar; la temporal es manual. |
+| Paradigmática | SQL no reasigna variables: se describe la salida intercambiando columnas. |
+
+## 🧬 El concepto en la familia
+
+En Ruby (scripting dinámico) es `a, b = b, a`, igual que Python. En Kotlin (JVM) se usa `also` o una temporal; en Haskell no hay reasignación: se define un nuevo valor.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 042
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Perder un valor al intercambiar sin temporal** → causa: asignar a=b antes de guardar a → solución: usar una temporal o la asignación múltiple del lenguaje
+- **Usar una variable sin inicializar** → causa: declararla y no darle valor (C) → solución: inicializar siempre en la declaración
+
+## ❓ Preguntas frecuentes
+
+- **¿La asignación múltiple es más lenta?** No de forma apreciable; es más legible y evita el error de la temporal.
+- **¿Por qué C no la tiene?** Es un lenguaje minimalista; el patrón con temporal es explícito y suficiente.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

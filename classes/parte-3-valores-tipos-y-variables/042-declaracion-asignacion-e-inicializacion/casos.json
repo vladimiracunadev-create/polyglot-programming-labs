@@ -1,0 +1,19 @@
+{
+  "descripcion": "Intercambiar el valor de dos variables enteras. Es el ejemplo mínimo para estudiar declaración, asignación e inicialización.",
+  "contrato": "stdin: una línea `a b` (dos enteros) → stdout: `a=<nuevo a> b=<nuevo b>` tras intercambiar",
+  "formula": "intercambiar a y b",
+  "casos": [
+    {
+      "stdin": "3 7",
+      "esperado": "a=7 b=3"
+    },
+    {
+      "stdin": "0 5",
+      "esperado": "a=5 b=0"
+    },
+    {
+      "stdin": "-2 9",
+      "esperado": "a=9 b=-2"
+    }
+  ]
+}

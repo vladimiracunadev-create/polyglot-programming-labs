@@ -1,0 +1,19 @@
+{
+  "descripcion": "Sumar y multiplicar dos números reales y mostrar ambos resultados con dos decimales.",
+  "contrato": "stdin: una línea `a b` (dos reales) → stdout: `suma=<a+b con 2 decimales> producto=<a*b con 2 decimales>`",
+  "formula": "suma = a + b ; producto = a * b (ambos a 2 decimales)",
+  "casos": [
+    {
+      "stdin": "1.5 2.5",
+      "esperado": "suma=4.00 producto=3.75"
+    },
+    {
+      "stdin": "0.1 0.2",
+      "esperado": "suma=0.30 producto=0.02"
+    },
+    {
+      "stdin": "10 3",
+      "esperado": "suma=13.00 producto=30.00"
+    }
+  ]
+}

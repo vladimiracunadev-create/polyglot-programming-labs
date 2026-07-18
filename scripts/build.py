@@ -37,8 +37,8 @@ LANG_META = {
     "php":        ("PHP",        "main.php",    "php main.php"),
 }
 
-# Clases con contenido escrito a mano; el generador no las sobrescribe.
-# Partes 0-2 (método, 1–40) + Partes 3-4 de código (041–072).
+# Todas las clases construidas: Partes 0-2 de método (1–40) + Partes 3-11 de
+# código (41–176). El programa está completo.
 BUILT = set(range(1, 177))
 
 NIVELES = ["Fundamentos", "Fundamentos", "Fundamentos", "Intermedio",
@@ -272,8 +272,8 @@ def index_readme(manifest):
 Programa secuencial de **{planned} clases** en **{len(manifest['parts'])} partes**. La numeración es
 global (001→…) y el orden importa: cada clase asume la anterior.
 
-**Estado:** {built} clases construidas · {planned - built} planificadas · núcleo de {len(NUCLEO)} lenguajes.
-Leyenda: ✅ construida · 🚧 planificada.
+**Estado:** {built} de {planned} clases construidas · núcleo de {len(NUCLEO)} lenguajes.
+{"Programa completo ✅." if built >= planned else "Leyenda: ✅ construida · 🚧 planificada."}
 
 ---
 

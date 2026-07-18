@@ -2,9 +2,9 @@
 
 > [⬅️ Volver al programa](README.md) · [📚 Índice completo](classes/README.md)
 
-Estado del programa **Polyglot Programming Labs**: 176 clases en 12 partes. El **esqueleto** (carpetas, manifest, índice y README con la anatomía) está completo; el **contenido a fondo** se escribe parte por parte.
+Estado del programa **Polyglot Programming Labs**: **completo — las 176 clases en 12 partes están construidas.** Las clases de código (Partes 3–11) traen sus 10 implementaciones del núcleo verificadas en CI; las de método (Partes 0–2) son conceptuales.
 
-Leyenda: ✅ construida · 🏗️ en progreso · 🚧 planificada.
+Leyenda: ✅ construida.
 
 | Parte | Título | Clases | Estado |
 |---|---|---|---|
@@ -21,13 +21,15 @@ Leyenda: ✅ construida · 🏗️ en progreso · 🚧 planificada.
 | 10 | Interoperabilidad y fronteras entre lenguajes | 10 | ✅ construida (155–164) |
 | 11 | Proyecto integrador políglota | 12 | ✅ construida (165–176) |
 
-## Orden de construcción
+## Construcción (completada)
 
-1. **Infraestructura y portal** ✅ — manifest, índice, README, verificador de equivalencia, CI, sitio.
-2. **Parte 0 completa** ✅ — el método políglota y el pensamiento computacional.
-3. **Partes 1–2 completas** ✅ — Atlas de familias y toolchains/comandos.
-4. **Parte 3 (Valores)** 🏗️ — clases de código, empezando por la insignia 041.
-5. **Resto de partes** en orden curricular.
+1. **Infraestructura y portal** ✅ — manifest, índice, README, verificador de equivalencia, CI (matriz por lenguaje), sitio.
+2. **Partes 0–2** ✅ — método políglota, Atlas de familias y toolchains/comandos (clases de método).
+3. **Partes 3–11** ✅ — clases de código: valores, control, funciones, datos, paradigmas, runtime, ingeniería, interoperabilidad y proyecto integrador, cada una con 10 implementaciones verificadas.
+
+## Cómo seguir aprendiendo
+
+El programa termina en la [clase 176](classes/parte-11-proyecto-integrador-poliglota/176-cierre-retrospectiva-y-transferencia-a-nuevos-lenguajes/README.md) con una idea: el conocimiento es transferible. Elige un lenguaje del [Atlas](atlas/README.md) que no domines, léelo por su familia y resuelve una clase en él.
 
 ## Cómo se genera todo
 

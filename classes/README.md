@@ -5,8 +5,8 @@
 Programa secuencial de **176 clases** en **12 partes**. La numeración es
 global (001→…) y el orden importa: cada clase asume la anterior.
 
-**Estado:** 176 clases construidas · 0 planificadas · núcleo de 10 lenguajes.
-Leyenda: ✅ construida · 🚧 planificada.
+**Estado:** 176 de 176 clases construidas · núcleo de 10 lenguajes.
+Programa completo ✅.
 
 ---
 

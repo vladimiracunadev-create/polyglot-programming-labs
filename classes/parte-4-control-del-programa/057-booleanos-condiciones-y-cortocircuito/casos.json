@@ -1,0 +1,19 @@
+{
+  "descripcion": "Dado un entero, informar si es positivo, si es par, y si cumple ambas condiciones (AND con cortocircuito).",
+  "contrato": "stdin: un entero `n` → stdout: `positivo=<true|false> par=<true|false> ambos=<true|false>`",
+  "formula": "positivo = n>0 ; par = n%2==0 ; ambos = positivo && par",
+  "casos": [
+    {
+      "stdin": "4",
+      "esperado": "positivo=true par=true ambos=true"
+    },
+    {
+      "stdin": "-3",
+      "esperado": "positivo=false par=false ambos=false"
+    },
+    {
+      "stdin": "7",
+      "esperado": "positivo=true par=false ambos=false"
+    }
+  ]
+}

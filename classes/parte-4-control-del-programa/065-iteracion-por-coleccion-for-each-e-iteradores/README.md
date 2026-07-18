@@ -1,20 +1,68 @@
 # Clase 065 — Iteración por colección: for-each e iteradores
 
-> Parte **4 — Control del programa** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **4 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **iteración por colección: for-each e iteradores**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Recorrer una colección con `for-each` (para cada elemento), sin gestionar índices. Es la forma idiomática de procesar listas en casi todos los lenguajes.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Recorrer una colección con for-each.
+2. Acumular un resultado sobre todos los elementos.
+3. Leer una lista de longitud variable.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | for-each | Para cada elemento, sin índice |
+| 2 | Colección | Una secuencia de valores |
+| 3 | Acumulación | Sumar recorriendo |
+| 4 | Longitud variable | No se sabe cuántos hay de antemano |
+
+## 📖 Definiciones y características
+
+- **for-each** — bucle que recorre cada elemento de una colección. Clave: sin índice manual.
+- **Colección** — estructura que agrupa varios valores (lista, arreglo). Clave: se recorre en orden.
+- **Iterar** — visitar cada elemento una vez. Clave: base del procesamiento de datos.
+- **Acumulación** — reunir un resultado (suma) recorriendo. Clave: patrón universal.
+
+## 🧩 Situación
+
+Sumar una lista de precios, contar elementos, buscar un máximo: todo empieza recorriendo la colección. El for-each expresa 'para cada elemento' sin el ruido del índice.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea con enteros separados por espacio
+- **Salida** (stdout): `suma=<suma de todos>`
+- **Regla:** suma = Σ elementos
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `3 1 4` | `suma=8` |
+| `10 20 30` | `suma=60` |
+| `5` | `suma=5` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER lista
+suma <- 0
+PARA CADA x EN lista: suma <- suma + x
+ESCRIBIR "suma=" suma
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +77,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | `for x in lista` (Python) vs. `for (int x : arr)` (Java) vs. `for x in &v` (Rust). |
+| Semántica | Todos recorren sin índice; C aún usa índice o puntero. |
+| Paradigmática | SQL suma con `SUM()` sobre filas, sin bucle explícito. |
+
+## 🧬 El concepto en la familia
+
+En Ruby `lista.each` o `lista.sum`. En Go `for _, x := range xs`. Kotlin `for (x in xs)`.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 065
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Usar índice cuando no hace falta** → causa: código más largo y con más errores → solución: usar for-each cuando solo necesitas el valor
+- **Olvidar inicializar el acumulador** → causa: resultado incorrecto → solución: empezar la suma en 0
+
+## ❓ Preguntas frecuentes
+
+- **¿for-each o for con índice?** for-each si solo necesitas el valor; con índice si también necesitas la posición.
+- **¿Cómo leo una lista de tamaño desconocido?** Leyendo toda la línea/entrada y separando por espacios.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

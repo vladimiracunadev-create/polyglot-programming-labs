@@ -1,0 +1,19 @@
+{
+  "descripcion": "Calcular el n-ésimo número de Fibonacci con una función recursiva.",
+  "contrato": "stdin: un entero `n` (0 <= n <= 30) → stdout: `fib=<F(n)>`",
+  "formula": "F(0)=0, F(1)=1, F(n)=F(n-1)+F(n-2)",
+  "casos": [
+    {
+      "stdin": "10",
+      "esperado": "fib=55"
+    },
+    {
+      "stdin": "1",
+      "esperado": "fib=1"
+    },
+    {
+      "stdin": "0",
+      "esperado": "fib=0"
+    }
+  ]
+}

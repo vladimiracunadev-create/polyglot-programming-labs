@@ -1,0 +1,19 @@
+{
+  "descripcion": "Convertir una calificación numérica (0-100) en una letra: A (>=90), B (>=80), C (>=70), F en otro caso.",
+  "contrato": "stdin: un entero `score` (0-100) → stdout: `nota=<A|B|C|F>`",
+  "formula": "score>=90→A; >=80→B; >=70→C; si no→F",
+  "casos": [
+    {
+      "stdin": "95",
+      "esperado": "nota=A"
+    },
+    {
+      "stdin": "72",
+      "esperado": "nota=C"
+    },
+    {
+      "stdin": "40",
+      "esperado": "nota=F"
+    }
+  ]
+}

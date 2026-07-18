@@ -1,0 +1,19 @@
+{
+  "descripcion": "Dado el número de día (1-7), devolver su nombre; cualquier otro número es 'invalido'.",
+  "contrato": "stdin: un entero `d` (día) → stdout: `dia=<nombre>` o `dia=invalido`",
+  "formula": "1→lunes … 7→domingo; otro→invalido",
+  "casos": [
+    {
+      "stdin": "1",
+      "esperado": "dia=lunes"
+    },
+    {
+      "stdin": "6",
+      "esperado": "dia=sabado"
+    },
+    {
+      "stdin": "8",
+      "esperado": "dia=invalido"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "descripcion": "Dividir dos enteros y manejar la división por cero con una excepción.",
+  "contrato": "stdin: una línea `a b` (dos enteros) → stdout: `resultado=<a/b entera>` o `error=division por cero` si b es 0",
+  "formula": "si b != 0 → a/b (entera); si b == 0 → mensaje de error",
+  "casos": [
+    {
+      "stdin": "10 2",
+      "esperado": "resultado=5"
+    },
+    {
+      "stdin": "7 0",
+      "esperado": "error=division por cero"
+    },
+    {
+      "stdin": "9 3",
+      "esperado": "resultado=3"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "descripcion": "De una lista de enteros, quedarse solo con los pares.",
+  "contrato": "stdin: una línea con enteros separados por espacio (al menos un par) → stdout: `pares=<los pares unidos por -, en orden>`",
+  "formula": "pares = [x ∈ lista : x par]",
+  "casos": [
+    {
+      "stdin": "1 2 3 4",
+      "esperado": "pares=2-4"
+    },
+    {
+      "stdin": "10 15 20",
+      "esperado": "pares=10-20"
+    },
+    {
+      "stdin": "6 7 8",
+      "esperado": "pares=6-8"
+    }
+  ]
+}

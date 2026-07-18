@@ -1,0 +1,19 @@
+{
+  "descripcion": "Dividir dos enteros devolviendo un resultado tipo Result/Either en lugar de lanzar una excepción.",
+  "contrato": "stdin: una línea `a b` (dos enteros) → stdout: `ok=<a/b entera>` o `err=division` si b es 0",
+  "formula": "si b != 0 → Ok(a/b); si b == 0 → Err(division)",
+  "casos": [
+    {
+      "stdin": "10 2",
+      "esperado": "ok=5"
+    },
+    {
+      "stdin": "7 0",
+      "esperado": "err=division"
+    },
+    {
+      "stdin": "8 4",
+      "esperado": "ok=2"
+    }
+  ]
+}

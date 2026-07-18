@@ -5,7 +5,7 @@
 Programa secuencial de **176 clases** en **12 partes**. La numeración es
 global (001→…) y el orden importa: cada clase asume la anterior.
 
-**Estado:** 56 clases construidas · 120 planificadas · núcleo de 10 lenguajes.
+**Estado:** 72 clases construidas · 104 planificadas · núcleo de 10 lenguajes.
 Leyenda: ✅ construida · 🚧 planificada.
 
 ---
@@ -100,22 +100,22 @@ Leyenda: ✅ construida · 🚧 planificada.
 
 | # | Clase |
 |---|---|
-| 🚧 057 | [Booleanos, condiciones y cortocircuito](parte-4-control-del-programa/057-booleanos-condiciones-y-cortocircuito/README.md) |
-| 🚧 058 | [Guardas y validación temprana](parte-4-control-del-programa/058-guardas-y-validacion-temprana/README.md) |
-| 🚧 059 | [if / else y anidamiento](parte-4-control-del-programa/059-if-else-y-anidamiento/README.md) |
-| 🚧 060 | [Expresiones condicionales: ternario e if como expresión](parte-4-control-del-programa/060-expresiones-condicionales-ternario-e-if-como-expresion/README.md) |
-| 🚧 061 | [switch, case y fallthrough](parte-4-control-del-programa/061-switch-case-y-fallthrough/README.md) |
-| 🚧 062 | [Coincidencia de patrones: match / when](parte-4-control-del-programa/062-coincidencia-de-patrones-match-when/README.md) |
-| 🚧 063 | [Iteración por condición: while y do-while](parte-4-control-del-programa/063-iteracion-por-condicion-while-y-do-while/README.md) |
-| 🚧 064 | [Iteración por rango: for clásico y for-range](parte-4-control-del-programa/064-iteracion-por-rango-for-clasico-y-for-range/README.md) |
-| 🚧 065 | [Iteración por colección: for-each e iteradores](parte-4-control-del-programa/065-iteracion-por-coleccion-for-each-e-iteradores/README.md) |
-| 🚧 066 | [Iteradores y generadores perezosos (lazy)](parte-4-control-del-programa/066-iteradores-y-generadores-perezosos-lazy/README.md) |
-| 🚧 067 | [Comprensiones de listas y colecciones](parte-4-control-del-programa/067-comprensiones-de-listas-y-colecciones/README.md) |
-| 🚧 068 | [Funciones de orden superior: map, filter, reduce](parte-4-control-del-programa/068-funciones-de-orden-superior-map-filter-reduce/README.md) |
-| 🚧 069 | [Recursión y recursión de cola](parte-4-control-del-programa/069-recursion-y-recursion-de-cola/README.md) |
-| 🚧 070 | [Control de flujo: break, continue, return, goto](parte-4-control-del-programa/070-control-de-flujo-break-continue-return-goto/README.md) |
-| 🚧 071 | [Manejo de errores I: excepciones (try/catch/finally)](parte-4-control-del-programa/071-manejo-de-errores-i-excepciones-try-catch-finally/README.md) |
-| 🚧 072 | [Manejo de errores II: resultados y valores (Result/Either/error de Go)](parte-4-control-del-programa/072-manejo-de-errores-ii-resultados-y-valores-result-either-error-de-go/README.md) |
+| ✅ 057 | [Booleanos, condiciones y cortocircuito](parte-4-control-del-programa/057-booleanos-condiciones-y-cortocircuito/README.md) |
+| ✅ 058 | [Guardas y validación temprana](parte-4-control-del-programa/058-guardas-y-validacion-temprana/README.md) |
+| ✅ 059 | [if / else y anidamiento](parte-4-control-del-programa/059-if-else-y-anidamiento/README.md) |
+| ✅ 060 | [Expresiones condicionales: ternario e if como expresión](parte-4-control-del-programa/060-expresiones-condicionales-ternario-e-if-como-expresion/README.md) |
+| ✅ 061 | [switch, case y fallthrough](parte-4-control-del-programa/061-switch-case-y-fallthrough/README.md) |
+| ✅ 062 | [Coincidencia de patrones: match / when](parte-4-control-del-programa/062-coincidencia-de-patrones-match-when/README.md) |
+| ✅ 063 | [Iteración por condición: while y do-while](parte-4-control-del-programa/063-iteracion-por-condicion-while-y-do-while/README.md) |
+| ✅ 064 | [Iteración por rango: for clásico y for-range](parte-4-control-del-programa/064-iteracion-por-rango-for-clasico-y-for-range/README.md) |
+| ✅ 065 | [Iteración por colección: for-each e iteradores](parte-4-control-del-programa/065-iteracion-por-coleccion-for-each-e-iteradores/README.md) |
+| ✅ 066 | [Iteradores y generadores perezosos (lazy)](parte-4-control-del-programa/066-iteradores-y-generadores-perezosos-lazy/README.md) |
+| ✅ 067 | [Comprensiones de listas y colecciones](parte-4-control-del-programa/067-comprensiones-de-listas-y-colecciones/README.md) |
+| ✅ 068 | [Funciones de orden superior: map, filter, reduce](parte-4-control-del-programa/068-funciones-de-orden-superior-map-filter-reduce/README.md) |
+| ✅ 069 | [Recursión y recursión de cola](parte-4-control-del-programa/069-recursion-y-recursion-de-cola/README.md) |
+| ✅ 070 | [Control de flujo: break, continue, return, goto](parte-4-control-del-programa/070-control-de-flujo-break-continue-return-goto/README.md) |
+| ✅ 071 | [Manejo de errores I: excepciones (try/catch/finally)](parte-4-control-del-programa/071-manejo-de-errores-i-excepciones-try-catch-finally/README.md) |
+| ✅ 072 | [Manejo de errores II: resultados y valores (Result/Either/error de Go)](parte-4-control-del-programa/072-manejo-de-errores-ii-resultados-y-valores-result-either-error-de-go/README.md) |
 
 ## Parte 5 — Funciones y modularidad · clases 073–088
 

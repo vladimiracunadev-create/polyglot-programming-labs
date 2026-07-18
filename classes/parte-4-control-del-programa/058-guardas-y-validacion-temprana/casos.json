@@ -1,0 +1,19 @@
+{
+  "descripcion": "Clasificar una edad con validación temprana: negativa es inválida, menor de 18 es 'menor', y el resto 'adulto'.",
+  "contrato": "stdin: un entero `edad` → stdout: `invalido` si edad<0, `menor` si edad<18, `adulto` en otro caso",
+  "formula": "guardas: edad<0 → invalido; edad<18 → menor; si no → adulto",
+  "casos": [
+    {
+      "stdin": "-5",
+      "esperado": "invalido"
+    },
+    {
+      "stdin": "10",
+      "esperado": "menor"
+    },
+    {
+      "stdin": "20",
+      "esperado": "adulto"
+    }
+  ]
+}

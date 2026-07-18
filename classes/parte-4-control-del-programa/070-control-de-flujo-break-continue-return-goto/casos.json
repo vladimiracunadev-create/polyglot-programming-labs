@@ -1,0 +1,19 @@
+{
+  "descripcion": "Encontrar el menor divisor de n mayor que 1, deteniendo el bucle al encontrarlo (break).",
+  "contrato": "stdin: un entero `n` (n >= 2) → stdout: `primer_divisor=<el menor divisor > 1>`",
+  "formula": "el menor d en [2..n] tal que n % d == 0",
+  "casos": [
+    {
+      "stdin": "15",
+      "esperado": "primer_divisor=3"
+    },
+    {
+      "stdin": "7",
+      "esperado": "primer_divisor=7"
+    },
+    {
+      "stdin": "12",
+      "esperado": "primer_divisor=2"
+    }
+  ]
+}

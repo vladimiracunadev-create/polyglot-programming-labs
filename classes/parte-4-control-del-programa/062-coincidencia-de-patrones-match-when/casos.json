@@ -1,0 +1,19 @@
+{
+  "descripcion": "Clasificar el signo de un entero (positivo, negativo o cero) usando coincidencia de patrones.",
+  "contrato": "stdin: un entero `n` → stdout: `signo=<positivo|negativo|cero>`",
+  "formula": "n>0→positivo; n<0→negativo; n==0→cero",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "signo=positivo"
+    },
+    {
+      "stdin": "-3",
+      "esperado": "signo=negativo"
+    },
+    {
+      "stdin": "0",
+      "esperado": "signo=cero"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "descripcion": "Generar los primeros n números pares positivos (2, 4, 6, ...).",
+  "contrato": "stdin: un entero `n` (n >= 1) → stdout: `pares=<2-4-...-2n>`",
+  "formula": "pares_i = 2·i para i de 1 a n",
+  "casos": [
+    {
+      "stdin": "3",
+      "esperado": "pares=2-4-6"
+    },
+    {
+      "stdin": "1",
+      "esperado": "pares=2"
+    },
+    {
+      "stdin": "5",
+      "esperado": "pares=2-4-6-8-10"
+    }
+  ]
+}

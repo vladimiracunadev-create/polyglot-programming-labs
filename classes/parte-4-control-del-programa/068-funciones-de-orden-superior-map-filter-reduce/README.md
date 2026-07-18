@@ -1,20 +1,68 @@
 # Clase 068 — Funciones de orden superior: map, filter, reduce
 
-> Parte **4 — Control del programa** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **4 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **funciones de orden superior: map, filter, reduce**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Combinar las tres funciones de orden superior clásicas: **map** (transformar cada elemento), **filter** (seleccionar) y **reduce** (combinar en un valor). Aquí se usan map y reduce sobre una lista.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Transformar una colección con map.
+2. Combinar una colección con reduce.
+3. Encadenar operaciones de orden superior.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | map | Transformar cada elemento |
+| 2 | reduce | Combinar en un solo valor |
+| 3 | Funciones de orden superior | Reciben otra función |
+| 4 | Encadenar | map y luego reduce |
+
+## 📖 Definiciones y características
+
+- **map** — aplica una función a cada elemento y devuelve una colección nueva. Clave: transforma sin mutar.
+- **reduce** — combina todos los elementos en un valor (suma, producto). Clave: acumula.
+- **Función de orden superior** — recibe o devuelve otra función. Clave: base del estilo funcional.
+- **Encadenamiento** — conectar operaciones (map → reduce). Clave: pipeline de datos.
+
+## 🧩 Situación
+
+Calcular el total de una factura con IVA: `map` aplica el IVA a cada línea y `reduce` las suma. map/filter/reduce son el lenguaje común del procesamiento de datos.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea con enteros separados por espacio
+- **Salida** (stdout): `doblados=<cada x·2 unidos por -> total=<suma de los doblados>`
+- **Regla:** doblados = map(x→2x) ; total = reduce(+, doblados)
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `1 2 3` | `doblados=2-4-6 total=12` |
+| `5` | `doblados=10 total=10` |
+| `2 4` | `doblados=4-8 total=12` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER lista
+doblados <- MAP(x -> 2x, lista)
+total <- REDUCE(+, doblados)
+ESCRIBIR "doblados=" UNIR(doblados,"-") " total=" total
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +77,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | `map`/`sum` (Python) vs. `.map().reduce()` (JS) vs. `.iter().map().sum()` (Rust). |
+| Semántica | map/reduce no mutan la lista original; devuelven valores nuevos. |
+| Paradigmática | SQL hace el 'map' en el SELECT y el 'reduce' con SUM(). |
+
+## 🧬 El concepto en la familia
+
+En Ruby `lista.map { |x| x*2 }.sum`. En Haskell `sum (map (*2) xs)`, el origen de este estilo.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 068
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Mutar dentro del map** → causa: efectos secundarios inesperados → solución: usar map para transformar, sin cambiar estado externo
+- **Confundir map con for-each** → causa: map devuelve una colección; for-each no → solución: usar map cuando quieres el resultado transformado
+
+## ❓ Preguntas frecuentes
+
+- **¿reduce es lo mismo que un bucle de suma?** Sí en esencia; reduce lo expresa de forma declarativa y reutilizable.
+- **¿Y filter?** Selecciona elementos; aquí no se usó, pero completa el trío map/filter/reduce.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

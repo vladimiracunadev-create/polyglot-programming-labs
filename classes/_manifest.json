@@ -14,8 +14,8 @@
   "php"
  ],
  "total_planned": 176,
- "total_built": 56,
- "parts_built": 4,
+ "total_built": 72,
+ "parts_built": 5,
  "parts_planned": 12,
  "parts": [
   {
@@ -411,97 +411,97 @@
      "num": 57,
      "title": "Booleanos, condiciones y cortocircuito",
      "slug": "057-booleanos-condiciones-y-cortocircuito",
-     "built": false
+     "built": true
     },
     {
      "num": 58,
      "title": "Guardas y validación temprana",
      "slug": "058-guardas-y-validacion-temprana",
-     "built": false
+     "built": true
     },
     {
      "num": 59,
      "title": "if / else y anidamiento",
      "slug": "059-if-else-y-anidamiento",
-     "built": false
+     "built": true
     },
     {
      "num": 60,
      "title": "Expresiones condicionales: ternario e if como expresión",
      "slug": "060-expresiones-condicionales-ternario-e-if-como-expresion",
-     "built": false
+     "built": true
     },
     {
      "num": 61,
      "title": "switch, case y fallthrough",
      "slug": "061-switch-case-y-fallthrough",
-     "built": false
+     "built": true
     },
     {
      "num": 62,
      "title": "Coincidencia de patrones: match / when",
      "slug": "062-coincidencia-de-patrones-match-when",
-     "built": false
+     "built": true
     },
     {
      "num": 63,
      "title": "Iteración por condición: while y do-while",
      "slug": "063-iteracion-por-condicion-while-y-do-while",
-     "built": false
+     "built": true
     },
     {
      "num": 64,
      "title": "Iteración por rango: for clásico y for-range",
      "slug": "064-iteracion-por-rango-for-clasico-y-for-range",
-     "built": false
+     "built": true
     },
     {
      "num": 65,
      "title": "Iteración por colección: for-each e iteradores",
      "slug": "065-iteracion-por-coleccion-for-each-e-iteradores",
-     "built": false
+     "built": true
     },
     {
      "num": 66,
      "title": "Iteradores y generadores perezosos (lazy)",
      "slug": "066-iteradores-y-generadores-perezosos-lazy",
-     "built": false
+     "built": true
     },
     {
      "num": 67,
      "title": "Comprensiones de listas y colecciones",
      "slug": "067-comprensiones-de-listas-y-colecciones",
-     "built": false
+     "built": true
     },
     {
      "num": 68,
      "title": "Funciones de orden superior: map, filter, reduce",
      "slug": "068-funciones-de-orden-superior-map-filter-reduce",
-     "built": false
+     "built": true
     },
     {
      "num": 69,
      "title": "Recursión y recursión de cola",
      "slug": "069-recursion-y-recursion-de-cola",
-     "built": false
+     "built": true
     },
     {
      "num": 70,
      "title": "Control de flujo: break, continue, return, goto",
      "slug": "070-control-de-flujo-break-continue-return-goto",
-     "built": false
+     "built": true
     },
     {
      "num": 71,
      "title": "Manejo de errores I: excepciones (try/catch/finally)",
      "slug": "071-manejo-de-errores-i-excepciones-try-catch-finally",
-     "built": false
+     "built": true
     },
     {
      "num": 72,
      "title": "Manejo de errores II: resultados y valores (Result/Either/error de Go)",
      "slug": "072-manejo-de-errores-ii-resultados-y-valores-result-either-error-de-go",
-     "built": false
+     "built": true
     }
    ]
   },

@@ -1,0 +1,19 @@
+{
+  "descripcion": "Calcular el factorial de n (n!) con un bucle for.",
+  "contrato": "stdin: un entero `n` (0 <= n <= 20) → stdout: `factorial=<n!>`",
+  "formula": "n! = 1·2·…·n ; 0! = 1",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "factorial=120"
+    },
+    {
+      "stdin": "1",
+      "esperado": "factorial=1"
+    },
+    {
+      "stdin": "0",
+      "esperado": "factorial=1"
+    }
+  ]
+}

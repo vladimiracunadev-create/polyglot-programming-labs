@@ -12,7 +12,7 @@ Leyenda: ✅ construida · 🏗️ en progreso · 🚧 planificada.
 | 1 | Atlas y genealogía de los lenguajes | 14 | ✅ construida (015–028) |
 | 2 | Herramientas, toolchains y anatomía de comandos | 12 | ✅ construida (029–040) |
 | 3 | Valores, tipos y variables | 16 | ✅ construida (041–056) |
-| 4 | Control del programa | 16 | 🚧 planificada |
+| 4 | Control del programa | 16 | ✅ construida (057–072) |
 | 5 | Funciones y modularidad | 16 | 🚧 planificada |
 | 6 | Datos y estructuras | 18 | 🚧 planificada |
 | 7 | Paradigmas | 16 | 🚧 planificada |

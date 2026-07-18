@@ -1,0 +1,19 @@
+{
+  "descripcion": "Sumar todos los enteros de una lista recibida por la entrada.",
+  "contrato": "stdin: una línea con enteros separados por espacio → stdout: `suma=<suma de todos>`",
+  "formula": "suma = Σ elementos",
+  "casos": [
+    {
+      "stdin": "3 1 4",
+      "esperado": "suma=8"
+    },
+    {
+      "stdin": "10 20 30",
+      "esperado": "suma=60"
+    },
+    {
+      "stdin": "5",
+      "esperado": "suma=5"
+    }
+  ]
+}

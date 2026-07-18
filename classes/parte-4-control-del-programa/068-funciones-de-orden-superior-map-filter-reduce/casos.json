@@ -1,0 +1,19 @@
+{
+  "descripcion": "De una lista de enteros, duplicar cada uno (map) y sumar los resultados (reduce).",
+  "contrato": "stdin: una línea con enteros separados por espacio → stdout: `doblados=<cada x·2 unidos por -> total=<suma de los doblados>`",
+  "formula": "doblados = map(x→2x) ; total = reduce(+, doblados)",
+  "casos": [
+    {
+      "stdin": "1 2 3",
+      "esperado": "doblados=2-4-6 total=12"
+    },
+    {
+      "stdin": "5",
+      "esperado": "doblados=10 total=10"
+    },
+    {
+      "stdin": "2 4",
+      "esperado": "doblados=4-8 total=12"
+    }
+  ]
+}

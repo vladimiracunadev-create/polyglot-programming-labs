@@ -1,0 +1,19 @@
+{
+  "descripcion": "Calcular el cuadrado de un número, como si se ejecutara en un módulo WebAssembly.",
+  "contrato": "stdin: un entero `n` → stdout: `resultado=<n²>`",
+  "formula": "calcular n al cuadrado (como en un módulo Wasm)",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "resultado=25"
+    },
+    {
+      "stdin": "0",
+      "esperado": "resultado=0"
+    },
+    {
+      "stdin": "7",
+      "esperado": "resultado=49"
+    }
+  ]
+}

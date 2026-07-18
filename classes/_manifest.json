@@ -14,8 +14,8 @@
   "php"
  ],
  "total_planned": 176,
- "total_built": 154,
- "parts_built": 10,
+ "total_built": 164,
+ "parts_built": 11,
  "parts_planned": 12,
  "parts": [
   {
@@ -1065,61 +1065,61 @@
      "num": 155,
      "title": "Por qué los sistemas reales son políglotas",
      "slug": "155-por-que-los-sistemas-reales-son-poliglotas",
-     "built": false
+     "built": true
     },
     {
      "num": 156,
      "title": "La FFI (Foreign Function Interface): llamar a C desde todos",
      "slug": "156-la-ffi-foreign-function-interface-llamar-a-c-desde-todos",
-     "built": false
+     "built": true
     },
     {
      "num": 157,
      "title": "ABI, enlace y convenciones de llamada",
      "slug": "157-abi-enlace-y-convenciones-de-llamada",
-     "built": false
+     "built": true
     },
     {
      "num": 158,
      "title": "Enlaces (bindings) y wrappers",
      "slug": "158-enlaces-bindings-y-wrappers",
-     "built": false
+     "built": true
     },
     {
      "num": 159,
      "title": "Serialización entre lenguajes: JSON, Protobuf, MessagePack",
      "slug": "159-serializacion-entre-lenguajes-json-protobuf-messagepack",
-     "built": false
+     "built": true
     },
     {
      "num": 160,
      "title": "Contratos de API: REST, gRPC y esquemas",
      "slug": "160-contratos-de-api-rest-grpc-y-esquemas",
-     "built": false
+     "built": true
     },
     {
      "num": 161,
      "title": "Procesos y comunicación: stdin/stdout, sockets, colas",
      "slug": "161-procesos-y-comunicacion-stdin-stdout-sockets-colas",
-     "built": false
+     "built": true
     },
     {
      "num": 162,
      "title": "WebAssembly como objetivo común",
      "slug": "162-webassembly-como-objetivo-comun",
-     "built": false
+     "built": true
     },
     {
      "num": 163,
      "title": "Incrustar un lenguaje en otro (Lua, Python embebido)",
      "slug": "163-incrustar-un-lenguaje-en-otro-lua-python-embebido",
-     "built": false
+     "built": true
     },
     {
      "num": 164,
      "title": "Elegir el lenguaje correcto para cada componente",
      "slug": "164-elegir-el-lenguaje-correcto-para-cada-componente",
-     "built": false
+     "built": true
     }
    ]
   },

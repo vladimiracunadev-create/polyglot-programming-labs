@@ -1,20 +1,63 @@
 # Clase 162 — WebAssembly como objetivo común
 
-> Parte **10 — Interoperabilidad y fronteras entre lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Avanzado**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **10 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **webassembly como objetivo común**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Entender **WebAssembly (Wasm)** como objetivo común: un formato binario portable al que compilan muchos lenguajes (Rust, C, Go) y que corre en el navegador o en runtimes. Es un 'punto de encuentro' entre lenguajes.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Explicar qué es WebAssembly.
+2. Reconocer qué lenguajes compilan a Wasm.
+3. Ver Wasm como objetivo común.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | WebAssembly | Binario portable y rápido |
+| 2 | Objetivo de compilación | Muchos lenguajes compilan a Wasm |
+| 3 | Runtime | Navegador o fuera de él (WASI) |
+
+## 📖 Definiciones y características
+
+- **WebAssembly** — formato binario portable y eficiente, objetivo de compilación de varios lenguajes. Clave: corre en el navegador y en runtimes.
+- **Objetivo (target)** — el formato al que compila un lenguaje. Clave: Rust, C, Go pueden apuntar a Wasm.
+- **WASI** — interfaz de sistema para Wasm fuera del navegador. Clave: Wasm del lado servidor.
+
+## 🧩 Situación
+
+Un módulo de cálculo escrito en Rust se compila a Wasm y corre en el navegador junto a JavaScript, o en un runtime del servidor. Wasm es el objetivo común que deja a varios lenguajes convivir.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): un entero `n`
+- **Salida** (stdout): `resultado=<n²>`
+- **Regla:** calcular n al cuadrado (como en un módulo Wasm)
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `5` | `resultado=25` |
+| `0` | `resultado=0` |
+| `7` | `resultado=49` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER n ; ESCRIBIR n*n
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | El cálculo es idéntico; lo distinto es el objetivo de compilación. |
+| Semántica | Wasm ejecuta el mismo cálculo de forma portable y rápida. |
+| Paradigmática | SQL corre en su propio motor, no en Wasm. |
+
+## 🧬 El concepto en la familia
+
+Rust, C/C++, Go, C# (Blazor) compilan a WebAssembly; runtimes como Wasmtime lo ejecutan.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 162
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Esperar acceso directo al sistema en Wasm del navegador** → causa: el sandbox lo limita → solución: usar las APIs disponibles (o WASI en servidor)
+- **Módulos Wasm enormes** → causa: carga lenta → solución: optimizar el tamaño del binario
+
+## ❓ Preguntas frecuentes
+
+- **¿Wasm reemplaza a JavaScript?** No: lo complementa para cargas de cómputo intensivo.
+- **¿Wasm solo en el navegador?** No: con WASI también en el servidor y en la nube.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

@@ -1,0 +1,19 @@
+{
+  "descripcion": "Evaluar un script incrustado que suma dos números (lenguaje embebido en otro).",
+  "contrato": "stdin: una línea `a b` (los datos que el anfitrión pasa al script) → stdout: `resultado=<a+b>` (lo que el script calcula)",
+  "formula": "el script embebido evalúa a + b",
+  "casos": [
+    {
+      "stdin": "3 4",
+      "esperado": "resultado=7"
+    },
+    {
+      "stdin": "10 5",
+      "esperado": "resultado=15"
+    },
+    {
+      "stdin": "0 0",
+      "esperado": "resultado=0"
+    }
+  ]
+}

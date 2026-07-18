@@ -1,0 +1,19 @@
+{
+  "descripcion": "Recibir una lista de números por una cola (FIFO) y sumarlos, como comunicación entre procesos.",
+  "contrato": "stdin: una línea con enteros separados por espacio (mensajes en la cola) → stdout: `recibido=<suma de los mensajes>`",
+  "formula": "sumar los mensajes recibidos en orden",
+  "casos": [
+    {
+      "stdin": "1 2 3",
+      "esperado": "recibido=6"
+    },
+    {
+      "stdin": "5",
+      "esperado": "recibido=5"
+    },
+    {
+      "stdin": "10 20 30 40",
+      "esperado": "recibido=100"
+    }
+  ]
+}

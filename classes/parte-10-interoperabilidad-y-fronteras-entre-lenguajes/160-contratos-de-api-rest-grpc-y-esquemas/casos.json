@@ -1,0 +1,19 @@
+{
+  "descripcion": "Construir un contrato de API a partir de un método HTTP y un recurso.",
+  "contrato": "stdin: una línea `metodo recurso` → stdout: `contrato=<METODO> /<recurso>`",
+  "formula": "combinar método y recurso en un endpoint",
+  "casos": [
+    {
+      "stdin": "GET users",
+      "esperado": "contrato=GET /users"
+    },
+    {
+      "stdin": "POST items",
+      "esperado": "contrato=POST /items"
+    },
+    {
+      "stdin": "PUT data",
+      "esperado": "contrato=PUT /data"
+    }
+  ]
+}

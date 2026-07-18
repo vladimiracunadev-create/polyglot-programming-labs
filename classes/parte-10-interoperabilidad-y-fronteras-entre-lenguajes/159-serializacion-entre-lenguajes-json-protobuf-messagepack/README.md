@@ -1,20 +1,63 @@
 # Clase 159 — Serialización entre lenguajes: JSON, Protobuf, MessagePack
 
-> Parte **10 — Interoperabilidad y fronteras entre lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Avanzado**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **10 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **serialización entre lenguajes: json, protobuf, messagepack**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Entender la **serialización entre lenguajes** (JSON, Protobuf, MessagePack): convertir datos a un formato común para que un componente en un lenguaje los envíe y otro en otro lenguaje los reciba. Aquí se serializa un par a texto.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Serializar un dato a un formato de intercambio.
+2. Explicar por qué se necesita un formato común.
+3. Reconocer JSON/Protobuf/MessagePack.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Serialización | De datos a formato de intercambio |
+| 2 | Formato común | Entendido por todos |
+| 3 | Esquema | Estructura acordada |
+
+## 📖 Definiciones y características
+
+- **Serialización** — convertir datos en un formato transmisible (texto o binario). Clave: cruzar la frontera de lenguaje.
+- **Formato de intercambio** — representación común (JSON, Protobuf). Clave: independiente del lenguaje.
+- **Esquema** — estructura acordada de los datos. Clave: emisor y receptor lo comparten.
+
+## 🧩 Situación
+
+Un servicio en Go envía datos a uno en Python: los serializa (a JSON o Protobuf), viajan como bytes y el otro los deserializa. El formato común es lo que permite el diálogo entre lenguajes.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea `clave valor`
+- **Salida** (stdout): `serializado=<clave>:<valor>`
+- **Regla:** unir clave y valor con ':'
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `x 5` | `serializado=x:5` |
+| `edad 30` | `serializado=edad:30` |
+| `n 100` | `serializado=n:100` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER clave, valor ; ESCRIBIR clave:valor
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | Concatenación (aquí); librerías JSON/Protobuf en la práctica. |
+| Semántica | El formato debe interpretarse igual en ambos lados. |
+| Paradigmática | SQL exporta a JSON con funciones del motor. |
+
+## 🧬 El concepto en la familia
+
+JSON (texto, universal), Protobuf/MessagePack (binarios, compactos y con esquema) son los formatos habituales.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 159
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Formato ambiguo sin esquema** → causa: el receptor no sabe interpretar → solución: acordar un esquema o formato estándar
+- **Diferencias de codificación** → causa: acentos/emoji corruptos → solución: usar UTF-8 y formatos bien definidos
+
+## ❓ Preguntas frecuentes
+
+- **¿JSON o Protobuf?** JSON es legible y universal; Protobuf es compacto y tipado. Según el caso.
+- **¿Serializar y deserializar son inversos?** Sí: uno convierte a formato, el otro reconstruye el dato.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

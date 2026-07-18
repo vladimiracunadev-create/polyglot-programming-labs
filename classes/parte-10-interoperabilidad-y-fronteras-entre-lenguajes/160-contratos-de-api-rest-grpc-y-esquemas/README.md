@@ -1,20 +1,63 @@
 # Clase 160 — Contratos de API: REST, gRPC y esquemas
 
-> Parte **10 — Interoperabilidad y fronteras entre lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Avanzado**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **10 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **contratos de api: rest, grpc y esquemas**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Entender los **contratos de API (REST, gRPC)**: la frontera entre servicios se define con un contrato (qué operaciones, qué datos). Un endpoint REST combina un método (GET, POST) con un recurso (/users).
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Construir un endpoint a partir de método y recurso.
+2. Explicar qué es un contrato de API.
+3. Distinguir REST de gRPC.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Contrato de API | El acuerdo entre servicios |
+| 2 | REST | Recursos y métodos HTTP |
+| 3 | gRPC | Contratos con esquema (Protobuf) |
+
+## 📖 Definiciones y características
+
+- **Contrato de API** — acuerdo de qué operaciones y datos expone un servicio. Clave: frontera estable entre componentes.
+- **REST** — estilo basado en recursos y métodos HTTP (GET, POST, PUT). Clave: simple y universal.
+- **gRPC** — framework de RPC con contratos definidos en Protobuf. Clave: eficiente y tipado.
+
+## 🧩 Situación
+
+El frontend habla con el backend a través de una API: `GET /users` pide los usuarios. El contrato define esos endpoints; mientras se respete, cada lado puede evolucionar por separado.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea `metodo recurso`
+- **Salida** (stdout): `contrato=<METODO> /<recurso>`
+- **Regla:** combinar método y recurso en un endpoint
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `GET users` | `contrato=GET /users` |
+| `POST items` | `contrato=POST /items` |
+| `PUT data` | `contrato=PUT /data` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER metodo, recurso ; ESCRIBIR metodo + ' /' + recurso
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | Concatenación en cada lenguaje. |
+| Semántica | El contrato desacopla cliente y servidor. |
+| Paradigmática | SQL expone datos vía vistas/procedimientos. |
+
+## 🧬 El concepto en la familia
+
+REST (HTTP), gRPC (Protobuf), GraphQL son estilos de contrato entre servicios.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 160
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Cambiar el contrato sin versionar** → causa: romper a los clientes → solución: versionar la API y evolucionar con compatibilidad
+- **Endpoints ambiguos** → causa: confusión y errores → solución: seguir convenciones REST claras
+
+## ❓ Preguntas frecuentes
+
+- **¿REST o gRPC?** REST para APIs públicas y simples; gRPC para comunicación interna eficiente y tipada.
+- **¿Qué es un endpoint?** Un punto de acceso: método + ruta que ofrece una operación.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

@@ -1,0 +1,19 @@
+{
+  "descripcion": "Llamar, a través de una FFI, a una función que duplica un número (como si viviera en C).",
+  "contrato": "stdin: un entero `n` → stdout: `resultado=<2n>`",
+  "formula": "llamar a doble(n) 'externo'",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "resultado=10"
+    },
+    {
+      "stdin": "0",
+      "esperado": "resultado=0"
+    },
+    {
+      "stdin": "7",
+      "esperado": "resultado=14"
+    }
+  ]
+}

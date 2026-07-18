@@ -1,0 +1,19 @@
+{
+  "descripcion": "Determinar si dos componentes son compatibles a nivel de ABI comparando su ancho de bits.",
+  "contrato": "stdin: una línea `a b` (ancho de bits de cada componente) → stdout: `abi=<compatible|incompatible>`",
+  "formula": "compatible si los anchos coinciden",
+  "casos": [
+    {
+      "stdin": "64 64",
+      "esperado": "abi=compatible"
+    },
+    {
+      "stdin": "64 32",
+      "esperado": "abi=incompatible"
+    },
+    {
+      "stdin": "32 32",
+      "esperado": "abi=compatible"
+    }
+  ]
+}

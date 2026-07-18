@@ -1,20 +1,63 @@
 # Clase 163 — Incrustar un lenguaje en otro (Lua, Python embebido)
 
-> Parte **10 — Interoperabilidad y fronteras entre lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Avanzado**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **10 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **incrustar un lenguaje en otro (lua, python embebido)**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Entender el **incrustar un lenguaje en otro**: motores como Lua o Python se embeben en aplicaciones para permitir scripting sin recompilar. El anfitrión pasa datos al script, este los procesa y devuelve un resultado.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Evaluar un script embebido.
+2. Explicar el uso de lenguajes de scripting embebidos.
+3. Reconocer casos (juegos, plugins).
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Lenguaje embebido | Un intérprete dentro de la app |
+| 2 | Anfitrión y script | Quién ejecuta a quién |
+| 3 | Extensibilidad | Cambiar comportamiento sin recompilar |
+
+## 📖 Definiciones y características
+
+- **Lenguaje embebido** — intérprete integrado en una aplicación anfitriona (Lua, Python). Clave: scripting sin recompilar.
+- **Anfitrión** — la aplicación que hospeda el intérprete. Clave: expone datos y funciones al script.
+- **Script embebido** — código interpretado que corre dentro del anfitrión. Clave: extiende la app.
+
+## 🧩 Situación
+
+Muchos juegos embeben Lua para su lógica; editores embeben Python para plugins. El anfitrión pasa datos al script y recibe el resultado, permitiendo modificar el comportamiento sin recompilar.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea `a b` (los datos que el anfitrión pasa al script)
+- **Salida** (stdout): `resultado=<a+b>` (lo que el script calcula)
+- **Regla:** el script embebido evalúa a + b
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `3 4` | `resultado=7` |
+| `10 5` | `resultado=15` |
+| `0 0` | `resultado=0` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+anfitrión pasa a, b ; el script suma ; devuelve el resultado
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | El anfitrión invoca al intérprete embebido; aquí se simula la evaluación. |
+| Semántica | El script corre en el runtime del lenguaje embebido. |
+| Paradigmática | SQL se embebe en apps vía librerías cliente. |
+
+## 🧬 El concepto en la familia
+
+Lua (juegos, Redis, Nginx), Python (Blender, editores), JavaScript (motores V8 embebidos) son los referentes.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 163
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Exponer demasiado al script** → causa: riesgo de seguridad → solución: limitar lo que el script puede tocar (sandbox)
+- **No validar la salida del script** → causa: datos inesperados → solución: comprobar lo que devuelve el script
+
+## ❓ Preguntas frecuentes
+
+- **¿Por qué embeber un lenguaje?** Para permitir personalización y plugins sin recompilar la app.
+- **¿Lua o Python?** Lua es minúsculo y rápido de embeber; Python, más potente y con más librerías.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

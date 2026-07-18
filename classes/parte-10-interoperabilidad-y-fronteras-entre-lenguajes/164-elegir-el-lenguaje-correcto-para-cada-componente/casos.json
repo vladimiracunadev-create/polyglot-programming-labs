@@ -1,0 +1,19 @@
+{
+  "descripcion": "Recomendar el lenguaje del núcleo más adecuado para un tipo de componente.",
+  "contrato": "stdin: una palabra: `sistemas`, `web` o `datos` → stdout: `lenguaje=<Rust|TypeScript|SQL>`",
+  "formula": "sistemas→Rust, web→TypeScript, datos→SQL",
+  "casos": [
+    {
+      "stdin": "sistemas",
+      "esperado": "lenguaje=Rust"
+    },
+    {
+      "stdin": "web",
+      "esperado": "lenguaje=TypeScript"
+    },
+    {
+      "stdin": "datos",
+      "esperado": "lenguaje=SQL"
+    }
+  ]
+}

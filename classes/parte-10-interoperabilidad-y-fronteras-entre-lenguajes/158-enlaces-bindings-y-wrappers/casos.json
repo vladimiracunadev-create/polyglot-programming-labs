@@ -1,0 +1,19 @@
+{
+  "descripcion": "Envolver una función nativa con un wrapper que adapta su resultado (doble, envuelto en 'wrap(...)').",
+  "contrato": "stdin: un entero `n` → stdout: `envuelto=wrap(<2n>)`",
+  "formula": "wrapper que aplica doble y formatea",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "envuelto=wrap(10)"
+    },
+    {
+      "stdin": "0",
+      "esperado": "envuelto=wrap(0)"
+    },
+    {
+      "stdin": "7",
+      "esperado": "envuelto=wrap(14)"
+    }
+  ]
+}

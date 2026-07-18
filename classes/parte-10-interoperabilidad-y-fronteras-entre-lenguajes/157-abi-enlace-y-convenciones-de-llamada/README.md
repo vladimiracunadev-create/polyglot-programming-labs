@@ -1,20 +1,63 @@
 # Clase 157 — ABI, enlace y convenciones de llamada
 
-> Parte **10 — Interoperabilidad y fronteras entre lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Avanzado**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **10 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **abi, enlace y convenciones de llamada**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Entender el **ABI, el enlace y las convenciones de llamada**: para que dos piezas binarias se comuniquen, deben compartir la misma ABI (cómo se pasan los datos y se llaman las funciones). Un desajuste (p. ej. 32 vs 64 bits) rompe la interoperabilidad.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Explicar qué es la ABI.
+2. Detectar una incompatibilidad de ABI.
+3. Distinguir ABI de API.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | ABI | Contrato binario |
+| 2 | Convención de llamada | Cómo se pasan los argumentos |
+| 3 | Compatibilidad | Mismo ABI para enlazar |
+
+## 📖 Definiciones y características
+
+- **ABI** — Application Binary Interface: cómo se representan datos y se llaman funciones a nivel binario. Clave: debe coincidir para enlazar.
+- **Convención de llamada** — reglas de paso de argumentos y retorno. Clave: parte de la ABI.
+- **API vs. ABI** — API es el contrato en código fuente; ABI, el binario. Clave: distinto nivel.
+
+## 🧩 Situación
+
+Enlazar una librería de 32 bits con un programa de 64 bits falla: sus ABI no coinciden. La ABI es el contrato invisible que hace posible (o imposible) que dos binarios cooperen.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea `a b` (ancho de bits de cada componente)
+- **Salida** (stdout): `abi=<compatible|incompatible>`
+- **Regla:** compatible si los anchos coinciden
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `64 64` | `abi=compatible` |
+| `64 32` | `abi=incompatible` |
+| `32 32` | `abi=compatible` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER a, b ; compatible <- (a == b)
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | Comparación de enteros en cada lenguaje. |
+| Semántica | La ABI incluye tamaños, alineación y convención de llamada. |
+| Paradigmática | SQL compara valores. |
+
+## 🧬 El concepto en la familia
+
+Cada plataforma (x86-64 System V, Windows x64) define su ABI; los binarios deben respetarla para enlazar.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 157
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Mezclar binarios de distinta arquitectura** → causa: fallo de enlace o corrupción → solución: compilar todo para la misma ABI
+- **Confundir API con ABI** → causa: esperar compatibilidad binaria del código fuente → solución: recordar que son contratos de distinto nivel
+
+## ❓ Preguntas frecuentes
+
+- **¿API o ABI?** API es el contrato fuente; ABI, el binario. Un cambio de ABI rompe binarios ya compilados.
+- **¿Por qué importa la ABI?** Para enlazar librerías compiladas y usar la FFI sin corromper datos.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

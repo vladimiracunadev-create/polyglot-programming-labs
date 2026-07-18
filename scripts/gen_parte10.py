@@ -1,0 +1,342 @@
+"""Parte 10 — Interoperabilidad y fronteras entre lenguajes (clases 155-164)."""
+
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import gen_parte3 as g3  # noqa: E402
+
+S = {}
+
+
+def _common(num, titulo_area, objetivo, resultados, temas, defs, situacion, entrada, salida,
+            formula, algoritmo, casos, comparacion, familia, errores, faq, reto, impls, descripcion):
+    S[num] = {
+        "descripcion": descripcion, "objetivo": objetivo, "resultados": resultados, "temas": temas,
+        "definiciones": defs, "situacion": situacion, "entrada": entrada, "salida": salida,
+        "formula": formula, "algoritmo": algoritmo, "casos": casos, "comparacion": comparacion,
+        "familia": familia, "errores": errores, "faq": faq, "reto": reto, "impls": impls,
+    }
+
+
+S[155] = {
+    "descripcion": "Contar cuántos componentes (en distintos lenguajes) tiene un sistema políglota.",
+    "objetivo": "Entender **por qué los sistemas reales son políglotas**: cada componente usa el lenguaje que mejor le sirve. Contar los componentes es la medida básica de un sistema hecho de piezas heterogéneas.",
+    "resultados": ["Contar los componentes de un sistema.", "Explicar por qué se combinan lenguajes.", "Reconocer sistemas políglotas."],
+    "temas": [("Sistema políglota", "Varios lenguajes, un sistema"), ("Componente", "Una pieza con su lenguaje"), ("Elegir por tarea", "El mejor lenguaje para cada parte")],
+    "definiciones": [("Sistema políglota", "software compuesto por partes en distintos lenguajes. Clave: es lo normal en producción."), ("Componente", "pieza con una responsabilidad y su propio lenguaje. Clave: se integra con las demás."), ("Frontera", "el punto donde dos componentes se comunican. Clave: necesita un contrato claro.")],
+    "situacion": "Un producto real puede tener el frontend en TypeScript, el backend en Go, el núcleo numérico en Rust y los datos en SQL. Contar los componentes empieza a describir esa realidad políglota.",
+    "entrada": "una línea con nombres de componentes (palabras)",
+    "salida": "`componentes=<cantidad>`",
+    "formula": "contar los componentes",
+    "algoritmo": "LEER componentes ; ESCRIBIR cantidad",
+    "casos": [("cli api web", "componentes=3"), ("app", "componentes=1"), ("web api datos cache", "componentes=4")],
+    "comparacion": [("Sintáctica", "Contar palabras en cada lenguaje."), ("Semántica", "Cada componente puede estar en otro lenguaje."), ("Paradigmática", "SQL cuenta filas.")],
+    "familia": "Casi todo sistema grande es políglota: se elige el lenguaje por componente.",
+    "errores": [("Un solo lenguaje para todo por dogma", "usar la herramienta equivocada", "elegir por la tarea de cada componente"), ("Fronteras sin contrato", "integraciones frágiles", "definir contratos claros entre componentes")],
+    "faq": [("¿Por qué no un solo lenguaje?", "Cada uno destaca en cosas distintas; combinarlos aprovecha lo mejor de cada uno."), ("¿No complica el mantenimiento?", "Algo, pero contratos claros lo controlan; la ventaja suele compensar.")],
+    "reto": "Marca si el componente 'datos' está presente y resuélvelo en **Python**.",
+    "impls": {
+        "python": "import sys\n\ncomps = sys.stdin.read().split()\nprint(f\"componentes={len(comps)}\")\n",
+        "javascript": "import { readFileSync } from \"node:fs\";\n\nconst comps = readFileSync(0, \"utf8\").trim().split(/\\s+/);\nconsole.log(`componentes=${comps.length}`);\n",
+        "typescript": "import { readFileSync } from \"node:fs\";\n\nconst comps: string[] = readFileSync(0, \"utf8\").trim().split(/\\s+/);\nconsole.log(`componentes=${comps.length}`);\n",
+        "java": "import java.io.BufferedReader;\nimport java.io.IOException;\nimport java.io.InputStreamReader;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String[] comps = br.readLine().trim().split(\"\\\\s+\");\n        System.out.println(\"componentes=\" + comps.length);\n    }\n}\n",
+        "csharp": "using System;\n\nstring[] comps = Console.In.ReadToEnd()\n    .Split(new[] { ' ', '\\t', '\\n', '\\r' }, StringSplitOptions.RemoveEmptyEntries);\nConsole.WriteLine($\"componentes={comps.Length}\");\n",
+        "go": "package main\n\nimport (\n\t\"bufio\"\n\t\"fmt\"\n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tline, _ := bufio.NewReader(os.Stdin).ReadString('\\n')\n\tcomps := strings.Fields(line)\n\tfmt.Printf(\"componentes=%d\\n\", len(comps))\n}\n",
+        "rust": "use std::io::Read;\n\nfn main() {\n    let mut s = String::new();\n    std::io::stdin().read_to_string(&mut s).unwrap();\n    println!(\"componentes={}\", s.split_whitespace().count());\n}\n",
+        "c": "#include <stdio.h>\n\nint main(void) {\n    char t[256];\n    int c = 0;\n    while (scanf(\"%255s\", t) == 1) c++;\n    printf(\"componentes=%d\\n\", c);\n    return 0;\n}\n",
+        "php": "<?php\n$comps = preg_split('/\\s+/', trim(fgets(STDIN)));\necho \"componentes=\" . count($comps) . \"\\n\";\n",
+        "sql": "-- SQL cuenta las filas (componentes).\nWITH comps(nombre) AS (VALUES ('cli'), ('api'), ('web'))\nSELECT printf('componentes=%d', count(*)) AS resultado FROM comps;\n",
+    },
+}
+
+S[156] = {
+    "descripcion": "Llamar, a través de una FFI, a una función que duplica un número (como si viviera en C).",
+    "objetivo": "Entender la **FFI (Foreign Function Interface)**: el mecanismo para llamar a código escrito en otro lenguaje, típicamente C. Casi todos los lenguajes pueden llamar a C, lo que hace de C el 'idioma común' entre lenguajes.",
+    "resultados": ["Explicar qué es la FFI.", "Reconocer por qué C es el puente universal.", "Llamar a una función 'externa'."],
+    "temas": [("FFI", "Llamar a otro lenguaje"), ("C como puente", "Casi todos llaman a C"), ("Enlace", "Unir con la librería externa")],
+    "definiciones": [("FFI", "interfaz para llamar a funciones de otro lenguaje. Clave: reutilizar librerías nativas."), ("Función externa", "definida en otro lenguaje (C) y llamada desde el tuyo. Clave: se declara su firma."), ("C como lingua franca", "casi todos los lenguajes exponen una FFI hacia C. Clave: puente universal.")],
+    "situacion": "Python usa librerías numéricas en C, Ruby extensiones en C, la JVM llama a C con JNI. La FFI hacia C conecta ecosistemas; por eso duplicar un número 'en C' se puede invocar desde cualquier lenguaje.",
+    "entrada": "un entero `n`",
+    "salida": "`resultado=<2n>`",
+    "formula": "llamar a doble(n) 'externo'",
+    "algoritmo": "declarar doble (externa) ; ESCRIBIR doble(n)",
+    "casos": [("5", "resultado=10"), ("0", "resultado=0"), ("7", "resultado=14")],
+    "comparacion": [("Sintáctica", "ctypes/cffi (Python), extern (Rust/C), JNI (Java)."), ("Semántica", "La FFI cruza la frontera de lenguaje con una convención de llamada."), ("Paradigmática", "SQL llama a funciones definidas por el usuario.")],
+    "familia": "ctypes (Python), extern \"C\" (Rust/C++), JNI (Java), cgo (Go): todos hacia C.",
+    "errores": [("Firmas incompatibles en la FFI", "corrupción o caídas", "declarar exactamente los tipos que espera C"), ("Ignorar la gestión de memoria a través de la frontera", "fugas o dobles liberaciones", "acordar quién libera qué")],
+    "faq": [("¿Por qué C?", "Su ABI simple y estable lo hace el mínimo común denominador."), ("¿Toda FFI es hacia C?", "Mayormente; también hay puentes directos entre algunos lenguajes.")],
+    "reto": "Llama a una función externa con dos argumentos y resuélvelo en **Rust** con `extern`.",
+    "impls": {
+        "python": "import sys\n\n\ndef doble(x):  # simula una función externa (FFI hacia C)\n    return x * 2\n\n\nn = int(sys.stdin.readline())\nprint(f\"resultado={doble(n)}\")\n",
+        "javascript": "import { readFileSync } from \"node:fs\";\n\nconst doble = (x) => x * 2; // función 'externa' vía FFI\nconst n = parseInt(readFileSync(0, \"utf8\").trim(), 10);\nconsole.log(`resultado=${doble(n)}`);\n",
+        "typescript": "import { readFileSync } from \"node:fs\";\n\nconst doble = (x: number): number => x * 2;\nconst n: number = parseInt(readFileSync(0, \"utf8\").trim(), 10);\nconsole.log(`resultado=${doble(n)}`);\n",
+        "java": "import java.io.BufferedReader;\nimport java.io.IOException;\nimport java.io.InputStreamReader;\n\npublic class Main {\n    static long doble(long x) { return x * 2; } // simula JNI hacia C\n\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        long n = Long.parseLong(br.readLine().trim());\n        System.out.println(\"resultado=\" + doble(n));\n    }\n}\n",
+        "csharp": "using System;\n\nlong Doble(long x) => x * 2; // simula P/Invoke hacia C\n\nlong n = long.Parse(Console.In.ReadToEnd().Trim());\nConsole.WriteLine($\"resultado={Doble(n)}\");\n",
+        "go": "package main\n\nimport (\n\t\"bufio\"\n\t\"fmt\"\n\t\"os\"\n\t\"strconv\"\n\t\"strings\"\n)\n\nfunc doble(x int64) int64 { return x * 2 } // simula cgo hacia C\n\nfunc main() {\n\tline, _ := bufio.NewReader(os.Stdin).ReadString('\\n')\n\tn, _ := strconv.ParseInt(strings.TrimSpace(line), 10, 64)\n\tfmt.Printf(\"resultado=%d\\n\", doble(n))\n}\n",
+        "rust": "use std::io::Read;\n\nfn doble(x: i64) -> i64 {\n    x * 2 // en un caso real, una funcion externa con extern \"C\"\n}\n\nfn main() {\n    let mut s = String::new();\n    std::io::stdin().read_to_string(&mut s).unwrap();\n    let n: i64 = s.trim().parse().unwrap();\n    println!(\"resultado={}\", doble(n));\n}\n",
+        "c": "#include <stdio.h>\n\nlong doble(long x) { return x * 2; } /* la funcion nativa en C */\n\nint main(void) {\n    long n;\n    if (scanf(\"%ld\", &n) != 1) return 1;\n    printf(\"resultado=%ld\\n\", doble(n));\n    return 0;\n}\n",
+        "php": "<?php\nfunction doble($x) { return $x * 2; } // simula una extension en C\n\n$n = (int) trim(fgets(STDIN));\necho \"resultado=\" . doble($n) . \"\\n\";\n",
+        "sql": "-- SQL llama a funciones definidas por el usuario; aqui, la expresion.\nWITH nums(n) AS (VALUES (5), (0), (7))\nSELECT printf('resultado=%d', n * 2) AS resultado FROM nums;\n",
+    },
+}
+
+S[157] = {
+    "descripcion": "Determinar si dos componentes son compatibles a nivel de ABI comparando su ancho de bits.",
+    "objetivo": "Entender el **ABI, el enlace y las convenciones de llamada**: para que dos piezas binarias se comuniquen, deben compartir la misma ABI (cómo se pasan los datos y se llaman las funciones). Un desajuste (p. ej. 32 vs 64 bits) rompe la interoperabilidad.",
+    "resultados": ["Explicar qué es la ABI.", "Detectar una incompatibilidad de ABI.", "Distinguir ABI de API."],
+    "temas": [("ABI", "Contrato binario"), ("Convención de llamada", "Cómo se pasan los argumentos"), ("Compatibilidad", "Mismo ABI para enlazar")],
+    "definiciones": [("ABI", "Application Binary Interface: cómo se representan datos y se llaman funciones a nivel binario. Clave: debe coincidir para enlazar."), ("Convención de llamada", "reglas de paso de argumentos y retorno. Clave: parte de la ABI."), ("API vs. ABI", "API es el contrato en código fuente; ABI, el binario. Clave: distinto nivel.")],
+    "situacion": "Enlazar una librería de 32 bits con un programa de 64 bits falla: sus ABI no coinciden. La ABI es el contrato invisible que hace posible (o imposible) que dos binarios cooperen.",
+    "entrada": "una línea `a b` (ancho de bits de cada componente)",
+    "salida": "`abi=<compatible|incompatible>`",
+    "formula": "compatible si los anchos coinciden",
+    "algoritmo": "LEER a, b ; compatible <- (a == b)",
+    "casos": [("64 64", "abi=compatible"), ("64 32", "abi=incompatible"), ("32 32", "abi=compatible")],
+    "comparacion": [("Sintáctica", "Comparación de enteros en cada lenguaje."), ("Semántica", "La ABI incluye tamaños, alineación y convención de llamada."), ("Paradigmática", "SQL compara valores.")],
+    "familia": "Cada plataforma (x86-64 System V, Windows x64) define su ABI; los binarios deben respetarla para enlazar.",
+    "errores": [("Mezclar binarios de distinta arquitectura", "fallo de enlace o corrupción", "compilar todo para la misma ABI"), ("Confundir API con ABI", "esperar compatibilidad binaria del código fuente", "recordar que son contratos de distinto nivel")],
+    "faq": [("¿API o ABI?", "API es el contrato fuente; ABI, el binario. Un cambio de ABI rompe binarios ya compilados."), ("¿Por qué importa la ABI?", "Para enlazar librerías compiladas y usar la FFI sin corromper datos.")],
+    "reto": "Añade la arquitectura además del ancho y compara ambas; resuélvelo en **Go**.",
+    "impls": {
+        "python": "import sys\n\na, b = map(int, sys.stdin.readline().split())\nprint(f\"abi={'compatible' if a == b else 'incompatible'}\")\n",
+        "javascript": "import { readFileSync } from \"node:fs\";\n\nconst [a, b] = readFileSync(0, \"utf8\").trim().split(/\\s+/).map(Number);\nconsole.log(`abi=${a === b ? \"compatible\" : \"incompatible\"}`);\n",
+        "typescript": "import { readFileSync } from \"node:fs\";\n\nconst [a, b] = readFileSync(0, \"utf8\").trim().split(/\\s+/).map(Number);\nconsole.log(`abi=${a === b ? \"compatible\" : \"incompatible\"}`);\n",
+        "java": "import java.io.BufferedReader;\nimport java.io.IOException;\nimport java.io.InputStreamReader;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String[] p = br.readLine().trim().split(\"\\\\s+\");\n        int a = Integer.parseInt(p[0]), b = Integer.parseInt(p[1]);\n        System.out.println(\"abi=\" + (a == b ? \"compatible\" : \"incompatible\"));\n    }\n}\n",
+        "csharp": "using System;\n\nstring[] p = Console.In.ReadToEnd()\n    .Split(new[] { ' ', '\\t', '\\n', '\\r' }, StringSplitOptions.RemoveEmptyEntries);\nint a = int.Parse(p[0]), b = int.Parse(p[1]);\nConsole.WriteLine($\"abi={(a == b ? \"compatible\" : \"incompatible\")}\");\n",
+        "go": "package main\n\nimport (\n\t\"bufio\"\n\t\"fmt\"\n\t\"os\"\n\t\"strconv\"\n\t\"strings\"\n)\n\nfunc main() {\n\tline, _ := bufio.NewReader(os.Stdin).ReadString('\\n')\n\tf := strings.Fields(line)\n\ta, _ := strconv.Atoi(f[0])\n\tb, _ := strconv.Atoi(f[1])\n\tres := \"incompatible\"\n\tif a == b {\n\t\tres = \"compatible\"\n\t}\n\tfmt.Printf(\"abi=%s\\n\", res)\n}\n",
+        "rust": "use std::io::Read;\n\nfn main() {\n    let mut s = String::new();\n    std::io::stdin().read_to_string(&mut s).unwrap();\n    let v: Vec<i64> = s.split_whitespace().map(|x| x.parse().unwrap()).collect();\n    let res = if v[0] == v[1] { \"compatible\" } else { \"incompatible\" };\n    println!(\"abi={res}\");\n}\n",
+        "c": "#include <stdio.h>\n\nint main(void) {\n    long a, b;\n    if (scanf(\"%ld %ld\", &a, &b) != 2) return 1;\n    printf(\"abi=%s\\n\", a == b ? \"compatible\" : \"incompatible\");\n    return 0;\n}\n",
+        "php": "<?php\n[$a, $b] = array_map('intval', preg_split('/\\s+/', trim(fgets(STDIN))));\necho \"abi=\" . ($a === $b ? \"compatible\" : \"incompatible\") . \"\\n\";\n",
+        "sql": "-- SQL compara los anchos.\nWITH t(a, b) AS (VALUES (64, 64))\nSELECT printf('abi=%s', CASE WHEN a = b THEN 'compatible' ELSE 'incompatible' END) AS resultado FROM t;\n",
+    },
+}
+
+S[158] = {
+    "descripcion": "Envolver una función nativa con un wrapper que adapta su resultado (doble, envuelto en 'wrap(...)').",
+    "objetivo": "Entender los **enlaces (bindings) y wrappers**: una capa que adapta una librería nativa a un uso cómodo e idiomático en tu lenguaje. El wrapper traduce entre la frontera y tu código.",
+    "resultados": ["Envolver una función con un wrapper.", "Explicar qué añade un binding.", "Reconocer bindings comunes."],
+    "temas": [("Binding", "Puente a una librería nativa"), ("Wrapper", "Adapta a un uso idiomático"), ("Adaptación", "Traducir entre fronteras")],
+    "definiciones": [("Binding", "capa que expone una librería de otro lenguaje en el tuyo. Clave: reutilizar sin reescribir."), ("Wrapper", "función que envuelve otra, adaptando su interfaz. Clave: uso más cómodo o seguro."), ("Adaptación", "traducir tipos y convenciones entre la librería nativa y tu código. Clave: ocultar la frontera.")],
+    "situacion": "Una librería de imágenes en C se expone en Python con un binding; el wrapper convierte tipos y hace la API pythónica. Aquí el wrapper duplica y presenta el resultado envuelto.",
+    "entrada": "un entero `n`",
+    "salida": "`envuelto=wrap(<2n>)`",
+    "formula": "wrapper que aplica doble y formatea",
+    "algoritmo": "r <- doble(n) ; ESCRIBIR 'wrap(' + r + ')'",
+    "casos": [("5", "envuelto=wrap(10)"), ("0", "envuelto=wrap(0)"), ("7", "envuelto=wrap(14)")],
+    "comparacion": [("Sintáctica", "Una función que envuelve a otra en cada lenguaje."), ("Semántica", "El wrapper adapta tipos y convenciones de la frontera."), ("Paradigmática", "SQL usa vistas para envolver consultas.")],
+    "familia": "PyBind11, node-gyp, JNA, cbindgen generan bindings entre lenguajes y C/C++.",
+    "errores": [("Wrapper que filtra detalles de la frontera", "abstracción con fugas", "ocultar la complejidad de la interoperabilidad"), ("No manejar errores de la librería nativa", "caídas inesperadas", "traducir los errores al modelo de tu lenguaje")],
+    "faq": [("¿Binding o reescribir?", "El binding reutiliza código probado; reescribir cuesta y arriesga."), ("¿Wrapper añade coste?", "Un poco, pero la comodidad y seguridad suelen compensar.")],
+    "reto": "Haz un wrapper que además valide la entrada y resuélvelo en **Python**.",
+    "impls": {
+        "python": "import sys\n\n\ndef doble(x):\n    return x * 2\n\n\ndef wrapper(x):  # adapta y formatea el resultado\n    return f\"wrap({doble(x)})\"\n\n\nn = int(sys.stdin.readline())\nprint(f\"envuelto={wrapper(n)}\")\n",
+        "javascript": "import { readFileSync } from \"node:fs\";\n\nconst doble = (x) => x * 2;\nconst wrapper = (x) => `wrap(${doble(x)})`;\n\nconst n = parseInt(readFileSync(0, \"utf8\").trim(), 10);\nconsole.log(`envuelto=${wrapper(n)}`);\n",
+        "typescript": "import { readFileSync } from \"node:fs\";\n\nconst doble = (x: number): number => x * 2;\nconst wrapper = (x: number): string => `wrap(${doble(x)})`;\n\nconst n: number = parseInt(readFileSync(0, \"utf8\").trim(), 10);\nconsole.log(`envuelto=${wrapper(n)}`);\n",
+        "java": "import java.io.BufferedReader;\nimport java.io.IOException;\nimport java.io.InputStreamReader;\n\npublic class Main {\n    static long doble(long x) { return x * 2; }\n    static String wrapper(long x) { return \"wrap(\" + doble(x) + \")\"; }\n\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        long n = Long.parseLong(br.readLine().trim());\n        System.out.println(\"envuelto=\" + wrapper(n));\n    }\n}\n",
+        "csharp": "using System;\n\nlong Doble(long x) => x * 2;\nstring Wrapper(long x) => $\"wrap({Doble(x)})\";\n\nlong n = long.Parse(Console.In.ReadToEnd().Trim());\nConsole.WriteLine($\"envuelto={Wrapper(n)}\");\n",
+        "go": "package main\n\nimport (\n\t\"bufio\"\n\t\"fmt\"\n\t\"os\"\n\t\"strconv\"\n\t\"strings\"\n)\n\nfunc doble(x int64) int64 { return x * 2 }\nfunc wrapper(x int64) string { return fmt.Sprintf(\"wrap(%d)\", doble(x)) }\n\nfunc main() {\n\tline, _ := bufio.NewReader(os.Stdin).ReadString('\\n')\n\tn, _ := strconv.ParseInt(strings.TrimSpace(line), 10, 64)\n\tfmt.Printf(\"envuelto=%s\\n\", wrapper(n))\n}\n",
+        "rust": "use std::io::Read;\n\nfn doble(x: i64) -> i64 {\n    x * 2\n}\n\nfn wrapper(x: i64) -> String {\n    format!(\"wrap({})\", doble(x))\n}\n\nfn main() {\n    let mut s = String::new();\n    std::io::stdin().read_to_string(&mut s).unwrap();\n    let n: i64 = s.trim().parse().unwrap();\n    println!(\"envuelto={}\", wrapper(n));\n}\n",
+        "c": "#include <stdio.h>\n\nlong doble(long x) { return x * 2; }\n\nint main(void) {\n    long n;\n    if (scanf(\"%ld\", &n) != 1) return 1;\n    printf(\"envuelto=wrap(%ld)\\n\", doble(n));\n    return 0;\n}\n",
+        "php": "<?php\nfunction doble($x) { return $x * 2; }\nfunction wrapper($x) { return \"wrap(\" . doble($x) . \")\"; }\n\n$n = (int) trim(fgets(STDIN));\necho \"envuelto=\" . wrapper($n) . \"\\n\";\n",
+        "sql": "-- SQL usa vistas para envolver; aqui, la expresion formateada.\nWITH nums(n) AS (VALUES (5), (0), (7))\nSELECT printf('envuelto=wrap(%d)', n * 2) AS resultado FROM nums;\n",
+    },
+}
+
+S[159] = {
+    "descripcion": "Serializar un par clave/valor a un formato de texto simple 'clave:valor'.",
+    "objetivo": "Entender la **serialización entre lenguajes** (JSON, Protobuf, MessagePack): convertir datos a un formato común para que un componente en un lenguaje los envíe y otro en otro lenguaje los reciba. Aquí se serializa un par a texto.",
+    "resultados": ["Serializar un dato a un formato de intercambio.", "Explicar por qué se necesita un formato común.", "Reconocer JSON/Protobuf/MessagePack."],
+    "temas": [("Serialización", "De datos a formato de intercambio"), ("Formato común", "Entendido por todos"), ("Esquema", "Estructura acordada")],
+    "definiciones": [("Serialización", "convertir datos en un formato transmisible (texto o binario). Clave: cruzar la frontera de lenguaje."), ("Formato de intercambio", "representación común (JSON, Protobuf). Clave: independiente del lenguaje."), ("Esquema", "estructura acordada de los datos. Clave: emisor y receptor lo comparten.")],
+    "situacion": "Un servicio en Go envía datos a uno en Python: los serializa (a JSON o Protobuf), viajan como bytes y el otro los deserializa. El formato común es lo que permite el diálogo entre lenguajes.",
+    "entrada": "una línea `clave valor`",
+    "salida": "`serializado=<clave>:<valor>`",
+    "formula": "unir clave y valor con ':'",
+    "algoritmo": "LEER clave, valor ; ESCRIBIR clave:valor",
+    "casos": [("x 5", "serializado=x:5"), ("edad 30", "serializado=edad:30"), ("n 100", "serializado=n:100")],
+    "comparacion": [("Sintáctica", "Concatenación (aquí); librerías JSON/Protobuf en la práctica."), ("Semántica", "El formato debe interpretarse igual en ambos lados."), ("Paradigmática", "SQL exporta a JSON con funciones del motor.")],
+    "familia": "JSON (texto, universal), Protobuf/MessagePack (binarios, compactos y con esquema) son los formatos habituales.",
+    "errores": [("Formato ambiguo sin esquema", "el receptor no sabe interpretar", "acordar un esquema o formato estándar"), ("Diferencias de codificación", "acentos/emoji corruptos", "usar UTF-8 y formatos bien definidos")],
+    "faq": [("¿JSON o Protobuf?", "JSON es legible y universal; Protobuf es compacto y tipado. Según el caso."), ("¿Serializar y deserializar son inversos?", "Sí: uno convierte a formato, el otro reconstruye el dato.")],
+    "reto": "Serializa dos pares separados por coma y resuélvelo en **Python**.",
+    "impls": {
+        "python": "import sys\n\nclave, valor = sys.stdin.readline().split()\nprint(f\"serializado={clave}:{valor}\")\n",
+        "javascript": "import { readFileSync } from \"node:fs\";\n\nconst [clave, valor] = readFileSync(0, \"utf8\").trim().split(/\\s+/);\nconsole.log(`serializado=${clave}:${valor}`);\n",
+        "typescript": "import { readFileSync } from \"node:fs\";\n\nconst [clave, valor] = readFileSync(0, \"utf8\").trim().split(/\\s+/);\nconsole.log(`serializado=${clave}:${valor}`);\n",
+        "java": "import java.io.BufferedReader;\nimport java.io.IOException;\nimport java.io.InputStreamReader;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String[] p = br.readLine().trim().split(\"\\\\s+\");\n        System.out.println(\"serializado=\" + p[0] + \":\" + p[1]);\n    }\n}\n",
+        "csharp": "using System;\n\nstring[] p = Console.In.ReadToEnd()\n    .Split(new[] { ' ', '\\t', '\\n', '\\r' }, StringSplitOptions.RemoveEmptyEntries);\nConsole.WriteLine($\"serializado={p[0]}:{p[1]}\");\n",
+        "go": "package main\n\nimport (\n\t\"bufio\"\n\t\"fmt\"\n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tline, _ := bufio.NewReader(os.Stdin).ReadString('\\n')\n\tp := strings.Fields(line)\n\tfmt.Printf(\"serializado=%s:%s\\n\", p[0], p[1])\n}\n",
+        "rust": "use std::io::Read;\n\nfn main() {\n    let mut s = String::new();\n    std::io::stdin().read_to_string(&mut s).unwrap();\n    let p: Vec<&str> = s.split_whitespace().collect();\n    println!(\"serializado={}:{}\", p[0], p[1]);\n}\n",
+        "c": "#include <stdio.h>\n\nint main(void) {\n    char clave[64], valor[64];\n    if (scanf(\"%63s %63s\", clave, valor) != 2) return 1;\n    printf(\"serializado=%s:%s\\n\", clave, valor);\n    return 0;\n}\n",
+        "php": "<?php\n[$clave, $valor] = preg_split('/\\s+/', trim(fgets(STDIN)));\necho \"serializado=$clave:$valor\\n\";\n",
+        "sql": "-- SQL concatena clave y valor.\nWITH t(clave, valor) AS (VALUES ('x', '5'))\nSELECT 'serializado=' || clave || ':' || valor AS resultado FROM t;\n",
+    },
+}
+
+S[160] = {
+    "descripcion": "Construir un contrato de API a partir de un método HTTP y un recurso.",
+    "objetivo": "Entender los **contratos de API (REST, gRPC)**: la frontera entre servicios se define con un contrato (qué operaciones, qué datos). Un endpoint REST combina un método (GET, POST) con un recurso (/users).",
+    "resultados": ["Construir un endpoint a partir de método y recurso.", "Explicar qué es un contrato de API.", "Distinguir REST de gRPC."],
+    "temas": [("Contrato de API", "El acuerdo entre servicios"), ("REST", "Recursos y métodos HTTP"), ("gRPC", "Contratos con esquema (Protobuf)")],
+    "definiciones": [("Contrato de API", "acuerdo de qué operaciones y datos expone un servicio. Clave: frontera estable entre componentes."), ("REST", "estilo basado en recursos y métodos HTTP (GET, POST, PUT). Clave: simple y universal."), ("gRPC", "framework de RPC con contratos definidos en Protobuf. Clave: eficiente y tipado.")],
+    "situacion": "El frontend habla con el backend a través de una API: `GET /users` pide los usuarios. El contrato define esos endpoints; mientras se respete, cada lado puede evolucionar por separado.",
+    "entrada": "una línea `metodo recurso`",
+    "salida": "`contrato=<METODO> /<recurso>`",
+    "formula": "combinar método y recurso en un endpoint",
+    "algoritmo": "LEER metodo, recurso ; ESCRIBIR metodo + ' /' + recurso",
+    "casos": [("GET users", "contrato=GET /users"), ("POST items", "contrato=POST /items"), ("PUT data", "contrato=PUT /data")],
+    "comparacion": [("Sintáctica", "Concatenación en cada lenguaje."), ("Semántica", "El contrato desacopla cliente y servidor."), ("Paradigmática", "SQL expone datos vía vistas/procedimientos.")],
+    "familia": "REST (HTTP), gRPC (Protobuf), GraphQL son estilos de contrato entre servicios.",
+    "errores": [("Cambiar el contrato sin versionar", "romper a los clientes", "versionar la API y evolucionar con compatibilidad"), ("Endpoints ambiguos", "confusión y errores", "seguir convenciones REST claras")],
+    "faq": [("¿REST o gRPC?", "REST para APIs públicas y simples; gRPC para comunicación interna eficiente y tipada."), ("¿Qué es un endpoint?", "Un punto de acceso: método + ruta que ofrece una operación.")],
+    "reto": "Añade un identificador al recurso (`GET /users/1`) y resuélvelo en **Go**.",
+    "impls": {
+        "python": "import sys\n\nmetodo, recurso = sys.stdin.readline().split()\nprint(f\"contrato={metodo} /{recurso}\")\n",
+        "javascript": "import { readFileSync } from \"node:fs\";\n\nconst [metodo, recurso] = readFileSync(0, \"utf8\").trim().split(/\\s+/);\nconsole.log(`contrato=${metodo} /${recurso}`);\n",
+        "typescript": "import { readFileSync } from \"node:fs\";\n\nconst [metodo, recurso] = readFileSync(0, \"utf8\").trim().split(/\\s+/);\nconsole.log(`contrato=${metodo} /${recurso}`);\n",
+        "java": "import java.io.BufferedReader;\nimport java.io.IOException;\nimport java.io.InputStreamReader;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String[] p = br.readLine().trim().split(\"\\\\s+\");\n        System.out.println(\"contrato=\" + p[0] + \" /\" + p[1]);\n    }\n}\n",
+        "csharp": "using System;\n\nstring[] p = Console.In.ReadToEnd()\n    .Split(new[] { ' ', '\\t', '\\n', '\\r' }, StringSplitOptions.RemoveEmptyEntries);\nConsole.WriteLine($\"contrato={p[0]} /{p[1]}\");\n",
+        "go": "package main\n\nimport (\n\t\"bufio\"\n\t\"fmt\"\n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tline, _ := bufio.NewReader(os.Stdin).ReadString('\\n')\n\tp := strings.Fields(line)\n\tfmt.Printf(\"contrato=%s /%s\\n\", p[0], p[1])\n}\n",
+        "rust": "use std::io::Read;\n\nfn main() {\n    let mut s = String::new();\n    std::io::stdin().read_to_string(&mut s).unwrap();\n    let p: Vec<&str> = s.split_whitespace().collect();\n    println!(\"contrato={} /{}\", p[0], p[1]);\n}\n",
+        "c": "#include <stdio.h>\n\nint main(void) {\n    char metodo[16], recurso[64];\n    if (scanf(\"%15s %63s\", metodo, recurso) != 2) return 1;\n    printf(\"contrato=%s /%s\\n\", metodo, recurso);\n    return 0;\n}\n",
+        "php": "<?php\n[$metodo, $recurso] = preg_split('/\\s+/', trim(fgets(STDIN)));\necho \"contrato=$metodo /$recurso\\n\";\n",
+        "sql": "-- SQL construye el endpoint por concatenacion.\nWITH t(metodo, recurso) AS (VALUES ('GET', 'users'))\nSELECT 'contrato=' || metodo || ' /' || recurso AS resultado FROM t;\n",
+    },
+}
+
+S[161] = {
+    "descripcion": "Recibir una lista de números por una cola (FIFO) y sumarlos, como comunicación entre procesos.",
+    "objetivo": "Entender la **comunicación entre procesos**: procesos separados intercambian datos por tuberías (stdin/stdout), sockets o colas. Una cola FIFO entrega los datos en orden a un consumidor que los suma.",
+    "resultados": ["Recibir datos por una cola.", "Explicar los mecanismos de comunicación entre procesos.", "Reconocer stdin/stdout como tubería."],
+    "temas": [("Tubería (pipe)", "stdout de uno a stdin de otro"), ("Cola/socket", "Comunicación asíncrona o en red"), ("Productor/consumidor", "Uno envía, otro recibe")],
+    "definiciones": [("Comunicación entre procesos (IPC)", "mecanismos para que procesos separados intercambien datos. Clave: tuberías, sockets, colas."), ("Tubería", "conecta la salida de un proceso con la entrada de otro. Clave: base de los comandos Unix encadenados."), ("Cola", "buffer FIFO que desacopla productor y consumidor. Clave: comunicación asíncrona.")],
+    "situacion": "En Unix, `productor | consumidor` conecta procesos por una tubería. Este curso usa justo eso: stdin/stdout como frontera común entre implementaciones. Aquí una cola entrega los números y se suman.",
+    "entrada": "una línea con enteros separados por espacio (mensajes en la cola)",
+    "salida": "`recibido=<suma de los mensajes>`",
+    "formula": "sumar los mensajes recibidos en orden",
+    "algoritmo": "PARA CADA mensaje de la cola: acumular ; ESCRIBIR suma",
+    "casos": [("1 2 3", "recibido=6"), ("5", "recibido=5"), ("10 20 30 40", "recibido=100")],
+    "comparacion": [("Sintáctica", "Recorrer la entrada (cola) en cada lenguaje."), ("Semántica", "La cola desacopla al productor del consumidor."), ("Paradigmática", "SQL no maneja procesos; agrega datos.")],
+    "familia": "Tuberías Unix, sockets, y colas (RabbitMQ, Kafka) conectan procesos y servicios.",
+    "errores": [("Asumir orden con múltiples productores", "mensajes entremezclados", "una cola por flujo o marcar el orden"), ("No cerrar la tubería", "el consumidor espera para siempre", "cerrar/EOF al terminar de enviar")],
+    "faq": [("¿Tubería o socket?", "Tubería para procesos en la misma máquina; socket para red."), ("¿Por qué stdin/stdout?", "Es la tubería universal; por eso el curso verifica con ella.")],
+    "reto": "Procesa dos colas y combina sus sumas; resuélvelo en **Go** con canales.",
+    "impls": {
+        "python": "import sys\n\nnums = [int(x) for x in sys.stdin.read().split()]\nrecibido = 0\nfor m in nums:  # consumidor de la cola\n    recibido += m\nprint(f\"recibido={recibido}\")\n",
+        "javascript": "import { readFileSync } from \"node:fs\";\n\nconst nums = readFileSync(0, \"utf8\").trim().split(/\\s+/).map(Number);\nlet recibido = 0;\nfor (const m of nums) recibido += m;\nconsole.log(`recibido=${recibido}`);\n",
+        "typescript": "import { readFileSync } from \"node:fs\";\n\nconst nums: number[] = readFileSync(0, \"utf8\").trim().split(/\\s+/).map(Number);\nlet recibido = 0;\nfor (const m of nums) recibido += m;\nconsole.log(`recibido=${recibido}`);\n",
+        "java": "import java.io.BufferedReader;\nimport java.io.IOException;\nimport java.io.InputStreamReader;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String[] p = br.readLine().trim().split(\"\\\\s+\");\n        long recibido = 0;\n        for (String s : p) recibido += Integer.parseInt(s);\n        System.out.println(\"recibido=\" + recibido);\n    }\n}\n",
+        "csharp": "using System;\nusing System.Linq;\n\nlong recibido = Console.In.ReadToEnd()\n    .Split(new[] { ' ', '\\t', '\\n', '\\r' }, StringSplitOptions.RemoveEmptyEntries)\n    .Sum(x => (long) int.Parse(x));\nConsole.WriteLine($\"recibido={recibido}\");\n",
+        "go": "package main\n\nimport (\n\t\"bufio\"\n\t\"fmt\"\n\t\"os\"\n\t\"strconv\"\n\t\"strings\"\n)\n\nfunc main() {\n\tline, _ := bufio.NewReader(os.Stdin).ReadString('\\n')\n\trecibido := 0\n\tfor _, s := range strings.Fields(line) {\n\t\tn, _ := strconv.Atoi(s)\n\t\trecibido += n\n\t}\n\tfmt.Printf(\"recibido=%d\\n\", recibido)\n}\n",
+        "rust": "use std::io::Read;\n\nfn main() {\n    let mut s = String::new();\n    std::io::stdin().read_to_string(&mut s).unwrap();\n    let recibido: i64 = s.split_whitespace().map(|x| x.parse::<i64>().unwrap()).sum();\n    println!(\"recibido={recibido}\");\n}\n",
+        "c": "#include <stdio.h>\n\nint main(void) {\n    long recibido = 0, m;\n    while (scanf(\"%ld\", &m) == 1) recibido += m;\n    printf(\"recibido=%ld\\n\", recibido);\n    return 0;\n}\n",
+        "php": "<?php\n$nums = array_map('intval', preg_split('/\\s+/', trim(fgets(STDIN))));\necho \"recibido=\" . array_sum($nums) . \"\\n\";\n",
+        "sql": "-- SQL agrega los mensajes con SUM.\nWITH cola(x) AS (VALUES (1), (2), (3))\nSELECT printf('recibido=%d', sum(x)) AS resultado FROM cola;\n",
+    },
+}
+
+S[162] = {
+    "descripcion": "Calcular el cuadrado de un número, como si se ejecutara en un módulo WebAssembly.",
+    "objetivo": "Entender **WebAssembly (Wasm)** como objetivo común: un formato binario portable al que compilan muchos lenguajes (Rust, C, Go) y que corre en el navegador o en runtimes. Es un 'punto de encuentro' entre lenguajes.",
+    "resultados": ["Explicar qué es WebAssembly.", "Reconocer qué lenguajes compilan a Wasm.", "Ver Wasm como objetivo común."],
+    "temas": [("WebAssembly", "Binario portable y rápido"), ("Objetivo de compilación", "Muchos lenguajes compilan a Wasm"), ("Runtime", "Navegador o fuera de él (WASI)")],
+    "definiciones": [("WebAssembly", "formato binario portable y eficiente, objetivo de compilación de varios lenguajes. Clave: corre en el navegador y en runtimes."), ("Objetivo (target)", "el formato al que compila un lenguaje. Clave: Rust, C, Go pueden apuntar a Wasm."), ("WASI", "interfaz de sistema para Wasm fuera del navegador. Clave: Wasm del lado servidor.")],
+    "situacion": "Un módulo de cálculo escrito en Rust se compila a Wasm y corre en el navegador junto a JavaScript, o en un runtime del servidor. Wasm es el objetivo común que deja a varios lenguajes convivir.",
+    "entrada": "un entero `n`",
+    "salida": "`resultado=<n²>`",
+    "formula": "calcular n al cuadrado (como en un módulo Wasm)",
+    "algoritmo": "LEER n ; ESCRIBIR n*n",
+    "casos": [("5", "resultado=25"), ("0", "resultado=0"), ("7", "resultado=49")],
+    "comparacion": [("Sintáctica", "El cálculo es idéntico; lo distinto es el objetivo de compilación."), ("Semántica", "Wasm ejecuta el mismo cálculo de forma portable y rápida."), ("Paradigmática", "SQL corre en su propio motor, no en Wasm.")],
+    "familia": "Rust, C/C++, Go, C# (Blazor) compilan a WebAssembly; runtimes como Wasmtime lo ejecutan.",
+    "errores": [("Esperar acceso directo al sistema en Wasm del navegador", "el sandbox lo limita", "usar las APIs disponibles (o WASI en servidor)"), ("Módulos Wasm enormes", "carga lenta", "optimizar el tamaño del binario")],
+    "faq": [("¿Wasm reemplaza a JavaScript?", "No: lo complementa para cargas de cómputo intensivo."), ("¿Wasm solo en el navegador?", "No: con WASI también en el servidor y en la nube.")],
+    "reto": "Calcula el cubo 'en Wasm' y resuélvelo en **Rust** (que compila a Wasm).",
+    "impls": {
+        "python": "import sys\n\nn = int(sys.stdin.readline())\nprint(f\"resultado={n * n}\")\n",
+        "javascript": "import { readFileSync } from \"node:fs\";\n\nconst n = parseInt(readFileSync(0, \"utf8\").trim(), 10);\nconsole.log(`resultado=${n * n}`);\n",
+        "typescript": "import { readFileSync } from \"node:fs\";\n\nconst n: number = parseInt(readFileSync(0, \"utf8\").trim(), 10);\nconsole.log(`resultado=${n * n}`);\n",
+        "java": "import java.io.BufferedReader;\nimport java.io.IOException;\nimport java.io.InputStreamReader;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        long n = Long.parseLong(br.readLine().trim());\n        System.out.println(\"resultado=\" + (n * n));\n    }\n}\n",
+        "csharp": "using System;\n\nlong n = long.Parse(Console.In.ReadToEnd().Trim());\nConsole.WriteLine($\"resultado={n * n}\");\n",
+        "go": "package main\n\nimport (\n\t\"bufio\"\n\t\"fmt\"\n\t\"os\"\n\t\"strconv\"\n\t\"strings\"\n)\n\nfunc main() {\n\tline, _ := bufio.NewReader(os.Stdin).ReadString('\\n')\n\tn, _ := strconv.ParseInt(strings.TrimSpace(line), 10, 64)\n\tfmt.Printf(\"resultado=%d\\n\", n*n)\n}\n",
+        "rust": "use std::io::Read;\n\nfn main() {\n    let mut s = String::new();\n    std::io::stdin().read_to_string(&mut s).unwrap();\n    let n: i64 = s.trim().parse().unwrap();\n    println!(\"resultado={}\", n * n);\n}\n",
+        "c": "#include <stdio.h>\n\nint main(void) {\n    long n;\n    if (scanf(\"%ld\", &n) != 1) return 1;\n    printf(\"resultado=%ld\\n\", n * n);\n    return 0;\n}\n",
+        "php": "<?php\n$n = (int) trim(fgets(STDIN));\necho \"resultado=\" . ($n * $n) . \"\\n\";\n",
+        "sql": "-- SQL calcula el cuadrado.\nWITH nums(n) AS (VALUES (5), (0), (7))\nSELECT printf('resultado=%d', n * n) AS resultado FROM nums;\n",
+    },
+}
+
+S[163] = {
+    "descripcion": "Evaluar un script incrustado que suma dos números (lenguaje embebido en otro).",
+    "objetivo": "Entender el **incrustar un lenguaje en otro**: motores como Lua o Python se embeben en aplicaciones para permitir scripting sin recompilar. El anfitrión pasa datos al script, este los procesa y devuelve un resultado.",
+    "resultados": ["Evaluar un script embebido.", "Explicar el uso de lenguajes de scripting embebidos.", "Reconocer casos (juegos, plugins)."],
+    "temas": [("Lenguaje embebido", "Un intérprete dentro de la app"), ("Anfitrión y script", "Quién ejecuta a quién"), ("Extensibilidad", "Cambiar comportamiento sin recompilar")],
+    "definiciones": [("Lenguaje embebido", "intérprete integrado en una aplicación anfitriona (Lua, Python). Clave: scripting sin recompilar."), ("Anfitrión", "la aplicación que hospeda el intérprete. Clave: expone datos y funciones al script."), ("Script embebido", "código interpretado que corre dentro del anfitrión. Clave: extiende la app.")],
+    "situacion": "Muchos juegos embeben Lua para su lógica; editores embeben Python para plugins. El anfitrión pasa datos al script y recibe el resultado, permitiendo modificar el comportamiento sin recompilar.",
+    "entrada": "una línea `a b` (los datos que el anfitrión pasa al script)",
+    "salida": "`resultado=<a+b>` (lo que el script calcula)",
+    "formula": "el script embebido evalúa a + b",
+    "algoritmo": "anfitrión pasa a, b ; el script suma ; devuelve el resultado",
+    "casos": [("3 4", "resultado=7"), ("10 5", "resultado=15"), ("0 0", "resultado=0")],
+    "comparacion": [("Sintáctica", "El anfitrión invoca al intérprete embebido; aquí se simula la evaluación."), ("Semántica", "El script corre en el runtime del lenguaje embebido."), ("Paradigmática", "SQL se embebe en apps vía librerías cliente.")],
+    "familia": "Lua (juegos, Redis, Nginx), Python (Blender, editores), JavaScript (motores V8 embebidos) son los referentes.",
+    "errores": [("Exponer demasiado al script", "riesgo de seguridad", "limitar lo que el script puede tocar (sandbox)"), ("No validar la salida del script", "datos inesperados", "comprobar lo que devuelve el script")],
+    "faq": [("¿Por qué embeber un lenguaje?", "Para permitir personalización y plugins sin recompilar la app."), ("¿Lua o Python?", "Lua es minúsculo y rápido de embeber; Python, más potente y con más librerías.")],
+    "reto": "Haz que el script embebido multiplique en vez de sumar y resuélvelo en **Python**.",
+    "impls": {
+        "python": "import sys\n\na, b = map(int, sys.stdin.readline().split())\nscript = \"a + b\"  # el script embebido\nresultado = eval(script, {}, {\"a\": a, \"b\": b})\nprint(f\"resultado={resultado}\")\n",
+        "javascript": "import { readFileSync } from \"node:fs\";\n\nconst [a, b] = readFileSync(0, \"utf8\").trim().split(/\\s+/).map(Number);\n// El anfitrion evalua el script embebido con los datos.\nconst resultado = a + b;\nconsole.log(`resultado=${resultado}`);\n",
+        "typescript": "import { readFileSync } from \"node:fs\";\n\nconst [a, b] = readFileSync(0, \"utf8\").trim().split(/\\s+/).map(Number);\nconst resultado: number = a + b;\nconsole.log(`resultado=${resultado}`);\n",
+        "java": "import java.io.BufferedReader;\nimport java.io.IOException;\nimport java.io.InputStreamReader;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String[] p = br.readLine().trim().split(\"\\\\s+\");\n        int a = Integer.parseInt(p[0]), b = Integer.parseInt(p[1]);\n        System.out.println(\"resultado=\" + (a + b));\n    }\n}\n",
+        "csharp": "using System;\n\nstring[] p = Console.In.ReadToEnd()\n    .Split(new[] { ' ', '\\t', '\\n', '\\r' }, StringSplitOptions.RemoveEmptyEntries);\nint a = int.Parse(p[0]), b = int.Parse(p[1]);\nConsole.WriteLine($\"resultado={a + b}\");\n",
+        "go": "package main\n\nimport (\n\t\"bufio\"\n\t\"fmt\"\n\t\"os\"\n\t\"strconv\"\n\t\"strings\"\n)\n\nfunc main() {\n\tline, _ := bufio.NewReader(os.Stdin).ReadString('\\n')\n\tf := strings.Fields(line)\n\ta, _ := strconv.Atoi(f[0])\n\tb, _ := strconv.Atoi(f[1])\n\tfmt.Printf(\"resultado=%d\\n\", a+b)\n}\n",
+        "rust": "use std::io::Read;\n\nfn main() {\n    let mut s = String::new();\n    std::io::stdin().read_to_string(&mut s).unwrap();\n    let v: Vec<i64> = s.split_whitespace().map(|x| x.parse().unwrap()).collect();\n    println!(\"resultado={}\", v[0] + v[1]);\n}\n",
+        "c": "#include <stdio.h>\n\nint main(void) {\n    long a, b;\n    if (scanf(\"%ld %ld\", &a, &b) != 2) return 1;\n    printf(\"resultado=%ld\\n\", a + b);\n    return 0;\n}\n",
+        "php": "<?php\n[$a, $b] = array_map('intval', preg_split('/\\s+/', trim(fgets(STDIN))));\necho \"resultado=\" . ($a + $b) . \"\\n\";\n",
+        "sql": "-- SQL se embebe en apps via librerias cliente; aqui, la suma.\nWITH t(a, b) AS (VALUES (3, 4))\nSELECT printf('resultado=%d', a + b) AS resultado FROM t;\n",
+    },
+}
+
+S[164] = {
+    "descripcion": "Recomendar el lenguaje del núcleo más adecuado para un tipo de componente.",
+    "objetivo": "Cerrar la parte con la decisión clave del enfoque políglota: **elegir el lenguaje correcto para cada componente**. Según la naturaleza del componente (sistemas, web, datos), un lenguaje encaja mejor que otro.",
+    "resultados": ["Asociar un tipo de componente con un lenguaje.", "Justificar la elección por la tarea.", "Aplicar el criterio a un sistema real."],
+    "temas": [("Elegir por componente", "El mejor lenguaje para cada parte"), ("Fortalezas", "Qué destaca cada lenguaje"), ("Sistema políglota", "Varias elecciones coherentes")],
+    "definiciones": [("Idoneidad", "cuánto encaja un lenguaje con una tarea. Clave: rendimiento, ecosistema, plataforma."), ("Componente de sistemas", "cercano al hardware o de alto rendimiento. Clave: Rust/C encajan."), ("Componente web/datos", "interfaz interactiva o consulta de datos. Clave: TypeScript/SQL encajan.")],
+    "situacion": "Para un núcleo de rendimiento eliges Rust; para el frontend, TypeScript; para las consultas, SQL. Elegir por componente es lo que hace de un sistema políglota una decisión de ingeniería, no un capricho.",
+    "entrada": "una palabra: `sistemas`, `web` o `datos`",
+    "salida": "`lenguaje=<Rust|TypeScript|SQL>`",
+    "formula": "sistemas→Rust, web→TypeScript, datos→SQL",
+    "algoritmo": "LEER tipo ; SEGUN tipo: recomendar lenguaje",
+    "casos": [("sistemas", "lenguaje=Rust"), ("web", "lenguaje=TypeScript"), ("datos", "lenguaje=SQL")],
+    "comparacion": [("Sintáctica", "switch/match/lookup en cada lenguaje."), ("Semántica", "La recomendación se basa en las fortalezas de cada lenguaje."), ("Paradigmática", "SQL usa CASE.")],
+    "familia": "La elección por componente es la esencia del programa: cada lenguaje del núcleo brilla en su terreno.",
+    "errores": [("Elegir por moda", "usar la herramienta equivocada", "elegir por la tarea y el contexto"), ("Un solo lenguaje para todo", "forzar la uniformidad", "aceptar que lo políglota suele ser mejor")],
+    "faq": [("¿Y si el equipo solo sabe un lenguaje?", "El talento disponible es un criterio legítimo y a menudo decisivo."), ("¿No es más simple un solo lenguaje?", "A veces; pero elegir por componente aprovecha lo mejor de cada uno.")],
+    "reto": "Añade el tipo `scripting` → Python y resuélvelo en **Rust** con `match`.",
+    "impls": {
+        "python": "import sys\n\ntipo = sys.stdin.readline().strip()\nrec = {\"sistemas\": \"Rust\", \"web\": \"TypeScript\", \"datos\": \"SQL\"}\nprint(f\"lenguaje={rec.get(tipo, 'Python')}\")\n",
+        "javascript": "import { readFileSync } from \"node:fs\";\n\nconst tipo = readFileSync(0, \"utf8\").trim();\nconst rec = { sistemas: \"Rust\", web: \"TypeScript\", datos: \"SQL\" };\nconsole.log(`lenguaje=${rec[tipo] ?? \"Python\"}`);\n",
+        "typescript": "import { readFileSync } from \"node:fs\";\n\nconst tipo: string = readFileSync(0, \"utf8\").trim();\nconst rec: Record<string, string> = { sistemas: \"Rust\", web: \"TypeScript\", datos: \"SQL\" };\nconsole.log(`lenguaje=${rec[tipo] ?? \"Python\"}`);\n",
+        "java": "import java.io.BufferedReader;\nimport java.io.IOException;\nimport java.io.InputStreamReader;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n        String tipo = br.readLine().trim();\n        String r;\n        switch (tipo) {\n            case \"sistemas\": r = \"Rust\"; break;\n            case \"web\": r = \"TypeScript\"; break;\n            case \"datos\": r = \"SQL\"; break;\n            default: r = \"Python\";\n        }\n        System.out.println(\"lenguaje=\" + r);\n    }\n}\n",
+        "csharp": "using System;\n\nstring tipo = Console.In.ReadToEnd().Trim();\nstring r = tipo switch {\n    \"sistemas\" => \"Rust\",\n    \"web\" => \"TypeScript\",\n    \"datos\" => \"SQL\",\n    _ => \"Python\",\n};\nConsole.WriteLine($\"lenguaje={r}\");\n",
+        "go": "package main\n\nimport (\n\t\"bufio\"\n\t\"fmt\"\n\t\"os\"\n\t\"strings\"\n)\n\nfunc main() {\n\tline, _ := bufio.NewReader(os.Stdin).ReadString('\\n')\n\ttipo := strings.TrimSpace(line)\n\trec := map[string]string{\"sistemas\": \"Rust\", \"web\": \"TypeScript\", \"datos\": \"SQL\"}\n\tr, ok := rec[tipo]\n\tif !ok {\n\t\tr = \"Python\"\n\t}\n\tfmt.Printf(\"lenguaje=%s\\n\", r)\n}\n",
+        "rust": "use std::io::Read;\n\nfn main() {\n    let mut s = String::new();\n    std::io::stdin().read_to_string(&mut s).unwrap();\n    let tipo = s.trim();\n    let r = match tipo {\n        \"sistemas\" => \"Rust\",\n        \"web\" => \"TypeScript\",\n        \"datos\" => \"SQL\",\n        _ => \"Python\",\n    };\n    println!(\"lenguaje={r}\");\n}\n",
+        "c": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    char tipo[32];\n    if (scanf(\"%31s\", tipo) != 1) return 1;\n    const char *r;\n    if (strcmp(tipo, \"sistemas\") == 0) r = \"Rust\";\n    else if (strcmp(tipo, \"web\") == 0) r = \"TypeScript\";\n    else if (strcmp(tipo, \"datos\") == 0) r = \"SQL\";\n    else r = \"Python\";\n    printf(\"lenguaje=%s\\n\", r);\n    return 0;\n}\n",
+        "php": "<?php\n$tipo = trim(fgets(STDIN));\n$rec = [\"sistemas\" => \"Rust\", \"web\" => \"TypeScript\", \"datos\" => \"SQL\"];\necho \"lenguaje=\" . ($rec[$tipo] ?? \"Python\") . \"\\n\";\n",
+        "sql": "-- SQL recomienda con CASE.\nWITH t(tipo) AS (VALUES ('sistemas'))\nSELECT printf('lenguaje=%s', CASE tipo WHEN 'sistemas' THEN 'Rust' WHEN 'web' THEN 'TypeScript' WHEN 'datos' THEN 'SQL' ELSE 'Python' END) AS resultado FROM t;\n",
+    },
+}
+
+
+def main():
+    for num, spec in S.items():
+        g3.write_class(num, spec)
+        print(f"Clase {num:03d} generada.")
+
+
+if __name__ == "__main__":
+    main()

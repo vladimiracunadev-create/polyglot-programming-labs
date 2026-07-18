@@ -1,0 +1,19 @@
+{
+  "descripcion": "Serializar un par clave/valor a un formato de texto simple 'clave:valor'.",
+  "contrato": "stdin: una línea `clave valor` → stdout: `serializado=<clave>:<valor>`",
+  "formula": "unir clave y valor con ':'",
+  "casos": [
+    {
+      "stdin": "x 5",
+      "esperado": "serializado=x:5"
+    },
+    {
+      "stdin": "edad 30",
+      "esperado": "serializado=edad:30"
+    },
+    {
+      "stdin": "n 100",
+      "esperado": "serializado=n:100"
+    }
+  ]
+}

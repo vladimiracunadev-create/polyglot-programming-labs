@@ -1,0 +1,19 @@
+{
+  "descripcion": "Contar cuántos componentes (en distintos lenguajes) tiene un sistema políglota.",
+  "contrato": "stdin: una línea con nombres de componentes (palabras) → stdout: `componentes=<cantidad>`",
+  "formula": "contar los componentes",
+  "casos": [
+    {
+      "stdin": "cli api web",
+      "esperado": "componentes=3"
+    },
+    {
+      "stdin": "app",
+      "esperado": "componentes=1"
+    },
+    {
+      "stdin": "web api datos cache",
+      "esperado": "componentes=4"
+    }
+  ]
+}

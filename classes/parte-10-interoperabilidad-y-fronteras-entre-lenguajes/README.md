@@ -1,6 +1,6 @@
 # Parte 10 — Interoperabilidad y fronteras entre lenguajes
 
-> [⏮️ Parte 9](../parte-9-ingenieria-de-software-poliglota/README.md) · [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md) · [⏭️ Parte 11](../parte-11-proyecto-integrador-poliglota/README.md)
+> [⏮️ Parte 9](../parte-9-ingenieria-de-software-poliglota/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 11](../parte-11-proyecto-integrador-poliglota/README.md)
 
 **10 clases** · rango 155–164
 
@@ -8,11 +8,7 @@ Por qué los sistemas reales son políglotas y cómo comunican sus piezas: FFI, 
 
 ---
 
-## 🎯 ¿De qué trata esta parte?
-
-Por qué los sistemas reales son políglotas y cómo comunican sus piezas: FFI, ABI, serialización, APIs y WebAssembly.
-
-## 📚 Clases
+## 📚 Clases de esta parte
 
 | # | Clase |
 |---|---|
@@ -29,4 +25,4 @@ Por qué los sistemas reales son políglotas y cómo comunican sus piezas: FFI, 
 
 ---
 
-> [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md)
+> [⏮️ Parte 9](../parte-9-ingenieria-de-software-poliglota/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 11](../parte-11-proyecto-integrador-poliglota/README.md)

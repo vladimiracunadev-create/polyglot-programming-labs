@@ -1,100 +1,71 @@
 # Clase 008 — Trazado manual y ejecución simbólica
 
-> Parte **0 — Pensamiento computacional y el método políglota** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada, contenido en desarrollo.
+> Parte **0 — Pensamiento computacional y el método políglota** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Comprender **trazado manual y ejecución simbólica** como conocimiento transferible: su forma independiente del lenguaje, cómo se expresa en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) de una familia a otra.
+Aprender a 'ejecutar' un algoritmo con papel y lápiz: seguir el valor de cada variable paso a paso (trazado) para verificar que hace lo que crees, antes de ejecutarlo en una máquina. Es la habilidad de depuración más fundamental.
 
 ## 📚 Resultados de aprendizaje
 
-_🚧 Contenido en desarrollo — la estructura de la clase ya está fijada._
+Al finalizar, podrás:
+
+1. Trazar la ejecución de un algoritmo con una tabla de variables.
+2. Detectar un error de lógica sin ejecutar el programa.
+3. Predecir la salida de un fragmento leyéndolo.
 
 ## 🗺️ Temas
 
 | # | Tema | Por qué importa |
 |---|------|-----------------|
-| 1 | _en desarrollo_ | _pendiente_ |
+| 1 | Tabla de trazado | Registrar el estado de las variables vuelta a vuelta |
+| 2 | Ejecución simbólica | Razonar con valores generales, no solo concretos |
+| 3 | Trazar para depurar | Encontrar el error donde el estado se desvía |
 
 ## 📖 Definiciones y características
 
-_🚧 En desarrollo._
+- **Trazado** — seguir a mano el valor de cada variable en cada paso. Clave: revela dónde se desvía la lógica.
+- **Estado** — el conjunto de valores de todas las variables en un instante. Clave: el programa avanza cambiando el estado.
+- **Ejecución simbólica** — trazar con símbolos (x, n) en vez de números concretos. Clave: cubre todos los casos a la vez.
 
 ## 🧩 Situación
 
-_El problema observable que motiva esta clase._
+Tu bucle debería sumar 1+2+3 = 6 pero devuelve 3. En vez de ejecutar 20 veces cambiando cosas al azar, trazas a mano: descubres que inicializas `suma` dentro del bucle, reiniciándola cada vuelta.
 
-## 🧮 Modelo
+## 🔎 Ejemplo
 
-Entradas · salidas · reglas · casos límite. La especificación es neutral al lenguaje y se
-verifica con [`casos.json`](casos.json).
-
-## 📐 Algoritmo (pseudocódigo neutral)
+Trazado de `suma <- 0; PARA i en 1..3: suma <- suma + i`:
 
 ```text
-# pseudocódigo independiente del lenguaje
+paso | i | suma
+-----|---|-----
+inic | - | 0
+  1  | 1 | 1
+  2  | 2 | 3
+  3  | 3 | 6   ⇐ salida
 ```
 
-## 🌐 Implementaciones idiomáticas
+## ✍️ Práctica
 
-Cuando esta clase se construya, aquí vivirá una implementación idiomática por lenguaje del núcleo, verificadas contra `casos.json`:
-
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
-
-## 🔬 Comparación
-
-| Clase de diferencia | Qué observar |
-|---|---|
-| Sintáctica | Cómo se escribe lo mismo en cada lenguaje |
-| Semántica | Tipos, mutabilidad, memoria y errores |
-| Paradigmática | Si el lenguaje invita a estructurar la solución de otra forma |
-
-## 🧬 El concepto en la familia
-
-Cómo se ve este concepto en los **primos** de cada familia (Ruby, Kotlin, Haskell, Elixir,
-Lua, C++…), como _delta_ respecto del representante del núcleo. Consulta el
-[Atlas](../../../atlas/README.md).
-
-## ✅ Prueba común
-
-Los mismos casos de entrada/salida para todas las implementaciones:
-[`casos.json`](casos.json). Verifica la equivalencia con:
-
-```bash
-python scripts/verificar_equivalencia.py 008-trazado-manual-y-ejecucion-simbolica
-```
-
-## 🧪 Reto de transferencia
-
-Resuelve una variante en un lenguaje **no explicado paso a paso**. Detalle en
-[`reto.md`](reto.md).
+Traza a mano `x <- 5; MIENTRAS x > 0: ESCRIBIR x; x <- x - 2`. ¿Qué imprime? ¿Termina?
 
 ## ⚠️ Errores comunes
 
-_Síntoma → causa → solución (en desarrollo)._
+- **Depurar cambiando cosas al azar** → causa: no entender el estado real → solución: trazar a mano hasta ver dónde se desvía
+- **Trazar solo un caso concreto** → causa: no generalizar → solución: usar ejecución simbólica para cubrir todos los casos
 
 ## ❓ Preguntas frecuentes
 
-_En desarrollo._
+- **¿No es más rápido usar el debugger?** El debugger traza por ti, pero si no sabes trazar, no entiendes lo que muestra.
+- **¿Cuándo trazar?** Cuando un resultado te sorprende: el trazado localiza el paso exacto del error.
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 
-> [⬅️ Parte 0](../README.md) · [📚 Índice completo](../../README.md) · [🌐 Atlas de lenguajes](../../../atlas/README.md)
+> [⏮️ Clase 007](../../parte-0-pensamiento-computacional-y-el-metodo-poliglota/007-pseudocodigo-neutral-escribir-sin-lenguaje/README.md) · [📂 Parte](../README.md) · [📚 Índice](../../README.md) · [🌐 Atlas](../../../atlas/README.md) · [Clase 009 ⏭️](../../parte-0-pensamiento-computacional-y-el-metodo-poliglota/009-complejidad-y-eficiencia-intuicion-de-coste/README.md)

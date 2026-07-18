@@ -21,7 +21,7 @@
 
 ---
 
-> 🧭 **Estado del programa.** El **esqueleto completo de las 176 clases en 12 partes está construido** (manifest, índice, README de cada parte y de cada clase con la anatomía fijada). El **contenido a fondo se está escribiendo parte por parte**: hoy está la **Parte 0 iniciada** y la **clase insignia 041** con las **10 implementaciones del núcleo verificadas**.
+> 🧭 **Estado del programa.** Las **176 clases en 12 partes** existen con su estructura, **navegación ⏮️/⏭️ entre clases** e índice. El **contenido a fondo se escribe parte por parte**: hoy está la **Parte 0 completa** (14 clases de método, cada una con su tema propio, ejemplos, práctica, errores comunes y FAQ) y la **clase insignia 041** con las **10 implementaciones del núcleo verificadas**. El resto son páginas con estructura y navegación, marcadas 🚧, a la espera de contenido.
 >
 > **Qué verifica una máquina y qué no**, para que sepas de qué te fías: el **[verificador de equivalencia](scripts/verificar_equivalencia.py)** ejecuta en CI las implementaciones de cada clase construida contra su `casos.json` y comprueba que **todas producen la misma salida**. El texto de las clases y el Atlas son material de lectura escrito a mano: **no** se ejecutan en CI. Si el badge de CI está verde, lo que garantiza es que las implementaciones equivalentes lo son de verdad.
 

@@ -5,7 +5,7 @@
 Programa secuencial de **176 clases** en **12 partes**. La numeración es
 global (001→…) y el orden importa: cada clase asume la anterior.
 
-**Estado:** 4 clases construidas · 172 planificadas · núcleo de 10 lenguajes.
+**Estado:** 15 clases construidas · 161 planificadas · núcleo de 10 lenguajes.
 Leyenda: ✅ construida · 🚧 planificada.
 
 ---
@@ -19,17 +19,17 @@ Leyenda: ✅ construida · 🚧 planificada.
 | ✅ 001 | [Qué es programar y por qué comparar lenguajes: la tesis políglota](parte-0-pensamiento-computacional-y-el-metodo-poliglota/001-que-es-programar-y-por-que-comparar-lenguajes-la-tesis-poliglota/README.md) |
 | ✅ 002 | [Las tres clases de diferencia: sintáctica, semántica y paradigmática](parte-0-pensamiento-computacional-y-el-metodo-poliglota/002-las-tres-clases-de-diferencia-sintactica-semantica-y-paradigmatica/README.md) |
 | ✅ 003 | [Problema, contexto, entradas, proceso y salidas](parte-0-pensamiento-computacional-y-el-metodo-poliglota/003-problema-contexto-entradas-proceso-y-salidas/README.md) |
-| 🚧 004 | [Descomposición y reconocimiento de patrones](parte-0-pensamiento-computacional-y-el-metodo-poliglota/004-descomposicion-y-reconocimiento-de-patrones/README.md) |
-| 🚧 005 | [Abstracción, restricciones y casos límite](parte-0-pensamiento-computacional-y-el-metodo-poliglota/005-abstraccion-restricciones-y-casos-limite/README.md) |
-| 🚧 006 | [Algoritmos: corrección y terminación](parte-0-pensamiento-computacional-y-el-metodo-poliglota/006-algoritmos-correccion-y-terminacion/README.md) |
-| 🚧 007 | [Pseudocódigo neutral: escribir sin lenguaje](parte-0-pensamiento-computacional-y-el-metodo-poliglota/007-pseudocodigo-neutral-escribir-sin-lenguaje/README.md) |
-| 🚧 008 | [Trazado manual y ejecución simbólica](parte-0-pensamiento-computacional-y-el-metodo-poliglota/008-trazado-manual-y-ejecucion-simbolica/README.md) |
-| 🚧 009 | [Complejidad y eficiencia: intuición de coste](parte-0-pensamiento-computacional-y-el-metodo-poliglota/009-complejidad-y-eficiencia-intuicion-de-coste/README.md) |
-| 🚧 010 | [Legibilidad, estilo e idiomática](parte-0-pensamiento-computacional-y-el-metodo-poliglota/010-legibilidad-estilo-e-idiomatica/README.md) |
-| 🚧 011 | [Anatomía de una ficha de transferencia y cómo estudiarla](parte-0-pensamiento-computacional-y-el-metodo-poliglota/011-anatomia-de-una-ficha-de-transferencia-y-como-estudiarla/README.md) |
-| 🚧 012 | [casos.json y el verificador de equivalencia](parte-0-pensamiento-computacional-y-el-metodo-poliglota/012-casos-json-y-el-verificador-de-equivalencia/README.md) |
-| 🚧 013 | [El concepto en la familia: leer un lenguaje que no conoces](parte-0-pensamiento-computacional-y-el-metodo-poliglota/013-el-concepto-en-la-familia-leer-un-lenguaje-que-no-conoces/README.md) |
-| 🚧 014 | [Cómo elegir lenguaje para un problema](parte-0-pensamiento-computacional-y-el-metodo-poliglota/014-como-elegir-lenguaje-para-un-problema/README.md) |
+| ✅ 004 | [Descomposición y reconocimiento de patrones](parte-0-pensamiento-computacional-y-el-metodo-poliglota/004-descomposicion-y-reconocimiento-de-patrones/README.md) |
+| ✅ 005 | [Abstracción, restricciones y casos límite](parte-0-pensamiento-computacional-y-el-metodo-poliglota/005-abstraccion-restricciones-y-casos-limite/README.md) |
+| ✅ 006 | [Algoritmos: corrección y terminación](parte-0-pensamiento-computacional-y-el-metodo-poliglota/006-algoritmos-correccion-y-terminacion/README.md) |
+| ✅ 007 | [Pseudocódigo neutral: escribir sin lenguaje](parte-0-pensamiento-computacional-y-el-metodo-poliglota/007-pseudocodigo-neutral-escribir-sin-lenguaje/README.md) |
+| ✅ 008 | [Trazado manual y ejecución simbólica](parte-0-pensamiento-computacional-y-el-metodo-poliglota/008-trazado-manual-y-ejecucion-simbolica/README.md) |
+| ✅ 009 | [Complejidad y eficiencia: intuición de coste](parte-0-pensamiento-computacional-y-el-metodo-poliglota/009-complejidad-y-eficiencia-intuicion-de-coste/README.md) |
+| ✅ 010 | [Legibilidad, estilo e idiomática](parte-0-pensamiento-computacional-y-el-metodo-poliglota/010-legibilidad-estilo-e-idiomatica/README.md) |
+| ✅ 011 | [Anatomía de una ficha de transferencia y cómo estudiarla](parte-0-pensamiento-computacional-y-el-metodo-poliglota/011-anatomia-de-una-ficha-de-transferencia-y-como-estudiarla/README.md) |
+| ✅ 012 | [casos.json y el verificador de equivalencia](parte-0-pensamiento-computacional-y-el-metodo-poliglota/012-casos-json-y-el-verificador-de-equivalencia/README.md) |
+| ✅ 013 | [El concepto en la familia: leer un lenguaje que no conoces](parte-0-pensamiento-computacional-y-el-metodo-poliglota/013-el-concepto-en-la-familia-leer-un-lenguaje-que-no-conoces/README.md) |
+| ✅ 014 | [Cómo elegir lenguaje para un problema](parte-0-pensamiento-computacional-y-el-metodo-poliglota/014-como-elegir-lenguaje-para-un-problema/README.md) |
 
 ## Parte 1 — Atlas y genealogía de los lenguajes · clases 015–028
 

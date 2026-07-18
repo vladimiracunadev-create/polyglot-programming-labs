@@ -14,7 +14,7 @@
   "php"
  ],
  "total_planned": 176,
- "total_built": 4,
+ "total_built": 15,
  "parts_built": 2,
  "parts_planned": 12,
  "parts": [
@@ -49,67 +49,67 @@
      "num": 4,
      "title": "Descomposición y reconocimiento de patrones",
      "slug": "004-descomposicion-y-reconocimiento-de-patrones",
-     "built": false
+     "built": true
     },
     {
      "num": 5,
      "title": "Abstracción, restricciones y casos límite",
      "slug": "005-abstraccion-restricciones-y-casos-limite",
-     "built": false
+     "built": true
     },
     {
      "num": 6,
      "title": "Algoritmos: corrección y terminación",
      "slug": "006-algoritmos-correccion-y-terminacion",
-     "built": false
+     "built": true
     },
     {
      "num": 7,
      "title": "Pseudocódigo neutral: escribir sin lenguaje",
      "slug": "007-pseudocodigo-neutral-escribir-sin-lenguaje",
-     "built": false
+     "built": true
     },
     {
      "num": 8,
      "title": "Trazado manual y ejecución simbólica",
      "slug": "008-trazado-manual-y-ejecucion-simbolica",
-     "built": false
+     "built": true
     },
     {
      "num": 9,
      "title": "Complejidad y eficiencia: intuición de coste",
      "slug": "009-complejidad-y-eficiencia-intuicion-de-coste",
-     "built": false
+     "built": true
     },
     {
      "num": 10,
      "title": "Legibilidad, estilo e idiomática",
      "slug": "010-legibilidad-estilo-e-idiomatica",
-     "built": false
+     "built": true
     },
     {
      "num": 11,
      "title": "Anatomía de una ficha de transferencia y cómo estudiarla",
      "slug": "011-anatomia-de-una-ficha-de-transferencia-y-como-estudiarla",
-     "built": false
+     "built": true
     },
     {
      "num": 12,
      "title": "casos.json y el verificador de equivalencia",
      "slug": "012-casos-json-y-el-verificador-de-equivalencia",
-     "built": false
+     "built": true
     },
     {
      "num": 13,
      "title": "El concepto en la familia: leer un lenguaje que no conoces",
      "slug": "013-el-concepto-en-la-familia-leer-un-lenguaje-que-no-conoces",
-     "built": false
+     "built": true
     },
     {
      "num": 14,
      "title": "Cómo elegir lenguaje para un problema",
      "slug": "014-como-elegir-lenguaje-para-un-problema",
-     "built": false
+     "built": true
     }
    ]
   },

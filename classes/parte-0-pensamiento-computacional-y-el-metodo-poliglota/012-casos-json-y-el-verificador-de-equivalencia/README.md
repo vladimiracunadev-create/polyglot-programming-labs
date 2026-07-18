@@ -1,100 +1,72 @@
 # Clase 012 — casos.json y el verificador de equivalencia
 
-> Parte **0 — Pensamiento computacional y el método políglota** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada, contenido en desarrollo.
+> Parte **0 — Pensamiento computacional y el método políglota** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Comprender **casos.json y el verificador de equivalencia** como conocimiento transferible: su forma independiente del lenguaje, cómo se expresa en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) de una familia a otra.
+Entender el mecanismo que hace único a este programa: un archivo `casos.json` con entradas y salidas comunes, y un verificador que ejecuta todas las implementaciones y comprueba que producen la **misma** salida. Es equivalencia demostrada por máquina, no prometida.
 
 ## 📚 Resultados de aprendizaje
 
-_🚧 Contenido en desarrollo — la estructura de la clase ya está fijada._
+Al finalizar, podrás:
+
+1. Explicar qué contiene casos.json y qué define.
+2. Ejecutar el verificador sobre una clase e interpretar su salida.
+3. Entender por qué algunos lenguajes se omiten o se marcan como ilustrativos.
 
 ## 🗺️ Temas
 
 | # | Tema | Por qué importa |
 |---|------|-----------------|
-| 1 | _en desarrollo_ | _pendiente_ |
+| 1 | El contrato de una clase | Entrada por stdin, salida por stdout, casos esperados |
+| 2 | El verificador | Alimenta cada caso a cada implementación y compara |
+| 3 | Degradación silenciosa | Si falta un toolchain, se omite e informa |
 
 ## 📖 Definiciones y características
 
-_🚧 En desarrollo._
+- **casos.json** — contrato de la clase: descripción, fórmula y lista de {stdin, esperado}. Clave: es la fuente de verdad de la equivalencia.
+- **Verificador de equivalencia** — script que corre las implementaciones contra casos.json. Clave: falla si dos difieren.
+- **Ilustrativa** — implementación que no participa en la comparación por stdin (p. ej. SQL). Clave: se muestra pero no se compara igual.
 
 ## 🧩 Situación
 
-_El problema observable que motiva esta clase._
+Afirmar 'estas 10 implementaciones hacen lo mismo' es fácil de decir y fácil de equivocar. El verificador lo convierte en algo comprobable: si la de Rust imprime `27000.0` y las demás `27000.00`, el CI se pone rojo.
 
-## 🧮 Modelo
+## 🔎 Ejemplo
 
-Entradas · salidas · reglas · casos límite. La especificación es neutral al lenguaje y se
-verifica con [`casos.json`](casos.json).
-
-## 📐 Algoritmo (pseudocódigo neutral)
+Salida real del verificador sobre la clase 041:
 
 ```text
-# pseudocódigo independiente del lenguaje
+✅ python      3/3 casos
+✅ javascript  3/3 casos
+✅ java        3/3 casos
+⏭️  go          omitido (toolchain 'go' no disponible)
+ℹ️  sql         ilustrativa (declarativa, sin stdin)
 ```
 
-## 🌐 Implementaciones idiomáticas
+Comando: `python scripts/verificar_equivalencia.py 041`
 
-Cuando esta clase se construya, aquí vivirá una implementación idiomática por lenguaje del núcleo, verificadas contra `casos.json`:
+## ✍️ Práctica
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
-
-## 🔬 Comparación
-
-| Clase de diferencia | Qué observar |
-|---|---|
-| Sintáctica | Cómo se escribe lo mismo en cada lenguaje |
-| Semántica | Tipos, mutabilidad, memoria y errores |
-| Paradigmática | Si el lenguaje invita a estructurar la solución de otra forma |
-
-## 🧬 El concepto en la familia
-
-Cómo se ve este concepto en los **primos** de cada familia (Ruby, Kotlin, Haskell, Elixir,
-Lua, C++…), como _delta_ respecto del representante del núcleo. Consulta el
-[Atlas](../../../atlas/README.md).
-
-## ✅ Prueba común
-
-Los mismos casos de entrada/salida para todas las implementaciones:
-[`casos.json`](casos.json). Verifica la equivalencia con:
-
-```bash
-python scripts/verificar_equivalencia.py 012-casos-json-y-el-verificador-de-equivalencia
-```
-
-## 🧪 Reto de transferencia
-
-Resuelve una variante en un lenguaje **no explicado paso a paso**. Detalle en
-[`reto.md`](reto.md).
+Ejecuta `python scripts/verificar_equivalencia.py 041` en tu máquina. ¿Qué lenguajes verifica y cuáles omite según tus toolchains instalados?
 
 ## ⚠️ Errores comunes
 
-_Síntoma → causa → solución (en desarrollo)._
+- **Confiar en que 'seguro son equivalentes'** → causa: no verificar → solución: correr el verificador: la máquina no se cansa de comparar
+- **Formatear distinto en un lenguaje** → causa: locale o decimales diferentes → solución: fijar el formato (cultura invariante, 2 decimales) en todas las implementaciones
 
 ## ❓ Preguntas frecuentes
 
-_En desarrollo._
+- **¿Qué NO verifica?** El texto de las clases y el Atlas: son material de lectura, no se ejecutan en CI.
+- **¿Por qué SQL es ilustrativa?** Es declarativa: no lee stdin como las demás; se muestra la misma fórmula como consulta.
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 
-> [⬅️ Parte 0](../README.md) · [📚 Índice completo](../../README.md) · [🌐 Atlas de lenguajes](../../../atlas/README.md)
+> [⏮️ Clase 011](../../parte-0-pensamiento-computacional-y-el-metodo-poliglota/011-anatomia-de-una-ficha-de-transferencia-y-como-estudiarla/README.md) · [📂 Parte](../README.md) · [📚 Índice](../../README.md) · [🌐 Atlas](../../../atlas/README.md) · [Clase 013 ⏭️](../../parte-0-pensamiento-computacional-y-el-metodo-poliglota/013-el-concepto-en-la-familia-leer-un-lenguaje-que-no-conoces/README.md)

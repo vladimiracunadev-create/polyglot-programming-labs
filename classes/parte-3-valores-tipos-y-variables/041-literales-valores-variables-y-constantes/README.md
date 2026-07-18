@@ -129,4 +129,4 @@ Detalle en [`reto.md`](reto.md): añade un **impuesto** del 19 % después del de
 
 ---
 
-> [⬅️ Parte 3](../README.md) · [📚 Índice completo](../../README.md) · [🌐 Atlas de lenguajes](../../../atlas/README.md)
+> [⏮️ Clase 040](../../parte-2-herramientas-toolchains-y-anatomia-de-comandos/040-variables-de-entorno-rutas-y-el-path-en-windows-y-unix/README.md) · [📂 Parte](../README.md) · [📚 Índice](../../README.md) · [🌐 Atlas](../../../atlas/README.md) · [Clase 042 ⏭️](../../parte-3-valores-tipos-y-variables/042-declaracion-asignacion-e-inicializacion/README.md)

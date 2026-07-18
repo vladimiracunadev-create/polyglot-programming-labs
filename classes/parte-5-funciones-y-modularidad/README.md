@@ -1,6 +1,6 @@
 # Parte 5 — Funciones y modularidad
 
-> [⏮️ Parte 4](../parte-4-control-del-programa/README.md) · [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md) · [⏭️ Parte 6](../parte-6-datos-y-estructuras/README.md)
+> [⏮️ Parte 4](../parte-4-control-del-programa/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 6](../parte-6-datos-y-estructuras/README.md)
 
 **16 clases** · rango 073–088
 
@@ -8,11 +8,7 @@ Nombrar procesos, pasar datos y organizar el código en módulos con contratos c
 
 ---
 
-## 🎯 ¿De qué trata esta parte?
-
-Nombrar procesos, pasar datos y organizar el código en módulos con contratos claros.
-
-## 📚 Clases
+## 📚 Clases de esta parte
 
 | # | Clase |
 |---|---|
@@ -35,4 +31,4 @@ Nombrar procesos, pasar datos y organizar el código en módulos con contratos c
 
 ---
 
-> [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md)
+> [⏮️ Parte 4](../parte-4-control-del-programa/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 6](../parte-6-datos-y-estructuras/README.md)

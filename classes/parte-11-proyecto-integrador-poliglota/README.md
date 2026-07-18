@@ -1,6 +1,6 @@
 # Parte 11 — Proyecto integrador políglota
 
-> [⏮️ Parte 10](../parte-10-interoperabilidad-y-fronteras-entre-lenguajes/README.md) · [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md)
+> [⏮️ Parte 10](../parte-10-interoperabilidad-y-fronteras-entre-lenguajes/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md)
 
 **12 clases** · rango 165–176
 
@@ -8,11 +8,7 @@ Construir un sistema real con componentes en varios lenguajes y defender cada de
 
 ---
 
-## 🎯 ¿De qué trata esta parte?
-
-Construir un sistema real con componentes en varios lenguajes y defender cada decisión de lenguaje y contrato.
-
-## 📚 Clases
+## 📚 Clases de esta parte
 
 | # | Clase |
 |---|---|
@@ -31,4 +27,4 @@ Construir un sistema real con componentes en varios lenguajes y defender cada de
 
 ---
 
-> [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md)
+> [⏮️ Parte 10](../parte-10-interoperabilidad-y-fronteras-entre-lenguajes/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md)

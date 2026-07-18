@@ -8,7 +8,7 @@ Leyenda: ✅ construida · 🏗️ en progreso · 🚧 planificada.
 
 | Parte | Título | Clases | Estado |
 |---|---|---|---|
-| 0 | Pensamiento computacional y el método políglota | 14 | 🏗️ en progreso (001–003) |
+| 0 | Pensamiento computacional y el método políglota | 14 | ✅ construida (001–014) |
 | 1 | Atlas y genealogía de los lenguajes | 14 | 🚧 planificada |
 | 2 | Herramientas, toolchains y anatomía de comandos | 12 | 🚧 planificada |
 | 3 | Valores, tipos y variables | 16 | 🏗️ en progreso (041 insignia) |
@@ -24,7 +24,7 @@ Leyenda: ✅ construida · 🏗️ en progreso · 🚧 planificada.
 ## Orden de construcción
 
 1. **Infraestructura y portal** ✅ — manifest, índice, README, verificador de equivalencia, CI, sitio.
-2. **Parte 0 completa** 🏗️ — el método políglota y el pensamiento computacional.
+2. **Parte 0 completa** ✅ — el método políglota y el pensamiento computacional.
 3. **Parte 3 (Valores)** 🏗️ — empezando por la clase insignia 041.
 4. **Partes 1–2 (Atlas + Toolchains)** — la base de comprensión y herramientas.
 5. **Resto de partes** en orden curricular.

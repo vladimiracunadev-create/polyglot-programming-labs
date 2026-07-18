@@ -1,46 +1,20 @@
 # Clase 149 — Diseño y arquitectura comparada
 
 > Parte **9 — Ingeniería de software políglota** · ⏱️ Duración estimada: **90 min** · Nivel: **Avanzado**
-> 🚧 **Clase planificada** — página creada, contenido en desarrollo.
+> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
 
 ---
 
 ## 🎯 Objetivo
 
-Comprender **diseño y arquitectura comparada** como conocimiento transferible: su forma independiente del lenguaje, cómo se expresa en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) de una familia a otra.
-
-## 📚 Resultados de aprendizaje
-
-_🚧 Contenido en desarrollo — la estructura de la clase ya está fijada._
-
-## 🗺️ Temas
-
-| # | Tema | Por qué importa |
-|---|------|-----------------|
-| 1 | _en desarrollo_ | _pendiente_ |
-
-## 📖 Definiciones y características
-
-_🚧 En desarrollo._
-
-## 🧩 Situación
-
-_El problema observable que motiva esta clase._
+Estudiar **diseño y arquitectura comparada**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
 
 ## 🧮 Modelo
 
-Entradas · salidas · reglas · casos límite. La especificación es neutral al lenguaje y se
-verifica con [`casos.json`](casos.json).
+Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
+[`casos.json`](casos.json) para verificar equivalencia.
 
-## 📐 Algoritmo (pseudocódigo neutral)
-
-```text
-# pseudocódigo independiente del lenguaje
-```
-
-## 🌐 Implementaciones idiomáticas
-
-Cuando esta clase se construya, aquí vivirá una implementación idiomática por lenguaje del núcleo, verificadas contra `casos.json`:
+## 🌐 Implementaciones idiomáticas (previstas)
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -55,46 +29,11 @@ Cuando esta clase se construya, aquí vivirá una implementación idiomática po
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación
+## 🔬 Comparación · 🧬 El concepto en la familia
 
-| Clase de diferencia | Qué observar |
-|---|---|
-| Sintáctica | Cómo se escribe lo mismo en cada lenguaje |
-| Semántica | Tipos, mutabilidad, memoria y errores |
-| Paradigmática | Si el lenguaje invita a estructurar la solución de otra forma |
-
-## 🧬 El concepto en la familia
-
-Cómo se ve este concepto en los **primos** de cada familia (Ruby, Kotlin, Haskell, Elixir,
-Lua, C++…), como _delta_ respecto del representante del núcleo. Consulta el
-[Atlas](../../../atlas/README.md).
-
-## ✅ Prueba común
-
-Los mismos casos de entrada/salida para todas las implementaciones:
-[`casos.json`](casos.json). Verifica la equivalencia con:
-
-```bash
-python scripts/verificar_equivalencia.py 149-diseno-y-arquitectura-comparada
-```
-
-## 🧪 Reto de transferencia
-
-Resuelve una variante en un lenguaje **no explicado paso a paso**. Detalle en
-[`reto.md`](reto.md).
-
-## ⚠️ Errores comunes
-
-_Síntoma → causa → solución (en desarrollo)._
-
-## ❓ Preguntas frecuentes
-
-_En desarrollo._
-
-## 🔗 Referencias
-
-- Documentación oficial de cada lenguaje del núcleo.
+Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
+concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
 
 ---
 
-> [⬅️ Parte 9](../README.md) · [📚 Índice completo](../../README.md) · [🌐 Atlas de lenguajes](../../../atlas/README.md)
+> [⏮️ Clase 148](../../parte-9-ingenieria-de-software-poliglota/148-entrega-y-despliegue/README.md) · [📂 Parte](../README.md) · [📚 Índice](../../README.md) · [🌐 Atlas](../../../atlas/README.md) · [Clase 150 ⏭️](../../parte-9-ingenieria-de-software-poliglota/150-refactorizacion-segura/README.md)

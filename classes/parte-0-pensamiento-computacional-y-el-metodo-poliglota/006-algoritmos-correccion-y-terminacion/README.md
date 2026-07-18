@@ -1,100 +1,73 @@
 # Clase 006 — Algoritmos: corrección y terminación
 
-> Parte **0 — Pensamiento computacional y el método políglota** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada, contenido en desarrollo.
+> Parte **0 — Pensamiento computacional y el método políglota** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Comprender **algoritmos: corrección y terminación** como conocimiento transferible: su forma independiente del lenguaje, cómo se expresa en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) de una familia a otra.
+Entender qué es un algoritmo y las dos propiedades que lo hacen fiable: **corrección** (produce el resultado correcto para toda entrada válida) y **terminación** (siempre acaba, no se queda en un bucle infinito).
 
 ## 📚 Resultados de aprendizaje
 
-_🚧 Contenido en desarrollo — la estructura de la clase ya está fijada._
+Al finalizar, podrás:
+
+1. Definir algoritmo y sus propiedades esenciales.
+2. Argumentar informalmente por qué un algoritmo es correcto.
+3. Detectar por qué un bucle podría no terminar.
 
 ## 🗺️ Temas
 
 | # | Tema | Por qué importa |
 |---|------|-----------------|
-| 1 | _en desarrollo_ | _pendiente_ |
+| 1 | Qué es un algoritmo | Una receta precisa y finita de pasos |
+| 2 | Corrección | Da la respuesta correcta para toda entrada válida |
+| 3 | Terminación | Siempre acaba; el bucle avanza hacia su fin |
+| 4 | Invariante y variante | Herramientas para razonar sobre bucles |
 
 ## 📖 Definiciones y características
 
-_🚧 En desarrollo._
+- **Algoritmo** — secuencia finita y precisa de pasos que resuelve un problema. Clave: finita y sin ambigüedad.
+- **Corrección** — el algoritmo produce la salida especificada para toda entrada válida. Clave: se argumenta, no se supone.
+- **Terminación** — el algoritmo acaba en un número finito de pasos. Clave: algo debe decrecer hacia un límite.
+- **Invariante de bucle** — condición verdadera en cada vuelta del bucle. Clave: prueba la corrección.
 
 ## 🧩 Situación
 
-_El problema observable que motiva esta clase._
+Un algoritmo de búsqueda binaria es rapidísimo… hasta que alguien escribe `fin = medio` en vez de `fin = medio - 1` y el bucle deja de decrecer: nunca termina. Terminación no es un detalle.
 
-## 🧮 Modelo
-
-Entradas · salidas · reglas · casos límite. La especificación es neutral al lenguaje y se
-verifica con [`casos.json`](casos.json).
-
-## 📐 Algoritmo (pseudocódigo neutral)
+## 🔎 Ejemplo
 
 ```text
-# pseudocódigo independiente del lenguaje
+ALGORITMO mayor(lista):
+    mayor <- lista[0]           # invariante: 'mayor' es el máximo de lo visto
+    PARA cada x en lista[1..]:
+        SI x > mayor: mayor <- x
+    DEVOLVER mayor
+
+Terminación: la lista es finita ⇒ el bucle da pasos finitos.
+Corrección: el invariante garantiza que al final 'mayor' es el máximo total.
 ```
 
-## 🌐 Implementaciones idiomáticas
+## ✍️ Práctica
 
-Cuando esta clase se construya, aquí vivirá una implementación idiomática por lenguaje del núcleo, verificadas contra `casos.json`:
-
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
-
-## 🔬 Comparación
-
-| Clase de diferencia | Qué observar |
-|---|---|
-| Sintáctica | Cómo se escribe lo mismo en cada lenguaje |
-| Semántica | Tipos, mutabilidad, memoria y errores |
-| Paradigmática | Si el lenguaje invita a estructurar la solución de otra forma |
-
-## 🧬 El concepto en la familia
-
-Cómo se ve este concepto en los **primos** de cada familia (Ruby, Kotlin, Haskell, Elixir,
-Lua, C++…), como _delta_ respecto del representante del núcleo. Consulta el
-[Atlas](../../../atlas/README.md).
-
-## ✅ Prueba común
-
-Los mismos casos de entrada/salida para todas las implementaciones:
-[`casos.json`](casos.json). Verifica la equivalencia con:
-
-```bash
-python scripts/verificar_equivalencia.py 006-algoritmos-correccion-y-terminacion
-```
-
-## 🧪 Reto de transferencia
-
-Resuelve una variante en un lenguaje **no explicado paso a paso**. Detalle en
-[`reto.md`](reto.md).
+Escribe un algoritmo que cuente cuántos números pares hay en una lista y argumenta en una frase por qué termina.
 
 ## ⚠️ Errores comunes
 
-_Síntoma → causa → solución (en desarrollo)._
+- **Bucle que no decrece** → causa: el índice o la condición no avanzan hacia el fin → solución: asegurar que algo cambia en cada vuelta acercándose al límite
+- **Asumir corrección sin argumentar** → causa: confiar en que 'parece bien' → solución: buscar el invariante que lo garantiza
 
 ## ❓ Preguntas frecuentes
 
-_En desarrollo._
+- **¿Hay que demostrar formalmente todo?** No en este curso: basta un argumento informal claro de por qué es correcto y termina.
+- **¿Un programa que no termina siempre es un bug?** Casi siempre. Excepción: servicios que corren en un bucle eventos a propósito.
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 
-> [⬅️ Parte 0](../README.md) · [📚 Índice completo](../../README.md) · [🌐 Atlas de lenguajes](../../../atlas/README.md)
+> [⏮️ Clase 005](../../parte-0-pensamiento-computacional-y-el-metodo-poliglota/005-abstraccion-restricciones-y-casos-limite/README.md) · [📂 Parte](../README.md) · [📚 Índice](../../README.md) · [🌐 Atlas](../../../atlas/README.md) · [Clase 007 ⏭️](../../parte-0-pensamiento-computacional-y-el-metodo-poliglota/007-pseudocodigo-neutral-escribir-sin-lenguaje/README.md)

@@ -1,6 +1,6 @@
 # Parte 9 — Ingeniería de software políglota
 
-> [⏮️ Parte 8](../parte-8-como-funcionan-los-lenguajes/README.md) · [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md) · [⏭️ Parte 10](../parte-10-interoperabilidad-y-fronteras-entre-lenguajes/README.md)
+> [⏮️ Parte 8](../parte-8-como-funcionan-los-lenguajes/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 10](../parte-10-interoperabilidad-y-fronteras-entre-lenguajes/README.md)
 
 **16 clases** · rango 139–154
 
@@ -8,11 +8,7 @@ Llevar el código a producción: pruebas, dependencias, Git, CI, rendimiento, se
 
 ---
 
-## 🎯 ¿De qué trata esta parte?
-
-Llevar el código a producción: pruebas, dependencias, Git, CI, rendimiento, seguridad y mantenibilidad en varios lenguajes.
-
-## 📚 Clases
+## 📚 Clases de esta parte
 
 | # | Clase |
 |---|---|
@@ -35,4 +31,4 @@ Llevar el código a producción: pruebas, dependencias, Git, CI, rendimiento, se
 
 ---
 
-> [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md)
+> [⏮️ Parte 8](../parte-8-como-funcionan-los-lenguajes/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 10](../parte-10-interoperabilidad-y-fronteras-entre-lenguajes/README.md)

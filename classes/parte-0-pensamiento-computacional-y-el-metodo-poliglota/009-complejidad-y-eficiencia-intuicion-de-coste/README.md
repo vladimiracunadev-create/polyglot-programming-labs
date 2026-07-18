@@ -1,100 +1,67 @@
 # Clase 009 — Complejidad y eficiencia: intuición de coste
 
-> Parte **0 — Pensamiento computacional y el método políglota** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada, contenido en desarrollo.
+> Parte **0 — Pensamiento computacional y el método políglota** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Comprender **complejidad y eficiencia: intuición de coste** como conocimiento transferible: su forma independiente del lenguaje, cómo se expresa en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) de una familia a otra.
+Desarrollar la intuición de cuánto 'cuesta' un algoritmo en tiempo y memoria según crece la entrada, usando la notación O-grande de forma práctica. No es matemática por deporte: es saber por qué un programa que va bien con 100 datos se cae con 10 millones.
 
 ## 📚 Resultados de aprendizaje
 
-_🚧 Contenido en desarrollo — la estructura de la clase ya está fijada._
+Al finalizar, podrás:
+
+1. Estimar el orden de crecimiento (O(1), O(n), O(n²)) de un algoritmo simple.
+2. Comparar dos soluciones por su coste, no solo por si funcionan.
+3. Reconocer el bucle anidado como fuente típica de O(n²).
 
 ## 🗺️ Temas
 
 | # | Tema | Por qué importa |
 |---|------|-----------------|
-| 1 | _en desarrollo_ | _pendiente_ |
+| 1 | Crecimiento con la entrada | Lo que importa es cómo escala, no el tiempo en un caso |
+| 2 | O(1), O(n), O(n²), O(log n) | El vocabulario para comparar costes |
+| 3 | Tiempo vs. memoria | A veces se cambia uno por el otro |
 
 ## 📖 Definiciones y características
 
-_🚧 En desarrollo._
+- **Complejidad temporal** — cómo crece el número de operaciones con el tamaño de la entrada. Clave: se mide el orden, no los segundos.
+- **O-grande** — cota superior del crecimiento (O(n), O(n²)…). Clave: describe el peor caso al escalar.
+- **Bucle anidado** — un bucle dentro de otro. Clave: suele producir O(n²); vigílalo.
 
 ## 🧩 Situación
 
-_El problema observable que motiva esta clase._
+Dos funciones ordenan una lista. Con 10 elementos ambas tardan 'nada'. Con un millón, una tarda 1 segundo y la otra, 3 horas. La diferencia no se ve en la demo: se ve en el orden de complejidad, O(n log n) vs. O(n²).
 
-## 🧮 Modelo
-
-Entradas · salidas · reglas · casos límite. La especificación es neutral al lenguaje y se
-verifica con [`casos.json`](casos.json).
-
-## 📐 Algoritmo (pseudocódigo neutral)
+## 🔎 Ejemplo
 
 ```text
-# pseudocódigo independiente del lenguaje
+Buscar en lista NO ordenada  ⇒ recorrer todo        ⇒ O(n)
+Buscar en lista ordenada     ⇒ búsqueda binaria    ⇒ O(log n)
+Comparar todos con todos     ⇒ bucle dentro de bucle ⇒ O(n²)
+Acceder a lista[i]           ⇒ directo             ⇒ O(1)
 ```
 
-## 🌐 Implementaciones idiomáticas
+## ✍️ Práctica
 
-Cuando esta clase se construya, aquí vivirá una implementación idiomática por lenguaje del núcleo, verificadas contra `casos.json`:
-
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
-
-## 🔬 Comparación
-
-| Clase de diferencia | Qué observar |
-|---|---|
-| Sintáctica | Cómo se escribe lo mismo en cada lenguaje |
-| Semántica | Tipos, mutabilidad, memoria y errores |
-| Paradigmática | Si el lenguaje invita a estructurar la solución de otra forma |
-
-## 🧬 El concepto en la familia
-
-Cómo se ve este concepto en los **primos** de cada familia (Ruby, Kotlin, Haskell, Elixir,
-Lua, C++…), como _delta_ respecto del representante del núcleo. Consulta el
-[Atlas](../../../atlas/README.md).
-
-## ✅ Prueba común
-
-Los mismos casos de entrada/salida para todas las implementaciones:
-[`casos.json`](casos.json). Verifica la equivalencia con:
-
-```bash
-python scripts/verificar_equivalencia.py 009-complejidad-y-eficiencia-intuicion-de-coste
-```
-
-## 🧪 Reto de transferencia
-
-Resuelve una variante en un lenguaje **no explicado paso a paso**. Detalle en
-[`reto.md`](reto.md).
+¿Cuál es el orden de un algoritmo que, para cada persona de una lista, la compara con todas las demás? (Pista: bucle anidado.)
 
 ## ⚠️ Errores comunes
 
-_Síntoma → causa → solución (en desarrollo)._
+- **Medir con entradas pequeñas** → causa: el coste solo se nota al escalar → solución: razonar el orden, no cronometrar un caso chico
+- **Optimizar sin medir** → causa: atacar lo que no es el cuello de botella → solución: primero identificar el orden dominante, luego optimizar
 
 ## ❓ Preguntas frecuentes
 
-_En desarrollo._
+- **¿Siempre gana el de menor O?** Para entradas grandes, sí. Para pequeñas, un O(n²) simple puede ganar a un O(n log n) complejo.
+- **¿Necesito las matemáticas formales?** Aquí basta la intuición: contar cuántas veces se repite el trabajo al crecer n.
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 
-> [⬅️ Parte 0](../README.md) · [📚 Índice completo](../../README.md) · [🌐 Atlas de lenguajes](../../../atlas/README.md)
+> [⏮️ Clase 008](../../parte-0-pensamiento-computacional-y-el-metodo-poliglota/008-trazado-manual-y-ejecucion-simbolica/README.md) · [📂 Parte](../README.md) · [📚 Índice](../../README.md) · [🌐 Atlas](../../../atlas/README.md) · [Clase 010 ⏭️](../../parte-0-pensamiento-computacional-y-el-metodo-poliglota/010-legibilidad-estilo-e-idiomatica/README.md)

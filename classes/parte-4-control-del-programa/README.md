@@ -1,6 +1,6 @@
 # Parte 4 — Control del programa
 
-> [⏮️ Parte 3](../parte-3-valores-tipos-y-variables/README.md) · [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md) · [⏭️ Parte 5](../parte-5-funciones-y-modularidad/README.md)
+> [⏮️ Parte 3](../parte-3-valores-tipos-y-variables/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 5](../parte-5-funciones-y-modularidad/README.md)
 
 **16 clases** · rango 057–072
 
@@ -8,11 +8,7 @@ Decidir, repetir y manejar errores: el flujo de ejecución expresado en cada fam
 
 ---
 
-## 🎯 ¿De qué trata esta parte?
-
-Decidir, repetir y manejar errores: el flujo de ejecución expresado en cada familia de lenguajes.
-
-## 📚 Clases
+## 📚 Clases de esta parte
 
 | # | Clase |
 |---|---|
@@ -35,4 +31,4 @@ Decidir, repetir y manejar errores: el flujo de ejecución expresado en cada fam
 
 ---
 
-> [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md)
+> [⏮️ Parte 3](../parte-3-valores-tipos-y-variables/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 5](../parte-5-funciones-y-modularidad/README.md)

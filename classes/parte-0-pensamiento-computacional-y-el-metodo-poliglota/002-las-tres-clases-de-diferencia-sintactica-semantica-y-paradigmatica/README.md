@@ -1,19 +1,21 @@
 # Clase 002 — Las tres clases de diferencia: sintáctica, semántica y paradigmática
 
-> Parte **0 — Pensamiento computacional y el método políglota** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
+> Parte **0 — Pensamiento computacional y el método políglota** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
 > ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Dar el marco que se usará en cada comparación del curso: cuando dos lenguajes difieren, la diferencia es de una de tres clases. Sintáctica (se escribe distinto pero significa lo mismo), semántica (cambia el comportamiento, el tipo, la memoria) o paradigmática (invita a estructurar la solución de otra manera).
+Dar el marco que se usa en **cada** comparación del curso. Cuando dos lenguajes difieren, la diferencia es de una de tres clases: sintáctica (se escribe distinto pero significa lo mismo), semántica (cambia el comportamiento, el tipo, la memoria) o paradigmática (invita a estructurar la solución de otra manera).
 
 ## 📚 Resultados de aprendizaje
 
+Al finalizar, podrás:
+
 1. Clasificar una diferencia entre lenguajes como sintáctica, semántica o paradigmática.
 2. Dar ejemplos propios de cada clase de diferencia.
-3. Explicar por qué confundir las tres clases lleva a traducir mecánicamente en vez de programar idiomáticamente.
+3. Explicar por qué confundirlas lleva a traducir mecánicamente en vez de programar idiomáticamente.
 
 ## 🗺️ Temas
 
@@ -28,81 +30,44 @@ Dar el marco que se usará en cada comparación del curso: cuando dos lenguajes 
 
 - **Diferencia sintáctica** — distinta escritura, mismo significado esencial. Clave: la más fácil de salvar.
 - **Diferencia semántica** — distinto comportamiento observable. Clave: la que causa bugs al portar código.
-- **Diferencia paradigmática** — distinta forma de estructurar el problema. Clave: exige cambiar de mentalidad, no solo de sintaxis.
-- **Código idiomático** — solución escrita como la escribiría un experto de ese lenguaje. Clave: aprovecha el paradigma, no lo combate.
+- **Diferencia paradigmática** — distinta forma de estructurar el problema. Clave: exige cambiar de mentalidad.
+- **Código idiomático** — solución escrita como la escribiría un experto de ese lenguaje. Clave: aprovecha el paradigma.
 
 ## 🧩 Situación
 
-_El problema observable que motiva esta clase._
+Portas un bucle de JavaScript a Rust cambiando solo las llaves y los `;`. Compila… pero el programa se comporta distinto porque en Rust el valor se *movió* y ya no puedes usarlo. No era una diferencia sintáctica: era semántica.
 
-## 🧮 Modelo
-
-Entradas · salidas · reglas · casos límite. La especificación es neutral al lenguaje y se
-verifica con [`casos.json`](casos.json).
-
-## 📐 Algoritmo (pseudocódigo neutral)
+## 🔎 Ejemplo
 
 ```text
-# pseudocódigo independiente del lenguaje
+Sintáctica:   for (i=0;i<n;i++)      vs   for i in range(n)
+              (mismo bucle, otra escritura)
+
+Semántica:    x = y (copia en C)     vs   x = y (mueve en Rust)
+              (misma escritura, otro comportamiento)
+
+Paradigmática: recorrer una lista con un bucle
+              vs   describir el resultado con SQL (SELECT ...)
 ```
 
-## 🌐 Implementaciones idiomáticas
+## ✍️ Práctica
 
-Cuando esta clase se construya, aquí vivirá una implementación idiomática por lenguaje del núcleo, verificadas contra `casos.json`:
-
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
-
-## 🔬 Comparación
-
-| Clase de diferencia | Qué observar |
-|---|---|
-| Sintáctica | Cómo se escribe lo mismo en cada lenguaje |
-| Semántica | Tipos, mutabilidad, memoria y errores |
-| Paradigmática | Si el lenguaje invita a estructurar la solución de otra forma |
-
-## 🧬 El concepto en la familia
-
-Cómo se ve este concepto en los **primos** de cada familia (Ruby, Kotlin, Haskell, Elixir,
-Lua, C++…), como _delta_ respecto del representante del núcleo. Consulta el
-[Atlas](../../../atlas/README.md).
-
-## ✅ Prueba común
-
-Los mismos casos de entrada/salida para todas las implementaciones:
-[`casos.json`](casos.json). Verifica la equivalencia con:
-
-```bash
-python scripts/verificar_equivalencia.py 002-las-tres-clases-de-diferencia-sintactica-semantica-y-paradigmatica
-```
-
-## 🧪 Reto de transferencia
-
-Resuelve una variante en un lenguaje **no explicado paso a paso**. Detalle en
-[`reto.md`](reto.md).
+Toma `a == b`. En Java compara referencias para objetos; en Python compara valor. ¿De qué clase de diferencia se trata? (Respuesta: semántica.)
 
 ## ⚠️ Errores comunes
 
-_Síntoma → causa → solución (en desarrollo)._
+- **Portar código cambiando solo la sintaxis** → causa: asumir que todo es sintáctico → solución: verificar siempre si hay diferencia semántica (tipos, memoria, mutabilidad)
+- **Forzar el estilo de un lenguaje en otro** → causa: ignorar el paradigma destino → solución: escribir idiomático: adaptar la estructura, no solo las palabras
 
 ## ❓ Preguntas frecuentes
 
-_En desarrollo._
+- **¿Cuál es la más peligrosa?** La semántica: el código compila y parece correcto, pero se comporta distinto.
+- **¿Y la paradigmática se puede evitar?** A veces sí (imperativo en casi todos), pero perderías la ventaja del lenguaje destino.
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 
-> [⬅️ Parte 0](../README.md) · [📚 Índice completo](../../README.md) · [🌐 Atlas de lenguajes](../../../atlas/README.md)
+> [⏮️ Clase 001](../../parte-0-pensamiento-computacional-y-el-metodo-poliglota/001-que-es-programar-y-por-que-comparar-lenguajes-la-tesis-poliglota/README.md) · [📂 Parte](../README.md) · [📚 Índice](../../README.md) · [🌐 Atlas](../../../atlas/README.md) · [Clase 003 ⏭️](../../parte-0-pensamiento-computacional-y-el-metodo-poliglota/003-problema-contexto-entradas-proceso-y-salidas/README.md)

@@ -1,6 +1,6 @@
 # Parte 7 — Paradigmas
 
-> [⏮️ Parte 6](../parte-6-datos-y-estructuras/README.md) · [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md) · [⏭️ Parte 8](../parte-8-como-funcionan-los-lenguajes/README.md)
+> [⏮️ Parte 6](../parte-6-datos-y-estructuras/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 8](../parte-8-como-funcionan-los-lenguajes/README.md)
 
 **16 clases** · rango 107–122
 
@@ -8,11 +8,7 @@ Las grandes formas de estructurar una solución: imperativo, objetos, funcional,
 
 ---
 
-## 🎯 ¿De qué trata esta parte?
-
-Las grandes formas de estructurar una solución: imperativo, objetos, funcional, declarativo, lógico, eventos y concurrencia.
-
-## 📚 Clases
+## 📚 Clases de esta parte
 
 | # | Clase |
 |---|---|
@@ -35,4 +31,4 @@ Las grandes formas de estructurar una solución: imperativo, objetos, funcional,
 
 ---
 
-> [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md)
+> [⏮️ Parte 6](../parte-6-datos-y-estructuras/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 8](../parte-8-como-funcionan-los-lenguajes/README.md)

@@ -1,6 +1,6 @@
 # Parte 2 — Herramientas, toolchains y anatomía de comandos
 
-> [⏮️ Parte 1](../parte-1-atlas-y-genealogia-de-los-lenguajes/README.md) · [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md) · [⏭️ Parte 3](../parte-3-valores-tipos-y-variables/README.md)
+> [⏮️ Parte 1](../parte-1-atlas-y-genealogia-de-los-lenguajes/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 3](../parte-3-valores-tipos-y-variables/README.md)
 
 **12 clases** · rango 029–040
 
@@ -8,11 +8,7 @@ Del código fuente al programa que corre: instalar, ejecutar, compilar, empaquet
 
 ---
 
-## 🎯 ¿De qué trata esta parte?
-
-Del código fuente al programa que corre: instalar, ejecutar, compilar, empaquetar y probar en cada lenguaje, con el esquema completo de cada comando.
-
-## 📚 Clases
+## 📚 Clases de esta parte
 
 | # | Clase |
 |---|---|
@@ -31,4 +27,4 @@ Del código fuente al programa que corre: instalar, ejecutar, compilar, empaquet
 
 ---
 
-> [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md)
+> [⏮️ Parte 1](../parte-1-atlas-y-genealogia-de-los-lenguajes/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 3](../parte-3-valores-tipos-y-variables/README.md)

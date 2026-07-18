@@ -1,6 +1,6 @@
 # Parte 8 — Cómo funcionan los lenguajes
 
-> [⏮️ Parte 7](../parte-7-paradigmas/README.md) · [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md) · [⏭️ Parte 9](../parte-9-ingenieria-de-software-poliglota/README.md)
+> [⏮️ Parte 7](../parte-7-paradigmas/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 9](../parte-9-ingenieria-de-software-poliglota/README.md)
 
 **16 clases** · rango 123–138
 
@@ -8,11 +8,7 @@ Qué ocurre por debajo: compilación, máquinas virtuales, memoria, concurrencia
 
 ---
 
-## 🎯 ¿De qué trata esta parte?
-
-Qué ocurre por debajo: compilación, máquinas virtuales, memoria, concurrencia y diagnóstico de errores.
-
-## 📚 Clases
+## 📚 Clases de esta parte
 
 | # | Clase |
 |---|---|
@@ -35,4 +31,4 @@ Qué ocurre por debajo: compilación, máquinas virtuales, memoria, concurrencia
 
 ---
 
-> [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md)
+> [⏮️ Parte 7](../parte-7-paradigmas/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 9](../parte-9-ingenieria-de-software-poliglota/README.md)

@@ -1,100 +1,73 @@
 # Clase 011 — Anatomía de una ficha de transferencia y cómo estudiarla
 
-> Parte **0 — Pensamiento computacional y el método políglota** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada, contenido en desarrollo.
+> Parte **0 — Pensamiento computacional y el método políglota** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Comprender **anatomía de una ficha de transferencia y cómo estudiarla** como conocimiento transferible: su forma independiente del lenguaje, cómo se expresa en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) de una familia a otra.
+Conocer la unidad de estudio del curso: la **ficha de transferencia** (cada clase de código). Verás qué secciones tiene, en qué orden estudiarlas y cómo usarlas para aprender un concepto una vez y aplicarlo en 10 lenguajes.
 
 ## 📚 Resultados de aprendizaje
 
-_🚧 Contenido en desarrollo — la estructura de la clase ya está fijada._
+Al finalizar, podrás:
+
+1. Nombrar las secciones de una clase y para qué sirve cada una.
+2. Seguir el flujo de estudio: concepto → pseudocódigo → implementaciones → comparación → transferencia.
+3. Usar casos.json y el verificador para comprobar tu comprensión.
 
 ## 🗺️ Temas
 
 | # | Tema | Por qué importa |
 |---|------|-----------------|
-| 1 | _en desarrollo_ | _pendiente_ |
+| 1 | Estructura de una clase | Objetivo, modelo, algoritmo, implementaciones, comparación, reto |
+| 2 | Orden de estudio recomendado | Del concepto neutral a la transferencia |
+| 3 | Los archivos de la ficha | concepto.md, comparacion.md, reto.md, casos.json, implementaciones/ |
 
 ## 📖 Definiciones y características
 
-_🚧 En desarrollo._
+- **Ficha de transferencia** — una clase de código: mismo problema resuelto y comparado en los 10 lenguajes. Clave: es la unidad de estudio.
+- **casos.json** — entradas y salidas comunes para todas las implementaciones. Clave: define la equivalencia.
+- **Reto de transferencia** — resolver una variante en un lenguaje no explicado. Clave: prueba que el conocimiento se transfirió.
 
 ## 🧩 Situación
 
-_El problema observable que motiva esta clase._
+Abres la clase 041 y ves diez implementaciones. El impulso es leerlas todas en paralelo. El método correcto es otro: primero el concepto y el algoritmo neutral, luego una implementación, luego comparar — y solo al final, el reto.
 
-## 🧮 Modelo
+## 🔎 Ejemplo
 
-Entradas · salidas · reglas · casos límite. La especificación es neutral al lenguaje y se
-verifica con [`casos.json`](casos.json).
-
-## 📐 Algoritmo (pseudocódigo neutral)
+Flujo de estudio de una ficha:
 
 ```text
-# pseudocódigo independiente del lenguaje
+1. 🎯 Objetivo + 🧮 Modelo   → entiende QUÉ se resuelve
+2. 📐 Algoritmo neutral       → entiende CÓMO, sin lenguaje
+3. 🌐 Una implementación      → ve la forma en TU lenguaje
+4. 🔬 Comparación             → nota qué cambia y por qué
+5. ✅ casos.json + verificador → comprueba equivalencia
+6. 🧪 Reto de transferencia   → aplícalo en un lenguaje nuevo
 ```
 
-## 🌐 Implementaciones idiomáticas
+Revisa la [clase 041](../../parte-3-valores-tipos-y-variables/041-literales-valores-variables-y-constantes/README.md) con este flujo.
 
-Cuando esta clase se construya, aquí vivirá una implementación idiomática por lenguaje del núcleo, verificadas contra `casos.json`:
+## ✍️ Práctica
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
-
-## 🔬 Comparación
-
-| Clase de diferencia | Qué observar |
-|---|---|
-| Sintáctica | Cómo se escribe lo mismo en cada lenguaje |
-| Semántica | Tipos, mutabilidad, memoria y errores |
-| Paradigmática | Si el lenguaje invita a estructurar la solución de otra forma |
-
-## 🧬 El concepto en la familia
-
-Cómo se ve este concepto en los **primos** de cada familia (Ruby, Kotlin, Haskell, Elixir,
-Lua, C++…), como _delta_ respecto del representante del núcleo. Consulta el
-[Atlas](../../../atlas/README.md).
-
-## ✅ Prueba común
-
-Los mismos casos de entrada/salida para todas las implementaciones:
-[`casos.json`](casos.json). Verifica la equivalencia con:
-
-```bash
-python scripts/verificar_equivalencia.py 011-anatomia-de-una-ficha-de-transferencia-y-como-estudiarla
-```
-
-## 🧪 Reto de transferencia
-
-Resuelve una variante en un lenguaje **no explicado paso a paso**. Detalle en
-[`reto.md`](reto.md).
+Abre la clase 041 y estúdiala siguiendo los 6 pasos. Al llegar al reto, intenta la variante en un lenguaje que no domines.
 
 ## ⚠️ Errores comunes
 
-_Síntoma → causa → solución (en desarrollo)._
+- **Leer las 10 implementaciones a la vez** → causa: saturarse sin fijar el concepto → solución: empezar por el algoritmo neutral y una sola implementación
+- **Saltarse la comparación** → causa: quedarse con la forma, no con el porqué → solución: leer siempre comparacion.md: ahí está el aprendizaje
 
 ## ❓ Preguntas frecuentes
 
-_En desarrollo._
+- **¿Debo implementar en los 10 siempre?** No. Domina 2-3, lee el resto para comparar, y usa el reto para forzar uno nuevo.
+- **¿Y las clases de la Parte 0?** Son de método (como esta): no tienen 10 implementaciones, sino ideas que se aplican a todas.
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 
-> [⬅️ Parte 0](../README.md) · [📚 Índice completo](../../README.md) · [🌐 Atlas de lenguajes](../../../atlas/README.md)
+> [⏮️ Clase 010](../../parte-0-pensamiento-computacional-y-el-metodo-poliglota/010-legibilidad-estilo-e-idiomatica/README.md) · [📂 Parte](../README.md) · [📚 Índice](../../README.md) · [🌐 Atlas](../../../atlas/README.md) · [Clase 012 ⏭️](../../parte-0-pensamiento-computacional-y-el-metodo-poliglota/012-casos-json-y-el-verificador-de-equivalencia/README.md)

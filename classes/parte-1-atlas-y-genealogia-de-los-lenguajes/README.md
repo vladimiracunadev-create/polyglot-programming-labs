@@ -1,6 +1,6 @@
 # Parte 1 — Atlas y genealogía de los lenguajes
 
-> [⏮️ Parte 0](../parte-0-pensamiento-computacional-y-el-metodo-poliglota/README.md) · [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md) · [⏭️ Parte 2](../parte-2-herramientas-toolchains-y-anatomia-de-comandos/README.md)
+> [⏮️ Parte 0](../parte-0-pensamiento-computacional-y-el-metodo-poliglota/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 2](../parte-2-herramientas-toolchains-y-anatomia-de-comandos/README.md)
 
 **14 clases** · rango 015–028
 
@@ -8,11 +8,7 @@ El árbol genealógico: cada lenguaje del núcleo es el representante de una fam
 
 ---
 
-## 🎯 ¿De qué trata esta parte?
-
-El árbol genealógico: cada lenguaje del núcleo es el representante de una familia y abre la puerta a decenas de primos.
-
-## 📚 Clases
+## 📚 Clases de esta parte
 
 | # | Clase |
 |---|---|
@@ -33,4 +29,4 @@ El árbol genealógico: cada lenguaje del núcleo es el representante de una fam
 
 ---
 
-> [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md)
+> [⏮️ Parte 0](../parte-0-pensamiento-computacional-y-el-metodo-poliglota/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 2](../parte-2-herramientas-toolchains-y-anatomia-de-comandos/README.md)

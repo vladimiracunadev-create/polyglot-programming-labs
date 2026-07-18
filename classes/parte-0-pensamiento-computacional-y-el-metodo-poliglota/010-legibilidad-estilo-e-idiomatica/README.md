@@ -1,100 +1,72 @@
 # Clase 010 — Legibilidad, estilo e idiomática
 
-> Parte **0 — Pensamiento computacional y el método políglota** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada, contenido en desarrollo.
+> Parte **0 — Pensamiento computacional y el método políglota** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Comprender **legibilidad, estilo e idiomática** como conocimiento transferible: su forma independiente del lenguaje, cómo se expresa en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) de una familia a otra.
+Entender que el código se lee muchas más veces de las que se escribe, y que cada lenguaje tiene su forma 'idiomática' (la que un experto reconoce como natural). Escribir legible e idiomático no es estética: es mantenibilidad.
 
 ## 📚 Resultados de aprendizaje
 
-_🚧 Contenido en desarrollo — la estructura de la clase ya está fijada._
+Al finalizar, podrás:
+
+1. Explicar por qué la legibilidad importa más que la brevedad.
+2. Reconocer código idiomático frente a una traducción mecánica.
+3. Aplicar nombres y estructura que comuniquen intención.
 
 ## 🗺️ Temas
 
 | # | Tema | Por qué importa |
 |---|------|-----------------|
-| 1 | _en desarrollo_ | _pendiente_ |
+| 1 | El código se lee más que se escribe | Optimizar para quien lo lea (incluido tu yo futuro) |
+| 2 | Idiomática por lenguaje | Lo natural en Python no lo es en Go |
+| 3 | Nombres que comunican | Un buen nombre ahorra un comentario |
 
 ## 📖 Definiciones y características
 
-_🚧 En desarrollo._
+- **Legibilidad** — facilidad con que un humano entiende el código. Clave: prima sobre la astucia.
+- **Idiomática** — escribir como lo haría un experto del lenguaje. Clave: aprovecha sus convenciones y su paradigma.
+- **Código listo (clever)** — código ingenioso pero difícil de leer. Clave: casi siempre es un error de criterio.
 
 ## 🧩 Situación
 
-_El problema observable que motiva esta clase._
+Un desarrollador escribe en Python un bucle `for i in range(len(lista))` para acceder por índice, como haría en C. Funciona, pero cualquier pythonista escribiría `for x in lista`. La versión idiomática se lee y se mantiene mejor.
 
-## 🧮 Modelo
-
-Entradas · salidas · reglas · casos límite. La especificación es neutral al lenguaje y se
-verifica con [`casos.json`](casos.json).
-
-## 📐 Algoritmo (pseudocódigo neutral)
+## 🔎 Ejemplo
 
 ```text
-# pseudocódigo independiente del lenguaje
+No idiomático (Python, estilo C):
+    for i in range(len(nombres)):
+        print(nombres[i])
+
+Idiomático (Python):
+    for nombre in nombres:
+        print(nombre)
 ```
 
-## 🌐 Implementaciones idiomáticas
+Mismo resultado; el segundo comunica la intención sin ruido.
 
-Cuando esta clase se construya, aquí vivirá una implementación idiomática por lenguaje del núcleo, verificadas contra `casos.json`:
+## ✍️ Práctica
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
-
-## 🔬 Comparación
-
-| Clase de diferencia | Qué observar |
-|---|---|
-| Sintáctica | Cómo se escribe lo mismo en cada lenguaje |
-| Semántica | Tipos, mutabilidad, memoria y errores |
-| Paradigmática | Si el lenguaje invita a estructurar la solución de otra forma |
-
-## 🧬 El concepto en la familia
-
-Cómo se ve este concepto en los **primos** de cada familia (Ruby, Kotlin, Haskell, Elixir,
-Lua, C++…), como _delta_ respecto del representante del núcleo. Consulta el
-[Atlas](../../../atlas/README.md).
-
-## ✅ Prueba común
-
-Los mismos casos de entrada/salida para todas las implementaciones:
-[`casos.json`](casos.json). Verifica la equivalencia con:
-
-```bash
-python scripts/verificar_equivalencia.py 010-legibilidad-estilo-e-idiomatica
-```
-
-## 🧪 Reto de transferencia
-
-Resuelve una variante en un lenguaje **no explicado paso a paso**. Detalle en
-[`reto.md`](reto.md).
+Busca un fragmento tuyo de hace meses. ¿Lo entiendes en 10 segundos? Reescríbelo para que sí, cambiando nombres y estructura.
 
 ## ⚠️ Errores comunes
 
-_Síntoma → causa → solución (en desarrollo)._
+- **Priorizar líneas cortas sobre claridad** → causa: confundir brevedad con calidad → solución: preferir lo legible aunque ocupe una línea más
+- **Escribir todos los lenguajes con el mismo estilo** → causa: ignorar la idiomática → solución: aprender las convenciones de cada lenguaje del núcleo
 
 ## ❓ Preguntas frecuentes
 
-_En desarrollo._
+- **¿La idiomática es subjetiva?** Menos de lo que parece: cada comunidad tiene guías de estilo (PEP 8, gofmt, rustfmt).
+- **¿Legible o rápido?** Legible por defecto; rápido solo donde midas que hace falta.
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 
-> [⬅️ Parte 0](../README.md) · [📚 Índice completo](../../README.md) · [🌐 Atlas de lenguajes](../../../atlas/README.md)
+> [⏮️ Clase 009](../../parte-0-pensamiento-computacional-y-el-metodo-poliglota/009-complejidad-y-eficiencia-intuicion-de-coste/README.md) · [📂 Parte](../README.md) · [📚 Índice](../../README.md) · [🌐 Atlas](../../../atlas/README.md) · [Clase 011 ⏭️](../../parte-0-pensamiento-computacional-y-el-metodo-poliglota/011-anatomia-de-una-ficha-de-transferencia-y-como-estudiarla/README.md)

@@ -1,110 +1,74 @@
 # Clase 001 — Qué es programar y por qué comparar lenguajes: la tesis políglota
 
-> Parte **0 — Pensamiento computacional y el método políglota** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
+> Parte **0 — Pensamiento computacional y el método políglota** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
 > ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Entender la tesis del programa: el conocimiento de la programación es transferible. Un mismo concepto (una variable, un bucle, una función) existe en todos los lenguajes; lo que cambia es la forma. Aprender el concepto una vez permite reconocerlo, compararlo y aplicarlo en cualquier lenguaje.
+Entender que programar es resolver problemas con instrucciones precisas, y que ese conocimiento es **transferible**: un mismo concepto (una variable, un bucle, una función) existe en todos los lenguajes; lo que cambia es la forma. Aprenderlo una vez permite reconocerlo, compararlo y aplicarlo en cualquier lenguaje.
 
 ## 📚 Resultados de aprendizaje
 
-1. Explicar la diferencia entre aprender un lenguaje y aprender a programar.
+Al finalizar, podrás:
+
+1. Explicar la diferencia entre aprender *un* lenguaje y aprender *a programar*.
 2. Enunciar la tesis políglota: concepto → forma neutral → implementaciones → comparación → transferencia.
-3. Distinguir conocimiento transferible de detalle sintáctico.
+3. Distinguir el conocimiento transferible del detalle sintáctico de un lenguaje.
 4. Justificar por qué comparar lenguajes acelera el aprendizaje en vez de dispersarlo.
 
 ## 🗺️ Temas
 
 | # | Tema | Por qué importa |
 |---|------|-----------------|
-| 1 | Concepto vs. sintaxis | Separa lo que perdura de lo que cambia entre lenguajes |
-| 2 | Los 10 lenguajes del núcleo | Definen el terreno práctico que se implementa y verifica |
-| 3 | Las ~40 familias del Atlas | Amplían la comprensión sin multiplicar el mantenimiento |
-| 4 | La ficha de transferencia | Es la unidad mínima de estudio del programa |
-| 5 | Reconocer, comparar, aplicar | El ciclo que convierte teoría en habilidad transferible |
+| 1 | Programar = resolver con precisión | Separa la idea (algoritmo) de su escritura (lenguaje) |
+| 2 | Concepto vs. sintaxis | Lo que perdura frente a lo que cambia entre lenguajes |
+| 3 | Los 10 lenguajes del núcleo | El terreno práctico que se implementa y verifica |
+| 4 | Las ~40 familias del Atlas | Amplían la comprensión sin multiplicar el mantenimiento |
+| 5 | Reconocer, comparar, aplicar | El ciclo que convierte teoría en habilidad |
 
 ## 📖 Definiciones y características
 
+- **Programar** — expresar la solución de un problema como instrucciones que una máquina ejecuta. Clave: la idea es independiente del lenguaje.
 - **Conocimiento transferible** — idea que sobrevive al cambio de lenguaje (p. ej. 'iterar una colección'). Clave: es lo que de verdad se aprende.
 - **Núcleo** — los 10 lenguajes que se implementan y verifican en CI. Clave: profundidad práctica.
 - **Atlas** — cobertura de ~40 lenguajes por sus características. Clave: amplitud de comprensión.
-- **Ficha de transferencia** — unidad de estudio: concepto, algoritmo, implementaciones y comparación. Clave: mismo problema en todos los lenguajes.
 
 ## 🧩 Situación
 
-_El problema observable que motiva esta clase._
+Alguien aprende Python, hace 50 ejercicios y se siente capaz. Le piden mantener un servicio en Go. Se bloquea: cree que no sabe programar, cuando en realidad **sí** sabe — solo no reconoce los mismos conceptos con otra piel. Este programa ataca justamente eso.
 
-## 🧮 Modelo
+## 🔎 Ejemplo
 
-Entradas · salidas · reglas · casos límite. La especificación es neutral al lenguaje y se
-verifica con [`casos.json`](casos.json).
-
-## 📐 Algoritmo (pseudocódigo neutral)
+El mismo concepto ("guardar un valor con nombre") en tres lenguajes:
 
 ```text
-# pseudocódigo independiente del lenguaje
+Python:  total = 27000
+Go:      total := 27000
+Rust:    let total = 27000;
 ```
 
-## 🌐 Implementaciones idiomáticas
+Cambia la escritura, **no** la idea: un nombre apunta a un valor. Eso es lo transferible.
 
-Cuando esta clase se construya, aquí vivirá una implementación idiomática por lenguaje del núcleo, verificadas contra `casos.json`:
+## ✍️ Práctica
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
-
-## 🔬 Comparación
-
-| Clase de diferencia | Qué observar |
-|---|---|
-| Sintáctica | Cómo se escribe lo mismo en cada lenguaje |
-| Semántica | Tipos, mutabilidad, memoria y errores |
-| Paradigmática | Si el lenguaje invita a estructurar la solución de otra forma |
-
-## 🧬 El concepto en la familia
-
-Cómo se ve este concepto en los **primos** de cada familia (Ruby, Kotlin, Haskell, Elixir,
-Lua, C++…), como _delta_ respecto del representante del núcleo. Consulta el
-[Atlas](../../../atlas/README.md).
-
-## ✅ Prueba común
-
-Los mismos casos de entrada/salida para todas las implementaciones:
-[`casos.json`](casos.json). Verifica la equivalencia con:
-
-```bash
-python scripts/verificar_equivalencia.py 001-que-es-programar-y-por-que-comparar-lenguajes-la-tesis-poliglota
-```
-
-## 🧪 Reto de transferencia
-
-Resuelve una variante en un lenguaje **no explicado paso a paso**. Detalle en
-[`reto.md`](reto.md).
+Escribe en una frase, sin usar ningún lenguaje, qué hace este programa: `precio * cantidad`. Luego búscalo escrito en dos lenguajes que conozcas y subraya qué es idéntico y qué cambia.
 
 ## ⚠️ Errores comunes
 
-_Síntoma → causa → solución (en desarrollo)._
+- **Creer que "sé Python" = "sé programar"** → causa: confundir el lenguaje con la disciplina → solución: estudiar el concepto y luego reconocerlo en otro lenguaje
+- **Memorizar sintaxis sin el concepto detrás** → causa: aprender la forma sin el fondo → solución: para cada línea, preguntar "¿qué idea neutral expresa?"
 
 ## ❓ Preguntas frecuentes
 
-_En desarrollo._
+- **¿Necesito saber los 10 lenguajes antes de empezar?** No. Empiezas por el concepto; los lenguajes se introducen comparándolos.
+- **¿No es más fácil dominar uno solo?** Para tu primer empleo, quizá. Para entender de verdad la programación, comparar revela por qué cada lenguaje decide lo que decide.
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 
-> [⬅️ Parte 0](../README.md) · [📚 Índice completo](../../README.md) · [🌐 Atlas de lenguajes](../../../atlas/README.md)
+> [📂 Parte](../README.md) · [📚 Índice](../../README.md) · [🌐 Atlas](../../../atlas/README.md) · [Clase 002 ⏭️](../../parte-0-pensamiento-computacional-y-el-metodo-poliglota/002-las-tres-clases-de-diferencia-sintactica-semantica-y-paradigmatica/README.md)

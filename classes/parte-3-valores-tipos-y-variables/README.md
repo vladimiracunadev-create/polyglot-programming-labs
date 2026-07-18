@@ -1,6 +1,6 @@
 # Parte 3 — Valores, tipos y variables
 
-> [⏮️ Parte 2](../parte-2-herramientas-toolchains-y-anatomia-de-comandos/README.md) · [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md) · [⏭️ Parte 4](../parte-4-control-del-programa/README.md)
+> [⏮️ Parte 2](../parte-2-herramientas-toolchains-y-anatomia-de-comandos/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 4](../parte-4-control-del-programa/README.md)
 
 **16 clases** · rango 041–056
 
@@ -8,11 +8,7 @@ La materia prima de todo programa: cómo cada lenguaje nombra, tipa, convierte y
 
 ---
 
-## 🎯 ¿De qué trata esta parte?
-
-La materia prima de todo programa: cómo cada lenguaje nombra, tipa, convierte y muta los valores.
-
-## 📚 Clases
+## 📚 Clases de esta parte
 
 | # | Clase |
 |---|---|
@@ -35,4 +31,4 @@ La materia prima de todo programa: cómo cada lenguaje nombra, tipa, convierte y
 
 ---
 
-> [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md)
+> [⏮️ Parte 2](../parte-2-herramientas-toolchains-y-anatomia-de-comandos/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 4](../parte-4-control-del-programa/README.md)

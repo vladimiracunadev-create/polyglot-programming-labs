@@ -1,100 +1,70 @@
 # Clase 004 — Descomposición y reconocimiento de patrones
 
-> Parte **0 — Pensamiento computacional y el método políglota** · ⏱️ Duración estimada: **90 min** · Nivel: **Fundamentos**
-> 🚧 **Clase planificada** — página creada, contenido en desarrollo.
+> Parte **0 — Pensamiento computacional y el método políglota** · ⏱️ Duración estimada: **75 min** · Nivel: **Fundamentos**
+> ✅ **Clase construida.**
 
 ---
 
 ## 🎯 Objetivo
 
-Comprender **descomposición y reconocimiento de patrones** como conocimiento transferible: su forma independiente del lenguaje, cómo se expresa en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) de una familia a otra.
+Aprender a partir un problema grande en subproblemas manejables (descomposición) y a notar cuándo un subproblema ya lo resolviste antes con otra forma (reconocimiento de patrones). Son las dos habilidades que hacen escalable la programación.
 
 ## 📚 Resultados de aprendizaje
 
-_🚧 Contenido en desarrollo — la estructura de la clase ya está fijada._
+Al finalizar, podrás:
+
+1. Descomponer un problema en subproblemas independientes.
+2. Reconocer un patrón repetido y nombrarlo.
+3. Explicar cómo la descomposición se traduce en funciones y módulos.
 
 ## 🗺️ Temas
 
 | # | Tema | Por qué importa |
 |---|------|-----------------|
-| 1 | _en desarrollo_ | _pendiente_ |
+| 1 | Descomposición | Divide y vencerás: partes pequeñas se resuelven y prueban solas |
+| 2 | Reconocimiento de patrones | Reutilizar una solución conocida ahorra trabajo y errores |
+| 3 | De subproblema a función | La descomposición prefigura la modularidad (Parte 5) |
 
 ## 📖 Definiciones y características
 
-_🚧 En desarrollo._
+- **Descomposición** — dividir un problema en subproblemas más simples. Clave: cada parte se resuelve y verifica por separado.
+- **Patrón** — estructura de solución que reaparece en problemas distintos. Clave: reconocerlo evita reinventar.
+- **Abstracción de subproblema** — tratar un subproblema resuelto como una caja negra. Clave: reduce la carga mental.
 
 ## 🧩 Situación
 
-_El problema observable que motiva esta clase._
+"Genera un reporte de ventas en PDF." Enorme. Descompuesto: (1) leer datos, (2) calcular totales, (3) dar formato, (4) exportar a PDF. Cada pieza es un problema conocido; el patrón "leer → transformar → escribir" reaparece en casi todo software.
 
-## 🧮 Modelo
-
-Entradas · salidas · reglas · casos límite. La especificación es neutral al lenguaje y se
-verifica con [`casos.json`](casos.json).
-
-## 📐 Algoritmo (pseudocódigo neutral)
+## 🔎 Ejemplo
 
 ```text
-# pseudocódigo independiente del lenguaje
+Problema: promedio de las notas aprobadas
+Descomposición:
+  1. filtrar las notas >= 4      (patrón: filtrar)
+  2. sumar las que quedaron      (patrón: reducir)
+  3. dividir entre cuántas son   (patrón: contar)
 ```
 
-## 🌐 Implementaciones idiomáticas
+Los patrones filtrar/reducir/contar reaparecen en la Parte 4 (map/filter/reduce).
 
-Cuando esta clase se construya, aquí vivirá una implementación idiomática por lenguaje del núcleo, verificadas contra `casos.json`:
+## ✍️ Práctica
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
-
-## 🔬 Comparación
-
-| Clase de diferencia | Qué observar |
-|---|---|
-| Sintáctica | Cómo se escribe lo mismo en cada lenguaje |
-| Semántica | Tipos, mutabilidad, memoria y errores |
-| Paradigmática | Si el lenguaje invita a estructurar la solución de otra forma |
-
-## 🧬 El concepto en la familia
-
-Cómo se ve este concepto en los **primos** de cada familia (Ruby, Kotlin, Haskell, Elixir,
-Lua, C++…), como _delta_ respecto del representante del núcleo. Consulta el
-[Atlas](../../../atlas/README.md).
-
-## ✅ Prueba común
-
-Los mismos casos de entrada/salida para todas las implementaciones:
-[`casos.json`](casos.json). Verifica la equivalencia con:
-
-```bash
-python scripts/verificar_equivalencia.py 004-descomposicion-y-reconocimiento-de-patrones
-```
-
-## 🧪 Reto de transferencia
-
-Resuelve una variante en un lenguaje **no explicado paso a paso**. Detalle en
-[`reto.md`](reto.md).
+Descompón "corregir automáticamente un test de opción múltiple" en 3-4 subproblemas y nombra el patrón de cada uno.
 
 ## ⚠️ Errores comunes
 
-_Síntoma → causa → solución (en desarrollo)._
+- **Resolver todo en una sola función gigante** → causa: no descomponer → solución: extraer cada subproblema a su propia función
+- **No ver que dos partes son el mismo patrón** → causa: falta de reconocimiento → solución: preguntar "¿esto se parece a algo que ya resolví?"
 
 ## ❓ Preguntas frecuentes
 
-_En desarrollo._
+- **¿Cuánto descomponer?** Hasta que cada parte quepa en tu cabeza y se pueda probar sola.
+- **¿Los patrones son los 'patrones de diseño'?** Aquí es más básico: estructuras de solución. Los patrones de diseño formales llegan en la Parte 9.
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+- Documentación de referencia de cada lenguaje del núcleo.
 
 ---
 
-> [⬅️ Parte 0](../README.md) · [📚 Índice completo](../../README.md) · [🌐 Atlas de lenguajes](../../../atlas/README.md)
+> [⏮️ Clase 003](../../parte-0-pensamiento-computacional-y-el-metodo-poliglota/003-problema-contexto-entradas-proceso-y-salidas/README.md) · [📂 Parte](../README.md) · [📚 Índice](../../README.md) · [🌐 Atlas](../../../atlas/README.md) · [Clase 005 ⏭️](../../parte-0-pensamiento-computacional-y-el-metodo-poliglota/005-abstraccion-restricciones-y-casos-limite/README.md)

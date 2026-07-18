@@ -1,6 +1,6 @@
 # Parte 6 — Datos y estructuras
 
-> [⏮️ Parte 5](../parte-5-funciones-y-modularidad/README.md) · [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md) · [⏭️ Parte 7](../parte-7-paradigmas/README.md)
+> [⏮️ Parte 5](../parte-5-funciones-y-modularidad/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 7](../parte-7-paradigmas/README.md)
 
 **18 clases** · rango 089–106
 
@@ -8,11 +8,7 @@ Modelar la información: colecciones, registros, tipos algebraicos, identidad, p
 
 ---
 
-## 🎯 ¿De qué trata esta parte?
-
-Modelar la información: colecciones, registros, tipos algebraicos, identidad, propiedad y persistencia.
-
-## 📚 Clases
+## 📚 Clases de esta parte
 
 | # | Clase |
 |---|---|
@@ -37,4 +33,4 @@ Modelar la información: colecciones, registros, tipos algebraicos, identidad, p
 
 ---
 
-> [⬅️ Volver al programa](../../README.md) · [📚 Índice completo](../README.md)
+> [⏮️ Parte 5](../parte-5-funciones-y-modularidad/README.md) · [⬅️ Programa](../../README.md) · [📚 Índice](../README.md) · [⏭️ Parte 7](../parte-7-paradigmas/README.md)

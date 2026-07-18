@@ -1,0 +1,32 @@
+# Artefactos de compilación de las implementaciones
+_bin
+_bin.exe
+main
+main.exe
+*.o
+*.out
+*.class
+**/bin/
+**/obj/
+
+# Node / pnpm
+node_modules/
+.pnpm-store/
+dist/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Sitio generado
+site/
+
+# Rust
+target/
+
+# Sistema
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

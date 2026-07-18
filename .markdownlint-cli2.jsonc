@@ -1,0 +1,23 @@
+{
+  // Configuración de markdownlint-cli2 para el programa.
+  // Se relajan reglas de estilo que no aportan a un currículo en español con
+  // tablas, emoji y bloques de código de varios lenguajes.
+  "config": {
+    "default": true,
+    "MD013": false, // longitud de línea
+    "MD033": false, // HTML embebido (portada del README)
+    "MD041": false, // primera línea debe ser encabezado
+    "MD024": false, // encabezados duplicados
+    "MD036": false, // énfasis usado como encabezado
+    "MD026": false, // puntuación al final de encabezados
+    "MD012": false, // líneas en blanco consecutivas
+    "MD040": false, // lenguaje en bloques de código
+    "MD060": false  // estilo de columnas de tabla (tablas compactas)
+  },
+  "ignores": [
+    "node_modules",
+    "site",
+    "**/node_modules/**",
+    "LICENSE"
+  ]
+}

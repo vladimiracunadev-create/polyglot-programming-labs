@@ -1,0 +1,10 @@
+{
+  "descripcion": "Calcular el total de una venta a partir de tres valores: precio unitario, cantidad y descuento. Es el problema mínimo para estudiar literales, valores, variables y constantes en cada lenguaje.",
+  "contrato": "stdin: una línea 'precio_unitario cantidad descuento' → stdout: 'Total: <total con 2 decimales>'",
+  "formula": "total = precio_unitario * cantidad * (1 - descuento)",
+  "casos": [
+    { "stdin": "15000 2 0.10", "esperado": "Total: 27000.00" },
+    { "stdin": "999.9 3 0",    "esperado": "Total: 2999.70" },
+    { "stdin": "5000 0 0.20",  "esperado": "Total: 0.00" }
+  ]
+}

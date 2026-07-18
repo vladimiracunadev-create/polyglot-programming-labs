@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "programa": "Polyglot Programming Labs",
+    "total_preguntas": 3,
+    "partes": 12
+  },
+  "partes": [
+    {
+      "idx": 0,
+      "titulo": "Pensamiento computacional y el método políglota",
+      "preguntas": [
+        {
+          "q": "Al portar código de Python a Rust, una variable que se reasignaba libremente ahora no compila. ¿De qué clase de diferencia se trata y cuál es el arreglo idiomático?",
+          "opciones": [
+            "Sintáctica: basta con cambiar el nombre de la variable",
+            "Semántica: Rust es inmutable por defecto; declarar la variable con `let mut`",
+            "Paradigmática: hay que reescribir el programa en estilo funcional",
+            "Es un bug del compilador de Rust"
+          ],
+          "correcta": 1,
+          "exp": "La mutabilidad por defecto es una diferencia semántica: cambia el comportamiento del enlace nombre→valor. Rust exige `let mut` para permitir la reasignación."
+        },
+        {
+          "q": "¿Cuál de estas afirmaciones describe mejor la tesis del programa?",
+          "opciones": [
+            "Todos los lenguajes son iguales y solo cambia la sintaxis",
+            "Hay que aprender los 10 lenguajes por separado antes de compararlos",
+            "El concepto es transferible; se aprende una vez y se reconoce, compara y aplica en cada lenguaje",
+            "SQL no cuenta como lenguaje de programación"
+          ],
+          "correcta": 2,
+          "exp": "El programa enseña el conocimiento transferible: el concepto permanece, la forma cambia. No afirma que los lenguajes sean iguales; explica qué cambia y por qué."
+        },
+        {
+          "q": "El verificador de equivalencia omite un lenguaje. ¿Qué significa?",
+          "opciones": [
+            "La implementación de ese lenguaje está mal",
+            "El toolchain de ese lenguaje no está instalado; se informa y se continúa",
+            "El caso de prueba es inválido",
+            "El programa no soporta ese lenguaje"
+          ],
+          "correcta": 1,
+          "exp": "El verificador degrada silenciosamente: si falta el toolchain, marca el lenguaje como omitido e informa, sin fallar. Solo falla si una implementación presente produce una salida distinta."
+        }
+      ]
+    }
+  ]
+}

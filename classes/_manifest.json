@@ -1,0 +1,1210 @@
+{
+ "program": "Polyglot Programming Labs",
+ "tagline": "Aprende el concepto una vez. Reconócelo, compáralo y aplícalo en cualquier lenguaje.",
+ "nucleo": [
+  "python",
+  "javascript",
+  "typescript",
+  "java",
+  "csharp",
+  "go",
+  "rust",
+  "c",
+  "sql",
+  "php"
+ ],
+ "total_planned": 176,
+ "total_built": 4,
+ "parts_built": 2,
+ "parts_planned": 12,
+ "parts": [
+  {
+   "idx": 0,
+   "title": "Pensamiento computacional y el método políglota",
+   "subtitle": "Cómo pensar un problema antes de elegir lenguaje, y el método de fichas de transferencia que sostiene todo el programa.",
+   "slug": "parte-0-pensamiento-computacional-y-el-metodo-poliglota",
+   "start": 1,
+   "end": 14,
+   "count": 14,
+   "classes": [
+    {
+     "num": 1,
+     "title": "Qué es programar y por qué comparar lenguajes: la tesis políglota",
+     "slug": "001-que-es-programar-y-por-que-comparar-lenguajes-la-tesis-poliglota",
+     "built": true
+    },
+    {
+     "num": 2,
+     "title": "Las tres clases de diferencia: sintáctica, semántica y paradigmática",
+     "slug": "002-las-tres-clases-de-diferencia-sintactica-semantica-y-paradigmatica",
+     "built": true
+    },
+    {
+     "num": 3,
+     "title": "Problema, contexto, entradas, proceso y salidas",
+     "slug": "003-problema-contexto-entradas-proceso-y-salidas",
+     "built": true
+    },
+    {
+     "num": 4,
+     "title": "Descomposición y reconocimiento de patrones",
+     "slug": "004-descomposicion-y-reconocimiento-de-patrones",
+     "built": false
+    },
+    {
+     "num": 5,
+     "title": "Abstracción, restricciones y casos límite",
+     "slug": "005-abstraccion-restricciones-y-casos-limite",
+     "built": false
+    },
+    {
+     "num": 6,
+     "title": "Algoritmos: corrección y terminación",
+     "slug": "006-algoritmos-correccion-y-terminacion",
+     "built": false
+    },
+    {
+     "num": 7,
+     "title": "Pseudocódigo neutral: escribir sin lenguaje",
+     "slug": "007-pseudocodigo-neutral-escribir-sin-lenguaje",
+     "built": false
+    },
+    {
+     "num": 8,
+     "title": "Trazado manual y ejecución simbólica",
+     "slug": "008-trazado-manual-y-ejecucion-simbolica",
+     "built": false
+    },
+    {
+     "num": 9,
+     "title": "Complejidad y eficiencia: intuición de coste",
+     "slug": "009-complejidad-y-eficiencia-intuicion-de-coste",
+     "built": false
+    },
+    {
+     "num": 10,
+     "title": "Legibilidad, estilo e idiomática",
+     "slug": "010-legibilidad-estilo-e-idiomatica",
+     "built": false
+    },
+    {
+     "num": 11,
+     "title": "Anatomía de una ficha de transferencia y cómo estudiarla",
+     "slug": "011-anatomia-de-una-ficha-de-transferencia-y-como-estudiarla",
+     "built": false
+    },
+    {
+     "num": 12,
+     "title": "casos.json y el verificador de equivalencia",
+     "slug": "012-casos-json-y-el-verificador-de-equivalencia",
+     "built": false
+    },
+    {
+     "num": 13,
+     "title": "El concepto en la familia: leer un lenguaje que no conoces",
+     "slug": "013-el-concepto-en-la-familia-leer-un-lenguaje-que-no-conoces",
+     "built": false
+    },
+    {
+     "num": 14,
+     "title": "Cómo elegir lenguaje para un problema",
+     "slug": "014-como-elegir-lenguaje-para-un-problema",
+     "built": false
+    }
+   ]
+  },
+  {
+   "idx": 1,
+   "title": "Atlas y genealogía de los lenguajes",
+   "subtitle": "El árbol genealógico: cada lenguaje del núcleo es el representante de una familia y abre la puerta a decenas de primos.",
+   "slug": "parte-1-atlas-y-genealogia-de-los-lenguajes",
+   "start": 15,
+   "end": 28,
+   "count": 14,
+   "classes": [
+    {
+     "num": 15,
+     "title": "El árbol genealógico de los lenguajes: mapa general",
+     "slug": "015-el-arbol-genealogico-de-los-lenguajes-mapa-general",
+     "built": false
+    },
+    {
+     "num": 16,
+     "title": "Cómo nace y evoluciona un lenguaje: estándares, versiones y ecosistemas",
+     "slug": "016-como-nace-y-evoluciona-un-lenguaje-estandares-versiones-y-ecosistemas",
+     "built": false
+    },
+    {
+     "num": 17,
+     "title": "Familia C y de las llaves: C, C++, Objective-C",
+     "slug": "017-familia-c-y-de-las-llaves-c-c-plus-plus-objective-c",
+     "built": false
+    },
+    {
+     "num": 18,
+     "title": "Familia scripting dinámico: Python, Ruby, Perl, PHP, Lua",
+     "slug": "018-familia-scripting-dinamico-python-ruby-perl-php-lua",
+     "built": false
+    },
+    {
+     "num": 19,
+     "title": "Familia JVM: Java, Kotlin, Scala, Groovy, Clojure",
+     "slug": "019-familia-jvm-java-kotlin-scala-groovy-clojure",
+     "built": false
+    },
+    {
+     "num": 20,
+     "title": "Familia .NET: C#, F#, VB.NET",
+     "slug": "020-familia-net-c-sharp-f-sharp-vb-net",
+     "built": false
+    },
+    {
+     "num": 21,
+     "title": "Familia JavaScript y web: JS, TypeScript, Dart",
+     "slug": "021-familia-javascript-y-web-js-typescript-dart",
+     "built": false
+    },
+    {
+     "num": 22,
+     "title": "Familia funcional tipada (ML): Haskell, OCaml, F# y la influencia en Rust",
+     "slug": "022-familia-funcional-tipada-ml-haskell-ocaml-f-sharp-y-la-influencia-en-rust",
+     "built": false
+    },
+    {
+     "num": 23,
+     "title": "Familia Lisp: Scheme, Racket, Clojure, Emacs Lisp",
+     "slug": "023-familia-lisp-scheme-racket-clojure-emacs-lisp",
+     "built": false
+    },
+    {
+     "num": 24,
+     "title": "Familia lógica y declarativa: SQL, Prolog, Datalog",
+     "slug": "024-familia-logica-y-declarativa-sql-prolog-datalog",
+     "built": false
+    },
+    {
+     "num": 25,
+     "title": "Familia concurrente/actor: Erlang, Elixir y el CSP de Go",
+     "slug": "025-familia-concurrente-actor-erlang-elixir-y-el-csp-de-go",
+     "built": false
+    },
+    {
+     "num": 26,
+     "title": "Familia de sistemas: C, C++, Rust, Zig",
+     "slug": "026-familia-de-sistemas-c-c-plus-plus-rust-zig",
+     "built": false
+    },
+    {
+     "num": 27,
+     "title": "Familia array y científica: APL, R, Julia, Fortran, MATLAB",
+     "slug": "027-familia-array-y-cientifica-apl-r-julia-fortran-matlab",
+     "built": false
+    },
+    {
+     "num": 28,
+     "title": "Lenguajes históricos y de nicho: COBOL, Fortran, Pascal, BASIC, Bash",
+     "slug": "028-lenguajes-historicos-y-de-nicho-cobol-fortran-pascal-basic-bash",
+     "built": false
+    }
+   ]
+  },
+  {
+   "idx": 2,
+   "title": "Herramientas, toolchains y anatomía de comandos",
+   "subtitle": "Del código fuente al programa que corre: instalar, ejecutar, compilar, empaquetar y probar en cada lenguaje, con el esquema completo de cada comando.",
+   "slug": "parte-2-herramientas-toolchains-y-anatomia-de-comandos",
+   "start": 29,
+   "end": 40,
+   "count": 12,
+   "classes": [
+    {
+     "num": 29,
+     "title": "Qué es un toolchain: del código fuente al programa que corre",
+     "slug": "029-que-es-un-toolchain-del-codigo-fuente-al-programa-que-corre",
+     "built": false
+    },
+    {
+     "num": 30,
+     "title": "Compilado vs. interpretado vs. transpilado vs. bytecode/VM",
+     "slug": "030-compilado-vs-interpretado-vs-transpilado-vs-bytecode-vm",
+     "built": false
+    },
+    {
+     "num": 31,
+     "title": "Anatomía de un comando: nombre, subcomando, flags, argumentos y esquema",
+     "slug": "031-anatomia-de-un-comando-nombre-subcomando-flags-argumentos-y-esquema",
+     "built": false
+    },
+    {
+     "num": 32,
+     "title": "Instalación y gestión de versiones (pyenv, nvm, rustup, SDKMAN, phpenv)",
+     "slug": "032-instalacion-y-gestion-de-versiones-pyenv-nvm-rustup-sdkman-phpenv",
+     "built": false
+    },
+    {
+     "num": 33,
+     "title": "Ejecutar: python, node, tsx, java, dotnet, go run, rustc, cc, php, sqlite3",
+     "slug": "033-ejecutar-python-node-tsx-java-dotnet-go-run-rustc-cc-php-sqlite3",
+     "built": false
+    },
+    {
+     "num": 34,
+     "title": "Compilar y construir: gcc/clang, cargo, go build, javac, dotnet build",
+     "slug": "034-compilar-y-construir-gcc-clang-cargo-go-build-javac-dotnet-build",
+     "built": false
+    },
+    {
+     "num": 35,
+     "title": "Paquetes y dependencias: pip, pnpm, cargo, maven/gradle, nuget, go mod, composer",
+     "slug": "035-paquetes-y-dependencias-pip-pnpm-cargo-maven-gradle-nuget-go-mod-composer",
+     "built": false
+    },
+    {
+     "num": 36,
+     "title": "REPL e intérpretes interactivos por lenguaje",
+     "slug": "036-repl-e-interpretes-interactivos-por-lenguaje",
+     "built": false
+    },
+    {
+     "num": 37,
+     "title": "Formateadores y linters: black, prettier, gofmt, rustfmt, clang-format, php-cs-fixer",
+     "slug": "037-formateadores-y-linters-black-prettier-gofmt-rustfmt-clang-format-php-cs-fixer",
+     "built": false
+    },
+    {
+     "num": 38,
+     "title": "Pruebas desde la terminal: pytest, node --test, go test, cargo test, dotnet test, phpunit",
+     "slug": "038-pruebas-desde-la-terminal-pytest-node-test-go-test-cargo-test-dotnet-test-phpunit",
+     "built": false
+    },
+    {
+     "num": 39,
+     "title": "Empaquetado y distribución: wheels, jars, binarios, contenedores",
+     "slug": "039-empaquetado-y-distribucion-wheels-jars-binarios-contenedores",
+     "built": false
+    },
+    {
+     "num": 40,
+     "title": "Variables de entorno, rutas y el PATH en Windows y Unix",
+     "slug": "040-variables-de-entorno-rutas-y-el-path-en-windows-y-unix",
+     "built": false
+    }
+   ]
+  },
+  {
+   "idx": 3,
+   "title": "Valores, tipos y variables",
+   "subtitle": "La materia prima de todo programa: cómo cada lenguaje nombra, tipa, convierte y muta los valores.",
+   "slug": "parte-3-valores-tipos-y-variables",
+   "start": 41,
+   "end": 56,
+   "count": 16,
+   "classes": [
+    {
+     "num": 41,
+     "title": "Literales, valores, variables y constantes",
+     "slug": "041-literales-valores-variables-y-constantes",
+     "built": true
+    },
+    {
+     "num": 42,
+     "title": "Declaración, asignación e inicialización",
+     "slug": "042-declaracion-asignacion-e-inicializacion",
+     "built": false
+    },
+    {
+     "num": 43,
+     "title": "Tipos primitivos: enteros, reales, booleanos, caracteres",
+     "slug": "043-tipos-primitivos-enteros-reales-booleanos-caracteres",
+     "built": false
+    },
+    {
+     "num": 44,
+     "title": "Enteros: tamaño, signo, desbordamiento y bases",
+     "slug": "044-enteros-tamano-signo-desbordamiento-y-bases",
+     "built": false
+    },
+    {
+     "num": 45,
+     "title": "Números reales: punto flotante, precisión y decimales",
+     "slug": "045-numeros-reales-punto-flotante-precision-y-decimales",
+     "built": false
+    },
+    {
+     "num": 46,
+     "title": "Booleanos y valores de verdad",
+     "slug": "046-booleanos-y-valores-de-verdad",
+     "built": false
+    },
+    {
+     "num": 47,
+     "title": "Caracteres, texto y Unicode",
+     "slug": "047-caracteres-texto-y-unicode",
+     "built": false
+    },
+    {
+     "num": 48,
+     "title": "Cadenas: representación, inmutabilidad e interpolación",
+     "slug": "048-cadenas-representacion-inmutabilidad-e-interpolacion",
+     "built": false
+    },
+    {
+     "num": 49,
+     "title": "Conversión de tipos: casting explícito vs. coerción implícita",
+     "slug": "049-conversion-de-tipos-casting-explicito-vs-coercion-implicita",
+     "built": false
+    },
+    {
+     "num": 50,
+     "title": "Tipado estático vs. dinámico",
+     "slug": "050-tipado-estatico-vs-dinamico",
+     "built": false
+    },
+    {
+     "num": 51,
+     "title": "Tipado fuerte vs. débil",
+     "slug": "051-tipado-fuerte-vs-debil",
+     "built": false
+    },
+    {
+     "num": 52,
+     "title": "Inferencia de tipos",
+     "slug": "052-inferencia-de-tipos",
+     "built": false
+    },
+    {
+     "num": 53,
+     "title": "Nulabilidad: null, nil, None, Option y valores ausentes",
+     "slug": "053-nulabilidad-null-nil-none-option-y-valores-ausentes",
+     "built": false
+    },
+    {
+     "num": 54,
+     "title": "Mutabilidad e inmutabilidad",
+     "slug": "054-mutabilidad-e-inmutabilidad",
+     "built": false
+    },
+    {
+     "num": 55,
+     "title": "Operadores y expresiones: aritméticos, lógicos, de comparación y bit a bit",
+     "slug": "055-operadores-y-expresiones-aritmeticos-logicos-de-comparacion-y-bit-a-bit",
+     "built": false
+    },
+    {
+     "num": 56,
+     "title": "Entrada y salida básica: leer y escribir",
+     "slug": "056-entrada-y-salida-basica-leer-y-escribir",
+     "built": false
+    }
+   ]
+  },
+  {
+   "idx": 4,
+   "title": "Control del programa",
+   "subtitle": "Decidir, repetir y manejar errores: el flujo de ejecución expresado en cada familia de lenguajes.",
+   "slug": "parte-4-control-del-programa",
+   "start": 57,
+   "end": 72,
+   "count": 16,
+   "classes": [
+    {
+     "num": 57,
+     "title": "Booleanos, condiciones y cortocircuito",
+     "slug": "057-booleanos-condiciones-y-cortocircuito",
+     "built": false
+    },
+    {
+     "num": 58,
+     "title": "Guardas y validación temprana",
+     "slug": "058-guardas-y-validacion-temprana",
+     "built": false
+    },
+    {
+     "num": 59,
+     "title": "if / else y anidamiento",
+     "slug": "059-if-else-y-anidamiento",
+     "built": false
+    },
+    {
+     "num": 60,
+     "title": "Expresiones condicionales: ternario e if como expresión",
+     "slug": "060-expresiones-condicionales-ternario-e-if-como-expresion",
+     "built": false
+    },
+    {
+     "num": 61,
+     "title": "switch, case y fallthrough",
+     "slug": "061-switch-case-y-fallthrough",
+     "built": false
+    },
+    {
+     "num": 62,
+     "title": "Coincidencia de patrones: match / when",
+     "slug": "062-coincidencia-de-patrones-match-when",
+     "built": false
+    },
+    {
+     "num": 63,
+     "title": "Iteración por condición: while y do-while",
+     "slug": "063-iteracion-por-condicion-while-y-do-while",
+     "built": false
+    },
+    {
+     "num": 64,
+     "title": "Iteración por rango: for clásico y for-range",
+     "slug": "064-iteracion-por-rango-for-clasico-y-for-range",
+     "built": false
+    },
+    {
+     "num": 65,
+     "title": "Iteración por colección: for-each e iteradores",
+     "slug": "065-iteracion-por-coleccion-for-each-e-iteradores",
+     "built": false
+    },
+    {
+     "num": 66,
+     "title": "Iteradores y generadores perezosos (lazy)",
+     "slug": "066-iteradores-y-generadores-perezosos-lazy",
+     "built": false
+    },
+    {
+     "num": 67,
+     "title": "Comprensiones de listas y colecciones",
+     "slug": "067-comprensiones-de-listas-y-colecciones",
+     "built": false
+    },
+    {
+     "num": 68,
+     "title": "Funciones de orden superior: map, filter, reduce",
+     "slug": "068-funciones-de-orden-superior-map-filter-reduce",
+     "built": false
+    },
+    {
+     "num": 69,
+     "title": "Recursión y recursión de cola",
+     "slug": "069-recursion-y-recursion-de-cola",
+     "built": false
+    },
+    {
+     "num": 70,
+     "title": "Control de flujo: break, continue, return, goto",
+     "slug": "070-control-de-flujo-break-continue-return-goto",
+     "built": false
+    },
+    {
+     "num": 71,
+     "title": "Manejo de errores I: excepciones (try/catch/finally)",
+     "slug": "071-manejo-de-errores-i-excepciones-try-catch-finally",
+     "built": false
+    },
+    {
+     "num": 72,
+     "title": "Manejo de errores II: resultados y valores (Result/Either/error de Go)",
+     "slug": "072-manejo-de-errores-ii-resultados-y-valores-result-either-error-de-go",
+     "built": false
+    }
+   ]
+  },
+  {
+   "idx": 5,
+   "title": "Funciones y modularidad",
+   "subtitle": "Nombrar procesos, pasar datos y organizar el código en módulos con contratos claros.",
+   "slug": "parte-5-funciones-y-modularidad",
+   "start": 73,
+   "end": 88,
+   "count": 16,
+   "classes": [
+    {
+     "num": 73,
+     "title": "Firma, parámetros, argumentos y retorno",
+     "slug": "073-firma-parametros-argumentos-y-retorno",
+     "built": false
+    },
+    {
+     "num": 74,
+     "title": "Parámetros por defecto y opcionales",
+     "slug": "074-parametros-por-defecto-y-opcionales",
+     "built": false
+    },
+    {
+     "num": 75,
+     "title": "Argumentos nombrados y de palabra clave",
+     "slug": "075-argumentos-nombrados-y-de-palabra-clave",
+     "built": false
+    },
+    {
+     "num": 76,
+     "title": "Parámetros variádicos",
+     "slug": "076-parametros-variadicos",
+     "built": false
+    },
+    {
+     "num": 77,
+     "title": "Múltiples retornos y desestructuración",
+     "slug": "077-multiples-retornos-y-desestructuracion",
+     "built": false
+    },
+    {
+     "num": 78,
+     "title": "Genéricos y polimorfismo paramétrico",
+     "slug": "078-genericos-y-polimorfismo-parametrico",
+     "built": false
+    },
+    {
+     "num": 79,
+     "title": "Paso por valor",
+     "slug": "079-paso-por-valor",
+     "built": false
+    },
+    {
+     "num": 80,
+     "title": "Paso por referencia",
+     "slug": "080-paso-por-referencia",
+     "built": false
+    },
+    {
+     "num": 81,
+     "title": "Semántica de movimiento y préstamo (Rust)",
+     "slug": "081-semantica-de-movimiento-y-prestamo-rust",
+     "built": false
+    },
+    {
+     "num": 82,
+     "title": "Alcance (scope) y sombreado (shadowing)",
+     "slug": "082-alcance-scope-y-sombreado-shadowing",
+     "built": false
+    },
+    {
+     "num": 83,
+     "title": "Cierres (closures) y captura de variables",
+     "slug": "083-cierres-closures-y-captura-de-variables",
+     "built": false
+    },
+    {
+     "num": 84,
+     "title": "Funciones puras y efectos secundarios",
+     "slug": "084-funciones-puras-y-efectos-secundarios",
+     "built": false
+    },
+    {
+     "num": 85,
+     "title": "Funciones de primera clase y como valores",
+     "slug": "085-funciones-de-primera-clase-y-como-valores",
+     "built": false
+    },
+    {
+     "num": 86,
+     "title": "Módulos, paquetes y espacios de nombres",
+     "slug": "086-modulos-paquetes-y-espacios-de-nombres",
+     "built": false
+    },
+    {
+     "num": 87,
+     "title": "Visibilidad, encapsulación y contratos (public/private)",
+     "slug": "087-visibilidad-encapsulacion-y-contratos-public-private",
+     "built": false
+    },
+    {
+     "num": 88,
+     "title": "Importar, exportar y organizar un proyecto",
+     "slug": "088-importar-exportar-y-organizar-un-proyecto",
+     "built": false
+    }
+   ]
+  },
+  {
+   "idx": 6,
+   "title": "Datos y estructuras",
+   "subtitle": "Modelar la información: colecciones, registros, tipos algebraicos, identidad, propiedad y persistencia.",
+   "slug": "parte-6-datos-y-estructuras",
+   "start": 89,
+   "end": 106,
+   "count": 18,
+   "classes": [
+    {
+     "num": 89,
+     "title": "Arreglos de tamaño fijo",
+     "slug": "089-arreglos-de-tamano-fijo",
+     "built": false
+    },
+    {
+     "num": 90,
+     "title": "Listas, vectores y arreglos dinámicos",
+     "slug": "090-listas-vectores-y-arreglos-dinamicos",
+     "built": false
+    },
+    {
+     "num": 91,
+     "title": "Tuplas y registros posicionales",
+     "slug": "091-tuplas-y-registros-posicionales",
+     "built": false
+    },
+    {
+     "num": 92,
+     "title": "Rangos y secuencias",
+     "slug": "092-rangos-y-secuencias",
+     "built": false
+    },
+    {
+     "num": 93,
+     "title": "Cadenas como estructura de datos",
+     "slug": "093-cadenas-como-estructura-de-datos",
+     "built": false
+    },
+    {
+     "num": 94,
+     "title": "Conjuntos (sets) y unicidad",
+     "slug": "094-conjuntos-sets-y-unicidad",
+     "built": false
+    },
+    {
+     "num": 95,
+     "title": "Mapas / diccionarios / tablas hash",
+     "slug": "095-mapas-diccionarios-tablas-hash",
+     "built": false
+    },
+    {
+     "num": 96,
+     "title": "Pilas y colas",
+     "slug": "096-pilas-y-colas",
+     "built": false
+    },
+    {
+     "num": 97,
+     "title": "Árboles",
+     "slug": "097-arboles",
+     "built": false
+    },
+    {
+     "num": 98,
+     "title": "Grafos",
+     "slug": "098-grafos",
+     "built": false
+    },
+    {
+     "num": 99,
+     "title": "Registros, structs y clases",
+     "slug": "099-registros-structs-y-clases",
+     "built": false
+    },
+    {
+     "num": 100,
+     "title": "Enumeraciones y tipos algebraicos (ADT / sum types)",
+     "slug": "100-enumeraciones-y-tipos-algebraicos-adt-sum-types",
+     "built": false
+    },
+    {
+     "num": 101,
+     "title": "Igualdad vs. identidad",
+     "slug": "101-igualdad-vs-identidad",
+     "built": false
+    },
+    {
+     "num": 102,
+     "title": "Copia superficial vs. profunda; referencia vs. valor",
+     "slug": "102-copia-superficial-vs-profunda-referencia-vs-valor",
+     "built": false
+    },
+    {
+     "num": 103,
+     "title": "Propiedad y ciclo de vida de los datos",
+     "slug": "103-propiedad-y-ciclo-de-vida-de-los-datos",
+     "built": false
+    },
+    {
+     "num": 104,
+     "title": "Archivos: leer y escribir texto y binario",
+     "slug": "104-archivos-leer-y-escribir-texto-y-binario",
+     "built": false
+    },
+    {
+     "num": 105,
+     "title": "JSON: serialización y deserialización",
+     "slug": "105-json-serializacion-y-deserializacion",
+     "built": false
+    },
+    {
+     "num": 106,
+     "title": "Otros formatos y persistencia: CSV, YAML, binarios, bases de datos",
+     "slug": "106-otros-formatos-y-persistencia-csv-yaml-binarios-bases-de-datos",
+     "built": false
+    }
+   ]
+  },
+  {
+   "idx": 7,
+   "title": "Paradigmas",
+   "subtitle": "Las grandes formas de estructurar una solución: imperativo, objetos, funcional, declarativo, lógico, eventos y concurrencia.",
+   "slug": "parte-7-paradigmas",
+   "start": 107,
+   "end": 122,
+   "count": 16,
+   "classes": [
+    {
+     "num": 107,
+     "title": "Qué es un paradigma y por qué importa",
+     "slug": "107-que-es-un-paradigma-y-por-que-importa",
+     "built": false
+    },
+    {
+     "num": 108,
+     "title": "Imperativo y estructurado",
+     "slug": "108-imperativo-y-estructurado",
+     "built": false
+    },
+    {
+     "num": 109,
+     "title": "Procedimental y modular",
+     "slug": "109-procedimental-y-modular",
+     "built": false
+    },
+    {
+     "num": 110,
+     "title": "Orientado a objetos: clases, objetos y estado",
+     "slug": "110-orientado-a-objetos-clases-objetos-y-estado",
+     "built": false
+    },
+    {
+     "num": 111,
+     "title": "Herencia, composición y polimorfismo",
+     "slug": "111-herencia-composicion-y-polimorfismo",
+     "built": false
+    },
+    {
+     "num": 112,
+     "title": "Interfaces, traits y clases abstractas",
+     "slug": "112-interfaces-traits-y-clases-abstractas",
+     "built": false
+    },
+    {
+     "num": 113,
+     "title": "OO basado en prototipos (JavaScript)",
+     "slug": "113-oo-basado-en-prototipos-javascript",
+     "built": false
+    },
+    {
+     "num": 114,
+     "title": "Funcional I: inmutabilidad y funciones puras",
+     "slug": "114-funcional-i-inmutabilidad-y-funciones-puras",
+     "built": false
+    },
+    {
+     "num": 115,
+     "title": "Funcional II: composición, currying y aplicación parcial",
+     "slug": "115-funcional-ii-composicion-currying-y-aplicacion-parcial",
+     "built": false
+    },
+    {
+     "num": 116,
+     "title": "Funcional III: functores, mónadas y efectos (visión práctica)",
+     "slug": "116-funcional-iii-functores-monadas-y-efectos-vision-practica",
+     "built": false
+    },
+    {
+     "num": 117,
+     "title": "Declarativo: consultas y transformación (SQL)",
+     "slug": "117-declarativo-consultas-y-transformacion-sql",
+     "built": false
+    },
+    {
+     "num": 118,
+     "title": "Lógico: reglas, hechos y unificación (Prolog)",
+     "slug": "118-logico-reglas-hechos-y-unificacion-prolog",
+     "built": false
+    },
+    {
+     "num": 119,
+     "title": "Orientado a eventos y callbacks",
+     "slug": "119-orientado-a-eventos-y-callbacks",
+     "built": false
+    },
+    {
+     "num": 120,
+     "title": "Reactivo y flujos de datos (streams)",
+     "slug": "120-reactivo-y-flujos-de-datos-streams",
+     "built": false
+    },
+    {
+     "num": 121,
+     "title": "Concurrente: hilos, tareas y canales",
+     "slug": "121-concurrente-hilos-tareas-y-canales",
+     "built": false
+    },
+    {
+     "num": 122,
+     "title": "Asíncrono: async/await y promesas",
+     "slug": "122-asincrono-async-await-y-promesas",
+     "built": false
+    }
+   ]
+  },
+  {
+   "idx": 8,
+   "title": "Cómo funcionan los lenguajes",
+   "subtitle": "Qué ocurre por debajo: compilación, máquinas virtuales, memoria, concurrencia y diagnóstico de errores.",
+   "slug": "parte-8-como-funcionan-los-lenguajes",
+   "start": 123,
+   "end": 138,
+   "count": 16,
+   "classes": [
+    {
+     "num": 123,
+     "title": "Del código a la ejecución: fases de compilación",
+     "slug": "123-del-codigo-a-la-ejecucion-fases-de-compilacion",
+     "built": false
+    },
+    {
+     "num": 124,
+     "title": "Compilador, intérprete y JIT",
+     "slug": "124-compilador-interprete-y-jit",
+     "built": false
+    },
+    {
+     "num": 125,
+     "title": "Bytecode y máquinas virtuales (JVM, CLR, V8)",
+     "slug": "125-bytecode-y-maquinas-virtuales-jvm-clr-v8",
+     "built": false
+    },
+    {
+     "num": 126,
+     "title": "AOT vs. JIT: costos y beneficios",
+     "slug": "126-aot-vs-jit-costos-y-beneficios",
+     "built": false
+    },
+    {
+     "num": 127,
+     "title": "La pila (stack) y el marco de llamada",
+     "slug": "127-la-pila-stack-y-el-marco-de-llamada",
+     "built": false
+    },
+    {
+     "num": 128,
+     "title": "El heap y la asignación dinámica",
+     "slug": "128-el-heap-y-la-asignacion-dinamica",
+     "built": false
+    },
+    {
+     "num": 129,
+     "title": "Referencias, apuntadores y direcciones",
+     "slug": "129-referencias-apuntadores-y-direcciones",
+     "built": false
+    },
+    {
+     "num": 130,
+     "title": "Gestión manual de memoria (C): malloc/free",
+     "slug": "130-gestion-manual-de-memoria-c-malloc-free",
+     "built": false
+    },
+    {
+     "num": 131,
+     "title": "Recolección de basura (GC)",
+     "slug": "131-recoleccion-de-basura-gc",
+     "built": false
+    },
+    {
+     "num": 132,
+     "title": "RAII, propiedad y préstamos (Rust/C++)",
+     "slug": "132-raii-propiedad-y-prestamos-rust-c-plus-plus",
+     "built": false
+    },
+    {
+     "num": 133,
+     "title": "Concurrencia: procesos, hilos y memoria compartida",
+     "slug": "133-concurrencia-procesos-hilos-y-memoria-compartida",
+     "built": false
+    },
+    {
+     "num": 134,
+     "title": "Tareas, corrutinas y canales",
+     "slug": "134-tareas-corrutinas-y-canales",
+     "built": false
+    },
+    {
+     "num": 135,
+     "title": "Actores y paso de mensajes (modelo BEAM)",
+     "slug": "135-actores-y-paso-de-mensajes-modelo-beam",
+     "built": false
+    },
+    {
+     "num": 136,
+     "title": "El modelo de memoria y las condiciones de carrera",
+     "slug": "136-el-modelo-de-memoria-y-las-condiciones-de-carrera",
+     "built": false
+    },
+    {
+     "num": 137,
+     "title": "Errores: de sintaxis, de tipos, de enlace y de ejecución",
+     "slug": "137-errores-de-sintaxis-de-tipos-de-enlace-y-de-ejecucion",
+     "built": false
+    },
+    {
+     "num": 138,
+     "title": "Depuración: cómo se diagnostica en cada runtime",
+     "slug": "138-depuracion-como-se-diagnostica-en-cada-runtime",
+     "built": false
+    }
+   ]
+  },
+  {
+   "idx": 9,
+   "title": "Ingeniería de software políglota",
+   "subtitle": "Llevar el código a producción: pruebas, dependencias, Git, CI, rendimiento, seguridad y mantenibilidad en varios lenguajes.",
+   "slug": "parte-9-ingenieria-de-software-poliglota",
+   "start": 139,
+   "end": 154,
+   "count": 16,
+   "classes": [
+    {
+     "num": 139,
+     "title": "Pruebas unitarias por lenguaje",
+     "slug": "139-pruebas-unitarias-por-lenguaje",
+     "built": false
+    },
+    {
+     "num": 140,
+     "title": "Pruebas de integración y el verificador de equivalencia",
+     "slug": "140-pruebas-de-integracion-y-el-verificador-de-equivalencia",
+     "built": false
+    },
+    {
+     "num": 141,
+     "title": "Depuradores: gdb, lldb, pdb y los de IDE",
+     "slug": "141-depuradores-gdb-lldb-pdb-y-los-de-ide",
+     "built": false
+    },
+    {
+     "num": 142,
+     "title": "Registro (logging) y observabilidad",
+     "slug": "142-registro-logging-y-observabilidad",
+     "built": false
+    },
+    {
+     "num": 143,
+     "title": "Dependencias, versiones y lockfiles",
+     "slug": "143-dependencias-versiones-y-lockfiles",
+     "built": false
+    },
+    {
+     "num": 144,
+     "title": "Compilación reproducible y empaquetado",
+     "slug": "144-compilacion-reproducible-y-empaquetado",
+     "built": false
+    },
+    {
+     "num": 145,
+     "title": "Git y control de versiones para proyectos políglotas",
+     "slug": "145-git-y-control-de-versiones-para-proyectos-poliglotas",
+     "built": false
+    },
+    {
+     "num": 146,
+     "title": "Revisión de código y estándares",
+     "slug": "146-revision-de-codigo-y-estandares",
+     "built": false
+    },
+    {
+     "num": 147,
+     "title": "Integración continua (CI) multi-lenguaje",
+     "slug": "147-integracion-continua-ci-multi-lenguaje",
+     "built": false
+    },
+    {
+     "num": 148,
+     "title": "Entrega y despliegue",
+     "slug": "148-entrega-y-despliegue",
+     "built": false
+    },
+    {
+     "num": 149,
+     "title": "Diseño y arquitectura comparada",
+     "slug": "149-diseno-y-arquitectura-comparada",
+     "built": false
+    },
+    {
+     "num": 150,
+     "title": "Refactorización segura",
+     "slug": "150-refactorizacion-segura",
+     "built": false
+    },
+    {
+     "num": 151,
+     "title": "Patrones de diseño comparados entre lenguajes",
+     "slug": "151-patrones-de-diseno-comparados-entre-lenguajes",
+     "built": false
+    },
+    {
+     "num": 152,
+     "title": "Rendimiento y perfilado (profiling)",
+     "slug": "152-rendimiento-y-perfilado-profiling",
+     "built": false
+    },
+    {
+     "num": 153,
+     "title": "Seguridad: entradas, memoria y dependencias",
+     "slug": "153-seguridad-entradas-memoria-y-dependencias",
+     "built": false
+    },
+    {
+     "num": 154,
+     "title": "Mantenibilidad, documentación y deuda técnica",
+     "slug": "154-mantenibilidad-documentacion-y-deuda-tecnica",
+     "built": false
+    }
+   ]
+  },
+  {
+   "idx": 10,
+   "title": "Interoperabilidad y fronteras entre lenguajes",
+   "subtitle": "Por qué los sistemas reales son políglotas y cómo comunican sus piezas: FFI, ABI, serialización, APIs y WebAssembly.",
+   "slug": "parte-10-interoperabilidad-y-fronteras-entre-lenguajes",
+   "start": 155,
+   "end": 164,
+   "count": 10,
+   "classes": [
+    {
+     "num": 155,
+     "title": "Por qué los sistemas reales son políglotas",
+     "slug": "155-por-que-los-sistemas-reales-son-poliglotas",
+     "built": false
+    },
+    {
+     "num": 156,
+     "title": "La FFI (Foreign Function Interface): llamar a C desde todos",
+     "slug": "156-la-ffi-foreign-function-interface-llamar-a-c-desde-todos",
+     "built": false
+    },
+    {
+     "num": 157,
+     "title": "ABI, enlace y convenciones de llamada",
+     "slug": "157-abi-enlace-y-convenciones-de-llamada",
+     "built": false
+    },
+    {
+     "num": 158,
+     "title": "Enlaces (bindings) y wrappers",
+     "slug": "158-enlaces-bindings-y-wrappers",
+     "built": false
+    },
+    {
+     "num": 159,
+     "title": "Serialización entre lenguajes: JSON, Protobuf, MessagePack",
+     "slug": "159-serializacion-entre-lenguajes-json-protobuf-messagepack",
+     "built": false
+    },
+    {
+     "num": 160,
+     "title": "Contratos de API: REST, gRPC y esquemas",
+     "slug": "160-contratos-de-api-rest-grpc-y-esquemas",
+     "built": false
+    },
+    {
+     "num": 161,
+     "title": "Procesos y comunicación: stdin/stdout, sockets, colas",
+     "slug": "161-procesos-y-comunicacion-stdin-stdout-sockets-colas",
+     "built": false
+    },
+    {
+     "num": 162,
+     "title": "WebAssembly como objetivo común",
+     "slug": "162-webassembly-como-objetivo-comun",
+     "built": false
+    },
+    {
+     "num": 163,
+     "title": "Incrustar un lenguaje en otro (Lua, Python embebido)",
+     "slug": "163-incrustar-un-lenguaje-en-otro-lua-python-embebido",
+     "built": false
+    },
+    {
+     "num": 164,
+     "title": "Elegir el lenguaje correcto para cada componente",
+     "slug": "164-elegir-el-lenguaje-correcto-para-cada-componente",
+     "built": false
+    }
+   ]
+  },
+  {
+   "idx": 11,
+   "title": "Proyecto integrador políglota",
+   "subtitle": "Construir un sistema real con componentes en varios lenguajes y defender cada decisión de lenguaje y contrato.",
+   "slug": "parte-11-proyecto-integrador-poliglota",
+   "start": 165,
+   "end": 176,
+   "count": 12,
+   "classes": [
+    {
+     "num": 165,
+     "title": "El proyecto: un sistema con componentes en varios lenguajes",
+     "slug": "165-el-proyecto-un-sistema-con-componentes-en-varios-lenguajes",
+     "built": false
+    },
+    {
+     "num": 166,
+     "title": "Diseño: responsabilidades y contratos entre componentes",
+     "slug": "166-diseno-responsabilidades-y-contratos-entre-componentes",
+     "built": false
+    },
+    {
+     "num": 167,
+     "title": "Componente CLI (lenguaje de sistemas)",
+     "slug": "167-componente-cli-lenguaje-de-sistemas",
+     "built": false
+    },
+    {
+     "num": 168,
+     "title": "Componente de API/servicio (backend)",
+     "slug": "168-componente-de-api-servicio-backend",
+     "built": false
+    },
+    {
+     "num": 169,
+     "title": "Componente web/frontend (JS/TS)",
+     "slug": "169-componente-web-frontend-js-ts",
+     "built": false
+    },
+    {
+     "num": 170,
+     "title": "Componente de datos y consultas (SQL)",
+     "slug": "170-componente-de-datos-y-consultas-sql",
+     "built": false
+    },
+    {
+     "num": 171,
+     "title": "Componente de automatización/scripting",
+     "slug": "171-componente-de-automatizacion-scripting",
+     "built": false
+    },
+    {
+     "num": 172,
+     "title": "Persistencia y almacenamiento",
+     "slug": "172-persistencia-y-almacenamiento",
+     "built": false
+    },
+    {
+     "num": 173,
+     "title": "Pruebas end-to-end del sistema completo",
+     "slug": "173-pruebas-end-to-end-del-sistema-completo",
+     "built": false
+    },
+    {
+     "num": 174,
+     "title": "Empaquetado, contenedores y despliegue",
+     "slug": "174-empaquetado-contenedores-y-despliegue",
+     "built": false
+    },
+    {
+     "num": 175,
+     "title": "Documentación y defensa de las decisiones de lenguaje",
+     "slug": "175-documentacion-y-defensa-de-las-decisiones-de-lenguaje",
+     "built": false
+    },
+    {
+     "num": 176,
+     "title": "Cierre: retrospectiva y transferencia a nuevos lenguajes",
+     "slug": "176-cierre-retrospectiva-y-transferencia-a-nuevos-lenguajes",
+     "built": false
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,12 @@
+{
+  "python": {"nombre": "Python", "extension": ".py", "run": "python main.py", "model": "interpreted-dynamic", "familia": "scripting dinámico"},
+  "javascript": {"nombre": "JavaScript", "extension": ".mjs", "run": "node main.mjs", "model": "jit-dynamic", "familia": "JavaScript / web"},
+  "typescript": {"nombre": "TypeScript", "extension": ".ts", "run": "pnpm exec tsx main.ts", "model": "transpiled-static", "familia": "JavaScript / web"},
+  "java": {"nombre": "Java", "extension": ".java", "run": "java Main.java", "model": "jvm-static", "familia": "JVM"},
+  "csharp": {"nombre": "C#", "extension": ".cs", "run": "dotnet run", "model": "clr-static", "familia": ".NET"},
+  "go": {"nombre": "Go", "extension": ".go", "run": "go run main.go", "model": "compiled-static", "familia": "sistemas"},
+  "rust": {"nombre": "Rust", "extension": ".rs", "run": "rustc main.rs -o main && ./main", "model": "compiled-static-ownership", "familia": "sistemas"},
+  "c": {"nombre": "C", "extension": ".c", "run": "cc main.c -o main && ./main", "model": "compiled-static-manual-memory", "familia": "C / llaves"},
+  "sql": {"nombre": "SQL", "extension": ".sql", "run": "sqlite3 :memory: < main.sql", "model": "declarative", "familia": "lógica y declarativa"},
+  "php": {"nombre": "PHP", "extension": ".php", "run": "php main.php", "model": "interpreted-dynamic-web", "familia": "scripting dinámico"}
+}

@@ -1,0 +1,8 @@
+# Normaliza saltos de línea a LF en el repositorio.
+* text=auto eol=lf
+
+# Binarios (por si se añaden en el futuro)
+*.png binary
+*.jpg binary
+*.pdf binary
+*.ico binary

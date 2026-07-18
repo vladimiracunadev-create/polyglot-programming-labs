@@ -1,0 +1,19 @@
+{
+  "descripcion": "Inspeccionar un valor mostrando el número, su cuadrado y su cubo, como al examinar variables en un depurador.",
+  "contrato": "stdin: un entero `n` → stdout: `valor=<n> cuadrado=<n²> cubo=<n³>`",
+  "formula": "inspeccionar n, n² y n³",
+  "casos": [
+    {
+      "stdin": "3",
+      "esperado": "valor=3 cuadrado=9 cubo=27"
+    },
+    {
+      "stdin": "2",
+      "esperado": "valor=2 cuadrado=4 cubo=8"
+    },
+    {
+      "stdin": "5",
+      "esperado": "valor=5 cuadrado=25 cubo=125"
+    }
+  ]
+}

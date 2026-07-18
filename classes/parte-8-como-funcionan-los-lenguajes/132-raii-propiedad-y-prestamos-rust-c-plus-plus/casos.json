@@ -1,0 +1,19 @@
+{
+  "descripcion": "Calcular el doble de un valor prestándolo (borrow) sin tomar su propiedad, ilustrando RAII y préstamos.",
+  "contrato": "stdin: un entero `n` → stdout: `resultado=<2n>`",
+  "formula": "prestar n a una función que devuelve 2n",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "resultado=10"
+    },
+    {
+      "stdin": "0",
+      "esperado": "resultado=0"
+    },
+    {
+      "stdin": "7",
+      "esperado": "resultado=14"
+    }
+  ]
+}

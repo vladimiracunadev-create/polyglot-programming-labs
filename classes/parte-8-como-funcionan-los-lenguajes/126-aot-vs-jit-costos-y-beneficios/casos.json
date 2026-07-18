@@ -1,0 +1,19 @@
+{
+  "descripcion": "Calcular 2 elevado a n.",
+  "contrato": "stdin: un entero `n` (0 <= n <= 60) → stdout: `resultado=<2^n>`",
+  "formula": "2 elevado a n",
+  "casos": [
+    {
+      "stdin": "3",
+      "esperado": "resultado=8"
+    },
+    {
+      "stdin": "0",
+      "esperado": "resultado=1"
+    },
+    {
+      "stdin": "5",
+      "esperado": "resultado=32"
+    }
+  ]
+}

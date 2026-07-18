@@ -1,0 +1,19 @@
+{
+  "descripcion": "Incrementar un contador n veces de forma segura, mostrando el resultado correcto.",
+  "contrato": "stdin: un entero `n` (número de incrementos) → stdout: `cuenta=<n>`",
+  "formula": "incrementar un contador n veces, con exclusión",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "cuenta=5"
+    },
+    {
+      "stdin": "0",
+      "esperado": "cuenta=0"
+    },
+    {
+      "stdin": "3",
+      "esperado": "cuenta=3"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "descripcion": "Dado un código de 1 a 4, indicar la clase de error correspondiente.",
+  "contrato": "stdin: un entero `codigo` (1 a 4) → stdout: `error=<sintaxis|tipos|enlace|ejecucion>`",
+  "formula": "1→sintaxis, 2→tipos, 3→enlace, 4→ejecucion",
+  "casos": [
+    {
+      "stdin": "1",
+      "esperado": "error=sintaxis"
+    },
+    {
+      "stdin": "3",
+      "esperado": "error=enlace"
+    },
+    {
+      "stdin": "4",
+      "esperado": "error=ejecucion"
+    }
+  ]
+}

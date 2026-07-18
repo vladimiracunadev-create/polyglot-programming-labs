@@ -1,0 +1,19 @@
+{
+  "descripcion": "Sumar una lista enviando cada número como mensaje a un actor acumulador.",
+  "contrato": "stdin: una línea con enteros separados por espacio → stdout: `total=<suma de todos>`",
+  "formula": "cada número es un mensaje al actor; el actor acumula",
+  "casos": [
+    {
+      "stdin": "1 2 3",
+      "esperado": "total=6"
+    },
+    {
+      "stdin": "5",
+      "esperado": "total=5"
+    },
+    {
+      "stdin": "10 20",
+      "esperado": "total=30"
+    }
+  ]
+}

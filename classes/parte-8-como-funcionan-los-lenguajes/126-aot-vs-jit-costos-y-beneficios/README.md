@@ -1,20 +1,63 @@
 # Clase 126 — AOT vs. JIT: costos y beneficios
 
-> Parte **8 — Cómo funcionan los lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **8 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **aot vs. jit: costos y beneficios**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Comparar **AOT (compilación anticipada)** con **JIT (compilación en tiempo de ejecución)**. AOT compila todo antes de arrancar (rápido al iniciar); JIT compila sobre la marcha las partes calientes (arranque más lento, luego rápido).
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Calcular una potencia de dos.
+2. Explicar AOT vs. JIT.
+3. Relacionar el modelo con arranque y rendimiento.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | AOT | Compilar todo antes de ejecutar |
+| 2 | JIT | Compilar las partes calientes al vuelo |
+| 3 | Arranque vs. pico | Compromiso entre ambos |
+
+## 📖 Definiciones y características
+
+- **AOT** — compilación anticipada a código máquina (C, Rust, Go). Clave: arranque instantáneo.
+- **JIT** — compilación durante la ejecución de lo más usado (JVM, V8). Clave: se calienta y acelera.
+- **Código caliente** — el que se ejecuta muchas veces. Clave: el JIT lo optimiza.
+
+## 🧩 Situación
+
+Una herramienta de línea de comandos AOT arranca al instante; un servidor JIT tarda en calentar pero luego es muy rápido. El cálculo (2^n) es el mismo; cambia cuándo se compila.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): un entero `n` (0 <= n <= 60)
+- **Salida** (stdout): `resultado=<2^n>`
+- **Regla:** 2 elevado a n
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `3` | `resultado=8` |
+| `0` | `resultado=1` |
+| `5` | `resultado=32` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+multiplicar 2 por sí mismo n veces (o desplazar bits)
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | Bucle o desplazamiento de bits en cada lenguaje. |
+| Semántica | El resultado no depende del modelo de compilación. |
+| Paradigmática | SQL calcula con una expresión. |
+
+## 🧬 El concepto en la familia
+
+Go/Rust/C son AOT; la JVM y V8 son JIT; GraalVM ofrece AOT para la JVM.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 126
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Desbordar con n grande** → causa: 2^64 no cabe → solución: aquí n <= 60
+- **Empezar el acumulador en 0** → causa: siempre daría 0 → solución: iniciar el acumulador de producto en 1
+
+## ❓ Preguntas frecuentes
+
+- **¿AOT o JIT es mejor?** AOT para arranque rápido y binarios; JIT para procesos largos que se benefician del calentamiento.
+- **¿Se pueden combinar?** Sí: GraalVM y otros ofrecen AOT sobre plataformas JIT.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

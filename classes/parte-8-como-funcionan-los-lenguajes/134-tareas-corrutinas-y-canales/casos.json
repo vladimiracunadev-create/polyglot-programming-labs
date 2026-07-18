@@ -1,0 +1,19 @@
+{
+  "descripcion": "Encontrar el máximo de una lista pasando los valores por un canal (productor/consumidor).",
+  "contrato": "stdin: una línea con enteros separados por espacio → stdout: `max=<el mayor>`",
+  "formula": "enviar los valores por un canal; el consumidor guarda el máximo",
+  "casos": [
+    {
+      "stdin": "3 1 4",
+      "esperado": "max=4"
+    },
+    {
+      "stdin": "5",
+      "esperado": "max=5"
+    },
+    {
+      "stdin": "10 20 5",
+      "esperado": "max=20"
+    }
+  ]
+}

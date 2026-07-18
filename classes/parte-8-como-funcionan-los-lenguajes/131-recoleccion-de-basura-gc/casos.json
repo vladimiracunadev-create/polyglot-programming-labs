@@ -1,0 +1,19 @@
+{
+  "descripcion": "Crear n objetos temporales y confirmar que, al no quedar referencias, la memoria se recolecta.",
+  "contrato": "stdin: un entero `n` (número de objetos temporales) → stdout: `creados=<n> estado=recolectado`",
+  "formula": "crear n objetos temporales; al perder la referencia, se recolectan",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "creados=5 estado=recolectado"
+    },
+    {
+      "stdin": "0",
+      "esperado": "creados=0 estado=recolectado"
+    },
+    {
+      "stdin": "3",
+      "esperado": "creados=3 estado=recolectado"
+    }
+  ]
+}

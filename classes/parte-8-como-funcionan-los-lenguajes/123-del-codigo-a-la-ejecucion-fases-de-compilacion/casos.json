@@ -1,0 +1,19 @@
+{
+  "descripcion": "Evaluar una expresión 'a op b' (op = +, -, *), simulando las fases lexer → parser → evaluador.",
+  "contrato": "stdin: una línea `a op b` (dos enteros y un operador +, -, *) → stdout: `resultado=<a op b>`",
+  "formula": "aplicar el operador a los dos operandos",
+  "casos": [
+    {
+      "stdin": "3 + 4",
+      "esperado": "resultado=7"
+    },
+    {
+      "stdin": "10 - 2",
+      "esperado": "resultado=8"
+    },
+    {
+      "stdin": "5 * 6",
+      "esperado": "resultado=30"
+    }
+  ]
+}

@@ -5,7 +5,7 @@
 Programa secuencial de **176 clases** en **12 partes**. La numeración es
 global (001→…) y el orden importa: cada clase asume la anterior.
 
-**Estado:** 122 clases construidas · 54 planificadas · núcleo de 10 lenguajes.
+**Estado:** 138 clases construidas · 38 planificadas · núcleo de 10 lenguajes.
 Leyenda: ✅ construida · 🚧 planificada.
 
 ---
@@ -194,22 +194,22 @@ Leyenda: ✅ construida · 🚧 planificada.
 
 | # | Clase |
 |---|---|
-| 🚧 123 | [Del código a la ejecución: fases de compilación](parte-8-como-funcionan-los-lenguajes/123-del-codigo-a-la-ejecucion-fases-de-compilacion/README.md) |
-| 🚧 124 | [Compilador, intérprete y JIT](parte-8-como-funcionan-los-lenguajes/124-compilador-interprete-y-jit/README.md) |
-| 🚧 125 | [Bytecode y máquinas virtuales (JVM, CLR, V8)](parte-8-como-funcionan-los-lenguajes/125-bytecode-y-maquinas-virtuales-jvm-clr-v8/README.md) |
-| 🚧 126 | [AOT vs. JIT: costos y beneficios](parte-8-como-funcionan-los-lenguajes/126-aot-vs-jit-costos-y-beneficios/README.md) |
-| 🚧 127 | [La pila (stack) y el marco de llamada](parte-8-como-funcionan-los-lenguajes/127-la-pila-stack-y-el-marco-de-llamada/README.md) |
-| 🚧 128 | [El heap y la asignación dinámica](parte-8-como-funcionan-los-lenguajes/128-el-heap-y-la-asignacion-dinamica/README.md) |
-| 🚧 129 | [Referencias, apuntadores y direcciones](parte-8-como-funcionan-los-lenguajes/129-referencias-apuntadores-y-direcciones/README.md) |
-| 🚧 130 | [Gestión manual de memoria (C): malloc/free](parte-8-como-funcionan-los-lenguajes/130-gestion-manual-de-memoria-c-malloc-free/README.md) |
-| 🚧 131 | [Recolección de basura (GC)](parte-8-como-funcionan-los-lenguajes/131-recoleccion-de-basura-gc/README.md) |
-| 🚧 132 | [RAII, propiedad y préstamos (Rust/C++)](parte-8-como-funcionan-los-lenguajes/132-raii-propiedad-y-prestamos-rust-c-plus-plus/README.md) |
-| 🚧 133 | [Concurrencia: procesos, hilos y memoria compartida](parte-8-como-funcionan-los-lenguajes/133-concurrencia-procesos-hilos-y-memoria-compartida/README.md) |
-| 🚧 134 | [Tareas, corrutinas y canales](parte-8-como-funcionan-los-lenguajes/134-tareas-corrutinas-y-canales/README.md) |
-| 🚧 135 | [Actores y paso de mensajes (modelo BEAM)](parte-8-como-funcionan-los-lenguajes/135-actores-y-paso-de-mensajes-modelo-beam/README.md) |
-| 🚧 136 | [El modelo de memoria y las condiciones de carrera](parte-8-como-funcionan-los-lenguajes/136-el-modelo-de-memoria-y-las-condiciones-de-carrera/README.md) |
-| 🚧 137 | [Errores: de sintaxis, de tipos, de enlace y de ejecución](parte-8-como-funcionan-los-lenguajes/137-errores-de-sintaxis-de-tipos-de-enlace-y-de-ejecucion/README.md) |
-| 🚧 138 | [Depuración: cómo se diagnostica en cada runtime](parte-8-como-funcionan-los-lenguajes/138-depuracion-como-se-diagnostica-en-cada-runtime/README.md) |
+| ✅ 123 | [Del código a la ejecución: fases de compilación](parte-8-como-funcionan-los-lenguajes/123-del-codigo-a-la-ejecucion-fases-de-compilacion/README.md) |
+| ✅ 124 | [Compilador, intérprete y JIT](parte-8-como-funcionan-los-lenguajes/124-compilador-interprete-y-jit/README.md) |
+| ✅ 125 | [Bytecode y máquinas virtuales (JVM, CLR, V8)](parte-8-como-funcionan-los-lenguajes/125-bytecode-y-maquinas-virtuales-jvm-clr-v8/README.md) |
+| ✅ 126 | [AOT vs. JIT: costos y beneficios](parte-8-como-funcionan-los-lenguajes/126-aot-vs-jit-costos-y-beneficios/README.md) |
+| ✅ 127 | [La pila (stack) y el marco de llamada](parte-8-como-funcionan-los-lenguajes/127-la-pila-stack-y-el-marco-de-llamada/README.md) |
+| ✅ 128 | [El heap y la asignación dinámica](parte-8-como-funcionan-los-lenguajes/128-el-heap-y-la-asignacion-dinamica/README.md) |
+| ✅ 129 | [Referencias, apuntadores y direcciones](parte-8-como-funcionan-los-lenguajes/129-referencias-apuntadores-y-direcciones/README.md) |
+| ✅ 130 | [Gestión manual de memoria (C): malloc/free](parte-8-como-funcionan-los-lenguajes/130-gestion-manual-de-memoria-c-malloc-free/README.md) |
+| ✅ 131 | [Recolección de basura (GC)](parte-8-como-funcionan-los-lenguajes/131-recoleccion-de-basura-gc/README.md) |
+| ✅ 132 | [RAII, propiedad y préstamos (Rust/C++)](parte-8-como-funcionan-los-lenguajes/132-raii-propiedad-y-prestamos-rust-c-plus-plus/README.md) |
+| ✅ 133 | [Concurrencia: procesos, hilos y memoria compartida](parte-8-como-funcionan-los-lenguajes/133-concurrencia-procesos-hilos-y-memoria-compartida/README.md) |
+| ✅ 134 | [Tareas, corrutinas y canales](parte-8-como-funcionan-los-lenguajes/134-tareas-corrutinas-y-canales/README.md) |
+| ✅ 135 | [Actores y paso de mensajes (modelo BEAM)](parte-8-como-funcionan-los-lenguajes/135-actores-y-paso-de-mensajes-modelo-beam/README.md) |
+| ✅ 136 | [El modelo de memoria y las condiciones de carrera](parte-8-como-funcionan-los-lenguajes/136-el-modelo-de-memoria-y-las-condiciones-de-carrera/README.md) |
+| ✅ 137 | [Errores: de sintaxis, de tipos, de enlace y de ejecución](parte-8-como-funcionan-los-lenguajes/137-errores-de-sintaxis-de-tipos-de-enlace-y-de-ejecucion/README.md) |
+| ✅ 138 | [Depuración: cómo se diagnostica en cada runtime](parte-8-como-funcionan-los-lenguajes/138-depuracion-como-se-diagnostica-en-cada-runtime/README.md) |
 
 ## Parte 9 — Ingeniería de software políglota · clases 139–154
 

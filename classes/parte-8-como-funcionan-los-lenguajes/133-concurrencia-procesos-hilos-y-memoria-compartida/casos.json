@@ -1,0 +1,19 @@
+{
+  "descripcion": "Contar los elementos de una lista usando un acumulador compartido, como visión de la memoria compartida.",
+  "contrato": "stdin: una línea con enteros separados por espacio → stdout: `cuenta=<número de elementos>`",
+  "formula": "acumulador compartido que cuenta los elementos",
+  "casos": [
+    {
+      "stdin": "1 2 3",
+      "esperado": "cuenta=3"
+    },
+    {
+      "stdin": "5",
+      "esperado": "cuenta=1"
+    },
+    {
+      "stdin": "10 20 30 40",
+      "esperado": "cuenta=4"
+    }
+  ]
+}

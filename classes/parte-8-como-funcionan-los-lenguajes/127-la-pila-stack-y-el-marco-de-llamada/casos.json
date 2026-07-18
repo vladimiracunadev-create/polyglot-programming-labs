@@ -1,0 +1,19 @@
+{
+  "descripcion": "Sumar 1 a n con una función recursiva y reportar la profundidad de la recursión.",
+  "contrato": "stdin: un entero `n` (1 <= n <= 1000) → stdout: `suma=<1+...+n> profundidad=<n>`",
+  "formula": "suma recursiva; profundidad = número de marcos = n",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "suma=15 profundidad=5"
+    },
+    {
+      "stdin": "3",
+      "esperado": "suma=6 profundidad=3"
+    },
+    {
+      "stdin": "1",
+      "esperado": "suma=1 profundidad=1"
+    }
+  ]
+}

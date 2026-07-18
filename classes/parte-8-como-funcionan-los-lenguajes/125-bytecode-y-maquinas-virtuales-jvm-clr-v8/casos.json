@@ -1,0 +1,19 @@
+{
+  "descripcion": "Evaluar una expresión en notación polaca inversa (RPN) 'a b op' con una pila.",
+  "contrato": "stdin: una línea `a b op` (dos enteros y un operador +, -, *) → stdout: `resultado=<a op b>`",
+  "formula": "apilar a y b; aplicar op; el tope es el resultado",
+  "casos": [
+    {
+      "stdin": "3 4 +",
+      "esperado": "resultado=7"
+    },
+    {
+      "stdin": "5 6 *",
+      "esperado": "resultado=30"
+    },
+    {
+      "stdin": "10 2 -",
+      "esperado": "resultado=8"
+    }
+  ]
+}

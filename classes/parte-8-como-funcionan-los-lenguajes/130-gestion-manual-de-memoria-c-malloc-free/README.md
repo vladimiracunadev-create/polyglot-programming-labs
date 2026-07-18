@@ -1,20 +1,63 @@
 # Clase 130 — Gestión manual de memoria (C): malloc/free
 
-> Parte **8 — Cómo funcionan los lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **8 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **gestión manual de memoria (c): malloc/free**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Practicar la **gestión manual de memoria** de C: reservar con malloc, usar y liberar con free. En los lenguajes con recolector esto es automático; en C es responsabilidad del programador.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Reservar y liberar memoria (concepto).
+2. Explicar malloc/free.
+3. Contrastar con la gestión automática.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | malloc/free | Reservar y liberar a mano |
+| 2 | Responsabilidad | Liberar lo que reservas |
+| 3 | Fugas y dobles liberaciones | Los peligros |
+
+## 📖 Definiciones y características
+
+- **malloc** — reserva un bloque de memoria en el heap (C). Clave: devuelve un puntero.
+- **free** — libera un bloque previamente reservado. Clave: olvidarlo causa fugas.
+- **Fuga de memoria** — memoria reservada que nunca se libera. Clave: el programa la va acumulando.
+
+## 🧩 Situación
+
+En C, cada malloc necesita su free; olvidarlo es una fuga, liberar dos veces es un error grave. Los lenguajes con GC hacen esto por ti, a cambio de menos control.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): un entero `n` (n >= 1)
+- **Salida** (stdout): `reservado=<n> suma=<1+...+n>`
+- **Regla:** reservar n enteros, llenarlos 1..n, sumar, liberar
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `5` | `reservado=5 suma=15` |
+| `1` | `reservado=1 suma=1` |
+| `3` | `reservado=3 suma=6` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+reservar(n) ; llenar 1..n ; sumar ; liberar
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | malloc/free (C); las colecciones automáticas en los demás. |
+| Semántica | C libera a mano; GC/ownership liberan por ti. |
+| Paradigmática | SQL no expone gestión de memoria. |
+
+## 🧬 El concepto en la familia
+
+C y C++ (con new/delete) gestionan a mano; Rust automatiza vía ownership sin GC; el resto usa GC.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 130
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Olvidar free** → causa: fuga de memoria → solución: liberar todo lo reservado
+- **Usar tras liberar** → causa: use-after-free → solución: no acceder a memoria ya liberada
+
+## ❓ Preguntas frecuentes
+
+- **¿Por qué gestionar a mano?** Control fino y rendimiento predecible, a cambio de responsabilidad.
+- **¿El GC elimina las fugas?** Las de memoria en gran medida, pero no las de otros recursos (archivos, sockets).
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

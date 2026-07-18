@@ -1,0 +1,19 @@
+{
+  "descripcion": "Construir dinámicamente una lista descendente de n a 1.",
+  "contrato": "stdin: un entero `n` (n >= 1) → stdout: `lista=<n-(n-1)-...-1>`",
+  "formula": "lista dinámica con los valores de n a 1",
+  "casos": [
+    {
+      "stdin": "3",
+      "esperado": "lista=3-2-1"
+    },
+    {
+      "stdin": "1",
+      "esperado": "lista=1"
+    },
+    {
+      "stdin": "5",
+      "esperado": "lista=5-4-3-2-1"
+    }
+  ]
+}

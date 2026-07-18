@@ -14,8 +14,8 @@
   "php"
  ],
  "total_planned": 176,
- "total_built": 122,
- "parts_built": 8,
+ "total_built": 138,
+ "parts_built": 9,
  "parts_planned": 12,
  "parts": [
   {
@@ -851,97 +851,97 @@
      "num": 123,
      "title": "Del código a la ejecución: fases de compilación",
      "slug": "123-del-codigo-a-la-ejecucion-fases-de-compilacion",
-     "built": false
+     "built": true
     },
     {
      "num": 124,
      "title": "Compilador, intérprete y JIT",
      "slug": "124-compilador-interprete-y-jit",
-     "built": false
+     "built": true
     },
     {
      "num": 125,
      "title": "Bytecode y máquinas virtuales (JVM, CLR, V8)",
      "slug": "125-bytecode-y-maquinas-virtuales-jvm-clr-v8",
-     "built": false
+     "built": true
     },
     {
      "num": 126,
      "title": "AOT vs. JIT: costos y beneficios",
      "slug": "126-aot-vs-jit-costos-y-beneficios",
-     "built": false
+     "built": true
     },
     {
      "num": 127,
      "title": "La pila (stack) y el marco de llamada",
      "slug": "127-la-pila-stack-y-el-marco-de-llamada",
-     "built": false
+     "built": true
     },
     {
      "num": 128,
      "title": "El heap y la asignación dinámica",
      "slug": "128-el-heap-y-la-asignacion-dinamica",
-     "built": false
+     "built": true
     },
     {
      "num": 129,
      "title": "Referencias, apuntadores y direcciones",
      "slug": "129-referencias-apuntadores-y-direcciones",
-     "built": false
+     "built": true
     },
     {
      "num": 130,
      "title": "Gestión manual de memoria (C): malloc/free",
      "slug": "130-gestion-manual-de-memoria-c-malloc-free",
-     "built": false
+     "built": true
     },
     {
      "num": 131,
      "title": "Recolección de basura (GC)",
      "slug": "131-recoleccion-de-basura-gc",
-     "built": false
+     "built": true
     },
     {
      "num": 132,
      "title": "RAII, propiedad y préstamos (Rust/C++)",
      "slug": "132-raii-propiedad-y-prestamos-rust-c-plus-plus",
-     "built": false
+     "built": true
     },
     {
      "num": 133,
      "title": "Concurrencia: procesos, hilos y memoria compartida",
      "slug": "133-concurrencia-procesos-hilos-y-memoria-compartida",
-     "built": false
+     "built": true
     },
     {
      "num": 134,
      "title": "Tareas, corrutinas y canales",
      "slug": "134-tareas-corrutinas-y-canales",
-     "built": false
+     "built": true
     },
     {
      "num": 135,
      "title": "Actores y paso de mensajes (modelo BEAM)",
      "slug": "135-actores-y-paso-de-mensajes-modelo-beam",
-     "built": false
+     "built": true
     },
     {
      "num": 136,
      "title": "El modelo de memoria y las condiciones de carrera",
      "slug": "136-el-modelo-de-memoria-y-las-condiciones-de-carrera",
-     "built": false
+     "built": true
     },
     {
      "num": 137,
      "title": "Errores: de sintaxis, de tipos, de enlace y de ejecución",
      "slug": "137-errores-de-sintaxis-de-tipos-de-enlace-y-de-ejecucion",
-     "built": false
+     "built": true
     },
     {
      "num": 138,
      "title": "Depuración: cómo se diagnostica en cada runtime",
      "slug": "138-depuracion-como-se-diagnostica-en-cada-runtime",
-     "built": false
+     "built": true
     }
    ]
   },

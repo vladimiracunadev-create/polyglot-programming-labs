@@ -1,20 +1,63 @@
 # Clase 133 — Concurrencia: procesos, hilos y memoria compartida
 
-> Parte **8 — Cómo funcionan los lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **8 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **concurrencia: procesos, hilos y memoria compartida**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Introducir la **concurrencia con memoria compartida**: varios hilos acceden a los mismos datos. Contar con un acumulador compartido ilustra el modelo; en concurrencia real, ese acceso debe protegerse.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Contar con un acumulador compartido.
+2. Explicar procesos, hilos y memoria compartida.
+3. Reconocer el riesgo de acceso concurrente.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Proceso vs. hilo | Aislado vs. comparte memoria |
+| 2 | Memoria compartida | Varios hilos, mismos datos |
+| 3 | Protección | Evitar el acceso simultáneo inseguro |
+
+## 📖 Definiciones y características
+
+- **Proceso** — programa en ejecución con su propia memoria aislada. Clave: no comparte por defecto.
+- **Hilo** — línea de ejecución dentro de un proceso; comparte su memoria. Clave: acceso concurrente a los datos.
+- **Memoria compartida** — datos accesibles por varios hilos. Clave: requiere sincronización para ser segura.
+
+## 🧩 Situación
+
+Los hilos de un proceso comparten memoria: es rápido comunicar, pero peligroso si dos escriben a la vez el mismo dato. Contar con un acumulador es el ejemplo de un estado compartido.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea con enteros separados por espacio
+- **Salida** (stdout): `cuenta=<número de elementos>`
+- **Regla:** acumulador compartido que cuenta los elementos
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `1 2 3` | `cuenta=3` |
+| `5` | `cuenta=1` |
+| `10 20 30 40` | `cuenta=4` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+cuenta <- 0 ; PARA CADA elemento: cuenta <- cuenta + 1
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | Un contador compartido en cada lenguaje. |
+| Semántica | Con hilos reales haría falta un mutex; aquí es secuencial. |
+| Paradigmática | SQL delega el paralelismo al motor. |
+
+## 🧬 El concepto en la familia
+
+Java/C#/C++ comparten memoria entre hilos (con locks); Go y Erlang prefieren comunicar en vez de compartir.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 133
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Compartir sin sincronizar** → causa: condiciones de carrera → solución: proteger el acceso con mutex o preferir mensajes
+- **Sobre-sincronizar** → causa: cuellos de botella → solución: minimizar la sección crítica
+
+## ❓ Preguntas frecuentes
+
+- **¿Compartir memoria o comunicar?** 'No comuniques compartiendo memoria; comparte comunicando' (lema de Go).
+- **¿Proceso o hilo?** Hilo para compartir datos rápido; proceso para aislar y ser robusto.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

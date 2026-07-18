@@ -1,0 +1,19 @@
+{
+  "descripcion": "Reservar dinámicamente un arreglo de n enteros, llenarlo de 1 a n, sumarlo y liberarlo.",
+  "contrato": "stdin: un entero `n` (n >= 1) → stdout: `reservado=<n> suma=<1+...+n>`",
+  "formula": "reservar n enteros, llenarlos 1..n, sumar, liberar",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "reservado=5 suma=15"
+    },
+    {
+      "stdin": "1",
+      "esperado": "reservado=1 suma=1"
+    },
+    {
+      "stdin": "3",
+      "esperado": "reservado=3 suma=6"
+    }
+  ]
+}

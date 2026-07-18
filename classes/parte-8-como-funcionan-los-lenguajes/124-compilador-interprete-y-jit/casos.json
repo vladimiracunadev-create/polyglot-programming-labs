@@ -1,0 +1,19 @@
+{
+  "descripcion": "Contar cuántos dígitos tiene un entero no negativo.",
+  "contrato": "stdin: un entero `n` (n >= 0) → stdout: `digitos=<cantidad de dígitos>`",
+  "formula": "contar los dígitos de n (0 tiene 1)",
+  "casos": [
+    {
+      "stdin": "12345",
+      "esperado": "digitos=5"
+    },
+    {
+      "stdin": "7",
+      "esperado": "digitos=1"
+    },
+    {
+      "stdin": "100",
+      "esperado": "digitos=3"
+    }
+  ]
+}

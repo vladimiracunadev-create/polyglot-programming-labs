@@ -1,20 +1,63 @@
 # Clase 123 — Del código a la ejecución: fases de compilación
 
-> Parte **8 — Cómo funcionan los lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **8 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **del código a la ejecución: fases de compilación**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Ver las **fases de compilación** en miniatura: separar la entrada en tokens (léxico), reconocer su estructura (sintáctico) y calcular el resultado (evaluación). Todo compilador o intérprete hace esto a mayor escala.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Separar una entrada en tokens.
+2. Interpretar la estructura de una expresión.
+3. Nombrar las fases de compilación.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Análisis léxico | De texto a tokens |
+| 2 | Análisis sintáctico | Reconocer la estructura |
+| 3 | Evaluación | Producir el resultado |
+
+## 📖 Definiciones y características
+
+- **Análisis léxico (lexer)** — divide el texto en tokens. Clave: '3 + 4' → [3, +, 4].
+- **Análisis sintáctico (parser)** — reconoce la estructura de los tokens. Clave: expresión = número op número.
+- **Evaluación** — calcula el resultado a partir de la estructura. Clave: aplica el operador.
+
+## 🧩 Situación
+
+Cuando compilas o ejecutas código, el lenguaje primero lo tokeniza, luego lo parsea y por fin lo evalúa o traduce. Este mini-evaluador muestra esas fases con una operación simple.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea `a op b` (dos enteros y un operador +, -, *)
+- **Salida** (stdout): `resultado=<a op b>`
+- **Regla:** aplicar el operador a los dos operandos
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `3 + 4` | `resultado=7` |
+| `10 - 2` | `resultado=8` |
+| `5 * 6` | `resultado=30` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+TOKENIZAR ; RECONOCER (num op num) ; EVALUAR
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | Cada lenguaje tokeniza y evalúa a su manera. |
+| Semántica | Las fases son universales: lexer, parser, evaluador. |
+| Paradigmática | SQL evalúa expresiones en la consulta. |
+
+## 🧬 El concepto en la familia
+
+Todo compilador (gcc, javac, rustc) y todo intérprete (CPython, V8) sigue estas fases.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 123
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Mezclar léxico con sintaxis** → causa: confundir tokens con estructura → solución: separar las fases mentalmente
+- **Operador no soportado** → causa: caso sin manejar → solución: cubrir los operadores esperados
+
+## ❓ Preguntas frecuentes
+
+- **¿Compilar es solo estas fases?** Son el núcleo; hay más (optimización, generación de código).
+- **¿Un intérprete parsea?** Sí: también tokeniza y parsea antes de ejecutar.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

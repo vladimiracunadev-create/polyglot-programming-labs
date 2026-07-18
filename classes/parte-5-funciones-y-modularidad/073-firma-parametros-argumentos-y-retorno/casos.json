@@ -1,0 +1,19 @@
+{
+  "descripcion": "Definir una función suma(a, b) y usarla para sumar dos enteros.",
+  "contrato": "stdin: una línea `a b` (dos enteros) → stdout: `suma=<a+b>`",
+  "formula": "suma(a, b) = a + b",
+  "casos": [
+    {
+      "stdin": "3 4",
+      "esperado": "suma=7"
+    },
+    {
+      "stdin": "10 20",
+      "esperado": "suma=30"
+    },
+    {
+      "stdin": "-5 5",
+      "esperado": "suma=0"
+    }
+  ]
+}

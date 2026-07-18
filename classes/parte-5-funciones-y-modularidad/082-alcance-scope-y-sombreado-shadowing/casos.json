@@ -1,0 +1,19 @@
+{
+  "descripcion": "Mostrar el sombreado (shadowing): una variable interna con el mismo nombre oculta a la externa dentro de su bloque.",
+  "contrato": "stdin: un entero `n` → stdout: `interno=<n+10> externo=<n>`",
+  "formula": "externo x = n; en un bloque interno x = n+10; al salir, x = n",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "interno=15 externo=5"
+    },
+    {
+      "stdin": "0",
+      "esperado": "interno=10 externo=0"
+    },
+    {
+      "stdin": "-3",
+      "esperado": "interno=7 externo=-3"
+    }
+  ]
+}

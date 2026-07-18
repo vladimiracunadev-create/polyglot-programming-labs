@@ -1,0 +1,19 @@
+{
+  "descripcion": "Calcular el valor absoluto de un entero usando la función correspondiente de la biblioteca estándar.",
+  "contrato": "stdin: un entero `n` → stdout: `abs=<|n|>`",
+  "formula": "abs(n) = |n|",
+  "casos": [
+    {
+      "stdin": "-5",
+      "esperado": "abs=5"
+    },
+    {
+      "stdin": "3",
+      "esperado": "abs=3"
+    },
+    {
+      "stdin": "0",
+      "esperado": "abs=0"
+    }
+  ]
+}

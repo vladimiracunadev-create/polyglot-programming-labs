@@ -1,0 +1,19 @@
+{
+  "descripcion": "Usar una función 'doble' definida en un módulo/espacio de nombres separado.",
+  "contrato": "stdin: un entero `n` → stdout: `resultado=<2n>`",
+  "formula": "modulo.doble(n) = 2n",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "resultado=10"
+    },
+    {
+      "stdin": "0",
+      "esperado": "resultado=0"
+    },
+    {
+      "stdin": "-4",
+      "esperado": "resultado=-8"
+    }
+  ]
+}

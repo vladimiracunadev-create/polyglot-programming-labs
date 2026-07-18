@@ -1,0 +1,19 @@
+{
+  "descripcion": "Aplicar dos operaciones (suma y producto) pasándolas como argumentos a una función que las ejecuta.",
+  "contrato": "stdin: una línea `a b` (dos enteros) → stdout: `suma=<a+b> producto=<a*b>`",
+  "formula": "aplicar(f, a, b) = f(a, b); con f = suma y f = producto",
+  "casos": [
+    {
+      "stdin": "3 4",
+      "esperado": "suma=7 producto=12"
+    },
+    {
+      "stdin": "5 5",
+      "esperado": "suma=10 producto=25"
+    },
+    {
+      "stdin": "0 9",
+      "esperado": "suma=9 producto=0"
+    }
+  ]
+}

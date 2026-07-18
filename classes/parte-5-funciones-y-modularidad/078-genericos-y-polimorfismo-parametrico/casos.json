@@ -1,0 +1,19 @@
+{
+  "descripcion": "Devolver el mayor de dos valores con una función genérica que sirve para cualquier tipo comparable.",
+  "contrato": "stdin: una línea `a b` (dos enteros) → stdout: `max=<el mayor>`",
+  "formula": "max<T>(a, b) = a si a>b, si no b",
+  "casos": [
+    {
+      "stdin": "3 7",
+      "esperado": "max=7"
+    },
+    {
+      "stdin": "9 2",
+      "esperado": "max=9"
+    },
+    {
+      "stdin": "5 5",
+      "esperado": "max=5"
+    }
+  ]
+}

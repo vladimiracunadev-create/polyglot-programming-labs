@@ -1,0 +1,19 @@
+{
+  "descripcion": "Mostrar que una función que recibe un entero por valor no modifica la variable original.",
+  "contrato": "stdin: un entero `n` → stdout: `original=<n> local=<2n>`",
+  "formula": "la función duplica una copia; el original permanece",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "original=5 local=10"
+    },
+    {
+      "stdin": "3",
+      "esperado": "original=3 local=6"
+    },
+    {
+      "stdin": "0",
+      "esperado": "original=0 local=0"
+    }
+  ]
+}

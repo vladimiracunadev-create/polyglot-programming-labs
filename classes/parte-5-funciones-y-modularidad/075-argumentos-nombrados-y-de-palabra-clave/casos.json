@@ -1,0 +1,19 @@
+{
+  "descripcion": "Construir la representación de un punto con argumentos por nombre (x, y).",
+  "contrato": "stdin: una línea `a b` (dos enteros: x, y) → stdout: `punto(x=<a>, y=<b>)`",
+  "formula": "punto(x=a, y=b)",
+  "casos": [
+    {
+      "stdin": "3 4",
+      "esperado": "punto(x=3, y=4)"
+    },
+    {
+      "stdin": "0 -2",
+      "esperado": "punto(x=0, y=-2)"
+    },
+    {
+      "stdin": "5 5",
+      "esperado": "punto(x=5, y=5)"
+    }
+  ]
+}

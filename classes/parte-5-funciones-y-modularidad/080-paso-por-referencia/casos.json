@@ -1,0 +1,19 @@
+{
+  "descripcion": "Mostrar que una función que recibe una referencia sí modifica la variable original.",
+  "contrato": "stdin: un entero `n` → stdout: `antes=<n> despues=<2n>`",
+  "formula": "la función duplica la variable original vía referencia",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "antes=5 despues=10"
+    },
+    {
+      "stdin": "3",
+      "esperado": "antes=3 despues=6"
+    },
+    {
+      "stdin": "7",
+      "esperado": "antes=7 despues=14"
+    }
+  ]
+}

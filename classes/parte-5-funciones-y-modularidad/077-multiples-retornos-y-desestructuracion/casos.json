@@ -1,0 +1,19 @@
+{
+  "descripcion": "Dividir dos enteros devolviendo a la vez el cociente y el resto (múltiples valores).",
+  "contrato": "stdin: una línea `a b` (enteros positivos, b != 0) → stdout: `cociente=<a/b> resto=<a%b>`",
+  "formula": "(cociente, resto) = (a/b, a%b)",
+  "casos": [
+    {
+      "stdin": "17 5",
+      "esperado": "cociente=3 resto=2"
+    },
+    {
+      "stdin": "10 2",
+      "esperado": "cociente=5 resto=0"
+    },
+    {
+      "stdin": "7 3",
+      "esperado": "cociente=2 resto=1"
+    }
+  ]
+}

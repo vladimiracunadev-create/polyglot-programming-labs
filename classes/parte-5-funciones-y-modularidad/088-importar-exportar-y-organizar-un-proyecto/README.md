@@ -1,20 +1,66 @@
 # Clase 088 — Importar, exportar y organizar un proyecto
 
-> Parte **5 — Funciones y modularidad** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **5 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **importar, exportar y organizar un proyecto**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Cerrar la parte usando la **biblioteca estándar**: importar y usar funciones ya provistas por el lenguaje (aquí, valor absoluto). Organizar un proyecto también es saber qué reutilizar en vez de reescribir.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Importar una función de la biblioteca estándar.
+2. Reconocer qué ya viene resuelto.
+3. Explicar import/include/use en cada lenguaje.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Biblioteca estándar | Lo que trae el lenguaje |
+| 2 | Importar | Traer una función incorporada |
+| 3 | No reinventar | Reutilizar lo que existe |
+| 4 | Organizar el proyecto | Estructura e imports |
+
+## 📖 Definiciones y características
+
+- **Biblioteca estándar** — conjunto de módulos incluidos con el lenguaje. Clave: funciones listas para usar.
+- **Importar/incluir** — traer un módulo o cabecera (`import`, `#include`, `use`). Clave: acceder a sus funciones.
+- **Valor absoluto** — distancia a cero, siempre no negativa. Clave: `abs(-5) = 5`.
+- **Reutilización** — usar código existente en vez de reescribir. Clave: menos errores.
+
+## 🧩 Situación
+
+El valor absoluto ya está en la biblioteca estándar de todos los lenguajes. Saber importarlo y usarlo, en vez de escribir tu propio `if x<0`, es parte de organizar bien un proyecto.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): un entero `n`
+- **Salida** (stdout): `abs=<|n|>`
+- **Regla:** abs(n) = |n|
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `-5` | `abs=5` |
+| `3` | `abs=3` |
+| `0` | `abs=0` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+IMPORTAR abs de la biblioteca
+LEER n ; ESCRIBIR "abs=" abs(n)
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +75,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | `abs()` (Python built-in), `Math.abs` (JS/Java), `#include <stdlib.h>` (C), `n.abs()` (Rust). |
+| Semántica | La función estándar maneja los casos; no hay que reimplementarla. |
+| Paradigmática | SQL usa `abs()` incorporado. |
+
+## 🧬 El concepto en la familia
+
+En Ruby `n.abs`. En Go `math.Abs` opera con float; para enteros se usa una función propia o un condicional.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 088
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Reimplementar lo que ya existe** → causa: más código y más bugs → solución: buscar primero en la biblioteca estándar
+- **Olvidar el import/include** → causa: función no encontrada → solución: importar el módulo correcto (math, stdlib)
+
+## ❓ Preguntas frecuentes
+
+- **¿Siempre usar la estándar?** Para lo común, sí: está probada y optimizada.
+- **¿Go no tiene abs de enteros?** `math.Abs` es para float; para int se usa un condicional o una función propia.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

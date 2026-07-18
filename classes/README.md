@@ -5,7 +5,7 @@
 Programa secuencial de **176 clases** en **12 partes**. La numeración es
 global (001→…) y el orden importa: cada clase asume la anterior.
 
-**Estado:** 72 clases construidas · 104 planificadas · núcleo de 10 lenguajes.
+**Estado:** 88 clases construidas · 88 planificadas · núcleo de 10 lenguajes.
 Leyenda: ✅ construida · 🚧 planificada.
 
 ---
@@ -123,22 +123,22 @@ Leyenda: ✅ construida · 🚧 planificada.
 
 | # | Clase |
 |---|---|
-| 🚧 073 | [Firma, parámetros, argumentos y retorno](parte-5-funciones-y-modularidad/073-firma-parametros-argumentos-y-retorno/README.md) |
-| 🚧 074 | [Parámetros por defecto y opcionales](parte-5-funciones-y-modularidad/074-parametros-por-defecto-y-opcionales/README.md) |
-| 🚧 075 | [Argumentos nombrados y de palabra clave](parte-5-funciones-y-modularidad/075-argumentos-nombrados-y-de-palabra-clave/README.md) |
-| 🚧 076 | [Parámetros variádicos](parte-5-funciones-y-modularidad/076-parametros-variadicos/README.md) |
-| 🚧 077 | [Múltiples retornos y desestructuración](parte-5-funciones-y-modularidad/077-multiples-retornos-y-desestructuracion/README.md) |
-| 🚧 078 | [Genéricos y polimorfismo paramétrico](parte-5-funciones-y-modularidad/078-genericos-y-polimorfismo-parametrico/README.md) |
-| 🚧 079 | [Paso por valor](parte-5-funciones-y-modularidad/079-paso-por-valor/README.md) |
-| 🚧 080 | [Paso por referencia](parte-5-funciones-y-modularidad/080-paso-por-referencia/README.md) |
-| 🚧 081 | [Semántica de movimiento y préstamo (Rust)](parte-5-funciones-y-modularidad/081-semantica-de-movimiento-y-prestamo-rust/README.md) |
-| 🚧 082 | [Alcance (scope) y sombreado (shadowing)](parte-5-funciones-y-modularidad/082-alcance-scope-y-sombreado-shadowing/README.md) |
-| 🚧 083 | [Cierres (closures) y captura de variables](parte-5-funciones-y-modularidad/083-cierres-closures-y-captura-de-variables/README.md) |
-| 🚧 084 | [Funciones puras y efectos secundarios](parte-5-funciones-y-modularidad/084-funciones-puras-y-efectos-secundarios/README.md) |
-| 🚧 085 | [Funciones de primera clase y como valores](parte-5-funciones-y-modularidad/085-funciones-de-primera-clase-y-como-valores/README.md) |
-| 🚧 086 | [Módulos, paquetes y espacios de nombres](parte-5-funciones-y-modularidad/086-modulos-paquetes-y-espacios-de-nombres/README.md) |
-| 🚧 087 | [Visibilidad, encapsulación y contratos (public/private)](parte-5-funciones-y-modularidad/087-visibilidad-encapsulacion-y-contratos-public-private/README.md) |
-| 🚧 088 | [Importar, exportar y organizar un proyecto](parte-5-funciones-y-modularidad/088-importar-exportar-y-organizar-un-proyecto/README.md) |
+| ✅ 073 | [Firma, parámetros, argumentos y retorno](parte-5-funciones-y-modularidad/073-firma-parametros-argumentos-y-retorno/README.md) |
+| ✅ 074 | [Parámetros por defecto y opcionales](parte-5-funciones-y-modularidad/074-parametros-por-defecto-y-opcionales/README.md) |
+| ✅ 075 | [Argumentos nombrados y de palabra clave](parte-5-funciones-y-modularidad/075-argumentos-nombrados-y-de-palabra-clave/README.md) |
+| ✅ 076 | [Parámetros variádicos](parte-5-funciones-y-modularidad/076-parametros-variadicos/README.md) |
+| ✅ 077 | [Múltiples retornos y desestructuración](parte-5-funciones-y-modularidad/077-multiples-retornos-y-desestructuracion/README.md) |
+| ✅ 078 | [Genéricos y polimorfismo paramétrico](parte-5-funciones-y-modularidad/078-genericos-y-polimorfismo-parametrico/README.md) |
+| ✅ 079 | [Paso por valor](parte-5-funciones-y-modularidad/079-paso-por-valor/README.md) |
+| ✅ 080 | [Paso por referencia](parte-5-funciones-y-modularidad/080-paso-por-referencia/README.md) |
+| ✅ 081 | [Semántica de movimiento y préstamo (Rust)](parte-5-funciones-y-modularidad/081-semantica-de-movimiento-y-prestamo-rust/README.md) |
+| ✅ 082 | [Alcance (scope) y sombreado (shadowing)](parte-5-funciones-y-modularidad/082-alcance-scope-y-sombreado-shadowing/README.md) |
+| ✅ 083 | [Cierres (closures) y captura de variables](parte-5-funciones-y-modularidad/083-cierres-closures-y-captura-de-variables/README.md) |
+| ✅ 084 | [Funciones puras y efectos secundarios](parte-5-funciones-y-modularidad/084-funciones-puras-y-efectos-secundarios/README.md) |
+| ✅ 085 | [Funciones de primera clase y como valores](parte-5-funciones-y-modularidad/085-funciones-de-primera-clase-y-como-valores/README.md) |
+| ✅ 086 | [Módulos, paquetes y espacios de nombres](parte-5-funciones-y-modularidad/086-modulos-paquetes-y-espacios-de-nombres/README.md) |
+| ✅ 087 | [Visibilidad, encapsulación y contratos (public/private)](parte-5-funciones-y-modularidad/087-visibilidad-encapsulacion-y-contratos-public-private/README.md) |
+| ✅ 088 | [Importar, exportar y organizar un proyecto](parte-5-funciones-y-modularidad/088-importar-exportar-y-organizar-un-proyecto/README.md) |
 
 ## Parte 6 — Datos y estructuras · clases 089–106
 

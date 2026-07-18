@@ -1,0 +1,19 @@
+{
+  "descripcion": "Crear una función que devuelve otra función (un cierre) que recuerda un valor base, y usarla dos veces.",
+  "contrato": "stdin: un entero `base` → stdout: `r1=<base+1> r2=<base+2>`",
+  "formula": "sumar = λx. base + x ; r1 = sumar(1) ; r2 = sumar(2)",
+  "casos": [
+    {
+      "stdin": "10",
+      "esperado": "r1=11 r2=12"
+    },
+    {
+      "stdin": "0",
+      "esperado": "r1=1 r2=2"
+    },
+    {
+      "stdin": "100",
+      "esperado": "r1=101 r2=102"
+    }
+  ]
+}

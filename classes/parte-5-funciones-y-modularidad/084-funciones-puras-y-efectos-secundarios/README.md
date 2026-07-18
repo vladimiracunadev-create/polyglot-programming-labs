@@ -1,20 +1,66 @@
 # Clase 084 — Funciones puras y efectos secundarios
 
-> Parte **5 — Funciones y modularidad** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **5 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **funciones puras y efectos secundarios**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Distinguir una **función pura** —su resultado depende solo de sus argumentos y no cambia nada externo— de una con **efectos secundarios**. Las puras son predecibles, testeables y seguras de paralelizar.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Definir una función pura.
+2. Explicar qué es un efecto secundario.
+3. Argumentar las ventajas de la pureza.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Función pura | Mismo entrada → mismo resultado |
+| 2 | Efecto secundario | Cambiar algo externo |
+| 3 | Transparencia referencial | Sustituir la llamada por su valor |
+| 4 | Ventajas | Testeable, cacheable, paralelizable |
+
+## 📖 Definiciones y características
+
+- **Función pura** — su salida depende solo de sus entradas y no causa efectos externos. Clave: predecible.
+- **Efecto secundario** — modificar estado externo, imprimir, leer archivos. Clave: rompe la pureza.
+- **Transparencia referencial** — poder reemplazar la llamada por su resultado. Clave: propiedad de las puras.
+- **Determinismo** — misma entrada, misma salida siempre. Clave: facilita las pruebas.
+
+## 🧩 Situación
+
+`cuadrado(n)` siempre da lo mismo para el mismo `n` y no toca nada más: es pura. Una función que además escribe en un log tiene un efecto secundario. Las puras son las más fáciles de probar y razonar.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): un entero `n`
+- **Salida** (stdout): `puro=<n²>`
+- **Regla:** cuadrado(n) = n * n (sin efectos)
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `4` | `puro=16` |
+| `-3` | `puro=9` |
+| `0` | `puro=0` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+FUNCION cuadrado(n): DEVOLVER n*n   // sin tocar nada externo
+LEER n ; ESCRIBIR "puro=" cuadrado(n)
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +75,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | Idéntica en todos: una función que devuelve un cálculo. |
+| Semántica | La pureza es una propiedad del diseño, no de la sintaxis. |
+| Paradigmática | SQL (declarativo) y Haskell (puro) empujan hacia la pureza por defecto. |
+
+## 🧬 El concepto en la familia
+
+En Haskell casi todo es puro; los efectos se aíslan con el tipo IO. En Rust, la pureza es una convención, no forzada.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 084
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Mezclar cálculo con impresión/estado** → causa: función difícil de testear → solución: separar el cálculo puro del efecto (I/O)
+- **Depender de estado global** → causa: resultados no reproducibles → solución: pasar todo por parámetros
+
+## ❓ Preguntas frecuentes
+
+- **¿Todo debe ser puro?** No: los efectos son necesarios (I/O). La idea es aislarlos y mantener puro el núcleo.
+- **¿Por qué importan las puras?** Se prueban fácil, se cachean (memoización) y se pueden paralelizar sin riesgo.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

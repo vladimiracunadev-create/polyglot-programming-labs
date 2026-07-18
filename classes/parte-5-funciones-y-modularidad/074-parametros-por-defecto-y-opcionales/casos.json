@@ -1,0 +1,19 @@
+{
+  "descripcion": "Calcular una potencia con exponente por defecto 2: si solo llega la base, se eleva al cuadrado.",
+  "contrato": "stdin: una línea: `base` (exp por defecto 2) o `base exp` → stdout: `resultado=<base^exp>`",
+  "formula": "potencia(base, exp=2) = base^exp",
+  "casos": [
+    {
+      "stdin": "3",
+      "esperado": "resultado=9"
+    },
+    {
+      "stdin": "2 3",
+      "esperado": "resultado=8"
+    },
+    {
+      "stdin": "5",
+      "esperado": "resultado=25"
+    }
+  ]
+}

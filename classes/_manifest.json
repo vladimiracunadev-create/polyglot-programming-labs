@@ -14,8 +14,8 @@
   "php"
  ],
  "total_planned": 176,
- "total_built": 72,
- "parts_built": 5,
+ "total_built": 88,
+ "parts_built": 6,
  "parts_planned": 12,
  "parts": [
   {
@@ -518,97 +518,97 @@
      "num": 73,
      "title": "Firma, parámetros, argumentos y retorno",
      "slug": "073-firma-parametros-argumentos-y-retorno",
-     "built": false
+     "built": true
     },
     {
      "num": 74,
      "title": "Parámetros por defecto y opcionales",
      "slug": "074-parametros-por-defecto-y-opcionales",
-     "built": false
+     "built": true
     },
     {
      "num": 75,
      "title": "Argumentos nombrados y de palabra clave",
      "slug": "075-argumentos-nombrados-y-de-palabra-clave",
-     "built": false
+     "built": true
     },
     {
      "num": 76,
      "title": "Parámetros variádicos",
      "slug": "076-parametros-variadicos",
-     "built": false
+     "built": true
     },
     {
      "num": 77,
      "title": "Múltiples retornos y desestructuración",
      "slug": "077-multiples-retornos-y-desestructuracion",
-     "built": false
+     "built": true
     },
     {
      "num": 78,
      "title": "Genéricos y polimorfismo paramétrico",
      "slug": "078-genericos-y-polimorfismo-parametrico",
-     "built": false
+     "built": true
     },
     {
      "num": 79,
      "title": "Paso por valor",
      "slug": "079-paso-por-valor",
-     "built": false
+     "built": true
     },
     {
      "num": 80,
      "title": "Paso por referencia",
      "slug": "080-paso-por-referencia",
-     "built": false
+     "built": true
     },
     {
      "num": 81,
      "title": "Semántica de movimiento y préstamo (Rust)",
      "slug": "081-semantica-de-movimiento-y-prestamo-rust",
-     "built": false
+     "built": true
     },
     {
      "num": 82,
      "title": "Alcance (scope) y sombreado (shadowing)",
      "slug": "082-alcance-scope-y-sombreado-shadowing",
-     "built": false
+     "built": true
     },
     {
      "num": 83,
      "title": "Cierres (closures) y captura de variables",
      "slug": "083-cierres-closures-y-captura-de-variables",
-     "built": false
+     "built": true
     },
     {
      "num": 84,
      "title": "Funciones puras y efectos secundarios",
      "slug": "084-funciones-puras-y-efectos-secundarios",
-     "built": false
+     "built": true
     },
     {
      "num": 85,
      "title": "Funciones de primera clase y como valores",
      "slug": "085-funciones-de-primera-clase-y-como-valores",
-     "built": false
+     "built": true
     },
     {
      "num": 86,
      "title": "Módulos, paquetes y espacios de nombres",
      "slug": "086-modulos-paquetes-y-espacios-de-nombres",
-     "built": false
+     "built": true
     },
     {
      "num": 87,
      "title": "Visibilidad, encapsulación y contratos (public/private)",
      "slug": "087-visibilidad-encapsulacion-y-contratos-public-private",
-     "built": false
+     "built": true
     },
     {
      "num": 88,
      "title": "Importar, exportar y organizar un proyecto",
      "slug": "088-importar-exportar-y-organizar-un-proyecto",
-     "built": false
+     "built": true
     }
    ]
   },

@@ -1,0 +1,19 @@
+{
+  "descripcion": "Elevar un número al cuadrado con una función pura (sin efectos secundarios).",
+  "contrato": "stdin: un entero `n` → stdout: `puro=<n²>`",
+  "formula": "cuadrado(n) = n * n (sin efectos)",
+  "casos": [
+    {
+      "stdin": "4",
+      "esperado": "puro=16"
+    },
+    {
+      "stdin": "-3",
+      "esperado": "puro=9"
+    },
+    {
+      "stdin": "0",
+      "esperado": "puro=0"
+    }
+  ]
+}

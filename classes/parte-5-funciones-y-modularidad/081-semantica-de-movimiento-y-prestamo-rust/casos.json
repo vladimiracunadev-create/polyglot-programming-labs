@@ -1,0 +1,19 @@
+{
+  "descripcion": "Medir la longitud de un texto y luego mostrarlo, ilustrando préstamo (borrow) y movimiento (move).",
+  "contrato": "stdin: una palabra (ASCII) → stdout: `movido=<palabra> longitud=<len>`",
+  "formula": "longitud por préstamo; el texto se muestra tras moverse",
+  "casos": [
+    {
+      "stdin": "Ada",
+      "esperado": "movido=Ada longitud=3"
+    },
+    {
+      "stdin": "Bo",
+      "esperado": "movido=Bo longitud=2"
+    },
+    {
+      "stdin": "hola",
+      "esperado": "movido=hola longitud=4"
+    }
+  ]
+}

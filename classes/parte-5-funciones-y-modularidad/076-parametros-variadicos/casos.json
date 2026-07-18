@@ -1,0 +1,19 @@
+{
+  "descripcion": "Sumar una cantidad variable de enteros con una función variádica.",
+  "contrato": "stdin: una línea con enteros separados por espacio → stdout: `suma=<suma de todos>`",
+  "formula": "suma(...nums) = Σ nums",
+  "casos": [
+    {
+      "stdin": "1 2 3",
+      "esperado": "suma=6"
+    },
+    {
+      "stdin": "5",
+      "esperado": "suma=5"
+    },
+    {
+      "stdin": "10 20 30 40",
+      "esperado": "suma=100"
+    }
+  ]
+}

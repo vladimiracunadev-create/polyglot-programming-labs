@@ -1,20 +1,66 @@
 # Clase 085 — Funciones de primera clase y como valores
 
-> Parte **5 — Funciones y modularidad** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **5 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **funciones de primera clase y como valores**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Tratar las funciones como **valores de primera clase**: guardarlas en variables y pasarlas como argumentos. `aplicar(suma, a, b)` ejecuta la función recibida; es la base de map/filter/reduce y de los callbacks.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Pasar una función como argumento.
+2. Guardar una función en una variable.
+3. Explicar 'valor de primera clase'.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Primera clase | Las funciones son valores |
+| 2 | Pasar funciones | Como cualquier argumento |
+| 3 | Función de orden superior | Recibe otra función |
+| 4 | Callbacks | El patrón detrás de eventos |
+
+## 📖 Definiciones y características
+
+- **Valor de primera clase** — algo que se puede guardar, pasar y devolver. Clave: las funciones lo son en casi todos los lenguajes.
+- **Función de orden superior** — recibe o devuelve funciones. Clave: `aplicar(f, a, b)`.
+- **Callback** — función pasada para ejecutarse después. Clave: base de eventos y asincronía.
+- **Puntero a función** — en C, un valor que apunta a una función. Clave: su forma de primera clase.
+
+## 🧩 Situación
+
+`aplicar(suma, 3, 4)` da 7 y `aplicar(producto, 3, 4)` da 12, usando la misma función `aplicar`. Poder pasar la operación como dato es lo que hace posibles map, filter y los callbacks.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea `a b` (dos enteros)
+- **Salida** (stdout): `suma=<a+b> producto=<a*b>`
+- **Regla:** aplicar(f, a, b) = f(a, b); con f = suma y f = producto
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `3 4` | `suma=7 producto=12` |
+| `5 5` | `suma=10 producto=25` |
+| `0 9` | `suma=9 producto=0` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+FUNCION aplicar(f, a, b): DEVOLVER f(a, b)
+ESCRIBIR "suma=" aplicar(suma,a,b) " producto=" aplicar(producto,a,b)
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +75,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | Pasar `suma` directamente (Python/JS/Go/Rust) vs. puntero a función (C) o interfaz funcional (Java). |
+| Semántica | La función es un valor; se invoca con `f(a, b)`. |
+| Paradigmática | SQL no pasa funciones; usa operadores/funciones incorporadas. |
+
+## 🧬 El concepto en la familia
+
+En Ruby se pasan `Proc`/bloques o `method(:suma)`. En Haskell pasar funciones es lo más natural del lenguaje.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 085
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Llamar la función en vez de pasarla** → causa: pasar `suma(a,b)` en lugar de `suma` → solución: pasar el nombre sin paréntesis
+- **Firmas incompatibles** → causa: la de orden superior espera otra forma → solución: asegurar que la función pasada encaja con lo esperado
+
+## ❓ Preguntas frecuentes
+
+- **¿Callbacks son esto?** Sí: un callback es una función que pasas para que se ejecute más tarde.
+- **¿C tiene funciones de primera clase?** Parcialmente: con punteros a función, aunque sin cierres.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

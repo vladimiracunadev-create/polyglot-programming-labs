@@ -1,0 +1,19 @@
+{
+  "descripcion": "Modelar una cuenta con saldo privado y un método depositar; hacer dos depósitos y consultar el saldo.",
+  "contrato": "stdin: un entero `n` (monto de cada depósito) → stdout: `saldo=<2n>` (tras depositar n dos veces)",
+  "formula": "cuenta.depositar(n) dos veces; saldo = 2n",
+  "casos": [
+    {
+      "stdin": "50",
+      "esperado": "saldo=100"
+    },
+    {
+      "stdin": "0",
+      "esperado": "saldo=0"
+    },
+    {
+      "stdin": "30",
+      "esperado": "saldo=60"
+    }
+  ]
+}

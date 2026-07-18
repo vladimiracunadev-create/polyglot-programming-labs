@@ -1,0 +1,19 @@
+{
+  "descripcion": "Calcular el área de una figura descrita por un tipo algebraico: cuadrado(lado) o rectangulo(ancho, alto).",
+  "contrato": "stdin: una línea: `cuadrado <lado>` o `rectangulo <ancho> <alto>` → stdout: `area=<área calculada>`",
+  "formula": "cuadrado→lado²; rectangulo→ancho·alto",
+  "casos": [
+    {
+      "stdin": "cuadrado 5",
+      "esperado": "area=25"
+    },
+    {
+      "stdin": "rectangulo 3 4",
+      "esperado": "area=12"
+    },
+    {
+      "stdin": "cuadrado 7",
+      "esperado": "area=49"
+    }
+  ]
+}

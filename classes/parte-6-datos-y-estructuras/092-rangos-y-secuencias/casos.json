@@ -1,0 +1,19 @@
+{
+  "descripcion": "Generar el rango de enteros de a hasta b (inclusive) y su suma.",
+  "contrato": "stdin: una línea `a b` (enteros, a <= b) → stdout: `rango=<a-...-b> suma=<suma del rango>`",
+  "formula": "rango [a..b] y su suma",
+  "casos": [
+    {
+      "stdin": "2 5",
+      "esperado": "rango=2-3-4-5 suma=14"
+    },
+    {
+      "stdin": "1 1",
+      "esperado": "rango=1 suma=1"
+    },
+    {
+      "stdin": "3 6",
+      "esperado": "rango=3-4-5-6 suma=18"
+    }
+  ]
+}

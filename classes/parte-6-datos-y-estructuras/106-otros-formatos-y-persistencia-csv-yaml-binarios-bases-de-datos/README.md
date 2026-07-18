@@ -1,20 +1,63 @@
 # Clase 106 — Otros formatos y persistencia: CSV, YAML, binarios, bases de datos
 
-> Parte **6 — Datos y estructuras** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **6 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **otros formatos y persistencia: csv, yaml, binarios, bases de datos**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Cerrar la parte con **persistencia y formatos tabulares**: CSV (valores separados por comas) es el formato más simple para guardar y compartir datos en tabla. Aquí se serializa una fila y se cuentan sus campos.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Serializar valores a una línea CSV.
+2. Contar los campos.
+3. Reconocer CSV frente a JSON.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | CSV | Valores separados por comas |
+| 2 | Campo | Cada valor de la fila |
+| 3 | Persistencia | Guardar datos en formato de texto |
+
+## 📖 Definiciones y características
+
+- **CSV** — formato tabular: filas de valores separados por comas. Clave: simple y universal.
+- **Campo** — cada valor de una fila CSV. Clave: separado por el delimitador.
+- **Persistencia** — guardar datos para recuperarlos después. Clave: archivos, bases de datos.
+
+## 🧩 Situación
+
+Exportar a Excel, cargar datos en una base, intercambiar tablas: el CSV es el mínimo común denominador. Una fila `1,2,3` con 3 campos es su unidad.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea con enteros separados por espacio
+- **Salida** (stdout): `csv=<valores separados por coma> campos=<cantidad>`
+- **Regla:** csv = unir con coma ; campos = cantidad de valores
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `1 2 3` | `csv=1,2,3 campos=3` |
+| `5` | `csv=5 campos=1` |
+| `10 20` | `csv=10,20 campos=2` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER lista ; csv <- unir con , ; campos <- longitud
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | `','.join(...)` (Python), `.join(',')` (JS), bucle (C). |
+| Semántica | CSV real necesita escapar comas y comillas; aquí los datos son simples. |
+| Paradigmática | SQL exporta/importa CSV con comandos del motor. |
+
+## 🧬 El concepto en la familia
+
+En Ruby `arr.join(',')`. Casi todos tienen una librería CSV que maneja comillas y saltos correctamente.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 106
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **No escapar comas dentro de un campo** → causa: CSV corrupto → solución: usar una librería CSV para datos reales
+- **Confundir campos con caracteres** → causa: contar mal → solución: los campos se separan por el delimitador
+
+## ❓ Preguntas frecuentes
+
+- **¿CSV o JSON?** CSV para tablas simples y planas; JSON para datos anidados y estructurados.
+- **¿CSV siempre usa comas?** Casi siempre; algunos usan punto y coma o tabuladores según la configuración regional.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

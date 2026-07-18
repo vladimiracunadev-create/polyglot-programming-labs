@@ -1,0 +1,19 @@
+{
+  "descripcion": "Crear un recurso con un valor, usarlo y liberarlo automáticamente al salir del ámbito.",
+  "contrato": "stdin: un entero `n` (valor del recurso) → stdout: `valor=<n> estado=liberado`",
+  "formula": "crear recurso(n), usarlo, liberarlo al salir",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "valor=5 estado=liberado"
+    },
+    {
+      "stdin": "0",
+      "esperado": "valor=0 estado=liberado"
+    },
+    {
+      "stdin": "9",
+      "esperado": "valor=9 estado=liberado"
+    }
+  ]
+}

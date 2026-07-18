@@ -14,7 +14,7 @@ Leyenda: ✅ construida · 🏗️ en progreso · 🚧 planificada.
 | 3 | Valores, tipos y variables | 16 | ✅ construida (041–056) |
 | 4 | Control del programa | 16 | ✅ construida (057–072) |
 | 5 | Funciones y modularidad | 16 | ✅ construida (073–088) |
-| 6 | Datos y estructuras | 18 | 🚧 planificada |
+| 6 | Datos y estructuras | 18 | ✅ construida (089–106) |
 | 7 | Paradigmas | 16 | 🚧 planificada |
 | 8 | Cómo funcionan los lenguajes | 16 | 🚧 planificada |
 | 9 | Ingeniería de software políglota | 16 | 🚧 planificada |

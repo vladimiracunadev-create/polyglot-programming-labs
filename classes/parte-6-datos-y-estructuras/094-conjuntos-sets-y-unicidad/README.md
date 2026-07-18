@@ -1,20 +1,63 @@
 # Clase 094 — Conjuntos (sets) y unicidad
 
-> Parte **6 — Datos y estructuras** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **6 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **conjuntos (sets) y unicidad**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Usar un **conjunto (set)**: una colección sin duplicados. Contar los valores únicos es la operación natural del conjunto.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Eliminar duplicados con un conjunto.
+2. Contar elementos distintos.
+3. Reconocer que el conjunto no tiene orden garantizado.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Conjunto | Colección sin duplicados |
+| 2 | Unicidad | Cada valor una vez |
+| 3 | Pertenencia | Comprobar si algo está |
+
+## 📖 Definiciones y características
+
+- **Conjunto** — colección de elementos únicos (set, HashSet). Clave: sin duplicados.
+- **Unicidad** — propiedad de no repetir. Clave: añadir un existente no hace nada.
+- **Pertenencia** — comprobar si un elemento está, en O(1) típico. Clave: uso habitual del set.
+
+## 🧩 Situación
+
+¿Cuántos usuarios distintos entraron? ¿Cuántas etiquetas únicas hay? El conjunto elimina duplicados y responde al instante.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea con enteros separados por espacio
+- **Salida** (stdout): `unicos=<cantidad de valores distintos>`
+- **Regla:** unicos = |conjunto(lista)|
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `1 2 2 3 3 3` | `unicos=3` |
+| `5 5 5` | `unicos=1` |
+| `1 2 3 4` | `unicos=4` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER lista ; conjunto <- SET(lista) ; ESCRIBIR |conjunto|
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | `set(x)` (Python), `new Set` (JS), `HashSet` (Java/Rust/C#). |
+| Semántica | El conjunto no garantiza orden; C lo simula con un bucle. |
+| Paradigmática | SQL usa `COUNT(DISTINCT x)`. |
+
+## 🧬 El concepto en la familia
+
+En Ruby `lista.uniq.size`. En Go, un `map[int]struct{}` hace de conjunto.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 094
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Asumir orden en un conjunto** → causa: esperar los elementos ordenados → solución: usar una lista/ordenar si necesitas orden
+- **Contar con bucles O(n²) sin necesidad** → causa: lento en listas grandes → solución: usar un conjunto con pertenencia O(1)
+
+## ❓ Preguntas frecuentes
+
+- **¿El conjunto conserva el orden?** En general no; algunos lenguajes tienen variantes ordenadas.
+- **¿Conjunto o lista?** Conjunto si te importa la unicidad y la pertenencia rápida.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

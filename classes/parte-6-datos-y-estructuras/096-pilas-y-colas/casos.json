@@ -1,0 +1,19 @@
+{
+  "descripcion": "Procesar una lista como pila (LIFO) y como cola (FIFO), mostrando el orden de salida de cada una.",
+  "contrato": "stdin: una línea con enteros separados por espacio → stdout: `pila=<orden LIFO> cola=<orden FIFO>`",
+  "formula": "pila = inverso(lista); cola = lista",
+  "casos": [
+    {
+      "stdin": "1 2 3",
+      "esperado": "pila=3-2-1 cola=1-2-3"
+    },
+    {
+      "stdin": "5",
+      "esperado": "pila=5 cola=5"
+    },
+    {
+      "stdin": "1 2 3 4",
+      "esperado": "pila=4-3-2-1 cola=1-2-3-4"
+    }
+  ]
+}

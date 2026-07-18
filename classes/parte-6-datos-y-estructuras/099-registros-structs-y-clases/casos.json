@@ -1,0 +1,19 @@
+{
+  "descripcion": "Crear un registro Persona con nombre y edad, y mostrarlo formateado.",
+  "contrato": "stdin: una línea `nombre edad` (una palabra y un entero) → stdout: `Persona(nombre=<nombre>, edad=<edad>)`",
+  "formula": "registro con campos nombre y edad",
+  "casos": [
+    {
+      "stdin": "Ada 36",
+      "esperado": "Persona(nombre=Ada, edad=36)"
+    },
+    {
+      "stdin": "Bo 5",
+      "esperado": "Persona(nombre=Bo, edad=5)"
+    },
+    {
+      "stdin": "Cy 99",
+      "esperado": "Persona(nombre=Cy, edad=99)"
+    }
+  ]
+}

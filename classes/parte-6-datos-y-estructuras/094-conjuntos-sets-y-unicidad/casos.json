@@ -1,0 +1,19 @@
+{
+  "descripcion": "Contar cuántos valores distintos hay en una lista de enteros.",
+  "contrato": "stdin: una línea con enteros separados por espacio → stdout: `unicos=<cantidad de valores distintos>`",
+  "formula": "unicos = |conjunto(lista)|",
+  "casos": [
+    {
+      "stdin": "1 2 2 3 3 3",
+      "esperado": "unicos=3"
+    },
+    {
+      "stdin": "5 5 5",
+      "esperado": "unicos=1"
+    },
+    {
+      "stdin": "1 2 3 4",
+      "esperado": "unicos=4"
+    }
+  ]
+}

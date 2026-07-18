@@ -1,0 +1,19 @@
+{
+  "descripcion": "Comparar dos enteros e indicar si son iguales.",
+  "contrato": "stdin: una línea `a b` (dos enteros) → stdout: `iguales=<true|false>`",
+  "formula": "iguales = (a == b)",
+  "casos": [
+    {
+      "stdin": "5 5",
+      "esperado": "iguales=true"
+    },
+    {
+      "stdin": "3 7",
+      "esperado": "iguales=false"
+    },
+    {
+      "stdin": "0 0",
+      "esperado": "iguales=true"
+    }
+  ]
+}

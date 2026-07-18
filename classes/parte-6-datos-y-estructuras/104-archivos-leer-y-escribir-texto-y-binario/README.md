@@ -1,20 +1,63 @@
 # Clase 104 — Archivos: leer y escribir texto y binario
 
-> Parte **6 — Datos y estructuras** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **6 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **archivos: leer y escribir texto y binario**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Procesar **contenido textual** como el de un archivo: leer una línea y extraer información (palabras, caracteres). Es el modelo de la lectura de archivos, aquí por la entrada estándar para poder verificarlo.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Leer una línea completa con espacios.
+2. Contar palabras y caracteres.
+3. Relacionarlo con la lectura de archivos.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Leer contenido | Una línea con espacios |
+| 2 | Contar palabras | Separar por espacios |
+| 3 | Contar caracteres | Longitud del texto |
+
+## 📖 Definiciones y características
+
+- **Contenido de texto** — los caracteres de un archivo o entrada. Clave: se procesa línea a línea.
+- **Palabra** — secuencia separada por espacios. Clave: se cuenta partiendo por espacios.
+- **Carácter** — cada símbolo, incluidos los espacios. Clave: la longitud total.
+
+## 🧩 Situación
+
+Contar líneas, palabras o caracteres (como `wc`) es el 'hola mundo' del procesamiento de archivos. Aquí el contenido llega por stdin para poder verificar el resultado.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea de texto (puede contener espacios)
+- **Salida** (stdout): `palabras=<número de palabras> caracteres=<longitud incluyendo espacios>`
+- **Regla:** palabras = partes por espacio; caracteres = longitud de la línea
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `hola mundo` | `palabras=2 caracteres=10` |
+| `abc` | `palabras=1 caracteres=3` |
+| `a b c d` | `palabras=4 caracteres=7` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER linea ; palabras <- partir por espacios ; caracteres <- longitud
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | `split()` y `len()` (Python) vs. equivalentes por lenguaje. |
+| Semántica | La longitud incluye los espacios; las palabras no. |
+| Paradigmática | SQL cuenta con funciones de texto y agregación. |
+
+## 🧬 El concepto en la familia
+
+En Ruby `linea.split.size` y `linea.length`. El comando Unix `wc` hace justo esto.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 104
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Contar espacios como palabras** → causa: palabras vacías → solución: partir por uno o más espacios
+- **Olvidar quitar el salto de línea** → causa: un carácter de más → solución: recortar el `\n` final antes de contar
+
+## ❓ Preguntas frecuentes
+
+- **¿Por qué stdin y no un archivo?** Para poder verificar el resultado con casos; un archivo se leería igual, línea a línea.
+- **¿Los caracteres incluyen espacios?** Sí: son parte del contenido; las palabras no.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

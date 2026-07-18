@@ -1,20 +1,63 @@
 # Clase 091 — Tuplas y registros posicionales
 
-> Parte **6 — Datos y estructuras** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **6 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **tuplas y registros posicionales**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Usar **tuplas**: agrupar un número fijo de valores, posiblemente de tipos distintos, sin definir una clase. Se accede por posición y se desestructuran fácilmente.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Crear y desestructurar una tupla.
+2. Acceder a los componentes por posición.
+3. Distinguir tupla de lista.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Tupla | Grupo fijo y ordenado |
+| 2 | Componentes | Acceso por posición |
+| 3 | Desestructuración | Repartir en variables |
+
+## 📖 Definiciones y características
+
+- **Tupla** — grupo ordenado de valores de tamaño fijo. Clave: liviana, sin definir un tipo.
+- **Componente** — cada elemento de la tupla, por posición. Clave: `.0`, `[0]`.
+- **Registro posicional** — estructura cuyos campos se identifican por orden. Clave: la tupla lo es.
+
+## 🧩 Situación
+
+Devolver coordenadas `(x, y)`, un par clave/valor, o un resultado con dos partes: la tupla agrupa sin la ceremonia de una clase.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea `a b` (dos enteros)
+- **Salida** (stdout): `tupla=(<b>, <a>)` (componentes intercambiados)
+- **Regla:** (a, b) → (b, a)
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `3 4` | `tupla=(4, 3)` |
+| `0 -2` | `tupla=(-2, 0)` |
+| `5 5` | `tupla=(5, 5)` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER (a, b) ; intercambiar ; ESCRIBIR (b, a)
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | `(a, b)` (Python/Rust/Go pares), arreglo (JS), record (Java). |
+| Semántica | Rust/Python tienen tuplas nativas; Java usa records/objetos. |
+| Paradigmática | SQL: una fila con varias columnas es una tupla. |
+
+## 🧬 El concepto en la familia
+
+En Ruby `[a, b]` funciona como tupla. En Haskell `(a, b)` es una tupla nativa con `fst`/`snd`.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 091
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Confundir tupla con lista** → causa: esperar que crezca → solución: la tupla tiene tamaño fijo
+- **Acceder a un índice inexistente** → causa: error de posición → solución: respetar el número de componentes
+
+## ❓ Preguntas frecuentes
+
+- **¿Tupla o clase?** Tupla para agrupaciones pequeñas y anónimas; clase cuando los campos merecen nombre.
+- **¿Las tuplas son inmutables?** En muchos lenguajes sí (Python, Rust): no se cambian tras crearlas.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

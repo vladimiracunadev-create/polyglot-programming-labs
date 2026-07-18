@@ -1,0 +1,19 @@
+{
+  "descripcion": "Copiar una lista, modificar el último elemento de la copia y mostrar que el original no cambia.",
+  "contrato": "stdin: una línea con enteros separados por espacio → stdout: `original=<lista> copia=<lista con el último cambiado a 99>` (unidos por -)",
+  "formula": "copiar; copia[último] = 99; original intacto",
+  "casos": [
+    {
+      "stdin": "1 2 3",
+      "esperado": "original=1-2-3 copia=1-2-99"
+    },
+    {
+      "stdin": "5 5",
+      "esperado": "original=5-5 copia=5-99"
+    },
+    {
+      "stdin": "7",
+      "esperado": "original=7 copia=99"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "descripcion": "Insertar enteros en un árbol binario de búsqueda y recorrerlo en orden (in-order), que produce la secuencia ordenada.",
+  "contrato": "stdin: una línea con enteros distintos separados por espacio → stdout: `inorden=<los valores ordenados ascendente unidos por ->`",
+  "formula": "in-order de un BST = orden ascendente",
+  "casos": [
+    {
+      "stdin": "3 1 4",
+      "esperado": "inorden=1-3-4"
+    },
+    {
+      "stdin": "5 2 8 1",
+      "esperado": "inorden=1-2-5-8"
+    },
+    {
+      "stdin": "9 7",
+      "esperado": "inorden=7-9"
+    }
+  ]
+}

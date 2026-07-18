@@ -1,0 +1,19 @@
+{
+  "descripcion": "Dado un arreglo fijo de tres enteros, calcular su suma y su máximo.",
+  "contrato": "stdin: una línea `a b c` (tres enteros) → stdout: `suma=<a+b+c> max=<el mayor>`",
+  "formula": "suma y máximo de los tres elementos",
+  "casos": [
+    {
+      "stdin": "3 1 4",
+      "esperado": "suma=8 max=4"
+    },
+    {
+      "stdin": "10 5 2",
+      "esperado": "suma=17 max=10"
+    },
+    {
+      "stdin": "1 1 1",
+      "esperado": "suma=3 max=1"
+    }
+  ]
+}

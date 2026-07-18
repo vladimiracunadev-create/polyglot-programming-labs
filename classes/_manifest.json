@@ -14,8 +14,8 @@
   "php"
  ],
  "total_planned": 176,
- "total_built": 88,
- "parts_built": 6,
+ "total_built": 106,
+ "parts_built": 7,
  "parts_planned": 12,
  "parts": [
   {
@@ -625,109 +625,109 @@
      "num": 89,
      "title": "Arreglos de tamaño fijo",
      "slug": "089-arreglos-de-tamano-fijo",
-     "built": false
+     "built": true
     },
     {
      "num": 90,
      "title": "Listas, vectores y arreglos dinámicos",
      "slug": "090-listas-vectores-y-arreglos-dinamicos",
-     "built": false
+     "built": true
     },
     {
      "num": 91,
      "title": "Tuplas y registros posicionales",
      "slug": "091-tuplas-y-registros-posicionales",
-     "built": false
+     "built": true
     },
     {
      "num": 92,
      "title": "Rangos y secuencias",
      "slug": "092-rangos-y-secuencias",
-     "built": false
+     "built": true
     },
     {
      "num": 93,
      "title": "Cadenas como estructura de datos",
      "slug": "093-cadenas-como-estructura-de-datos",
-     "built": false
+     "built": true
     },
     {
      "num": 94,
      "title": "Conjuntos (sets) y unicidad",
      "slug": "094-conjuntos-sets-y-unicidad",
-     "built": false
+     "built": true
     },
     {
      "num": 95,
      "title": "Mapas / diccionarios / tablas hash",
      "slug": "095-mapas-diccionarios-tablas-hash",
-     "built": false
+     "built": true
     },
     {
      "num": 96,
      "title": "Pilas y colas",
      "slug": "096-pilas-y-colas",
-     "built": false
+     "built": true
     },
     {
      "num": 97,
      "title": "Árboles",
      "slug": "097-arboles",
-     "built": false
+     "built": true
     },
     {
      "num": 98,
      "title": "Grafos",
      "slug": "098-grafos",
-     "built": false
+     "built": true
     },
     {
      "num": 99,
      "title": "Registros, structs y clases",
      "slug": "099-registros-structs-y-clases",
-     "built": false
+     "built": true
     },
     {
      "num": 100,
      "title": "Enumeraciones y tipos algebraicos (ADT / sum types)",
      "slug": "100-enumeraciones-y-tipos-algebraicos-adt-sum-types",
-     "built": false
+     "built": true
     },
     {
      "num": 101,
      "title": "Igualdad vs. identidad",
      "slug": "101-igualdad-vs-identidad",
-     "built": false
+     "built": true
     },
     {
      "num": 102,
      "title": "Copia superficial vs. profunda; referencia vs. valor",
      "slug": "102-copia-superficial-vs-profunda-referencia-vs-valor",
-     "built": false
+     "built": true
     },
     {
      "num": 103,
      "title": "Propiedad y ciclo de vida de los datos",
      "slug": "103-propiedad-y-ciclo-de-vida-de-los-datos",
-     "built": false
+     "built": true
     },
     {
      "num": 104,
      "title": "Archivos: leer y escribir texto y binario",
      "slug": "104-archivos-leer-y-escribir-texto-y-binario",
-     "built": false
+     "built": true
     },
     {
      "num": 105,
      "title": "JSON: serialización y deserialización",
      "slug": "105-json-serializacion-y-deserializacion",
-     "built": false
+     "built": true
     },
     {
      "num": 106,
      "title": "Otros formatos y persistencia: CSV, YAML, binarios, bases de datos",
      "slug": "106-otros-formatos-y-persistencia-csv-yaml-binarios-bases-de-datos",
-     "built": false
+     "built": true
     }
    ]
   },

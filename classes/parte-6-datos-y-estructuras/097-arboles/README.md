@@ -1,20 +1,63 @@
 # Clase 097 — Árboles
 
-> Parte **6 — Datos y estructuras** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **6 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **árboles**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Conocer los **árboles**: estructuras jerárquicas. En un árbol binario de búsqueda (BST), el recorrido in-order devuelve los elementos ordenados. Aquí el efecto observable es la ordenación.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Entender la propiedad del BST.
+2. Reconocer el recorrido in-order.
+3. Relacionar el árbol con el orden.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Árbol | Nodos con hijos, jerárquico |
+| 2 | BST | Menores a la izquierda, mayores a la derecha |
+| 3 | Recorrido in-order | Produce el orden ascendente |
+
+## 📖 Definiciones y características
+
+- **Árbol** — estructura jerárquica de nodos con hijos. Clave: sin ciclos, una raíz.
+- **BST** — árbol binario ordenado: izquierda < nodo < derecha. Clave: búsqueda O(log n) equilibrado.
+- **In-order** — recorrido izquierda-raíz-derecha. Clave: en un BST da los valores ordenados.
+
+## 🧩 Situación
+
+Índices de bases de datos, sistemas de archivos, autocompletado: los árboles organizan datos jerárquicos y permiten búsquedas rápidas. En un BST, recorrer in-order ordena.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea con enteros distintos separados por espacio
+- **Salida** (stdout): `inorden=<los valores ordenados ascendente unidos por ->`
+- **Regla:** in-order de un BST = orden ascendente
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `3 1 4` | `inorden=1-3-4` |
+| `5 2 8 1` | `inorden=1-2-5-8` |
+| `9 7` | `inorden=7-9` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER lista ; insertar en BST ; recorrer in-order
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | Ordenar (`sorted`) equivale al in-order del BST en esta clase. |
+| Semántica | El BST mantiene el orden al insertar; ordenar lo hace de una vez. |
+| Paradigmática | SQL usa ORDER BY, que el motor implementa con árboles/índices. |
+
+## 🧬 El concepto en la familia
+
+En muchos lenguajes se usa un TreeSet/TreeMap (árbol equilibrado) que ya mantiene el orden.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 097
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Confundir in-order con otros recorridos** → causa: pre/post-order no ordenan → solución: usar in-order para obtener el orden
+- **Insertar duplicados sin política** → causa: árbol ambiguo → solución: aquí los valores son distintos
+
+## ❓ Preguntas frecuentes
+
+- **¿Por qué in-order ordena?** Porque visita izquierda (menores), raíz, derecha (mayores) recursivamente.
+- **¿BST o array ordenado?** El BST permite inserciones/borrados eficientes manteniendo el orden.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

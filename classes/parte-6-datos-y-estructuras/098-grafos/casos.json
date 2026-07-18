@@ -1,0 +1,19 @@
+{
+  "descripcion": "Dado un grafo como lista de aristas (pares de nodos), contar las aristas y los nodos distintos.",
+  "contrato": "stdin: una línea con pares de enteros (cada par es una arista) → stdout: `aristas=<número de pares> nodos=<nodos distintos>`",
+  "formula": "aristas = tokens/2 ; nodos = |conjunto de todos los números|",
+  "casos": [
+    {
+      "stdin": "1 2 2 3",
+      "esperado": "aristas=2 nodos=3"
+    },
+    {
+      "stdin": "1 2",
+      "esperado": "aristas=1 nodos=2"
+    },
+    {
+      "stdin": "1 2 2 3 3 1",
+      "esperado": "aristas=3 nodos=3"
+    }
+  ]
+}

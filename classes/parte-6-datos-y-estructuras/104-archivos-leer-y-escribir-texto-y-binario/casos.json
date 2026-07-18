@@ -1,0 +1,19 @@
+{
+  "descripcion": "Dada una línea de texto (como el contenido de un archivo), contar sus palabras y sus caracteres.",
+  "contrato": "stdin: una línea de texto (puede contener espacios) → stdout: `palabras=<número de palabras> caracteres=<longitud incluyendo espacios>`",
+  "formula": "palabras = partes por espacio; caracteres = longitud de la línea",
+  "casos": [
+    {
+      "stdin": "hola mundo",
+      "esperado": "palabras=2 caracteres=10"
+    },
+    {
+      "stdin": "abc",
+      "esperado": "palabras=1 caracteres=3"
+    },
+    {
+      "stdin": "a b c d",
+      "esperado": "palabras=4 caracteres=7"
+    }
+  ]
+}

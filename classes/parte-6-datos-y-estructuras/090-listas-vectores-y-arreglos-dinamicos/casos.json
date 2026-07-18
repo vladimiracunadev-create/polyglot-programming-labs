@@ -1,0 +1,19 @@
+{
+  "descripcion": "Invertir una lista dinámica de enteros.",
+  "contrato": "stdin: una línea con enteros separados por espacio → stdout: `invertido=<elementos en orden inverso unidos por ->`",
+  "formula": "invertido = reverse(lista)",
+  "casos": [
+    {
+      "stdin": "1 2 3",
+      "esperado": "invertido=3-2-1"
+    },
+    {
+      "stdin": "5",
+      "esperado": "invertido=5"
+    },
+    {
+      "stdin": "10 20 30 40",
+      "esperado": "invertido=40-30-20-10"
+    }
+  ]
+}

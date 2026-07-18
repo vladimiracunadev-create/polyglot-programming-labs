@@ -1,0 +1,19 @@
+{
+  "descripcion": "Invertir una cadena de texto.",
+  "contrato": "stdin: una palabra (ASCII, sin espacios) → stdout: `invertido=<la palabra al revés>`",
+  "formula": "invertir la secuencia de caracteres",
+  "casos": [
+    {
+      "stdin": "hola",
+      "esperado": "invertido=aloh"
+    },
+    {
+      "stdin": "Ada",
+      "esperado": "invertido=adA"
+    },
+    {
+      "stdin": "abc",
+      "esperado": "invertido=cba"
+    }
+  ]
+}

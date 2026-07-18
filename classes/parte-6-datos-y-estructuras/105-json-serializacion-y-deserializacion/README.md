@@ -1,20 +1,63 @@
 # Clase 105 — JSON: serialización y deserialización
 
-> Parte **6 — Datos y estructuras** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **6 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **json: serialización y deserialización**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Trabajar con **JSON**: el formato universal de intercambio de datos. Aquí se **serializa** (construye) un objeto JSON con un formato fijo; en la práctica también se deserializa (parsea).
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Serializar datos a JSON.
+2. Respetar el formato (comillas, dos puntos).
+3. Reconocer JSON como formato de intercambio.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | JSON | Formato de intercambio de datos |
+| 2 | Serializar | De datos a texto JSON |
+| 3 | Deserializar | De texto JSON a datos |
+
+## 📖 Definiciones y características
+
+- **JSON** — formato de texto para datos estructurados (objetos, arreglos). Clave: universal entre lenguajes.
+- **Serializar** — convertir datos en su representación de texto (JSON). Clave: para enviarlos o guardarlos.
+- **Deserializar** — reconstruir datos desde el texto JSON. Clave: la operación inversa.
+
+## 🧩 Situación
+
+Las APIs web hablan JSON. Un objeto `{"nombre": "Ada", "edad": 36}` viaja entre un servidor en Go y un cliente en JavaScript sin problema: JSON es el idioma común.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una línea `nombre edad` (una palabra y un entero)
+- **Salida** (stdout): `{"nombre": "<nombre>", "edad": <edad>}`
+- **Regla:** objeto JSON con las claves nombre y edad
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `Ada 36` | `{"nombre": "Ada", "edad": 36}` |
+| `Bo 5` | `{"nombre": "Bo", "edad": 5}` |
+| `Cy 99` | `{"nombre": "Cy", "edad": 99}` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER nombre, edad ; construir objeto ; serializar a JSON
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | Librerías `json` (Python), `JSON.stringify` (JS), pero el formato es idéntico. |
+| Semántica | Las cadenas van entre comillas dobles; los números sin comillas. |
+| Paradigmática | SQL genera JSON con funciones `json_object` (aquí, con printf). |
+
+## 🧬 El concepto en la familia
+
+En Ruby `to_json`. En casi todos hay una librería estándar o popular para JSON; el formato no cambia.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 105
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Comillas simples en JSON** → causa: JSON exige comillas dobles → solución: usar comillas dobles siempre
+- **Poner comillas a los números** → causa: tipo incorrecto → solución: los números van sin comillas
+
+## ❓ Preguntas frecuentes
+
+- **¿Construir JSON a mano o con librería?** En la práctica, librería (escapa bien); aquí a mano para fijar el formato exacto.
+- **¿JSON solo para web?** No: también para configuración, logs y almacenamiento.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

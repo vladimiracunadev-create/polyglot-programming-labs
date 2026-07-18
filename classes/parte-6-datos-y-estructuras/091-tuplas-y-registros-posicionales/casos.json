@@ -1,0 +1,19 @@
+{
+  "descripcion": "Recibir dos enteros como una tupla e intercambiar sus componentes.",
+  "contrato": "stdin: una línea `a b` (dos enteros) → stdout: `tupla=(<b>, <a>)` (componentes intercambiados)",
+  "formula": "(a, b) → (b, a)",
+  "casos": [
+    {
+      "stdin": "3 4",
+      "esperado": "tupla=(4, 3)"
+    },
+    {
+      "stdin": "0 -2",
+      "esperado": "tupla=(-2, 0)"
+    },
+    {
+      "stdin": "5 5",
+      "esperado": "tupla=(5, 5)"
+    }
+  ]
+}

@@ -1,20 +1,63 @@
 # Clase 093 — Cadenas como estructura de datos
 
-> Parte **6 — Datos y estructuras** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
-> 🚧 **Clase planificada** — página creada con la estructura y la navegación; contenido en desarrollo.
+> Parte **6 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Estudiar **cadenas como estructura de datos**: su forma independiente del lenguaje, cómo se expresa idiomáticamente en el núcleo de 10 lenguajes y qué cambia (sintáctica, semántica o paradigmáticamente) entre familias.
+Tratar una **cadena como estructura de datos**: una secuencia de caracteres que se puede recorrer, indexar e invertir. Verás que la inmutabilidad obliga a construir una nueva cadena.
+
+## 📚 Resultados de aprendizaje
+
+Al finalizar, podrás:
+
+1. Recorrer una cadena carácter a carácter.
+2. Construir una cadena invertida.
+3. Reconocer la inmutabilidad de las cadenas.
+
+## 🗺️ Temas
+
+| # | Tema | Por qué importa |
+|---|------|-----------------|
+| 1 | Cadena como secuencia | Caracteres indexados |
+| 2 | Inversión | Del último al primero |
+| 3 | Inmutabilidad | Se crea una nueva cadena |
+
+## 📖 Definiciones y características
+
+- **Cadena** — secuencia de caracteres. Clave: se recorre como una colección.
+- **Inmutable** — no se modifica en sitio (Java/Python/C#). Clave: invertir crea otra.
+- **Índice de carácter** — posición dentro de la cadena. Clave: base 0.
+
+## 🧩 Situación
+
+Invertir texto, comprobar palíndromos, procesar entradas: tratar la cadena como una secuencia de caracteres es constante en programación.
 
 ## 🧮 Modelo
 
-Cuando esta clase se construya, tendrá su especificación neutral (entradas · salidas · reglas) y su
-[`casos.json`](casos.json) para verificar equivalencia.
+- **Entrada** (stdin): una palabra (ASCII, sin espacios)
+- **Salida** (stdout): `invertido=<la palabra al revés>`
+- **Regla:** invertir la secuencia de caracteres
 
-## 🌐 Implementaciones idiomáticas (previstas)
+Especificación y verificación en [`casos.json`](casos.json):
+
+| stdin | esperado |
+|---|---|
+| `hola` | `invertido=aloh` |
+| `Ada` | `invertido=adA` |
+| `abc` | `invertido=cba` |
+
+## 📐 Algoritmo (pseudocódigo neutral)
+
+```text
+LEER w ; recorrer del final al inicio ; ESCRIBIR invertido
+```
+
+## 🌐 Implementaciones idiomáticas
+
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
 
 | Lenguaje | Archivo | Cómo ejecutar |
 |---|---|---|
@@ -29,10 +72,46 @@ Cuando esta clase se construya, tendrá su especificación neutral (entradas · 
 | SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
 | PHP | `implementaciones/php/main.php` | `php main.php` |
 
-## 🔬 Comparación · 🧬 El concepto en la familia
+> SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
+> una tabla de casos, y el verificador la marca como *ilustrativa*.
 
-Cada clase compara las tres clases de diferencia (sintáctica, semántica, paradigmática) y muestra el
-concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/README.md).
+## 🔬 Comparación
+
+| Clase de diferencia | Observación entre lenguajes |
+|---|---|
+| Sintáctica | `w[::-1]` (Python), `.reverse()` sobre arreglo de chars (JS/Rust). |
+| Semántica | En Rust hay que iterar por `chars()` (UTF-8); en C es por bytes. |
+| Paradigmática | SQL tiene la función `reverse` en algunos motores; sqlite no de serie. |
+
+## 🧬 El concepto en la familia
+
+En Ruby `w.reverse`. En C se intercambian los caracteres por índices, sin función incorporada.
+
+## ✅ Prueba común
+
+Los mismos casos para todas las implementaciones: [`casos.json`](casos.json). Verifica la equivalencia:
+
+```bash
+python scripts/verificar_equivalencia.py 093
+```
+
+## 🧪 Reto de transferencia
+
+Detalle en [`reto.md`](reto.md).
+
+## ⚠️ Errores comunes
+
+- **Invertir por bytes con Unicode** → causa: romper caracteres multibyte → solución: iterar por caracteres (aquí ASCII, sin problema)
+- **Intentar mutar la cadena** → causa: es inmutable en varios lenguajes → solución: construir una nueva
+
+## ❓ Preguntas frecuentes
+
+- **¿Por qué invertir crea otra cadena?** Porque en muchos lenguajes las cadenas son inmutables.
+- **¿ASCII o Unicode?** Aquí ASCII; con Unicode hay que respetar los límites de carácter.
+
+## 🔗 Referencias
+
+- Documentación oficial de cada lenguaje del núcleo.
 
 ---
 

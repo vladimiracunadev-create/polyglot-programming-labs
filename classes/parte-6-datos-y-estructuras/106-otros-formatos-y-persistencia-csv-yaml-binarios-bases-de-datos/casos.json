@@ -1,0 +1,19 @@
+{
+  "descripcion": "Convertir una lista de valores a una línea CSV e informar cuántos campos tiene.",
+  "contrato": "stdin: una línea con enteros separados por espacio → stdout: `csv=<valores separados por coma> campos=<cantidad>`",
+  "formula": "csv = unir con coma ; campos = cantidad de valores",
+  "casos": [
+    {
+      "stdin": "1 2 3",
+      "esperado": "csv=1,2,3 campos=3"
+    },
+    {
+      "stdin": "5",
+      "esperado": "csv=5 campos=1"
+    },
+    {
+      "stdin": "10 20",
+      "esperado": "csv=10,20 campos=2"
+    }
+  ]
+}

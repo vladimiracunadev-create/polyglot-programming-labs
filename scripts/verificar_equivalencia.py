@@ -30,6 +30,9 @@ ROOT = Path(__file__).resolve().parent.parent
 CLASSES = ROOT / "classes"
 EXE = ".exe" if os.name == "nt" else ""
 
+# Filtro opcional de lenguajes (para paralelizar el CI por lenguaje con --lang).
+LANG_FILTER = None
+
 
 def resolve(cmd):
     """Resuelve el ejecutable a su ruta completa (necesario en Windows para .cmd/.bat)."""
@@ -78,6 +81,8 @@ def verificar_clase(cdir: Path) -> tuple[int, int, list[str]]:
 
     for lang in ["python", "javascript", "typescript", "java", "csharp",
                  "go", "rust", "c", "php"]:
+        if LANG_FILTER and lang not in LANG_FILTER:
+            continue
         impl_dir = impl_root / lang
         if not impl_dir.is_dir() or not any(impl_dir.iterdir()):
             continue
@@ -124,7 +129,7 @@ def verificar_clase(cdir: Path) -> tuple[int, int, list[str]]:
 
     # SQL: ilustrativa, no participa en la comparación por stdin.
     sql_dir = impl_root / "sql"
-    if (sql_dir / "main.sql").exists():
+    if (not LANG_FILTER or "sql" in LANG_FILTER) and (sql_dir / "main.sql").exists():
         if shutil.which("sqlite3"):
             try:
                 r = run(["sqlite3", ":memory:"], sql_dir,
@@ -154,7 +159,13 @@ def find_class_dir(arg: str) -> Path | None:
 
 
 def main():
+    global LANG_FILTER
     args = sys.argv[1:]
+    # Extraer --lang <lenguaje[,lenguaje...]> (permite paralelizar por lenguaje en CI).
+    if "--lang" in args:
+        i = args.index("--lang")
+        LANG_FILTER = set(args[i + 1].split(","))
+        del args[i:i + 2]
     if not args:
         print(__doc__)
         sys.exit(2)

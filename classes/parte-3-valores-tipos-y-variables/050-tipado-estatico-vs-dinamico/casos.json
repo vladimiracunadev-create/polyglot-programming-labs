@@ -1,0 +1,19 @@
+{
+  "descripcion": "Sumar un entero y un real y mostrar el resultado con dos decimales.",
+  "contrato": "stdin: una línea `a b` (a entero, b real) → stdout: `suma=<a+b con 2 decimales>`",
+  "formula": "suma = a + b (a entero promovido a real)",
+  "casos": [
+    {
+      "stdin": "2 3.5",
+      "esperado": "suma=5.50"
+    },
+    {
+      "stdin": "10 0.25",
+      "esperado": "suma=10.25"
+    },
+    {
+      "stdin": "0 0",
+      "esperado": "suma=0.00"
+    }
+  ]
+}

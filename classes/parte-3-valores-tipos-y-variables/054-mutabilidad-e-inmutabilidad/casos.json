@@ -1,0 +1,19 @@
+{
+  "descripcion": "Dado un entero n, construir la secuencia '1-2-...-n'.",
+  "contrato": "stdin: un entero `n` (n >= 1) → stdout: `sec=1-2-...-n` (números de 1 a n separados por guiones)",
+  "formula": "sec = unir([1..n], separador='-')",
+  "casos": [
+    {
+      "stdin": "3",
+      "esperado": "sec=1-2-3"
+    },
+    {
+      "stdin": "1",
+      "esperado": "sec=1"
+    },
+    {
+      "stdin": "5",
+      "esperado": "sec=1-2-3-4-5"
+    }
+  ]
+}

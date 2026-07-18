@@ -1,0 +1,19 @@
+{
+  "descripcion": "Dado un carácter, mostrar el propio carácter y su punto de código (code point).",
+  "contrato": "stdin: un único carácter (ASCII) → stdout: `char=<c> codigo=<punto de código>`",
+  "formula": "codigo = punto_de_codigo(c)",
+  "casos": [
+    {
+      "stdin": "A",
+      "esperado": "char=A codigo=65"
+    },
+    {
+      "stdin": "z",
+      "esperado": "char=z codigo=122"
+    },
+    {
+      "stdin": "0",
+      "esperado": "char=0 codigo=48"
+    }
+  ]
+}

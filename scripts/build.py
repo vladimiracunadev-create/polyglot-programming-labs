@@ -38,8 +38,8 @@ LANG_META = {
 }
 
 # Clases con contenido escrito a mano; el generador no las sobrescribe.
-# Partes 0, 1 y 2 (método, 1–40) + clases de código 041–046 (Parte 3, en curso).
-BUILT = set(range(1, 47))
+# Partes 0, 1 y 2 (método, 1–40) + Parte 3 completa de código (041–056).
+BUILT = set(range(1, 57))
 
 NIVELES = ["Fundamentos", "Fundamentos", "Fundamentos", "Intermedio",
            "Intermedio", "Intermedio", "Intermedio", "Intermedio",

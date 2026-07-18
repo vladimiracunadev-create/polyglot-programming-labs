@@ -1,0 +1,19 @@
+{
+  "descripcion": "Dado un número real como texto, mostrar su parte entera (truncada) y el valor con dos decimales.",
+  "contrato": "stdin: un número real como texto → stdout: `entero=<parte entera truncada> real=<valor con 2 decimales>`",
+  "formula": "entero = truncar(real) ; real formateado a 2 decimales",
+  "casos": [
+    {
+      "stdin": "3.7",
+      "esperado": "entero=3 real=3.70"
+    },
+    {
+      "stdin": "5.0",
+      "esperado": "entero=5 real=5.00"
+    },
+    {
+      "stdin": "8.9",
+      "esperado": "entero=8 real=8.90"
+    }
+  ]
+}

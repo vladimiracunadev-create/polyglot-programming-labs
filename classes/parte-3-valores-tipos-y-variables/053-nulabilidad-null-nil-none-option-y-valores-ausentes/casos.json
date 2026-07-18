@@ -1,0 +1,19 @@
+{
+  "descripcion": "Dado un entero donde 0 representa 'ausente', informar si hay valor o no.",
+  "contrato": "stdin: un entero `n` (0 significa ausente) → stdout: `valor=<n>` si hay valor, o `valor=ausente` si n es 0",
+  "formula": "si n == 0 → 'ausente'; si no → n",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "valor=5"
+    },
+    {
+      "stdin": "0",
+      "esperado": "valor=ausente"
+    },
+    {
+      "stdin": "42",
+      "esperado": "valor=42"
+    }
+  ]
+}

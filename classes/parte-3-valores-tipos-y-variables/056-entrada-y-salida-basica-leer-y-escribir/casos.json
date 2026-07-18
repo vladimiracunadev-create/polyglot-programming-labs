@@ -1,0 +1,19 @@
+{
+  "descripcion": "Leer una línea de texto y devolverla con el prefijo 'eco: '.",
+  "contrato": "stdin: una línea de texto → stdout: `eco: <la línea leída>`",
+  "formula": "salida = 'eco: ' + entrada",
+  "casos": [
+    {
+      "stdin": "hola",
+      "esperado": "eco: hola"
+    },
+    {
+      "stdin": "Polyglot",
+      "esperado": "eco: Polyglot"
+    },
+    {
+      "stdin": "123",
+      "esperado": "eco: 123"
+    }
+  ]
+}

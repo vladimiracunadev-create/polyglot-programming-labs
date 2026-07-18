@@ -1,0 +1,19 @@
+{
+  "descripcion": "Multiplicar dos enteros y mostrar el producto.",
+  "contrato": "stdin: una línea `a b` (dos enteros) → stdout: `producto=<a*b>`",
+  "formula": "producto = a * b",
+  "casos": [
+    {
+      "stdin": "3 4",
+      "esperado": "producto=12"
+    },
+    {
+      "stdin": "0 9",
+      "esperado": "producto=0"
+    },
+    {
+      "stdin": "-2 5",
+      "esperado": "producto=-10"
+    }
+  ]
+}

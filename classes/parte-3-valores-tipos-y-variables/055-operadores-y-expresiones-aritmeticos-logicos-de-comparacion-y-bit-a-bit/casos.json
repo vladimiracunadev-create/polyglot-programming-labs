@@ -1,0 +1,19 @@
+{
+  "descripcion": "Dados dos enteros positivos, mostrar su suma, resta, producto, división entera y resto.",
+  "contrato": "stdin: una línea `a b` (enteros positivos, b != 0) → stdout: `suma=<a+b> resta=<a-b> mult=<a*b> div=<a/b entera> mod=<a%b>`",
+  "formula": "las cinco operaciones aritméticas sobre a y b",
+  "casos": [
+    {
+      "stdin": "10 3",
+      "esperado": "suma=13 resta=7 mult=30 div=3 mod=1"
+    },
+    {
+      "stdin": "20 4",
+      "esperado": "suma=24 resta=16 mult=80 div=5 mod=0"
+    },
+    {
+      "stdin": "7 2",
+      "esperado": "suma=9 resta=5 mult=14 div=3 mod=1"
+    }
+  ]
+}

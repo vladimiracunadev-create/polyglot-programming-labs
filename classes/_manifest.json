@@ -14,7 +14,7 @@
   "php"
  ],
  "total_planned": 176,
- "total_built": 46,
+ "total_built": 56,
  "parts_built": 4,
  "parts_planned": 12,
  "parts": [
@@ -340,61 +340,61 @@
      "num": 47,
      "title": "Caracteres, texto y Unicode",
      "slug": "047-caracteres-texto-y-unicode",
-     "built": false
+     "built": true
     },
     {
      "num": 48,
      "title": "Cadenas: representación, inmutabilidad e interpolación",
      "slug": "048-cadenas-representacion-inmutabilidad-e-interpolacion",
-     "built": false
+     "built": true
     },
     {
      "num": 49,
      "title": "Conversión de tipos: casting explícito vs. coerción implícita",
      "slug": "049-conversion-de-tipos-casting-explicito-vs-coercion-implicita",
-     "built": false
+     "built": true
     },
     {
      "num": 50,
      "title": "Tipado estático vs. dinámico",
      "slug": "050-tipado-estatico-vs-dinamico",
-     "built": false
+     "built": true
     },
     {
      "num": 51,
      "title": "Tipado fuerte vs. débil",
      "slug": "051-tipado-fuerte-vs-debil",
-     "built": false
+     "built": true
     },
     {
      "num": 52,
      "title": "Inferencia de tipos",
      "slug": "052-inferencia-de-tipos",
-     "built": false
+     "built": true
     },
     {
      "num": 53,
      "title": "Nulabilidad: null, nil, None, Option y valores ausentes",
      "slug": "053-nulabilidad-null-nil-none-option-y-valores-ausentes",
-     "built": false
+     "built": true
     },
     {
      "num": 54,
      "title": "Mutabilidad e inmutabilidad",
      "slug": "054-mutabilidad-e-inmutabilidad",
-     "built": false
+     "built": true
     },
     {
      "num": 55,
      "title": "Operadores y expresiones: aritméticos, lógicos, de comparación y bit a bit",
      "slug": "055-operadores-y-expresiones-aritmeticos-logicos-de-comparacion-y-bit-a-bit",
-     "built": false
+     "built": true
     },
     {
      "num": 56,
      "title": "Entrada y salida básica: leer y escribir",
      "slug": "056-entrada-y-salida-basica-leer-y-escribir",
-     "built": false
+     "built": true
     }
    ]
   },

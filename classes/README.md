@@ -5,7 +5,7 @@
 Programa secuencial de **176 clases** en **12 partes**. La numeración es
 global (001→…) y el orden importa: cada clase asume la anterior.
 
-**Estado:** 46 clases construidas · 130 planificadas · núcleo de 10 lenguajes.
+**Estado:** 56 clases construidas · 120 planificadas · núcleo de 10 lenguajes.
 Leyenda: ✅ construida · 🚧 planificada.
 
 ---
@@ -83,16 +83,16 @@ Leyenda: ✅ construida · 🚧 planificada.
 | ✅ 044 | [Enteros: tamaño, signo, desbordamiento y bases](parte-3-valores-tipos-y-variables/044-enteros-tamano-signo-desbordamiento-y-bases/README.md) |
 | ✅ 045 | [Números reales: punto flotante, precisión y decimales](parte-3-valores-tipos-y-variables/045-numeros-reales-punto-flotante-precision-y-decimales/README.md) |
 | ✅ 046 | [Booleanos y valores de verdad](parte-3-valores-tipos-y-variables/046-booleanos-y-valores-de-verdad/README.md) |
-| 🚧 047 | [Caracteres, texto y Unicode](parte-3-valores-tipos-y-variables/047-caracteres-texto-y-unicode/README.md) |
-| 🚧 048 | [Cadenas: representación, inmutabilidad e interpolación](parte-3-valores-tipos-y-variables/048-cadenas-representacion-inmutabilidad-e-interpolacion/README.md) |
-| 🚧 049 | [Conversión de tipos: casting explícito vs. coerción implícita](parte-3-valores-tipos-y-variables/049-conversion-de-tipos-casting-explicito-vs-coercion-implicita/README.md) |
-| 🚧 050 | [Tipado estático vs. dinámico](parte-3-valores-tipos-y-variables/050-tipado-estatico-vs-dinamico/README.md) |
-| 🚧 051 | [Tipado fuerte vs. débil](parte-3-valores-tipos-y-variables/051-tipado-fuerte-vs-debil/README.md) |
-| 🚧 052 | [Inferencia de tipos](parte-3-valores-tipos-y-variables/052-inferencia-de-tipos/README.md) |
-| 🚧 053 | [Nulabilidad: null, nil, None, Option y valores ausentes](parte-3-valores-tipos-y-variables/053-nulabilidad-null-nil-none-option-y-valores-ausentes/README.md) |
-| 🚧 054 | [Mutabilidad e inmutabilidad](parte-3-valores-tipos-y-variables/054-mutabilidad-e-inmutabilidad/README.md) |
-| 🚧 055 | [Operadores y expresiones: aritméticos, lógicos, de comparación y bit a bit](parte-3-valores-tipos-y-variables/055-operadores-y-expresiones-aritmeticos-logicos-de-comparacion-y-bit-a-bit/README.md) |
-| 🚧 056 | [Entrada y salida básica: leer y escribir](parte-3-valores-tipos-y-variables/056-entrada-y-salida-basica-leer-y-escribir/README.md) |
+| ✅ 047 | [Caracteres, texto y Unicode](parte-3-valores-tipos-y-variables/047-caracteres-texto-y-unicode/README.md) |
+| ✅ 048 | [Cadenas: representación, inmutabilidad e interpolación](parte-3-valores-tipos-y-variables/048-cadenas-representacion-inmutabilidad-e-interpolacion/README.md) |
+| ✅ 049 | [Conversión de tipos: casting explícito vs. coerción implícita](parte-3-valores-tipos-y-variables/049-conversion-de-tipos-casting-explicito-vs-coercion-implicita/README.md) |
+| ✅ 050 | [Tipado estático vs. dinámico](parte-3-valores-tipos-y-variables/050-tipado-estatico-vs-dinamico/README.md) |
+| ✅ 051 | [Tipado fuerte vs. débil](parte-3-valores-tipos-y-variables/051-tipado-fuerte-vs-debil/README.md) |
+| ✅ 052 | [Inferencia de tipos](parte-3-valores-tipos-y-variables/052-inferencia-de-tipos/README.md) |
+| ✅ 053 | [Nulabilidad: null, nil, None, Option y valores ausentes](parte-3-valores-tipos-y-variables/053-nulabilidad-null-nil-none-option-y-valores-ausentes/README.md) |
+| ✅ 054 | [Mutabilidad e inmutabilidad](parte-3-valores-tipos-y-variables/054-mutabilidad-e-inmutabilidad/README.md) |
+| ✅ 055 | [Operadores y expresiones: aritméticos, lógicos, de comparación y bit a bit](parte-3-valores-tipos-y-variables/055-operadores-y-expresiones-aritmeticos-logicos-de-comparacion-y-bit-a-bit/README.md) |
+| ✅ 056 | [Entrada y salida básica: leer y escribir](parte-3-valores-tipos-y-variables/056-entrada-y-salida-basica-leer-y-escribir/README.md) |
 
 ## Parte 4 — Control del programa · clases 057–072
 

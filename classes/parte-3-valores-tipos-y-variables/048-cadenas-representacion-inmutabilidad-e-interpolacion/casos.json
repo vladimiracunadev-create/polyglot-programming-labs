@@ -1,0 +1,19 @@
+{
+  "descripcion": "Dada una palabra, saludar e informar su longitud.",
+  "contrato": "stdin: una palabra (ASCII, sin espacios) → stdout: `hola=<palabra> longitud=<número de caracteres>`",
+  "formula": "longitud = |palabra|",
+  "casos": [
+    {
+      "stdin": "Ada",
+      "esperado": "hola=Ada longitud=3"
+    },
+    {
+      "stdin": "Bo",
+      "esperado": "hola=Bo longitud=2"
+    },
+    {
+      "stdin": "polyglot",
+      "esperado": "hola=polyglot longitud=8"
+    }
+  ]
+}

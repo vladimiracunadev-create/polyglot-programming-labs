@@ -1,0 +1,19 @@
+{
+  "descripcion": "Dado un entero, mostrar su suma consigo mismo (número) y su concatenación consigo mismo (texto).",
+  "contrato": "stdin: un entero `n` → stdout: `suma=<n+n> texto=<n concatenado consigo mismo>`",
+  "formula": "suma = n + n ; texto = str(n) ++ str(n)",
+  "casos": [
+    {
+      "stdin": "5",
+      "esperado": "suma=10 texto=55"
+    },
+    {
+      "stdin": "3",
+      "esperado": "suma=6 texto=33"
+    },
+    {
+      "stdin": "12",
+      "esperado": "suma=24 texto=1212"
+    }
+  ]
+}

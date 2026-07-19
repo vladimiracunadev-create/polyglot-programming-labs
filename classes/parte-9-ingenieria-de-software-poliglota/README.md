@@ -6,6 +6,14 @@
 
 Llevar el código a producción: pruebas, dependencias, Git, CI, rendimiento, seguridad y mantenibilidad en varios lenguajes.
 
+**Fuentes de referencia de esta parte:**
+
+- S. McConnell — *Code Complete* (2ª ed., Microsoft Press).
+- A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley).
+- M. Fowler — *Refactoring* (2ª ed., Addison-Wesley).
+- E. Gamma, R. Helm, R. Johnson y J. Vlissides — *Design Patterns* (Addison-Wesley; «GoF»).
+- K. Beck — *Test-Driven Development: By Example* (Addison-Wesley).
+
 ---
 
 ## 📚 Clases de esta parte

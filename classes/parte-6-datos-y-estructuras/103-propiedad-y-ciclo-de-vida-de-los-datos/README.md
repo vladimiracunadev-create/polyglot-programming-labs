@@ -55,22 +55,202 @@ Especificación y verificación en [`casos.json`](casos.json):
 LEER n ; crear recurso ; usar ; liberar al salir del ámbito
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+
+class Recurso:
+    def __init__(self, valor):
+        self.valor = valor
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        pass  # aquí se liberaría
+
+
+n = int(sys.stdin.readline())
+with Recurso(n) as r:
+    valor = r.valor
+print(f"valor={valor} estado=liberado")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const n = parseInt(readFileSync(0, "utf8").trim(), 10);
+let valor;
+{
+  const recurso = { valor: n };
+  valor = recurso.valor;
+  // en JS el GC libera; aquí el ámbito marca el fin de uso
+}
+console.log(`valor=${valor} estado=liberado`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const n: number = parseInt(readFileSync(0, "utf8").trim(), 10);
+let valor: number;
+{
+  const recurso = { valor: n };
+  valor = recurso.valor;
+}
+console.log(`valor=${valor} estado=liberado`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    static class Recurso implements AutoCloseable {
+        final int valor;
+        Recurso(int v) { this.valor = v; }
+        public void close() { /* se libera aquí */ }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
+        int valor;
+        try (Recurso r = new Recurso(n)) {
+            valor = r.valor;
+        }
+        System.out.println("valor=" + valor + " estado=liberado");
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+int n = int.Parse(Console.In.ReadToEnd().Trim());
+int valor;
+using (var r = new Recurso(n)) {
+    valor = r.Valor;
+}
+Console.WriteLine($"valor={valor} estado=liberado");
+
+class Recurso : IDisposable {
+    public int Valor { get; }
+    public Recurso(int v) { Valor = v; }
+    public void Dispose() { /* se libera aquí */ }
+}
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	n, _ := strconv.Atoi(strings.TrimSpace(line))
+	valor := 0
+	func() {
+		defer func() { /* se libera al salir */ }()
+		valor = n
+	}()
+	fmt.Printf("valor=%d estado=liberado\n", valor)
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+struct Recurso {
+    valor: i64,
+}
+
+impl Drop for Recurso {
+    fn drop(&mut self) {
+        // se libera automáticamente al salir del ámbito
+    }
+}
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let n: i64 = s.trim().parse().unwrap();
+    let valor;
+    {
+        let r = Recurso { valor: n };
+        valor = r.valor;
+    } // aquí se ejecuta Drop
+    println!("valor={valor} estado=liberado");
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+    long n;
+    if (scanf("%ld", &n) != 1) return 1;
+    long *recurso = malloc(sizeof(long));
+    *recurso = n;
+    long valor = *recurso;
+    free(recurso); /* liberación manual */
+    printf("valor=%ld estado=liberado\n", valor);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL: el ciclo de vida se gestiona con transacciones; aquí se ilustra el valor.
+WITH nums(n) AS (VALUES (5), (0), (9))
+SELECT printf('valor=%d estado=liberado', n) AS resultado FROM nums;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+class Recurso {
+    public function __construct(public int $valor) {}
+    public function __destruct() { /* se libera aquí */ }
+}
+
+$n = (int) trim(fgets(STDIN));
+$r = new Recurso($n);
+$valor = $r->valor;
+unset($r); // libera el recurso
+echo "valor=$valor estado=liberado\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -111,7 +291,23 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- T. Cormen, C. Leiserson, R. Rivest y C. Stein — *Introduction to Algorithms* (4ª ed., MIT Press).
+- R. Sedgewick y K. Wayne — *Algorithms* (4ª ed., Addison-Wesley).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

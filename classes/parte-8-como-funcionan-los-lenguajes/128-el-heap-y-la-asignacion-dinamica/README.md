@@ -55,22 +55,157 @@ Especificación y verificación en [`casos.json`](casos.json):
 reservar lista ; añadir n, n-1, ..., 1 ; unir por -
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+n = int(sys.stdin.readline())
+lista = []
+for i in range(n, 0, -1):
+    lista.append(i)
+print("lista=" + "-".join(str(x) for x in lista))
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const n = parseInt(readFileSync(0, "utf8").trim(), 10);
+const lista = [];
+for (let i = n; i >= 1; i--) lista.push(i);
+console.log(`lista=${lista.join("-")}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const n: number = parseInt(readFileSync(0, "utf8").trim(), 10);
+const lista: number[] = [];
+for (let i = n; i >= 1; i--) lista.push(i);
+console.log(`lista=${lista.join("-")}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
+        List<Integer> lista = new ArrayList<>();
+        for (int i = n; i >= 1; i--) lista.add(i);
+        System.out.println("lista=" + lista.stream().map(String::valueOf).collect(Collectors.joining("-")));
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+using System.Collections.Generic;
+
+int n = int.Parse(Console.In.ReadToEnd().Trim());
+var lista = new List<int>();
+for (int i = n; i >= 1; i--) lista.Add(i);
+Console.WriteLine($"lista={string.Join("-", lista)}");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	n, _ := strconv.Atoi(strings.TrimSpace(line))
+	var lista []string
+	for i := n; i >= 1; i-- {
+		lista = append(lista, strconv.Itoa(i))
+	}
+	fmt.Printf("lista=%s\n", strings.Join(lista, "-"))
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let n: i64 = s.trim().parse().unwrap();
+    let lista: Vec<String> = (1..=n).rev().map(|x| x.to_string()).collect();
+    println!("lista={}", lista.join("-"));
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+    long n;
+    if (scanf("%ld", &n) != 1) return 1;
+    long *lista = malloc(n * sizeof(long));
+    for (long i = 0; i < n; i++) lista[i] = n - i;
+    printf("lista=");
+    for (long i = 0; i < n; i++) {
+        if (i > 0) printf("-");
+        printf("%ld", lista[i]);
+    }
+    printf("\n");
+    free(lista);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL: genera la secuencia descendente con un CTE (ilustrativo, n=3).
+WITH RECURSIVE r(i) AS (VALUES (3) UNION ALL SELECT i - 1 FROM r WHERE i > 1)
+SELECT 'lista=' || group_concat(i, '-') AS resultado FROM r;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+$n = (int) trim(fgets(STDIN));
+$lista = [];
+for ($i = $n; $i >= 1; $i--) {
+    $lista[] = $i;
+}
+echo "lista=" . implode("-", $lista) . "\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -111,7 +246,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- R. Nystrom — *Crafting Interpreters* (Genever Benning) — [gratis online](https://craftinginterpreters.com/).
+- A. Aho, M. Lam, R. Sethi y J. Ullman — *Compilers: Principles, Techniques, and Tools* (2ª ed., Pearson; «Dragon Book»).
+- R. Bryant y D. O'Hallaron — *Computer Systems: A Programmer's Perspective* (3ª ed., Pearson).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

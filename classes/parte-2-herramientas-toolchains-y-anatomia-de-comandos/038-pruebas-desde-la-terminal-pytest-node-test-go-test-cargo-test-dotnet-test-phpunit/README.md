@@ -68,7 +68,9 @@ El verificador de equivalencia es, en el fondo, una prueba: compara la salida re
 
 ## 🔗 Referencias
 
-- Documentación de referencia de cada lenguaje del núcleo.
+- W. Shotts — *The Linux Command Line* (2ª ed., No Starch Press) — [gratis online](https://linuxcommand.org/tlcl.php).
+- B. W. Kernighan y R. Pike — *The Unix Programming Environment* (Prentice Hall).
+- A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley).
 
 ---
 

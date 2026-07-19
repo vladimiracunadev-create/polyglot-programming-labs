@@ -55,22 +55,157 @@ Especificación y verificación en [`casos.json`](casos.json):
 LEER tipo ; SEGUN tipo: recomendar lenguaje
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+tipo = sys.stdin.readline().strip()
+rec = {"sistemas": "Rust", "web": "TypeScript", "datos": "SQL"}
+print(f"lenguaje={rec.get(tipo, 'Python')}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const tipo = readFileSync(0, "utf8").trim();
+const rec = { sistemas: "Rust", web: "TypeScript", datos: "SQL" };
+console.log(`lenguaje=${rec[tipo] ?? "Python"}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const tipo: string = readFileSync(0, "utf8").trim();
+const rec: Record<string, string> = { sistemas: "Rust", web: "TypeScript", datos: "SQL" };
+console.log(`lenguaje=${rec[tipo] ?? "Python"}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String tipo = br.readLine().trim();
+        String r;
+        switch (tipo) {
+            case "sistemas": r = "Rust"; break;
+            case "web": r = "TypeScript"; break;
+            case "datos": r = "SQL"; break;
+            default: r = "Python";
+        }
+        System.out.println("lenguaje=" + r);
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+string tipo = Console.In.ReadToEnd().Trim();
+string r = tipo switch {
+    "sistemas" => "Rust",
+    "web" => "TypeScript",
+    "datos" => "SQL",
+    _ => "Python",
+};
+Console.WriteLine($"lenguaje={r}");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	tipo := strings.TrimSpace(line)
+	rec := map[string]string{"sistemas": "Rust", "web": "TypeScript", "datos": "SQL"}
+	r, ok := rec[tipo]
+	if !ok {
+		r = "Python"
+	}
+	fmt.Printf("lenguaje=%s\n", r)
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let tipo = s.trim();
+    let r = match tipo {
+        "sistemas" => "Rust",
+        "web" => "TypeScript",
+        "datos" => "SQL",
+        _ => "Python",
+    };
+    println!("lenguaje={r}");
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+    char tipo[32];
+    if (scanf("%31s", tipo) != 1) return 1;
+    const char *r;
+    if (strcmp(tipo, "sistemas") == 0) r = "Rust";
+    else if (strcmp(tipo, "web") == 0) r = "TypeScript";
+    else if (strcmp(tipo, "datos") == 0) r = "SQL";
+    else r = "Python";
+    printf("lenguaje=%s\n", r);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL recomienda con CASE.
+WITH t(tipo) AS (VALUES ('sistemas'))
+SELECT printf('lenguaje=%s', CASE tipo WHEN 'sistemas' THEN 'Rust' WHEN 'web' THEN 'TypeScript' WHEN 'datos' THEN 'SQL' ELSE 'Python' END) AS resultado FROM t;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+$tipo = trim(fgets(STDIN));
+$rec = ["sistemas" => "Rust", "web" => "TypeScript", "datos" => "SQL"];
+echo "lenguaje=" . ($rec[$tipo] ?? "Python") . "\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -111,7 +246,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- M. Kleppmann — *Designing Data-Intensive Applications* (O'Reilly).
+- S. Newman — *Building Microservices* (2ª ed., O'Reilly).
+- A. Tanenbaum y M. van Steen — *Distributed Systems* (3ª ed.).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

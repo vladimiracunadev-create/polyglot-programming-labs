@@ -55,22 +55,130 @@ Especificación y verificación en [`casos.json`](casos.json):
 LEER x, y ; ESCRIBIR equivalente=(x==y)
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+x, y = sys.stdin.readline().split()
+print(f"equivalente={'true' if x == y else 'false'}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const [x, y] = readFileSync(0, "utf8").trim().split(/\s+/);
+console.log(`equivalente=${x === y ? "true" : "false"}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const [x, y] = readFileSync(0, "utf8").trim().split(/\s+/);
+console.log(`equivalente=${x === y ? "true" : "false"}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] p = br.readLine().trim().split("\\s+");
+        System.out.println("equivalente=" + (p[0].equals(p[1]) ? "true" : "false"));
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+string[] p = Console.In.ReadToEnd()
+    .Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+Console.WriteLine($"equivalente={(p[0] == p[1] ? "true" : "false")}");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	f := strings.Fields(line)
+	res := "false"
+	if f[0] == f[1] {
+		res = "true"
+	}
+	fmt.Printf("equivalente=%s\n", res)
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let v: Vec<&str> = s.split_whitespace().collect();
+    let res = if v[0] == v[1] { "true" } else { "false" };
+    println!("equivalente={res}");
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+    char x[64], y[64];
+    if (scanf("%63s %63s", x, y) != 2) return 1;
+    printf("equivalente=%s\n", strcmp(x, y) == 0 ? "true" : "false");
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL: compara dos valores.
+WITH t(x, y) AS (VALUES (6, 6))
+SELECT printf('equivalente=%s', CASE WHEN x = y THEN 'true' ELSE 'false' END) AS resultado FROM t;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+[$x, $y] = preg_split('/\s+/', trim(fgets(STDIN)));
+echo "equivalente=" . ($x === $y ? "true" : "false") . "\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -111,7 +219,26 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- S. McConnell — *Code Complete* (2ª ed., Microsoft Press).
+- A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley).
+- M. Fowler — *Refactoring* (2ª ed., Addison-Wesley).
+- E. Gamma, R. Helm, R. Johnson y J. Vlissides — *Design Patterns* (Addison-Wesley; «GoF»).
+- K. Beck — *Test-Driven Development: By Example* (Addison-Wesley).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

@@ -59,22 +59,179 @@ local <- doblar(n)   // dentro trabaja una copia
 ESCRIBIR "original=" n " local=" local
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+
+def doblar(x):
+    x = x * 2  # modifica la copia local
+    return x
+
+
+n = int(sys.stdin.readline())
+local = doblar(n)
+print(f"original={n} local={local}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+function doblar(x) {
+  x = x * 2;
+  return x;
+}
+
+const n = parseInt(readFileSync(0, "utf8").trim(), 10);
+const local = doblar(n);
+console.log(`original=${n} local=${local}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+function doblar(x: number): number {
+  x = x * 2;
+  return x;
+}
+
+const n: number = parseInt(readFileSync(0, "utf8").trim(), 10);
+const local: number = doblar(n);
+console.log(`original=${n} local=${local}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    static int doblar(int x) {
+        x = x * 2;
+        return x;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
+        int local = doblar(n);
+        System.out.println("original=" + n + " local=" + local);
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+int Doblar(int x) {
+    x = x * 2;
+    return x;
+}
+
+int n = int.Parse(Console.In.ReadToEnd().Trim());
+int local = Doblar(n);
+Console.WriteLine($"original={n} local={local}");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func doblar(x int) int {
+	x = x * 2
+	return x
+}
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	n, _ := strconv.Atoi(strings.TrimSpace(line))
+	local := doblar(n)
+	fmt.Printf("original=%d local=%d\n", n, local)
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn doblar(mut x: i64) -> i64 {
+    x *= 2;
+    x
+}
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let n: i64 = s.trim().parse().unwrap();
+    let local = doblar(n);
+    println!("original={n} local={local}");
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+long doblar(long x) {
+    x = x * 2; /* modifica la copia local */
+    return x;
+}
+
+int main(void) {
+    long n;
+    if (scanf("%ld", &n) != 1) return 1;
+    long local = doblar(n);
+    printf("original=%ld local=%ld\n", n, local);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL: sin variables del llamador; la expresión produce el valor.
+WITH nums(n) AS (VALUES (5), (3), (0))
+SELECT printf('original=%d local=%d', n, n * 2) AS resultado FROM nums;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+function doblar($x) {
+    $x = $x * 2;
+    return $x;
+}
+
+$n = (int) trim(fgets(STDIN));
+$local = doblar($n);
+echo "original=$n local=$local\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -115,7 +272,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press).
+- R. C. Martin — *Clean Code* (Prentice Hall).
+- S. McConnell — *Code Complete* (2ª ed., Microsoft Press).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

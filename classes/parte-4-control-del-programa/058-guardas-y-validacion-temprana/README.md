@@ -60,22 +60,173 @@ SI edad < 18: ESCRIBIR "menor" ; FIN
 ESCRIBIR "adulto"
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+edad = int(sys.stdin.readline())
+if edad < 0:
+    print("invalido")
+elif edad < 18:
+    print("menor")
+else:
+    print("adulto")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const edad = parseInt(readFileSync(0, "utf8").trim(), 10);
+if (edad < 0) console.log("invalido");
+else if (edad < 18) console.log("menor");
+else console.log("adulto");
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const edad: number = parseInt(readFileSync(0, "utf8").trim(), 10);
+if (edad < 0) console.log("invalido");
+else if (edad < 18) console.log("menor");
+else console.log("adulto");
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int edad = Integer.parseInt(br.readLine().trim());
+        if (edad < 0) {
+            System.out.println("invalido");
+        } else if (edad < 18) {
+            System.out.println("menor");
+        } else {
+            System.out.println("adulto");
+        }
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+int edad = int.Parse(Console.In.ReadToEnd().Trim());
+if (edad < 0)
+    Console.WriteLine("invalido");
+else if (edad < 18)
+    Console.WriteLine("menor");
+else
+    Console.WriteLine("adulto");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	edad, _ := strconv.Atoi(strings.TrimSpace(line))
+	if edad < 0 {
+		fmt.Println("invalido")
+		return
+	}
+	if edad < 18 {
+		fmt.Println("menor")
+		return
+	}
+	fmt.Println("adulto")
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let edad: i64 = s.trim().parse().unwrap();
+    if edad < 0 {
+        println!("invalido");
+    } else if edad < 18 {
+        println!("menor");
+    } else {
+        println!("adulto");
+    }
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    long edad;
+    if (scanf("%ld", &edad) != 1) return 1;
+    if (edad < 0) {
+        printf("invalido\n");
+    } else if (edad < 18) {
+        printf("menor\n");
+    } else {
+        printf("adulto\n");
+    }
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL: clasificación con CASE WHEN en orden.
+WITH edades(edad) AS (VALUES (-5), (10), (20))
+SELECT CASE WHEN edad < 0 THEN 'invalido'
+            WHEN edad < 18 THEN 'menor'
+            ELSE 'adulto' END AS resultado
+FROM edades;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+$edad = (int) trim(fgets(STDIN));
+if ($edad < 0) {
+    echo "invalido\n";
+} elseif ($edad < 18) {
+    echo "menor\n";
+} else {
+    echo "adulto\n";
+}
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -116,7 +267,23 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- O.-J. Dahl, E. W. Dijkstra y C. A. R. Hoare — *Structured Programming* (Academic Press).
+- R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. control de flujo.
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

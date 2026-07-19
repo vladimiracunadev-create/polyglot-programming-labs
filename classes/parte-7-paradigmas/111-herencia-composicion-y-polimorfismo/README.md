@@ -55,22 +55,222 @@ Especificación y verificación en [`casos.json`](casos.json):
 LEER tipo ; crear animal ; ESCRIBIR animal.sonido()
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+
+class Perro:
+    def sonido(self):
+        return "guau"
+
+
+class Gato:
+    def sonido(self):
+        return "miau"
+
+
+class Vaca:
+    def sonido(self):
+        return "muu"
+
+
+tipo = sys.stdin.readline().strip()
+animales = {"perro": Perro(), "gato": Gato(), "vaca": Vaca()}
+print(f"sonido={animales[tipo].sonido()}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+class Perro { sonido() { return "guau"; } }
+class Gato { sonido() { return "miau"; } }
+class Vaca { sonido() { return "muu"; } }
+
+const tipo = readFileSync(0, "utf8").trim();
+const animales = { perro: new Perro(), gato: new Gato(), vaca: new Vaca() };
+console.log(`sonido=${animales[tipo].sonido()}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+interface Animal { sonido(): string; }
+class Perro implements Animal { sonido() { return "guau"; } }
+class Gato implements Animal { sonido() { return "miau"; } }
+class Vaca implements Animal { sonido() { return "muu"; } }
+
+const tipo: string = readFileSync(0, "utf8").trim();
+const animales: Record<string, Animal> = { perro: new Perro(), gato: new Gato(), vaca: new Vaca() };
+console.log(`sonido=${animales[tipo].sonido()}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    interface Animal { String sonido(); }
+    static class Perro implements Animal { public String sonido() { return "guau"; } }
+    static class Gato implements Animal { public String sonido() { return "miau"; } }
+    static class Vaca implements Animal { public String sonido() { return "muu"; } }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String tipo = br.readLine().trim();
+        Animal a;
+        switch (tipo) {
+            case "perro": a = new Perro(); break;
+            case "gato": a = new Gato(); break;
+            default: a = new Vaca();
+        }
+        System.out.println("sonido=" + a.sonido());
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+string tipo = Console.In.ReadToEnd().Trim();
+IAnimal a = tipo switch {
+    "perro" => new Perro(),
+    "gato" => new Gato(),
+    _ => new Vaca(),
+};
+Console.WriteLine($"sonido={a.Sonido()}");
+
+interface IAnimal { string Sonido(); }
+class Perro : IAnimal { public string Sonido() => "guau"; }
+class Gato : IAnimal { public string Sonido() => "miau"; }
+class Vaca : IAnimal { public string Sonido() => "muu"; }
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
+
+type Animal interface {
+	sonido() string
+}
+
+type Perro struct{}
+type Gato struct{}
+type Vaca struct{}
+
+func (Perro) sonido() string { return "guau" }
+func (Gato) sonido() string  { return "miau" }
+func (Vaca) sonido() string  { return "muu" }
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	tipo := strings.TrimSpace(line)
+	var a Animal
+	switch tipo {
+	case "perro":
+		a = Perro{}
+	case "gato":
+		a = Gato{}
+	default:
+		a = Vaca{}
+	}
+	fmt.Printf("sonido=%s\n", a.sonido())
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+trait Animal {
+    fn sonido(&self) -> &'static str;
+}
+
+struct Perro;
+struct Gato;
+struct Vaca;
+
+impl Animal for Perro { fn sonido(&self) -> &'static str { "guau" } }
+impl Animal for Gato { fn sonido(&self) -> &'static str { "miau" } }
+impl Animal for Vaca { fn sonido(&self) -> &'static str { "muu" } }
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let tipo = s.trim();
+    let a: Box<dyn Animal> = match tipo {
+        "perro" => Box::new(Perro),
+        "gato" => Box::new(Gato),
+        _ => Box::new(Vaca),
+    };
+    println!("sonido={}", a.sonido());
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+    char tipo[32];
+    if (scanf("%31s", tipo) != 1) return 1;
+    const char *sonido;
+    if (strcmp(tipo, "perro") == 0) sonido = "guau";
+    else if (strcmp(tipo, "gato") == 0) sonido = "miau";
+    else sonido = "muu";
+    printf("sonido=%s\n", sonido);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL: sin despacho polimórfico; se usa CASE.
+WITH animales(tipo) AS (VALUES ('perro'))
+SELECT printf('sonido=%s', CASE tipo WHEN 'perro' THEN 'guau' WHEN 'gato' THEN 'miau' ELSE 'muu' END) AS resultado
+FROM animales;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+interface Animal { public function sonido(): string; }
+class Perro implements Animal { public function sonido(): string { return "guau"; } }
+class Gato implements Animal { public function sonido(): string { return "miau"; } }
+class Vaca implements Animal { public function sonido(): string { return "muu"; } }
+
+$tipo = trim(fgets(STDIN));
+$animales = ["perro" => new Perro(), "gato" => new Gato(), "vaca" => new Vaca()];
+echo "sonido=" . $animales[$tipo]->sonido() . "\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -111,7 +311,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press).
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press).
+- R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

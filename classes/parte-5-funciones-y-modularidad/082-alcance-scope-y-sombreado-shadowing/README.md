@@ -59,22 +59,161 @@ BLOQUE: x_interno <- x + 10 ; imprimir interno
 imprimir externo (x sigue siendo n)
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+n = int(sys.stdin.readline())
+x = n
+# Python no crea alcance de bloque: se usa otra variable para el 'interno'.
+x_interno = x + 10
+print(f"interno={x_interno} externo={x}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const n = parseInt(readFileSync(0, "utf8").trim(), 10);
+const x = n;
+{
+  const x = n + 10; // sombrea a la externa dentro del bloque
+  console.log(`interno=${x} externo=${n}`);
+}
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const n: number = parseInt(readFileSync(0, "utf8").trim(), 10);
+const x: number = n;
+{
+  const x: number = n + 10;
+  console.log(`interno=${x} externo=${n}`);
+}
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
+        int x = n;
+        {
+            int xInterno = x + 10; // Java no permite re-declarar x en el bloque
+            System.out.println("interno=" + xInterno + " externo=" + x);
+        }
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+int n = int.Parse(Console.In.ReadToEnd().Trim());
+int x = n;
+{
+    int xInterno = x + 10;
+    Console.WriteLine($"interno={xInterno} externo={x}");
+}
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	n, _ := strconv.Atoi(strings.TrimSpace(line))
+	x := n // externo
+	interno := 0
+	{
+		x := x + 10 // sombrea a la externa en este bloque
+		interno = x
+	}
+	fmt.Printf("interno=%d externo=%d\n", interno, x)
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let n: i64 = s.trim().parse().unwrap();
+    let x = n;
+    {
+        let x = n + 10; // sombreado idiomático en Rust
+        println!("interno={x} externo={n}");
+    }
+    let _ = x;
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    long n;
+    if (scanf("%ld", &n) != 1) return 1;
+    long x = n;
+    {
+        long x = n + 10; /* sombrea a la externa dentro del bloque */
+        printf("interno=%ld externo=%ld\n", x, n);
+    }
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL usa alias/subconsultas para acotar nombres.
+WITH nums(n) AS (VALUES (5), (0), (-3))
+SELECT printf('interno=%d externo=%d', n + 10, n) AS resultado FROM nums;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+$n = (int) trim(fgets(STDIN));
+$x = $n;
+// PHP no tiene alcance de bloque: se usa otra variable.
+$xInterno = $x + 10;
+echo "interno=$xInterno externo=$x\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -115,7 +254,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press).
+- R. C. Martin — *Clean Code* (Prentice Hall).
+- S. McConnell — *Code Complete* (2ª ed., Microsoft Press).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

@@ -6,6 +6,11 @@
 
 Modelar la información: colecciones, registros, tipos algebraicos, identidad, propiedad y persistencia.
 
+**Fuentes de referencia de esta parte:**
+
+- T. Cormen, C. Leiserson, R. Rivest y C. Stein — *Introduction to Algorithms* (4ª ed., MIT Press).
+- R. Sedgewick y K. Wayne — *Algorithms* (4ª ed., Addison-Wesley).
+
 ---
 
 ## 📚 Clases de esta parte

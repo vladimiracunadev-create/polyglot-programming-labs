@@ -59,22 +59,170 @@ ba <- (a != 0) ; bb <- (b != 0)
 ESCRIBIR "and=" (ba Y bb) " or=" (ba O bb) " not_a=" (NO ba)
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+a, b = map(int, sys.stdin.readline().split())
+ba, bb = a != 0, b != 0
+tf = lambda x: "true" if x else "false"
+print(f"and={tf(ba and bb)} or={tf(ba or bb)} not_a={tf(not ba)}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const [ai, bi] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
+const a = ai !== 0;
+const b = bi !== 0;
+const tf = (x) => (x ? "true" : "false");
+console.log(`and=${tf(a && b)} or=${tf(a || b)} not_a=${tf(!a)}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const [ai, bi]: number[] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
+const a: boolean = ai !== 0;
+const b: boolean = bi !== 0;
+const tf = (x: boolean): string => (x ? "true" : "false");
+console.log(`and=${tf(a && b)} or=${tf(a || b)} not_a=${tf(!a)}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    static String tf(boolean x) {
+        return x ? "true" : "false";
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] p = br.readLine().trim().split("\\s+");
+        boolean a = Integer.parseInt(p[0]) != 0;
+        boolean b = Integer.parseInt(p[1]) != 0;
+        System.out.printf("and=%s or=%s not_a=%s%n", tf(a && b), tf(a || b), tf(!a));
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+string[] p = Console.In.ReadToEnd()
+    .Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+bool a = int.Parse(p[0]) != 0;
+bool b = int.Parse(p[1]) != 0;
+string Tf(bool x) => x ? "true" : "false";
+Console.WriteLine($"and={Tf(a && b)} or={Tf(a || b)} not_a={Tf(!a)}");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func tf(x bool) string {
+	if x {
+		return "true"
+	}
+	return "false"
+}
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	f := strings.Fields(line)
+	ai, _ := strconv.Atoi(f[0])
+	bi, _ := strconv.Atoi(f[1])
+	a, b := ai != 0, bi != 0
+	fmt.Printf("and=%s or=%s not_a=%s\n", tf(a && b), tf(a || b), tf(!a))
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn tf(x: bool) -> &'static str {
+    if x { "true" } else { "false" }
+}
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let v: Vec<i64> = s.split_whitespace().map(|x| x.parse().unwrap()).collect();
+    let (a, b) = (v[0] != 0, v[1] != 0);
+    println!("and={} or={} not_a={}", tf(a && b), tf(a || b), tf(!a));
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+static const char *tf(int x) {
+    return x ? "true" : "false";
+}
+
+int main(void) {
+    int a, b;
+    if (scanf("%d %d", &a, &b) != 2) return 1;
+    a = a != 0;
+    b = b != 0;
+    printf("and=%s or=%s not_a=%s\n", tf(a && b), tf(a || b), tf(!a));
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL no tiene tipo booleano nativo: se expresa con CASE WHEN.
+WITH pares(a, b) AS (VALUES (1, 0), (1, 1), (0, 0))
+SELECT printf('and=%s or=%s not_a=%s',
+       CASE WHEN a <> 0 AND b <> 0 THEN 'true' ELSE 'false' END,
+       CASE WHEN a <> 0 OR b <> 0 THEN 'true' ELSE 'false' END,
+       CASE WHEN NOT (a <> 0) THEN 'true' ELSE 'false' END) AS resultado
+FROM pares;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+[$a, $b] = preg_split('/\s+/', trim(fgets(STDIN)));
+$a = ((int) $a) !== 0;
+$b = ((int) $b) !== 0;
+$tf = fn($x) => $x ? "true" : "false";
+printf("and=%s or=%s not_a=%s\n", $tf($a && $b), $tf($a || $b), $tf(!$a));
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -115,7 +263,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. tipos y variables.
+- B. C. Pierce — *Types and Programming Languages* (MIT Press).
+- M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

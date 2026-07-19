@@ -55,22 +55,156 @@ Especificación y verificación en [`casos.json`](casos.json):
 cuenta <- 0 ; REPETIR n veces (protegido): cuenta <- cuenta + 1
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+n = int(sys.stdin.readline())
+cuenta = 0
+for _ in range(n):  # sección crítica protegida (aquí, secuencial)
+    cuenta += 1
+print(f"cuenta={cuenta}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const n = parseInt(readFileSync(0, "utf8").trim(), 10);
+let cuenta = 0;
+for (let i = 0; i < n; i++) cuenta += 1;
+console.log(`cuenta=${cuenta}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const n: number = parseInt(readFileSync(0, "utf8").trim(), 10);
+let cuenta = 0;
+for (let i = 0; i < n; i++) cuenta += 1;
+console.log(`cuenta=${cuenta}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
+        AtomicInteger cuenta = new AtomicInteger(0);
+        for (int i = 0; i < n; i++) cuenta.incrementAndGet();
+        System.out.println("cuenta=" + cuenta.get());
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+using System.Threading;
+
+int n = int.Parse(Console.In.ReadToEnd().Trim());
+int cuenta = 0;
+for (int i = 0; i < n; i++) Interlocked.Increment(ref cuenta);
+Console.WriteLine($"cuenta={cuenta}");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+	"sync"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	n, _ := strconv.Atoi(strings.TrimSpace(line))
+	var mu sync.Mutex
+	cuenta := 0
+	for i := 0; i < n; i++ {
+		mu.Lock()
+		cuenta++
+		mu.Unlock()
+	}
+	fmt.Printf("cuenta=%d\n", cuenta)
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+use std::sync::Mutex;
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let n: i64 = s.trim().parse().unwrap();
+    let cuenta = Mutex::new(0i64);
+    for _ in 0..n {
+        *cuenta.lock().unwrap() += 1;
+    }
+    println!("cuenta={}", *cuenta.lock().unwrap());
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    long n;
+    if (scanf("%ld", &n) != 1) return 1;
+    long cuenta = 0;
+    for (long i = 0; i < n; i++) cuenta++;
+    printf("cuenta=%ld\n", cuenta);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL usa transacciones para la consistencia; aquí, el conteo.
+WITH nums(n) AS (VALUES (5), (0), (3))
+SELECT printf('cuenta=%d', n) AS resultado FROM nums;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+$n = (int) trim(fgets(STDIN));
+$cuenta = 0;
+for ($i = 0; $i < $n; $i++) {
+    $cuenta += 1;
+}
+echo "cuenta=$cuenta\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -111,7 +245,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- R. Nystrom — *Crafting Interpreters* (Genever Benning) — [gratis online](https://craftinginterpreters.com/).
+- A. Aho, M. Lam, R. Sethi y J. Ullman — *Compilers: Principles, Techniques, and Tools* (2ª ed., Pearson; «Dragon Book»).
+- R. Bryant y D. O'Hallaron — *Computer Systems: A Programmer's Perspective* (3ª ed., Pearson).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

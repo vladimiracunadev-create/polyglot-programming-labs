@@ -6,6 +6,12 @@
 
 Construir un sistema real con componentes en varios lenguajes y defender cada decisión de lenguaje y contrato.
 
+**Fuentes de referencia de esta parte:**
+
+- S. Newman — *Building Microservices* (2ª ed., O'Reilly).
+- M. Nygard — *Release It!* (2ª ed., Pragmatic Bookshelf).
+- A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley).
+
 ---
 
 ## 📚 Clases de esta parte

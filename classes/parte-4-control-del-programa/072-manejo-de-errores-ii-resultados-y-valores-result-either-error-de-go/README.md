@@ -59,22 +59,211 @@ res <- dividir(a,b)  // devuelve Ok(v) o Err
 SEGUN res: Ok(v)->"ok="v ; Err->"err=division"
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+
+def dividir(a, b):
+    if b == 0:
+        return (None, "division")
+    return (a // b, None)
+
+
+a, b = map(int, sys.stdin.readline().split())
+valor, err = dividir(a, b)
+if err is not None:
+    print(f"err={err}")
+else:
+    print(f"ok={valor}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+function dividir(a, b) {
+  if (b === 0) return { err: "division" };
+  return { ok: Math.trunc(a / b) };
+}
+
+const [a, b] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
+const r = dividir(a, b);
+console.log(r.err ? `err=${r.err}` : `ok=${r.ok}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+type Res = { ok: number } | { err: string };
+
+function dividir(a: number, b: number): Res {
+  if (b === 0) return { err: "division" };
+  return { ok: Math.trunc(a / b) };
+}
+
+const [a, b]: number[] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
+const r = dividir(a, b);
+console.log("err" in r ? `err=${r.err}` : `ok=${r.ok}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Optional;
+
+public class Main {
+    static Optional<Integer> dividir(int a, int b) {
+        return b == 0 ? Optional.empty() : Optional.of(a / b);
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] p = br.readLine().trim().split("\\s+");
+        int a = Integer.parseInt(p[0]);
+        int b = Integer.parseInt(p[1]);
+        Optional<Integer> r = dividir(a, b);
+        System.out.println(r.isPresent() ? "ok=" + r.get() : "err=division");
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+(int? ok, string err) Dividir(int a, int b) =>
+    b == 0 ? (null, "division") : (a / b, null);
+
+string[] p = Console.In.ReadToEnd()
+    .Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+int a = int.Parse(p[0]);
+int b = int.Parse(p[1]);
+var (ok, err) = Dividir(a, b);
+Console.WriteLine(err != null ? $"err={err}" : $"ok={ok}");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"errors"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func dividir(a, b int) (int, error) {
+	if b == 0 {
+		return 0, errors.New("division")
+	}
+	return a / b, nil
+}
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	f := strings.Fields(line)
+	a, _ := strconv.Atoi(f[0])
+	b, _ := strconv.Atoi(f[1])
+	res, err := dividir(a, b)
+	if err != nil {
+		fmt.Printf("err=%s\n", err)
+	} else {
+		fmt.Printf("ok=%d\n", res)
+	}
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn dividir(a: i64, b: i64) -> Result<i64, String> {
+    if b == 0 {
+        Err("division".to_string())
+    } else {
+        Ok(a / b)
+    }
+}
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let v: Vec<i64> = s.split_whitespace().map(|x| x.parse().unwrap()).collect();
+    match dividir(v[0], v[1]) {
+        Ok(r) => println!("ok={r}"),
+        Err(e) => println!("err={e}"),
+    }
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+/* C: se usa un valor de retorno para señalar el error (0 = ok, 1 = error). */
+int dividir(long a, long b, long *out) {
+    if (b == 0) return 1;
+    *out = a / b;
+    return 0;
+}
+
+int main(void) {
+    long a, b, r;
+    if (scanf("%ld %ld", &a, &b) != 2) return 1;
+    if (dividir(a, b, &r) != 0) {
+        printf("err=division\n");
+    } else {
+        printf("ok=%ld\n", r);
+    }
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL: sin tipo de error; se distingue el caso con CASE WHEN.
+WITH pares(a, b) AS (VALUES (10, 2), (7, 0), (8, 4))
+SELECT CASE WHEN b = 0 THEN 'err=division'
+            ELSE printf('ok=%d', a / b) END AS resultado
+FROM pares;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+function dividir($a, $b) {
+    if ($b === 0) {
+        return ["err" => "division"];
+    }
+    return ["ok" => intdiv($a, $b)];
+}
+
+[$a, $b] = preg_split('/\s+/', trim(fgets(STDIN)));
+$r = dividir((int) $a, (int) $b);
+echo isset($r["err"]) ? "err={$r['err']}\n" : "ok={$r['ok']}\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -115,7 +304,23 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- O.-J. Dahl, E. W. Dijkstra y C. A. R. Hoare — *Structured Programming* (Academic Press).
+- R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. control de flujo.
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

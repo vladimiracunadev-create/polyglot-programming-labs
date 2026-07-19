@@ -55,22 +55,182 @@ Especificación y verificación en [`casos.json`](casos.json):
 obj <- { valor: n, doble() { DEVOLVER valor*2 } } ; ESCRIBIR obj.doble()
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+n = int(sys.stdin.readline())
+obj = {"valor": n}
+def doble(o):
+    return o["valor"] * 2
+print(f"resultado={doble(obj)}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const n = parseInt(readFileSync(0, "utf8").trim(), 10);
+// Objeto literal con método (modelo de prototipos).
+const obj = {
+  valor: n,
+  doble() {
+    return this.valor * 2;
+  },
+};
+console.log(`resultado=${obj.doble()}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const n: number = parseInt(readFileSync(0, "utf8").trim(), 10);
+const obj = {
+  valor: n,
+  doble(): number {
+    return this.valor * 2;
+  },
+};
+console.log(`resultado=${obj.doble()}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    static class Obj {
+        int valor;
+        Obj(int v) { valor = v; }
+        int doble() { return valor * 2; }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
+        System.out.println("resultado=" + new Obj(n).doble());
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+int n = int.Parse(Console.In.ReadToEnd().Trim());
+var obj = new Obj(n);
+Console.WriteLine($"resultado={obj.Doble()}");
+
+class Obj {
+    int valor;
+    public Obj(int v) { valor = v; }
+    public int Doble() => valor * 2;
+}
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+type Obj struct{ valor int }
+
+func (o Obj) doble() int { return o.valor * 2 }
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	n, _ := strconv.Atoi(strings.TrimSpace(line))
+	o := Obj{valor: n}
+	fmt.Printf("resultado=%d\n", o.doble())
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+struct Obj {
+    valor: i64,
+}
+
+impl Obj {
+    fn doble(&self) -> i64 {
+        self.valor * 2
+    }
+}
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let n: i64 = s.trim().parse().unwrap();
+    let o = Obj { valor: n };
+    println!("resultado={}", o.doble());
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+struct Obj {
+    long valor;
+};
+
+long doble(struct Obj *o) {
+    return o->valor * 2;
+}
+
+int main(void) {
+    long n;
+    if (scanf("%ld", &n) != 1) return 1;
+    struct Obj o = {n};
+    printf("resultado=%ld\n", doble(&o));
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL no tiene objetos; el cálculo va en la consulta.
+WITH nums(n) AS (VALUES (5), (0), (7))
+SELECT printf('resultado=%d', n * 2) AS resultado FROM nums;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+$n = (int) trim(fgets(STDIN));
+$obj = new class($n) {
+    public function __construct(public int $valor) {}
+    public function doble(): int { return $this->valor * 2; }
+};
+echo "resultado=" . $obj->doble() . "\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -111,7 +271,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press).
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press).
+- R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

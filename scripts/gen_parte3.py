@@ -18,7 +18,39 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from build import nav_footer, LANG_META  # noqa: E402
-from curriculo import NUCLEO  # noqa: E402
+from curriculo import NUCLEO, BIBLIO, LIBROS_NUCLEO  # noqa: E402
+
+# Lenguaje para el resaltado del bloque de código embebido.
+FENCE = {
+    "python": "python", "javascript": "javascript", "typescript": "typescript",
+    "java": "java", "csharp": "csharp", "go": "go", "rust": "rust",
+    "c": "c", "sql": "sql", "php": "php",
+}
+
+
+def codigo_a_la_vista(spec):
+    """Embebe el código de cada lenguaje del núcleo dentro de la clase (a la vista)."""
+    bloques = []
+    for l in NUCLEO:
+        code = spec["impls"].get(l)
+        if not code:
+            continue
+        nombre, _archivo, run = LANG_META[l]
+        bloques.append(
+            f"### {nombre} · `{run}`\n\n```{FENCE[l]}\n{code.rstrip()}\n```"
+        )
+    return "\n\n".join(bloques)
+
+
+def refs_libros(idx, extra=None):
+    """Fuentes: libros de la parte + libros de los lenguajes del núcleo."""
+    lineas = ["**Libros de la parte:**", ""]
+    lineas += [f"- {b}" for b in BIBLIO.get(idx, [])]
+    lineas += ["", "**Libros de los lenguajes del núcleo:**", ""]
+    lineas += [f"- {LIBROS_NUCLEO[l]}" for l in NUCLEO if l in LIBROS_NUCLEO]
+    if extra:
+        lineas += ["", *[f"- {e}" for e in extra]]
+    return "\n".join(lineas)
 
 ROOT = Path(__file__).resolve().parent.parent
 CLASSES = ROOT / "classes"
@@ -130,13 +162,12 @@ Especificación y verificación en [`casos.json`](casos.json):
 {spec['algoritmo']}
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-{impl_table()}
+{codigo_a_la_vista(spec)}
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -173,7 +204,7 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+{refs_libros(idx)}
 
 ---
 

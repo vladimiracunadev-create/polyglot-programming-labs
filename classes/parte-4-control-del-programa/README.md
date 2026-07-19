@@ -6,6 +6,11 @@
 
 Decidir, repetir y manejar errores: el flujo de ejecución expresado en cada familia de lenguajes.
 
+**Fuentes de referencia de esta parte:**
+
+- O.-J. Dahl, E. W. Dijkstra y C. A. R. Hoare — *Structured Programming* (Academic Press).
+- R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. control de flujo.
+
 ---
 
 ## 📚 Clases de esta parte

@@ -12,7 +12,8 @@
     "MD026": false, // puntuación al final de encabezados
     "MD012": false, // líneas en blanco consecutivas
     "MD040": false, // lenguaje en bloques de código
-    "MD060": false  // estilo de columnas de tabla (tablas compactas)
+    "MD060": false, // estilo de columnas de tabla (tablas compactas)
+    "MD010": { "code_blocks": false } // Go usa tabs; permitirlas dentro de bloques de código
   },
   "ignores": [
     "node_modules",

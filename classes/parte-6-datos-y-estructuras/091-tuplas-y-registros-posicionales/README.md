@@ -55,22 +55,143 @@ Especificación y verificación en [`casos.json`](casos.json):
 LEER (a, b) ; intercambiar ; ESCRIBIR (b, a)
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+a, b = map(int, sys.stdin.readline().split())
+t = (a, b)
+t = (t[1], t[0])
+print(f"tupla=({t[0]}, {t[1]})")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const [a, b] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
+const t = [b, a];
+console.log(`tupla=(${t[0]}, ${t[1]})`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const [a, b]: number[] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
+const t: [number, number] = [b, a];
+console.log(`tupla=(${t[0]}, ${t[1]})`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    record Par(int a, int b) {}
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] p = br.readLine().trim().split("\\s+");
+        Par t = new Par(Integer.parseInt(p[0]), Integer.parseInt(p[1]));
+        Par s = new Par(t.b(), t.a());
+        System.out.println("tupla=(" + s.a() + ", " + s.b() + ")");
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+string[] p = Console.In.ReadToEnd()
+    .Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+(int a, int b) t = (int.Parse(p[0]), int.Parse(p[1]));
+t = (t.b, t.a);
+Console.WriteLine($"tupla=({t.a}, {t.b})");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	f := strings.Fields(line)
+	a, _ := strconv.Atoi(f[0])
+	b, _ := strconv.Atoi(f[1])
+	a, b = b, a
+	fmt.Printf("tupla=(%d, %d)\n", a, b)
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let v: Vec<i64> = s.split_whitespace().map(|x| x.parse().unwrap()).collect();
+    let t: (i64, i64) = (v[0], v[1]);
+    let t = (t.1, t.0);
+    println!("tupla=({}, {})", t.0, t.1);
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    long a, b;
+    if (scanf("%ld %ld", &a, &b) != 2) return 1;
+    /* C no tiene tuplas: se usa una struct. */
+    struct Par { long a, b; } t = { b, a };
+    printf("tupla=(%ld, %ld)\n", t.a, t.b);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL: una fila con varias columnas es una tupla.
+WITH pares(a, b) AS (VALUES (3, 4), (0, -2), (5, 5))
+SELECT printf('tupla=(%d, %d)', b, a) AS resultado FROM pares;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+[$a, $b] = preg_split('/\s+/', trim(fgets(STDIN)));
+$t = [(int) $b, (int) $a];
+echo "tupla=({$t[0]}, {$t[1]})\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -111,7 +232,23 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- T. Cormen, C. Leiserson, R. Rivest y C. Stein — *Introduction to Algorithms* (4ª ed., MIT Press).
+- R. Sedgewick y K. Wayne — *Algorithms* (4ª ed., Addison-Wesley).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

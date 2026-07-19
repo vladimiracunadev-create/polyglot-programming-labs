@@ -55,22 +55,144 @@ Especificación y verificación en [`casos.json`](casos.json):
 LEER indice y lista ; ESCRIBIR lista[indice]
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+t = sys.stdin.read().split()
+indice = int(t[0])
+lista = [int(x) for x in t[1:]]
+print(f"valor={lista[indice]}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const t = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
+const indice = t[0];
+const lista = t.slice(1);
+console.log(`valor=${lista[indice]}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const t: number[] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
+const indice = t[0];
+const lista = t.slice(1);
+console.log(`valor=${lista[indice]}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] t = br.readLine().trim().split("\\s+");
+        int indice = Integer.parseInt(t[0]);
+        System.out.println("valor=" + Integer.parseInt(t[indice + 1]));
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+using System.Linq;
+
+int[] t = Console.In.ReadToEnd()
+    .Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
+    .Select(int.Parse).ToArray();
+int indice = t[0];
+Console.WriteLine($"valor={t[indice + 1]}");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	t := strings.Fields(line)
+	indice, _ := strconv.Atoi(t[0])
+	lista := t[1:]
+	fmt.Printf("valor=%s\n", lista[indice])
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let t: Vec<&str> = s.split_whitespace().collect();
+    let indice: usize = t[0].parse().unwrap();
+    let lista = &t[1..];
+    println!("valor={}", lista[indice]);
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    long v[1024];
+    int n = 0;
+    while (scanf("%ld", &v[n]) == 1) n++;
+    long indice = v[0];
+    long *lista = v + 1; /* aritmética de punteros */
+    printf("valor=%ld\n", *(lista + indice));
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL: acceso por posición con una subconsulta ordenada (ilustrativo).
+WITH datos(pos, x) AS (VALUES (0, 10), (1, 20), (2, 30))
+SELECT printf('valor=%d', x) AS resultado FROM datos WHERE pos = 1;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+$t = preg_split('/\s+/', trim(fgets(STDIN)));
+$indice = (int) $t[0];
+$lista = array_slice($t, 1);
+echo "valor={$lista[$indice]}\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -111,7 +233,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- R. Nystrom — *Crafting Interpreters* (Genever Benning) — [gratis online](https://craftinginterpreters.com/).
+- A. Aho, M. Lam, R. Sethi y J. Ullman — *Compilers: Principles, Techniques, and Tools* (2ª ed., Pearson; «Dragon Book»).
+- R. Bryant y D. O'Hallaron — *Computer Systems: A Programmer's Perspective* (3ª ed., Pearson).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

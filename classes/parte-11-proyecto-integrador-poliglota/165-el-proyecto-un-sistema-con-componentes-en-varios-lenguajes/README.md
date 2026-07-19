@@ -55,22 +55,132 @@ Especificación y verificación en [`casos.json`](casos.json):
 LEER componentes ; ESCRIBIR conteo y nombres unidos
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+c = sys.stdin.read().split()
+print(f"componentes={len(c)} nombres={'-'.join(c)}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const c = readFileSync(0, "utf8").trim().split(/\s+/);
+console.log(`componentes=${c.length} nombres=${c.join("-")}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const c: string[] = readFileSync(0, "utf8").trim().split(/\s+/);
+console.log(`componentes=${c.length} nombres=${c.join("-")}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] c = br.readLine().trim().split("\\s+");
+        System.out.println("componentes=" + c.length + " nombres=" + String.join("-", c));
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+string[] c = Console.In.ReadToEnd()
+    .Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+Console.WriteLine($"componentes={c.Length} nombres={string.Join("-", c)}");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	c := strings.Fields(line)
+	fmt.Printf("componentes=%d nombres=%s\n", len(c), strings.Join(c, "-"))
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let c: Vec<&str> = s.split_whitespace().collect();
+    println!("componentes={} nombres={}", c.len(), c.join("-"));
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+    char t[64];
+    char buf[4096];
+    buf[0] = '\0';
+    int n = 0;
+    while (scanf("%63s", t) == 1) {
+        if (n > 0) strcat(buf, "-");
+        strcat(buf, t);
+        n++;
+    }
+    printf("componentes=%d nombres=%s\n", n, buf);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL cuenta y une los componentes.
+WITH c(nombre) AS (VALUES ('cli'), ('api'), ('web'))
+SELECT printf('componentes=%d nombres=%s', count(*), group_concat(nombre, '-')) AS resultado FROM c;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+$c = preg_split('/\s+/', trim(fgets(STDIN)));
+echo "componentes=" . count($c) . " nombres=" . implode("-", $c) . "\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -111,7 +221,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- S. Newman — *Building Microservices* (2ª ed., O'Reilly).
+- M. Nygard — *Release It!* (2ª ed., Pragmatic Bookshelf).
+- A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

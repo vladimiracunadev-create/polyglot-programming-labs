@@ -59,22 +59,179 @@ INTENTAR: r <- a/b ; ESCRIBIR "resultado=" r
 CAPTURAR division_por_cero: ESCRIBIR "error=division por cero"
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+a, b = map(int, sys.stdin.readline().split())
+try:
+    r = a // b
+    print(f"resultado={r}")
+except ZeroDivisionError:
+    print("error=division por cero")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const [a, b] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
+try {
+  if (b === 0) throw new Error("div");
+  console.log(`resultado=${Math.trunc(a / b)}`);
+} catch {
+  console.log("error=division por cero");
+}
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const [a, b]: number[] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
+try {
+  if (b === 0) throw new Error("div");
+  console.log(`resultado=${Math.trunc(a / b)}`);
+} catch {
+  console.log("error=division por cero");
+}
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] p = br.readLine().trim().split("\\s+");
+        int a = Integer.parseInt(p[0]);
+        int b = Integer.parseInt(p[1]);
+        try {
+            int r = a / b;
+            System.out.println("resultado=" + r);
+        } catch (ArithmeticException e) {
+            System.out.println("error=division por cero");
+        }
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+string[] p = Console.In.ReadToEnd()
+    .Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+int a = int.Parse(p[0]);
+int b = int.Parse(p[1]);
+try {
+    int r = a / b;
+    Console.WriteLine($"resultado={r}");
+} catch (DivideByZeroException) {
+    Console.WriteLine("error=division por cero");
+}
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	f := strings.Fields(line)
+	a, _ := strconv.Atoi(f[0])
+	b, _ := strconv.Atoi(f[1])
+	// Go no usa excepciones: comprueba antes de dividir.
+	if b == 0 {
+		fmt.Println("error=division por cero")
+	} else {
+		fmt.Printf("resultado=%d\n", a/b)
+	}
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let v: Vec<i64> = s.split_whitespace().map(|x| x.parse().unwrap()).collect();
+    let (a, b) = (v[0], v[1]);
+    // Rust no usa excepciones: checked_div devuelve Option.
+    match a.checked_div(b) {
+        Some(r) => println!("resultado={r}"),
+        None => println!("error=division por cero"),
+    }
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    long a, b;
+    if (scanf("%ld %ld", &a, &b) != 2) return 1;
+    /* C no tiene excepciones: comprobar antes de dividir. */
+    if (b == 0) {
+        printf("error=division por cero\n");
+    } else {
+        printf("resultado=%ld\n", a / b);
+    }
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL: evita el error comprobando el divisor con CASE WHEN.
+WITH pares(a, b) AS (VALUES (10, 2), (7, 0), (9, 3))
+SELECT CASE WHEN b = 0 THEN 'error=division por cero'
+            ELSE printf('resultado=%d', a / b) END AS resultado
+FROM pares;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+[$a, $b] = preg_split('/\s+/', trim(fgets(STDIN)));
+$a = (int) $a;
+$b = (int) $b;
+try {
+    $r = intdiv($a, $b);
+    echo "resultado=$r\n";
+} catch (DivisionByZeroError $e) {
+    echo "error=division por cero\n";
+}
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -115,7 +272,23 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- O.-J. Dahl, E. W. Dijkstra y C. A. R. Hoare — *Structured Programming* (Academic Press).
+- R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. control de flujo.
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

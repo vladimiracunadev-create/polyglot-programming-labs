@@ -63,7 +63,10 @@ Descompón "corregir automáticamente un test de opción múltiple" en 3-4 subpr
 
 ## 🔗 Referencias
 
-- Documentación de referencia de cada lenguaje del núcleo.
+- G. Polya — *How to Solve It* (Princeton University Press).
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press) — [gratis online](https://mitpress.mit.edu/9780262510875/).
+- A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley).
+- T. Cormen, C. Leiserson, R. Rivest y C. Stein — *Introduction to Algorithms* (4ª ed., MIT Press).
 
 ---
 

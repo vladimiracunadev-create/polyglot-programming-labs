@@ -62,22 +62,214 @@ total    <- subtotal * (1 - descuento)
 ESCRIBIR "Total: " + FORMATEAR(total, 2 decimales)
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`. Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | [`implementaciones/python/main.py`](implementaciones/python/main.py) | `python main.py` |
-| JavaScript | [`implementaciones/javascript/main.mjs`](implementaciones/javascript/main.mjs) | `node main.mjs` |
-| TypeScript | [`implementaciones/typescript/main.ts`](implementaciones/typescript/main.ts) | `pnpm exec tsx main.ts` |
-| Java | [`implementaciones/java/Main.java`](implementaciones/java/Main.java) | `java Main.java` |
-| C# | [`implementaciones/csharp/Program.cs`](implementaciones/csharp/Program.cs) | `dotnet run` |
-| Go | [`implementaciones/go/main.go`](implementaciones/go/main.go) | `go run main.go` |
-| Rust | [`implementaciones/rust/main.rs`](implementaciones/rust/main.rs) | `rustc main.rs -o main && ./main` |
-| C | [`implementaciones/c/main.c`](implementaciones/c/main.c) | `cc main.c -o main && ./main` |
-| PHP | [`implementaciones/php/main.php`](implementaciones/php/main.php) | `php main.php` |
-| SQL | [`implementaciones/sql/main.sql`](implementaciones/sql/main.sql) | `sqlite3 :memory: < main.sql` (ilustrativa) |
+### Python · `python main.py`
+
+```python
+import sys
+
+# Literales y constantes: los valores se leen y se nombran.
+precio_str, cantidad_str, descuento_str = sys.stdin.readline().split()
+
+PRECIO_UNITARIO = float(precio_str)   # tipo dinámico, inferido en tiempo de ejecución
+CANTIDAD = int(cantidad_str)
+DESCUENTO = float(descuento_str)
+
+subtotal = PRECIO_UNITARIO * CANTIDAD
+total = subtotal * (1 - DESCUENTO)
+
+print(f"Total: {total:.2f}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+// Números en JS: un solo tipo `number` (doble de 64 bits) para todo.
+const [precio, cantidad, descuento] = readFileSync(0, "utf8")
+  .trim()
+  .split(/\s+/)
+  .map(Number);
+
+const subtotal = precio * cantidad;
+const total = subtotal * (1 - descuento);
+
+console.log(`Total: ${total.toFixed(2)}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+// TypeScript añade tipos estáticos sobre JavaScript: se comprueban al compilar.
+const [precio, cantidad, descuento]: number[] = readFileSync(0, "utf8")
+  .trim()
+  .split(/\s+/)
+  .map(Number);
+
+const subtotal: number = precio * cantidad;
+const total: number = subtotal * (1 - descuento);
+
+console.log(`Total: ${total.toFixed(2)}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Locale;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] p = br.readLine().trim().split("\\s+");
+
+        // Tipado estático nominal: cada valor declara su tipo.
+        final double precioUnitario = Double.parseDouble(p[0]);
+        final int cantidad = Integer.parseInt(p[1]);
+        final double descuento = Double.parseDouble(p[2]);
+
+        double subtotal = precioUnitario * cantidad;
+        double total = subtotal * (1 - descuento);
+
+        System.out.printf(Locale.US, "Total: %.2f%n", total);
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+using System.Globalization;
+
+// C# sobre el CLR: tipado estático con cultura invariante para el formato.
+string[] p = Console.In.ReadToEnd()
+    .Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+
+double precioUnitario = double.Parse(p[0], CultureInfo.InvariantCulture);
+int cantidad = int.Parse(p[1], CultureInfo.InvariantCulture);
+double descuento = double.Parse(p[2], CultureInfo.InvariantCulture);
+
+double subtotal = precioUnitario * cantidad;
+double total = subtotal * (1 - descuento);
+
+Console.WriteLine("Total: " + total.ToString("F2", CultureInfo.InvariantCulture));
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	reader := bufio.NewReader(os.Stdin)
+	linea, _ := reader.ReadString('\n')
+	campos := strings.Fields(linea)
+
+	// Go: tipado estático explícito; conversión float64(cantidad) obligatoria.
+	precioUnitario, _ := strconv.ParseFloat(campos[0], 64)
+	cantidad, _ := strconv.Atoi(campos[1])
+	descuento, _ := strconv.ParseFloat(campos[2], 64)
+
+	subtotal := precioUnitario * float64(cantidad)
+	total := subtotal * (1 - descuento)
+
+	fmt.Printf("Total: %.2f\n", total)
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn main() {
+    let mut entrada = String::new();
+    std::io::stdin().read_to_string(&mut entrada).unwrap();
+    let campos: Vec<&str> = entrada.split_whitespace().collect();
+
+    // Rust: inmutable por defecto (`let`), tipos explícitos, conversión con `as`.
+    let precio_unitario: f64 = campos[0].parse().unwrap();
+    let cantidad: i64 = campos[1].parse().unwrap();
+    let descuento: f64 = campos[2].parse().unwrap();
+
+    let subtotal = precio_unitario * cantidad as f64;
+    let total = subtotal * (1.0 - descuento);
+
+    println!("Total: {total:.2}");
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    double precio_unitario, descuento;
+    long cantidad;
+
+    /* C: tipos primitivos de tamaño fijo; scanf convierte el texto de entrada. */
+    if (scanf("%lf %ld %lf", &precio_unitario, &cantidad, &descuento) != 3) {
+        return 1;
+    }
+
+    double subtotal = precio_unitario * (double)cantidad;
+    double total = subtotal * (1.0 - descuento);
+
+    printf("Total: %.2f\n", total);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL es declarativo: no lee stdin como los lenguajes imperativos. En vez de
+-- una variable que se asigna, se describe el cálculo sobre una tabla de valores.
+-- Esta consulta demuestra la misma fórmula para los tres casos de casos.json.
+WITH ventas(precio_unitario, cantidad, descuento) AS (
+    VALUES (15000.0, 2, 0.10),
+           (999.9, 3, 0.0),
+           (5000.0, 0, 0.20)
+)
+SELECT printf('Total: %.2f', precio_unitario * cantidad * (1 - descuento)) AS resultado
+FROM ventas;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+// PHP: dinámico y débilmente tipado; las variables llevan el prefijo $.
+$linea = trim(fgets(STDIN));
+[$precio, $cantidad, $descuento] = preg_split('/\s+/', $linea);
+
+$precioUnitario = (float) $precio;
+$cantidadInt = (int) $cantidad;
+$descuentoFloat = (float) $descuento;
+
+$subtotal = $precioUnitario * $cantidadInt;
+$total = $subtotal * (1 - $descuentoFloat);
+
+printf("Total: %.2f\n", $total);
+```
 
 > SQL es declarativo: no lee de stdin como los demás. Su implementación muestra la misma fórmula
 > sobre una tabla de casos, y por eso el verificador la marca como *ilustrativa*.
@@ -125,7 +317,24 @@ Detalle en [`reto.md`](reto.md): añade un **impuesto** del 19 % después del de
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo (Python, MDN, TypeScript, Oracle Java, Microsoft C#/.NET, Go, Rust, cppreference/C, SQLite, PHP).
+**Libros de la parte:**
+
+- R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. tipos y variables.
+- B. C. Pierce — *Types and Programming Languages* (MIT Press).
+- M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

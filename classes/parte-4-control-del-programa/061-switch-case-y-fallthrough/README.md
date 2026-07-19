@@ -58,22 +58,223 @@ LEER d
 SEGUN d: 1..7 -> nombre ; otro -> invalido
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+d = int(sys.stdin.readline())
+nombres = {1: "lunes", 2: "martes", 3: "miercoles", 4: "jueves",
+           5: "viernes", 6: "sabado", 7: "domingo"}
+print(f"dia={nombres.get(d, 'invalido')}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const d = parseInt(readFileSync(0, "utf8").trim(), 10);
+let dia;
+switch (d) {
+  case 1: dia = "lunes"; break;
+  case 2: dia = "martes"; break;
+  case 3: dia = "miercoles"; break;
+  case 4: dia = "jueves"; break;
+  case 5: dia = "viernes"; break;
+  case 6: dia = "sabado"; break;
+  case 7: dia = "domingo"; break;
+  default: dia = "invalido";
+}
+console.log(`dia=${dia}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const d: number = parseInt(readFileSync(0, "utf8").trim(), 10);
+let dia: string;
+switch (d) {
+  case 1: dia = "lunes"; break;
+  case 2: dia = "martes"; break;
+  case 3: dia = "miercoles"; break;
+  case 4: dia = "jueves"; break;
+  case 5: dia = "viernes"; break;
+  case 6: dia = "sabado"; break;
+  case 7: dia = "domingo"; break;
+  default: dia = "invalido";
+}
+console.log(`dia=${dia}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int d = Integer.parseInt(br.readLine().trim());
+        String dia;
+        switch (d) {
+            case 1: dia = "lunes"; break;
+            case 2: dia = "martes"; break;
+            case 3: dia = "miercoles"; break;
+            case 4: dia = "jueves"; break;
+            case 5: dia = "viernes"; break;
+            case 6: dia = "sabado"; break;
+            case 7: dia = "domingo"; break;
+            default: dia = "invalido";
+        }
+        System.out.println("dia=" + dia);
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+int d = int.Parse(Console.In.ReadToEnd().Trim());
+string dia = d switch {
+    1 => "lunes",
+    2 => "martes",
+    3 => "miercoles",
+    4 => "jueves",
+    5 => "viernes",
+    6 => "sabado",
+    7 => "domingo",
+    _ => "invalido",
+};
+Console.WriteLine($"dia={dia}");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	d, _ := strconv.Atoi(strings.TrimSpace(line))
+	var dia string
+	switch d {
+	case 1:
+		dia = "lunes"
+	case 2:
+		dia = "martes"
+	case 3:
+		dia = "miercoles"
+	case 4:
+		dia = "jueves"
+	case 5:
+		dia = "viernes"
+	case 6:
+		dia = "sabado"
+	case 7:
+		dia = "domingo"
+	default:
+		dia = "invalido"
+	}
+	fmt.Printf("dia=%s\n", dia)
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let d: i64 = s.trim().parse().unwrap();
+    let dia = match d {
+        1 => "lunes",
+        2 => "martes",
+        3 => "miercoles",
+        4 => "jueves",
+        5 => "viernes",
+        6 => "sabado",
+        7 => "domingo",
+        _ => "invalido",
+    };
+    println!("dia={dia}");
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    long d;
+    if (scanf("%ld", &d) != 1) return 1;
+    const char *dia;
+    switch (d) {
+        case 1: dia = "lunes"; break;
+        case 2: dia = "martes"; break;
+        case 3: dia = "miercoles"; break;
+        case 4: dia = "jueves"; break;
+        case 5: dia = "viernes"; break;
+        case 6: dia = "sabado"; break;
+        case 7: dia = "domingo"; break;
+        default: dia = "invalido";
+    }
+    printf("dia=%s\n", dia);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL: selección por valor con CASE WHEN.
+WITH dias(d) AS (VALUES (1), (6), (8))
+SELECT printf('dia=%s',
+       CASE d WHEN 1 THEN 'lunes' WHEN 2 THEN 'martes' WHEN 3 THEN 'miercoles'
+              WHEN 4 THEN 'jueves' WHEN 5 THEN 'viernes' WHEN 6 THEN 'sabado'
+              WHEN 7 THEN 'domingo' ELSE 'invalido' END) AS resultado
+FROM dias;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+$d = (int) trim(fgets(STDIN));
+switch ($d) {
+    case 1: $dia = "lunes"; break;
+    case 2: $dia = "martes"; break;
+    case 3: $dia = "miercoles"; break;
+    case 4: $dia = "jueves"; break;
+    case 5: $dia = "viernes"; break;
+    case 6: $dia = "sabado"; break;
+    case 7: $dia = "domingo"; break;
+    default: $dia = "invalido";
+}
+echo "dia=$dia\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -114,7 +315,23 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- O.-J. Dahl, E. W. Dijkstra y C. A. R. Hoare — *Structured Programming* (Academic Press).
+- R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. control de flujo.
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

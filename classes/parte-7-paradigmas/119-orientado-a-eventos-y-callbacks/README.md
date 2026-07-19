@@ -55,22 +55,182 @@ Especificación y verificación en [`casos.json`](casos.json):
 registrar callback ; PARA i de 1 a n: emitir(i) ; ESCRIBIR recolectados
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+recolectados = []
+
+
+def al_evento(i):
+    recolectados.append(i)
+
+
+n = int(sys.stdin.readline())
+for i in range(1, n + 1):
+    al_evento(i)
+print("eventos=" + "-".join(str(x) for x in recolectados))
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const recolectados = [];
+const alEvento = (i) => recolectados.push(i);
+
+const n = parseInt(readFileSync(0, "utf8").trim(), 10);
+for (let i = 1; i <= n; i++) alEvento(i);
+console.log(`eventos=${recolectados.join("-")}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const recolectados: number[] = [];
+const alEvento = (i: number): void => {
+  recolectados.push(i);
+};
+
+const n: number = parseInt(readFileSync(0, "utf8").trim(), 10);
+for (let i = 1; i <= n; i++) alEvento(i);
+console.log(`eventos=${recolectados.join("-")}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.IntConsumer;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
+        List<Integer> recolectados = new ArrayList<>();
+        IntConsumer alEvento = recolectados::add;
+        for (int i = 1; i <= n; i++) alEvento.accept(i);
+        System.out.println("eventos=" + recolectados.stream().map(String::valueOf).collect(Collectors.joining("-")));
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+using System.Collections.Generic;
+
+int n = int.Parse(Console.In.ReadToEnd().Trim());
+var recolectados = new List<int>();
+Action<int> alEvento = i => recolectados.Add(i);
+for (int i = 1; i <= n; i++) alEvento(i);
+Console.WriteLine($"eventos={string.Join("-", recolectados)}");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	n, _ := strconv.Atoi(strings.TrimSpace(line))
+	var recolectados []string
+	alEvento := func(i int) {
+		recolectados = append(recolectados, strconv.Itoa(i))
+	}
+	for i := 1; i <= n; i++ {
+		alEvento(i)
+	}
+	fmt.Printf("eventos=%s\n", strings.Join(recolectados, "-"))
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn al_evento(recolectados: &mut Vec<String>, i: i64) {
+    recolectados.push(i.to_string());
+}
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let n: i64 = s.trim().parse().unwrap();
+    let mut recolectados: Vec<String> = Vec::new();
+    for i in 1..=n {
+        al_evento(&mut recolectados, i);
+    }
+    println!("eventos={}", recolectados.join("-"));
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    long n;
+    if (scanf("%ld", &n) != 1) return 1;
+    printf("eventos=");
+    for (long i = 1; i <= n; i++) {
+        if (i > 1) printf("-");
+        printf("%ld", i);
+    }
+    printf("\n");
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL no tiene eventos; se genera la secuencia con un CTE (ilustrativo, n=3).
+WITH RECURSIVE e(i) AS (VALUES (1) UNION ALL SELECT i + 1 FROM e WHERE i < 3)
+SELECT 'eventos=' || group_concat(i, '-') AS resultado FROM e;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+$recolectados = [];
+$alEvento = function ($i) use (&$recolectados) {
+    $recolectados[] = $i;
+};
+
+$n = (int) trim(fgets(STDIN));
+for ($i = 1; $i <= $n; $i++) {
+    $alEvento($i);
+}
+echo "eventos=" . implode("-", $recolectados) . "\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -111,7 +271,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press).
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press).
+- R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

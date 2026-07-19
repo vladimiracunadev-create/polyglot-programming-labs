@@ -58,22 +58,176 @@ FUNCION divmod(a,b): DEVOLVER (a/b, a%b)
 LEER a,b ; (q,r) <- divmod(a,b) ; ESCRIBIR q, r
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+
+def divmod2(a, b):
+    return a // b, a % b
+
+
+a, b = map(int, sys.stdin.readline().split())
+q, r = divmod2(a, b)
+print(f"cociente={q} resto={r}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+function divmod(a, b) {
+  return [Math.trunc(a / b), a % b];
+}
+
+const [a, b] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
+const [q, r] = divmod(a, b);
+console.log(`cociente=${q} resto=${r}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+function divmod(a: number, b: number): [number, number] {
+  return [Math.trunc(a / b), a % b];
+}
+
+const [a, b]: number[] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
+const [q, r]: [number, number] = divmod(a, b);
+console.log(`cociente=${q} resto=${r}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    // Java devuelve un objeto (record) para varios valores.
+    record DivRes(int cociente, int resto) {}
+
+    static DivRes divmod(int a, int b) {
+        return new DivRes(a / b, a % b);
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] p = br.readLine().trim().split("\\s+");
+        DivRes d = divmod(Integer.parseInt(p[0]), Integer.parseInt(p[1]));
+        System.out.println("cociente=" + d.cociente() + " resto=" + d.resto());
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+(int, int) Divmod(int a, int b) => (a / b, a % b);
+
+string[] p = Console.In.ReadToEnd()
+    .Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+var (q, r) = Divmod(int.Parse(p[0]), int.Parse(p[1]));
+Console.WriteLine($"cociente={q} resto={r}");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func divmod(a, b int) (int, int) {
+	return a / b, a % b
+}
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	f := strings.Fields(line)
+	a, _ := strconv.Atoi(f[0])
+	b, _ := strconv.Atoi(f[1])
+	q, r := divmod(a, b)
+	fmt.Printf("cociente=%d resto=%d\n", q, r)
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn divmod(a: i64, b: i64) -> (i64, i64) {
+    (a / b, a % b)
+}
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let v: Vec<i64> = s.split_whitespace().map(|x| x.parse().unwrap()).collect();
+    let (q, r) = divmod(v[0], v[1]);
+    println!("cociente={q} resto={r}");
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+/* C devuelve un valor; el segundo va por puntero. */
+long divmod(long a, long b, long *resto) {
+    *resto = a % b;
+    return a / b;
+}
+
+int main(void) {
+    long a, b, r;
+    if (scanf("%ld %ld", &a, &b) != 2) return 1;
+    long q = divmod(a, b, &r);
+    printf("cociente=%ld resto=%ld\n", q, r);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL: varias columnas por fila son un multi-retorno natural.
+WITH pares(a, b) AS (VALUES (17, 5), (10, 2), (7, 3))
+SELECT printf('cociente=%d resto=%d', a / b, a % b) AS resultado FROM pares;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+function divmod($a, $b) {
+    return [intdiv($a, $b), $a % $b];
+}
+
+[$a, $b] = preg_split('/\s+/', trim(fgets(STDIN)));
+[$q, $r] = divmod((int) $a, (int) $b);
+echo "cociente=$q resto=$r\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -114,7 +268,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press).
+- R. C. Martin — *Clean Code* (Prentice Hall).
+- S. McConnell — *Code Complete* (2ª ed., Microsoft Press).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

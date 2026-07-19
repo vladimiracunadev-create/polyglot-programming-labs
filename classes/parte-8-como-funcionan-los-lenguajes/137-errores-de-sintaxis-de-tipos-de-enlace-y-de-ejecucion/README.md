@@ -56,22 +56,172 @@ Especificación y verificación en [`casos.json`](casos.json):
 LEER codigo ; SEGUN codigo: 1..4 -> nombre del error
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+codigo = int(sys.stdin.readline())
+nombres = {1: "sintaxis", 2: "tipos", 3: "enlace", 4: "ejecucion"}
+print(f"error={nombres.get(codigo, 'desconocido')}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const codigo = parseInt(readFileSync(0, "utf8").trim(), 10);
+const nombres = { 1: "sintaxis", 2: "tipos", 3: "enlace", 4: "ejecucion" };
+console.log(`error=${nombres[codigo] ?? "desconocido"}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const codigo: number = parseInt(readFileSync(0, "utf8").trim(), 10);
+const nombres: Record<number, string> = { 1: "sintaxis", 2: "tipos", 3: "enlace", 4: "ejecucion" };
+console.log(`error=${nombres[codigo] ?? "desconocido"}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int codigo = Integer.parseInt(br.readLine().trim());
+        String e;
+        switch (codigo) {
+            case 1: e = "sintaxis"; break;
+            case 2: e = "tipos"; break;
+            case 3: e = "enlace"; break;
+            case 4: e = "ejecucion"; break;
+            default: e = "desconocido";
+        }
+        System.out.println("error=" + e);
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+int codigo = int.Parse(Console.In.ReadToEnd().Trim());
+string e = codigo switch {
+    1 => "sintaxis",
+    2 => "tipos",
+    3 => "enlace",
+    4 => "ejecucion",
+    _ => "desconocido",
+};
+Console.WriteLine($"error={e}");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	codigo, _ := strconv.Atoi(strings.TrimSpace(line))
+	var e string
+	switch codigo {
+	case 1:
+		e = "sintaxis"
+	case 2:
+		e = "tipos"
+	case 3:
+		e = "enlace"
+	case 4:
+		e = "ejecucion"
+	default:
+		e = "desconocido"
+	}
+	fmt.Printf("error=%s\n", e)
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let codigo: i64 = s.trim().parse().unwrap();
+    let e = match codigo {
+        1 => "sintaxis",
+        2 => "tipos",
+        3 => "enlace",
+        4 => "ejecucion",
+        _ => "desconocido",
+    };
+    println!("error={e}");
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    int codigo;
+    if (scanf("%d", &codigo) != 1) return 1;
+    const char *e;
+    switch (codigo) {
+        case 1: e = "sintaxis"; break;
+        case 2: e = "tipos"; break;
+        case 3: e = "enlace"; break;
+        case 4: e = "ejecucion"; break;
+        default: e = "desconocido";
+    }
+    printf("error=%s\n", e);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL: selección por código con CASE.
+WITH c(codigo) AS (VALUES (1))
+SELECT printf('error=%s', CASE codigo WHEN 1 THEN 'sintaxis' WHEN 2 THEN 'tipos' WHEN 3 THEN 'enlace' WHEN 4 THEN 'ejecucion' ELSE 'desconocido' END) AS resultado
+FROM c;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+$codigo = (int) trim(fgets(STDIN));
+$nombres = [1 => "sintaxis", 2 => "tipos", 3 => "enlace", 4 => "ejecucion"];
+echo "error=" . ($nombres[$codigo] ?? "desconocido") . "\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -112,7 +262,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- R. Nystrom — *Crafting Interpreters* (Genever Benning) — [gratis online](https://craftinginterpreters.com/).
+- A. Aho, M. Lam, R. Sethi y J. Ullman — *Compilers: Principles, Techniques, and Tools* (2ª ed., Pearson; «Dragon Book»).
+- R. Bryant y D. O'Hallaron — *Computer Systems: A Programmer's Perspective* (3ª ed., Pearson).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

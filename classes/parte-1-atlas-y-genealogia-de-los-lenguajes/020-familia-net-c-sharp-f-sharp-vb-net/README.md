@@ -63,7 +63,10 @@ F# es a .NET lo que Kotlin/Clojure son a la JVM: otro paradigma sobre el mismo r
 
 ## 🔗 Referencias
 
-- Documentación de referencia de cada lenguaje del núcleo.
+- R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson).
+- M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann).
+- B. A. Tate — *Seven Languages in Seven Weeks* (Pragmatic Bookshelf).
+- P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press).
 
 ---
 

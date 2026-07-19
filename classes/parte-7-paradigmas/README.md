@@ -6,6 +6,12 @@
 
 Las grandes formas de estructurar una solución: imperativo, objetos, funcional, declarativo, lógico, eventos y concurrencia.
 
+**Fuentes de referencia de esta parte:**
+
+- P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press).
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press).
+- R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson).
+
 ---
 
 ## 📚 Clases de esta parte

@@ -55,22 +55,174 @@ Especificación y verificación en [`casos.json`](casos.json):
 PARA cada token: SI número, apilar; SI operador, desapilar 2, aplicar, apilar
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+a, b, op = sys.stdin.readline().split()
+pila = [int(a), int(b)]
+y = pila.pop()
+x = pila.pop()
+r = x + y if op == "+" else x - y if op == "-" else x * y
+print(f"resultado={r}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const [a, b, op] = readFileSync(0, "utf8").trim().split(/\s+/);
+const pila = [Number(a), Number(b)];
+const y = pila.pop(), x = pila.pop();
+const r = op === "+" ? x + y : op === "-" ? x - y : x * y;
+console.log(`resultado=${r}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const [a, b, op] = readFileSync(0, "utf8").trim().split(/\s+/);
+const pila: number[] = [Number(a), Number(b)];
+const y = pila.pop()!, x = pila.pop()!;
+const r = op === "+" ? x + y : op === "-" ? x - y : x * y;
+console.log(`resultado=${r}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] t = br.readLine().trim().split("\\s+");
+        Deque<Long> pila = new ArrayDeque<>();
+        pila.push(Long.parseLong(t[0]));
+        pila.push(Long.parseLong(t[1]));
+        long y = pila.pop(), x = pila.pop();
+        long r = t[2].equals("+") ? x + y : t[2].equals("-") ? x - y : x * y;
+        System.out.println("resultado=" + r);
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+using System.Collections.Generic;
+
+string[] t = Console.In.ReadToEnd()
+    .Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+var pila = new Stack<long>();
+pila.Push(long.Parse(t[0]));
+pila.Push(long.Parse(t[1]));
+long y = pila.Pop(), x = pila.Pop();
+long r = t[2] switch { "+" => x + y, "-" => x - y, _ => x * y };
+Console.WriteLine($"resultado={r}");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	t := strings.Fields(line)
+	x, _ := strconv.Atoi(t[0])
+	y, _ := strconv.Atoi(t[1])
+	var r int
+	switch t[2] {
+	case "+":
+		r = x + y
+	case "-":
+		r = x - y
+	default:
+		r = x * y
+	}
+	fmt.Printf("resultado=%d\n", r)
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let t: Vec<&str> = s.split_whitespace().collect();
+    let mut pila: Vec<i64> = vec![t[0].parse().unwrap(), t[1].parse().unwrap()];
+    let y = pila.pop().unwrap();
+    let x = pila.pop().unwrap();
+    let r = match t[2] {
+        "+" => x + y,
+        "-" => x - y,
+        _ => x * y,
+    };
+    println!("resultado={r}");
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    long x, y;
+    char op;
+    if (scanf("%ld %ld %c", &x, &y, &op) != 3) return 1;
+    long r = op == '+' ? x + y : op == '-' ? x - y : x * y;
+    printf("resultado=%ld\n", r);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL: sin pila explícita; evalúa la expresión.
+WITH e(x, y, op) AS (VALUES (3, 4, '+'))
+SELECT printf('resultado=%d', CASE op WHEN '+' THEN x + y WHEN '-' THEN x - y ELSE x * y END) AS resultado
+FROM e;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+[$a, $b, $op] = preg_split('/\s+/', trim(fgets(STDIN)));
+$pila = [(int) $a, (int) $b];
+$y = array_pop($pila);
+$x = array_pop($pila);
+$r = $op === "+" ? $x + $y : ($op === "-" ? $x - $y : $x * $y);
+echo "resultado=$r\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -111,7 +263,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- R. Nystrom — *Crafting Interpreters* (Genever Benning) — [gratis online](https://craftinginterpreters.com/).
+- A. Aho, M. Lam, R. Sethi y J. Ullman — *Compilers: Principles, Techniques, and Tools* (2ª ed., Pearson; «Dragon Book»).
+- R. Bryant y D. O'Hallaron — *Computer Systems: A Programmer's Perspective* (3ª ed., Pearson).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

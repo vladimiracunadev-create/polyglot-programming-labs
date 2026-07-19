@@ -55,22 +55,192 @@ Especificación y verificación en [`casos.json`](casos.json):
 PARA CADA número: enviar mensaje al actor ; el actor suma a su estado
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+
+class Acumulador:  # actor con estado propio
+    def __init__(self):
+        self.total = 0
+
+    def recibir(self, mensaje):
+        self.total += mensaje
+
+
+nums = [int(x) for x in sys.stdin.read().split()]
+actor = Acumulador()
+for m in nums:
+    actor.recibir(m)
+print(f"total={actor.total}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const actor = { total: 0, recibir(m) { this.total += m; } };
+const nums = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
+for (const m of nums) actor.recibir(m);
+console.log(`total=${actor.total}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const actor = { total: 0, recibir(m: number) { this.total += m; } };
+const nums: number[] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
+for (const m of nums) actor.recibir(m);
+console.log(`total=${actor.total}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    static class Acumulador {
+        long total = 0;
+        void recibir(int m) { total += m; }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] p = br.readLine().trim().split("\\s+");
+        Acumulador actor = new Acumulador();
+        for (String s : p) actor.recibir(Integer.parseInt(s));
+        System.out.println("total=" + actor.total);
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+var actor = new Acumulador();
+foreach (string s in Console.In.ReadToEnd()
+    .Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries))
+    actor.Recibir(int.Parse(s));
+Console.WriteLine($"total={actor.Total}");
+
+class Acumulador {
+    public long Total { get; private set; }
+    public void Recibir(int m) => Total += m;
+}
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	buzon := make(chan int, 64)
+	done := make(chan int64)
+	go func() { // actor: acumula los mensajes de su buzón
+		var total int64
+		for m := range buzon {
+			total += int64(m)
+		}
+		done <- total
+	}()
+	for _, s := range strings.Fields(line) {
+		n, _ := strconv.Atoi(s)
+		buzon <- n
+	}
+	close(buzon)
+	fmt.Printf("total=%d\n", <-done)
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+struct Acumulador {
+    total: i64,
+}
+
+impl Acumulador {
+    fn recibir(&mut self, mensaje: i64) {
+        self.total += mensaje;
+    }
+}
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let mut actor = Acumulador { total: 0 };
+    for x in s.split_whitespace() {
+        actor.recibir(x.parse().unwrap());
+    }
+    println!("total={}", actor.total);
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    long total = 0, m;
+    while (scanf("%ld", &m) == 1) {
+        total += m; /* el 'actor' acumula cada mensaje */
+    }
+    printf("total=%ld\n", total);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL agrega sin actores; SUM sobre las filas.
+WITH nums(x) AS (VALUES (1), (2), (3))
+SELECT printf('total=%d', sum(x)) AS resultado FROM nums;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+class Acumulador {
+    public int $total = 0;
+    public function recibir($m) { $this->total += $m; }
+}
+
+$nums = array_map('intval', preg_split('/\s+/', trim(fgets(STDIN))));
+$actor = new Acumulador();
+foreach ($nums as $m) {
+    $actor->recibir($m);
+}
+echo "total={$actor->total}\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -111,7 +281,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- R. Nystrom — *Crafting Interpreters* (Genever Benning) — [gratis online](https://craftinginterpreters.com/).
+- A. Aho, M. Lam, R. Sethi y J. Ullman — *Compilers: Principles, Techniques, and Tools* (2ª ed., Pearson; «Dragon Book»).
+- R. Bryant y D. O'Hallaron — *Computer Systems: A Programmer's Perspective* (3ª ed., Pearson).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

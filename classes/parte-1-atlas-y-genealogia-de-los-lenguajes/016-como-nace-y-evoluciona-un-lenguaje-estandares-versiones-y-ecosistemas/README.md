@@ -67,7 +67,10 @@ Averigua la última versión estable de dos lenguajes del núcleo y una feature 
 
 ## 🔗 Referencias
 
-- Documentación de referencia de cada lenguaje del núcleo.
+- R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson).
+- M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann).
+- B. A. Tate — *Seven Languages in Seven Weeks* (Pragmatic Bookshelf).
+- P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press).
 
 ---
 

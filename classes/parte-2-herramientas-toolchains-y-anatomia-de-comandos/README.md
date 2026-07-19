@@ -6,6 +6,12 @@
 
 Del código fuente al programa que corre: instalar, ejecutar, compilar, empaquetar y probar en cada lenguaje, con el esquema completo de cada comando.
 
+**Fuentes de referencia de esta parte:**
+
+- W. Shotts — *The Linux Command Line* (2ª ed., No Starch Press) — [gratis online](https://linuxcommand.org/tlcl.php).
+- B. W. Kernighan y R. Pike — *The Unix Programming Environment* (Prentice Hall).
+- A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley).
+
 ---
 
 ## 📚 Clases de esta parte

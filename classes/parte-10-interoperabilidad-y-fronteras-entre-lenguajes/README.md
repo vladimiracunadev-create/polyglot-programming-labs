@@ -6,6 +6,12 @@
 
 Por qué los sistemas reales son políglotas y cómo comunican sus piezas: FFI, ABI, serialización, APIs y WebAssembly.
 
+**Fuentes de referencia de esta parte:**
+
+- M. Kleppmann — *Designing Data-Intensive Applications* (O'Reilly).
+- S. Newman — *Building Microservices* (2ª ed., O'Reilly).
+- A. Tanenbaum y M. van Steen — *Distributed Systems* (3ª ed.).
+
 ---
 
 ## 📚 Clases de esta parte

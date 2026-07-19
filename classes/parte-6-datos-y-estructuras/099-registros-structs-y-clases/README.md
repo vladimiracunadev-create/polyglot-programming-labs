@@ -55,22 +55,173 @@ Especificación y verificación en [`casos.json`](casos.json):
 LEER nombre, edad ; crear Persona ; ESCRIBIR formateado
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+from dataclasses import dataclass
+
+
+@dataclass
+class Persona:
+    nombre: str
+    edad: int
+
+
+t = sys.stdin.readline().split()
+p = Persona(t[0], int(t[1]))
+print(f"Persona(nombre={p.nombre}, edad={p.edad})")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const t = readFileSync(0, "utf8").trim().split(/\s+/);
+const persona = { nombre: t[0], edad: parseInt(t[1], 10) };
+console.log(`Persona(nombre=${persona.nombre}, edad=${persona.edad})`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+interface Persona {
+  nombre: string;
+  edad: number;
+}
+
+const t: string[] = readFileSync(0, "utf8").trim().split(/\s+/);
+const p: Persona = { nombre: t[0], edad: parseInt(t[1], 10) };
+console.log(`Persona(nombre=${p.nombre}, edad=${p.edad})`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    record Persona(String nombre, int edad) {}
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] t = br.readLine().trim().split("\\s+");
+        Persona p = new Persona(t[0], Integer.parseInt(t[1]));
+        System.out.println("Persona(nombre=" + p.nombre() + ", edad=" + p.edad() + ")");
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+string[] t = Console.In.ReadToEnd()
+    .Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+var p = new Persona(t[0], int.Parse(t[1]));
+Console.WriteLine($"Persona(nombre={p.Nombre}, edad={p.Edad})");
+
+record Persona(string Nombre, int Edad);
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+type Persona struct {
+	Nombre string
+	Edad   int
+}
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	t := strings.Fields(line)
+	edad, _ := strconv.Atoi(t[1])
+	p := Persona{Nombre: t[0], Edad: edad}
+	fmt.Printf("Persona(nombre=%s, edad=%d)\n", p.Nombre, p.Edad)
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+struct Persona {
+    nombre: String,
+    edad: i64,
+}
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let t: Vec<&str> = s.split_whitespace().collect();
+    let p = Persona {
+        nombre: t[0].to_string(),
+        edad: t[1].parse().unwrap(),
+    };
+    println!("Persona(nombre={}, edad={})", p.nombre, p.edad);
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+struct Persona {
+    char nombre[64];
+    long edad;
+};
+
+int main(void) {
+    struct Persona p;
+    if (scanf("%63s %ld", p.nombre, &p.edad) != 2) return 1;
+    printf("Persona(nombre=%s, edad=%ld)\n", p.nombre, p.edad);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL: una fila de una tabla es un registro.
+WITH personas(nombre, edad) AS (VALUES ('Ada', 36))
+SELECT printf('Persona(nombre=%s, edad=%d)', nombre, edad) AS resultado FROM personas;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+class Persona {
+    public function __construct(public string $nombre, public int $edad) {}
+}
+
+$t = preg_split('/\s+/', trim(fgets(STDIN)));
+$p = new Persona($t[0], (int) $t[1]);
+echo "Persona(nombre={$p->nombre}, edad={$p->edad})\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -111,7 +262,23 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- T. Cormen, C. Leiserson, R. Rivest y C. Stein — *Introduction to Algorithms* (4ª ed., MIT Press).
+- R. Sedgewick y K. Wayne — *Algorithms* (4ª ed., Addison-Wesley).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

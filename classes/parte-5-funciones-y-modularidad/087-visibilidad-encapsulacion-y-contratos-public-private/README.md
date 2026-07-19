@@ -60,22 +60,252 @@ cuenta.depositar(n) ; cuenta.depositar(n)
 ESCRIBIR "saldo=" cuenta.saldo()
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+
+class Cuenta:
+    def __init__(self):
+        self._saldo = 0  # privado por convención
+
+    def depositar(self, monto):
+        self._saldo += monto
+
+    def saldo(self):
+        return self._saldo
+
+
+n = int(sys.stdin.readline())
+c = Cuenta()
+c.depositar(n)
+c.depositar(n)
+print(f"saldo={c.saldo()}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+class Cuenta {
+  #saldo = 0; // campo privado real
+  depositar(monto) {
+    this.#saldo += monto;
+  }
+  saldo() {
+    return this.#saldo;
+  }
+}
+
+const n = parseInt(readFileSync(0, "utf8").trim(), 10);
+const c = new Cuenta();
+c.depositar(n);
+c.depositar(n);
+console.log(`saldo=${c.saldo()}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+class Cuenta {
+  private saldoInterno = 0;
+  depositar(monto: number): void {
+    this.saldoInterno += monto;
+  }
+  saldo(): number {
+    return this.saldoInterno;
+  }
+}
+
+const n: number = parseInt(readFileSync(0, "utf8").trim(), 10);
+const c = new Cuenta();
+c.depositar(n);
+c.depositar(n);
+console.log(`saldo=${c.saldo()}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    static class Cuenta {
+        private long saldo = 0;
+
+        void depositar(long monto) {
+            saldo += monto;
+        }
+
+        long saldo() {
+            return saldo;
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        long n = Long.parseLong(br.readLine().trim());
+        Cuenta c = new Cuenta();
+        c.depositar(n);
+        c.depositar(n);
+        System.out.println("saldo=" + c.saldo());
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+// Las sentencias top-level van antes de la declaración del tipo.
+long n = long.Parse(Console.In.ReadToEnd().Trim());
+var c = new Cuenta();
+c.Depositar(n);
+c.Depositar(n);
+Console.WriteLine($"saldo={c.Saldo()}");
+
+class Cuenta {
+    private long saldo = 0;
+    public void Depositar(long monto) => saldo += monto;
+    public long Saldo() => saldo;
+}
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+// saldo en minúscula: privado del paquete.
+type cuenta struct {
+	saldo int64
+}
+
+func (c *cuenta) depositar(monto int64) {
+	c.saldo += monto
+}
+
+func (c *cuenta) obtenerSaldo() int64 {
+	return c.saldo
+}
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	n, _ := strconv.ParseInt(strings.TrimSpace(line), 10, 64)
+	c := &cuenta{}
+	c.depositar(n)
+	c.depositar(n)
+	fmt.Printf("saldo=%d\n", c.obtenerSaldo())
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+struct Cuenta {
+    saldo: i64, // privado fuera del módulo
+}
+
+impl Cuenta {
+    fn nueva() -> Self {
+        Cuenta { saldo: 0 }
+    }
+    fn depositar(&mut self, monto: i64) {
+        self.saldo += monto;
+    }
+    fn saldo(&self) -> i64 {
+        self.saldo
+    }
+}
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let n: i64 = s.trim().parse().unwrap();
+    let mut c = Cuenta::nueva();
+    c.depositar(n);
+    c.depositar(n);
+    println!("saldo={}", c.saldo());
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+/* C no tiene 'private'; se usa una struct y funciones por convención. */
+struct Cuenta {
+    long saldo;
+};
+
+void depositar(struct Cuenta *c, long monto) {
+    c->saldo += monto;
+}
+
+int main(void) {
+    long n;
+    if (scanf("%ld", &n) != 1) return 1;
+    struct Cuenta c = {0};
+    depositar(&c, n);
+    depositar(&c, n);
+    printf("saldo=%ld\n", c.saldo);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL encapsula con vistas/permisos; aquí el cálculo va en la consulta.
+WITH montos(n) AS (VALUES (50), (0), (30))
+SELECT printf('saldo=%d', n * 2) AS resultado FROM montos;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+class Cuenta {
+    private $saldo = 0;
+
+    public function depositar($monto) {
+        $this->saldo += $monto;
+    }
+
+    public function saldo() {
+        return $this->saldo;
+    }
+}
+
+$n = (int) trim(fgets(STDIN));
+$c = new Cuenta();
+$c->depositar($n);
+$c->depositar($n);
+echo "saldo=" . $c->saldo() . "\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -116,7 +346,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press).
+- R. C. Martin — *Clean Code* (Prentice Hall).
+- S. McConnell — *Code Complete* (2ª ed., Microsoft Press).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

@@ -58,22 +58,122 @@ LEER c
 ESCRIBIR "char=" c " codigo=" CODIGO(c)
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+c = sys.stdin.readline().rstrip("\n")[0]
+print(f"char={c} codigo={ord(c)}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const data = readFileSync(0, "utf8");
+const c = data[0];
+console.log(`char=${c} codigo=${data.charCodeAt(0)}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const data: string = readFileSync(0, "utf8");
+const c: string = data[0];
+console.log(`char=${c} codigo=${data.charCodeAt(0)}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.IOException;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        int r = System.in.read();
+        char c = (char) r;
+        System.out.println("char=" + c + " codigo=" + r);
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+int r = Console.In.Read();
+char c = (char) r;
+Console.WriteLine($"char={c} codigo={r}");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
+
+func main() {
+	b, _ := bufio.NewReader(os.Stdin).ReadByte()
+	fmt.Printf("char=%c codigo=%d\n", b, b)
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let c = s.chars().next().unwrap();
+    println!("char={} codigo={}", c, c as u32);
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    int c = getchar();
+    printf("char=%c codigo=%d\n", c, c);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL: unicode(c) devuelve el punto de código de un carácter.
+WITH chars(c) AS (VALUES ('A'), ('z'), ('0'))
+SELECT printf('char=%s codigo=%d', c, unicode(c)) AS resultado
+FROM chars;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+$c = fgetc(STDIN);
+printf("char=%s codigo=%d\n", $c, ord($c));
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -114,7 +214,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. tipos y variables.
+- B. C. Pierce — *Types and Programming Languages* (MIT Press).
+- M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

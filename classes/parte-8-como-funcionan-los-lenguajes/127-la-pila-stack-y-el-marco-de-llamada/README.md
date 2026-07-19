@@ -55,22 +55,168 @@ Especificación y verificación en [`casos.json`](casos.json):
 sumar(n) = n + sumar(n-1) ; sumar(0) = 0 ; profundidad = n
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+sys.setrecursionlimit(5000)
+
+
+def sumar(n):
+    return 0 if n == 0 else n + sumar(n - 1)
+
+
+n = int(sys.stdin.readline())
+print(f"suma={sumar(n)} profundidad={n}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+function sumar(n) {
+  return n === 0 ? 0 : n + sumar(n - 1);
+}
+
+const n = parseInt(readFileSync(0, "utf8").trim(), 10);
+console.log(`suma=${sumar(n)} profundidad=${n}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+function sumar(n: number): number {
+  return n === 0 ? 0 : n + sumar(n - 1);
+}
+
+const n: number = parseInt(readFileSync(0, "utf8").trim(), 10);
+console.log(`suma=${sumar(n)} profundidad=${n}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    static long sumar(int n) {
+        return n == 0 ? 0 : n + sumar(n - 1);
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
+        System.out.println("suma=" + sumar(n) + " profundidad=" + n);
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+
+long Sumar(int n) => n == 0 ? 0 : n + Sumar(n - 1);
+
+int n = int.Parse(Console.In.ReadToEnd().Trim());
+Console.WriteLine($"suma={Sumar(n)} profundidad={n}");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func sumar(n int) int64 {
+	if n == 0 {
+		return 0
+	}
+	return int64(n) + sumar(n-1)
+}
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	n, _ := strconv.Atoi(strings.TrimSpace(line))
+	fmt.Printf("suma=%d profundidad=%d\n", sumar(n), n)
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn sumar(n: i64) -> i64 {
+    if n == 0 {
+        0
+    } else {
+        n + sumar(n - 1)
+    }
+}
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let n: i64 = s.trim().parse().unwrap();
+    println!("suma={} profundidad={}", sumar(n), n);
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+long sumar(long n) {
+    return n == 0 ? 0 : n + sumar(n - 1);
+}
+
+int main(void) {
+    long n;
+    if (scanf("%ld", &n) != 1) return 1;
+    printf("suma=%ld profundidad=%ld\n", sumar(n), n);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL: recursión con CTE (ilustrativo, n=5).
+WITH RECURSIVE r(i) AS (VALUES (1) UNION ALL SELECT i + 1 FROM r WHERE i < 5)
+SELECT printf('suma=%d profundidad=%d', sum(i), max(i)) AS resultado FROM r;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+function sumar($n) {
+    return $n === 0 ? 0 : $n + sumar($n - 1);
+}
+
+$n = (int) trim(fgets(STDIN));
+echo "suma=" . sumar($n) . " profundidad=$n\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -111,7 +257,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- R. Nystrom — *Crafting Interpreters* (Genever Benning) — [gratis online](https://craftinginterpreters.com/).
+- A. Aho, M. Lam, R. Sethi y J. Ullman — *Compilers: Principles, Techniques, and Tools* (2ª ed., Pearson; «Dragon Book»).
+- R. Bryant y D. O'Hallaron — *Computer Systems: A Programmer's Perspective* (3ª ed., Pearson).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

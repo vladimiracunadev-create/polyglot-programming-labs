@@ -58,22 +58,147 @@ LEER n
 ESCRIBIR "dec=" n " hex=" BASE(n,16) " oct=" BASE(n,8) " bin=" BASE(n,2)
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+n = int(sys.stdin.readline())
+print(f"dec={n} hex={n:x} oct={n:o} bin={n:b}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const n = parseInt(readFileSync(0, "utf8").trim(), 10);
+console.log(`dec=${n} hex=${n.toString(16)} oct=${n.toString(8)} bin=${n.toString(2)}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const n: number = parseInt(readFileSync(0, "utf8").trim(), 10);
+console.log(`dec=${n} hex=${n.toString(16)} oct=${n.toString(8)} bin=${n.toString(2)}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
+        System.out.printf("dec=%d hex=%s oct=%s bin=%s%n", n,
+                Integer.toHexString(n), Integer.toOctalString(n), Integer.toBinaryString(n));
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+using System.Globalization;
+
+int n = int.Parse(Console.In.ReadToEnd().Trim(), CultureInfo.InvariantCulture);
+Console.WriteLine($"dec={n} hex={Convert.ToString(n, 16)} oct={Convert.ToString(n, 8)} bin={Convert.ToString(n, 2)}");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	n, _ := strconv.Atoi(strings.TrimSpace(line))
+	fmt.Printf("dec=%d hex=%x oct=%o bin=%b\n", n, n, n, n)
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let n: u64 = s.trim().parse().unwrap();
+    println!("dec={n} hex={:x} oct={:o} bin={:b}", n, n, n);
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    unsigned long n;
+    if (scanf("%lu", &n) != 1) return 1;
+
+    /* C no tiene especificador para binario: se construye a mano. */
+    char bin[65];
+    int i = 0;
+    if (n == 0) {
+        bin[i++] = '0';
+    } else {
+        char tmp[65];
+        int j = 0;
+        unsigned long t = n;
+        while (t > 0) {
+            tmp[j++] = (char) ('0' + (t & 1UL));
+            t >>= 1;
+        }
+        while (j > 0) {
+            bin[i++] = tmp[--j];
+        }
+    }
+    bin[i] = '\0';
+
+    printf("dec=%lu hex=%lx oct=%lo bin=%s\n", n, n, n, bin);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL (sqlite) solo formatea hexadecimal con %x; octal y binario no son nativos.
+WITH nums(n) AS (VALUES (255), (10), (1))
+SELECT printf('dec=%d hex=%x', n, n) AS resultado
+FROM nums;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+$n = (int) trim(fgets(STDIN));
+printf("dec=%d hex=%s oct=%s bin=%s\n", $n, dechex($n), decoct($n), decbin($n));
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -114,7 +239,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. tipos y variables.
+- B. C. Pierce — *Types and Programming Languages* (MIT Press).
+- M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

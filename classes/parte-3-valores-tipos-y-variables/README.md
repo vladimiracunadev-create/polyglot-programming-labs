@@ -6,6 +6,12 @@
 
 La materia prima de todo programa: cómo cada lenguaje nombra, tipa, convierte y muta los valores.
 
+**Fuentes de referencia de esta parte:**
+
+- R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. tipos y variables.
+- B. C. Pierce — *Types and Programming Languages* (MIT Press).
+- M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann).
+
 ---
 
 ## 📚 Clases de esta parte

@@ -55,22 +55,140 @@ Especificación y verificación en [`casos.json`](casos.json):
 PARA CADA mensaje de la cola: acumular ; ESCRIBIR suma
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+nums = [int(x) for x in sys.stdin.read().split()]
+recibido = 0
+for m in nums:  # consumidor de la cola
+    recibido += m
+print(f"recibido={recibido}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const nums = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
+let recibido = 0;
+for (const m of nums) recibido += m;
+console.log(`recibido=${recibido}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const nums: number[] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
+let recibido = 0;
+for (const m of nums) recibido += m;
+console.log(`recibido=${recibido}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] p = br.readLine().trim().split("\\s+");
+        long recibido = 0;
+        for (String s : p) recibido += Integer.parseInt(s);
+        System.out.println("recibido=" + recibido);
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+using System.Linq;
+
+long recibido = Console.In.ReadToEnd()
+    .Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
+    .Sum(x => (long) int.Parse(x));
+Console.WriteLine($"recibido={recibido}");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	recibido := 0
+	for _, s := range strings.Fields(line) {
+		n, _ := strconv.Atoi(s)
+		recibido += n
+	}
+	fmt.Printf("recibido=%d\n", recibido)
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let recibido: i64 = s.split_whitespace().map(|x| x.parse::<i64>().unwrap()).sum();
+    println!("recibido={recibido}");
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    long recibido = 0, m;
+    while (scanf("%ld", &m) == 1) recibido += m;
+    printf("recibido=%ld\n", recibido);
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL agrega los mensajes con SUM.
+WITH cola(x) AS (VALUES (1), (2), (3))
+SELECT printf('recibido=%d', sum(x)) AS resultado FROM cola;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+$nums = array_map('intval', preg_split('/\s+/', trim(fgets(STDIN))));
+echo "recibido=" . array_sum($nums) . "\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -111,7 +229,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- M. Kleppmann — *Designing Data-Intensive Applications* (O'Reilly).
+- S. Newman — *Building Microservices* (2ª ed., O'Reilly).
+- A. Tanenbaum y M. van Steen — *Distributed Systems* (3ª ed.).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

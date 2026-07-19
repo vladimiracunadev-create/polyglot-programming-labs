@@ -6,6 +6,12 @@
 
 Nombrar procesos, pasar datos y organizar el código en módulos con contratos claros.
 
+**Fuentes de referencia de esta parte:**
+
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press).
+- R. C. Martin — *Clean Code* (Prentice Hall).
+- S. McConnell — *Code Complete* (2ª ed., Microsoft Press).
+
 ---
 
 ## 📚 Clases de esta parte

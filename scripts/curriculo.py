@@ -20,6 +20,90 @@ FAMILIAS_ATLAS = [
     "concurrente / actor", "sistemas", "array / científica", "históricos",
 ]
 
+# --------------------------------------------------------------------------- #
+# Bibliografía: los libros que sostienen cada parte (columna vertebral del
+# contenido). Cada clase cita las fuentes de su parte + el libro del lenguaje.
+# --------------------------------------------------------------------------- #
+
+BIBLIO = {
+    0: [  # Pensamiento computacional y método
+        "G. Polya — *How to Solve It* (Princeton University Press).",
+        "H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press) — [gratis online](https://mitpress.mit.edu/9780262510875/).",
+        "A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley).",
+        "T. Cormen, C. Leiserson, R. Rivest y C. Stein — *Introduction to Algorithms* (4ª ed., MIT Press).",
+    ],
+    1: [  # Atlas y genealogía de los lenguajes
+        "R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson).",
+        "M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann).",
+        "B. A. Tate — *Seven Languages in Seven Weeks* (Pragmatic Bookshelf).",
+        "P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press).",
+    ],
+    2: [  # Toolchains y comandos
+        "W. Shotts — *The Linux Command Line* (2ª ed., No Starch Press) — [gratis online](https://linuxcommand.org/tlcl.php).",
+        "B. W. Kernighan y R. Pike — *The Unix Programming Environment* (Prentice Hall).",
+        "A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley).",
+    ],
+    3: [  # Valores, tipos y variables
+        "R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. tipos y variables.",
+        "B. C. Pierce — *Types and Programming Languages* (MIT Press).",
+        "M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann).",
+    ],
+    4: [  # Control del programa
+        "O.-J. Dahl, E. W. Dijkstra y C. A. R. Hoare — *Structured Programming* (Academic Press).",
+        "R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. control de flujo.",
+    ],
+    5: [  # Funciones y modularidad
+        "H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press).",
+        "R. C. Martin — *Clean Code* (Prentice Hall).",
+        "S. McConnell — *Code Complete* (2ª ed., Microsoft Press).",
+    ],
+    6: [  # Datos y estructuras
+        "T. Cormen, C. Leiserson, R. Rivest y C. Stein — *Introduction to Algorithms* (4ª ed., MIT Press).",
+        "R. Sedgewick y K. Wayne — *Algorithms* (4ª ed., Addison-Wesley).",
+    ],
+    7: [  # Paradigmas
+        "P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press).",
+        "H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press).",
+        "R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson).",
+    ],
+    8: [  # Cómo funcionan los lenguajes
+        "R. Nystrom — *Crafting Interpreters* (Genever Benning) — [gratis online](https://craftinginterpreters.com/).",
+        "A. Aho, M. Lam, R. Sethi y J. Ullman — *Compilers: Principles, Techniques, and Tools* (2ª ed., Pearson; «Dragon Book»).",
+        "R. Bryant y D. O'Hallaron — *Computer Systems: A Programmer's Perspective* (3ª ed., Pearson).",
+    ],
+    9: [  # Ingeniería de software políglota
+        "S. McConnell — *Code Complete* (2ª ed., Microsoft Press).",
+        "A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley).",
+        "M. Fowler — *Refactoring* (2ª ed., Addison-Wesley).",
+        "E. Gamma, R. Helm, R. Johnson y J. Vlissides — *Design Patterns* (Addison-Wesley; «GoF»).",
+        "K. Beck — *Test-Driven Development: By Example* (Addison-Wesley).",
+    ],
+    10: [  # Interoperabilidad y fronteras
+        "M. Kleppmann — *Designing Data-Intensive Applications* (O'Reilly).",
+        "S. Newman — *Building Microservices* (2ª ed., O'Reilly).",
+        "A. Tanenbaum y M. van Steen — *Distributed Systems* (3ª ed.).",
+    ],
+    11: [  # Proyecto integrador
+        "S. Newman — *Building Microservices* (2ª ed., O'Reilly).",
+        "M. Nygard — *Release It!* (2ª ed., Pragmatic Bookshelf).",
+        "A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley).",
+    ],
+}
+
+# Libro de referencia por lenguaje del núcleo (se cita en las clases de código).
+LIBROS_NUCLEO = {
+    "python": "L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).",
+    "javascript": "M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).",
+    "typescript": "B. Cherny — *Programming TypeScript* (O'Reilly).",
+    "java": "J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).",
+    "csharp": "J. Skeet — *C# in Depth* (4ª ed., Manning).",
+    "go": "A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).",
+    "rust": "S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).",
+    "c": "B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).",
+    "sql": "C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).",
+    "php": "J. Lockhart — *Modern PHP* (O'Reilly).",
+}
+
 
 def slug(texto: str) -> str:
     t = unicodedata.normalize("NFKD", texto).encode("ascii", "ignore").decode().lower()

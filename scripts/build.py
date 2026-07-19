@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from curriculo import PARTES, slug, iter_clases, total_clases, NUCLEO  # noqa: E402
+from curriculo import PARTES, slug, iter_clases, total_clases, NUCLEO, BIBLIO  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 CLASSES = ROOT / "classes"
@@ -117,7 +117,8 @@ def clase_metodo(num, idx, titulo, d):
     practica = f"## ✍️ Práctica\n\n{d['practica']}\n\n" if d.get("practica") else ""
     errores = f"## ⚠️ Errores comunes\n\n{_errores(d['errores'])}\n\n" if d.get("errores") else ""
     faq = f"## ❓ Preguntas frecuentes\n\n{_faq(d['faq'])}\n\n" if d.get("faq") else ""
-    refs = d.get("referencias", ["Documentación de referencia de cada lenguaje del núcleo."])
+    # Fuentes: los libros de la parte + las referencias propias de la clase.
+    refs = list(BIBLIO.get(idx, [])) + list(d.get("referencias", []))
     refs_md = "\n".join(f"- {r}" for r in refs)
 
     return f"""# Clase {num:03d} — {titulo}
@@ -212,6 +213,7 @@ def part_readme(idx, t, sub, ini, fin, count):
         estado = "✅" if n in BUILT else "🚧"
         filas.append(f"| {estado} {n:03d} | [{titulo}]({class_slug(n, titulo)}/README.md) |")
         n += 1
+    libros = "\n".join(f"- {b}" for b in BIBLIO.get(idx, []))
     return f"""# Parte {idx} — {t}
 
 > {prev}[⬅️ Programa](../../README.md) · [📚 Índice](../README.md){nxt}
@@ -219,6 +221,10 @@ def part_readme(idx, t, sub, ini, fin, count):
 **{count} clases** · rango {ini:03d}–{fin:03d}
 
 {sub}
+
+**Fuentes de referencia de esta parte:**
+
+{libros}
 
 ---
 

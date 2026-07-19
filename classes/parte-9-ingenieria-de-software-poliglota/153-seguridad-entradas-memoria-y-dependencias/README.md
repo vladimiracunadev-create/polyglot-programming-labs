@@ -55,22 +55,147 @@ Especificación y verificación en [`casos.json`](casos.json):
 LEER entrada ; seguro <- todos los caracteres alfanuméricos
 ```
 
-## 🌐 Implementaciones idiomáticas
+## 🌐 Implementaciones idiomáticas — el código a la vista
 
-Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`:
+Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-| Lenguaje | Archivo | Cómo ejecutar |
-|---|---|---|
-| Python | `implementaciones/python/main.py` | `python main.py` |
-| JavaScript | `implementaciones/javascript/main.mjs` | `node main.mjs` |
-| TypeScript | `implementaciones/typescript/main.ts` | `pnpm exec tsx main.ts` |
-| Java | `implementaciones/java/Main.java` | `java Main.java` |
-| C# | `implementaciones/csharp/Program.cs` | `dotnet run` |
-| Go | `implementaciones/go/main.go` | `go run main.go` |
-| Rust | `implementaciones/rust/main.rs` | `rustc main.rs -o main && ./main` |
-| C | `implementaciones/c/main.c` | `cc main.c -o main && ./main` |
-| SQL | `implementaciones/sql/main.sql` | `sqlite3 :memory: < main.sql` |
-| PHP | `implementaciones/php/main.php` | `php main.php` |
+### Python · `python main.py`
+
+```python
+import sys
+
+w = sys.stdin.readline().strip()
+seguro = w.isalnum()
+print(f"seguro={'true' if seguro else 'false'}")
+```
+
+### JavaScript · `node main.mjs`
+
+```javascript
+import { readFileSync } from "node:fs";
+
+const w = readFileSync(0, "utf8").trim();
+const seguro = /^[A-Za-z0-9]+$/.test(w);
+console.log(`seguro=${seguro ? "true" : "false"}`);
+```
+
+### TypeScript · `pnpm exec tsx main.ts`
+
+```typescript
+import { readFileSync } from "node:fs";
+
+const w: string = readFileSync(0, "utf8").trim();
+const seguro = /^[A-Za-z0-9]+$/.test(w);
+console.log(`seguro=${seguro ? "true" : "false"}`);
+```
+
+### Java · `java Main.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String w = br.readLine().trim();
+        boolean seguro = w.matches("[A-Za-z0-9]+");
+        System.out.println("seguro=" + (seguro ? "true" : "false"));
+    }
+}
+```
+
+### C# · `dotnet run`
+
+```csharp
+using System;
+using System.Linq;
+
+string w = Console.In.ReadToEnd().Trim();
+bool seguro = w.Length > 0 && w.All(char.IsLetterOrDigit);
+Console.WriteLine($"seguro={(seguro ? "true" : "false")}");
+```
+
+### Go · `go run main.go`
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+	"unicode"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	w := strings.TrimSpace(line)
+	seguro := len(w) > 0
+	for _, c := range w {
+		if !unicode.IsLetter(c) && !unicode.IsDigit(c) {
+			seguro = false
+		}
+	}
+	res := "false"
+	if seguro {
+		res = "true"
+	}
+	fmt.Printf("seguro=%s\n", res)
+}
+```
+
+### Rust · `rustc main.rs -o main && ./main`
+
+```rust
+use std::io::Read;
+
+fn main() {
+    let mut s = String::new();
+    std::io::stdin().read_to_string(&mut s).unwrap();
+    let w = s.trim();
+    let seguro = !w.is_empty() && w.chars().all(|c| c.is_ascii_alphanumeric());
+    println!("seguro={}", if seguro { "true" } else { "false" });
+}
+```
+
+### C · `cc main.c -o main && ./main`
+
+```c
+#include <stdio.h>
+#include <ctype.h>
+
+int main(void) {
+    char w[256];
+    if (scanf("%255s", w) != 1) return 1;
+    int seguro = 1;
+    for (int i = 0; w[i]; i++) {
+        if (!isalnum((unsigned char) w[i])) seguro = 0;
+    }
+    printf("seguro=%s\n", seguro ? "true" : "false");
+    return 0;
+}
+```
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+```sql
+-- SQL: se evita la inyección con consultas parametrizadas; aquí, validación por patrón.
+WITH t(w) AS (VALUES ('abc'))
+SELECT printf('seguro=%s', CASE WHEN w GLOB '*[^A-Za-z0-9]*' THEN 'false' ELSE 'true' END) AS resultado FROM t;
+```
+
+### PHP · `php main.php`
+
+```php
+<?php
+$w = trim(fgets(STDIN));
+$seguro = ctype_alnum($w);
+echo "seguro=" . ($seguro ? "true" : "false") . "\n";
+```
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
@@ -111,7 +236,26 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-- Documentación oficial de cada lenguaje del núcleo.
+**Libros de la parte:**
+
+- S. McConnell — *Code Complete* (2ª ed., Microsoft Press).
+- A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley).
+- M. Fowler — *Refactoring* (2ª ed., Addison-Wesley).
+- E. Gamma, R. Helm, R. Johnson y J. Vlissides — *Design Patterns* (Addison-Wesley; «GoF»).
+- K. Beck — *Test-Driven Development: By Example* (Addison-Wesley).
+
+**Libros de los lenguajes del núcleo:**
+
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- B. Cherny — *Programming TypeScript* (O'Reilly).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly).
 
 ---
 

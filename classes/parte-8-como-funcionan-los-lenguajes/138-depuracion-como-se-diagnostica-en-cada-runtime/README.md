@@ -232,13 +232,23 @@ Detalle en [`reto.md`](reto.md).
 
 ## ⚠️ Errores comunes
 
-- **Depurar cambiando al azar** → causa: no observar el estado → solución: inspeccionar variables en puntos clave
-- **Llenar el código de prints y olvidarlos** → causa: ruido y regresiones → solución: preferir el depurador o quitar los prints al terminar
+- **Cambiar código al azar hasta que el síntoma desaparece** → causa: no hay hipótesis, solo tanteo → solución: formular una hipótesis falsable antes de tocar nada y diseñar la observación que la refute. Un síntoma que desaparece sin que sepas por qué suele estar escondido, no resuelto.
+- **Empezar a depurar sin una reproducción fiable** → causa: perseguir un fallo que aparece a veces → solución: primero, reducir la entrada hasta el caso mínimo que lo provoca de forma consistente. Sin eso no puedes saber si lo arreglaste ni cuándo has terminado.
+- **Leer solo la primera línea del *backtrace*** → causa: el marco superior es donde explotó, no donde está el bug → solución: recorrer la pila hacia abajo hasta el primer marco de **tu** código, y en excepciones encadenadas buscar la causa raíz al final (`Caused by:`).
+- **Depurar código compilado con optimizaciones** → causa: `-O2` funde funciones, reordena líneas y elimina variables, y el depurador salta erráticamente → solución: recompilar con `-Og` o `-O0` y `-g`. Y si el bug **solo** aparece optimizado, sospechar de comportamiento indefinido, no del compilador.
+- **Llenar el código de `print` y olvidarlos** → causa: depuración por impresión sin limpieza → solución: usar el sistema de registro con niveles (`debug`, `info`), de modo que las trazas queden pero se puedan silenciar; y el depurador cuando el estado es complejo.
+- **Usar el depurador para problemas que no le corresponden** → causa: intentar encontrar una fuga de memoria, una carrera o un cuello de botella pausando el programa → solución: cada síntoma tiene su herramienta. Corrupción y carreras, sanitizadores; lentitud, perfilador; consumo, volcado de heap; producción, trazas estructuradas.
+- **Depurar sin control de versiones a mano** → causa: buscar a ciegas cuándo se rompió → solución: `git bisect` localiza el commit culpable en logaritmo del número de commits. Si tienes una prueba que falla, `git bisect run` lo hace solo.
+- **Culpar al compilador, a la biblioteca o al sistema operativo** → causa: agotamiento tras horas sin resultado → solución: en la inmensa mayoría de los casos el bug es tuyo. Vale la pena volver a comprobar las suposiciones más básicas —que el binario que ejecutas es el que compilaste, que el archivo que editas es el que se carga— antes de sospechar de la plataforma.
 
 ## ❓ Preguntas frecuentes
 
-- **¿print o depurador?** El print es rápido; el depurador permite inspeccionar sin recompilar y avanzar paso a paso.
-- **¿Cómo se depura SQL?** Con EXPLAIN (plan de ejecución) y consultas de prueba sobre subconjuntos.
+- **¿`print` o depurador?** Ambos, según el caso. El `print` gana cuando quieres ver una secuencia de valores a lo largo del tiempo o cuando pausar altera el comportamiento (concurrencia, tiempo real). El depurador gana cuando el estado es complejo y no sabes de antemano qué mirar: puedes inspeccionar cualquier cosa sin recompilar, subir por la pila y evaluar expresiones en el contexto del fallo.
+- **¿Qué es un punto de ruptura condicional y por qué importa?** Un punto de ruptura que solo detiene el programa si se cumple una expresión (`break main.c:42 if n > 1000`). Es lo que hace viable depurar un bucle de un millón de iteraciones que falla en la 999.998. Su primo, el *watchpoint*, detiene cuando una dirección de memoria cambia, y es casi la única forma de encontrar quién corrompe un dato.
+- **¿Qué es un heisenbug?** Un fallo que cambia o desaparece al observarlo. Suele deberse a que el acto de medir altera lo que hace el programa: un `print` introduce E/S y sincronización y cambia el entrelazado de los hilos; compilar sin optimizar cambia la disposición de la pila y encubre un desbordamiento de búfer. Su presencia es en sí misma una pista fuerte: apunta a concurrencia o a comportamiento indefinido.
+- **¿Cómo se depura SQL?** Con `EXPLAIN` para ver el plan que eligió el optimizador y `EXPLAIN ANALYZE` para contrastarlo con la ejecución real. La señal más útil es la divergencia entre filas estimadas y filas reales: cuando el planificador se equivoca por órdenes de magnitud, casi siempre son estadísticas desactualizadas o un índice que falta. Para la lógica, descomponer la consulta en CTE y comprobar cada paso por separado.
+- **¿Cómo se depura algo en producción, donde no puedo pausar nada?** Con observabilidad: registro estructurado en formato consultable, identificadores de traza que correlacionen las etapas de una misma petición, métricas y muestreo continuo de perfiles. También hay herramientas de muestreo no intrusivo (`py-spy`, `pprof` por HTTP, `async-profiler`) y, tras un fallo terminal, el análisis *post mortem* de un volcado de núcleo o de heap. La regla es preparar la observabilidad **antes** de necesitarla.
+- **¿Cuál es la mejor inversión de tiempo en depuración?** Aprender `git bisect` y aprender a reducir un caso de prueba. Las dos son bisección, la técnica más rentable que existe, y ninguna depende del lenguaje que uses.
 
 ## 🔗 Referencias
 

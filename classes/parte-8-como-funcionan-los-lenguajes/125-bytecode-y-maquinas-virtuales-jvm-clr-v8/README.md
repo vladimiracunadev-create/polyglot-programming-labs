@@ -1,39 +1,42 @@
 # Clase 125 — Bytecode y máquinas virtuales (JVM, CLR, V8)
 
-> Parte **8 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> Parte **8 — Cómo funcionan los lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
 > ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Entender el **bytecode y las máquinas virtuales**: una VM ejecuta instրucciones simples sobre una pila. La notación polaca inversa (RPN) es exactamente cómo trabaja una VM de pila: apila operandos y aplica operadores.
+Cuando `javac` compila tu clase, no produce código de máquina sino **bytecode**: una lista de instrucciones muy simples para una **máquina virtual (VM)** imaginaria. La JVM, el CLR de .NET y V8 ejecutan ese bytecode, y la mayoría lo hace sobre una *pila de operandos*. Esta clase abre esa caja negra evaluando una expresión en **notación polaca inversa (RPN)** —`3 4 +`— porque RPN *es*, literalmente, cómo piensa una VM de pila: apila los operandos, y cuando llega un operador, los desapila, opera y apila el resultado. El *porqué* es doble. Primero, entender el bytecode explica la portabilidad («compila una vez, corre en cualquier sistema»): el bytecode no depende de la CPU, solo de la VM. Segundo, entender la máquina de pila explica por qué las instrucciones no necesitan nombrar registros —el operando implícito es «el tope de la pila»—, lo que las hace compactas y fáciles de generar. Nystrom construye exactamente esta VM de pila en la Parte III de *Crafting Interpreters*, con sus `OP_CONSTANT`, `OP_ADD` y un puntero de pila.
 
 ## 📚 Resultados de aprendizaje
 
 Al finalizar, podrás:
 
-1. Evaluar RPN con una pila.
-2. Relacionar RPN con las VM de pila.
-3. Explicar qué es el bytecode.
+1. Evaluar una expresión RPN empujando y sacando valores de una pila.
+2. Relacionar la RPN con el ciclo *fetch–decode–execute* de una VM de pila.
+3. Explicar qué es el bytecode y por qué da portabilidad entre sistemas operativos.
+4. Distinguir una máquina de *pila* de una máquina de *registros* y nombrar ejemplos de cada una.
 
 ## 🗺️ Temas
 
 | # | Tema | Por qué importa |
 |---|------|-----------------|
-| 1 | Máquina de pila | Opera sobre una pila de valores |
-| 2 | RPN | Operandos primero, operador después |
-| 3 | Bytecode | Instrucciones simples para la VM |
+| 1 | Máquina de pila | El operando implícito es el tope; instrucciones sin registros |
+| 2 | RPN | El orden operandos-luego-operador imita el bytecode de pila |
+| 3 | Bytecode | Código intermedio portable que la VM interpreta o compila con JIT |
 
 ## 📖 Definiciones y características
 
-- **Bytecode** — código intermedio de instrucciones simples que ejecuta una VM. Clave: portable (JVM, CLR).
-- **Máquina virtual de pila** — VM que opera apilando y desapilando valores. Clave: `push 3, push 4, add`.
-- **RPN** — notación donde el operador va tras los operandos. Clave: `3 4 +` = 7.
+El **bytecode** es un código intermedio: más bajo que el fuente, más alto que el código de máquina. `javac` genera un `.class` lleno de opcodes de un byte (de ahí el nombre) como `iload`, `iadd`, `invokevirtual`. Ese archivo no sabe nada de x86 ni de ARM; solo de la JVM. Esa indirección es la que cumple la promesa de Java, «*write once, run anywhere*»: basta con que exista una JVM para tu plataforma. El CLR de .NET hace lo mismo con su *IL* (*Intermediate Language*), y CPython con sus opcodes en `.pyc`.
+
+Una **máquina virtual de pila** ejecuta ese bytecode manteniendo una pila de operandos. La instrucción `push 3` deja un 3 en la cima; `push 4`, un 4 encima; `add` desapila los dos, los suma y apila el 7. Ninguna instrucción menciona dónde están los datos —siempre operan sobre el tope—, y por eso el bytecode de pila es tan denso y tan sencillo de generar desde un AST: recorres el árbol en postorden y emites una instrucción por nodo. La alternativa, una *máquina de registros* (como Lua 5 o Dalvik de Android), nombra explícitamente sus operandos y produce menos instrucciones pero más grandes.
+
+La **notación polaca inversa (RPN)** escribe el operador *después* de sus operandos: `3 4 +` en vez de `3 + 4`. No necesita paréntesis ni reglas de precedencia, y se evalúa en una sola pasada con una pila. Esta correspondencia no es casualidad: la RPN es la forma textual del recorrido postorden de un árbol de expresión, el mismo recorrido que un compilador usa para emitir bytecode de pila.
 
 ## 🧩 Situación
 
-La JVM y el CLR ejecutan bytecode sobre una pila: apilan operandos y aplican operadores. Evaluar '3 4 +' con una pila reproduce ese mecanismo en pequeño.
+Un colega afirma que «Java es más portable que C». Sin el concepto de bytecode, la frase es un eslogan. Con él, es un mecanismo concreto: el binario de C está clavado a una arquitectura de CPU, mientras que el `.class` de Java habla el idioma de una máquina abstracta que cada plataforma implementa. Reproducir la evaluación de `3 4 +` con una pila —empujar, empujar, desapilar dos, operar, empujar— te deja tocar con las manos el ciclo que la JVM repite millones de veces por segundo, y entender por qué las instrucciones de bytecode son tan minúsculas.
 
 ## 🧮 Modelo
 
@@ -227,17 +230,29 @@ echo "resultado=$r\n";
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
 
+## 🧪 Laboratorio: recorrido del código
+
+Sigue `3 4 +` (esperado `resultado=7`) y verás la máquina de pila explícita en unos lenguajes e implícita en otros.
+
+En **Python**, `pila = [int(a), int(b)]` es la pila con los dos operandos ya empujados; una lista donde `append`/`pop` operan por el final. Las dos líneas `y = pila.pop()` y `x = pila.pop()` desapilan en el orden en que la VM lo haría: primero sale el operando de la cima (`y`, el segundo que se empujó), luego `x`. Ese orden importa muchísimo para operaciones no conmutativas: en `10 2 -` el resultado debe ser `10 - 2 = 8`, no `2 - 10`. Al desapilar `y=2` y `x=10` y calcular `x - y`, la implementación respeta la semántica de la RPN. El resultado se apilaría de nuevo en una VM real; aquí se imprime directo.
+
+En **Java**, la máquina de pila es literal: `Deque<Long> pila = new ArrayDeque<>()` y las llamadas `pila.push(...)` / `pila.pop()` son casi el bytecode que la propia JVM ejecutaría para `x + y`. De hecho, si desensamblaras este método con `javap -c`, verías instrucciones `ladd`, `lsub` y `lmul` operando sobre la pila de operandos interna del *frame* —la misma idea que el código modela a mano. Java está, en cierto modo, simulando en objetos lo que su runtime hace en el metal virtual.
+
+En **C**, no hay pila de operandos: `scanf("%ld %ld %c", &x, &y, &op)` lee los tres campos a variables y el ternario calcula directo. C compila a una *máquina de registros real* (la CPU), así que su compilador nunca construyó una pila de operandos de bytecode; asignó `x` e `y` a registros y emitió una instrucción `add`/`sub`/`imul`. El contraste es exacto: la implementación en C revela por qué un lenguaje compilado a máquina no necesita la indirección de la VM de pila, y por qué la JVM sí la usa para ser portable.
+
 ## 🔬 Comparación
 
-| Clase de diferencia | Observación entre lenguajes |
+| Rasgo | Cómo aparece entre los 10 lenguajes |
 |---|---|
-| Sintáctica | Una pila (lista) en cada lenguaje. |
-| Semántica | La VM de pila es el mismo modelo que la JVM/CLR. |
-| Paradigmática | SQL no tiene pila explícita; evalúa la expresión. |
+| Modelo de máquina | Pila de bytecode: Java (JVM), C# (CLR), Python (VM). Registros de CPU: C, Rust, Go tras compilar. |
+| Pila explícita en el código | Sí en Python, JS, TS, Java, C#, Rust, PHP (lista/deque); no en C ni Go (variables directas). |
+| Orden de desapilado | Todos respetan «la cima es el segundo operando» para que `-` y `/` no se inviertan. |
+| Portabilidad del artefacto | `.class`/IL corren en cualquier VM; el binario de C/Rust está atado a la arquitectura. |
+| SQL | Sin pila: el motor evalúa la expresión con `CASE`; se marca ilustrativa. |
 
 ## 🧬 El concepto en la familia
 
-La JVM (bytecode Java) y el CLR (.NET) son máquinas de pila. Python también usa una VM de pila.
+La JVM y el CLR son las máquinas de pila más conocidas, y CPython comparte el modelo (`dis.dis()` te muestra sus opcodes de pila). Pero no es la única opción: la VM de Lua y la Dalvik de Android son *máquinas de registros*, que emiten menos instrucciones a cambio de instrucciones más grandes. V8, en JavaScript, empieza con un intérprete de bytecode de pila (*Ignition*) y luego compila lo caliente con JIT. Reconocer el patrón «apilar operandos, aplicar operador» te permite leer un volcado de bytecode de casi cualquier lenguaje gestionado y seguir *Crafting Interpreters* cuando construye su propia VM.
 
 ## ✅ Prueba común
 
@@ -253,13 +268,15 @@ Detalle en [`reto.md`](reto.md).
 
 ## ⚠️ Errores comunes
 
-- **Desapilar en orden equivocado** → causa: resta/división invertidas → solución: el primero desapilado es el segundo operando
-- **Pila vacía al operar** → causa: expresión mal formada → solución: asumir RPN bien formada
+- **Desapilar en el orden equivocado** → causa: para operaciones no conmutativas (`-`, `/`), invertir los operandos da otro resultado → solución: recordar que el *primero* que sale de la pila es el *segundo* operando; calcular `x - y` con `x` desapilado en segundo lugar.
+- **Confundir bytecode con código de máquina** → causa: creer que un `.class` ya son instrucciones de CPU → solución: el bytecode lo ejecuta una VM (o lo recompila su JIT); no lo entiende el procesador directamente.
+- **Operar con la pila vacía** → causa: una expresión RPN mal formada deja menos operandos de los que el operador necesita → solución: en una VM real esto es un error de verificación del bytecode; aquí se asume entrada bien formada.
 
 ## ❓ Preguntas frecuentes
 
-- **¿Por qué VM de pila?** Simplicidad y portabilidad: las instrucciones no nombran registros.
-- **¿RPN se usa de verdad?** Sí: calculadoras HP, PostScript y muchas VM internamente.
+- **¿Por qué una VM de pila y no de registros?** Porque las instrucciones de pila no nombran operandos (van al tope), son compactas y trivialmente fáciles de generar desde un AST. Es un compromiso de simplicidad y portabilidad sobre densidad.
+- **¿La RPN se usa de verdad?** Sí: las calculadoras HP, el lenguaje PostScript, Forth y el bytecode interno de muchas VM se basan en ella.
+- **¿Puedo ver el bytecode de un lenguaje?** Sí: `javap -c` (Java), `ildasm` (.NET), `dis.dis()` (Python) o `node --print-bytecode` (V8) te muestran los opcodes reales.
 
 ## 🔗 Referencias
 

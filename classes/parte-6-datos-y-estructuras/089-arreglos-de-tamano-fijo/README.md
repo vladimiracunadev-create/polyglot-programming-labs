@@ -7,7 +7,7 @@
 
 ## 🎯 Objetivo
 
-Usar un **arreglo de tamaño fijo**: una secuencia contigua con un número de elementos conocido. Es la estructura más básica y la más cercana a la memoria.
+Comprender el **arreglo de tamaño fijo** no como «una lista cualquiera», sino como la estructura de datos primitiva de la que descienden casi todas las demás. Un arreglo es un bloque **contiguo** de memoria dividido en celdas idénticas; conocer su longitud por anticipado permite reservar ese bloque de una sola vez y, sobre todo, calcular la dirección de cualquier elemento con una multiplicación y una suma: `dirección(arr[i]) = base + i × tamaño`. De esa aritmética nace la propiedad que define al arreglo y que ninguna otra estructura ofrece tan barata: **acceso aleatorio en tiempo constante, O(1)**, dé igual que pidas el elemento 0 o el 999. Cormen lo formaliza en el modelo RAM (CLRS, cap. 10) y Sedgewick lo llama la ventaja del «acceso indexado». En esta clase verás esa misma física encarnada en diez lenguajes que difieren en la escritura pero comparten la memoria.
 
 ## 📚 Resultados de aprendizaje
 
@@ -27,13 +27,13 @@ Al finalizar, podrás:
 
 ## 📖 Definiciones y características
 
-- **Arreglo** — colección de elementos contiguos indexados. Clave: acceso O(1) por índice.
-- **Tamaño fijo** — número de elementos definido al crear. Clave: no crece.
-- **Índice** — posición de un elemento, empezando en 0. Clave: `arr[0]` es el primero.
+- **Arreglo (array)** — secuencia de elementos del mismo tipo colocados uno tras otro en memoria. Su rasgo esencial no es «guardar varias cosas», sino *cómo* las guarda: contiguas y del mismo tamaño, lo que hace posible el acceso O(1) por índice. Recorrerlo entero cuesta O(n).
+- **Tamaño fijo** — la longitud se fija al crear el arreglo y no cambia. A cambio de perder flexibilidad, ganas previsibilidad: el compilador sabe exactamente cuánta memoria reservar y a menudo puede colocarlo en la pila, sin llamadas al asignador dinámico.
+- **Índice** — desplazamiento entero desde el inicio, empezando en 0. `arr[0]` es el primer elemento porque está a *cero* celdas del comienzo; `arr[i]` está a `i` celdas. La base 0 no es un capricho: es la traducción directa de la aritmética de direcciones.
 
 ## 🧩 Situación
 
-Un arreglo fijo de 3 sensores, 12 meses, 7 días: cuando el tamaño se conoce, el arreglo fijo es la estructura más eficiente.
+Piensa en tres sensores de temperatura, los doce meses de un año o los siete días de la semana: cantidades que **no van a cambiar** durante la ejecución. Cuando el tamaño se conoce de antemano, el arreglo fijo es la opción más eficiente que existe: no reserva memoria de más «por si crece», no paga el coste de reubicarse y su disposición contigua es amable con la caché del procesador (los elementos vecinos viajan juntos a la caché, lo que acelera los recorridos). El problema de hoy es deliberadamente mínimo —tres enteros, su suma y su máximo— para que la atención caiga sobre la estructura, no sobre el algoritmo: un solo recorrido lineal que toca cada celda una vez.
 
 ## 🧮 Modelo
 
@@ -210,6 +210,18 @@ echo "suma=" . array_sum($arr) . " max=" . max($arr) . "\n";
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
 
+## 🧪 Laboratorio guiado: del código a la salida
+
+Sigamos el caso `3 1 4`, que debe producir `suma=8 max=4`. Las diez implementaciones ejecutan el mismo recorrido lineal; conviene mirar tres que revelan modelos de memoria distintos.
+
+En **Python**, `map(int, ...split())` convierte la línea en tres enteros y `arr = [a, b, c]` crea una lista (Python no tiene arreglos fijos nativos: usa listas dinámicas). Las funciones `sum(arr)` y `max(arr)` recorren la secuencia por dentro, cada una en O(n): suman 3+1+4=8 y comparan hasta quedarse con 4. La salida se arma con un f-string.
+
+En **Go**, `var arr [3]int` es un arreglo de verdad de tamaño fijo: el `3` es parte del tipo y el arreglo vive en la pila. El bucle `for _, x := range arr` acumula `suma` y actualiza `max`, inicializado en `arr[0]`. Aquí se ve el patrón clásico del máximo: empezar con el primer elemento como candidato y quedarse con cualquiera mayor —nunca con un valor «neutro» como 0, que fallaría si todos fueran negativos.
+
+En **C**, `long arr[3]` reserva 24 bytes contiguos y `scanf` los llena. El bucle accede con `arr[i]`, que el compilador traduce a `base + i × 8`: la aritmética de direcciones desnuda. Es el mismo algoritmo que en Python, pero sin ninguna capa entre tu código y la memoria.
+
+Los tres imprimen `suma=8 max=4`; el verificador comprueba que las diez implementaciones coinciden carácter a carácter con lo que dicta `casos.json`.
+
 ## 🔬 Comparación
 
 | Clase de diferencia | Observación entre lenguajes |
@@ -218,9 +230,11 @@ echo "suma=" . array_sum($arr) . " max=" . max($arr) . "\n";
 | Semántica | En C el tamaño es parte del tipo; en Python/JS el arreglo es dinámico. |
 | Paradigmática | SQL agrega sobre filas, no índices. |
 
+La diferencia semántica más honda es **quién comprueba los límites**. En C, `arr[5]` sobre un arreglo de 3 no da error: lee memoria ajena (comportamiento indefinido). En Java, C#, Go, Rust y Python la lectura fuera de rango lanza una excepción o *panic* en tiempo de ejecución, a cambio de una comprobación en cada acceso. Y hay un eje de **valor vs. referencia**: en C, Rust, Go y C# un arreglo fijo se copia al asignarlo o pasarlo (en Rust, `[i64; 3]` implementa `Copy`); en Java, `int[]` es una referencia y se comparte. Python, JavaScript y PHP ni siquiera tienen arreglos fijos: sus «arreglos» son colecciones dinámicas que crecen —el tema de la clase siguiente.
+
 ## 🧬 El concepto en la familia
 
-En Go `[3]int` es fijo y `[]int` es slice dinámico. En C++ `std::array<int,3>`.
+En Go, `[3]int` es un arreglo fijo pero `[]int` es un *slice* dinámico: parecen iguales pero uno es valor y el otro una vista con longitud y capacidad. En C++, `std::array<int, 3>` es el fijo con seguridad de tipos, frente al `int[3]` heredado de C. En Rust, `[i64; 3]` es fijo y vive en la pila, mientras `Vec<i64>` vive en el heap. Reconocer este par fijo/dinámico en cada lenguaje es media batalla ganada: casi todos ofrecen ambos y el nombre a veces engaña.
 
 ## ✅ Prueba común
 
@@ -236,13 +250,15 @@ Detalle en [`reto.md`](reto.md).
 
 ## ⚠️ Errores comunes
 
-- **Salirse del índice** → causa: acceso fuera de rango → solución: recorrer solo dentro del tamaño
-- **Confundir fijo con dinámico** → causa: esperar que crezca → solución: usar lista/vector si el tamaño cambia
+- **Salirse del índice (off-by-one)** → recorrer `0..=n` en vez de `0..n-1`, o confiar en un tamaño equivocado → recorre solo `[0, n)`; en C esto es especialmente peligroso porque no hay red de seguridad y el fallo puede pasar inadvertido.
+- **Inicializar el máximo en 0** → si todos los elementos fueran negativos, el resultado sería 0, que no está en el arreglo → inicializa `max` con `arr[0]`, el primer elemento real, como hacen todas las implementaciones.
+- **Confundir fijo con dinámico** → esperar que un arreglo fijo crezca con `append` → si el tamaño varía, usa lista/vector (clase 090).
 
 ## ❓ Preguntas frecuentes
 
-- **¿Por qué base 0?** El índice es un desplazamiento desde el inicio; el primero está a distancia 0.
-- **¿Arreglo o lista?** Arreglo fijo si el tamaño es constante; lista si varía (siguiente clase).
+- **¿Por qué el índice empieza en 0?** Porque es un desplazamiento desde el inicio: el primer elemento está a distancia cero. `arr[i]` significa literalmente «la celda a `i` posiciones de la base». Lenguajes como Fortran o Lua rompen esta convención y empiezan en 1, lo que obliga a restar 1 al hacer aritmética de direcciones.
+- **¿Por qué el acceso es O(1) pero la búsqueda es O(n)?** Acceder a una posición conocida es una cuenta directa; *encontrar* un valor sin saber dónde está obliga a mirar celda por celda. El arreglo es rapidísimo para «dame el elemento i» y mediocre para «¿está el valor v?».
+- **¿Arreglo o lista?** Arreglo fijo si el tamaño es constante y te importan la eficiencia y la localidad de memoria; lista/vector si el tamaño cambia (siguiente clase).
 
 ## 🔗 Referencias
 

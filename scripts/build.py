@@ -316,11 +316,10 @@ def main():
         if not readme.exists():
             readme.write_text(contenido, encoding="utf-8")
             creados += 1
-        elif datos and datos.get("tipo") == "metodo":
-            # Las clases de método viven en los datos: se regeneran siempre.
-            readme.write_text(contenido, encoding="utf-8")
-            reescritos += 1
         elif force and num not in BUILT:
+            # Solo con --force-scaffold se reescriben las clases NO construidas.
+            # Las clases ya construidas (incluidas las de método) tienen contenido
+            # editado a mano y NO se sobrescriben.
             readme.write_text(contenido, encoding="utf-8")
             reescritos += 1
 

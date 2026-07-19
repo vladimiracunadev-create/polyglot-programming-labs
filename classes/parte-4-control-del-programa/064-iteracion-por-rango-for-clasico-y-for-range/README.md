@@ -7,7 +7,9 @@
 
 ## 🎯 Objetivo
 
-Usar el bucle `for` cuando el número de vueltas se conoce. El factorial multiplica de 1 a n y muestra el `for` clásico y el `for`-range de cada lenguaje.
+El bucle `for` existe para el caso más común de todos: cuando sabes de antemano cuántas veces vas a repetir, o sobre qué rango vas a iterar. Frente al `while`, que te obliga a orquestar a mano la inicialización, la condición y el avance, el `for` reúne esas tres piezas en un solo lugar visible, y con ello reduce la superficie donde puede colarse un error de límite. Esa concentración es su virtud: quien lee un `for` sabe de un vistazo por dónde empieza el contador, cuándo para y cómo avanza.
+
+En esta clase calculamos el factorial —n! = 1·2·…·n— porque es el ejemplo canónico donde el `for` brilla: el número de vueltas es exactamente `n`, conocido antes de empezar. La tarea revela además dos formas distintas de expresar el mismo bucle: el `for` *clásico* de tres partes heredado de C (`for (i=1; i<=n; i++)`), donde tú gestionas el índice, y el `for`-*range* moderno (`for i in 1..=n`, `for i in range(1, n+1)`), donde declaras el rango y el lenguaje se encarga del índice, eliminando de raíz los errores de contorno. El porqué de fondo es que iterar un número conocido de veces es tan frecuente que cada lenguaje ha buscado la forma más segura y legible de expresarlo, y comparar esas formas ilumina las prioridades de diseño de cada uno.
 
 ## 📚 Resultados de aprendizaje
 
@@ -33,9 +35,15 @@ Al finalizar, podrás:
 - **Factorial** — n! = 1·2·…·n. Clave: 0! = 1 por definición.
 - **Acumulador de producto** — variable que empieza en 1 y se multiplica. Clave: 1 es el neutro del producto.
 
+Sebesta, en el capítulo de estructuras de control de *Concepts of Programming Languages*, clasifica el `for` entre los *bucles controlados por contador*, y narra su evolución histórica: del `for` rígido de Fortran (con límites y paso fijados de antemano) al `for` flexible de C, cuyas tres cláusulas son en realidad expresiones arbitrarias, tanto que un `for` de C es apenas azúcar sintáctico sobre un `while`. Esa flexibilidad tuvo un precio: al dejar el índice enteramente en manos del programador, el `for` clásico de C es un imán para los errores *off-by-one* (usar `<` donde iba `<=`, empezar en `0` en vez de `1`). Los lenguajes posteriores reaccionaron con el `for`-range: en lugar de escribir las tres cláusulas, declaras el rango (`1..=n` en Rust, `range(1, n+1)` en Python) y el lenguaje genera el índice correcto, cerrando esa fuente de errores.
+
+Ese giro conecta con el espíritu de *Structured Programming*: Dahl, Dijkstra y Hoare abogaban por construcciones cuya corrección sea evidente a la vista, sin necesidad de simular la ejecución en la cabeza. Un `for i in 1..=n` dice literalmente "para cada i de 1 a n inclusive", y no hay margen para equivocar el límite; un `for (i=1; i<=n; i++)` exige releer las tres cláusulas y comprobar que encajan. Es también notable que Rust *no* tenga el `for` clásico de tres partes estilo C: solo ofrece la iteración sobre rangos e iteradores, una decisión de diseño deliberada para forzar la forma más segura. En esta clase, el caso base `0! = 1` sale gratis precisamente por cómo está definido el rango: con `n=0`, el rango `1..=0` está vacío, el bucle no se ejecuta y el acumulador conserva su valor inicial `1`, que es el neutro del producto.
+
 ## 🧩 Situación
 
-El factorial aparece en combinatoria y probabilidad. Con un for de 1 a n se calcula directo; el caso `0! = 1` sale gratis porque el bucle no se ejecuta y el acumulador queda en 1.
+El factorial aparece por todas partes en combinatoria y probabilidad: cuenta de cuántas formas se pueden ordenar n elementos y es el cimiento de las permutaciones y los coeficientes binomiales. Pero como problema de programación es el arquetipo perfecto del `for` por contador: hay que multiplicar exactamente los enteros de 1 a n, un número de vueltas conocido antes de empezar, y acumular el producto. Ningún otro tipo de bucle expresa esa intención con más claridad.
+
+Dos detalles de ingeniería lo hacen jugoso. El primero es el caso base: `0! = 1` no necesita un `if` especial, sale gratis porque con `n=0` el rango de 1 a 0 está vacío, el bucle no se ejecuta y el acumulador queda en su valor inicial `1`. Esto ilustra una virtud del diseño: cuando el neutro se elige bien, los casos límite se resuelven solos. El segundo es el desbordamiento: el factorial crece explosivamente. `20!` todavía cabe en un entero de 64 bits, pero `21!` ya lo desborda, y por eso el contrato de la clase limita `n` a 20 y las implementaciones usan tipos de 64 bits (`long`, `int64`, `i64`). El porqué de fondo es que un bucle correcto no basta si el tipo del acumulador no puede contener el resultado.
 
 ## 🧮 Modelo
 
@@ -220,6 +228,14 @@ echo "factorial=$f\n";
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
 
+## 🔎 Recorrido del código: de la entrada a la salida
+
+Sigamos el caso `5` de `casos.json`, cuya salida esperada es `factorial=120`. En **Python**, `n = int(sys.stdin.readline())` fija `n = 5`, y `f = 1` inicializa el acumulador con el neutro del producto. El bucle es `for i in range(1, n + 1):`, es decir `range(1, 6)`, que produce la secuencia `1, 2, 3, 4, 5` —observa el `n + 1`, necesario porque `range` excluye su límite superior. En cada vuelta `f *= i`: parte de `1`, pasa a `1·1=1`, luego `1·2=2`, `2·3=6`, `6·4=24` y `24·5=120`. Al agotarse el rango, imprime `factorial=120`. Con el caso `0`, `range(1, 1)` está vacío, el cuerpo no se ejecuta y `f` conserva su `1` inicial: así `0! = 1` sale sin ningún caso especial.
+
+El contraste más nítido es **C**, con el `for` clásico de tres partes: `for (long i = 1; i <= n; i++)`. Aquí las tres piezas están a la vista y bajo tu control: `i = 1` inicializa, `i <= n` es la condición (nota el `<=`, que sí incluye a `n`, a diferencia del `range` de Python), e `i++` avanza. Con `n=5` recorre `i = 1, 2, 3, 4, 5` y multiplica `f` hasta `120`. El precio de ese control es la responsabilidad: escribir `i < n` en vez de `i <= n` daría `24` en lugar de `120`, un clásico error *off-by-one* que el lenguaje no puede detectar por ti. El tipo `long` de `f` anticipa el crecimiento del factorial.
+
+El tercer enfoque, **Rust**, encarna el `for`-range en su forma más pura: `for i in 1..=n`. El operador `..=` denota un rango *inclusivo*, así que `1..=5` recorre `1, 2, 3, 4, 5` sin necesidad de sumar uno ni de escribir una condición. No hay `i++` ni comparación a la vista: declaras el rango y Rust genera el índice correcto, cerrando la puerta al error de contorno. Con `n=0`, `1..=0` es un rango vacío y `f` queda en `1`. Las tres rutas convierten el `5` de entrada en `factorial=120`, pero van del máximo control manual (C) al máximo cuidado del lenguaje (Rust), con Python en un término medio expresivo.
+
 ## 🔬 Comparación
 
 | Clase de diferencia | Observación entre lenguajes |
@@ -228,9 +244,11 @@ echo "factorial=$f\n";
 | Semántica | El for-range evita el error de límites; el for clásico lo deja en tus manos. |
 | Paradigmática | SQL usa un CTE recursivo o una agregación, no un for. |
 
+La divisoria más real entre los diez lenguajes es cuál forma de `for` ofrecen. **C**, **Java**, **C#**, **JavaScript** y **TypeScript** usan el `for` clásico de tres partes (`for (i=1; i<=n; i++)`), donde tú gestionas el índice y cargas con el riesgo de contorno. **Go** también tiene esa forma —`for i := 1; i <= n; i++`—, aunque su `for` es el único bucle del lenguaje. En el otro extremo, **Rust** *no ofrece* el `for` de tres partes: obliga a iterar sobre rangos (`1..=n`) o iteradores, cerrando por diseño la puerta al *off-by-one*. **Python** usa `range(1, n+1)`, un `for`-range con límite superior *exclusivo* (de ahí el `+1`). Un detalle fácil de olvidar es que el rango de Python es semiabierto mientras que el `..=` de Rust es inclusivo: el mismo factorial exige `n+1` en uno y `n` en el otro. **SQL**, sin bucles, expresa el factorial con un CTE recursivo o una agregación. La misma iteración por contador, por tanto, oscila entre "hazlo todo tú" y "declara el rango y confía en el lenguaje".
+
 ## 🧬 El concepto en la familia
 
-En Ruby `(1..n).reduce(1, :*)`. En Go `for i := 1; i <= n; i++`. Kotlin `for (i in 1..n)`.
+En la familia de C —C, Java, C#, JavaScript, Go— reina el `for` clásico de tres cláusulas, expresivo y peligroso a partes iguales. La familia de lenguajes de más alto nivel se decantó por el `for`-range: Python (`range`), Ruby (`(1..n)`), Kotlin (`for (i in 1..n)`) y Swift iteran sobre rangos y colecciones sin índice explícito. Rust lleva esa preferencia hasta su conclusión eliminando el `for` clásico por completo. Y la familia funcional prescinde a veces del bucle: en Ruby, `(1..n).reduce(1, :*)` expresa el factorial como un plegado sobre el rango, sin contador ni acumulador visibles. Bajo todas esas formas late la misma idea —recorrer un número conocido de valores—, y la tendencia histórica va del control manual hacia construcciones que declaran el rango y hacen imposible el error de límite.
 
 ## ✅ Prueba común
 

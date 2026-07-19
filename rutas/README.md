@@ -47,4 +47,4 @@ Foco en el pensamiento declarativo y su relación con lo imperativo.
 - Parte 7 — Paradigmas (declarativo y lógico).
 - Parte 6 — Datos y estructuras (JSON, persistencia, formatos).
 
-> Estas rutas se afinarán a nivel de clase individual a medida que se construya el contenido.
+> Todas las clases referidas están construidas; usa el [índice completo](../classes/README.md) para saltar a cualquiera por número.

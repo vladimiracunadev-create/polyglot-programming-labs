@@ -7,7 +7,11 @@
 
 ## 🎯 Objetivo
 
-Ver la **inferencia de tipos**: el compilador deduce el tipo sin que lo anotes. Un producto de dos enteros basta para comparar `x = a*b` (Python), `var`/`:=` (C#/Go), `let` (Rust) frente a la anotación explícita de Java o C.
+La **inferencia de tipos** es la capacidad del compilador de deducir el tipo de una expresión sin que tú lo escribas. Cuando declaras `var total = a * b;` en C# o `let p = a * b;` en Rust, no has anotado ningún tipo, y sin embargo `total` y `p` **tienen** un tipo fijo, entero, que el compilador ha calculado a partir de la expresión. La inferencia es la reconciliación entre dos deseos que parecían opuestos: la seguridad del tipado estático y la concisión del código sin anotaciones. Te da las dos cosas —el compilador sabe el tipo y lo comprueba— sin obligarte a repetir lo que el propio código ya deja obvio.
+
+El punto conceptual más importante, y el que más malentendidos causa, es que **inferencia no es tipado dinámico**. Que no *escribas* el tipo no significa que no *exista* o que pueda cambiar. En `var a = 5`, C# fija `a` como `int` para siempre; asignarle luego una cadena es un error de compilación, exactamente igual que si hubieras escrito `int a`. Sebesta insiste en esta distinción: la inferencia solo omite la *anotación*, no la *ligadura estática* del tipo a la variable. El binario resultante es idéntico al del código anotado; no hay ninguna penalización en ejecución, porque toda la deducción ocurre en compilación.
+
+Hay además dos ligas muy distintas de inferencia, y esta clase las contrasta. La inferencia **local** —`var` en C#/Java, `:=` en Go, `auto` en C++, `let` en Rust— mira solo el lado derecho de una asignación y deduce el tipo de esa expresión: es simple y limitada a la declaración. La inferencia **global** al estilo Hindley-Milner (algoritmo W, que resuelve restricciones por *unificación*), presente en Haskell o ML, deduce los tipos de un programa entero —incluidos parámetros de funciones— casi sin ninguna anotación. TypeScript ocupa un punto intermedio con su inferencia **bidireccional**, que combina el tipo esperado por el contexto con el tipo del valor. El laboratorio usa el caso mínimo —el producto de dos enteros— para poner lado a lado quién infiere (`p = a*b`, `p := a*b`, `let p = a*b`) y quién exige la anotación (`int p = a*b` en Java y C).
 
 ## 📚 Resultados de aprendizaje
 
@@ -33,9 +37,17 @@ Al finalizar, podrás:
 - **var / := / let** — formas de declarar con inferencia (C#, Go, Rust). Clave: el tipo se fija igual.
 - **Estático con inferencia** — tipos fijos que no hace falta anotar. Clave: no confundir con dinámico.
 
+La inferencia funciona resolviendo **restricciones**. El compilador observa la expresión `a * b`, sabe que `a` y `b` son `int` (a su vez inferidos de sus valores), sabe que multiplicar dos `int` produce un `int`, y por tanto concluye que la variable que recibe ese resultado es `int`. En la inferencia local eso es todo: se examina el lado derecho de una declaración y se propaga su tipo hacia la izquierda. Rust añade un matiz potente: puede inferir *hacia atrás* desde un uso posterior —si más adelante la variable se compara con un `u8`, Rust la deduce `u8` aunque la declaración no lo dijera—, un pequeño paso hacia la inferencia global.
+
+La inferencia **global de Hindley-Milner** —el algoritmo W— es de otra escala. En lugar de mirar una declaración aislada, recoge restricciones de todo el programa y las resuelve por **unificación**: un proceso que busca la asignación de tipos más general que satisface todas las ecuaciones a la vez. Por eso en Haskell casi nunca anotas tipos, ni siquiera en los parámetros de una función: el compilador los deduce del cuerpo. Scott describe la unificación como el corazón de este mecanismo, y es lo que permite que un lenguaje sea a la vez fuertemente tipado y notablemente conciso. TypeScript usa una variante **bidireccional**: cuando el contexto ya impone un tipo esperado (por ejemplo, el tipo de retorno declarado de una función), lo *empuja* hacia la expresión en vez de deducirlo solo desde el valor.
+
+El malentendido que hay que erradicar es equiparar "no anotar" con "sin tipo". Un lenguaje dinámico como Python no anota porque el tipo vive en el valor y se comprueba en ejecución; un lenguaje estático con inferencia como Rust no anota porque el tipo ya está **fijado en compilación**, solo que deducido en vez de escrito. La diferencia es abismal: en el segundo caso, reasignar un valor de otro tipo es un error que detiene la compilación. Inferencia y dinamismo se parecen a la vista —ambos omiten el tipo en el código— pero son opuestos en cuándo y con qué firmeza se liga el tipo.
+
 ## 🧩 Situación
 
-`var total = a * b;` en C# infiere que `total` es entero. No es tipado dinámico: el tipo es fijo, solo no lo escribiste. Distinguir inferencia de dinamismo evita malentendidos.
+Imagina que revisas un cálculo de inventario: `var total = unidades * precioPorCaja;`. En C# esa línea no dice ningún tipo, y sin embargo `total` queda ligado a un tipo concreto —el que resulte de multiplicar sus operandos— desde el instante de la compilación. Un lector desprevenido podría pensar que C# se ha vuelto dinámico como Python; no es así. Si en la línea siguiente intentaras `total = "agotado";`, el compilador lo rechazaría, porque `total` es y seguirá siendo numérico. La única diferencia con `int total = ...` es que te ahorraste escribir el tipo que ya era evidente.
+
+Distinguir inferencia de dinamismo evita malentendidos costosos: te permite disfrutar de código conciso sin perder la red de seguridad estática, y te protege de la falsa creencia de que `var`, `:=`, `let` o `auto` "relajan" el tipado. No lo relajan; solo dejan de exigir que repitas lo obvio. El laboratorio hace esto tangible con el producto de dos enteros: la misma multiplicación se escribe con inferencia en unos lenguajes y con anotación en otros, y el resultado —y el tipo— es idéntico en todos.
 
 ## 🧮 Modelo
 
@@ -191,17 +203,30 @@ printf("producto=%d\n", $producto);
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
 
+## 🔎 Recorrido guiado por el código
+
+Tomemos el caso `stdin` = `3 4`, esperado `producto=12`, y observemos no *qué* calcula cada lenguaje —todos multiplican— sino **cómo nombra el tipo** de la variable que guarda el resultado.
+
+**Python** es el punto de partida pero también el matiz sutil: `a, b = map(int, sys.stdin.readline().split())` desempaqueta `"3 4"` en dos enteros, y `producto` (implícito en `a * b`) no se declara en ningún sitio. Cuidado: aquí no hay *inferencia estática* como en los compilados; Python es dinámico y el tipo simplemente vive en el objeto en ejecución. Sirve de contraste con lo que sigue: se parece a `var p = a*b` a la vista, pero el mecanismo es distinto. El `print(f"producto={a * b}")` produce `producto=12`; con `-2 5`, la misma expresión da `producto=-10`.
+
+Los lenguajes con **inferencia estática** son el corazón de la clase. En **Go**, `producto := a * b` usa el operador de declaración corta `:=`: Go ve que `a` y `b` son `int` (devueltos por `strconv.Atoi`), deduce que su producto es `int` y liga `producto` a ese tipo **en compilación**, sin que escribas `int`. En **Rust**, `let producto = v[0] * v[1];` hace lo mismo con `let`: no hay anotación, pero `producto` es de tipo fijo `i64` porque el vector se declaró `Vec<i64>` y esa información se propaga. En **C#**, `var a = int.Parse(p[0])` infiere `a` como `int` desde el tipo de retorno de `int.Parse`; la palabra `var` no significa "cualquier tipo", significa "el tipo que deduzcas de la expresión". Los tres —`:=`, `let`, `var`— llegan a un tipo entero fijo sin escribirlo, y todos imprimen `producto=12`.
+
+El polo opuesto lo marcan **Java** y **C**, que **exigen la anotación**. En Java, `int a = Integer.parseInt(p[0]);` y `int b = ...` obligan a nombrar `int` en cada declaración; el resultado se calcula en `(a * b)` sin variable intermedia, pero cada operando llevó su tipo escrito a mano. En C, `long a, b;` declara los tipos por adelantado antes incluso de leerlos con `scanf`. Comparar la línea de Go `producto := a * b` con la de C `long a, b;` en el mismo problema resume la clase entera: mismo tipado estático, mismo binario final, misma salida `producto=12` verificada contra `casos.json`; lo único que cambia es si el compilador dedujo el tipo o si tú lo escribiste.
+
 ## 🔬 Comparación
+
+Lo que separa a estos lenguajes es el **grado de inferencia**, no la presencia de tipos: todos los estáticos aquí acaban con una variable de tipo entero fijo. La escala va de la anotación obligatoria (Java, C) a la inferencia local (Go, Rust, C#) y, fuera del núcleo, a la inferencia global de Haskell. Python queda aparte: parece inferir, pero en realidad es dinámico y su tipo se resuelve en ejecución.
 
 | Clase de diferencia | Observación entre lenguajes |
 |---|---|
-| Sintáctica | `p = a*b` (Python), `p := a*b` (Go), `let p = a*b` (Rust), `int p = a*b` (Java/C). |
-| Semántica | En Go/Rust/C# el tipo se infiere pero es fijo; en Java/C se anota. |
-| Paradigmática | SQL no declara variables: la expresión produce el valor. |
+| Sintáctica | `p = a*b` (Python, dinámico), `p := a*b` (Go), `let p = a*b` (Rust), `var a = ...` (C#), `int a = ...` (Java/C). |
+| Semántica (mecanismo) | En Go/Rust/C# el tipo se **infiere** en compilación pero queda fijo; en Java/C se **anota** a mano; en Python no se infiere estáticamente, se resuelve al ejecutar. |
+| Semántica (alcance) | Inferencia **local** (mira solo la declaración) en Go/C#/Java-`var`; Rust añade deducción desde usos posteriores; Hindley-Milner (Haskell) infiere de todo el programa por unificación. |
+| Paradigmática | SQL no declara variables: la expresión produce el valor directamente, sin ligar un tipo a un nombre. |
 
 ## 🧬 El concepto en la familia
 
-En Kotlin `val p = a * b` infiere. En C++ `auto p = a * b`. En Haskell la inferencia (Hindley-Milner) es total: casi nunca anotas tipos.
+En Kotlin `val p = a * b` infiere localmente, como Go o C#. En C++ la palabra `auto` cumple ese papel: `auto p = a * b` deduce el tipo de la expresión. En Java, `var` (desde Java 10) trajo la misma inferencia local que C# tenía hace más tiempo. En el extremo está Haskell, cuya inferencia Hindley-Milner es **total**: gracias al algoritmo W y a la unificación, un programa entero puede quedar correctamente tipado casi sin una sola anotación, incluidos los parámetros de las funciones. TypeScript ilustra un punto intermedio con inferencia **bidireccional**, que aprovecha el tipo esperado por el contexto para deducir mejor. Recorrer la familia deja una moraleja: la inferencia es una escala de *cuánto* deduce el compilador, y en todos los casos el tipo resultante es tan fijo y tan comprobado como si lo hubieras escrito.
 
 ## ✅ Prueba común
 

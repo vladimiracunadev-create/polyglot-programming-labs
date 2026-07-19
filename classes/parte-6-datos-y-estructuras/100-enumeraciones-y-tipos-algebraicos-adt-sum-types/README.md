@@ -7,7 +7,7 @@
 
 ## 🎯 Objetivo
 
-Usar **tipos algebraicos (suma)**: un valor que es una de varias alternativas, cada una con sus datos. `Forma = Cuadrado | Rectangulo`. El `match` decide y calcula según la variante.
+Distinguir dos ideas que a menudo se confunden bajo la palabra «enum». La primera es la **enumeración simple**: un conjunto cerrado de valores con nombre —`Lunes`, `Martes`…, o `Rojo`, `Verde`, `Azul`— que sustituye a las constantes enteras «mágicas» por símbolos legibles y con tipo. La segunda, mucho más potente, es el **tipo suma** o **tipo algebraico de datos (ADT)**: un valor que es **una de varias alternativas, y cada alternativa puede llevar datos distintos**. `Forma = Cuadrado(lado) | Rectangulo(ancho, alto)` no es solo una etiqueta: cada variante transporta su propia carga. Donde el registro de la clase 099 es un tipo **producto** (tiene el campo A **y** el campo B), el tipo suma es su dual: es la variante A **o** la variante B. Sobre ese valor, la construcción `match` (o `switch` de patrones) decide qué variante tienes, extrae sus datos y calcula. El objetivo profundo es entender por qué esta forma, heredada de la familia ML (Haskell, OCaml, F#) y adoptada por Rust y Swift, es la manera **segura** de modelar «esto o lo otro»: el compilador verifica la **exhaustividad** y hace imposible olvidar un caso.
 
 ## 📚 Resultados de aprendizaje
 
@@ -27,13 +27,14 @@ Al finalizar, podrás:
 
 ## 📖 Definiciones y características
 
-- **Tipo algebraico (suma)** — valor que es una de varias alternativas (Cuadrado o Rectangulo). Clave: modela 'o esto o lo otro'.
-- **Variante** — cada alternativa del tipo suma, con sus propios datos. Clave: `Cuadrado(lado)`.
-- **Exhaustividad** — cubrir todas las variantes. Clave: Rust lo exige al compilar.
+- **Enumeración (enum)** — tipo cuyos valores forman un conjunto **cerrado y finito** de constantes con nombre. En su forma simple es una etiqueta sin datos: `enum Dia { Lunes, Martes, ... }`. Aporta seguridad de tipos (no puedes pasar un `Dia` donde se espera un `Color`) y legibilidad frente a los enteros mágicos. Java y C# la enriquecen: el `enum` de Java es una clase completa con métodos, y Bloch (*Effective Java*, ítem «Use enums instead of int constants») la defiende como sustituto seguro de las constantes enteras.
+- **Tipo suma / ADT** — valor que es **una** de varias alternativas, y cada alternativa puede llevar **datos propios y distintos**: `Cuadrado(i64)` lleva un lado, `Rectangulo(i64, i64)` lleva ancho y alto. Se llama «suma» porque el número de valores posibles del tipo es la **suma** de los de cada variante, frente al tipo **producto** (el registro), donde se **multiplican**. De ahí «algebraico»: los tipos se combinan con sumas y productos como en el álgebra. Klabnik y Nichols (*The Rust Programming Language*, cap. 6) presentan el `enum` de Rust exactamente así, como el tipo que «puede ser una de un conjunto posible de valores».
+- **Variante (variant / constructor)** — cada alternativa del tipo suma, con su nombre y su carga de datos. Construir un valor es elegir una variante y darle sus datos, `Forma::Cuadrado(5)`; leerlo es descomponerlo con `match`.
+- **Match y exhaustividad** — la construcción que inspecciona un valor suma, decide qué variante es y extrae sus datos en el mismo gesto (*pattern matching*). Su virtud decisiva es la **exhaustividad**: el compilador exige cubrir **todas** las variantes o dará error. Si mañana añades una variante `Circulo`, el compilador te señala cada `match` que quedó incompleto —el olvido se vuelve imposible—. Es también la base de `Option`/`Result`, la alternativa de la familia ML a `null`: en vez de un puntero nulo que revienta en tiempo de ejecución, un valor que es `Some(x)` **o** `None` y que el `match` te obliga a considerar.
 
 ## 🧩 Situación
 
-Un pago es efectivo, tarjeta o transferencia; una figura es círculo, cuadrado o rectángulo. Los tipos suma modelan estas alternativas con seguridad, y el match obliga a considerarlas todas.
+Un pago es en efectivo, con tarjeta o por transferencia; y cada forma necesita datos distintos: la tarjeta guarda los últimos cuatro dígitos, la transferencia un IBAN, el efectivo nada. Sin tipos suma, la tentación es un `struct` con todos los campos posibles —la mayoría nulos según el caso— y una etiqueta de tipo que hay que recordar consultar; tarde o temprano alguien lee el IBAN de un pago en efectivo y el programa falla. El tipo suma modela esto con precisión: cada variante lleva **exactamente** los datos que le corresponden, ni uno más, y el `match` obliga a tratarlas todas. Cuando el negocio añade un cuarto medio de pago, el compilador recorre el programa y te señala cada lugar que olvidaste actualizar. El problema de hoy es una versión mínima de esa idea —una figura que es un cuadrado (con su lado) o un rectángulo (con ancho y alto), y hay que calcular el área— para que veas el patrón construir/match sin distracciones.
 
 ## 🧮 Modelo
 
@@ -239,6 +240,18 @@ echo "area=$area\n";
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
 
+## 🧪 Laboratorio guiado: del código a la salida
+
+Sigamos el caso `cuadrado 5`, que debe producir `area=25`, y de paso `rectangulo 3 4` → `area=12`. Los diez programas leen una etiqueta y sus datos, deciden la variante y calculan; conviene contrastar el que **tiene** tipo suma de verdad con los que lo **simulan**.
+
+En **Rust**, el `enum Forma { Cuadrado(i64), Rectangulo(i64, i64) }` es un tipo suma nativo. El programa primero **construye** el valor: si la etiqueta es `"cuadrado"`, crea `Forma::Cuadrado(5)`; si no, `Forma::Rectangulo(...)`. Luego el `match forma { Forma::Cuadrado(l) => l * l, Forma::Rectangulo(a, b) => a * b }` **descompone**: reconoce la variante, liga `l` al 5 que iba dentro y devuelve 25. Lo esencial es lo que no se ve: si borraras el brazo `Rectangulo`, el programa **no compilaría** —el compilador exige cubrir todas las variantes—. Esa es la exhaustividad de la que habla Klabnik y Nichols.
+
+En **C#**, no hay enum con datos, pero el `switch` de expresión con patrones se le acerca: `t[0] switch { "cuadrado" => p*p, _ => a*b }` sobre la etiqueta de texto. El brazo `_` es el comodín; produce 25 para `cuadrado 5`. La diferencia con Rust es que la exhaustividad aquí es sobre cadenas, no sobre variantes de un tipo cerrado: el compilador no puede saber qué etiquetas son válidas.
+
+En **C**, no hay ni enum con datos ni match: el programa usa `strcmp(tipo, "cuadrado")` y un `if/else`, leyendo con `scanf` solo los números que la rama necesita (uno para el cuadrado, dos para el rectángulo). Es la simulación más cruda del tipo suma: la «etiqueta» es una cadena y la «exhaustividad» depende enteramente de que el programador no olvide una rama —no hay red de seguridad—. Go hace lo mismo con `iota` para enums simples, pero tampoco tiene sum types reales.
+
+Los tres imprimen `area=25` para `cuadrado 5`; el verificador comprueba que las diez implementaciones coinciden carácter a carácter con lo que dicta `casos.json`.
+
 ## 🔬 Comparación
 
 | Clase de diferencia | Observación entre lenguajes |
@@ -247,9 +260,11 @@ echo "area=$area\n";
 | Semántica | Rust/Haskell garantizan exhaustividad; C usa una etiqueta manual. |
 | Paradigmática | SQL usa una columna 'tipo' + CASE. |
 
+La brecha real entre los diez lenguajes es **quién tiene tipos suma de verdad**. Rust los tiene nativos y con exhaustividad comprobada; Java moderna los aproxima con `sealed interface` + records y `switch` de patrones que también exige exhaustividad; C# con `record` y `switch` de patrones se acerca. En el otro extremo, **Go** solo ofrece `iota` para numerar constantes —un enum pobre, sin datos por variante y sin exhaustividad—, y la comunidad simula los sum types con interfaces y *type switches*. **C** no tiene nada: se usa un `enum` de etiquetas junto a un `union` y un `switch` que el compilador no obliga a completar. **TypeScript** ocupa un lugar curioso: sus *union types* discriminados (`{tipo: "cuadrado", lado: number} | {tipo: "rectangulo", ...}`) con un `switch` sobre el discriminante sí dan exhaustividad si activas `strict`, acercándose a la familia ML sin salir del ecosistema JavaScript. Cherny (*Programming TypeScript*) dedica un capítulo a esta técnica. **Python** cubre el hueco con `enum.Enum` para el caso simple y `match` estructural (3.10+) para descomponer, aunque sin comprobación de exhaustividad en tiempo de compilación. Hay además un eje de **coste**: el `match` es esencialmente un salto según la etiqueta, O(número de variantes) en el peor caso pero típicamente O(1) por *jump table*, tan barato como el `if/else` que sustituye.
+
 ## 🧬 El concepto en la familia
 
-En Haskell `data Forma = Cuadrado Int | Rectangulo Int Int`. En Kotlin, una `sealed class`.
+El tipo suma nace en la familia ML y de ahí irradia. En **Haskell**, `data Forma = Cuadrado Int | Rectangulo Int Int` es la definición canónica, y el compilador avisa (`-Wincomplete-patterns`) si un `case` no cubre todas las variantes. **OCaml** y **F#** tienen la misma construcción bajo el nombre de *variant types*. **Swift** copió el `enum` con datos asociados casi tal cual de Rust (o ambos de ML), y lo usa hasta para `Optional`. **Kotlin** lo emula con `sealed class`, y **Scala** con `sealed trait` + `case class`. El hilo común es doble: el conjunto de variantes es **cerrado** (nadie puede añadir una desde fuera, al revés que con la herencia abierta), y el compilador usa ese cierre para garantizar la exhaustividad. Reconocer que `Option`/`Maybe`, `Result`/`Either` y tu propio `Forma` son todos el mismo patrón —un valor que es «una de N cosas, cada una con sus datos»— es la idea que unifica media biblioteca estándar de los lenguajes modernos.
 
 ## ✅ Prueba común
 
@@ -265,13 +280,17 @@ Detalle en [`reto.md`](reto.md).
 
 ## ⚠️ Errores comunes
 
-- **Olvidar una variante** → causa: caso sin manejar → solución: en Rust el compilador avisa; en otros, incluir el default
-- **Leer los datos de la variante equivocada** → causa: usar campos que no existen → solución: extraer solo los datos de la variante correcta
+- **Olvidar una variante** → causa: un `match`/`switch` que no cubre todos los casos → solución: en Rust, Haskell o Java sellada el compilador lo impide; en lenguajes sin exhaustividad, activa las advertencias del compilador y evita el comodín `_`/`default` que silencia el olvido justo cuando añades una variante nueva.
+- **Abusar del comodín `_`** → causa: un brazo `_ => ...` que traga cualquier variante futura y anula la comprobación de exhaustividad → solución: enumerar las variantes explícitamente cuando quieras que el compilador te avise al añadir una; reserva `_` solo para casos genuinamente «todos los demás».
+- **Leer los datos de la variante equivocada** → causa: acceder a un campo que solo existe en otra variante (el IBAN de un pago en efectivo) → solución: extraer los datos **dentro** del brazo del `match`, donde el patrón garantiza qué campos existen; nunca antes de saber qué variante tienes.
+- **Confundir enum simple con tipo suma** → causa: esperar que el `iota` de Go o un `enum` de C lleven datos por variante → solución: para datos por variante necesitas un ADT real (Rust, Swift, Java sellada) o simularlo con interfaces/uniones; el enum a secas es solo un conjunto de etiquetas.
 
 ## ❓ Preguntas frecuentes
 
-- **¿Tipo suma o herencia?** El tipo suma es cerrado y exhaustivo; la herencia es abierta. Distintas garantías.
-- **¿Por qué 'algebraico'?** Combina 'sumas' (alternativas) y 'productos' (campos) de tipos.
+- **¿Tipo suma o herencia?** Ambos modelan «una de varias cosas», pero con garantías opuestas. El tipo suma es **cerrado**: las variantes se conocen todas en un sitio y el compilador comprueba la exhaustividad, ideal cuando el conjunto de casos es estable y quieres seguridad. La herencia es **abierta**: cualquiera puede añadir una subclase después, ideal cuando esperas extensiones y prefieres el polimorfismo. Elige según cuál de las dos libertades necesitas.
+- **¿Por qué 'algebraico'?** Porque los tipos se componen con las mismas operaciones que los números: el **producto** (registro: campo A y campo B; sus valores se multiplican) y la **suma** (variantes: A o B; sus valores se suman). De ahí «tipo algebraico de datos». La analogía llega lejos: el tipo con cero valores es como el 0 y el tipo con un solo valor (unit) es como el 1.
+- **¿Qué relación tiene con `null`?** El tipo suma es la cura de `null`. En vez de un puntero que puede ser nulo y reventar sin aviso, la familia ML usa `Option<T>` = `Some(T) | None`: el `match` te **obliga** a manejar el caso vacío, y el «error del billón de dólares» —el `NullPointerException`— desaparece por construcción.
+- **¿Y el rendimiento?** Un valor de tipo suma ocupa lo que su variante más grande más una pequeña etiqueta (el *tag*); el `match` sobre él suele compilarse a una tabla de saltos, tan rápido como un `switch` sobre enteros. No hay penalización por la seguridad que aporta.
 
 ## 🔗 Referencias
 

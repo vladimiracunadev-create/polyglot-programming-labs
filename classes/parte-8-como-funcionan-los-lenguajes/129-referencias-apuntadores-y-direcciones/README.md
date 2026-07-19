@@ -1,39 +1,42 @@
 # Clase 129 — Referencias, apuntadores y direcciones
 
-> Parte **8 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> Parte **8 — Cómo funcionan los lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
 > ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Entender **referencias, apuntadores y direcciones**: acceder a un dato a través de su posición o dirección, no directamente. Indexar una lista es aritmética de direcciones: base + índice.
+Los datos del heap de la clase 128 no se manipulan directamente: se accede a ellos *a través* de algo que dice dónde están. Ese «algo» —una **dirección**, un **puntero** o una **referencia**— es la idea de **indirección**, una de las más poderosas y peligrosas de la programación. Esta clase la ilumina con una operación que parece inocente: acceder a `lista[indice]`. El *porqué* es que `arr[i]` no es una operación primitiva, sino azúcar sobre aritmética de direcciones: «toma la dirección base del arreglo, avanza `i` elementos, y lee lo que hay ahí». En C esa aritmética es visible (`*(arr + i)`); en Python, Java o Go está escondida bajo el corchete, pero el mecanismo subyacente es idéntico. Bryant & O'Hallaron muestran cómo el propio conjunto de instrucciones de la máquina ofrece *modos de direccionamiento* con base y desplazamiento escalado precisamente para que `arr[i]` sea una sola instrucción. Entender la indirección explica los punteros de C, las referencias de Java, el aliasing, el *segmentation fault* y por qué dos variables pueden apuntar al mismo objeto.
 
 ## 📚 Resultados de aprendizaje
 
 Al finalizar, podrás:
 
-1. Acceder a un elemento por su índice.
-2. Explicar la indirección (referencia/puntero).
-3. Relacionar el índice con la dirección.
+1. Acceder a un elemento de una secuencia por su índice.
+2. Explicar la indirección: acceder a un dato a través de una referencia a su posición.
+3. Relacionar un índice con una dirección: base más desplazamiento.
+4. Distinguir un puntero (dirección explícita, con aritmética) de una referencia gestionada.
 
 ## 🗺️ Temas
 
 | # | Tema | Por qué importa |
 |---|------|-----------------|
-| 1 | Indirección | Acceder a través de una posición |
-| 2 | Índice como dirección | base + desplazamiento |
-| 3 | Referencia vs. puntero | Ambos apuntan a un dato |
+| 1 | Indirección | Acceder al dato a través de quien lo señala, no directamente |
+| 2 | Índice como dirección | `arr[i]` equivale a base + i·tamaño del elemento |
+| 3 | Referencia vs. puntero | Ambos designan un dato; difieren en control y seguridad |
 
 ## 📖 Definiciones y características
 
-- **Referencia** — un valor que designa a otro dato. Clave: acceso indirecto.
-- **Puntero** — referencia explícita que guarda una dirección (C). Clave: `arr + i` = dirección del elemento i.
-- **Índice** — posición dentro de una secuencia. Clave: equivale a un desplazamiento desde la base.
+Una **referencia** es un valor que designa a otro dato en lugar de contenerlo. Cuando en Java escribes `List<Integer> a = b;`, `a` no copia la lista: ambas variables *referencian* el mismo objeto del heap. Modificar a través de una afecta a la otra —el fenómeno del *aliasing*—. La referencia es indirección con red de seguridad: no puedes hacer aritmética con ella ni apuntarla a una dirección arbitraria.
+
+Un **puntero** es una referencia explícita que guarda literalmente una dirección de memoria, un número. En C, `arr` es la dirección del primer elemento, y `arr + i` calcula la dirección del elemento `i` sabiendo el tamaño de cada elemento —el compilador escala el desplazamiento por `sizeof`—. El operador `*` *desreferencia*: va a esa dirección y lee o escribe el valor. Con ese poder viene el peligro: un puntero puede apuntar a una dirección inválida, y desreferenciarlo produce el temido *segmentation fault*.
+
+Un **índice** es una posición dentro de una secuencia, y aquí está la revelación de la clase: `lista[indice]` *es* aritmética de direcciones disfrazada. El índice es el desplazamiento desde la base. Por eso los arreglos empiezan en 0 —el primer elemento está a distancia cero de la base— y por eso el acceso indexado es O(1): no hay que recorrer nada, solo calcular una dirección y leerla.
 
 ## 🧩 Situación
 
-`arr[i]` en el fondo es 've a la dirección base más i posiciones'. Los punteros de C hacen esa aritmética explícita; los índices la esconden. Ambos son indirección.
+Un programador que solo ha usado `arr[i]` en Python cree que indexar «busca» el elemento. Cuando pasa a C y ve `*(arr + i)`, o cuando en Java descubre que asignar una lista a otra variable no la copia sino que la comparte, se topa con que todo era indirección. Acceder a `lista[indice]` con los mismos casos en los diez lenguajes deja ver cómo cada uno expone —o esconde— que por debajo hay una dirección base y un desplazamiento.
 
 ## 🧮 Modelo
 

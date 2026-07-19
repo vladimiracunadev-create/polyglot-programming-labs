@@ -7,7 +7,7 @@
 
 ## 🎯 Objetivo
 
-Usar **tuplas**: agrupar un número fijo de valores, posiblemente de tipos distintos, sin definir una clase. Se accede por posición y se desestructuran fácilmente.
+Comprender la **tupla** como lo que es: una colección de tamaño **fijo** y **heterogénea** cuyos elementos se identifican por su **posición**, no por un nombre. Es la estructura mínima para responder a la necesidad más común de la programación —«devuélveme dos cosas relacionadas»— sin el peso de declarar un tipo con nombre para ello. Una función que calcula un cociente y su resto, un punto `(x, y)`, un par clave/valor: en todos esos casos los valores viajan juntos porque significan algo en conjunto, pero no ameritan bautizar un `struct`. La clave conceptual es doble. Primero, la tupla se distingue del **registro** o `struct` (clase 099), donde los campos tienen nombre (`p.x`, `p.y`): en la tupla accedes por orden (`t.0`, `t[1]`), lo que la hace más ligera pero también más frágil, porque el significado vive en una convención posicional que el compilador no siempre protege. Segundo, en la mayoría de lenguajes la tupla es **inmutable** y de **semántica de valor**: se copia al asignarla y no cambia tras crearse, lo que la vuelve segura para compartir. El acceso a cualquier componente es O(1), como en cualquier estructura indexada por posición. El ejercicio de hoy —leer un par e intercambiar sus componentes— ejercita justo eso: construir la tupla, desestructurarla y reordenarla.
 
 ## 📚 Resultados de aprendizaje
 
@@ -27,13 +27,14 @@ Al finalizar, podrás:
 
 ## 📖 Definiciones y características
 
-- **Tupla** — grupo ordenado de valores de tamaño fijo. Clave: liviana, sin definir un tipo.
-- **Componente** — cada elemento de la tupla, por posición. Clave: `.0`, `[0]`.
-- **Registro posicional** — estructura cuyos campos se identifican por orden. Clave: la tupla lo es.
+- **Tupla** — grupo ordenado de valores de tamaño fijo, posiblemente de tipos distintos, sin necesidad de declarar un tipo con nombre. Su aridad (cuántos elementos tiene) y a menudo el tipo de cada posición forman parte de su propio tipo: en Rust `(i64, i64)` es un tipo distinto de `(i64, i64, i64)`. Es liviana y suele ser inmutable, con semántica de valor: Ramalho, en *Fluent Python*, la describe como «registros sin nombres de campo».
+- **Componente** — cada elemento de la tupla, accedido por su **posición**, empezando en 0. La notación cambia por lenguaje: `t[0]` en Python, `t.0` en Rust, `t.Item1` o campos nombrados en las tuplas de C#. El acceso es O(1): la posición se traduce en un desplazamiento fijo, igual que en un arreglo.
+- **Registro posicional vs. registro nominal** — un registro agrupa campos relacionados; la diferencia está en **cómo** se identifican. En el registro *posicional* (la tupla) el significado lo da el orden: el primero es la `x`, el segundo la `y`, por convención. En el registro *nominal* (`struct`, `record`, clase 099) cada campo tiene nombre, lo que documenta la intención y resiste reordenamientos. La tupla cambia legibilidad por brevedad.
+- **Desestructuración** — repartir los componentes de una tupla en variables independientes de una sola vez (`a, b = t`). Es la operación que hace a la tupla tan cómoda para devolver varios valores, y la base del intercambio idiomático `a, b = b, a`.
 
 ## 🧩 Situación
 
-Devolver coordenadas `(x, y)`, un par clave/valor, o un resultado con dos partes: la tupla agrupa sin la ceremonia de una clase.
+Una función necesita devolver dos cosas que significan algo juntas: un cociente y su resto, las coordenadas `(x, y)` de un punto, un par clave/valor, o el resultado de una búsqueda con su índice y su valor. Declarar una clase con nombre para cada una de esas parejas efímeras sería una ceremonia desproporcionada —tendrías decenas de tipos triviales que solo se usan una vez—. La tupla resuelve el caso: agrupa los valores sin bautizar nada, se desestructura en el sitio donde se recibe y desaparece. El problema de hoy —leer dos enteros e imprimirlos intercambiados como `tupla=(b, a)`— es el mínimo que muestra la construcción, el acceso posicional y el reordenamiento sin caer en el algoritmo.
 
 ## 🧮 Modelo
 
@@ -196,6 +197,18 @@ echo "tupla=({$t[0]}, {$t[1]})\n";
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
 
+## 🧪 Laboratorio guiado: del código a la salida
+
+Sigamos el caso `3 4`, que debe producir `tupla=(4, 3)`. La regla es simple —intercambiar los dos componentes— pero cada lenguaje la expresa con las herramientas que su modelo de tuplas le ofrece; comparemos tres muy distintos.
+
+En **Python**, `a, b = map(int, ...)` ya es una desestructuración: la tupla que produce `map` se reparte en `a=3` y `b=4`. Luego `t = (a, b)` construye la tupla `(3, 4)` explícita, y `t = (t[1], t[0])` crea una tupla **nueva** con los componentes en orden inverso, `(4, 3)` —no muta la anterior, porque las tuplas de Python son inmutables (Ramalho, *Fluent Python*)—. El acceso `t[0]`, `t[1]` es posicional y O(1). El f-string produce `tupla=(4, 3)`.
+
+En **Rust**, `let t: (i64, i64) = (v[0], v[1])` declara una tupla con tipo explícito; el acceso es por campo posicional con punto: `t.0` y `t.1`, sintaxis peculiar de Rust que refleja que la posición es parte del tipo. `let t = (t.1, t.0)` reasigna con *shadowing* a una tupla nueva `(4, 3)`. Como la tupla implementa `Copy` cuando sus componentes lo hacen, todo esto ocurre por valor, sin asignación en el heap.
+
+En **Java**, que no tiene tuplas nativas, el ejemplo recurre a lo más cercano: un `record Par(int a, int b)`. Aquí el registro es **nominal**, no posicional —los campos se llaman `a` y `b` y se leen con `t.a()`, `t.b()`—, y el «intercambio» se hace construyendo `new Par(t.b(), t.a())`, es decir `Par(4, 3)`. Es la ilustración perfecta del contraste de la clase: donde Python y Rust usan orden, Java usa nombres, y el `record` (introducido en Java 16, elogiado por Bloch como remedio a las clases de datos verbosas) es su forma idiomática de agrupar datos inmutables. La salida vuelve a ser `tupla=(4, 3)`.
+
+Los tres imprimen `tupla=(4, 3)`; el verificador comprueba que las diez implementaciones coinciden carácter a carácter con lo que dicta `casos.json`.
+
 ## 🔬 Comparación
 
 | Clase de diferencia | Observación entre lenguajes |
@@ -204,9 +217,11 @@ echo "tupla=({$t[0]}, {$t[1]})\n";
 | Semántica | Rust/Python tienen tuplas nativas; Java usa records/objetos. |
 | Paradigmática | SQL: una fila con varias columnas es una tupla. |
 
+El eje más revelador es **qué tan nativa es la tupla**. Python y Rust la tienen como tipo de primera clase —`(a, b)` es una tupla de verdad, inmutable y con acceso posicional—. C# ofrece las *value tuples* `(int a, int b)` con nombres opcionales de campo, un híbrido entre tupla y registro. Go **no tiene** tuplas: en su lugar, las funciones devuelven varios valores (`a, b := f()`), lo que cubre el caso de uso más frecuente —el retorno múltiple— sin introducir un tipo tupla; por eso el ejemplo de Go simplemente hace `a, b = b, a`. C y Java carecen igualmente de tuplas y recurren a `struct` (C) o `record`/`ValueTuple` (Java/C#), es decir, a registros **nominales**. En **valor vs. referencia**: la tupla de Rust y la de C#, y el `struct` de C, son de valor (se copian); el `record` de Java es una referencia a un objeto inmutable en el heap. Y en **coste**, todas coinciden: el acceso a un componente es O(1), porque la posición es un desplazamiento fijo conocido en tiempo de compilación.
+
 ## 🧬 El concepto en la familia
 
-En Ruby `[a, b]` funciona como tupla. En Haskell `(a, b)` es una tupla nativa con `fst`/`snd`.
+La tupla posicional es un patrón casi universal, con matices que conviene conocer. En Haskell `(a, b)` es una tupla nativa de primera clase, con las funciones `fst` y `snd` para pares, y su aridad forma parte del tipo hasta el punto de que `(a, b)` y `(a, b, c)` son tipos incompatibles. En Ruby cualquier arreglo `[a, b]` cumple el papel de tupla y se desestructura con `a, b = arr`. En Swift las tuplas permiten incluso nombrar sus posiciones (`(x: 3, y: 4)`), acercándose al registro. En Python coexisten la `tuple` anónima y `collections.namedtuple`/`typing.NamedTuple`, que le ponen nombre a los campos sin perder la semántica de tupla —el puente exacto entre el registro posicional de esta clase y el nominal de la 099—. La lección transversal: cuando dos o tres valores viajan juntos y son efímeros, casi todo lenguaje ofrece una tupla o algo que hace sus veces; en cuanto los campos merecen nombre y el grupo persiste, conviene graduarse a un registro con nombre.
 
 ## ✅ Prueba común
 
@@ -222,13 +237,17 @@ Detalle en [`reto.md`](reto.md).
 
 ## ⚠️ Errores comunes
 
-- **Confundir tupla con lista** → causa: esperar que crezca → solución: la tupla tiene tamaño fijo
-- **Acceder a un índice inexistente** → causa: error de posición → solución: respetar el número de componentes
+- **Confundir tupla con lista** → causa: esperar que la tupla crezca con `append` o que se pueda mutar un componente → solución: la tupla tiene tamaño fijo y suele ser inmutable; si necesitas cambiar el contenido, usa una lista (clase 090) o construye una tupla nueva.
+- **Acceder a un componente inexistente** → causa: pedir `t[2]` en un par, error de posición → solución: respetar la aridad; en lenguajes tipados como Rust el compilador lo impide, pero en Python es un error en tiempo de ejecución.
+- **Depender del orden en tuplas largas** → causa: en `(nombre, edad, ciudad)` es fácil olvidar cuál posición es cuál y pasar los argumentos cambiados → solución: si son más de dos o tres campos, o si el orden no es obvio, gradúate a un registro con nombre (`namedtuple`, `record`, `struct`) donde el significado sea explícito.
+- **Creer que intercambiar muta la tupla original** → causa: `t = (t[1], t[0])` no cambia la tupla vieja, crea una nueva → solución: entender que reasignas la variable a una tupla distinta; la original, si alguien más la referenciaba, sigue intacta (semántica de valor e inmutabilidad).
 
 ## ❓ Preguntas frecuentes
 
-- **¿Tupla o clase?** Tupla para agrupaciones pequeñas y anónimas; clase cuando los campos merecen nombre.
-- **¿Las tuplas son inmutables?** En muchos lenguajes sí (Python, Rust): no se cambian tras crearlas.
+- **¿Tupla o clase/registro?** Tupla para agrupaciones pequeñas, anónimas y efímeras, sobre todo retornos de dos o tres valores; registro con nombre cuando los campos merecen documentarse, el grupo persiste o el orden no basta para recordar qué es qué. La tupla cambia legibilidad por brevedad.
+- **¿Las tuplas son inmutables?** En muchos lenguajes sí (Python, Rust, las *value tuples* de C# copian por valor): no se modifican tras crearse. Eso las hace seguras de compartir y aptas como claves de diccionario en Python. Ojo: si una tupla de Python contiene una lista, esa lista interna sí puede mutar.
+- **¿Por qué Go no tiene tuplas?** Porque cubre el caso principal —devolver varios valores— con el **retorno múltiple** (`a, b := f()`), sin añadir un tipo tupla al lenguaje. Es una decisión de diseño minimalista de Go: resuelve el 90 % de los usos de la tupla sin el tipo.
+- **¿El acceso por posición es lento?** No: es O(1). La posición se conoce (a menudo en compilación) y se traduce en un desplazamiento fijo, igual que indexar un arreglo.
 
 ## 🔗 Referencias
 

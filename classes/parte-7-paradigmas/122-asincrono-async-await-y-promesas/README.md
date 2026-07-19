@@ -7,7 +7,11 @@
 
 ## 🎯 Objetivo
 
-Asomarse al paradigma **asíncrono**: iniciar una operación que tardará y continuar sin bloquear, esperando su resultado con `async/await`. Aquí una tarea calcula el doble y se espera su valor.
+La clase anterior repartía trabajo entre hilos que corrían de verdad a la vez. El paradigma **asíncrono** persigue un objetivo parecido —no quedarse parado esperando— pero con una filosofía opuesta: un solo hilo que, en vez de bloquearse mientras aguarda una operación lenta, la inicia, la deja en marcha y sigue haciendo otra cosa, para retomarla cuando el resultado esté listo. No hay paralelismo; hay *concurrencia sin paralelismo*. La palabra clave es *no bloquear*: cuando pides un dato a la red o al disco, no congelas el programa entero durante los milisegundos (o segundos) que tarda la respuesta.
+
+La pieza que representa "un valor que todavía no está pero llegará" es la **promesa** (o *future*, o *task*). Es un objeto que devuelves de inmediato como un pagaré: "aquí tienes un recibo; cuando el cálculo termine, contendrá el valor". El operador `await` es lo que canjeas ese recibo: suspende tu función en ese punto, devuelve el control al **bucle de eventos** —el mismo motor que viste en la clase 119— y reanuda tu función justo donde la dejaste cuando la promesa se resuelve. Bajo el azúcar, `async/await` es una máquina de estados: el compilador trocea tu función en los puntos de `await` y guarda dónde iba para poder continuar después. Es, en el fondo, *azúcar sintáctico sobre continuaciones y callbacks*: lo que en la clase 119 escribías como pirámide de callbacks anidados, aquí se lee como código secuencial de arriba abajo.
+
+Nuestro laboratorio reduce el paradigma a su gesto mínimo —una tarea asíncrona que calcula el doble de un número y se espera su valor— para que veas la *forma* `async/await` sin el ruido de la I/O real. El cálculo es instantáneo, pero la estructura (definir una operación asíncrona, iniciarla, esperar su resultado con `await`) es idéntica a la de leer un archivo o consultar una base de datos, que es donde este estilo despliega toda su ventaja.
 
 ## 📚 Resultados de aprendizaje
 

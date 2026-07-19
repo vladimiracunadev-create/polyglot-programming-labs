@@ -7,7 +7,11 @@
 
 ## 🎯 Objetivo
 
-Repasar los **operadores aritméticos** y ver diferencias sutiles: la división entera y el módulo se comportan distinto con negativos según el lenguaje (aquí usamos positivos para que coincidan). Es la base del cálculo en todo programa.
+Una expresión como `a + b * c` esconde más decisiones de las que parece. ¿Se multiplica antes de sumar? ¿En qué orden se evalúan `a`, `b` y `c`? ¿Qué pasa si `b` es una llamada con efecto colateral? Los operadores son los ladrillos de toda expresión, y las reglas que los gobiernan —precedencia, asociatividad, orden de evaluación— deciden qué calcula realmente tu código. Sebesta dedica un capítulo entero a esto porque es una fuente sorprendentemente rica de errores sutiles y de diferencias entre lenguajes.
+
+El ejercicio de esta clase se centra en los **cinco aritméticos** (`+ - * / %`) sobre dos enteros positivos, porque ahí vive la trampa más famosa: la división entera y el módulo. `7 / 2` da `3`, no `3.5`, cuando ambos operandos son enteros en C, Java o Go; Python separa esa operación en `//` (entera) y `/` (real) para evitar la ambigüedad. Y el módulo con negativos es un campo minado: `-7 % 3` da `2` en Python (signo del divisor) pero `-1` en C y Java (signo del dividendo). Por eso el contrato usa solo positivos: para que las diez implementaciones coincidan y la diferencia quede como advertencia, no como fallo del verificador.
+
+Aunque el código sea aritmético, el título abarca las otras tres familias que conviene tener presentes: los **de comparación** (`==`, `<`, `>=`), los **lógicos** con evaluación en cortocircuito (`&&`, `||`, que dejan de evaluar en cuanto el resultado está decidido, como analiza Scott) y los **bit a bit** (`&`, `|`, `^`, `<<`, `>>`), que operan sobre la representación binaria. Todos comparten el mismo esqueleto de reglas —precedencia y asociatividad— y todos pueden esconder efectos colaterales cuando un operando modifica estado al evaluarse.
 
 ## 📚 Resultados de aprendizaje
 

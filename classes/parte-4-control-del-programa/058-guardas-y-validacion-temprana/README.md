@@ -7,7 +7,9 @@
 
 ## 🎯 Objetivo
 
-Aplicar **guardas** (validación temprana): comprobar primero los casos inválidos o especiales y salir cuanto antes, dejando el camino principal limpio. Reduce el anidamiento y hace el código más legible.
+Una función que primero se ocupa de todo lo que puede salir mal —entradas inválidas, casos límite, situaciones especiales— y sale de inmediato ante cada uno, deja el resto del cuerpo para una sola cosa: el trabajo real. Eso es una **guarda** (*guard clause*), y la técnica de anteponerlas se llama validación temprana. El problema que resuelve es concreto y viejo: sin guardas, cada comprobación envuelve al resto del código en un `else`, y tres o cuatro validaciones producen una escalera de anidamiento que se desplaza hacia la derecha hasta volverse ilegible. La guarda invierte esa forma: en lugar de anidar el camino feliz cada vez más adentro, lo saca a la superficie y descarta los desvíos uno a uno.
+
+El concepto entronca directamente con la programación estructurada. Los **comandos guardados** (*guarded commands*) que Dijkstra formaliza en *Structured Programming* proponen justamente pensar el flujo como una lista de condiciones vigiladas, cada una con su acción; la guard clause moderna es la versión pragmática de esa idea. La intuición que se gana es que la validación no es ruido que estorba al algoritmo, sino su primera fase: establecer las precondiciones bajo las cuales el resto del código tiene derecho a suponer que sus datos son buenos. Un cuerpo de función que empieza con guardas se lee después "de corrido", sin tener que sostener mentalmente en qué rama anidada estamos.
 
 ## 📚 Resultados de aprendizaje
 
@@ -33,9 +35,13 @@ Al finalizar, podrás:
 - **Retorno temprano** — salir de la función en cuanto hay respuesta. Clave: menos ramas abiertas.
 - **Camino feliz** — el flujo principal sin errores. Clave: se lee de corrido tras las guardas.
 
+Estas cuatro nociones describen una misma disciplina desde ángulos distintos. La guarda es la construcción; la validación temprana es la estrategia de ponerlas al principio; el retorno temprano es el mecanismo con que cada guarda corta el flujo; y el camino feliz es el resultado: el trozo de código, ya al final, que solo se ejecuta cuando todo lo anterior pasó. La conexión con la teoría es directa. Los *guarded commands* de Dijkstra en *Structured Programming* modelan una decisión como un conjunto de guardas —condiciones booleanas— asociadas a acciones, y esa misma idea, llevada a la práctica, dice: comprueba las condiciones que invalidan el resto y despáchalas antes de continuar. Sebesta, al tratar la selección múltiple en *Concepts of Programming Languages*, observa que un `if/else` profundamente anidado y una secuencia de retornos tempranos son *equivalentes en control de flujo* pero no en carga cognitiva: el segundo mantiene baja la "profundidad" del código, que es una medida real de cuánto contexto debe sostener el lector. Aplanar el anidamiento no cambia lo que el programa hace; cambia lo que un humano puede verificar de un vistazo. Por eso en Go y Rust el early return al inicio de la función no es un truco, sino el estilo idiomático recomendado: se valida, se retorna, y el camino feliz queda al ras del margen izquierdo.
+
 ## 🧩 Situación
 
-Con guardas, `if edad < 0: return invalido` al principio evita envolver todo el resto en un `else`. El código baja en escalera en vez de anidarse hacia la derecha.
+Piensa en la función que procesa el pago de un pedido: necesita un usuario autenticado, un carrito no vacío, un método de pago válido y stock disponible. Escrita sin guardas, cada requisito abre un `if` cuyo `else` envuelve todo lo siguiente, y el cobro real termina cuatro o cinco niveles de indentación adentro, rodeado de llaves que hay que emparejar mentalmente para saber a qué error corresponde cada rama. Un lector que llega a arreglar un bug en el cálculo del total debe primero descifrar bajo qué combinación de condiciones se ejecuta esa línea. Con guardas —`if (!usuario.autenticado) return Error.NO_AUTH;`, `if (carrito.vacio) return Error.CARRITO_VACIO;`, y así— cada fallo se despacha y se olvida, y el cobro queda al final, sin anidar, legible como una frase.
+
+La diferencia no es solo estética: es de corrección. Cuando la validación está dispersa en `else` anidados, es fácil que una rama olvide cubrir un caso o que un cambio posterior mueva código dentro de la rama equivocada, y el sistema procese un pedido inválido. La validación temprana concentra todas las precondiciones en un bloque visible al inicio, donde saltan a la vista los huecos. Es la diferencia entre "creo que validamos el stock en algún sitio" y "las cuatro guardas están aquí, en orden, al principio".
 
 ## 🧮 Modelo
 
@@ -231,6 +237,12 @@ if ($edad < 0) {
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
 
+## 🔎 Recorrido del código: de la entrada a la salida
+
+Comparar **Python** y **Go** en esta clase es especialmente instructivo, porque expresan la misma lógica con dos formas distintas de la misma idea. Sigamos `edad = 10`. En Python, tras `int(sys.stdin.readline())` se evalúa `if edad < 0`: `10 < 0` es falso, se salta; luego `elif edad < 18`: `10 < 18` es verdadero, imprime `"menor"` y el `if/elif/else` termina sin tocar la rama `else`. Con `edad = -5`, la primera guarda `edad < 0` se cumple y produce `"invalido"` de inmediato; con `edad = 20`, ambas comprobaciones fallan y cae al `else` → `"adulto"`. Las tres salidas coinciden con `casos.json`. Aquí Python usa un `if/elif/else` clásico: una sola sentencia de selección múltiple con salida por `print`.
+
+Go escribe exactamente la misma clasificación, pero como **guardas con retorno temprano**: `if edad < 0 { fmt.Println("invalido"); return }`, luego `if edad < 18 { fmt.Println("menor"); return }`, y finalmente `fmt.Println("adulto")` sin `else`. Con `edad = 10`, la primera guarda no se cumple, la segunda sí: imprime `"menor"` y el `return` corta la función antes de llegar al `adulto` del final. Esta es la forma canónica de la guard clause: cada condición especial se despacha y se sale, de modo que la línea del camino feliz (`"adulto"`) vive al margen izquierdo, sin anidar. Nota que el resultado es idéntico al de Python precisamente porque un `if/elif/else` y una secuencia de guardas con `return` son *equivalentes en control de flujo*; lo que cambia es la forma. Go además **obliga** las llaves `{ }` incluso en un cuerpo de una línea, lo que hace visualmente inconfundible dónde empieza y termina cada guarda. Un tercer contraste es **SQL**, que no tiene retorno ni función: colapsa las tres guardas en un único `CASE WHEN edad < 0 ... WHEN edad < 18 ... ELSE 'adulto' END`, evaluado en orden sobre cada fila. El orden de los `WHEN` reproduce el orden de las guardas: si intercambiaras las dos primeras condiciones, un `-5` se clasificaría mal en los tres lenguajes por igual.
+
 ## 🔬 Comparación
 
 | Clase de diferencia | Observación entre lenguajes |
@@ -239,9 +251,11 @@ if ($edad < 0) {
 | Semántica | El orden de las guardas define la clasificación; cambiarlo cambia el resultado. |
 | Paradigmática | SQL encadena condiciones con CASE WHEN en orden. |
 
+Bajo la superficie, los diez lenguajes divergen en cuánto favorecen el estilo de guarda. Go lo eleva casi a norma cultural: su ausencia deliberada de excepciones para el flujo ordinario hace que el `if err != nil { return err }` sea el patrón dominante de todo el lenguaje, y el compilador **obliga** las llaves, eliminando el problema del `else` colgante. Rust empuja en la misma dirección pero con más herramientas: además del early return, ofrece `?` para propagar errores y `let ... else { return }` para validar-y-desestructurar en un gesto. Python, JavaScript y PHP permiten el `return` temprano sin ceremonia, aunque su tradición mezcla ambos estilos. Java y C# admiten guardas, pero cargan con el debate histórico del "único punto de salida" heredado de la era estructurada estricta, hoy mayormente abandonado. C las usa con `return` directo, sin excepciones que compliquen el flujo. SQL, declarativo, no tiene "salida temprana" en absoluto: su equivalente es el orden de los `WHEN` en un `CASE`, evaluado perezosamente de arriba abajo pero sin abandonar nunca la evaluación de la fila.
+
 ## 🧬 El concepto en la familia
 
-En Ruby `return 'invalido' if edad < 0`. En Go es común la guarda con `if ...{ return }` al inicio de la función.
+En la familia de scripting dinámico, Ruby ofrece el elegante modificador postfijo `return 'invalido' if edad < 0`, que lee casi como inglés y hace la guarda aún más compacta. En la familia de sistemas, Go y Rust han convertido el early return en el estilo por defecto para el manejo de errores, hasta el punto de que su ausencia de excepciones para el flujo normal *fuerza* el patrón de guarda. En la familia funcional, la idea toma otra forma: en vez de "salir temprano" —que presupone sentencias y efectos—, Haskell o los `match`/`case` con patrones expresan lo mismo despachando primero los casos base de una función definida por ecuaciones, y las *guard clauses* de Haskell (`| edad < 0 = "invalido"`) son literalmente eso, guardas, heredando el término de Dijkstra. La disciplina es universal; solo cambia si la encarnas con `return` imperativo o con ramas de una expresión.
 
 ## ✅ Prueba común
 
@@ -257,15 +271,21 @@ Detalle en [`reto.md`](reto.md).
 
 ## ⚠️ Errores comunes
 
-- **Anidar en vez de usar guardas** → causa: escalera de if/else hacia la derecha → solución: sacar los casos especiales como guardas al inicio
-- **Ordenar mal las guardas** → causa: clasificar mal por comprobar tarde → solución: ir de la condición más restrictiva a la más general
+- **Anidar en vez de usar guardas** → causa: envolver cada validación en un `else`, produciendo una escalera que se hunde hacia la derecha → solución: sacar los casos especiales como guardas con retorno temprano al inicio, dejando el camino feliz al margen.
+- **Ordenar mal las guardas** → causa: comprobar una condición general antes que una más específica, de modo que un valor cae en la rama equivocada (p. ej. probar `edad < 18` antes que `edad < 0`, clasificando un `-5` como `menor`) → solución: ir de la condición más restrictiva o excluyente a la más general.
+- **Olvidar el `return` en la guarda** → causa: escribir la condición pero no cortar el flujo, de modo que la ejecución sigue y también entra al camino feliz → solución: asegurar que cada guarda termina en `return` (o `break`/`continue`/`throw`) y no solo imprime.
+- **Meter lógica en las guardas** → causa: mezclar cálculo real dentro de las cláusulas de validación, difuminando la frontera entre "validar" y "hacer" → solución: mantener las guardas como comprobaciones baratas y de salida rápida; el trabajo va después, en el camino feliz.
 
 ## ❓ Preguntas frecuentes
 
-- **¿Guarda o if/else anidado?** La guarda suele ser más legible: aplana el código y deja claro el camino feliz.
-- **¿Varios return son mala práctica?** No con guardas: hacen el flujo más claro, no más confuso.
+- **¿Guarda o if/else anidado?** La guarda suele ser más legible: aplana el código, elimina la indentación creciente y deja el camino feliz claro al final. El anidado solo gana cuando las condiciones no son independientes y realmente representan sub-decisiones.
+- **¿Varios `return` no violan la regla del "único punto de salida"?** Esa regla era una convención de la era estructurada estricta, útil cuando había que liberar recursos manualmente. Con guardas y gestión automática de recursos, múltiples returns tempranos hacen el flujo *más* claro, no menos.
+- **¿Dónde ubico las guardas?** Al principio de la función, antes de cualquier cálculo, ordenadas de la validación más barata o más excluyente a la más costosa. Así el código nunca hace trabajo que luego una guarda descartaría.
+- **¿Esto sirve también en bucles?** Sí: el equivalente de la guarda dentro de un bucle es `continue` para saltar iteraciones inválidas temprano, aplanando el cuerpo del bucle igual que el `return` aplana la función.
 
 ## 🔗 Referencias
+
+Para esta clase, ve en *Structured Programming* al material de Dijkstra sobre *guarded commands* y la disciplina de la selección; en Sebesta, apóyate en el tratamiento de sentencias de selección y en su discusión sobre profundidad de anidamiento y legibilidad dentro del capítulo de control de flujo.
 
 **Libros de la parte:**
 

@@ -1,39 +1,64 @@
 # Clase 171 — Componente de automatización/scripting
 
-> Parte **11 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> Parte **11 — Proyecto integrador políglota** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
 > ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Construir el **componente de automatización/scripting**: tareas repetitivas que se ejecutan sin intervención (limpieza, despliegue, informes). Aquí se procesan n tareas y se confirma su finalización.
+Construimos el **componente de automatización**: los scripts que ejecutan tareas repetitivas sin que nadie
+las mire —limpiar temporales, respaldar, desplegar, mandar informes—. Es el pegamento del sistema, el que
+hace que las piezas trabajen juntas de noche y en fin de semana. Hoy modelamos su forma esencial: procesar
+un **lote** de `n` tareas y **confirmar** su finalización.
+
+La automatización es uno de los pilares de *The Pragmatic Programmer*, donde Hunt y Thomas dedican un
+capítulo entero a "la ubicuidad de la automatización" con una tesis contundente: **todo lo que haces a mano
+más de una vez es un candidato a script**, porque las manos se cansan, se distraen y se equivocan, mientras
+un script hace lo mismo la vez mil que la primera. Esa fiabilidad no es solo comodidad: es la base de la
+reproducibilidad. Un despliegue automatizado se puede auditar, versionar y repetir idéntico; un despliegue
+manual es una anécdota irrepetible. Por eso este componente, aunque humilde, sostiene la salud del sistema
+entero.
 
 ## 📚 Resultados de aprendizaje
 
 Al finalizar, podrás:
 
-1. Procesar un lote de tareas.
-2. Confirmar la finalización.
-3. Reconocer el rol de la automatización.
+1. Procesar un lote de tareas y confirmar su finalización.
+2. Explicar por qué automatizar da fiabilidad y reproducibilidad, no solo ahorro de tiempo.
+3. Reconocer el papel del scripting como pegamento entre componentes.
 
 ## 🗺️ Temas
 
 | # | Tema | Por qué importa |
 |---|------|-----------------|
-| 1 | Automatización | Tareas sin intervención |
-| 2 | Scripting | Pegamento entre componentes |
-| 3 | Lote de tareas | Procesar en serie |
+| 1 | Automatización | Tareas repetitivas sin intervención humana |
+| 2 | Scripting | El pegamento que compone los componentes |
+| 3 | Lote de tareas | Procesar en serie y confirmar |
 
 ## 📖 Definiciones y características
 
-- **Automatización** — ejecutar tareas repetitivas sin intervención humana. Clave: fiabilidad y ahorro de tiempo.
-- **Script** — programa que orquesta o automatiza pasos. Clave: pegamento del sistema.
-- **Lote** — conjunto de tareas procesadas juntas. Clave: eficiencia.
+La **automatización** es ejecutar tareas repetitivas sin intervención humana; su valor es la fiabilidad y
+la reproducibilidad, no solo el tiempo ahorrado. Un **script** es un programa que orquesta o automatiza
+pasos —el pegamento que une componentes que no fueron diseñados para hablarse directamente—. Un **lote** es
+un conjunto de tareas procesadas juntas, la unidad típica de un trabajo nocturno.
+
+Hay una propiedad silenciosa pero crucial en este mundo: la **idempotencia**. Un buen script de
+automatización se puede volver a lanzar tras un fallo sin causar estragos —respaldar dos veces no rompe
+nada, pero cobrar dos veces sí—. Nygard, en *Release It!*, advierte que los trabajos automáticos son
+justamente donde los fallos se acumulan en silencio: si nadie mira y nadie registra, un lote roto puede
+llevar semanas pasando desapercibido. De ahí que confirmar la finalización —el `estado=completado` de esta
+clase— no sea decorativo: es la señal que un sistema de monitoreo necesita para saber que la noche fue bien.
 
 ## 🧩 Situación
 
-Un script nocturno procesa las tareas pendientes (limpiar, respaldar, notificar) y confirma su finalización. La automatización, a menudo en Python o Bash, mantiene el sistema funcionando solo.
+Un script nocturno procesa las tareas pendientes: limpia archivos temporales, respalda la base de datos,
+notifica por correo, y al terminar confirma. Si una de esas tareas falla y el script se detiene sin avisar,
+el respaldo no se hizo y nadie se entera hasta que hace falta restaurarlo —el peor momento posible—. Por eso
+la automatización real se apoya en tres cosas que este ejercicio mínimo prefigura: procesar el lote,
+**registrar** el resultado y **confirmar** el desenlace. Python y Bash dominan aquí por su rapidez de
+escritura y su ubicuidad: están en todas partes y expresan "haz esto, luego esto" con un mínimo de
+ceremonia.
 
 ## 🧮 Modelo
 

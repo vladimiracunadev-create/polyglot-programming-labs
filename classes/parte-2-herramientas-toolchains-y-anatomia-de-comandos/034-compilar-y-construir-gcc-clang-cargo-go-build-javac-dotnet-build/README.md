@@ -7,67 +7,90 @@
 
 ## 🎯 Objetivo
 
-Distinguir 'ejecutar' de 'construir': construir produce un artefacto (binario, jar, dll) listo para distribuir o desplegar, sin ejecutarlo. Cada lenguaje compilado tiene su comando de construcción, y los proyectos reales se apoyan en un sistema de construcción (cargo, gradle, msbuild) que gestiona dependencias y pasos.
+Ejecutar y construir se parecen tanto que es fácil confundirlos, y sin embargo sirven a momentos completamente distintos del ciclo de vida de un programa. *Ejecutar* es correrlo ahora, para ver si funciona. *Construir* (build) es producir un **artefacto** —un binario, un `.jar`, un `.dll`— que se puede distribuir y ejecutar más tarde, en otra máquina, sin volver a tener el código fuente ni el compilador. El objetivo de esta clase es que dejes de mezclar ambas ideas: que sepas cuándo usas `go run` y cuándo `go build`, y que entiendas el papel de los **sistemas de construcción** (cargo, gradle, msbuild) que orquestan la compilación de proyectos reales con muchos archivos y dependencias.
+
+La distinción tiene consecuencias directas en producción. Desplegar código fuente y pedir «que lo compilen allá» traslada la complejidad al usuario y multiplica los puntos de fallo. Construir un artefacto y desplegar *eso* es la práctica profesional: reproducible, versionable y auditable, en línea con la insistencia de *The Pragmatic Programmer* en automatizar la construcción para que sea repetible y no dependa de la memoria de nadie.
 
 ## 📚 Resultados de aprendizaje
 
 Al finalizar, podrás:
 
-1. Diferenciar ejecutar de construir/compilar a un artefacto.
-2. Usar el comando de construcción de cada lenguaje del núcleo.
-3. Explicar el papel de un sistema de construcción (build system).
-
-## 🗺️ Temas
-
-| # | Tema | Por qué importa |
-|---|------|-----------------|
-| 1 | Ejecutar vs. construir | Correr ahora vs. producir un artefacto |
-| 2 | Compilador directo | gcc/clang, javac, rustc |
-| 3 | Sistema de construcción | cargo, go build, dotnet build, gradle |
-| 4 | Artefactos | Binarios, .jar, .dll listos para desplegar |
-
-## 📖 Definiciones y características
-
-- **Construir (build)** — producir el artefacto final (ejecutable, librería) a partir del código. Clave: el resultado se distribuye o despliega.
-- **Artefacto** — salida de la construcción: binario, .jar, .dll, wheel. Clave: es lo que se entrega, no el código fuente.
-- **Sistema de construcción** — herramienta que orquesta compilación y dependencias (cargo, gradle, msbuild). Clave: automatiza builds reproducibles.
-- **Compilación separada** — compilar módulos por separado y enlazarlos. Clave: acelera recompilaciones (solo lo que cambió).
+1. Diferenciar ejecutar de construir/compilar a un artefacto distribuible.
+2. Usar el comando de construcción de cada lenguaje compilado del núcleo.
+3. Explicar qué es un sistema de construcción y qué problemas resuelve más allá de invocar el compilador.
+4. Distinguir builds de depuración (debug) y de publicación (release) y cuándo usar cada uno.
 
 ## 🧩 Situación
 
-Durante el desarrollo usas `go run`; para desplegar en el servidor usas `go build`, que produce un binario que copias y ejecutas sin necesitar el toolchain. Ejecutar y construir sirven a momentos distintos.
+Durante el desarrollo de un servicio en Go usas `go run` una y otra vez: cambias, corres, verificas. Llega el día de desplegar en el servidor de producción, que no tiene instalado el toolchain de Go ni tu código. Aquí `go run` no sirve: lo que haces es `go build -o servicio`, que produce un binario autónomo; copias ese único archivo al servidor y lo ejecutas. El servidor nunca ve tu código fuente ni necesita el compilador. Esa es la diferencia entre ejecutar y construir en la práctica: durante el desarrollo iteras, para el despliegue produces un artefacto que viaja solo. Confundirlas lleva a instalar toolchains en servidores de producción, algo que ni hace falta ni es buena idea.
 
-## 🔎 Ejemplo
+## 📖 Del compilador al sistema de construcción
 
-Comandos de construcción del núcleo:
+En su forma más básica, construir es invocar el compilador con la flag de salida: `gcc main.c -o programa` produce el ejecutable `programa`. Funciona perfecto para un archivo. Pero un proyecto real tiene decenas de archivos fuente, dependencias externas, distintas configuraciones y pasos previos y posteriores a la compilación. Invocar el compilador a mano para todo eso sería insostenible y propenso a errores. De ahí nacen los **sistemas de construcción**.
 
-```text
-C:     gcc main.c -o programa
-Rust:  cargo build --release      → target/release/programa
-Go:    go build -o programa
-Java:  javac Main.java            → Main.class
-C#:    dotnet build -c Release    → bin/Release/...
+Un sistema de construcción hace tres cosas que el compilador solo no hace. Primero, **gestiona dependencias**: sabe qué bibliotecas necesita el proyecto y las trae (se solapa con la clase 035). Segundo, **orquesta la compilación incremental**: recompila solo lo que cambió desde la última vez, apoyándose en las marcas de tiempo de los archivos —la idea que popularizó `make` en Unix y que Kernighan y Pike ya trataban como pieza central del entorno de programación—. Tercero, **estandariza el proceso**: cualquiera del equipo construye con el mismo comando, sin conocer los detalles internos. `cargo build` en Rust, `dotnet build` en C#, `gradle build` en Java y `go build` en Go son esa capa: un comando único que esconde la complejidad y produce un build reproducible.
+
+Otra distinción importante es entre **debug** y **release**. Un build de depuración incluye símbolos e información para el depurador y no optimiza, para que compilar sea rápido y depurar cómodo; es el modo por defecto mientras desarrollas. Un build de *release* activa las optimizaciones del compilador y elimina la información de depuración: el binario es más rápido y más pequeño, pero más difícil de inspeccionar. `cargo build` produce debug; `cargo build --release` produce el binario optimizado que enviarías a producción. La misma dualidad existe en `dotnet build -c Release` y en las flags de optimización de gcc (`-O2`).
+
+## 🔬 Laboratorio guiado: construir en cada lenguaje
+
+Compara el comando de construcción del núcleo y, sobre todo, *dónde* deja el artefacto cada uno:
+
+```bash
+cc    main.c   -o programa            # C:    -> ./programa (ejecutable nativo)
+rustc main.rs  -o programa            # Rust: compilador directo, un archivo
+cargo build                           # Rust: -> target/debug/<nombre> (sistema de build)
+cargo build --release                 # Rust: -> target/release/<nombre> (optimizado)
+go    build    -o programa main.go    # Go:   -> ./programa (binario autocontenido)
+javac Main.java                       # Java: -> Main.class (bytecode, no ejecutable nativo)
+dotnet build   -c Release             # C#:   -> bin/Release/.../<proyecto>.dll
+```
+
+Fíjate en que el compilador directo (`gcc`, `rustc`, `javac`) deja el artefacto donde tú digas o al lado del fuente, mientras que los sistemas de construcción (`cargo`, `dotnet`) lo colocan en una carpeta convenida (`target/`, `bin/`). Esa convención es deliberada: separa tu código fuente de lo generado, para que puedas borrar lo generado sin miedo y para no versionarlo.
+
+Ahora comprueba con las manos la promesa del artefacto: que corre sin el toolchain ni el fuente. Construye un binario, mueve el fuente fuera de en medio y ejecuta:
+
+```bash
+go build -o programa main.go
+mkdir _fuentes && mv main.go _fuentes/   # el código ya no está aquí
+./programa                               # y sin embargo el binario sigue corriendo
+```
+
+Y observa la compilación incremental de un sistema de build: la primera vez compila todo, la segunda casi nada porque nada cambió:
+
+```bash
+cargo build          # primera vez: compila el proyecto y sus dependencias (lento)
+cargo build          # otra vez sin cambios: "Finished" al instante (no recompila)
+touch src/main.rs    # simula un cambio en un archivo
+cargo build          # ahora sí recompila, pero solo lo afectado
 ```
 
 ## ✍️ Práctica
 
-Si tienes Go o Rust, construye un binario y ejecútalo directamente (sin `run`). Observa que ya no necesitas el código fuente para correrlo.
+Si tienes Go o Rust, construye un binario y verifica que es autónomo: constrúyelo, aparta el código fuente a otra carpeta y ejecuta el binario; comprueba que sigue funcionando sin las fuentes presentes. Después, si usas Rust, construye en modo debug y luego en `--release` y compara el tamaño de ambos binarios con `ls -lh target/debug/` y `ls -lh target/release/`: el de release suele ser distinto por las optimizaciones. Ejecuta `cargo build` dos veces seguidas sin cambiar nada y observa que la segunda no recompila —esa es la compilación incremental en acción—. Anota, para tu lenguaje, cuál es el comando de construcción, dónde deja el artefacto y cómo pedirías un build de release.
 
 ## ⚠️ Errores comunes
 
-- **Desplegar el código fuente en vez del artefacto** → causa: confundir build con run → solución: construir y distribuir el binario/artefacto, no las fuentes
-- **Recompilar todo cada vez** → causa: no aprovechar la compilación incremental → solución: dejar que el build system recompile solo lo cambiado
+| Síntoma / mensaje | Causa y cómo arreglar |
+|-------------------|-----------------------|
+| Desplegar el código fuente y pedir «que lo compilen» | Confundir build con run. Construye el artefacto y distribuye *ese*, no las fuentes |
+| Instalar el toolchain en el servidor de producción | No hace falta si despliegas un binario autocontenido. Construye en CI, despliega el artefacto |
+| Recompilar todo el proyecto cada vez | No aprovechar la compilación incremental. Deja que el build system recompile solo lo cambiado |
+| El binario va lento en producción | Compilaste en modo debug. Usa `--release` / `-c Release` / `-O2` para el artefacto final |
+| Versionar `target/` o `bin/` en git | Son artefactos generados. Añádelos al `.gitignore`; se reconstruyen |
 
 ## ❓ Preguntas frecuentes
 
-- **¿Cuál es la diferencia entre debug y release?** Release optimiza y quita información de depuración: más rápido, más difícil de depurar.
-- **¿Los interpretados se 'construyen'?** Suelen empaquetarse (wheel, tarball) más que compilarse; el concepto de artefacto sigue aplicando.
+- **¿Cuál es la diferencia entre debug y release?** El build de release optimiza el código y quita la información de depuración: es más rápido y pequeño, pero difícil de depurar. El de debug es lo contrario: cómodo para desarrollar. Desarrolla en debug, distribuye en release.
+- **¿Los lenguajes interpretados se «construyen»?** No compilan a un ejecutable nativo, pero sí se *empaquetan* en artefactos distribuibles (wheels, tarballs), que es la clase 039. El concepto de «producir algo listo para entregar» sigue aplicando.
+- **¿`go build` y `cargo build` son compiladores?** No: son sistemas de construcción que *invocan* al compilador (el de Go, `rustc`) y además gestionan dependencias y compilación incremental. El compilador es una pieza de dentro.
+- **¿Por qué `cargo` deja todo en `target/`?** Para separar limpiamente lo generado del código fuente. Puedes borrar `target/` entero (`cargo clean`) y reconstruir; nunca pierdes nada que no se pueda regenerar.
 
 ## 🔗 Referencias
 
 - W. Shotts — *The Linux Command Line* (2ª ed., No Starch Press) — [gratis online](https://linuxcommand.org/tlcl.php).
-- B. W. Kernighan y R. Pike — *The Unix Programming Environment* (Prentice Hall).
-- A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley).
+- B. W. Kernighan y R. Pike — *The Unix Programming Environment* (Prentice Hall), sobre `make` y la construcción automatizada.
+- A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley), sobre automatizar la construcción para que sea reproducible.
 
 ---
 

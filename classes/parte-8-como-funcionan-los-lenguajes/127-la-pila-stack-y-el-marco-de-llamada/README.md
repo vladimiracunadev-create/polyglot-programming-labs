@@ -1,39 +1,42 @@
 # Clase 127 — La pila (stack) y el marco de llamada
 
-> Parte **8 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> Parte **8 — Cómo funcionan los lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
 > ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Entender la **pila (stack) y el marco de llamada**: cada llamada a función crea un marco con sus variables; la recursión los apila. La profundidad de la recursión es cuántos marcos hay a la vez.
+Toda función que llamas necesita recordar dos cosas: sus datos locales y a dónde volver cuando termine. El mecanismo que lo hace posible es la **pila de llamadas (call stack)** y su unidad, el **marco de llamada (stack frame)**. Esta clase lo hace visible con una suma recursiva `1+…+n` que reporta además su profundidad, porque la recursión es la forma más limpia de *apilar* marcos: cada `sumar(n)` deja su marco activo mientras espera el resultado de `sumar(n-1)`, y con `n` invocaciones anidadas hay `n` marcos vivos a la vez. El *porqué* es que esta estructura, descrita al detalle por Bryant & O'Hallaron en su capítulo sobre el *procedimiento* y la organización del *stack frame* en x86-64, explica fenómenos que verás toda tu carrera: el *stack overflow* de una recursión sin caso base, por qué las variables locales «desaparecen» al volver de una función, cómo un depurador reconstruye el *backtrace*, y por qué la pila es rapidísima comparada con el heap. Es una región LIFO (*last-in, first-out*) que crece y decrece con puro movimiento de un puntero.
 
 ## 📚 Resultados de aprendizaje
 
 Al finalizar, podrás:
 
-1. Reconocer la pila de llamadas.
-2. Relacionar recursión con marcos apilados.
-3. Explicar el desbordamiento de pila.
+1. Describir qué guarda un marco de llamada: parámetros, variables locales y dirección de retorno.
+2. Relacionar la recursión con marcos apilados y la profundidad con el número de marcos vivos.
+3. Explicar el desbordamiento de pila y sus causas.
+4. Contrastar la pila (automática, LIFO, acotada) con el heap (flexible, gestionado).
 
 ## 🗺️ Temas
 
 | # | Tema | Por qué importa |
 |---|------|-----------------|
-| 1 | Pila de llamadas | Marcos de las funciones activas |
-| 2 | Marco de llamada | Variables y retorno de una llamada |
-| 3 | Profundidad | Cuántos marcos hay a la vez |
+| 1 | Pila de llamadas | Registra las funciones activas y su orden de retorno |
+| 2 | Marco de llamada | Aísla los locales y el punto de retorno de cada invocación |
+| 3 | Profundidad | Cuántos marcos coexisten; su límite provoca el desbordamiento |
 
 ## 📖 Definiciones y características
 
-- **Pila (stack)** — región de memoria para los marcos de llamada. Clave: LIFO, rápida.
-- **Marco de llamada** — espacio de una llamada: parámetros, locales, dirección de retorno. Clave: se apila al llamar.
-- **Desbordamiento de pila** — cuando hay demasiados marcos. Clave: recursión muy profunda lo causa.
+La **pila (stack)** es la región de memoria donde el runtime coloca los marcos de las funciones activas. Su disciplina es LIFO: el último marco que entra es el primero que sale, exactamente el orden en que las llamadas se anidan y retornan. Su gran virtud, como subrayan Bryant & O'Hallaron, es la velocidad: reservar espacio para un marco es restar al puntero de pila (*stack pointer*), y liberarlo es sumarlo de vuelta —una sola instrucción, sin buscar hueco ni contabilizar nada.
+
+El **marco de llamada (stack frame)** es el bloque que una invocación reserva para sí: sus parámetros, sus variables locales y —crucial— la *dirección de retorno*, el punto del código al que la CPU debe saltar cuando la función acabe. Cuando `sumar(3)` llama a `sumar(2)`, el marco de `sumar(3)` permanece en la pila, congelado, guardando su `n=3` y su promesa de sumar `3` al resultado que espera. Por eso al volver de una función sus locales dejan de existir: su marco se desapiló.
+
+El **desbordamiento de pila (stack overflow)** ocurre cuando se apilan más marcos de los que caben en el espacio reservado (típicamente unos pocos MB). Una recursión sin caso base apila marcos indefinidamente y lo provoca; también una recursión correcta pero demasiado profunda. Es un límite físico, no un error lógico: por eso Python lo anticipa con `sys.setrecursionlimit` y por eso los lenguajes funcionales optimizan la *recursión de cola* para no crecer la pila.
 
 ## 🧩 Situación
 
-Cada llamada recursiva apila un marco; sumar 1..n con recursión usa n marcos a la vez. Si n es enorme, la pila se desborda. La pila explica cómo el programa recuerda dónde volver.
+Un programa recursivo funciona perfecto con `n=100` y revienta con `n=1_000_000` lanzando un *stack overflow*. Sin el modelo de la pila, parece magia negra. Con él, es aritmética: un millón de marcos vivos a la vez no caben en los megabytes de pila que el sistema operativo asignó al hilo. Sumar `1..n` con recursión, reportando `profundidad=n`, hace tangible esa correspondencia uno-a-uno entre llamadas anidadas y marcos apilados, y prepara el terreno para entender por qué a veces conviene convertir recursión en iteración.
 
 ## 🧮 Modelo
 
@@ -221,17 +224,29 @@ echo "suma=" . sumar($n) . " profundidad=$n\n";
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
 
+## 🧪 Laboratorio: recorrido del código
+
+Todas las implementaciones comparten la misma recurrencia `sumar(n) = n + sumar(n-1)` con caso base `sumar(0) = 0`, y todas apilan `n` marcos para `sumar(n)`. Las diferencias revelan cómo cada lenguaje trata el límite de la pila.
+
+En **Python**, la primera línea significativa es `sys.setrecursionlimit(5000)`. Es una confesión honesta del modelo: CPython impone un tope artificial a la profundidad de recursión —por defecto ~1000— para transformar un *stack overflow* nativo (que colgaría el proceso) en una excepción `RecursionError` manejable. Sin ese ajuste, `sumar(2000)` fallaría no por lógica sino por chocar contra el límite. La función `sumar` apila un marco de intérprete por llamada, y `profundidad={n}` reporta cuántos hubo vivos en el punto más hondo.
+
+En **C**, `long sumar(long n)` apila marcos *nativos* reales sobre la pila del hilo. Cada marco de C es minúsculo —unos pocos bytes para `n` y la dirección de retorno—, y no hay red de seguridad: si `n` fuera lo bastante grande, el programa no lanzaría una excepción sino que escribiría más allá del final de la pila y moriría con un *segmentation fault*. Este es el modelo que Bryant & O'Hallaron describen en el metal: la pila crece hacia direcciones bajas y el `stack pointer` se mueve con cada `call` y `ret`.
+
+En **Go**, `func sumar(n int) int64` corre sobre una *goroutine* con una pila que empieza pequeña (unos KB) pero *crece dinámicamente*: el runtime detecta cuando falta espacio y realoja la pila en una región mayor, copiando los marcos. Por eso Go tolera recursiones que tumbarían a C con la misma pila fija, a cambio de un coste de gestión. Tres lenguajes, tres políticas de pila —tope artificial, pila fija nativa, pila que crece— para exactamente la misma recurrencia.
+
 ## 🔬 Comparación
 
-| Clase de diferencia | Observación entre lenguajes |
+| Rasgo | Cómo se comporta entre los 10 lenguajes |
 |---|---|
-| Sintáctica | Función recursiva en cada lenguaje. |
-| Semántica | Cada llamada apila un marco; el retorno lo desapila. |
-| Paradigmática | SQL usa recursión con CTE, sin pila visible. |
+| Tipo de marco | Nativo real en C, Rust, Go; marco de intérprete/VM en Python, PHP; de la JVM/CLR en Java, C#. |
+| Límite de profundidad | Artificial y ajustable en Python (`setrecursionlimit`); pila fija del hilo en C/Rust/Java; pila que crece en Go. |
+| Fallo al exceder | `RecursionError` (Python), `StackOverflowError` (Java/C#), *segfault* (C), *panic* (Rust). |
+| Recursión de cola | Optimizada en algunos (funcionales, a veces C/Rust con `-O`); no garantizada en Python ni Java. |
+| SQL | Sin pila visible: el CTE recursivo (`WITH RECURSIVE`) expresa la iteración de forma declarativa. |
 
 ## 🧬 El concepto en la familia
 
-En Haskell la recursión es el modo natural de iterar; la recursión de cola puede optimizarse a un bucle.
+La pila de llamadas es universal, pero su relación con la recursión cambia según el paradigma. En Haskell y otros funcionales, la recursión *es* el bucle natural, y el compilador optimiza la *recursión de cola* (cuando la llamada recursiva es lo último que se hace) reutilizando el marco en vez de apilar uno nuevo —convirtiendo una recursión en un bucle de pila constante. Scheme lo garantiza por norma del lenguaje. Python y Java, en cambio, deliberadamente *no* la optimizan, priorizando *backtraces* legibles sobre la eficiencia de pila. Entender el marco de llamada te permite predecir cuáles de estos lenguajes sobreviven a una recursión profunda y cuáles exigen reescribirla como iteración.
 
 ## ✅ Prueba común
 
@@ -247,13 +262,15 @@ Detalle en [`reto.md`](reto.md).
 
 ## ⚠️ Errores comunes
 
-- **Recursión sin caso base** → causa: desbordamiento de pila → solución: definir el caso base
-- **Recursión demasiado profunda** → causa: límite de pila → solución: usar iteración o recursión de cola para n enorme
+- **Recursión sin caso base** → causa: nada detiene el anidamiento, la pila se llena → solución: definir y verificar el caso base (`sumar(0) = 0`) antes de la llamada recursiva.
+- **Recursión correcta pero demasiado profunda** → causa: incluso con caso base, `n` enorme excede la pila del hilo → solución: convertir a iteración, o a recursión de cola si el lenguaje la optimiza.
+- **Confiar en la optimización de cola donde no existe** → causa: asumir que Python o Java reciclan el marco → solución: comprobar que el lenguaje la garantiza; si no, reescribir el bucle a mano.
 
 ## ❓ Preguntas frecuentes
 
-- **¿Por qué existe la pila?** Para recordar dónde volver y los datos locales de cada llamada.
-- **¿Stack o heap?** La pila guarda marcos (rápida, automática); el heap, datos de vida flexible.
+- **¿Por qué existe la pila?** Para que cada función activa recuerde sus datos locales y su dirección de retorno sin pisar a las demás, con reserva y liberación en una sola instrucción.
+- **¿Pila o heap?** La pila guarda marcos de vida ligada a la llamada (rápida, automática, LIFO, acotada); el heap guarda datos de vida flexible que sobreviven al retorno (clase 128).
+- **¿Qué es un *backtrace*?** La lista de marcos vivos en el momento de un error: es literalmente la pila de llamadas leída de arriba abajo, y por eso un depurador puede mostrártela.
 
 ## 🔗 Referencias
 

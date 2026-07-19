@@ -1,39 +1,46 @@
 # Clase 149 — Diseño y arquitectura comparada
 
-> Parte **9 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> Parte **9 — Ingeniería de software políglota** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
 > ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Introducir el **diseño y la arquitectura**: un sistema se organiza en capas o componentes con responsabilidades claras. Contar las capas es la medida más básica de su estructura.
+El **diseño** es el conjunto de decisiones que reparten un sistema en piezas y definen cómo se hablan entre sí; la **arquitectura** es ese diseño a la escala más alta, la que fija la forma general antes de escribir una sola línea de negocio. McConnell dedica en *Code Complete* varios capítulos a lo que llama el desafío central del diseño de software: gestionar la complejidad dividiendo el sistema en partes que quepan, cada una, en una sola cabeza. Dos conceptos gobiernan esa división. La **cohesión** mide cuánto pertenecen juntas las cosas dentro de un módulo —alta cohesión es bueno, una capa que hace *una* cosa—; el **acoplamiento** mide cuánto depende un módulo de otro —bajo acoplamiento es bueno, porque permite cambiar una pieza sin arrastrar a las demás—. Hunt y Thomas, en *The Pragmatic Programmer*, empaquetan la misma meta bajo la palabra **ortogonalidad**: componentes independientes, donde tocar uno no repercute en los otros.
+
+El programa de `casos.json` toma la medida más elemental imaginable de una arquitectura: *contar sus capas*. Recibe los nombres de las capas (`web api datos`) y responde `capas=3`. Es deliberadamente humilde —contar no es diseñar—, pero nombrar y enumerar los componentes es siempre el primer acto de razonar sobre una estructura: no puedes hablar del acoplamiento entre capas que aún no has identificado. La arquitectura en capas clásica (presentación → lógica → datos) es el ejemplo canónico, y contar sus estratos es el punto de partida.
+
+Lo verdaderamente interesante para un curso políglota aparece en la comparación: cada lenguaje *empuja* hacia una forma distinta de organizar el código. Java te da paquetes y una jerarquía de directorios; Go y Rust, módulos con reglas de visibilidad propias; C# organiza con namespaces y ensamblados. La arquitectura no es neutral respecto al lenguaje: la gramática del lenguaje moldea la estructura que resulta natural.
 
 ## 📚 Resultados de aprendizaje
 
 Al finalizar, podrás:
 
-1. Contar las capas de una arquitectura.
-2. Explicar la separación de responsabilidades.
-3. Reconocer estilos arquitectónicos.
+1. **Contar e identificar** las capas o componentes de una arquitectura descrita por sus nombres.
+2. **Distinguir** cohesión de acoplamiento y explicar por qué se busca alta cohesión y bajo acoplamiento.
+3. **Relacionar** la separación de responsabilidades con la capacidad de cambiar el sistema sin efectos colaterales.
+4. **Comparar** cómo distintos lenguajes (paquetes Java, módulos Go/Rust, namespaces C#) empujan hacia distintas estructuras.
 
 ## 🗺️ Temas
 
 | # | Tema | Por qué importa |
 |---|------|-----------------|
-| 1 | Arquitectura | Estructura de alto nivel |
-| 2 | Capa/componente | Responsabilidad definida |
-| 3 | Separación de responsabilidades | Cada parte hace una cosa |
+| 1 | Arquitectura y capas | Estructura de alto nivel del sistema |
+| 2 | Cohesión y acoplamiento | Decide qué tan fácil es cambiar |
+| 3 | Separación de responsabilidades | Cada parte hace una sola cosa |
+| 4 | Módulos por lenguaje | La gramática moldea la estructura |
 
 ## 📖 Definiciones y características
 
-- **Arquitectura** — estructura de alto nivel de un sistema y sus componentes. Clave: guía las decisiones grandes.
-- **Capa** — grupo de componentes con una responsabilidad (presentación, lógica, datos). Clave: separa preocupaciones.
-- **Acoplamiento** — grado de dependencia entre componentes. Clave: bajo acoplamiento facilita el cambio.
+- **Arquitectura** — la estructura de alto nivel de un sistema: qué componentes existen, qué responsabilidad tiene cada uno y cómo se relacionan. Es donde se toman las decisiones caras de revertir, así que McConnell insiste en pensarlas antes, cuando cambiarlas todavía es barato.
+- **Capa** — un grupo de componentes con una responsabilidad común (presentación, lógica de negocio, acceso a datos). Las capas imponen una dirección a las dependencias: la de presentación conoce a la de negocio, no al revés, y esa asimetría es lo que mantiene el sistema comprensible.
+- **Cohesión** — el grado en que los elementos de un módulo pertenecen realmente juntos. Alta cohesión significa que una capa tiene un motivo único para existir; baja cohesión es el módulo "cajón de sastre" que hace de todo y no se entiende.
+- **Acoplamiento** — el grado de dependencia entre componentes. Bajo acoplamiento —el ideal— permite reemplazar o modificar una pieza sin que el cambio se propague; alto acoplamiento convierte cualquier retoque en una reacción en cadena. Hunt y Thomas lo llaman ortogonalidad y lo consideran, junto a la ausencia de duplicación, la base de un diseño mantenible.
 
 ## 🧩 Situación
 
-Un sistema típico tiene capas: web (interfaz), api (lógica), datos (persistencia). Nombrar y contar las capas es el primer paso para razonar sobre su arquitectura.
+Heredas un servicio que "nadie se atreve a tocar". Al leerlo descubres que la lógica de negocio hace consultas SQL directas y también arma HTML: las tres responsabilidades —presentación, negocio y datos— viven mezcladas en las mismas funciones. Cambiar el formato de una fecha en pantalla te obliga a entender la consulta a la base de datos, porque están enredadas: alto acoplamiento, baja cohesión. La cura es arquitectónica: separar en capas `web`, `api` y `datos`, cada una con su responsabilidad, con dependencias que apunten en una sola dirección. El primer paso, antes de mover una línea, es exactamente lo que hace el programa de esta clase: nombrar las capas y contarlas, para tener un mapa sobre el que razonar. `capas=3` es el diagnóstico inicial de una arquitectura que por fin se puede discutir.
 
 ## 🧮 Modelo
 
@@ -51,6 +58,8 @@ Especificación y verificación en [`casos.json`](casos.json):
 
 ## 📐 Algoritmo (pseudocódigo neutral)
 
+Contar los componentes es la medida más básica de una estructura: sin enumerarlos no hay nada sobre lo que razonar.
+
 ```text
 LEER capas ; ESCRIBIR cantidad
 ```
@@ -62,11 +71,48 @@ Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
 ### Python · `python main.py`
 
+Python resuelve el conteo con una elegancia casi telegráfica. `sys.stdin.read().split()` sin argumentos parte por *cualquier* bloque de espacios en blanco y descarta los vacíos, así que `"web api datos"` se convierte en una lista de tres cadenas; `len(...)` la mide. El detalle idiomático que Ramalho subraya en *Fluent Python* es que `str.split()` sin separador ya normaliza espacios múltiples y saltos de línea, por lo que no hace falta limpieza previa: la abstracción correcta hace desaparecer el caso borde.
+
 ```python
 import sys
 
 capas = sys.stdin.read().split()
 print(f"capas={len(capas)}")
+```
+
+Para `web api datos` la lista tiene tres elementos y sale `capas=3`; para `cli`, uno, `capas=1`; para `web api datos cache`, cuatro. Fíjate en que el "modelo" del sistema —sus capas— es aquí, literalmente, una lista, y contar componentes es medir esa lista.
+
+### Go · `go run main.go`
+
+Go contrasta en la forma de leer, pero coincide en el espíritu con `strings.Fields`, que es el equivalente exacto del `split()` sin argumentos de Python: trocea por espacios en blanco y omite los vacíos. Donovan y Kernighan, en *The Go Programming Language*, presentan `Fields` como la herramienta idiomática para tokenizar texto separado por espacios sin sorpresas. La verbosidad de importar `bufio`, `os` y `strings` es el precio que Go paga por su explicitud: nada de magia, cada dependencia a la vista.
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
+
+func main() {
+	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	capas := strings.Fields(line)
+	fmt.Printf("capas=%d\n", len(capas))
+}
+```
+
+Que Go se apoye en `strings.Fields` no es casual: es un lenguaje que organiza el propio código en *paquetes* con visibilidad por mayúscula/minúscula, y su biblioteca estándar refleja esa mentalidad modular y sin adornos.
+
+### SQL · `sqlite3 :memory: < main.sql`
+
+SQL vuelve a mostrar el otro paradigma. No hay lista ni tokens: hay una tabla donde *cada capa es una fila*, y contar componentes es la agregación `count(*)`. Es una traducción fiel de la idea arquitectónica —cada componente, una entidad— al modelo relacional que Date defiende en *SQL and Relational Theory*: razonas sobre conjuntos de filas, no sobre una cadena que hay que partir.
+
+```sql
+-- SQL: cuenta las filas (capas).
+WITH capas(nombre) AS (VALUES ('web'), ('api'), ('datos'))
+SELECT printf('capas=%d', count(*)) AS resultado FROM capas;
 ```
 
 ### JavaScript · `node main.mjs`
@@ -113,25 +159,6 @@ string[] capas = Console.In.ReadToEnd()
 Console.WriteLine($"capas={capas.Length}");
 ```
 
-### Go · `go run main.go`
-
-```go
-package main
-
-import (
-	"bufio"
-	"fmt"
-	"os"
-	"strings"
-)
-
-func main() {
-	line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
-	capas := strings.Fields(line)
-	fmt.Printf("capas=%d\n", len(capas))
-}
-```
-
 ### Rust · `rustc main.rs -o main && ./main`
 
 ```rust
@@ -159,14 +186,6 @@ int main(void) {
 }
 ```
 
-### SQL · `sqlite3 :memory: < main.sql`
-
-```sql
--- SQL: cuenta las filas (capas).
-WITH capas(nombre) AS (VALUES ('web'), ('api'), ('datos'))
-SELECT printf('capas=%d', count(*)) AS resultado FROM capas;
-```
-
 ### PHP · `php main.php`
 
 ```php
@@ -180,15 +199,28 @@ echo "capas=" . count($capas) . "\n";
 
 ## 🔬 Comparación
 
+Aquí la diferencia entre lenguajes va más allá de la sintaxis del conteo: cada uno ofrece un mecanismo distinto para *organizar* el código en unidades, y ese mecanismo condiciona la arquitectura que emerge de forma natural.
+
+| Lenguaje | Unidad de organización | Control de visibilidad |
+|---|---|---|
+| Java | paquetes (`package a.b.c`) + directorios | `public`/`protected`/`private`/paquete |
+| C# | namespaces + ensamblados | `public`/`internal`/`private` |
+| Go | paquetes (por directorio) | mayúscula = exportado |
+| Rust | módulos (`mod`) + crates | `pub` explícito, privado por defecto |
+| Python | módulos y paquetes (`__init__.py`) | convención `_privado` |
+| JavaScript/TS | módulos ES (`import`/`export`) | `export` explícito |
+| C | archivos + cabeceras `.h` | `static` = interno a la unidad |
+| SQL | esquemas | permisos por objeto |
+
 | Clase de diferencia | Observación entre lenguajes |
 |---|---|
-| Sintáctica | Contar palabras en cada lenguaje. |
-| Semántica | Cada capa aísla una responsabilidad. |
-| Paradigmática | SQL cuenta filas. |
+| Sintáctica | `split`/`Fields`/`count` frente a bucle con `scanf`. |
+| Semántica | Cada capa aísla una responsabilidad; contar es el primer diagnóstico. |
+| Paradigmática | SQL cuenta filas (una capa = una fila) en vez de tokenizar. |
 
 ## 🧬 El concepto en la familia
 
-Arquitecturas en capas, hexagonal, microservicios: todas organizan componentes con responsabilidades.
+La estructura en componentes con responsabilidades reaparece en cada estilo arquitectónico: la arquitectura en **capas** las apila y dirige las dependencias hacia abajo; la **hexagonal** (puertos y adaptadores) pone el dominio en el centro y el mundo exterior en los bordes; los **microservicios** separan las capas en procesos independientes desplegables por separado. Cambian las fronteras y su coste, pero la pregunta de fondo es siempre la misma que la de esta clase: ¿cuántas piezas hay, qué responsabilidad tiene cada una y cómo dependen entre sí?
 
 ## ✅ Prueba común
 
@@ -204,13 +236,15 @@ Detalle en [`reto.md`](reto.md).
 
 ## ⚠️ Errores comunes
 
-- **Capas con responsabilidades mezcladas** → causa: difícil de mantener → solución: una responsabilidad por capa
-- **Alto acoplamiento** → causa: un cambio propaga a todo → solución: definir contratos claros entre capas
+- **Capas con responsabilidades mezcladas** → causa: baja cohesión, difícil de mantener → solución: una responsabilidad por capa.
+- **Alto acoplamiento** → causa: un cambio se propaga a todo el sistema → solución: definir contratos claros entre capas y dirigir las dependencias.
+- **Sobre-arquitectura** → causa: inventar capas que el problema no pide, complejidad gratuita → solución: tantas capas como el problema justifique, ni una más.
 
 ## ❓ Preguntas frecuentes
 
-- **¿Cuántas capas?** Las que el problema justifique; ni de más ni de menos.
-- **¿Capas o microservicios?** Capas dentro de un proceso; microservicios los separan en servicios.
+- **¿Cuántas capas debe tener un sistema?** Las que el problema justifique; ni de más (complejidad gratuita) ni de menos (responsabilidades mezcladas). Contar es el diagnóstico, no la meta.
+- **¿Capas o microservicios?** Las capas conviven dentro de un mismo proceso; los microservicios separan responsabilidades en servicios desplegables por separado, ganando independencia a cambio de complejidad de red.
+- **¿El lenguaje decide la arquitectura?** No la decide, pero la empuja: los módulos de Rust o los paquetes de Java hacen que ciertas estructuras sean naturales y otras, incómodas.
 
 ## 🔗 Referencias
 

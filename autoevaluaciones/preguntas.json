@@ -1,7 +1,7 @@
 {
   "meta": {
     "programa": "Polyglot Programming Labs",
-    "total_preguntas": 3,
+    "total_preguntas": 47,
     "partes": 12
   },
   "partes": [
@@ -41,6 +41,556 @@
           ],
           "correcta": 1,
           "exp": "El verificador degrada silenciosamente: si falta el toolchain, marca el lenguaje como omitido e informa, sin fallar. Solo falla si una implementación presente produce una salida distinta."
+        }
+      ]
+    },
+    {
+      "idx": 1,
+      "titulo": "Atlas y genealogía de los lenguajes",
+      "preguntas": [
+        {
+          "q": "Se dice que C# y Java son \"primos\" y que ambos descienden de C en la sintaxis. ¿Qué captura mejor el valor de pensar en familias de lenguajes al aprender uno nuevo?",
+          "opciones": [
+            "Que dos lenguajes de la misma familia comparten siempre la misma biblioteca estándar",
+            "Que conocer los rasgos de la familia (gestión de memoria, tipado, modelo de ejecución) permite anticipar decisiones de diseño del nuevo lenguaje",
+            "Que la sintaxis parecida garantiza que el código de uno compile en el otro",
+            "Que los lenguajes de una familia tienen exactamente el mismo rendimiento"
+          ],
+          "correcta": 1,
+          "exp": "La genealogía es útil porque predice decisiones de diseño (memoria administrada por GC, tipado estático nominal, VM), no porque garantice compatibilidad de código o bibliotecas. La sintaxis compartida es solo la capa más visible."
+        },
+        {
+          "q": "Go, Erlang/Elixir y Java resuelven la concurrencia de maneras distintas. ¿Qué idea genealógica explica por qué Go se asocia al CSP y Erlang al modelo de actores?",
+          "opciones": [
+            "Ambos copiaron el modelo de hilos con memoria compartida de C",
+            "Go hereda la comunicación por canales (CSP de Hoare) y Erlang el paso de mensajes entre procesos aislados (actores)",
+            "Los dos usan exactamente el mismo modelo, solo cambia el nombre",
+            "La concurrencia no depende del linaje del lenguaje sino solo del hardware"
+          ],
+          "correcta": 1,
+          "exp": "Go desciende de la tradición CSP: goroutines que se comunican por canales. Erlang encarna el modelo de actores: procesos aislados sin memoria compartida que intercambian mensajes. Son linajes conceptuales distintos, no el modelo de hilos compartidos de C."
+        },
+        {
+          "q": "Rust incorpora enums con datos, pattern matching y Option/Result. ¿De qué familia toma prestadas esas ideas y qué revela sobre la evolución de los lenguajes?",
+          "opciones": [
+            "De la familia Lisp; demuestra que Rust es un dialecto de Scheme",
+            "De la familia funcional tipada (ML/Haskell); los lenguajes modernos combinan linajes en vez de pertenecer a uno solo",
+            "De COBOL; prueba que las ideas viejas no sirven",
+            "De SQL; los tipos algebraicos vienen del álgebra relacional"
+          ],
+          "correcta": 1,
+          "exp": "Los tipos suma con datos, el pattern matching y Option/Result provienen de la familia ML (Haskell, OCaml). Rust es un caso claro de lenguaje moderno que fusiona el linaje de sistemas (C/C++) con el funcional tipado."
+        },
+        {
+          "q": "SQL aparece en el núcleo junto a lenguajes imperativos. ¿Por qué se le considera un lenguaje de programación pese a no tener bucles ni variables mutables al estilo de Python?",
+          "opciones": [
+            "Porque en el fondo se compila a C",
+            "Porque es declarativo: se describe QUÉ resultado se quiere y el motor decide CÓMO obtenerlo, lo cual es un paradigma legítimo",
+            "Porque solo sirve para almacenar datos, no para programar",
+            "Porque es idéntico a una hoja de cálculo"
+          ],
+          "correcta": 1,
+          "exp": "SQL pertenece a la familia declarativa/lógica: el programador especifica el resultado deseado y el planificador de consultas elige la estrategia de ejecución. Es un paradigma de programación distinto al imperativo, no una carencia."
+        }
+      ]
+    },
+    {
+      "idx": 2,
+      "titulo": "Herramientas, toolchains y anatomía de comandos",
+      "preguntas": [
+        {
+          "q": "En un lenguaje interpretado corregiste un error de tipos escribiendo mal el nombre de una variable que solo se usa en una rama poco frecuente. ¿Por qué ese mismo error habría aparecido antes en un lenguaje compilado con tipado estático?",
+          "opciones": [
+            "Porque los lenguajes compilados no permiten variables",
+            "Porque la compilación analiza todo el código antes de ejecutar, mientras que el intérprete solo evalúa las líneas que realmente corre",
+            "Porque los intérpretes no tienen errores de tipos nunca",
+            "Porque compilar borra las ramas poco frecuentes"
+          ],
+          "correcta": 1,
+          "exp": "El compilador verifica todo el programa de forma estática antes de ejecutar, así que detecta errores en ramas no ejecutadas. Un intérprete descubre el error solo cuando el flujo llega a esa línea en tiempo de ejecución."
+        },
+        {
+          "q": "TypeScript se \"transpila\" a JavaScript, Java se compila a bytecode y C se compila a código máquina. ¿Qué distingue conceptualmente a la transpilación de la compilación tradicional?",
+          "opciones": [
+            "La transpilación produce código de otro lenguaje de alto nivel (o de nivel similar), no un ejecutable ni código máquina",
+            "La transpilación siempre es más lenta en tiempo de ejecución",
+            "La transpilación elimina la necesidad de un runtime",
+            "No hay ninguna diferencia; son sinónimos exactos"
+          ],
+          "correcta": 0,
+          "exp": "Transpilar es traducir de un lenguaje fuente a otro de nivel comparable (TS→JS). Compilar tradicionalmente baja el nivel de abstracción hacia bytecode o código máquina. El destino de la traducción es lo que los distingue."
+        },
+        {
+          "q": "Herramientas como pyenv, nvm, rustup y SDKMAN existen en casi todos los ecosistemas. ¿Qué problema transferible resuelven todas ellas?",
+          "opciones": [
+            "Formatear el código automáticamente al guardar",
+            "Instalar y alternar entre múltiples versiones del lenguaje/toolchain por proyecto sin conflictos globales",
+            "Ejecutar las pruebas unitarias en paralelo",
+            "Publicar el paquete en el repositorio oficial"
+          ],
+          "correcta": 1,
+          "exp": "Son gestores de versiones del propio toolchain: permiten que distintos proyectos usen distintas versiones del lenguaje sin romper la instalación global. El concepto es idéntico entre ecosistemas aunque cambie el comando."
+        },
+        {
+          "q": "Al leer `cargo build --release --target wasm32-unknown-unknown`, ¿qué parte es el subcomando y qué parte es una bandera (flag)?",
+          "opciones": [
+            "`cargo` es el subcomando y `build` es una bandera",
+            "`build` es el subcomando y `--release` es una bandera; `wasm32-unknown-unknown` es el argumento de `--target`",
+            "Todo después de `cargo` son argumentos posicionales sin estructura",
+            "`--release` y `--target` son subcomandos anidados"
+          ],
+          "correcta": 1,
+          "exp": "La anatomía es: programa (`cargo`), subcomando (`build`), banderas (`--release`, `--target`) y el valor que acompaña a `--target`. Reconocer este esquema permite leer comandos de cualquier toolchain."
+        }
+      ]
+    },
+    {
+      "idx": 3,
+      "titulo": "Valores, tipos y variables",
+      "preguntas": [
+        {
+          "q": "En JavaScript `\"5\" + 3` da `\"53\"` pero `\"5\" - 3` da `2`, mientras que en Python `\"5\" + 3` lanza un error. ¿Qué propiedad del sistema de tipos explica la diferencia?",
+          "opciones": [
+            "Python es compilado y JavaScript interpretado",
+            "JavaScript tiene tipado débil con coerción implícita; Python tiene tipado fuerte que rechaza mezclar tipos incompatibles",
+            "JavaScript no tiene tipos de datos",
+            "Python convierte todo a cadena antes de operar"
+          ],
+          "correcta": 1,
+          "exp": "El eje fuerte/débil describe cuánta coerción implícita permite el lenguaje. JS coacciona agresivamente según el operador; Python es fuertemente tipado y exige conversión explícita. Es independiente de estático/dinámico."
+        },
+        {
+          "q": "Sumar 0.1 + 0.2 da 0.30000000000000004 en Python, JavaScript, Java y C. ¿Por qué el mismo \"error\" aparece en lenguajes tan distintos?",
+          "opciones": [
+            "Porque todos tienen el mismo bug heredado de C",
+            "Porque todos usan el estándar IEEE 754 de punto flotante binario, que no representa exactamente muchos decimales",
+            "Porque el redondeo depende del sistema operativo",
+            "Porque 0.1 y 0.2 no son números válidos"
+          ],
+          "correcta": 1,
+          "exp": "El punto flotante binario (IEEE 754) no puede representar exactamente fracciones decimales como 0.1. El comportamiento es transferible porque el estándar de hardware es el mismo, no un bug de un lenguaje concreto."
+        },
+        {
+          "q": "En Rust y Java `Option<T>`/`Optional<T>` obligan a manejar la ausencia de valor, mientras que en muchos lenguajes cualquier referencia puede ser `null`. ¿Qué ventaja de seguridad aporta el enfoque de tipo opción?",
+          "opciones": [
+            "Hace el programa más rápido en tiempo de ejecución",
+            "Convierte la posible ausencia en parte del tipo, forzando al compilador a exigir que se maneje antes de usar el valor",
+            "Elimina la necesidad de escribir condicionales",
+            "Permite que el valor sea de cualquier tipo a la vez"
+          ],
+          "correcta": 1,
+          "exp": "El tipo opción hace explícita la nulabilidad en el sistema de tipos, así el compilador rechaza usar el valor sin desenvolverlo. Esto evita la clase de errores del \"null que se cuela\" (el \"error de los mil millones\")."
+        },
+        {
+          "q": "Un `int` de 32 bits con signo desborda al superar ~2 mil millones. En C el resultado es indefinido, en Java \"da la vuelta\" (wrap), en Python el entero crece sin límite. Al portar un algoritmo entre ellos, ¿qué debes vigilar?",
+          "opciones": [
+            "Nada, todos los lenguajes tratan los enteros igual",
+            "Que la semántica de desbordamiento difiere: precisión arbitraria vs. wrap-around vs. comportamiento indefinido pueden cambiar el resultado",
+            "Solo el nombre del tipo, no su comportamiento",
+            "Que Python es más lento, y nada más"
+          ],
+          "correcta": 1,
+          "exp": "El tamaño y la política ante desbordamiento son decisiones semánticas: Python usa enteros de precisión arbitraria, Java define wrap-around, C deja el desbordamiento con signo como indefinido. Ignorarlo produce bugs sutiles al portar."
+        }
+      ]
+    },
+    {
+      "idx": 4,
+      "titulo": "Control del programa",
+      "preguntas": [
+        {
+          "q": "En Python `if x:` es verdadero para 1 pero falso para 0, \"\" o []. En Java `if (x)` exige un `boolean` estricto. ¿Qué concepto explica esta diferencia?",
+          "opciones": [
+            "La velocidad de la CPU",
+            "La \"veracidad\" (truthiness): algunos lenguajes definen qué valores no booleanos cuentan como verdaderos/falsos; otros solo aceptan booleanos",
+            "Que Java no tiene condicionales",
+            "Que Python convierte todo a entero"
+          ],
+          "correcta": 1,
+          "exp": "La truthiness es una decisión semántica: lenguajes como Python o JS asignan valor de verdad a no-booleanos (0, cadenas vacías, listas vacías son falsy); Java y otros exigen un booleano. Portar código requiere hacer explícita la condición."
+        },
+        {
+          "q": "El operador `&&` en `a() && b()` no evalúa `b()` si `a()` es falso. ¿Por qué este \"cortocircuito\" es una decisión semántica y no solo una optimización?",
+          "opciones": [
+            "Porque acelera el programa sin cambiar nada más",
+            "Porque permite usar la primera condición como guarda de la segunda (p. ej. `p != null && p.valor > 0`), de modo que evaluar b() o no cambia el comportamiento observable",
+            "Porque && y & son siempre intercambiables",
+            "Porque el compilador reordena las condiciones"
+          ],
+          "correcta": 1,
+          "exp": "El cortocircuito garantiza que el segundo operando no se evalúa si el primero decide el resultado. Esto se usa como guarda para evitar efectos secundarios o errores (acceder a un nulo), por eso es semántico y no mera optimización."
+        },
+        {
+          "q": "Rust y otros lenguajes exigen que un `match` cubra todos los casos (exhaustividad), mientras que un `switch` clásico en C no lo obliga. ¿Qué ventaja de mantenibilidad aporta la exhaustividad?",
+          "opciones": [
+            "Reduce el tamaño del ejecutable",
+            "Si más adelante se añade una variante nueva al tipo, el compilador señala todos los match que ya no la cubren",
+            "Hace innecesarias las pruebas unitarias",
+            "Permite omitir la rama por defecto sin consecuencias"
+          ],
+          "correcta": 1,
+          "exp": "El chequeo de exhaustividad convierte al compilador en red de seguridad: al agregar un caso al tipo suma, falla la compilación en cada match incompleto. Esto previene el clásico caso olvidado de los switch abiertos."
+        },
+        {
+          "q": "Go maneja errores devolviéndolos como valores (`v, err := f()`), mientras Java o Python lanzan excepciones. ¿Qué diferencia de flujo de control implica esto al portar código?",
+          "opciones": [
+            "Ninguna, err y try/catch son idénticos",
+            "Con excepciones el error se propaga automáticamente hasta un manejador; con valores de error hay que comprobarlo y propagarlo explícitamente en cada llamada",
+            "Go no puede reportar errores",
+            "Las excepciones siempre terminan el programa"
+          ],
+          "correcta": 1,
+          "exp": "Las excepciones desvían el control implícitamente hacia el catch más cercano; los errores como valor obligan a chequear y propagar en cada punto. Portar entre ambos modelos reestructura el flujo, no solo la sintaxis."
+        }
+      ]
+    },
+    {
+      "idx": 5,
+      "titulo": "Funciones y modularidad",
+      "preguntas": [
+        {
+          "q": "En Python `def f(x=[]):` con lista por defecto puede acumular datos entre llamadas, un error clásico. ¿Qué principio general sobre valores por defecto ilustra este caso?",
+          "opciones": [
+            "Que Python no admite parámetros por defecto",
+            "Que si el valor por defecto es un objeto mutable evaluado una sola vez, puede compartirse entre llamadas; conviene usar un centinela inmutable (None) y crear el objeto dentro",
+            "Que las listas no pueden pasarse a funciones",
+            "Que el problema solo ocurre en lenguajes compilados"
+          ],
+          "correcta": 1,
+          "exp": "El defecto mutable se crea una vez al definir la función y se reutiliza. El patrón transferible es usar un centinela inmutable (None) y construir el mutable dentro del cuerpo. Es una trampa de semántica de evaluación, no de sintaxis."
+        },
+        {
+          "q": "Un closure captura variables de su entorno. En un bucle que crea funciones, capturar la variable del bucle \"por referencia\" en vez de \"por valor\" produce que todas las funciones vean el último valor. ¿Qué explica este comportamiento?",
+          "opciones": [
+            "Que los closures no pueden usarse en bucles",
+            "Que el closure captura el enlace a la variable, no una copia de su valor en el momento de crear la función; todas comparten el mismo enlace mutado",
+            "Que el bucle se ejecuta al revés",
+            "Que las funciones anónimas no tienen alcance"
+          ],
+          "correcta": 1,
+          "exp": "Muchos lenguajes capturan la variable (el enlace), no una instantánea de su valor. Al terminar el bucle todas las funciones ven el estado final. La solución es capturar una copia por iteración, una diferencia semántica clave entre lenguajes."
+        },
+        {
+          "q": "En Java pasar un objeto a un método permite mutar sus campos, pero reasignar el parámetro no afecta al exterior. ¿Cómo se describe correctamente esta semántica?",
+          "opciones": [
+            "Paso por referencia puro",
+            "Paso por valor de una referencia: se copia la referencia (por eso ves el mismo objeto), pero reasignar el parámetro no cambia la variable original",
+            "Paso por nombre",
+            "Paso por copia profunda del objeto"
+          ],
+          "correcta": 1,
+          "exp": "Java (como Python o JS) pasa el valor de la referencia: ambos apuntan al mismo objeto, así que mutarlo se ve fuera, pero reasignar la variable local no. Confundir esto con paso por referencia verdadero causa errores al portar código."
+        },
+        {
+          "q": "Los genéricos (`List<T>`, funciones parametrizadas) aparecen en Java, C#, Rust, TypeScript y Go. ¿Qué problema de diseño resuelven de forma transferible?",
+          "opciones": [
+            "Hacer el programa más rápido eliminando la memoria",
+            "Escribir código que funciona con muchos tipos manteniendo la seguridad de tipos, sin duplicar la lógica ni renunciar a la verificación estática",
+            "Permitir que cualquier función acepte cualquier número de argumentos",
+            "Convertir un lenguaje estático en dinámico"
+          ],
+          "correcta": 1,
+          "exp": "El polimorfismo paramétrico permite una sola implementación reutilizable para múltiples tipos conservando el chequeo estático. Evita la duplicación y la pérdida de seguridad que implicaría usar un tipo \"cualquiera\" sin tipar."
+        }
+      ]
+    },
+    {
+      "idx": 6,
+      "titulo": "Datos y estructuras",
+      "preguntas": [
+        {
+          "q": "En Python `a = [1,2]; b = a` y luego `b.append(3)` cambia también `a`. ¿Qué distinción conceptual explica esto y cómo se evita?",
+          "opciones": [
+            "Igualdad vs. identidad no aplica a listas",
+            "`b = a` copia la referencia (identidad compartida), no el contenido; para independizarlos hace falta una copia (superficial o profunda)",
+            "Las listas de Python son inmutables",
+            "append crea una lista nueva cada vez"
+          ],
+          "correcta": 1,
+          "exp": "Asignar copia la referencia: ambos nombres apuntan al mismo objeto. Mutar por uno se ve por el otro. Para separarlos se necesita copia superficial o profunda. Es la distinción referencia/valor e identidad/igualdad, común a muchos lenguajes."
+        },
+        {
+          "q": "Comparar dos objetos con `==` puede probar igualdad de contenido o identidad de referencia según el lenguaje (Java `==` vs `.equals()`, Python `==` vs `is`). ¿Por qué importa esta distinción?",
+          "opciones": [
+            "Porque la identidad y la igualdad siempre coinciden",
+            "Porque dos objetos pueden ser iguales en contenido pero ser instancias distintas; usar el operador equivocado produce comparaciones que fallan sutilmente",
+            "Porque == solo funciona con números",
+            "Porque .equals() es más lento y por eso se evita"
+          ],
+          "correcta": 1,
+          "exp": "Identidad (¿son el mismo objeto en memoria?) e igualdad (¿tienen el mismo valor?) son cosas distintas. Java `==` compara referencias para objetos; hay que usar `equals`. Confundirlas es una fuente clásica de bugs transferible entre lenguajes."
+        },
+        {
+          "q": "Un tipo algebraico de suma (enum con datos en Rust, `sealed`/uniones etiquetadas) modela \"una de varias formas posibles\". ¿Qué ventaja tiene sobre representar el mismo caso con un entero o cadena de estado?",
+          "opciones": [
+            "Ocupa menos memoria siempre",
+            "Cada variante puede llevar sus propios datos y el compilador verifica que se manejen todas, haciendo imposible representar estados inválidos",
+            "Permite valores nulos en cualquier campo",
+            "Elimina la necesidad de estructuras de datos"
+          ],
+          "correcta": 1,
+          "exp": "Los tipos suma hacen que los estados inválidos sean irrepresentables y, combinados con match exhaustivo, obligan a cubrir cada caso. Un entero o cadena de estado permite valores fuera de rango y no lleva datos asociados por variante."
+        },
+        {
+          "q": "Una tabla hash (dict, map, HashMap) ofrece acceso promedio O(1). Al portar código que asume orden de inserción, ¿qué debes verificar entre lenguajes?",
+          "opciones": [
+            "Que todos garantizan el mismo orden de iteración",
+            "Que la garantía de orden varía: algunos preservan orden de inserción, otros no dan ninguna garantía; no se debe asumir un orden si el lenguaje no lo promete",
+            "Que las tablas hash no permiten iterar",
+            "Que el rendimiento es O(n) en todos"
+          ],
+          "correcta": 1,
+          "exp": "El orden de iteración de un mapa es una garantía específica de cada lenguaje/versión (Python 3.7+ preserva inserción; el map de Go no la garantiza y aleatoriza). Asumir orden portando código produce fallos no deterministas."
+        }
+      ]
+    },
+    {
+      "idx": 7,
+      "titulo": "Paradigmas",
+      "preguntas": [
+        {
+          "q": "La herencia de implementación y la composición son dos formas de reutilizar código en OO. ¿Por qué la máxima \"preferir composición sobre herencia\" es transferible entre lenguajes?",
+          "opciones": [
+            "Porque la herencia no existe en lenguajes modernos",
+            "Porque la herencia acopla fuertemente subclase y superclase (jerarquía rígida, fragilidad ante cambios), mientras la composición delega en piezas intercambiables con menor acoplamiento",
+            "Porque la composición siempre es más rápida en ejecución",
+            "Porque los lenguajes prohíben más de un nivel de herencia"
+          ],
+          "correcta": 1,
+          "exp": "La herencia crea acoplamiento fuerte y jerarquías frágiles (el \"problema de la clase base frágil\"); la composición ensambla comportamientos mediante objetos delegados intercambiables. El principio guía el diseño en cualquier lenguaje OO."
+        },
+        {
+          "q": "El OO de JavaScript se basa en prototipos, no en clases al estilo de Java (aunque `class` es azúcar sintáctico). ¿Qué diferencia semántica real hay bajo esa sintaxis?",
+          "opciones": [
+            "Ninguna, class en JS crea clases idénticas a las de Java",
+            "Los objetos delegan en otro objeto (su prototipo) en tiempo de ejecución; la \"herencia\" es una cadena de delegación mutable, no una plantilla estática de clase",
+            "JavaScript no permite crear objetos",
+            "Los prototipos solo existen en el navegador"
+          ],
+          "correcta": 1,
+          "exp": "En JS un objeto delega búsquedas de propiedades a su prototipo por una cadena que puede modificarse en ejecución. La palabra `class` es azúcar sobre este modelo; entender la delegación explica comportamientos que el modelo de clases no predice."
+        },
+        {
+          "q": "La programación funcional insiste en la inmutabilidad y las funciones puras. ¿Qué beneficio concreto tiene esto para la concurrencia?",
+          "opciones": [
+            "Hace innecesario cualquier bloqueo porque impide ejecutar en paralelo",
+            "Si los datos no mutan y las funciones no tienen efectos, no hay estado compartido que corromper, eliminando muchas condiciones de carrera",
+            "Convierte automáticamente el código en asíncrono",
+            "Elimina la necesidad de estructuras de datos"
+          ],
+          "correcta": 1,
+          "exp": "Las condiciones de carrera nacen de estado mutable compartido. Datos inmutables y funciones puras (sin efectos) eliminan esa raíz, permitiendo compartir datos entre hilos sin sincronización. Es una ventaja transferible del paradigma funcional."
+        },
+        {
+          "q": "SQL es declarativo: escribes `SELECT ... WHERE ...` sin decir cómo recorrer las filas. ¿Qué implica esto respecto a quién decide la estrategia de ejecución?",
+          "opciones": [
+            "El programador debe escribir el bucle de recorrido manualmente",
+            "El motor (planificador de consultas) elige el algoritmo y el orden de acceso; el programador especifica el resultado deseado, no el procedimiento",
+            "SQL ejecuta siempre en el mismo orden fila por fila",
+            "La estrategia la fija el sistema operativo"
+          ],
+          "correcta": 1,
+          "exp": "En el paradigma declarativo el programador expresa el QUÉ y el optimizador de consultas decide el CÓMO (índices, joins, orden). Esta separación es la esencia de lo declarativo y contrasta con el control explícito del código imperativo."
+        }
+      ]
+    },
+    {
+      "idx": 8,
+      "titulo": "Cómo funcionan los lenguajes",
+      "preguntas": [
+        {
+          "q": "Java y C# compilan a bytecode que corre sobre una VM (JVM/CLR) con JIT, mientras C compila directo a código máquina (AOT). ¿Qué compensación fundamental describe esto?",
+          "opciones": [
+            "El bytecode siempre es más lento y no tiene ventajas",
+            "La VM con JIT gana portabilidad y optimización en caliente en tiempo de ejecución a costa de arranque y de un runtime; el AOT arranca rápido y sin runtime pero es específico de plataforma",
+            "AOT y JIT producen exactamente el mismo binario",
+            "El JIT solo sirve para interpretar, nunca compila"
+          ],
+          "correcta": 1,
+          "exp": "El JIT compila en ejecución usando información real de uso (portabilidad y optimización dinámica) pero paga arranque y memoria del runtime. El AOT genera un binario nativo veloz al iniciar y sin VM, a cambio de atarse a una plataforma."
+        },
+        {
+          "q": "Rust evita el recolector de basura con propiedad y préstamos verificados en compilación; Java y Go usan GC. ¿Qué compensación de diseño representa cada enfoque?",
+          "opciones": [
+            "El GC siempre produce programas incorrectos",
+            "El modelo de propiedad da control y predictibilidad de memoria sin pausas de GC, a costa de una disciplina que el compilador exige; el GC simplifica al programador a costa de pausas y sobrecarga en ejecución",
+            "Rust y el GC son idénticos en rendimiento y ergonomía",
+            "El GC solo existe en lenguajes interpretados"
+          ],
+          "correcta": 1,
+          "exp": "Propiedad/préstamos mueven la gestión de memoria a tiempo de compilación: sin GC, sin pausas, pero con reglas estrictas que el programador debe satisfacer. El GC libera al programador de esa carga a cambio de sobrecarga y pausas en ejecución."
+        },
+        {
+          "q": "Una recursión muy profunda provoca \"stack overflow\" en muchos lenguajes. ¿Qué explica este límite y por qué el heap no lo tiene igual?",
+          "opciones": [
+            "El stack es infinito pero el programa se cansa",
+            "Cada llamada apila un marco (frame) en una pila de tamaño acotado; agotar ese espacio desborda la pila, mientras el heap crece dinámicamente y se limita por la memoria disponible",
+            "El heap y el stack son la misma región",
+            "El overflow ocurre solo en lenguajes sin funciones"
+          ],
+          "correcta": 1,
+          "exp": "Cada invocación reserva un marco de llamada en la pila, de tamaño fijo y acotado. La recursión sin caso base o sin optimización de cola agota ese espacio. El heap se asigna dinámicamente y se limita por la memoria total, no por un tope de pila."
+        },
+        {
+          "q": "Una condición de carrera aparece cuando dos hilos acceden a memoria compartida sin sincronización. ¿Por qué el modelo de actores (Erlang/Elixir) las evita por diseño?",
+          "opciones": [
+            "Porque los actores usan un solo hilo siempre",
+            "Porque cada actor tiene estado privado y solo se comunica por mensajes; al no haber memoria compartida mutable, no existe la carrera sobre ese estado",
+            "Porque los mensajes son más rápidos que la memoria",
+            "Porque el GC elimina las carreras automáticamente"
+          ],
+          "correcta": 1,
+          "exp": "El modelo de actores aísla el estado en cada proceso y prohíbe el acceso directo desde fuera: la única interacción es por mensajes. Sin estado mutable compartido desaparece la raíz de las condiciones de carrera."
+        }
+      ]
+    },
+    {
+      "idx": 9,
+      "titulo": "Ingeniería de software políglota",
+      "preguntas": [
+        {
+          "q": "Un lockfile (package-lock.json, Cargo.lock, poetry.lock) acompaña al manifiesto de dependencias. ¿Qué garantiza y por qué es transferible entre ecosistemas?",
+          "opciones": [
+            "Que las dependencias se descarguen más rápido",
+            "Que se fijen las versiones exactas de todo el árbol de dependencias, haciendo la instalación reproducible en cualquier máquina y momento",
+            "Que solo se use la última versión disponible siempre",
+            "Que las dependencias no necesiten internet"
+          ],
+          "correcta": 1,
+          "exp": "El manifiesto declara rangos deseados; el lockfile congela las versiones resueltas de todo el árbol. Así cualquier colaborador o CI instala exactamente lo mismo. El concepto de compilación reproducible se repite en todos los ecosistemas."
+        },
+        {
+          "q": "El patrón Singleton, Observer o Strategy se puede implementar en Java, Python o Go de formas muy distintas. ¿Qué revela esto sobre los patrones de diseño?",
+          "opciones": [
+            "Que los patrones son código copiable idéntico entre lenguajes",
+            "Que un patrón es una solución conceptual a un problema recurrente; su forma depende de los recursos del lenguaje (funciones de primera clase, interfaces, closures) y a veces el lenguaje lo hace innecesario",
+            "Que solo Java tiene patrones de diseño",
+            "Que los patrones no aplican a lenguajes dinámicos"
+          ],
+          "correcta": 1,
+          "exp": "Los patrones son soluciones a problemas de diseño recurrentes, no recetas de código fijo. Con funciones de primera clase, por ejemplo, Strategy suele reducirse a pasar una función; el patrón se adapta a lo que ofrece cada lenguaje."
+        },
+        {
+          "q": "Antes de refactorizar código legado, la práctica recomendada es tener pruebas que cubran su comportamiento actual. ¿Por qué esta regla es independiente del lenguaje?",
+          "opciones": [
+            "Porque las pruebas hacen el código más rápido",
+            "Porque refactorizar significa cambiar la estructura interna sin cambiar el comportamiento observable; las pruebas son la red que detecta si se rompe ese comportamiento",
+            "Porque sin pruebas el código no compila",
+            "Porque solo se puede refactorizar código con pruebas en Java"
+          ],
+          "correcta": 1,
+          "exp": "Por definición la refactorización preserva el comportamiento externo mientras mejora la estructura. Las pruebas verifican esa preservación tras cada paso. El principio aplica igual en cualquier lenguaje porque describe qué es refactorizar."
+        },
+        {
+          "q": "El verificador de equivalencia del programa corre la misma entrada por implementaciones en varios lenguajes y compara salidas. ¿Qué tipo de prueba es y qué valida?",
+          "opciones": [
+            "Una prueba unitaria de una sola función interna",
+            "Una prueba de integración/equivalencia: valida que implementaciones distintas producen la misma salida observable para la misma entrada, confirmando que son traducciones fieles",
+            "Una prueba de rendimiento que mide velocidad",
+            "Una prueba de seguridad de dependencias"
+          ],
+          "correcta": 1,
+          "exp": "Compara el comportamiento externo de múltiples implementaciones ante entradas comunes: es una prueba de equivalencia (de integración de salidas). Confirma que las versiones en distintos lenguajes son equivalentes en resultado, no memoriza sintaxis."
+        }
+      ]
+    },
+    {
+      "idx": 10,
+      "titulo": "Interoperabilidad y fronteras entre lenguajes",
+      "preguntas": [
+        {
+          "q": "Python (con ctypes/cffi), Rust, Go y Java pueden llamar a bibliotecas escritas en C. ¿Por qué C actúa como \"lengua franca\" de la interoperabilidad?",
+          "opciones": [
+            "Porque C es el lenguaje más rápido",
+            "Porque su ABI y convenciones de llamada estables son el objetivo común que casi todos los runtimes saben invocar; la FFI se define contra esa interfaz de C",
+            "Porque C se puede transpilar a cualquier lenguaje",
+            "Porque todos los lenguajes están escritos en C"
+          ],
+          "correcta": 1,
+          "exp": "La FFI de la mayoría de lenguajes se define contra la ABI de C, estable y ampliamente soportada. Por eso una biblioteca con interfaz C se puede llamar desde muchos runtimes: C es el mínimo común denominador binario, no el más rápido."
+        },
+        {
+          "q": "Al enviar datos entre un servicio en Go y otro en Python, se elige JSON, Protobuf o MessagePack. ¿Qué compensación distingue a JSON de Protobuf?",
+          "opciones": [
+            "JSON es binario y Protobuf es texto",
+            "JSON es texto legible y autodescriptivo pero más voluminoso y sin esquema forzado; Protobuf es binario compacto y rápido con un esquema explícito compartido, a costa de legibilidad y de generar código",
+            "Protobuf no funciona entre lenguajes distintos",
+            "Ambos son idénticos salvo el nombre"
+          ],
+          "correcta": 1,
+          "exp": "JSON prioriza legibilidad y flexibilidad sin esquema; Protobuf prioriza tamaño y velocidad con un contrato de esquema compartido entre lenguajes, pagando legibilidad y un paso de generación. La elección depende del contexto de la frontera."
+        },
+        {
+          "q": "Dos servicios se comunican por un contrato de API (REST u gRPC). ¿Por qué el contrato/esquema importa más que el lenguaje interno de cada servicio?",
+          "opciones": [
+            "Porque ambos servicios deben estar escritos en el mismo lenguaje",
+            "Porque mientras respeten el contrato acordado (formatos, tipos, semántica), cada servicio puede implementarse y evolucionar en el lenguaje que convenga sin romper al otro",
+            "Porque el contrato define el hardware necesario",
+            "Porque REST y gRPC obligan a usar JSON siempre"
+          ],
+          "correcta": 1,
+          "exp": "El contrato es la frontera estable: define qué se intercambia, no cómo se implementa. Respetarlo permite que cada componente use el lenguaje más adecuado y evolucione internamente sin afectar a los demás. Esa es la base de los sistemas políglotas."
+        },
+        {
+          "q": "WebAssembly permite compilar Rust, C o Go a un objetivo común que corre en el navegador y en servidores. ¿Qué idea de interoperabilidad representa?",
+          "opciones": [
+            "Que Wasm reemplaza a todos los lenguajes existentes",
+            "Un formato binario portátil y con espacio de memoria aislado (sandbox) como objetivo de compilación común, de modo que muchos lenguajes se ejecutan en el mismo host de forma segura",
+            "Que solo JavaScript puede generar Wasm",
+            "Que Wasm es un lenguaje de alto nivel que se escribe a mano"
+          ],
+          "correcta": 1,
+          "exp": "Wasm es un objetivo de compilación portátil y aislado: distintos lenguajes compilan a él y corren en cualquier host que lo soporte, con un sandbox de seguridad. Es un punto de encuentro binario común, no un reemplazo de los lenguajes fuente."
+        }
+      ]
+    },
+    {
+      "idx": 11,
+      "titulo": "Proyecto integrador políglota",
+      "preguntas": [
+        {
+          "q": "El proyecto usa un lenguaje de sistemas para una CLI, un backend para la API, JS/TS para el frontend y SQL para los datos. ¿Qué criterio justifica esta división en lugar de un solo lenguaje?",
+          "opciones": [
+            "Usar más lenguajes siempre es mejor",
+            "Cada componente tiene requisitos distintos (rendimiento, ecosistema, modelo de ejecución) y se elige la herramienta cuyas fortalezas encajan, respetando contratos entre piezas",
+            "El equipo quería practicar sintaxis variada",
+            "Un solo lenguaje es incapaz de leer archivos"
+          ],
+          "correcta": 1,
+          "exp": "La elección políglota se defiende por adecuación: el navegador impone JS/TS, las consultas encajan en SQL, un binario veloz sin runtime favorece un lenguaje de sistemas. Se justifica por fortalezas y contratos claros, no por variedad porque sí."
+        },
+        {
+          "q": "Al diseñar los contratos entre componentes, ¿por qué conviene definir primero las responsabilidades y las interfaces antes de escribir cada componente?",
+          "opciones": [
+            "Porque así se elige el color del logo",
+            "Porque contratos claros desacoplan a los equipos y permiten desarrollar, probar y desplegar cada componente de forma independiente sin conocer la implementación interna del otro",
+            "Porque obliga a usar el mismo lenguaje en todos",
+            "Porque el contrato define la velocidad de la CPU"
+          ],
+          "correcta": 1,
+          "exp": "Definir responsabilidades e interfaces primero establece fronteras estables: cada componente cumple su contrato y puede evolucionar aislado. Esto habilita desarrollo paralelo, pruebas por componente y despliegue independiente."
+        },
+        {
+          "q": "Las pruebas end-to-end del sistema completo se distinguen de las unitarias de cada componente. ¿Qué valida específicamente una prueba E2E en un sistema políglota?",
+          "opciones": [
+            "Que cada función interna devuelve el valor correcto",
+            "Que las piezas en distintos lenguajes, al integrarse a través de sus contratos reales, producen el comportamiento esperado del sistema como un todo",
+            "Que el código compila en cada lenguaje",
+            "Que las dependencias no tienen vulnerabilidades"
+          ],
+          "correcta": 1,
+          "exp": "La prueba E2E ejercita el sistema completo a través de sus fronteras reales (API, datos, frontend), verificando que la integración entre lenguajes funciona. Las unitarias validan piezas aisladas; la E2E valida el todo integrado."
+        },
+        {
+          "q": "La retrospectiva final enfatiza \"transferir lo aprendido a un lenguaje nuevo no visto en el curso\". ¿Qué habilidad concreta se espera que el estudiante haya desarrollado?",
+          "opciones": [
+            "Memorizar la sintaxis de los diez lenguajes del núcleo",
+            "Mapear un lenguaje desconocido a conceptos ya dominados (tipado, memoria, control, paradigma) para aprenderlo rápido preguntando qué cambia y por qué",
+            "Rechazar cualquier lenguaje que no esté en el curso",
+            "Reescribir todo el proyecto en un único lenguaje"
+          ],
+          "correcta": 1,
+          "exp": "El objetivo del programa es el conocimiento transferible: ante un lenguaje nuevo, identificar dónde encaja en el mapa de conceptos y preguntar qué difiere y por qué. Esa capacidad de mapeo, no la memoria de sintaxis, es el resultado buscado."
         }
       ]
     }

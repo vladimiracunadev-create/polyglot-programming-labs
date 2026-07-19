@@ -1,0 +1,44 @@
+name: Security
+
+on:
+  pull_request:
+  push:
+    branches: ["main"]
+  schedule:
+    - cron: "0 11 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  secretos:
+    name: Escaneo de secretos (gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Instalar gitleaks
+        env:
+          GITLEAKS_VERSION: "8.18.4"
+        run: |
+          curl -sSfL "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" \
+            | tar -xz -C /usr/local/bin gitleaks
+          gitleaks version
+      - name: Detectar secretos
+        run: gitleaks detect --no-git --redact -v --source . --config .gitleaks.toml
+
+  sast:
+    name: Análisis estático (bandit)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Instalar bandit
+        run: python -m pip install bandit==1.7.9
+      - name: Analizar los scripts del generador
+        # Solo el tooling (scripts/): las implementaciones didácticas de las
+        # clases muestran a propósito construcciones como eval, que no deben
+        # tratarse como vulnerabilidad. Se reportan solo problemas de severidad alta.
+        run: bandit -r scripts/ --severity-level high

@@ -7,7 +7,7 @@
 
 ## 🎯 Objetivo
 
-Usar un **mapa (diccionario)**: asociar claves con valores. Contar frecuencias es el uso más común: la clave es el número y el valor, cuántas veces aparece.
+Comprender el **mapa** —diccionario, tabla hash, según el lenguaje— como la estructura que asocia **claves con valores** y que, junto con el arreglo, sostiene buena parte de la programación real. Si el conjunto de la clase anterior era una tabla hash que solo guarda claves, el mapa es la tabla hash completa: a cada clave le cuelga un valor. Lo esencial es cómo se logra el acceso rápido. Como formaliza Cormen en el capítulo 11 de *Introduction to Algorithms*, una **función hash** transforma la clave en el índice de un cubo, de modo que leer, insertar o actualizar `mapa[clave]` cuesta **O(1) promedio**, no O(n): no hay que buscar la clave recorriendo, se calcula directamente dónde vive. Sedgewick dedica a esta idea el corazón de sus *symbol tables* en *Algorithms*. El uso más común, y el de hoy, es el **mapa de frecuencias**: recorrer una secuencia usando cada elemento como clave y llevando en el valor cuántas veces ha aparecido. Es el patrón que subyace a contar palabras, votos o visitas, y muestra el mapa en su forma más pura: clave → cuenta.
 
 ## 📚 Resultados de aprendizaje
 
@@ -27,13 +27,17 @@ Al finalizar, podrás:
 
 ## 📖 Definiciones y características
 
-- **Mapa** — colección de pares clave→valor (dict, HashMap). Clave: búsqueda por clave en O(1).
-- **Clave** — identificador único de una entrada. Clave: no se repite.
-- **Frecuencia** — cuántas veces aparece un valor. Clave: uso típico del mapa.
+Un **mapa** es una colección de pares **clave→valor** donde cada clave es única y sirve para localizar su valor. Su implementación dominante es la **tabla hash**, y entender esa tabla explica todas sus propiedades. Cormen la describe así (cap. 11): una función hash mapea cada clave a un índice de una tabla de cubos; cuando dos claves distintas caen en el mismo cubo se produce una **colisión**, que se resuelve por **encadenamiento** (cada cubo guarda una lista de las entradas que colisionan) o por **direccionamiento abierto** (se busca otro cubo libre siguiendo una secuencia de sondeo). Con un buen reparto, el acceso, la inserción y el borrado son **O(1) promedio**; en el peor caso —todas las claves colisionando— caen a O(n). El equilibrio lo gobierna el **factor de carga** (entradas ÷ cubos): cuando sube demasiado, la tabla hace **rehashing** —reserva más cubos y recoloca todo—, una operación O(n) puntual que mantiene barato el coste amortizado.
+
+La segunda cara del mapa es el **orden**, y aquí los lenguajes discrepan de forma notable. El `dict` de Python conserva el **orden de inserción** desde la versión 3.7 (Ramalho lo documenta en *Fluent Python*); el `HashMap` de Java y el `Dictionary` de C# no garantizan ningún orden; y Go va más lejos: itera sus mapas en **orden deliberadamente aleatorio** para que nadie escriba código que dependa de un orden accidental (Donovan y Kernighan lo advierten en *The Go Programming Language*). Las claves, por último, deben ser **hashables**: números y cadenas siempre valen; objetos mutables, en general, no.
+
+- **Mapa** — colección de pares clave→valor respaldada por una tabla hash (Python `dict`, Java `HashMap`, C# `Dictionary`, Go `map`, Rust `HashMap`); acceso por clave en O(1) promedio.
+- **Clave** — identificador único de cada entrada; se pasa por la función hash para localizar el cubo. Insertar con una clave existente sobrescribe su valor.
+- **Frecuencia** — número de apariciones de un elemento; el uso canónico del mapa consiste en usar el elemento como clave y su cuenta como valor.
 
 ## 🧩 Situación
 
-Contar palabras, votos, visitas por página: el mapa asocia cada cosa con su cuenta y la actualiza al instante.
+Contar cuántas veces aparece cada palabra en un texto, cuántos votos recibió cada candidato, cuántas visitas tuvo cada página, qué usuario hizo cada acción: son todas variantes del mismo problema —asociar cada cosa con un dato y actualizarlo sobre la marcha— y todas piden un mapa. Resolverlas con listas paralelas o búsquedas lineales convierte cada actualización en un recorrido O(n); el mapa las hace en O(1) promedio, calculando directamente dónde está la entrada de esa clave. El caso de hoy es la forma esencial de ese patrón: construir un mapa de frecuencias de una lista de enteros y consultar cuántas veces aparece el primero. Verás que el mapa hace dos trabajos a la vez —almacenar y contar— y que el modismo `mapa[clave] = mapa.get(clave, 0) + 1` (o su equivalente en cada lenguaje) captura la esencia de «leer el valor actual, incrementarlo y volver a escribirlo».
 
 ## 🧮 Modelo
 
@@ -217,6 +221,18 @@ echo "cuenta=" . $freq[$nums[0]] . "\n";
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
 
+## 🧪 Laboratorio guiado: del código a la salida
+
+Sigamos el caso `3 1 3 3`, que debe producir `cuenta=3`. El primer elemento es `3`, y aparece tres veces; el mapa de frecuencias debe reflejarlo y luego consultarse por esa clave.
+
+En **Python**, el corazón es `freq[x] = freq.get(x, 0) + 1`. `freq.get(x, 0)` lee el valor actual de la clave `x`, devolviendo `0` si aún no existe —el truco que evita el error de clave inexistente—. Recorriendo `3 1 3 3`: el `3` pasa de ausente a 1; el `1` a 1; el segundo `3` de 1 a 2; el tercer `3` de 2 a 3. El mapa queda `{3: 3, 1: 1}`. Después, `freq[nums[0]]` consulta la clave `nums[0] = 3` y devuelve 3. Cada acceso a `freq[...]` es una operación hash O(1) promedio.
+
+En **Java**, el mismo conteo se escribe con `freq.merge(x, 1, Integer::sum)`, un método que Bloch destaca en *Effective Java* por eliminar el rodeo del «leer, comprobar nulo, escribir»: si la clave `x` no existe, la inserta con valor 1; si existe, combina el valor viejo con 1 usando `Integer::sum`. Para `3 1 3 3` el resultado es idéntico: la clave `3` termina en 3. Luego `freq.get(Integer.parseInt(p[0]))` recupera la cuenta del primer token. El `HashMap` no promete orden de iteración, pero eso aquí da igual: solo consultamos una clave concreta.
+
+En **C**, no hay mapa nativo, y el código lo sortea con astucia: como el problema solo pide la frecuencia del **primer** elemento, no construye ninguna tabla; recorre el arreglo `v[]` contando cuántos elementos son iguales a `v[0]`. Para `3 1 3 3` cuenta las tres apariciones de `3` y emite `cuenta=3`. Es correcto para esta pregunta puntual, pero no generaliza: contar la frecuencia de *cada* clave a la vez exigiría construir una tabla hash a mano o recorrer en O(n²). Ese contraste es justo lo que el mapa nativo regala en los demás lenguajes.
+
+Los tres imprimen `cuenta=3`; el verificador comprueba que las diez implementaciones coinciden carácter a carácter con lo que dicta `casos.json`.
+
 ## 🔬 Comparación
 
 | Clase de diferencia | Observación entre lenguajes |
@@ -225,9 +241,11 @@ echo "cuenta=" . $freq[$nums[0]] . "\n";
 | Semántica | El mapa no garantiza orden de claves; C lo simula con arreglos. |
 | Paradigmática | SQL agrupa con GROUP BY. |
 
+La diferencia más visible es el **modismo de incremento con valor por defecto**, porque leer una clave ausente es el error clásico con mapas y cada lenguaje lo previene a su manera: Python usa `freq.get(x, 0) + 1`, C# `GetValueOrDefault(x, 0) + 1`, Java el elegante `merge(x, 1, Integer::sum)`, Rust `*freq.entry(x).or_insert(0) += 1` (que devuelve una referencia mutable a la entrada, creándola si falta), Go se apoya en que el valor cero de un `int` ausente es `0`, de modo que `freq[n]++` simplemente funciona, y PHP tiene la función de biblioteca `array_count_values`. La segunda diferencia honda es el **orden de iteración**: el `dict` de Python conserva orden de inserción desde 3.7, Go lo aleatoriza a propósito, y Java/C# no lo garantizan; por eso este ejercicio consulta una clave concreta en vez de recorrer, y así el resultado no depende del orden. El tercer eje es **quién trae mapa nativo**: todos menos C lo tienen de serie; en C hay que construir la tabla hash o, como aquí, resolver el caso puntual con un recorrido. Finalmente, el **array asociativo de PHP** difumina la frontera entre lista y mapa: es a la vez secuencia indexada y diccionario, algo que Lockhart señala en *Modern PHP* como rasgo distintivo del lenguaje.
+
 ## 🧬 El concepto en la familia
 
-En Ruby `Hash.new(0)` para contar. En Go `map[int]int` es idiomático.
+El mapa es tan central que casi ningún lenguaje prescinde de él, y sus nombres delatan su implementación: *HashMap*, *Dictionary*, *hash*, *associative array*, *table*. La familia se divide en dos ramas por el orden. La rama **hash** —`HashMap`, `dict`, `Dictionary`, `map` de Go, `HashMap` de Rust— da O(1) promedio sin orden garantizado. La rama **ordenada** —`TreeMap` en Java, `SortedDictionary` en C#, `BTreeMap` en Rust, `std::map` en C++— mantiene las claves ordenadas a cambio de O(log n) por operación, respaldada por un árbol balanceado en lugar de una tabla hash. En Ruby, `Hash.new(0)` crea un mapa cuyo valor por defecto es 0, ideal para contar sin comprobar existencia; en Go, `map[int]int` es el modismo directo para frecuencias. Reconocer que «mapa» significa por defecto «tabla hash sin orden», y que existe la variante ordenada de árbol cuando se necesita recorrer por clave en orden, es la decisión de diseño que más se repite en la práctica.
 
 ## ✅ Prueba común
 

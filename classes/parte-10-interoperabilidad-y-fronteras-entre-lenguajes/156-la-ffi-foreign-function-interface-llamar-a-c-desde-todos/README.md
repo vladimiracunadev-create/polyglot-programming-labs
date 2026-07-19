@@ -1,39 +1,46 @@
 # Clase 156 — La FFI (Foreign Function Interface): llamar a C desde todos
 
-> Parte **10 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> Parte **10 — Interoperabilidad y fronteras entre lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
 > ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Entender la **FFI (Foreign Function Interface)**: el mecanismo para llamar a código escrito en otro lenguaje, típicamente C. Casi todos los lenguajes pueden llamar a C, lo que hace de C el 'idioma común' entre lenguajes.
+La frontera más íntima entre dos lenguajes es la **llamada directa de función**: mi código invoca, dentro del mismo proceso y sin red de por medio, una función compilada por otro lenguaje. El mecanismo que lo hace posible se llama **FFI, Foreign Function Interface**, y el objetivo de esta clase es entender por qué existe, cómo funciona y por qué —casi sin excepción— el punto de encuentro es **C**.
+
+La razón es histórica y práctica a la vez. C fue el lenguaje del sistema operativo Unix, y con él nació una convención binaria estable para llamar funciones: cómo se pasan los argumentos, dónde se deja el valor de retorno, quién limpia la pila. Esa convención, la ABI de C (que estudiarás en detalle en la clase 157), es tan simple y tan universal que se convirtió en el mínimo común denominador. Cuando Python necesita velocidad numérica, no reescribe LAPACK: lo llama por FFI. Cuando la JVM necesita tocar el sistema operativo, usa JNI hacia C. C no es el mejor lenguaje para casi nada moderno, pero es el **idioma franco** en el que todos saben decir "llámame esta función". Entender la FFI es entender por qué C sigue vivo en el centro de ecosistemas que no escriben una sola línea de C.
 
 ## 📚 Resultados de aprendizaje
 
 Al finalizar, podrás:
 
-1. Explicar qué es la FFI.
-2. Reconocer por qué C es el puente universal.
-3. Llamar a una función 'externa'.
+1. **Explicar** qué es la FFI y qué problema resuelve.
+2. **Reconocer** por qué C es el puente universal entre lenguajes.
+3. **Llamar** a una función "externa" respetando su firma.
+4. **Anticipar** los riesgos de cruzar la frontera: tipos, memoria y errores.
 
 ## 🗺️ Temas
 
 | # | Tema | Por qué importa |
 |---|------|-----------------|
-| 1 | FFI | Llamar a otro lenguaje |
-| 2 | C como puente | Casi todos llaman a C |
-| 3 | Enlace | Unir con la librería externa |
+| 1 | FFI | Llamar a código de otro lenguaje en el mismo proceso |
+| 2 | C como puente | Casi todos exponen una FFI hacia C |
+| 3 | Firma y enlace | Declarar tipos exactos y unir con la librería |
 
 ## 📖 Definiciones y características
 
-- **FFI** — interfaz para llamar a funciones de otro lenguaje. Clave: reutilizar librerías nativas.
-- **Función externa** — definida en otro lenguaje (C) y llamada desde el tuyo. Clave: se declara su firma.
-- **C como lingua franca** — casi todos los lenguajes exponen una FFI hacia C. Clave: puente universal.
+La **FFI** es la interfaz que permite a un lenguaje llamar funciones definidas en otro, típicamente compiladas a código nativo. Su valor es reutilizar librerías probadas —criptografía, compresión, álgebra— en vez de reescribirlas. Pero reutilizar tiene un precio: debes describir, en tu lenguaje, la **firma** exacta de la función externa (cuántos argumentos, de qué tipo, qué devuelve). Si te equivocas, no hay un error de compilación amable: hay corrupción de memoria o una caída, porque la frontera es binaria y nadie la revisa por ti.
+
+Una **función externa** es la que vive en otro lenguaje y se declara para poder invocarla. En Rust se escribe `extern "C" { fn doble(x: i64) -> i64; }`; en Python se describe con `ctypes` o `cffi`; en C# con `[DllImport]`. La declaración no ejecuta nada: solo le dice al enlazador y al runtime cómo hablar con esa función. Y **C como lingua franca** es el hecho central: casi todos los lenguajes exponen una FFI *hacia C*, no hacia cada uno de los demás. Como observa Tanenbaum al hablar de heterogeneidad, un sistema con muchas partes necesita un protocolo común; en la frontera intra-proceso, ese protocolo común es la ABI de C.
+
+- **FFI** — interfaz para llamar a funciones de otro lenguaje en el mismo proceso. Clave: reutilizar librerías nativas sin reescribirlas.
+- **Función externa** — definida en otro lenguaje (C) y llamada desde el tuyo. Clave: hay que declarar su firma con precisión.
+- **C como lingua franca** — casi todos los lenguajes exponen una FFI hacia C. Clave: puente universal por su ABI simple y estable.
 
 ## 🧩 Situación
 
-Python usa librerías numéricas en C, Ruby extensiones en C, la JVM llama a C con JNI. La FFI hacia C conecta ecosistemas; por eso duplicar un número 'en C' se puede invocar desde cualquier lenguaje.
+NumPy no es Python: su corazón es C y Fortran, y Python lo llama por FFI millones de veces por segundo. Ruby carga extensiones nativas en C; la JVM baja a C con JNI para operaciones que el bytecode no cubre; Node.js expone N-API para escribir addons en C++. En todos estos casos ocurre lo mismo: un lenguaje de alto nivel delega el trabajo pesado en una función nativa y recoge el resultado. Para que el concepto se vea sin el ruido de instalar una librería, esta clase simula esa frontera con la función más simple imaginable —**duplicar un número**— escrita como si viviera en C y llamada desde cada lenguaje. La operación es trivial; lo que importa es el gesto: *aquí hay una función que finge venir de C, y todos la saben invocar*.
 
 ## 🧮 Modelo
 
@@ -198,17 +205,34 @@ echo "resultado=" . doble($n) . "\n";
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
 
+## 🔎 Recorrido del código (laboratorio)
+
+Tomemos el caso `5`, que debe producir `resultado=10`. La entrada es un entero; la salida es su doble. Lo interesante es cómo cada lenguaje representa "la función que vive en C".
+
+En **Python**, `doble(x)` se define con un comentario explícito —`# simula una función externa (FFI hacia C)`— porque en un caso real esa función *no* sería Python: sería `lib.doble` obtenida con `ctypes.CDLL("libdoble.so")`. Aquí se escribe en Python para que el ejemplo corra sin compilar una `.so`, pero el papel es el de una llamada externa. Se lee `n` con `int(sys.stdin.readline())`, se invoca `doble(n)` y la `f-string` imprime `resultado=10`. Fíjate en el detalle semántico: Python convierte el texto `"5"` a un entero de precisión arbitraria; el "5 de C" sería un `long` de 64 bits fijos. Esa diferencia de tipos es exactamente lo que la FFI real obliga a declarar.
+
+En **C**, `doble` es la función nativa de verdad: `long doble(long x) { return x * 2; }`. No hay simulación, es el destino que los demás fingen. `scanf("%ld", &n)` lee el entero y `printf("resultado=%ld\n", doble(n))` imprime. Este bloque es la referencia: es la firma que un binding tendría que reproducir sin un solo bit de diferencia (`long`, un argumento, devuelve `long`).
+
+En **Rust**, `doble(x: i64) -> i64` lleva el comentario `// en un caso real, una funcion externa con extern "C"`. En producción se escribiría dentro de un bloque `extern "C" { fn doble(x: i64) -> i64; }` y se llamaría bajo `unsafe`, porque Rust no puede garantizar la seguridad de memoria al otro lado de la frontera. El `i64` de Rust coincide deliberadamente con el `long` de C de 64 bits: *ese* emparejamiento de tipos es lo que hace segura la llamada. Los tres lenguajes producen `resultado=10`, pero solo C ejecuta código nativo; Python y Rust muestran la *forma* de la frontera.
+
 ## 🔬 Comparación
 
-| Clase de diferencia | Observación entre lenguajes |
+| Lenguaje | Mecanismo real de FFI hacia C |
 |---|---|
-| Sintáctica | ctypes/cffi (Python), extern (Rust/C), JNI (Java). |
-| Semántica | La FFI cruza la frontera de lenguaje con una convención de llamada. |
-| Paradigmática | SQL llama a funciones definidas por el usuario. |
+| Python | `ctypes` / `cffi` en la stdlib; casi toda librería científica es un binding a C. |
+| JavaScript | N-API (addons nativos) o `ffi-napi` para cargar `.so`/`.dll` en tiempo de ejecución. |
+| Java | JNI (clásico) y el nuevo Foreign Function & Memory API (Project Panama, `java.lang.foreign`). |
+| C# | P/Invoke con `[DllImport]`; el runtime hace el *marshalling* de tipos. |
+| Go | cgo: `import "C"` con un preámbulo de C incrustado en comentarios. |
+| Rust | `extern "C"` + `unsafe`; la crate `libc` y `bindgen` generan las firmas. |
+| C | Es el destino: no necesita FFI, expone la firma. |
+| PHP | Extensión Zend en C, o la clase `FFI` desde PHP 7.4. |
+
+La columna revela el punto de la clase: la sintaxis cambia radicalmente —`ctypes` no se parece en nada a `extern "C"`— pero **todas apuntan a lo mismo, C**, y todas resuelven el mismo problema semántico: emparejar tipos a través de una frontera binaria. La diferencia peligrosa no es sintáctica sino semántica: si declaras `int` (32 bits) donde C espera `long` (64 bits en Linux), la llamada compila y corrompe datos en silencio. Por eso Java está migrando de JNI —verboso y frágil— al API de Panama, más seguro y tipado. SQL queda aparte: sus "funciones externas" son UDF (funciones definidas por el usuario) registradas en el motor, un modelo distinto al de la FFI intra-proceso.
 
 ## 🧬 El concepto en la familia
 
-ctypes (Python), extern "C" (Rust/C++), JNI (Java), cgo (Go): todos hacia C.
+El patrón "todos hacia C" se repite en cada familia: `ctypes` en Python, N-API en Node, JNI y Panama en la JVM, P/Invoke en .NET, cgo en Go, `extern "C"` en Rust y C++. Incluso lenguajes muy alejados —Haskell con su FFI, Lua con su C API— convergen en la misma ABI. C es el esperanto de las bibliotecas nativas: nadie lo elige por gusto, todos lo hablan por necesidad.
 
 ## ✅ Prueba común
 
@@ -224,25 +248,28 @@ Detalle en [`reto.md`](reto.md).
 
 ## ⚠️ Errores comunes
 
-- **Firmas incompatibles en la FFI** → causa: corrupción o caídas → solución: declarar exactamente los tipos que espera C
-- **Ignorar la gestión de memoria a través de la frontera** → causa: fugas o dobles liberaciones → solución: acordar quién libera qué
+- **Firmas incompatibles en la FFI** → causa: declarar `int` donde C espera `long`, o el orden de argumentos cambiado → solución: reproducir la firma bit a bit; ante la duda, generarla con `bindgen`/`cbindgen` en vez de a mano.
+- **Ignorar la gestión de memoria a través de la frontera** → causa: no acordar quién libera un puntero devuelto por C → solución: definir la propiedad (ownership); si C reserva, C libera, o se expone una función `free` dedicada.
+- **Pasar tipos de alto nivel sin convertir** → causa: enviar un `str` de Python directo a una función que espera `char*` → solución: codificar a bytes (`encode()`) y pasar el puntero; la FFI solo entiende tipos C.
+- **Olvidar el coste de cruzar** → causa: llamar a una función trivial por FFI en un bucle caliente → solución: cruzar la frontera pocas veces con lotes grandes, no muchas veces con datos pequeños.
 
 ## ❓ Preguntas frecuentes
 
-- **¿Por qué C?** Su ABI simple y estable lo hace el mínimo común denominador.
-- **¿Toda FFI es hacia C?** Mayormente; también hay puentes directos entre algunos lenguajes.
+- **¿Por qué C y no otro lenguaje?** Porque su ABI es simple, estable desde hace décadas y la implementa todo sistema operativo. Otros lenguajes cambian su representación interna entre versiones; C no.
+- **¿Toda FFI es hacia C?** Mayormente sí, porque C es el denominador común. Existen puentes directos entre lenguajes cercanos (Kotlin↔Java en la JVM, C++↔Rust con `cxx`), pero cuando dos lenguajes son lejanos, el punto de encuentro casi siempre es la ABI de C.
+- **¿La FFI es insegura?** El cruce lo es: Rust exige `unsafe` y Java aísla JNI precisamente porque al otro lado no hay garantías. La seguridad se recupera envolviendo la llamada en una capa que valida tipos y memoria —el tema de la clase 158.
 
 ## 🔗 Referencias
 
 **Libros de la parte:**
 
-- M. Kleppmann — *Designing Data-Intensive Applications* (O'Reilly).
-- S. Newman — *Building Microservices* (2ª ed., O'Reilly).
-- A. Tanenbaum y M. van Steen — *Distributed Systems* (3ª ed.).
+- M. Kleppmann — *Designing Data-Intensive Applications* (O'Reilly). Cap. 4: codificación y evolución, la raíz del emparejamiento de tipos entre lenguajes.
+- S. Newman — *Building Microservices* (2ª ed., O'Reilly). Sobre reutilizar código nativo tras una interfaz estable.
+- A. Tanenbaum y M. van Steen — *Distributed Systems* (3ª ed.). Cap. 4: llamadas a procedimiento y el problema de heterogeneidad de datos.
 
 **Libros de los lenguajes del núcleo:**
 
-- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly). Interfaz con C mediante `ctypes`/`cffi`.
 - M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
 - B. Cherny — *Programming TypeScript* (O'Reilly).
 - J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).

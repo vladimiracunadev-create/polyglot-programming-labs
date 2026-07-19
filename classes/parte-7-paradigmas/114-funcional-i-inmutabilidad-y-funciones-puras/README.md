@@ -7,7 +7,11 @@
 
 ## 🎯 Objetivo
 
-Practicar el paradigma **funcional (I)**: inmutabilidad y funciones puras. Transformar una lista con `map` produce una lista nueva sin alterar la original ni usar estado mutable.
+La programación funcional no empieza por `map` ni por las lambdas: empieza por una decisión sobre el **estado**. El modelo imperativo que has usado hasta aquí razona en términos de celdas de memoria que cambian con el tiempo —una variable acumuladora, un contador, una lista que se va llenando—. El modelo funcional renuncia a ese estado mutable y describe el resultado como una **transformación** de los datos de entrada. En lugar de "recorre la lista y ve doblando cada número en un acumulador", dices "la lista de los dobles". Van Roy y Haridi (CTM, caps. 2-3) llaman a esto el **modelo declarativo** o sin estado, y lo presentan como el más simple de razonar precisamente porque nada cambia a tus espaldas.
+
+El pilar teórico es la **transparencia referencial**, que Abelson y Sussman desarrollan desde la sección 1.1 de SICP: una expresión es referencialmente transparente si puedes sustituirla por su valor sin alterar el significado del programa. Eso solo es posible si las funciones son **puras** —su salida depende únicamente de sus argumentos y no producen efectos observables (no imprimen, no mutan, no dependen de un reloj o de una variable global)—. Una función pura es, en el sentido matemático, una función de verdad: la misma entrada da siempre la misma salida. Esa propiedad es la que hace que el "modelo de sustitución" de SICP funcione, y con él la capacidad de razonar sobre el código como sobre álgebra.
+
+El objetivo de esta clase es que interiorices las dos caras de esa moneda con un ejemplo mínimo: **inmutabilidad** (transformar una lista sin tocar la original) y **pureza** (una función `x → 2x` sin efectos). Sebesta (cap. 15) sitúa estas ideas como el núcleo de los lenguajes funcionales, y verás que casi todos los lenguajes del núcleo —imperativos incluidos— ofrecen hoy `map` porque el estilo declarativo produce código más corto, más fácil de paralelizar y menos propenso a los errores por estado compartido que arruinan los programas grandes.
 
 ## 📚 Resultados de aprendizaje
 
@@ -31,9 +35,17 @@ Al finalizar, podrás:
 - **Inmutabilidad** — los datos no cambian; las transformaciones crean nuevos. Clave: más seguro.
 - **map** — aplica una función a cada elemento y devuelve una colección nueva. Clave: no muta.
 
+La propiedad que hace valiosa a una función pura es la **transparencia referencial** (SICP, sección 1.1): si `doble(3)` siempre vale `6` y no hace nada más, puedes reemplazar `doble(3)` por `6` en cualquier lugar sin cambiar el resultado del programa. Ese poder de sustitución, que parece trivial, es lo que permite razonar sobre el código con la seguridad del álgebra: no necesitas simular la ejecución paso a paso ni preguntarte "¿en qué estado está el programa ahora?". Abelson y Sussman contrastan este "modelo de sustitución" con el modelo imperativo, donde la introducción de asignación (`set!`) rompe la transparencia y obliga a razonar con la línea de tiempo del estado. Perder la transparencia, advierten, es perder la capacidad de razonar localmente.
+
+La **inmutabilidad** es la condición que sostiene esa pureza a nivel de datos. Si `map` mutara la lista de entrada, la función dejaría de ser pura: tendría un efecto observable sobre el mundo exterior. Por eso `map` construye una colección **nueva** y deja la original intacta. Van Roy y Haridi (CTM, caps. 2-3) muestran que un programa escrito en el modelo declarativo —sin celdas mutables— es equivalente a un conjunto de definiciones matemáticas, y que esa equivalencia se pierde en cuanto introduces estado. La inmutabilidad no es una restricción caprichosa: es lo que mantiene el programa dentro del territorio donde el razonamiento formal, la memoización y la ejecución concurrente son seguros por construcción.
+
+Conviene distinguir **`map` de un bucle con efectos**. Un `for` que acumula en una variable externa produce el mismo resultado, pero mezcla dos cosas: *qué* transformación se aplica y *cómo* se recorre y acumula. `map` separa ambas —recibe solo la función de transformación y se encarga del recorrido— y por eso es composable y trivialmente paralelizable: como cada elemento se transforma de forma independiente y sin efectos, el orden y la simultaneidad dan igual. Sebesta (cap. 15) señala esta ausencia de dependencias de orden como una de las razones por las que el estilo funcional encaja tan bien con el hardware multinúcleo actual.
+
 ## 🧩 Situación
 
-En vez de recorrer y mutar, el estilo funcional describe la transformación: 'la lista de los dobles'. La original queda intacta, lo que evita errores por estado compartido.
+Un clásico de los bugs difíciles: una función recibe una lista, la "procesa" y, sin que nadie lo esperara, deja la lista original modificada. Otra parte del programa que aún tenía una referencia a esa lista empieza a ver datos que no reconoce, y el error aparece lejos de donde se causó. Este tipo de fallo por **estado compartido y mutación** es de los más caros de depurar porque rompe la suposición más básica: que un valor que no tocaste sigue siendo el mismo.
+
+El estilo funcional elimina la categoría entera de ese error. En vez de mutar, describes la transformación y obtienes un valor nuevo; la entrada queda intacta y cualquiera que la tuviera sigue viéndola igual. Esta clase reduce la idea a su mínima expresión: dada una lista de enteros, producir la lista de sus dobles. Los casos —`1 2 3 → doblados=2-4-6`, `5 → doblados=10`, `2 4 → doblados=4-8`— se resuelven con un `map` que no altera la lista original ni usa acumulador. La sencillez es intencional: deja ver la mecánica del paradigma sin que la lógica del problema estorbe.
 
 ## 🧮 Modelo
 
@@ -201,6 +213,25 @@ echo "doblados=" . implode("-", $doblados) . "\n";
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
 
+## 🧪 Laboratorio guiado — recorrido del código
+
+Sigamos el caso `1 2 3 → doblados=2-4-6` de [`casos.json`](casos.json), con `5 → doblados=10` y `2 4 → doblados=4-8`. El verificador entrega la línea de enteros por `stdin` y espera el prefijo `doblados=` seguido de los dobles unidos por guiones.
+
+**Python** expresa el paradigma casi con las palabras del pseudocódigo. Tras leer los números, la línea central es `doblados = list(map(lambda x: x * 2, nums))`. Aquí `map` recibe dos cosas: la **función pura** `lambda x: x * 2` —sin efectos, su salida solo depende de `x`— y la colección `nums`. Aplica la función a cada elemento y produce una secuencia nueva; `nums` no se toca en ningún momento. Para `1 2 3`, `map` genera `[2, 4, 6]`, y el `"-".join(...)` los une en `2-4-6`, imprimiendo `doblados=2-4-6`. Fíjate en que no hay acumulador ni índice: la transparencia referencial permitiría sustituir `map(lambda x: x*2, [1,2,3])` por `[2,4,6]` sin cambiar nada. Con `5` el resultado es la lista de un elemento `[10]` y sale `doblados=10`; el mismo código cubre el caso de un solo número sin ramas especiales.
+
+**Haskell no está en el núcleo, pero Rust muestra la versión más cercana al ideal funcional** con su cadena de iteradores. La expresión `s.split_whitespace().map(|x| (x.parse::<i64>().unwrap() * 2).to_string()).collect()` encadena tres transformaciones puras: partir en palabras, doblar cada una, recolectar en un `Vec<String>`. Nada se muta; cada etapa produce un valor nuevo que alimenta a la siguiente. Y hay un detalle idiomático importante: en Rust `map` sobre un iterador es **perezoso** —no calcula nada hasta que `collect()` fuerza la evaluación—, lo que permite componer largas cadenas sin materializar listas intermedias. Para `2 4`, la cadena produce `["4", "8"]` y el `join("-")` da `doblados=4-8`.
+
+El contraste instructivo lo pone **Go**, que en el núcleo carece de un `map` genérico idiomático y resuelve con un bucle explícito:
+
+```go
+for _, s := range strings.Fields(line) {
+    n, _ := strconv.Atoi(s)
+    doblados = append(doblados, strconv.Itoa(n*2))
+}
+```
+
+Aquí sí hay estado que evoluciona —la rebanada `doblados` crece con cada `append`—. El resultado impreso es idéntico (`doblados=2-4-6`), pero el estilo es imperativo: el *qué* (doblar) y el *cómo* (recorrer y acumular) están entrelazados. Comparar esta versión con la de Python o Rust es el corazón de la clase: misma salida, dos mentalidades. **Java** (streams: `.map(x -> x * 2)`) y **C#** (LINQ: `.Select(x => x * 2)`) recuperan el estilo declarativo sobre una plataforma imperativa. El **SQL** lo hace a su manera, y de forma naturalmente inmutable: `group_concat(x * 2, '-')` transforma en el `SELECT` sin alterar la tabla —por eso el verificador no lo marca como una anomalía de mutación sino como la expresión declarativa del mismo cálculo—. Recorrer estas variantes deja ver que `map` no es una función de librería, sino una forma de pensar que muchos lenguajes terminaron adoptando.
+
 ## 🔬 Comparación
 
 | Clase de diferencia | Observación entre lenguajes |
@@ -209,9 +240,13 @@ echo "doblados=" . implode("-", $doblados) . "\n";
 | Semántica | No muta la lista original; devuelve otra. |
 | Paradigmática | SQL transforma en el SELECT, sin mutar. |
 
+La diferencia real más profunda es **cuán en serio se toma cada lenguaje la inmutabilidad**. En Python, JavaScript o Java, `map` devuelve una colección nueva, pero nada te impide mutar la original con otra operación: la pureza es una disciplina, no una garantía. Rust la eleva a regla del compilador —un valor es inmutable salvo que lo declares `mut`, y el sistema de propiedad impide que dos partes muten lo mismo a la vez—, de modo que muchos errores de estado compartido ni siquiera compilan. Haskell va al extremo opuesto de lo imperativo: **todos** los valores son inmutables por defecto y los efectos se aíslan en el sistema de tipos (la mónada `IO`), lo que hace la transparencia referencial una propiedad del lenguaje entero, no del programador aplicado.
+
+La segunda diferencia es **evaluación estricta frente a perezosa**. El `map` de Python o Java (streams) y los iteradores de Rust son perezosos: no producen nada hasta que algo consume el resultado (`list()`, `collect()`, un terminal de stream). El `map` sobre listas de JavaScript es estricto: calcula toda la lista de inmediato. Haskell es perezoso por defecto en todo el lenguaje, lo que permite trabajar con estructuras infinitas (`map (*2) [1..]`). Esta distinción, invisible en un caso de tres números, es decisiva en tuberías largas: la pereza evita materializar colecciones intermedias y puede convertir una cadena de `map`/`filter` en un único recorrido.
+
 ## 🧬 El concepto en la familia
 
-En Haskell `map (*2) xs` es el ejemplo puro. Casi todos ofrecen map.
+En Haskell `map (*2) xs` es el ejemplo canónico y puro: sin efectos posibles, sobre datos inmutables por defecto y con evaluación perezosa. Lisp y Scheme —el linaje de SICP— tienen `map` desde hace décadas y lo usan como bloque de construcción junto a `filter` y `fold`/`reduce`, el trío que resume casi todo el procesamiento de listas funcional. Clojure hace de la inmutabilidad su bandera con estructuras de datos persistentes que comparten memoria entre versiones. Y los lenguajes imperativos convergieron: Java añadió *streams* en 8, C# tiene LINQ, C++ tiene `std::transform` y *ranges*. Que un concepto nacido en el mundo funcional haya colonizado a casi todos es la mejor evidencia de su valor: describir transformaciones en lugar de orquestar mutaciones produce código más corto, más seguro y más fácil de paralelizar.
 
 ## ✅ Prueba común
 

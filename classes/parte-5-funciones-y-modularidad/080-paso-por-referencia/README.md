@@ -1,41 +1,21 @@
 # Clase 080 — Paso por referencia
 
-> Parte **5 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> Parte **5 — Funciones y modularidad** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
 > ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Comprender el **paso por referencia**: la función recibe un enlace a la variable original, así que modificar el parámetro **sí** cambia la variable de quien llama. C usa punteros, Go `*`, Rust `&mut`, C# `ref`.
+Entender el modo de paso que sí permite a una función alcanzar y modificar la variable de quien la llamó: el **paso por referencia**. Si en el paso por valor la función recibía una fotocopia, aquí recibe la dirección del documento original: escribe sobre él, y el cambio persiste cuando la función retorna. Es el mecanismo con el que una subrutina puede tener un canal de salida distinto del `return` —o incluso varios a la vez— y es la base de operaciones clásicas como intercambiar dos variables (`swap`) o rellenar un buffer que el llamador proporciona.
 
-## 📚 Resultados de aprendizaje
+Robert Sebesta, en *Concepts of Programming Languages*, define el paso por referencia como el modo en que la subrutina recibe un **camino de acceso** (normalmente una dirección) a la variable del llamador, en lugar de una copia de su valor. La información fluye en las dos direcciones: lo que la función escribe a través de ese camino queda escrito en el original. Pero Sebesta también advierte del reverso oscuro: los efectos secundarios y los *alias* (dos nombres para la misma celda) hacen el código más difícil de razonar, porque ya no basta mirar el `return` para saber qué cambió una llamada.
 
-Al finalizar, podrás:
-
-1. Modificar una variable del llamador desde una función.
-2. Distinguir referencia de copia.
-3. Reconocer cómo cada lenguaje pasa referencias.
-
-## 🗺️ Temas
-
-| # | Tema | Por qué importa |
-|---|------|-----------------|
-| 1 | Paso por referencia | Se pasa un enlace, no una copia |
-| 2 | Punteros/referencias | &, *, ref, &mut |
-| 3 | Efecto en el llamador | El original cambia |
-| 4 | Riesgo | Modificaciones a distancia |
-
-## 📖 Definiciones y características
-
-- **Paso por referencia** — la función accede a la variable original. Clave: puede modificarla.
-- **Puntero** — valor que guarda la dirección de otra variable (C). Clave: permite modificarla.
-- **Referencia mutable** — enlace que permite cambiar el valor (`&mut` en Rust, `ref` en C#). Clave: modificación explícita.
-- **Efecto secundario** — cambiar algo fuera de la función. Clave: potente pero peligroso.
+El objetivo hondo —y la fuente de la mitad de la confusión en esta materia— es distinguir el **paso por referencia genuino** del **paso de una referencia por valor**. Son cosas distintas que se parecen. C++ (`&`), C# (`ref`) y Rust (`&mut`) ofrecen referencia genuina: la función opera directamente sobre la variable del llamador. Java y Go, en cambio, **no tienen paso por referencia**: siempre pasan por valor, y lo que a veces parece «por referencia» es que copiaron un puntero o una referencia a objeto. Go lo hace explícito con punteros `*T`; Java lo disimula bajo objetos mutables. Saber en qué grupo está cada lenguaje es el corazón de la clase.
 
 ## 🧩 Situación
 
-Una función `doblar(&n)` cambia `n` para siempre. Es útil (evita copiar datos grandes) pero peligroso: modificaciones 'a distancia' que sorprenden si no se esperan.
+Escribes `doblar(&n)` y, tras la llamada, `n` vale el doble para siempre. Es potente: evita copiar estructuras grandes y permite que una función devuelva resultados por más de un canal. Pero es peligroso justo por lo mismo: la función modificó tu variable «a distancia», y si no esperabas ese efecto, tu programa hace algo que no leías en la línea de la llamada. Ese es el dilema que atraviesa toda la clase. El paso por referencia es la herramienta correcta cuando el *propósito* de la función es mutar (un `swap`, un acumulador, un buffer), y una trampa cuando lo usas por comodidad y olvidas que la variable del llamador quedó a merced del cuerpo de la función.
 
 ## 🧮 Modelo
 
@@ -50,6 +30,14 @@ Especificación y verificación en [`casos.json`](casos.json):
 | `5` | `antes=5 despues=10` |
 | `3` | `antes=3 despues=6` |
 | `7` | `antes=7 despues=14` |
+
+## 📖 Definiciones y características
+
+- **Paso por referencia** — la función recibe un camino de acceso a la variable original, no una copia de su valor. Modificar el parámetro modifica la variable del llamador. En términos de Sebesta, el parámetro y el argumento se convierten en *alias*: dos nombres para la misma celda de memoria.
+- **Puntero** — en C y Go, un valor que guarda la **dirección** de otra variable. Pasar `&n` entrega esa dirección; dentro, `*p` *desreferencia* el puntero para leer o escribir la celda apuntada. El puntero en sí se pasa por valor (es una dirección copiada), pero como apunta al original, escribir en `*p` alcanza al llamador.
+- **Referencia mutable** — el enlace explícito que autoriza a cambiar el valor: `&mut` en Rust, `ref` en C#, `&` en C++. Es la forma más honesta de paso por referencia: la firma declara en voz alta «voy a poder modificar esto».
+- **Efecto secundario** — cualquier cambio que una función produce fuera de sí misma, aquí la mutación de la variable del llamador. Es lo que da poder al paso por referencia y, a la vez, lo que hay que vigilar: un efecto secundario no anunciado es una fuente clásica de bugs.
+- **Paso por referencia vs. referencia por valor** — la distinción capital. Java y Go **no** tienen paso por referencia real: siempre copian el argumento. Cuando parece que mutan el original, lo que ocurre es que copiaron una *referencia a un objeto* (Java) o que tú pasaste explícitamente un *puntero* (Go `*T`). La prueba: en Java no puedes escribir un `swap(a, b)` que intercambie dos `int` locales del llamador, porque no hay forma de pasar por referencia un primitivo. Por eso las implementaciones de Java, JS y Python de esta clase usan una **caja** (un arreglo o un objeto de un elemento): meten el entero dentro de un objeto mutable y comparten la referencia a ese objeto.
 
 ## 📐 Algoritmo (pseudocódigo neutral)
 
@@ -242,17 +230,36 @@ echo "antes=$antes despues=$n\n";
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
 
+## 🔬 Ejemplo trabajado — del stdin a la salida
+
+Sigamos el primer caso de `casos.json` (`stdin = "5"`, `esperado = "antes=5 despues=10"`) por tres lenguajes que representan los tres grandes enfoques: puntero (C), referencia mutable (Rust) y caja-objeto (Java).
+
+**C — el puntero explícito.** `scanf("%ld", &n)` deja `n = 5`. Antes de tocarla, `antes = n` guarda una copia del `5` para poder mostrar el valor previo. La llamada `doblar(&n)` pasa la **dirección** de `n`, no su valor: el parámetro `long *p` recibe esa dirección. Dentro, `*p *= 2` significa «ve a la celda que apunta `p` y multiplícala por dos»: esa celda *es* `n`, así que `n` pasa de `5` a `10`. Al retornar, `antes` sigue valiendo `5` (era una copia independiente) y `n` vale `10`, produciendo `antes=5 despues=10`. Si hubieras olvidado el `&` y pasado `n` a secas, la función habría doblado una copia y `n` no habría cambiado: el `&` es lo que convierte esto en paso por referencia.
+
+**Rust — la referencia mutable comprobada.** `let mut n: i64 = ...` da `n = 5`, y `n` se declara `mut` porque va a mutarse. `let antes = n` copia el `5` (los enteros son `Copy`). La llamada `doblar(&mut n)` presta `n` de forma **mutable**: el parámetro `x: &mut i64` es una referencia que autoriza escritura. Dentro, `*x *= 2` desreferencia y dobla el original a `10`. El detalle propio de Rust: el *borrow checker* exige que escribas `&mut` tanto en la llamada como en la firma, y garantiza en compilación que no haya dos referencias mutables vivas a la vez —seguridad que C no da—. Salida: `antes=5 despues=10`.
+
+**Java — la caja, porque no hay referencia real.** Aquí está la lección incómoda. `int n = ...` da `n = 5`, y `antes = n` lo copia. Java **no puede** pasar `n` por referencia: los `int` van siempre por valor. El truco es meter el entero en un arreglo: `int[] caja = { n }` crea un objeto arreglo cuyo elemento `[0]` es `5`. Al llamar `doblar(caja)`, Java copia la *referencia al arreglo* (por valor), pero esa copia apunta al mismo arreglo, así que `caja[0] *= 2` muta el `5` a `10` dentro del objeto compartido. Fíjate en lo que **no** cambia: la variable `n` de `main` sigue siendo `5`; lo que cambió fue el contenido del arreglo, que es lo que imprimimos (`caja[0]`). El tercer caso, `7`, recorre lo mismo: `7 * 2 = 14`, salida `antes=7 despues=14`. Tres rutas —puntero, referencia mutable, caja compartida— hacia la misma línea verificada, pero solo dos de ellas (C y Rust, más C# y PHP) son paso por referencia *genuino*; Java y Go y JS simulan el efecto compartiendo un objeto.
+
 ## 🔬 Comparación
 
-| Clase de diferencia | Observación entre lenguajes |
+| Lenguaje | Cómo alcanza la variable del llamador |
 |---|---|
-| Sintáctica | `*p` (C/Go), `&mut` (Rust), `ref` (C#), objeto/lista (Java/JS/Python). |
-| Semántica | Referencia mutable cambia el original; los primitivos por valor no. |
-| Paradigmática | SQL no modifica variables: usa UPDATE sobre datos. |
+| Python | No hay referencia real a un nombre; se comparte un objeto mutable (aquí una lista `caja`). |
+| JavaScript | Igual: se envuelve el valor en un objeto `{ v }` y se muta su propiedad. |
+| TypeScript | Como JS; el tipo `{ v: number }` documenta la caja sin cambiar la semántica. |
+| Java | **Sin** paso por referencia; se usa un arreglo/objeto como caja y se muta su contenido. |
+| C# | Paso por referencia **real** con `ref int x`; la firma declara la mutación explícitamente. |
+| Go | **Sin** referencia real; se emula con un puntero explícito `*int` y `&n` en la llamada. |
+| Rust | Referencia mutable comprobada `&mut i64`; el *borrow checker* garantiza aliasing seguro. |
+| C | Punteros `long *p`; `&n` pasa la dirección y `*p` desreferencia para escribir. |
+| SQL | No muta variables del llamador; el «después» se calcula por expresión sobre cada fila. |
+| PHP | Paso por referencia **real** con `&$x` en la firma; el original se muta directamente. |
+
+La síntesis es la advertencia de Sebesta hecha práctica: solo C, C++, C#, Rust y PHP ofrecen paso por referencia *genuino*, donde la firma crea un alias directo con la variable del llamador. Java y Go —y por extensión JS/TS/Python— pasan siempre por valor; lo que ves como «modificar el original» es compartir un objeto mutable a través de una referencia copiada. La consecuencia práctica es contundente: en Java no existe un `swap(int a, int b)` que funcione, mientras que en C, C#, Rust o PHP se escribe en dos líneas. Distinguir «paso por referencia» de «paso de una referencia por valor» no es pedantería académica: decide qué puedes y qué no puedes hacer en cada lenguaje.
 
 ## 🧬 El concepto en la familia
 
-En Ruby los objetos se pasan por referencia (de valor); los enteros no se mutan. En C++ hay referencias `&` explícitas.
+En **C++** las referencias son explícitas y directas: `void doblar(long &x) { x *= 2; }`, y en la llamada basta `doblar(n)` sin ningún `&` —la referencia se establece en la firma, no en el sitio de la llamada, a diferencia de C—. En **Ruby**, todos los argumentos se pasan por referencia de valor (como Java): puedes mutar el objeto recibido, pero no reasignar la variable del llamador. En **Fortran**, históricamente todo se pasaba por referencia por defecto, lo que lo hacía peligrosamente fácil de sorprender con efectos secundarios. Reconocer el patrón —¿el `&` va en la firma o en la llamada?, ¿el lenguaje tiene referencia real o solo objetos compartidos?— permite predecir el comportamiento antes de ejecutar.
 
 ## ✅ Prueba común
 
@@ -268,32 +275,36 @@ Detalle en [`reto.md`](reto.md).
 
 ## ⚠️ Errores comunes
 
-- **Modificar sin querer el original** → causa: efecto secundario inesperado → solución: pasar por valor si no debes cambiar el original
-- **Confundir puntero con valor** → causa: modificar la copia del puntero → solución: desreferenciar (`*p`) para tocar el valor apuntado
+- **Olvidar el `&` en C/Go** → causa: pasar `n` en vez de `&n`, con lo que la función dobla una copia y el original no cambia → solución: pasar la dirección (`&n`) cuando la firma espera un puntero, y usar `*p` dentro para tocar el valor apuntado.
+- **Creer que Java o Go pasan por referencia** → causa: ver que un objeto mutado «cambia fuera» y generalizarlo a los primitivos, intentando luego un `swap(int, int)` que no compila o no funciona → solución: recordar que ambos pasan por valor; para mutar un primitivo hay que envolverlo (caja) o usar un puntero explícito (Go `*T`).
+- **Confundir modificar el objeto con reasignar la variable** → causa: en la llamada por compartición puedes mutar el objeto (`caja[0] = ...`) pero si reasignas el parámetro (`caja = otro`) el llamador no lo ve → solución: distinguir mutar el contenido apuntado de cambiar a qué apunta la referencia local.
+- **Efectos secundarios sorpresa** → causa: usar paso por referencia por comodidad y olvidar que la función altera variables del llamador → solución: reservar la mutación por referencia para cuando ese sea el propósito explícito de la función; en lo demás, preferir devolver el valor (paso por valor, clase 079).
 
 ## ❓ Preguntas frecuentes
 
-- **¿Referencia o valor?** Referencia para modificar o evitar copiar datos grandes; valor para aislar.
-- **¿Java pasa por referencia?** Pasa la referencia por valor: puedes mutar el objeto, no reasignar la variable del llamador.
+- **¿Referencia o valor?** Usa referencia cuando el propósito de la función *sea* modificar el argumento (un `swap`, un acumulador) o cuando copiar el dato sea caro. Usa valor cuando quieras aislamiento y previsibilidad, que es la mayoría de los casos.
+- **¿Java pasa por referencia?** No. Java pasa siempre por valor. Con los objetos, lo que copia es la referencia al objeto, así que puedes *mutar* el objeto pero no *reasignar* la variable del llamador. Con los primitivos, ni siquiera eso: es copia pura. De ahí la caja (`int[]`) en la implementación de esta clase.
+- **¿Por qué Go usa punteros si «no tiene» paso por referencia?** Porque los punteros de Go *son* paso por valor de una dirección: copias la dirección, pero como apunta al original, `*p *= 2` alcanza la variable del llamador. Es la forma idiomática de Go para lograr el efecto sin un modo de paso por referencia dedicado.
+- **¿Qué protege el `&mut` de Rust que no protege el puntero de C?** El *borrow checker* garantiza en compilación que no exista más de una referencia mutable viva al mismo dato a la vez, eliminando toda una familia de bugs de aliasing y carreras que en C quedan a cargo del programador. Es el tema central de la clase 081.
 
 ## 🔗 Referencias
 
 **Libros de la parte:**
 
-- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press).
-- R. C. Martin — *Clean Code* (Prentice Hall).
-- S. McConnell — *Code Complete* (2ª ed., Microsoft Press).
+- R. W. Sebesta — *Concepts of Programming Languages* (11ª ed., Pearson), cap. 9 «Subprograms», §9.5 sobre paso por referencia y el problema de los *alias*.
+- S. McConnell — *Code Complete* (2ª ed., Microsoft Press), cap. 7 «High-Quality Routines».
+- R. C. Martin — *Clean Code* (Prentice Hall), cap. 3 «Functions» (argumentos de salida y efectos secundarios).
 
 **Libros de los lenguajes del núcleo:**
 
-- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly), cap. sobre referencias, mutabilidad y aliasing.
 - M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
 - B. Cherny — *Programming TypeScript* (O'Reilly).
 - J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
-- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- J. Skeet — *C# in Depth* (4ª ed., Manning); parámetros `ref` y `out`.
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley), §2.3.2 sobre punteros.
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/), cap. 4 «References and Borrowing».
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall), §5.2 «Pointers and Function Arguments».
 - C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
 - J. Lockhart — *Modern PHP* (O'Reilly).
 

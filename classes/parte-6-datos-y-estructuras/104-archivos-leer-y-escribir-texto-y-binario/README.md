@@ -7,7 +7,7 @@
 
 ## 🎯 Objetivo
 
-Procesar **contenido textual** como el de un archivo: leer una línea y extraer información (palabras, caracteres). Es el modelo de la lectura de archivos, aquí por la entrada estándar para poder verificarlo.
+Entender la entrada/salida de archivos como lo que realmente es: un **flujo** (*stream*) de bytes que fluye entre tu programa y el mundo exterior —el disco, la red, el teclado, la pantalla—. Un archivo no se «lee de golpe» por arte de magia; se abre, se recorre de principio a fin transfiriendo trozos, y se cierra. En ese recorrido hay dos decisiones que gobiernan todo: si el flujo se trata como **texto** (una secuencia de caracteres con una codificación y saltos de línea que se normalizan) o como **binario** (bytes crudos, sin interpretar), y cómo el **buffering** amortigua el altísimo coste de hablar con el sistema operativo. Esta clase usa la operación textual más elemental —contar palabras y caracteres de una línea, el corazón del comando `wc`— para fijar el modelo mental de la lectura de archivos. El contenido llega por la entrada estándar, que no es más que un flujo como el de un archivo, para que el resultado se pueda verificar.
 
 ## 📚 Resultados de aprendizaje
 
@@ -27,13 +27,15 @@ Al finalizar, podrás:
 
 ## 📖 Definiciones y características
 
-- **Contenido de texto** — los caracteres de un archivo o entrada. Clave: se procesa línea a línea.
-- **Palabra** — secuencia separada por espacios. Clave: se cuenta partiendo por espacios.
-- **Carácter** — cada símbolo, incluidos los espacios. Clave: la longitud total.
+Un **flujo** (*stream*) es la abstracción central de la E/S: una fuente o destino de datos que se consume secuencialmente, sin necesidad de tener todo el contenido en memoria a la vez. Kernighan y Ritchie construyen sobre ella toda la biblioteca de C —`fopen` abre un flujo, `fgets`/`fread` lo leen, `fwrite` lo escribe, `fclose` lo cierra— y ese mismo trío abrir-usar-cerrar reaparece, con otros nombres, en los diez lenguajes. Cerrar importa por una razón concreta: cada archivo abierto ocupa un **descriptor** (*file descriptor*), un recurso finito que el sistema operativo administra; no cerrarlo lo deja retenido hasta que el proceso muera o se agote el límite.
+
+El **modo texto** frente al **modo binario** es la distinción que más sorpresas causa. En modo texto, el flujo interpreta los bytes según una **codificación** (hoy casi siempre UTF-8) para producir caracteres, y **normaliza los saltos de línea** —en Windows, el par `\r\n` del disco se traduce a un solo `\n` al leer y viceversa al escribir. En modo binario no hay interpretación alguna: los bytes entran y salen tal cual, y por eso es el único modo correcto para imágenes, ejecutables o cualquier formato donde un byte `0x0D` no significa «fin de línea» sino un dato. Confundir los modos corrompe silenciosamente los binarios; tratar texto como bytes rompe los acentos y emojis, cuyos caracteres ocupan varios bytes en UTF-8 —de ahí que la *longitud en caracteres* y la *longitud en bytes* no siempre coincidan.
+
+El **buffering** es la razón de que la E/S sea rápida. Cada llamada al sistema operativo (leer del disco, escribir en pantalla) es cara —cruza la frontera entre tu programa y el núcleo—, así que las bibliotecas acumulan los datos en un **búfer** en memoria y hablan con el sistema por grandes bloques en lugar de byte a byte. Por eso Java envuelve el flujo en un `BufferedReader` y Go en un `bufio.Reader`: amortizan miles de llamadas costosas en unas pocas. La contrapartida del buffering al escribir es que los datos pueden quedar «atrapados» en el búfer sin llegar al destino hasta que se **vacía** (*flush*) —lo que ocurre, entre otros momentos, al **cerrar** el flujo. Ahí se cierra el círculo: cerrar no es un trámite, es lo que garantiza que lo escrito realmente se persista y que el descriptor se libere.
 
 ## 🧩 Situación
 
-Contar líneas, palabras o caracteres (como `wc`) es el 'hola mundo' del procesamiento de archivos. Aquí el contenido llega por stdin para poder verificar el resultado.
+Contar líneas, palabras y caracteres es el «hola mundo» del procesamiento de archivos: el venerable comando `wc` de Unix no hace más que eso, y sin embargo toca cada pieza del modelo —abrir un flujo, recorrerlo trozo a trozo, decidir qué cuenta como palabra, distinguir un carácter de un byte, cerrar. Es la tarea con la que se estrena todo el que aprende a leer archivos porque obliga a enfrentar las preguntas reales: ¿el salto de línea final cuenta como carácter?, ¿dos espacios seguidos son una palabra vacía?, ¿la longitud es en caracteres o en bytes? Aquí el contenido llega por la entrada estándar en lugar de por un archivo con nombre, pero es exactamente el mismo flujo: si mañana cambias `stdin` por el resultado de abrir «datos.txt», el resto del código no se entera. Esa es la potencia de la abstracción de flujo —la fuente cambia, el procesamiento no.
 
 ## 🧮 Modelo
 
@@ -199,6 +201,18 @@ echo "palabras=$palabras caracteres=" . strlen($linea) . "\n";
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
 
+## 🧪 Laboratorio guiado: del código a la salida
+
+Sigamos el caso `hola mundo`, que debe producir `palabras=2 caracteres=10`. Las diez implementaciones leen la línea, la limpian, cuentan sus palabras y su longitud; miremos tres que muestran distintos niveles de abstracción sobre el flujo.
+
+En **Python**, `sys.stdin.readline()` lee una línea del flujo de entrada —incluido el `\n` final— y `.rstrip("\n")` lo recorta, dejando `"hola mundo"` (10 caracteres). El `.split()` sin argumentos parte por cualquier tramo de espacios en blanco y descarta los vacíos, así que `["hola", "mundo"]` tiene `len` 2. `len(linea)` cuenta 10 caracteres. Nótese que `readline` ya trae el buffering de Python por debajo: no toca el sistema operativo carácter a carácter.
+
+En **Java**, la abstracción del flujo es explícita y por capas. `new InputStreamReader(System.in)` envuelve el flujo de bytes crudo y lo decodifica a caracteres según la codificación; `new BufferedReader(...)` añade el búfer que amortiza las llamadas al sistema. `br.readLine()` devuelve la línea *sin* el salto de línea —Java ya lo normaliza—, de modo que `linea.length()` da 10 directamente. El `split("\\s+")` sobre la línea recortada produce dos elementos. Aquí se ve el ensamblaje manual de la tubería lector→decodificador→búfer que otros lenguajes ocultan.
+
+En **C**, se trabaja al ras del metal. `fgets(buf, sizeof buf, stdin)` lee hasta un salto de línea o hasta llenar el búfer de 4096 bytes, dejando el `\n` dentro; `buf[strcspn(buf, "\r\n")] = '\0'` lo sustituye por el terminador de cadena. `strlen` cuenta 10 **bytes** —que aquí coinciden con caracteres porque el texto es ASCII, pero divergirían con acentos en UTF-8. Las palabras se cuentan con una máquina de estados: la bandera `dentro` distingue si vamos «dentro» de una palabra, e incrementa el contador solo en la transición de espacio a no-espacio. Ese bucle es, literalmente, lo que hacen por dentro los `split` de los demás lenguajes.
+
+Los tres imprimen `palabras=2 caracteres=10`; el verificador comprueba que las diez coincidan carácter a carácter con `casos.json`.
+
 ## 🔬 Comparación
 
 | Clase de diferencia | Observación entre lenguajes |
@@ -206,6 +220,8 @@ echo "palabras=$palabras caracteres=" . strlen($linea) . "\n";
 | Sintáctica | `split()` y `len()` (Python) vs. equivalentes por lenguaje. |
 | Semántica | La longitud incluye los espacios; las palabras no. |
 | Paradigmática | SQL cuenta con funciones de texto y agregación. |
+
+La diferencia más honda entre los diez es **cuánto de la tubería de E/S te obligan a construir a mano**. Python (`readline`), Go (`bufio.NewReader`) y C# (`Console.In`) te dan un lector de líneas casi listo; Java te hace ensamblar `InputStreamReader` + `BufferedReader`, exponiendo las capas de decodificación y buffering que los demás fusionan; C te da `fgets` sobre un búfer que tú declaras, con el tamaño y la gestión del salto de línea a tu cargo. Otra frontera real es **carácter frente a byte**: `linea.length()` en Java y `len(linea)` en Python cuentan *caracteres* (unidades de código), mientras `strlen` en C y `len(linea)` en Go cuentan *bytes* —una distinción invisible en ASCII pero decisiva en cuanto aparece un carácter multibyte de UTF-8, donde una `ñ` suma un carácter pero dos bytes. Por último, la **normalización de saltos de línea** difiere: en modo texto, un archivo con finales `\r\n` de Windows se ve con `\n` limpios en la mayoría de lenguajes, pero varias implementaciones recortan explícitamente `\r` y `\n` para no depender del modo —un recordatorio de que el mismo texto puede tener una longitud distinta según el sistema que lo escribió.
 
 ## 🧬 El concepto en la familia
 

@@ -9,5 +9,6 @@ semántica y no solo sintáctica, cuándo conviene una forma sobre otra, qué ca
 Las preguntas viven en [`preguntas.json`](preguntas.json) y alimentan la versión interactiva del
 sitio ([quiz](https://vladimiracunadev-create.github.io/polyglot-programming-labs/autoevaluaciones/quiz.html)).
 
-> 🚧 El banco de preguntas se construye junto con cada parte. Hoy contiene la batería inicial de la
-> Parte 0; el resto se añade a medida que se escribe el contenido.
+El banco cubre **las 12 partes del programa**. Cada pregunta trae sus opciones, la respuesta
+correcta y una **explicación razonada** de por qué lo es. Úsalas después de estudiar cada parte para
+comprobar que la comprensión es transferible y no memoria de sintaxis.

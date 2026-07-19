@@ -1,0 +1,18 @@
+# Configuración de gitleaks para Polyglot Programming Labs.
+#
+# Se usan las reglas por defecto de gitleaks sobre todo el repositorio
+# (scripts, workflows, configuración). Se excluye el texto didáctico de las
+# clases: algunos README muestran cadenas de ejemplo (claves, tokens ficticios)
+# con fines pedagógicos. Nunca son secretos reales.
+
+title = "gitleaks — Polyglot Programming Labs"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Contenido didáctico con valores de ejemplo (nunca reales): clases y sitio generado"
+paths = [
+  '''^classes/.*\.md$''',
+  '''^site/.*''',
+]

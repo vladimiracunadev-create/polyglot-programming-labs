@@ -1,39 +1,46 @@
 # Clase 157 — ABI, enlace y convenciones de llamada
 
-> Parte **10 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> Parte **10 — Interoperabilidad y fronteras entre lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
 > ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Entender el **ABI, el enlace y las convenciones de llamada**: para que dos piezas binarias se comuniquen, deben compartir la misma ABI (cómo se pasan los datos y se llaman las funciones). Un desajuste (p. ej. 32 vs 64 bits) rompe la interoperabilidad.
+La clase anterior asumió que basta con "declarar la firma correcta" para que la FFI funcione. Bajo esa firma hay un contrato mucho más profundo y silencioso: la **ABI, Application Binary Interface**. Si la API es el acuerdo en el código fuente ("existe una función `doble` que toma un entero"), la ABI es el acuerdo en el **binario**: en qué registro va el primer argumento, cuántos bytes ocupa un `long`, cómo se alinean los campos de una estructura, quién limpia la pila al volver. El objetivo de esta clase es hacer visible ese contrato invisible y entender por qué su desajuste rompe la interoperabilidad de forma que ningún compilador puede advertir.
+
+La ABI es a los binarios lo que un formato de codificación es a los datos. Kleppmann dedica el capítulo 4 de *Designing Data-Intensive Applications* a que emisor y receptor de un mensaje deben acordar la representación de bytes; la ABI es exactamente esa idea aplicada a las llamadas de función dentro de un proceso. Un binario de 32 bits y otro de 64 bits no pueden enlazarse por la misma razón por la que un lector que espera enteros de 4 bytes no puede leer un flujo escrito con enteros de 8: los bits están donde no se los espera. Entender la ABI es entender por qué "compila en mi máquina" no garantiza "enlaza con tu librería".
 
 ## 📚 Resultados de aprendizaje
 
 Al finalizar, podrás:
 
-1. Explicar qué es la ABI.
-2. Detectar una incompatibilidad de ABI.
-3. Distinguir ABI de API.
+1. **Explicar** qué es la ABI y qué reglas cubre.
+2. **Detectar** una incompatibilidad de ABI (anchura, alineación, convención).
+3. **Distinguir** con precisión ABI de API.
+4. **Relacionar** la estabilidad de ABI con la compatibilidad binaria de librerías.
 
 ## 🗺️ Temas
 
 | # | Tema | Por qué importa |
 |---|------|-----------------|
-| 1 | ABI | Contrato binario |
-| 2 | Convención de llamada | Cómo se pasan los argumentos |
-| 3 | Compatibilidad | Mismo ABI para enlazar |
+| 1 | ABI | El contrato binario que hace posible enlazar |
+| 2 | Convención de llamada | Registros, pila y quién limpia al volver |
+| 3 | API vs. ABI | Contrato fuente frente a contrato binario |
 
 ## 📖 Definiciones y características
 
-- **ABI** — Application Binary Interface: cómo se representan datos y se llaman funciones a nivel binario. Clave: debe coincidir para enlazar.
-- **Convención de llamada** — reglas de paso de argumentos y retorno. Clave: parte de la ABI.
-- **API vs. ABI** — API es el contrato en código fuente; ABI, el binario. Clave: distinto nivel.
+La **ABI** define cómo se representan los datos y cómo se llaman las funciones a nivel de máquina. Cubre cuatro cosas: el **tamaño y alineación** de cada tipo (¿`long` son 4 u 8 bytes?), la **convención de llamada** (¿los argumentos van en registros o en la pila?, ¿en qué orden?), el **name mangling** (cómo se codifica el nombre de la función en el binario) y el **layout de estructuras** (dónde cae cada campo, con qué relleno). Para que dos binarios se enlacen, deben coincidir en las cuatro. Basta que uno crea que `size_t` son 4 bytes y el otro 8 para que la pila se descuadre y el programa se corrompa.
+
+La **convención de llamada** es la parte más subestimada. En x86-64 System V (Linux, macOS) los primeros seis enteros van en los registros `rdi, rsi, rdx, rcx, r8, r9`; en la ABI de Windows x64 van en `rcx, rdx, r8, r9` y el resto en la pila. Son reglas incompatibles: el mismo código fuente compilado para una y llamado con la otra lee argumentos basura. Por último, **API frente a ABI**: la API es el contrato en código fuente —lo que escribes y el compilador verifica—; la ABI es el contrato binario —lo que queda tras compilar. Puedes mantener la API idéntica y romper la ABI con solo cambiar el orden de dos campos de una estructura: el código que la incluye seguirá compilando, pero los binarios ya compilados contra la versión vieja fallarán.
+
+- **ABI** — Application Binary Interface: representación de datos y protocolo de llamada a nivel binario. Clave: debe coincidir para enlazar.
+- **Convención de llamada** — reglas de paso de argumentos, valor de retorno y limpieza de pila. Clave: parte central de la ABI, y varía por plataforma.
+- **API vs. ABI** — la API es el contrato en el código fuente; la ABI, en el binario. Clave: son niveles distintos y se rompen por causas distintas.
 
 ## 🧩 Situación
 
-Enlazar una librería de 32 bits con un programa de 64 bits falla: sus ABI no coinciden. La ABI es el contrato invisible que hace posible (o imposible) que dos binarios cooperen.
+Descargas una librería precompilada de 32 bits y tu aplicación es de 64 bits. El enlazador falla con un error críptico, o peor, enlaza y el programa se corrompe en tiempo de ejecución. Sus ABI no coinciden: los punteros miden distinto, los registros son otros, la pila se organiza diferente. No hay nada malo en tu código fuente —la API es perfecta—, el problema vive un nivel más abajo. Este es el drama cotidiano de quien distribuye software nativo: mantener la ABI estable es lo que permite actualizar una `.dll` o una `.so` sin recompilar todo lo que la usa. Para observar la esencia del problema sin montar dos toolchains, esta clase lo reduce a comparar dos "anchos de bits": si coinciden, los binarios son compatibles; si no, no.
 
 ## 🧮 Modelo
 
@@ -187,17 +194,29 @@ echo "abi=" . ($a === $b ? "compatible" : "incompatible") . "\n";
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
 
+## 🔎 Recorrido del código (laboratorio)
+
+El caso `64 32` debe producir `abi=incompatible`, y `32 32` debe dar `abi=compatible`. La entrada son dos anchos de bits; la regla es igualdad. El problema es deliberadamente un espejo de la vida real: dos binarios son compatibles si comparten anchura.
+
+En **Python**, `a, b = map(int, sys.stdin.readline().split())` desempaqueta la línea en dos enteros de una sola expresión, y el operador ternario `'compatible' if a == b else 'incompatible'` decide dentro de la `f-string`. Es la forma idiomática pythónica: legible, sin ramas explícitas. Sobre `64 32`, `a == b` es `False` y sale `abi=incompatible`.
+
+En **C**, la comparación es la misma pero el detalle es jugoso porque *esta clase trata precisamente de C*. `long a, b;` declara dos enteros cuyo tamaño **depende de la ABI**: 8 bytes en Linux de 64 bits, 4 en Windows aunque sea de 64. `scanf("%ld %ld", &a, &b)` los lee y el ternario `a == b ? "compatible" : "incompatible"` decide. Que el propio tipo `long` cambie de tamaño según la plataforma es la lección incrustada en el código: el lenguaje que sirve de puente universal es también el que más expone las diferencias de ABI.
+
+En **Rust**, se parsea a `Vec<i64>` con `map(|x| x.parse().unwrap()).collect()` y se compara `v[0] == v[1]`. Rust fija `i64` a 64 bits *en toda plataforma*, a diferencia del `long` de C: esa decisión de diseño elimina una clase entera de bugs de ABI, y es una de las razones por las que Rust resulta cómodo para escribir bindings. Las tres implementaciones imprimen lo mismo, pero solo comparándolas se ve que "un entero" no significa lo mismo en todos los lenguajes: justo el corazón del problema de ABI.
+
 ## 🔬 Comparación
 
 | Clase de diferencia | Observación entre lenguajes |
 |---|---|
-| Sintáctica | Comparación de enteros en cada lenguaje. |
-| Semántica | La ABI incluye tamaños, alineación y convención de llamada. |
-| Paradigmática | SQL compara valores. |
+| Sintáctica | Un `==` entre enteros y un ternario: trivial en todos. |
+| Semántica | El tamaño real del entero varía: `long` de C depende de plataforma; `i64` de Rust y `long` de Java son fijos. Ahí nacen los desajustes de ABI. |
+| Paradigmática | SQL compara valores con `CASE`, ajeno a cualquier noción de binario o registro. |
+
+Lo que el problema abstrae —comparar dos números— esconde el tema verdadero: **por qué dos números que "son iguales" en el fuente pueden diferir en el binario**. Los lenguajes gestionados (Java, C#, Go) definen tamaños fijos por especificación y compilan a un bytecode o a un binario con ABI conocida, así que rara vez sufren estos choques entre sí. El drama vive en la frontera nativa: C, C++ y Rust producen código máquina directo, y ahí la ABI de la plataforma manda. El name mangling agrava la cosa: C exporta `doble` tal cual, pero C++ codifica el nombre con tipos (`_Z5doblel`), por eso todo binding declara `extern "C"` para desactivar el mangling y recuperar un símbolo estable. La ABI es, en el fondo, el formato de codificación de Kleppmann llevado al plano de la memoria y los registros.
 
 ## 🧬 El concepto en la familia
 
-Cada plataforma (x86-64 System V, Windows x64) define su ABI; los binarios deben respetarla para enlazar.
+Cada plataforma define su ABI: x86-64 System V rige en Linux y macOS, la ABI de Windows x64 en Windows, y ARM64 tiene la suya (AAPCS). Un binario debe respetar la de su plataforma para enlazar. Los ecosistemas gestionados añaden una capa por encima: la JVM define su propio *bytecode* estable, y .NET su CIL, de modo que Java, Kotlin y Scala comparten ABI de VM aunque el hardware cambie. Esa es la jugada de fondo: subir el punto de encuentro por encima del hardware para que la heterogeneidad de la que habla Tanenbaum deje de doler.
 
 ## ✅ Prueba común
 
@@ -213,21 +232,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## ⚠️ Errores comunes
 
-- **Mezclar binarios de distinta arquitectura** → causa: fallo de enlace o corrupción → solución: compilar todo para la misma ABI
-- **Confundir API con ABI** → causa: esperar compatibilidad binaria del código fuente → solución: recordar que son contratos de distinto nivel
+- **Mezclar binarios de distinta arquitectura** → causa: enlazar una librería de 32 bits con un ejecutable de 64 → solución: compilar todo el conjunto para la misma ABI y verificarlo (`file`, `objdump`).
+- **Confundir API con ABI** → causa: creer que si el código fuente compila, los binarios ya compilados seguirán funcionando → solución: recordar que reordenar un campo o cambiar un tipo mantiene la API y rompe la ABI.
+- **Olvidar `extern "C"` al exportar desde C++/Rust** → causa: el name mangling produce un símbolo que el otro lado no encuentra → solución: envolver las funciones exportadas en `extern "C"`.
+- **Asumir que `long`/`int` miden lo mismo en todas partes** → causa: `long` son 8 bytes en Linux y 4 en Windows → solución: usar tipos de anchura fija (`int64_t`, `i64`) en la frontera.
 
 ## ❓ Preguntas frecuentes
 
-- **¿API o ABI?** API es el contrato fuente; ABI, el binario. Un cambio de ABI rompe binarios ya compilados.
-- **¿Por qué importa la ABI?** Para enlazar librerías compiladas y usar la FFI sin corromper datos.
+- **¿API o ABI?** La API es el contrato en el código fuente y la verifica el compilador; la ABI es el contrato binario y la verifica el enlazador y el runtime. Un cambio de ABI rompe binarios ya compilados aunque el fuente siga válido.
+- **¿Por qué importa la ABI si uso lenguajes gestionados?** Entre lenguajes de la misma VM (Java/Kotlin) casi no la ves, porque la VM la estabiliza. Importa en cuanto tocas la frontera nativa: FFI, plugins compilados, librerías del sistema.
+- **¿Qué es una ABI "estable"?** Una que no cambia entre versiones de una librería, de modo que puedes reemplazar la `.so`/`.dll` sin recompilar los programas que la usan. Es un compromiso caro que asumen las librerías del sistema (glibc, la Win32 API).
 
 ## 🔗 Referencias
 
 **Libros de la parte:**
 
-- M. Kleppmann — *Designing Data-Intensive Applications* (O'Reilly).
-- S. Newman — *Building Microservices* (2ª ed., O'Reilly).
-- A. Tanenbaum y M. van Steen — *Distributed Systems* (3ª ed.).
+- M. Kleppmann — *Designing Data-Intensive Applications* (O'Reilly). Cap. 4: formatos de codificación y compatibilidad hacia atrás/adelante, análogo directo de la estabilidad de ABI.
+- S. Newman — *Building Microservices* (2ª ed., O'Reilly). Sobre versionar contratos sin romper a los consumidores.
+- A. Tanenbaum y M. van Steen — *Distributed Systems* (3ª ed.). Cap. 4: heterogeneidad de representación de datos entre plataformas.
 
 **Libros de los lenguajes del núcleo:**
 

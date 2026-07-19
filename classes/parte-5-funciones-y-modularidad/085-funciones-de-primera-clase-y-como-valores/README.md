@@ -1,41 +1,21 @@
 # Clase 085 — Funciones de primera clase y como valores
 
-> Parte **5 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> Parte **5 — Funciones y modularidad** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
 > ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Tratar las funciones como **valores de primera clase**: guardarlas en variables y pasarlas como argumentos. `aplicar(suma, a, b)` ejecuta la función recibida; es la base de map/filter/reduce y de los callbacks.
+Dejar de ver la función como una construcción especial del lenguaje y empezar a verla como lo que en muchos lenguajes realmente es: **un valor más**. Decir que las funciones son de **primera clase (first-class)** significa que gozan de los mismos derechos que un número o una cadena: se pueden guardar en una variable, meter en una lista, pasar como argumento a otra función y devolver como resultado. Ese estatus, aparentemente modesto, es el que hace posibles `map`, `filter`, `reduce`, los callbacks, los manejadores de eventos, las tablas de despacho y buena parte de los patrones de diseño clásicos, que dejan de necesitar una jerarquía de clases cuando puedes simplemente pasar la operación como dato.
 
-## 📚 Resultados de aprendizaje
+La idea nuclear la desarrollan Abelson y Sussman en *Structure and Interpretation of Computer Programs* §1.3, dedicada a las **funciones de orden superior** (higher-order procedures): procedimientos que reciben otros procedimientos como argumentos o los devuelven. Su tesis es que limitar qué se puede nombrar y pasar limita el poder expresivo de un lenguaje; conceder a las funciones el estatus de primera clase elimina esa restricción y permite capturar patrones generales —«aplicar una operación a cada elemento», «combinar mediante una operación»— como abstracciones reutilizables. La operación deja de estar cableada en el código y pasa a ser un parámetro.
 
-Al finalizar, podrás:
-
-1. Pasar una función como argumento.
-2. Guardar una función en una variable.
-3. Explicar 'valor de primera clase'.
-
-## 🗺️ Temas
-
-| # | Tema | Por qué importa |
-|---|------|-----------------|
-| 1 | Primera clase | Las funciones son valores |
-| 2 | Pasar funciones | Como cualquier argumento |
-| 3 | Función de orden superior | Recibe otra función |
-| 4 | Callbacks | El patrón detrás de eventos |
-
-## 📖 Definiciones y características
-
-- **Valor de primera clase** — algo que se puede guardar, pasar y devolver. Clave: las funciones lo son en casi todos los lenguajes.
-- **Función de orden superior** — recibe o devuelve funciones. Clave: `aplicar(f, a, b)`.
-- **Callback** — función pasada para ejecutarse después. Clave: base de eventos y asincronía.
-- **Puntero a función** — en C, un valor que apunta a una función. Clave: su forma de primera clase.
+Luciano Ramalho lo resume en *Fluent Python* con la frase que da nombre al fenómeno: en Python las funciones son *objetos* de primera clase, instancias que se pueden crear en tiempo de ejecución, asignar, almacenar en estructuras y pasar como argumento. El objetivo profundo de la clase es interiorizar que `aplicar(suma, 3, 4)` no es magia: `suma` es un valor que viaja hasta `aplicar`, y dentro se invoca. Reconocer ese mecanismo —y ver cómo cada lenguaje lo modela, desde el puntero a función de C hasta el delegado de C#— es la llave de casi todo el estilo funcional que viene después.
 
 ## 🧩 Situación
 
-`aplicar(suma, 3, 4)` da 7 y `aplicar(producto, 3, 4)` da 12, usando la misma función `aplicar`. Poder pasar la operación como dato es lo que hace posibles map, filter y los callbacks.
+Escribes una función que recorre una lista de pedidos y aplica un cálculo a cada uno: hoy es «sumar impuesto», mañana «aplicar descuento», la semana que viene «convertir divisa». Sin funciones de primera clase, escribirías tres funciones de recorrido casi idénticas que solo difieren en la línea del medio, o meterías un `switch` gigante con un código por operación. Con funciones como valores, escribes *un solo* recorrido, `procesar(operacion, pedidos)`, y le pasas la operación que toque como argumento. El patrón de iteración se escribe una vez; la operación se decide en el sitio de la llamada. Ese es el dolor que resuelve el estatus de primera clase: no tener que duplicar la estructura de control cada vez que cambia la operación que va dentro.
 
 ## 🧮 Modelo
 
@@ -254,17 +234,30 @@ echo "suma=" . aplicar($suma, $a, $b) . " producto=" . aplicar($producto, $a, $b
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
 
+## 🔬 Ejemplo trabajado — del stdin a la salida
+
+Sigamos el primer caso de `casos.json` (`stdin = "3 4"`, `esperado = "suma=7 producto=12"`) por Python, C y Java, tres formas de responder a la pregunta «¿cómo viaja una función hasta `aplicar`?».
+
+**Python — la función es un objeto.** Tras `a, b = map(int, ...)` tenemos `a=3, b=4`. La clave está en `aplicar(suma, a, b)`: aquí `suma` **sin paréntesis** no es una llamada, es el objeto-función en sí, que se pasa como argumento. Dentro, `aplicar` recibe ese objeto en su parámetro `f` y ejecuta `f(a, b)`, que ahora sí invoca: `suma(3, 4) = 7`. La segunda llamada pasa `producto`, y `f(3, 4)` calcula `12`. El f-string imprime `suma=7 producto=12`. Como explica Ramalho, `suma` es una instancia de primera clase: podrías meterla en una lista `[suma, producto]` y recorrerla, porque no tiene nada de especial frente a otros valores. La distinción crítica es `suma` (el valor) frente a `suma(a, b)` (el resultado de invocarlo); confundirlas es el error número uno del tema.
+
+**C — puntero a función.** C no tiene objetos-función, pero sí su forma de primera clase: el **puntero a función**. La firma de `aplicar` lo declara con la sintaxis característica `long (*f)(long, long)` —«`f` es un puntero a una función que toma dos `long` y devuelve `long`»—. Al llamar `aplicar(suma, a, b)`, el nombre `suma` se convierte automáticamente en la dirección de la función, que se pasa por `f`; dentro, `f(a, b)` la invoca a través del puntero y da `7`. Con `producto`, `12`. Salida: `suma=7 producto=12`. Es el mismo mecanismo conceptual que en Python —pasar la operación como dato— pero expuesto al nivel de la máquina: lo que viaja es una dirección de memoria de código, no un objeto con métodos.
+
+**Java — interfaz funcional.** Java no permite pasar «un método suelto» como valor: todo tiene que ser un objeto. Su solución son las **interfaces funcionales**, interfaces con un único método abstracto que una lambda puede satisfacer. Aquí `IntBinaryOperator` es esa interfaz (su método es `applyAsInt(int, int)`), y `IntBinaryOperator suma = (x, y) -> x + y;` crea un objeto que la implementa. `aplicar` lo recibe como `f` y lo usa con `f.applyAsInt(a, b)`, que para `3, 4` da `7`; con `producto`, `12`. El resultado impreso es idéntico, `suma=7 producto=12`, pero el andamiaje revela la filosofía de Java: la función-como-valor se modela como un objeto que cumple un contrato de un solo método. Los tres lenguajes llevan la operación hasta `aplicar`; solo cambian el envoltorio —objeto, dirección de código o instancia de interfaz—.
+
 ## 🔬 Comparación
 
 | Clase de diferencia | Observación entre lenguajes |
 |---|---|
-| Sintáctica | Pasar `suma` directamente (Python/JS/Go/Rust) vs. puntero a función (C) o interfaz funcional (Java). |
-| Semántica | La función es un valor; se invoca con `f(a, b)`. |
-| Paradigmática | SQL no pasa funciones; usa operadores/funciones incorporadas. |
+| Sintáctica | Se pasa el nombre desnudo `suma` (Python, JS, Go, Rust, C, PHP) o una lambda a una interfaz (Java `IntBinaryOperator`, C# `Func<>`). C exige la sintaxis de puntero `long (*f)(long, long)`. |
+| Semántica | Python, JS, Ruby y PHP tratan la función como un **objeto** de primera clase, creable y almacenable en tiempo de ejecución. C usa un **puntero a función** (sin entorno). Rust distingue el *puntero* `fn(...)` de los *traits* `Fn`/`FnMut`/`FnOnce` para cierres. |
+| Semántica | Java y C# no pasan «métodos sueltos»: envuelven la función en una interfaz funcional (`IntBinaryOperator`) o un delegado (`Func<>`); la lambda es azúcar sobre ese objeto. Go pasa valores de función con tipo `func(int, int) int` directamente. |
+| Paradigmática | SQL no trata las funciones como valores que se pasan: usa operadores y funciones incorporadas dentro de la consulta; el `a + b` y `a * b` de la CTE cumplen el papel sin pasar `f`. |
+
+La síntesis está en *SICP* §1.3: conceder a las funciones el estatus de primera clase es lo que permite capturar patrones de cómputo como abstracciones. La diferencia entre los diez lenguajes no es *si* pueden pasar operaciones —casi todos pueden, de una forma u otra— sino *qué* viaja por el cable: un objeto (Python), una dirección de código (C), una instancia de interfaz (Java), un delegado (C#) o un valor de función tipado (Go, Rust). Reconocer el envoltorio de cada familia es lo que te deja leer código funcional en un lenguaje que nunca has visto.
 
 ## 🧬 El concepto en la familia
 
-En Ruby se pasan `Proc`/bloques o `method(:suma)`. En Haskell pasar funciones es lo más natural del lenguaje.
+En **Ruby**, los métodos no son objetos de primera clase por defecto, pero se obtiene su versión pasable con `method(:suma)`, o se usan `Proc`/bloques y `lambda`, que sí lo son. En **Haskell**, pasar funciones es lo más natural del lenguaje: no hay ninguna ceremonia, y la aplicación parcial hace que `map (+1)` sea idiomático. En **Kotlin**, las funciones son de primera clase y existe la referencia a función con `::suma`, además de lambdas con tipo `(Int, Int) -> Int`. En **Swift**, las funciones son valores tipados y las clausuras se pasan a diario como argumento final (*trailing closure*). El patrón a reconocer en cualquier lenguaje nuevo: ¿se pasa el nombre desnudo, se necesita un operador de referencia (`::`, `method(...)`), o hay que envolverlo en una interfaz/delegado?
 
 ## ✅ Prueba común
 
@@ -280,32 +273,36 @@ Detalle en [`reto.md`](reto.md).
 
 ## ⚠️ Errores comunes
 
-- **Llamar la función en vez de pasarla** → causa: pasar `suma(a,b)` en lugar de `suma` → solución: pasar el nombre sin paréntesis
-- **Firmas incompatibles** → causa: la de orden superior espera otra forma → solución: asegurar que la función pasada encaja con lo esperado
+- **Llamar la función en vez de pasarla** → causa: escribir `aplicar(suma(a, b), ...)` en lugar de `aplicar(suma, ...)`; lo primero invoca `suma` y pasa el *número* resultante, no la función → solución: pasa el nombre **sin paréntesis**; los paréntesis significan «invócala ahora».
+- **Firmas incompatibles con lo que espera la de orden superior** → causa: pasar una función cuya forma no encaja con la que `aplicar` invocará (número o tipo de parámetros distinto) → solución: verifica que la función pasada cumple exactamente el tipo esperado (`IntBinaryOperator`, `fn(i64, i64) -> i64`, `long (*)(long, long)`).
+- **En C, olvidar que el nombre decae a puntero** → causa: intentar `&aplicar` o dudar de si hace falta `&suma`; el nombre de una función ya decae a su dirección → solución: pasa `suma` a secas; `&suma` también funciona, pero el nombre desnudo es suficiente e idiomático.
+- **Esperar que Java pase un método suelto** → causa: intentar pasar `suma` como si fuera un valor cuando es un método → solución: usa una interfaz funcional (`IntBinaryOperator`, `Function<>`) con una lambda o una referencia a método (`Math::max`), que es como Java modela la función-como-valor.
 
 ## ❓ Preguntas frecuentes
 
-- **¿Callbacks son esto?** Sí: un callback es una función que pasas para que se ejecute más tarde.
-- **¿C tiene funciones de primera clase?** Parcialmente: con punteros a función, aunque sin cierres.
+- **¿Los callbacks son esto?** Sí: un callback es exactamente una función de primera clase que pasas a otra parte del programa para que la ejecute más tarde —al llegar un evento, al completarse una operación asíncrona—. El mecanismo que estudias aquí es la base de toda la programación orientada a eventos.
+- **¿C tiene funciones de primera clase?** Parcialmente. Con punteros a función puedes guardarlas en variables, pasarlas y devolverlas, así que cumplen buena parte del criterio; lo que les falta es **capturar entorno** (no hay cierres), por lo que el estado hay que pasarlo aparte, como se vio en la clase de cierres.
+- **¿Qué diferencia hay entre función de primera clase y de orden superior?** «Primera clase» describe el estatus de la función *como valor* (se puede pasar, guardar, devolver); «orden superior» describe una función que *recibe o devuelve* otras funciones. `aplicar` es de orden superior precisamente porque las funciones son de primera clase.
+- **¿Por qué Java y C# necesitan tanto andamiaje (interfaces, delegados)?** Porque son lenguajes donde, históricamente, todo valor pasable era un objeto; modelan la función-como-valor como un objeto que implementa un contrato de un método (`IntBinaryOperator`) o como un tipo delegado (`Func<>`). Las lambdas son azúcar sintáctico sobre ese objeto.
 
 ## 🔗 Referencias
 
 **Libros de la parte:**
 
-- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press).
-- R. C. Martin — *Clean Code* (Prentice Hall).
-- S. McConnell — *Code Complete* (2ª ed., Microsoft Press).
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press), §1.3 «Formulating Abstractions with Higher-Order Procedures».
+- R. C. Martin — *Clean Code* (Prentice Hall), cap. 3 «Functions».
+- S. McConnell — *Code Complete* (2ª ed., Microsoft Press), cap. 7 «High-Quality Routines».
 
 **Libros de los lenguajes del núcleo:**
 
-- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly), cap. 7 «Funciones como objetos de primera clase».
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.), cap. 5 «Higher-Order Functions» — [gratis online](https://eloquentjavascript.net/).
 - B. Cherny — *Programming TypeScript* (O'Reilly).
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
-- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley) (ítems sobre lambdas e interfaces funcionales).
+- J. Skeet — *C# in Depth* (4ª ed., Manning) (delegados y `Func<>`).
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley), §5.5 sobre valores de función.
 - S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall) (punteros a función, §5.11).
 - C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
 - J. Lockhart — *Modern PHP* (O'Reilly).
 

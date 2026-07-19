@@ -1,39 +1,42 @@
 # Clase 124 — Compilador, intérprete y JIT
 
-> Parte **8 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> Parte **8 — Cómo funcionan los lenguajes** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
 > ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
 
 ## 🎯 Objetivo
 
-Diferenciar **compilador, intérprete y JIT** por su forma de ejecutar. El programa (contar dígitos) es el mismo; lo que cambia entre modelos es cuándo y cómo se traduce a instrucciones de la máquina.
+La clase 123 mostró que todo lenguaje tokeniza y parsea; esta responde a la pregunta que abría allí: *¿qué se hace con el AST después?* Hay tres respuestas, y son el corazón de por qué un mismo programa —contar los dígitos de un número— rinde distinto en C, en Python y en JavaScript. Un **compilador** traduce todo el código a instrucciones de máquina *antes* de que el programa corra; un **intérprete** recorre la representación interna y actúa sobre ella *mientras* corre; y un **JIT** (*just-in-time*) empieza interpretando pero, al detectar código que se ejecuta muchas veces, lo compila a máquina *durante* la ejecución. El *porqué* de distinguirlos es práctico: explica por qué un binario de C arranca en microsegundos y un proceso de la JVM tarda en «calentar», por qué un error de tipos detiene a `rustc` pero no a Python hasta que la línea se ejecuta, y por qué los tres modelos coexisten hoy en el mismo runtime. Nystrom dedica la segunda mitad de *Crafting Interpreters* justamente a este salto: de un intérprete de árbol (*tree-walk*) a una VM con compilación a bytecode.
 
 ## 📚 Resultados de aprendizaje
 
 Al finalizar, podrás:
 
-1. Contar dígitos recorriendo el número.
-2. Explicar compilado, interpretado y JIT.
-3. Relacionar el modelo con el rendimiento.
+1. Contar los dígitos de un entero midiendo su representación textual.
+2. Distinguir compilación AOT, interpretación y JIT por *cuándo* traducen a código de máquina.
+3. Relacionar cada modelo con su perfil de rendimiento (arranque, régimen, memoria).
+4. Explicar por qué el modelo de ejecución no altera el resultado, solo el camino hacia él.
 
 ## 🗺️ Temas
 
 | # | Tema | Por qué importa |
 |---|------|-----------------|
-| 1 | Compilador | Traduce antes de ejecutar |
-| 2 | Intérprete | Ejecuta la fuente al vuelo |
-| 3 | JIT | Compila durante la ejecución |
+| 1 | Compilador (AOT) | Traduce todo antes de ejecutar; errores y coste de traducción por adelantado |
+| 2 | Intérprete | Ejecuta la representación interna al vuelo; arranque inmediato, régimen más lento |
+| 3 | JIT | Compila lo «caliente» durante la ejecución; combina arranque rápido y régimen veloz |
 
 ## 📖 Definiciones y características
 
-- **Compilador** — traduce todo el programa a código máquina antes de ejecutar. Clave: rápido, errores antes.
-- **Intérprete** — ejecuta la fuente instrucción a instrucción. Clave: flexible, más lento.
-- **JIT** — compila a máquina las partes calientes durante la ejecución. Clave: combina ambos (V8, JVM).
+Un **compilador anticipado (AOT, *ahead-of-time*)** hace todo el trabajo de traducción antes de que exista el primer dato de entrada. `cc main.c -o main` produce un binario de instrucciones de la CPU; cuando lo ejecutas, no queda rastro del texto fuente. Como todo el programa pasó por el front-end y el back-end del Dragon Book, el compilador tuvo la oportunidad de rechazar errores de tipo y de optimizar globalmente. El precio es que cualquier cambio exige recompilar, y el arranque incluye cargar y enlazar un binario ya listo.
+
+Un **intérprete** conserva la representación interna del programa (bytecode o AST) y la recorre paso a paso en tiempo de ejecución. CPython compila tu `.py` a bytecode `.pyc` y luego un bucle de evaluación —la *VM* de Python— ejecuta esas instrucciones una a una. La ventaja es la flexibilidad y el arranque inmediato: no hay fase de espera. El coste es el sobrecoste de *interpretar* cada instrucción cada vez que se ejecuta, incluso dentro de un bucle apretado.
+
+Un **compilador JIT** es la síntesis. El motor V8 de JavaScript y la HotSpot de la JVM empiezan interpretando (o compilando de forma rápida y tosca), miden qué funciones y bucles son *hot* —se repiten mucho— y solo entonces invierten en compilarlos a código de máquina optimizado, con información que un compilador AOT no tiene: los tipos reales que se vieron en ejecución. Por eso un servicio Java «calienta»: los primeros segundos van interpretados y luego aceleran. El JIT paga un coste de compilación en tiempo de ejecución a cambio de un régimen casi tan rápido como el AOT.
 
 ## 🧩 Situación
 
-Contar dígitos corre igual en C (compilado), Python (interpretado) y JavaScript (JIT); lo que cambia es el rendimiento y cuándo aparecen los errores, no el resultado.
+Te dicen que «Python es lento y C es rápido» y lo aceptas sin matiz. Pero cuando escribes un script que se ejecuta una vez y termina, el arranque instantáneo del intérprete gana; cuando escribes un servicio que corre horas, el JIT de la JVM alcanza a C tras el calentamiento; y cuando el programa es un binario que debe arrancar en un microcontrolador, solo el AOT sirve. Contar dígitos —una operación que da el mismo `digitos=5` en los tres modelos— es el laboratorio perfecto: aísla el *modelo de ejecución* de la *lógica*, y deja ver que la diferencia no está en el resultado sino en el viaje.
 
 ## 🧮 Modelo
 
@@ -177,17 +180,29 @@ echo "digitos=" . strlen($n) . "\n";
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.
 
+## 🧪 Laboratorio: recorrido del código
+
+El truco compartido por casi todas las implementaciones es contar dígitos *sin aritmética*: leer el número como texto y medir su longitud. Es una decisión reveladora, porque hace que el trabajo real —contar caracteres— sea idéntico y deja el modelo de ejecución como única variable.
+
+En **Python**, `n = int(sys.stdin.readline())` convierte la entrada a entero y `len(str(n))` la vuelve a texto para medirla. Cada una de esas operaciones se ejecuta interpretando bytecode: CPython ya compiló el `.py` a instrucciones internas, y su bucle de evaluación las recorre. Si el programa estuviera dentro de un bucle de un millón de iteraciones, ese sobrecoste de interpretar `LOAD_NAME`, `CALL_FUNCTION`, etc., se pagaría un millón de veces. Aquí, con una sola línea de entrada, es imperceptible.
+
+En **C**, `scanf("%63s", n)` lee el número como cadena y `strlen(n)` cuenta sus caracteres. Pero lo decisivo es que `strlen` y el `printf` ya son código de máquina antes de arrancar: `cc` los tradujo, el enlazador los unió con la libc, y el binario resultante no interpreta nada. Por eso el arranque es un `exec` del sistema operativo y la ejecución, instrucciones directas de la CPU. No hay «calentamiento» ni bucle de evaluación: es el modelo AOT en estado puro.
+
+En **JavaScript**, `readFileSync(0, "utf8").trim()` y `n.length` corren sobre V8, un JIT. En la primera ejecución V8 interpreta con su intérprete *Ignition*; si esta función se llamara millones de veces, el compilador *TurboFan* la recompilaría a máquina especializando el tipo de `n` como cadena. Para un programa de una sola pasada como este, el JIT nunca llega a activarse: pagas el arranque del intérprete y no cosechas la aceleración. Ese es el matiz que la frase «JS usa JIT» esconde: el JIT ayuda al código *repetido*, no al de una sola vez.
+
 ## 🔬 Comparación
 
-| Clase de diferencia | Observación entre lenguajes |
+| Rasgo del runtime | Cómo se reparte entre los 10 lenguajes |
 |---|---|
-| Sintáctica | Igual en todos: recorrer o medir el número. |
-| Semántica | El modelo de ejecución no cambia el resultado. |
-| Paradigmática | SQL usa length sobre el texto del número. |
+| Traducción a máquina | Antes de ejecutar: C, Rust, Go. Durante: Java, C#, JS (JIT). Nunca del todo: Python, PHP interpretan bytecode. |
+| Arranque | Instantáneo en intérpretes; con carga de binario en AOT; con «calentamiento» en JIT de larga vida (JVM). |
+| Detección de errores de tipo | En compilación (C, Rust, Go, Java, C#); en ejecución al llegar la línea (Python, JS, PHP). |
+| Régimen sostenido | AOT y JIT maduro son comparables; el intérprete puro paga sobrecoste por instrucción. |
+| SQL | No encaja en el eje: el motor de la BD planifica y ejecuta la consulta; `length` opera sobre el texto. |
 
 ## 🧬 El concepto en la familia
 
-C compila; CPython interpreta bytecode; V8 y la JVM usan JIT. El programa es idéntico.
+Las etiquetas se difuminan en cuanto miras de cerca. Python «interpretado» compila a bytecode; Java «compilado» ejecuta bytecode que la JVM vuelve a compilar con JIT; JavaScript «interpretado» corre sobre uno de los JIT más sofisticados del mundo. GraalVM incluso compila Java AOT a binario nativo para arrancar rápido, sacrificando el calentamiento del JIT. La lección de *Crafting Interpreters* aplica aquí: intérprete y compilador no son especies opuestas sino puntos de un continuo definido por *cuándo* traduces y *cuánto* optimizas con la información disponible en ese momento.
 
 ## ✅ Prueba común
 
@@ -203,13 +218,15 @@ Detalle en [`reto.md`](reto.md).
 
 ## ⚠️ Errores comunes
 
-- **Contar 0 como 0 dígitos** → causa: el 0 tiene un dígito → solución: tratar el caso n=0
-- **Dividir sin parar** → causa: bucle infinito → solución: parar cuando el número llega a 0
+- **Creer que «interpretado» y «compilado» se excluyen** → causa: pensar en dos cajones estancos → solución: casi todo lenguaje moderno compila a *algo* (bytecode) y luego lo interpreta o lo re-compila con JIT.
+- **Esperar el pico de rendimiento del JIT en un script corto** → causa: el JIT solo invierte en compilar lo que se repite → solución: para medir de verdad un runtime JIT, hay que dejarlo «calentar» con muchas iteraciones antes de cronometrar.
+- **Contar el `0` como cero dígitos** → causa: el enfoque aritmético (dividir por 10) no entra al bucle con `n=0` → solución: la implementación mide la longitud del texto, donde `"0"` ya tiene un carácter; el caso límite queda cubierto.
 
 ## ❓ Preguntas frecuentes
 
-- **¿Cuál es más rápido?** Compilado suele ganar en ejecución; interpretado gana en iteración; JIT busca ambos.
-- **¿Python compila?** A bytecode internamente; luego lo interpreta.
+- **¿Cuál es más rápido?** Depende del régimen. En arranque gana el intérprete; en ejecución sostenida, AOT y JIT maduro empatan; en un cálculo largo de una sola pasada, el AOT suele liderar.
+- **¿Python compila?** Sí, a bytecode (`.pyc`); lo que interpreta es ese bytecode, no el texto fuente. Por eso es más justo llamarlo «compilado a bytecode, ejecutado por una VM».
+- **¿Qué es «calentar» la JVM?** Es la fase inicial en que el código va interpretado mientras el JIT reúne estadísticas; al superar los umbrales, recompila las funciones calientes a máquina y el rendimiento sube de golpe.
 
 ## 🔗 Referencias
 

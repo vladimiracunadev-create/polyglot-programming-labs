@@ -66,7 +66,7 @@ LEER lista ; checksum <- suma ; ESCRIBIR checksum
 Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
 Cada bloque es el archivo real de [`implementaciones/`](implementaciones/). El contrato: leer enteros separados por espacio y escribir `checksum=<suma>`. Con `1 2 3` la salida es `checksum=6`; con `10 20 30`, `checksum=60`.
 
-### Python · `python main.py`
+### Python · [`python/main.py`](implementaciones/python/main.py) · `python main.py`
 
 ```python
 import sys
@@ -77,7 +77,7 @@ print(f"checksum={sum(nums)}")
 
 La versión de Python es la más compacta y expresa con claridad el patrón «leer todo, tokenizar, reducir». `sys.stdin.read()` consume la entrada completa; `.split()` sin argumentos parte por cualquier bloque de espacios (incluidos saltos de línea), lo que hace al programa robusto ante entradas con formato irregular. La comprensión de lista `[int(x) for x in ...]` convierte cada token a entero de una vez —Ramalho, en *Fluent Python*, defiende estas comprensiones como la forma legible de expresar transformaciones sobre secuencias— y `sum(...)` hace la reducción. La suma es la operación reproducible por excelencia: no depende del orden en que se recorran los sumandos, así que dos ejecuciones con la misma entrada dan el mismo resultado, que es justo la propiedad que se busca en un build.
 
-### JavaScript · `node main.mjs`
+### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
 import { readFileSync } from "node:fs";
@@ -86,7 +86,7 @@ const nums = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
 console.log(`checksum=${nums.reduce((a, b) => a + b, 0)}`);
 ```
 
-### TypeScript · `pnpm exec tsx main.ts`
+### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
 import { readFileSync } from "node:fs";
@@ -95,7 +95,7 @@ const nums: number[] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
 console.log(`checksum=${nums.reduce((a, b) => a + b, 0)}`);
 ```
 
-### Java · `java Main.java`
+### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
 ```java
 import java.io.BufferedReader;
@@ -113,7 +113,7 @@ public class Main {
 }
 ```
 
-### C# · `dotnet run`
+### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
 using System;
@@ -125,7 +125,7 @@ long c = Console.In.ReadToEnd()
 Console.WriteLine($"checksum={c}");
 ```
 
-### Go · `go run main.go`
+### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
 ```go
 package main
@@ -149,7 +149,7 @@ func main() {
 }
 ```
 
-### Rust · `rustc main.rs -o main && ./main`
+### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
 use std::io::Read;
@@ -162,7 +162,7 @@ fn main() {
 }
 ```
 
-### C · `cc main.c -o main && ./main`
+### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 ```c
 #include <stdio.h>
@@ -177,7 +177,7 @@ int main(void) {
 
 Merece contrastar dos filosofías. C acumula en un bucle `while (scanf(...) == 1)`: no construye ninguna lista intermedia, va sumando token a token hasta que `scanf` deja de leer un entero. Es la aproximación de mínimo consumo de memoria que caracteriza el estilo de Kernighan y Ritchie, y usa `long` para el acumulador anticipando que la suma puede desbordar el rango de un entero pequeño. Go y C# eligen el camino opuesto pero igual de deliberado: Go recorre `strings.Fields(line)` sumando explícitamente, mientras que C# encadena `.Split(...).Sum(x => (long) int.Parse(x))` en estilo LINQ declarativo. Fíjate en que ambos, como el C, promocionan a `long` antes de sumar: es una decisión de ingeniería para evitar el desbordamiento silencioso, un no-determinismo tan real como una marca de tiempo, porque un checksum que desborda deja de representar fielmente su entrada.
 
-### SQL · `sqlite3 :memory: < main.sql`
+### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
 -- SQL: SUM como checksum simple.
@@ -185,7 +185,7 @@ WITH nums(x) AS (VALUES (1), (2), (3))
 SELECT printf('checksum=%d', sum(x)) AS resultado FROM nums;
 ```
 
-### PHP · `php main.php`
+### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
 <?php

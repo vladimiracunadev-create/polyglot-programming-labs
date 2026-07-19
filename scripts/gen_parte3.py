@@ -18,7 +18,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from build import nav_footer, LANG_META  # noqa: E402
-from curriculo import NUCLEO, BIBLIO, LIBROS_NUCLEO  # noqa: E402
+from curriculo import NUCLEO, BIBLIO, LIBROS_NUCLEO, PARTES  # noqa: E402
 
 # Lenguaje para el resaltado del bloque de código embebido.
 FENCE = {
@@ -115,7 +115,7 @@ def render_readme(num, spec):
     casos_tabla = "\n".join(f"| `{c[0]}` | `{c[1]}` |" for c in spec["casos"])
     return f"""# Clase {num:03d} — {title}
 
-> Parte **{idx} — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> Parte **{idx} — {PARTES[idx][0]}** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
 > ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---

@@ -1,6 +1,6 @@
 # Clase 089 — Arreglos de tamaño fijo
 
-> Parte **6 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
+> Parte **6 — Datos y estructuras** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
 > ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
 ---
@@ -60,9 +60,9 @@ ESCRIBIR suma, max
 ## 🌐 Implementaciones idiomáticas — el código a la vista
 
 Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
-Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/): el enlace de cada lenguaje abre su fuente, y el comando de al lado lo ejecuta.
 
-### Python · `python main.py`
+### Python · [`python/main.py`](implementaciones/python/main.py) · `python main.py`
 
 ```python
 import sys
@@ -72,7 +72,7 @@ arr = [a, b, c]
 print(f"suma={sum(arr)} max={max(arr)}")
 ```
 
-### JavaScript · `node main.mjs`
+### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
 import { readFileSync } from "node:fs";
@@ -81,7 +81,7 @@ const arr = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
 console.log(`suma=${arr.reduce((a, b) => a + b, 0)} max=${Math.max(...arr)}`);
 ```
 
-### TypeScript · `pnpm exec tsx main.ts`
+### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
 import { readFileSync } from "node:fs";
@@ -90,7 +90,7 @@ const arr: number[] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
 console.log(`suma=${arr.reduce((a, b) => a + b, 0)} max=${Math.max(...arr)}`);
 ```
 
-### Java · `java Main.java`
+### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
 ```java
 import java.io.BufferedReader;
@@ -113,7 +113,7 @@ public class Main {
 }
 ```
 
-### C# · `dotnet run`
+### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
 using System;
@@ -125,7 +125,7 @@ int[] arr = p.Take(3).Select(int.Parse).ToArray();
 Console.WriteLine($"suma={arr.Sum()} max={arr.Max()}");
 ```
 
-### Go · `go run main.go`
+### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
 ```go
 package main
@@ -156,7 +156,7 @@ func main() {
 }
 ```
 
-### Rust · `rustc main.rs -o main && ./main`
+### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
 use std::io::Read;
@@ -172,7 +172,7 @@ fn main() {
 }
 ```
 
-### C · `cc main.c -o main && ./main`
+### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 ```c
 #include <stdio.h>
@@ -190,7 +190,7 @@ int main(void) {
 }
 ```
 
-### SQL · `sqlite3 :memory: < main.sql`
+### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
 -- SQL: agrega sobre filas, no índices.
@@ -198,7 +198,7 @@ WITH arr(x) AS (VALUES (3), (1), (4))
 SELECT printf('suma=%d max=%d', sum(x), max(x)) AS resultado FROM arr;
 ```
 
-### PHP · `php main.php`
+### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
 <?php

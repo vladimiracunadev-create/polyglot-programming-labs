@@ -66,7 +66,7 @@ LEER version ; separar por '.' ; ESCRIBIR componentes
 Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
 Cada bloque es el archivo real de [`implementaciones/`](implementaciones/). El contrato es fijo: leer una línea `mayor.menor.parche` de stdin y escribir `mayor=<M> menor=<m> parche=<p>`. Para `1.2.3` la salida es `mayor=1 menor=2 parche=3`, y para `0.5.10`, `mayor=0 menor=5 parche=10` —el `10` es la razón por la que hay que convertir a entero: el `parche` de dos dígitos no encaja en una comparación textual ingenua.
 
-### Python · `python main.py`
+### Python · [`python/main.py`](implementaciones/python/main.py) · `python main.py`
 
 ```python
 import sys
@@ -77,7 +77,7 @@ print(f"mayor={int(mayor)} menor={int(menor)} parche={int(parche)}")
 
 La versión de Python condensa todo en dos líneas y merece leerse con calma. `split(".")` parte la cadena por los puntos y devuelve una lista de tres cadenas; el desempaquetado `mayor, menor, parche = ...` las asigna en un solo gesto —una construcción que Ramalho, en *Fluent Python*, presenta como *unpacking* y considera una de las señas de identidad del código pitónico frente al indexado manual `v[0]`, `v[1]`, `v[2]`. El `int(...)` de cada componente no es cosmético: garantiza que `10` se imprima como el número `10` y no arrastre un espacio o un salto de línea. Aquí `f"..."` interpola directamente el valor evaluado. El resultado es exactamente el `esperado` de `casos.json`.
 
-### JavaScript · `node main.mjs`
+### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
 import { readFileSync } from "node:fs";
@@ -86,7 +86,7 @@ const [mayor, menor, parche] = readFileSync(0, "utf8").trim().split(".").map(Num
 console.log(`mayor=${mayor} menor=${menor} parche=${parche}`);
 ```
 
-### TypeScript · `pnpm exec tsx main.ts`
+### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
 import { readFileSync } from "node:fs";
@@ -95,7 +95,7 @@ const [mayor, menor, parche] = readFileSync(0, "utf8").trim().split(".").map(Num
 console.log(`mayor=${mayor} menor=${menor} parche=${parche}`);
 ```
 
-### Java · `java Main.java`
+### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
 ```java
 import java.io.BufferedReader;
@@ -111,7 +111,7 @@ public class Main {
 }
 ```
 
-### C# · `dotnet run`
+### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
 using System;
@@ -120,7 +120,7 @@ string[] v = Console.In.ReadToEnd().Trim().Split('.');
 Console.WriteLine($"mayor={int.Parse(v[0])} menor={int.Parse(v[1])} parche={int.Parse(v[2])}");
 ```
 
-### Go · `go run main.go`
+### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
 ```go
 package main
@@ -143,7 +143,7 @@ func main() {
 }
 ```
 
-### Rust · `rustc main.rs -o main && ./main`
+### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
 use std::io::Read;
@@ -156,7 +156,7 @@ fn main() {
 }
 ```
 
-### C · `cc main.c -o main && ./main`
+### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 ```c
 #include <stdio.h>
@@ -171,7 +171,7 @@ int main(void) {
 
 El contraste con C es instructivo. Donde Python separa y luego convierte, C hace ambas cosas a la vez: la cadena de formato `"%ld.%ld.%ld"` de `scanf` describe la estructura esperada —tres enteros largos con puntos entre ellos— y el parser la aplica en una sola llamada. Fiel al espíritu de Kernighan y Ritchie en *The C Programming Language*, el código comprueba el valor de retorno (`!= 3`) y aborta si no leyó los tres campos: en C nada valida por ti, el contrato lo verificas a mano. Rust ocupa un punto intermedio: `split('.').map(|x| x.parse().unwrap())` encadena separación y conversión en una expresión funcional, y el `unwrap()` hace explícito que un formato inválido debe interrumpir el programa —la filosofía de manejo de errores que Klabnik y Nichols describen en *The Rust Programming Language*, donde ignorar un `Result` es una decisión visible, no un descuido.
 
-### SQL · `sqlite3 :memory: < main.sql`
+### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
 -- SQL: separa la versión con funciones de texto (ilustrativo).
@@ -183,7 +183,7 @@ SELECT printf('mayor=%d menor=%d parche=%d',
 FROM v;
 ```
 
-### PHP · `php main.php`
+### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
 <?php

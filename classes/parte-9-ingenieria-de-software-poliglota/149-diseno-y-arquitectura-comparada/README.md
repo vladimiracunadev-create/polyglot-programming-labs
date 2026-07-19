@@ -67,9 +67,9 @@ LEER capas ; ESCRIBIR cantidad
 ## 🌐 Implementaciones idiomáticas — el código a la vista
 
 Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
-Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/): el enlace de cada lenguaje abre su fuente, y el comando de al lado lo ejecuta.
 
-### Python · `python main.py`
+### Python · [`python/main.py`](implementaciones/python/main.py) · `python main.py`
 
 Python resuelve el conteo con una elegancia casi telegráfica. `sys.stdin.read().split()` sin argumentos parte por *cualquier* bloque de espacios en blanco y descarta los vacíos, así que `"web api datos"` se convierte en una lista de tres cadenas; `len(...)` la mide. El detalle idiomático que Ramalho subraya en *Fluent Python* es que `str.split()` sin separador ya normaliza espacios múltiples y saltos de línea, por lo que no hace falta limpieza previa: la abstracción correcta hace desaparecer el caso borde.
 
@@ -82,7 +82,7 @@ print(f"capas={len(capas)}")
 
 Para `web api datos` la lista tiene tres elementos y sale `capas=3`; para `cli`, uno, `capas=1`; para `web api datos cache`, cuatro. Fíjate en que el "modelo" del sistema —sus capas— es aquí, literalmente, una lista, y contar componentes es medir esa lista.
 
-### Go · `go run main.go`
+### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
 Go contrasta en la forma de leer, pero coincide en el espíritu con `strings.Fields`, que es el equivalente exacto del `split()` sin argumentos de Python: trocea por espacios en blanco y omite los vacíos. Donovan y Kernighan, en *The Go Programming Language*, presentan `Fields` como la herramienta idiomática para tokenizar texto separado por espacios sin sorpresas. La verbosidad de importar `bufio`, `os` y `strings` es el precio que Go paga por su explicitud: nada de magia, cada dependencia a la vista.
 
@@ -105,7 +105,7 @@ func main() {
 
 Que Go se apoye en `strings.Fields` no es casual: es un lenguaje que organiza el propio código en *paquetes* con visibilidad por mayúscula/minúscula, y su biblioteca estándar refleja esa mentalidad modular y sin adornos.
 
-### SQL · `sqlite3 :memory: < main.sql`
+### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 SQL vuelve a mostrar el otro paradigma. No hay lista ni tokens: hay una tabla donde *cada capa es una fila*, y contar componentes es la agregación `count(*)`. Es una traducción fiel de la idea arquitectónica —cada componente, una entidad— al modelo relacional que Date defiende en *SQL and Relational Theory*: razonas sobre conjuntos de filas, no sobre una cadena que hay que partir.
 
@@ -115,7 +115,7 @@ WITH capas(nombre) AS (VALUES ('web'), ('api'), ('datos'))
 SELECT printf('capas=%d', count(*)) AS resultado FROM capas;
 ```
 
-### JavaScript · `node main.mjs`
+### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
 import { readFileSync } from "node:fs";
@@ -124,7 +124,7 @@ const capas = readFileSync(0, "utf8").trim().split(/\s+/);
 console.log(`capas=${capas.length}`);
 ```
 
-### TypeScript · `pnpm exec tsx main.ts`
+### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
 import { readFileSync } from "node:fs";
@@ -133,7 +133,7 @@ const capas: string[] = readFileSync(0, "utf8").trim().split(/\s+/);
 console.log(`capas=${capas.length}`);
 ```
 
-### Java · `java Main.java`
+### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
 ```java
 import java.io.BufferedReader;
@@ -149,7 +149,7 @@ public class Main {
 }
 ```
 
-### C# · `dotnet run`
+### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
 using System;
@@ -159,7 +159,7 @@ string[] capas = Console.In.ReadToEnd()
 Console.WriteLine($"capas={capas.Length}");
 ```
 
-### Rust · `rustc main.rs -o main && ./main`
+### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
 use std::io::Read;
@@ -172,7 +172,7 @@ fn main() {
 }
 ```
 
-### C · `cc main.c -o main && ./main`
+### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 ```c
 #include <stdio.h>
@@ -186,7 +186,7 @@ int main(void) {
 }
 ```
 
-### PHP · `php main.php`
+### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
 <?php

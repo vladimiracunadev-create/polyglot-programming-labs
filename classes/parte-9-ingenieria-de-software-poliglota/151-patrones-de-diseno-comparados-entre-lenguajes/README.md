@@ -64,9 +64,9 @@ LEER estrategia, a, b ; seleccionar operación ; aplicar
 ## 🌐 Implementaciones idiomáticas — el código a la vista
 
 Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
-Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/): el enlace de cada lenguaje abre su fuente, y el comando de al lado lo ejecuta.
 
-### Python · `python main.py`
+### Python · [`python/main.py`](implementaciones/python/main.py) · `python main.py`
 
 En Python la Estrategia toma su forma más ligera: un diccionario. Ramalho, en *Fluent Python*, dedica un capítulo entero a mostrar que, en un lenguaje con funciones de primera clase, el patrón Estrategia «clásico» de GoF —una interfaz y una clase por algoritmo— se disuelve en un simple mapa de nombres a valores. Aquí no hay ni siquiera funciones: el diccionario `ops` guarda el *resultado ya calculado* de cada operación sobre `a` y `b`, y `ops[estrategia]` selecciona el que corresponde al nombre leído. La línea `estrategia, a, b = ...split()` desempaqueta las tres palabras de la entrada; luego `a` y `b` pasan a enteros, y la indexación `ops[estrategia]` es el despacho.
 
@@ -79,7 +79,7 @@ ops = {"suma": a + b, "resta": a - b, "producto": a * b}
 print(f"resultado={ops[estrategia]}")
 ```
 
-### JavaScript · `node main.mjs`
+### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
 import { readFileSync } from "node:fs";
@@ -90,7 +90,7 @@ const ops = { suma: x + y, resta: x - y, producto: x * y };
 console.log(`resultado=${ops[estrategia]}`);
 ```
 
-### TypeScript · `pnpm exec tsx main.ts`
+### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 La versión de TypeScript es idéntica en espíritu, pero fíjate en la anotación `Record<string, number>` sobre `ops`. Cherny, en *Programming TypeScript*, insiste en que el tipo documenta el contrato de la tabla de estrategias: las claves son cadenas y los valores números. En una Estrategia real con funciones, ese tipo sería algo como `Record<string, (a: number, b: number) => number>`, y el compilador garantizaría que toda estrategia registrada respete la firma.
 
@@ -103,7 +103,7 @@ const ops: Record<string, number> = { suma: x + y, resta: x - y, producto: x * y
 console.log(`resultado=${ops[estrategia]}`);
 ```
 
-### Java · `java Main.java`
+### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
 Java muestra el otro extremo del espectro. Sin funciones de primera clase hasta Java 8, la Estrategia canónica de GoF nació aquí: una interfaz `Operacion` con un método `aplicar(a, b)` y una clase por variante. La implementación mínima de abajo usa un `switch` sobre el nombre —el despacho hecho a mano— porque el problema de juguete no justifica tres clases. Bloch, en *Effective Java*, recomienda para estos casos las estrategias como *function objects* o, desde Java 8, referencias a método y lambdas guardadas en un `Map<String, BinaryOperator<Long>>`. El `switch` explícito es la forma honesta cuando las variantes son fijas y triviales.
 
@@ -128,7 +128,7 @@ public class Main {
 }
 ```
 
-### C# · `dotnet run`
+### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 C# ofrece un tercer camino nativo: el **delegado**. Un `delegate` es un tipo que representa una función, y `Func<long, long, long>` es exactamente la firma de una estrategia binaria. Aquí, en cambio, la implementación usa una expresión `switch` moderna (`t[0] switch { ... }`), que Skeet en *C# in Depth* describe como el reemplazo idiomático del condicional: concisa, exhaustiva y sin `break`. En un diseño de producción registrarías `Func` en un diccionario y el patrón Estrategia se vería como una tabla de delegados.
 
@@ -142,7 +142,7 @@ long r = t[0] switch { "suma" => a + b, "resta" => a - b, _ => a * b };
 Console.WriteLine($"resultado={r}");
 ```
 
-### Go · `go run main.go`
+### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
 Go no tiene clases ni herencia, pero sí funciones de primera clase, así que vuelve a la forma-mapa de Python. Donovan y Kernighan muestran en *The Go Programming Language* que una `map[string]func(int, int) int` es la Estrategia idiomática en Go; aquí el mapa guarda directamente los resultados. La indexación `ops[t[0]]` es el despacho.
 
@@ -167,7 +167,7 @@ func main() {
 }
 ```
 
-### Rust · `rustc main.rs -o main && ./main`
+### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 Rust brinda el contraste conceptual más rico. La Estrategia idiomática se expresa con un **trait** (un contrato de comportamiento) e implementaciones que se pasan como `Box<dyn Operacion>` o como genéricos monomorfizados. Pero aquí Klabnik y Nichols nos recordarían que el `match` exhaustivo es a menudo más claro: el compilador verifica que cubras todos los casos, y el patrón `_ => a * b` captura el resto. El `match` sobre `t[0]` es despacho estático; el trait sería despacho dinámico. Ambos son Estrategia.
 
@@ -189,7 +189,7 @@ fn main() {
 }
 ```
 
-### C · `cc main.c -o main && ./main`
+### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 C no tiene mapas ni traits, pero sí **punteros a función**, que son la Estrategia de más bajo nivel: una tabla de `long (*)(long, long)` indexada por nombre. La implementación mínima usa `strcmp` encadenados —el despacho más elemental— porque para tres casos fijos no hace falta más. Kernighan y Ritchie muestran en *The C Programming Language* que los punteros a función son precisamente lo que permite pasar comportamiento como dato en un lenguaje sin objetos.
 
@@ -210,7 +210,7 @@ int main(void) {
 }
 ```
 
-### SQL · `sqlite3 :memory: < main.sql`
+### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
 -- SQL: selecciona la estrategia con CASE.
@@ -218,7 +218,7 @@ WITH t(e, a, b) AS (VALUES ('suma', 3, 4))
 SELECT printf('resultado=%d', CASE e WHEN 'suma' THEN a + b WHEN 'resta' THEN a - b ELSE a * b END) AS resultado FROM t;
 ```
 
-### PHP · `php main.php`
+### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
 <?php

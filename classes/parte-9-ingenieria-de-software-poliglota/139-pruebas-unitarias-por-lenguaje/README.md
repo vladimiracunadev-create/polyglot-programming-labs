@@ -64,7 +64,7 @@ LEER a, b, esperado ; SI a+b == esperado: pasa SINO falla
 Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
 Cada bloque es el archivo real de [`implementaciones/`](implementaciones/). Cada programa es a la vez el *sujeto* y la *aserción*: lee `a b esperado`, calcula la suma y emite el veredicto. En un proyecto real separarías la función bajo prueba del código que la prueba, pero aquí los fundimos para que veas la comparación esencial sin el andamiaje del *framework*.
 
-### Python · `python main.py`
+### Python · [`python/main.py`](implementaciones/python/main.py) · `python main.py`
 
 ```python
 import sys
@@ -75,7 +75,7 @@ print(f"test={'pasa' if a + b == esperado else 'falla'}")
 
 Léelo despacio, porque condensa toda la clase en dos líneas. `sys.stdin.readline().split()` parte la línea `3 4 7` en tres cadenas; `map(int, …)` las convierte a enteros y el desempaquetado los ata a `a`, `b` y `esperado`. La segunda línea es la aserción: la expresión condicional `'pasa' if a + b == esperado else 'falla'` evalúa exactamente el mismo predicado que escribirías dentro de un `assert a + b == esperado` de pytest. La diferencia es que pytest, al fallar, te mostraría el valor real y el esperado con su *introspección de aserciones*; aquí lo reducimos a la palabra `pasa` o `falla` para que el verificador del curso pueda compararla carácter a carácter. Con la entrada `2 2 5` la suma da `4`, no `5`, y la salida es `test=falla`: una prueba en rojo, tal como Beck quiere verla antes de escribir el arreglo.
 
-### JavaScript · `node main.mjs`
+### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
 import { readFileSync } from "node:fs";
@@ -84,7 +84,7 @@ const [a, b, esperado] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number)
 console.log(`test=${a + b === esperado ? "pasa" : "falla"}`);
 ```
 
-### TypeScript · `pnpm exec tsx main.ts`
+### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
 import { readFileSync } from "node:fs";
@@ -93,7 +93,7 @@ const [a, b, esperado] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number)
 console.log(`test=${a + b === esperado ? "pasa" : "falla"}`);
 ```
 
-### Java · `java Main.java`
+### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
 ```java
 import java.io.BufferedReader;
@@ -110,7 +110,7 @@ public class Main {
 }
 ```
 
-### C# · `dotnet run`
+### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
 using System;
@@ -120,7 +120,7 @@ int[] p = Array.ConvertAll(Console.In.ReadToEnd()
 Console.WriteLine($"test={(p[0] + p[1] == p[2] ? "pasa" : "falla")}");
 ```
 
-### Go · `go run main.go`
+### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
 ```go
 package main
@@ -147,7 +147,7 @@ func main() {
 }
 ```
 
-### Rust · `rustc main.rs -o main && ./main`
+### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
 use std::io::Read;
@@ -161,7 +161,7 @@ fn main() {
 }
 ```
 
-### C · `cc main.c -o main && ./main`
+### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 ```c
 #include <stdio.h>
@@ -174,7 +174,7 @@ int main(void) {
 }
 ```
 
-### SQL · `sqlite3 :memory: < main.sql`
+### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
 -- SQL: una consulta de comprobación.
@@ -182,7 +182,7 @@ WITH t(a, b, esperado) AS (VALUES (3, 4, 7))
 SELECT printf('test=%s', CASE WHEN a + b = esperado THEN 'pasa' ELSE 'falla' END) AS resultado FROM t;
 ```
 
-### PHP · `php main.php`
+### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
 <?php

@@ -69,9 +69,9 @@ LEER version ; ESCRIBIR 'desplegado=v' + version
 ## 🌐 Implementaciones idiomáticas — el código a la vista
 
 Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
-Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/): el enlace de cada lenguaje abre su fuente, y el comando de al lado lo ejecuta.
 
-### Python · `python main.py`
+### Python · [`python/main.py`](implementaciones/python/main.py) · `python main.py`
 
 El problema es, en el fondo, una concatenación con formato, y ahí Python brilla con las f-strings. `sys.stdin.readline().strip()` lee la única línea y le quita el salto final; la f-string `f"desplegado=v{version}"` inserta la versión ya limpia justo después del prefijo `v`. Ramalho, en *Fluent Python*, presenta las f-strings como la forma preferente de interpolar en Python moderno por ser legibles y eficientes: el texto plantilla y los valores conviven a la vista, sin `+` ni `%` que estorben.
 
@@ -84,7 +84,7 @@ print(f"desplegado=v{version}")
 
 Para `1.2.3`, `version` vale `"1.2.3"` y la salida es `desplegado=v1.2.3`. El `strip()` es la parte silenciosamente importante: sin él, el `\n` de stdin viajaría dentro de la etiqueta y rompería la comparación con `casos.json`.
 
-### Java · `java Main.java`
+### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
 Java contrasta por su ceremonia: no hay lectura de una línea "de una", sino el trío `BufferedReader` + `InputStreamReader` + `System.in`, la escalera clásica de la E/S de la plataforma. La concatenación usa el operador `+` sobre `String`, que Bloch analiza en *Effective Java*: es cómodo para unir dos piezas como aquí, aunque desaconseje encadenar muchas en bucle por el coste. `br.readLine().trim()` cumple el mismo papel que el `strip()` de Python.
 
@@ -102,7 +102,7 @@ public class Main {
 }
 ```
 
-### SQL · `sqlite3 :memory: < main.sql`
+### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 SQL hace explícito el otro rostro de la misma operación: la concatenación como cómputo declarativo. El operador estándar `||` une el literal `'desplegado=v'` con la columna `v` de una tabla de una sola fila. No hay "leer una línea"; hay una relación con un valor y una proyección que lo transforma. Date, en *SQL and Relational Theory*, recuerda que en el modelo relacional todo es evaluación de expresiones sobre relaciones, y algo tan mundano como añadir un prefijo se piensa como un `SELECT` que proyecta una nueva columna.
 
@@ -112,7 +112,7 @@ WITH t(v) AS (VALUES ('1.2.3'))
 SELECT 'desplegado=v' || v AS resultado FROM t;
 ```
 
-### JavaScript · `node main.mjs`
+### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
 import { readFileSync } from "node:fs";
@@ -121,7 +121,7 @@ const version = readFileSync(0, "utf8").trim();
 console.log(`desplegado=v${version}`);
 ```
 
-### TypeScript · `pnpm exec tsx main.ts`
+### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
 import { readFileSync } from "node:fs";
@@ -130,7 +130,7 @@ const version: string = readFileSync(0, "utf8").trim();
 console.log(`desplegado=v${version}`);
 ```
 
-### C# · `dotnet run`
+### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
 using System;
@@ -139,7 +139,7 @@ string version = Console.In.ReadToEnd().Trim();
 Console.WriteLine($"desplegado=v{version}");
 ```
 
-### Go · `go run main.go`
+### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
 ```go
 package main
@@ -158,7 +158,7 @@ func main() {
 }
 ```
 
-### Rust · `rustc main.rs -o main && ./main`
+### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
 use std::io::Read;
@@ -171,7 +171,7 @@ fn main() {
 }
 ```
 
-### C · `cc main.c -o main && ./main`
+### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 ```c
 #include <stdio.h>
@@ -184,7 +184,7 @@ int main(void) {
 }
 ```
 
-### PHP · `php main.php`
+### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
 <?php

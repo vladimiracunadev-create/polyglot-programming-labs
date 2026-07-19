@@ -25,6 +25,12 @@ SALIDA = RAIZ / "glosario" / "README.md"
 
 # - **Término** — definición
 ENTRADA = re.compile(r"^\s*-\s+\*\*(?P<termino>[^*]+)\*\*\s*[—–-]\s*(?P<definicion>.+?)\s*$")
+# - **Término.** definición
+ENTRADA_PUNTO = re.compile(r"^\s*-\s+\*\*(?P<termino>[^*]+?)\.?\*\*\s+(?P<definicion>[a-zA-ZÁÉÍÓÚÑ¿«].+?)\s*$")
+# **Término** es/son/… (párrafo que abre definiendo el término)
+ENTRADA_PARRAFO = re.compile(
+    r"^\*\*(?P<termino>[^*]+?)\.?\*\*\s+(?P<definicion>(?:es|son|designa|denota|se |no |consiste|significa|nombra|ocurre|permite|describe|representa)\b.+?)\s*$"
+)
 ENCABEZADO_DEFINICIONES = re.compile(r"^##\s+.*Definiciones")
 OTRO_ENCABEZADO = re.compile(r"^##\s+")
 
@@ -52,6 +58,33 @@ def primera_frase(texto: str, maximo: int = 320) -> str:
     return texto.strip().rstrip(".")
 
 
+def limpiar_termino(termino: str) -> str:
+    """Normaliza el término: quita puntuación final y comillas de código."""
+    return termino.strip().strip("`").rstrip(".:").strip()
+
+
+def par_de(linea: str) -> tuple[str, str] | None:
+    """Extrae (término, definición) de una línea, en cualquiera de los tres formatos usados.
+
+    Las clases redactan sus definiciones de tres maneras equivalentes:
+        - **Término** — definición
+        - **Término.** definición
+        **Término** es una definición…   (párrafo que abre con el término)
+    """
+    for patron in (ENTRADA, ENTRADA_PUNTO, ENTRADA_PARRAFO):
+        m = patron.match(linea)
+        if not m:
+            continue
+        termino = limpiar_termino(m.group("termino"))
+        # La parte tras "Clave:" es un matiz didáctico, no la definición.
+        definicion = primera_frase(m.group("definicion").split("Clave:")[0].strip())
+        # Descarta falsos positivos: rótulos ("Nota:"), negritas de énfasis y frases sueltas.
+        if not termino or len(termino) > 60 or len(definicion) < 20:
+            continue
+        return termino, definicion
+    return None
+
+
 def definiciones_de(readme: Path) -> list[tuple[str, str]]:
     """Devuelve los pares (término, definición) de la sección de definiciones."""
     dentro = False
@@ -64,13 +97,9 @@ def definiciones_de(readme: Path) -> list[tuple[str, str]]:
             break
         if not dentro:
             continue
-        m = ENTRADA.match(linea)
-        if m:
-            termino = m.group("termino").strip()
-            # La parte tras "Clave:" es un matiz didáctico, no la definición.
-            definicion = primera_frase(m.group("definicion").split("Clave:")[0].strip())
-            if termino and definicion:
-                encontradas.append((termino, definicion))
+        par = par_de(linea)
+        if par:
+            encontradas.append(par)
     return encontradas
 
 

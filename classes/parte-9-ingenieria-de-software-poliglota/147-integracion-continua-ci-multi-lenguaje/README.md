@@ -68,9 +68,9 @@ LEER pasos ; verde <- todos == 1
 ## 🌐 Implementaciones idiomáticas — el código a la vista
 
 Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
-Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/): el enlace de cada lenguaje abre su fuente, y el comando de al lado lo ejecuta.
 
-### Python · `python main.py`
+### Python · [`python/main.py`](implementaciones/python/main.py) · `python main.py`
 
 La versión de Python es la más transparente sobre lo que realmente ocurre. Lee todo stdin, lo parte por espacios y convierte cada token a entero mediante una comprensión de lista. La decisión vive en `all(p == 1 for p in pasos)`: `all` es la encarnación exacta del AND lógico —devuelve `True` solo si *cada* elemento cumple la condición— y, además, es perezoso, así que en cuanto encuentra el primer paso distinto de 1 deja de mirar. Ese cortocircuito es el mismo espíritu del `fail-fast` de un pipeline real. Ramalho, en *Fluent Python*, destaca `all`/`any` sobre expresiones generadoras como la manera pitónica de expresar cuantificadores sin escribir un bucle explícito.
 
@@ -83,7 +83,7 @@ print(f"ci={'verde' if all(p == 1 for p in pasos) else 'rojo'}")
 
 Para `1 1 1`, `all` recorre los tres unos y devuelve `True`, así que imprime `ci=verde`. Para `1 0 1`, se detiene en el `0` y produce `ci=rojo`. Para `1 1`, dos unos, verde. Exactamente los tres casos del contrato.
 
-### JavaScript · `node main.mjs`
+### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 JavaScript expresa el mismo cuantificador con `Array.prototype.every`, que también cortocircuita en el primer elemento que no cumple. La diferencia idiomática está en la lectura: `readFileSync(0, ...)` lee el descriptor 0 (stdin) de una vez, y `split(/\s+/)` separa por cualquier bloque de espacios. Haverbeke, en *Eloquent JavaScript*, presenta `every`/`some` como los métodos de orden superior que capturan "para todos" y "existe" sin bucles manuales.
 
@@ -94,7 +94,7 @@ const pasos = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
 console.log(`ci=${pasos.every((p) => p === 1) ? "verde" : "rojo"}`);
 ```
 
-### TypeScript · `pnpm exec tsx main.ts`
+### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 TypeScript es, aquí, JavaScript con la red del tipado estático: la única diferencia visible es la anotación `pasos: number[]`, que documenta y hace comprobable en tiempo de compilación que trabajamos con un arreglo de números. Cherny, en *Programming TypeScript*, defiende justo este valor: los tipos son una forma de prueba que se ejecuta antes de correr el programa, otra capa de verificación temprana muy en el espíritu de la CI.
 
@@ -105,7 +105,7 @@ const pasos: number[] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
 console.log(`ci=${pasos.every((p) => p === 1) ? "verde" : "rojo"}`);
 ```
 
-### Rust · `rustc main.rs -o main && ./main`
+### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 Rust muestra un contraste instructivo: su iterador `.all(...)` también es perezoso y cortocircuita, pero el `parse::<i64>()` devuelve un `Result` que aquí se resuelve con `unwrap()`. En un pipeline real, ese `unwrap` sobre una entrada malformada sería justo el tipo de fallo que pone la celda de Rust en rojo —una lección viva sobre por qué la CI existe—. Klabnik y Nichols, en *The Rust Programming Language*, insisten en que el sistema de tipos te obliga a *decidir* qué hacer con el error, aunque `unwrap` sea el atajo de "confío en la entrada".
 
@@ -120,7 +120,7 @@ fn main() {
 }
 ```
 
-### Java · `java Main.java`
+### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
 Java resuelve el AND de la forma más elemental y quizá más didáctica: un booleano `verde` que empieza en `true` y se apaga irrevocablemente si *algún* paso no es 1. No cortocircuita (recorre todos los tokens), pero el resultado es idéntico. Es la traducción literal de "todos deben pasar": una sola falla contamina el conjunto. Bloch, en *Effective Java*, recomendaría en código de producción `Arrays.stream(...).allMatch(...)` para expresar la intención con un cuantificador, pero la versión con bucle deja el AND completamente a la vista.
 
@@ -140,7 +140,7 @@ public class Main {
 }
 ```
 
-### C# · `dotnet run`
+### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
 using System;
@@ -152,7 +152,7 @@ bool verde = Console.In.ReadToEnd()
 Console.WriteLine($"ci={(verde ? "verde" : "rojo")}");
 ```
 
-### Go · `go run main.go`
+### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
 ```go
 package main
@@ -182,7 +182,7 @@ func main() {
 }
 ```
 
-### C · `cc main.c -o main && ./main`
+### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 ```c
 #include <stdio.h>
@@ -198,7 +198,7 @@ int main(void) {
 }
 ```
 
-### SQL · `sqlite3 :memory: < main.sql`
+### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
 -- SQL: verde si el mínimo de los pasos es 1.
@@ -208,7 +208,7 @@ SELECT printf('ci=%s', CASE WHEN min(x) = 1 THEN 'verde' ELSE 'rojo' END) AS res
 
 SQL merece una nota aparte: como es declarativo, no piensa en "recorrer y apagar un flag", sino en agregar. `min(x)` sobre una columna de ceros y unos vale 1 solo si *no hay ningún cero*; en cuanto aparece un cero, el mínimo cae a 0. Es una forma algebraica y elegante de expresar el mismo AND: verde ⇔ mínimo = 1. Date, en *SQL and Relational Theory*, subraya justo esto: en el modelo relacional razonas sobre conjuntos y agregados, no sobre iteraciones paso a paso.
 
-### PHP · `php main.php`
+### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
 <?php

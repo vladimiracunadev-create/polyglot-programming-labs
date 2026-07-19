@@ -66,7 +66,7 @@ LEER mensajes ; ESCRIBIR cantidad
 Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
 Cada bloque es el archivo real de [`implementaciones/`](implementaciones/). El contrato: leer mensajes de commit separados por espacio y escribir `commits=<cantidad>`. Con `fix add refactor` sale `commits=3`; con `init`, `commits=1`.
 
-### Python · `python main.py`
+### Python · [`python/main.py`](implementaciones/python/main.py) · `python main.py`
 
 ```python
 import sys
@@ -77,7 +77,7 @@ print(f"commits={len(msgs)}")
 
 La solución de Python es casi telegráfica y por eso ilustra bien la operación. `sys.stdin.read().split()` lee toda la entrada y la trocea por espacios en una lista de tokens; `len(...)` cuenta cuántos hay. Cada token representa un commit, así que su longitud es el número de commits del historial —exactamente lo que devuelve `git rev-list --count HEAD` sobre un repositorio real. Que `.split()` sin argumentos colapse múltiples espacios es una comodidad deliberada: hace que un historial con separación irregular se cuente igual de bien, sin tokens vacíos que inflen el resultado.
 
-### JavaScript · `node main.mjs`
+### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
 import { readFileSync } from "node:fs";
@@ -86,7 +86,7 @@ const msgs = readFileSync(0, "utf8").trim().split(/\s+/);
 console.log(`commits=${msgs.length}`);
 ```
 
-### TypeScript · `pnpm exec tsx main.ts`
+### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
 import { readFileSync } from "node:fs";
@@ -95,7 +95,7 @@ const msgs: string[] = readFileSync(0, "utf8").trim().split(/\s+/);
 console.log(`commits=${msgs.length}`);
 ```
 
-### Java · `java Main.java`
+### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
 ```java
 import java.io.BufferedReader;
@@ -111,7 +111,7 @@ public class Main {
 }
 ```
 
-### C# · `dotnet run`
+### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
 using System;
@@ -121,7 +121,7 @@ string[] msgs = Console.In.ReadToEnd()
 Console.WriteLine($"commits={msgs.Length}");
 ```
 
-### Go · `go run main.go`
+### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
 ```go
 package main
@@ -140,7 +140,7 @@ func main() {
 }
 ```
 
-### Rust · `rustc main.rs -o main && ./main`
+### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
 use std::io::Read;
@@ -153,7 +153,7 @@ fn main() {
 }
 ```
 
-### C · `cc main.c -o main && ./main`
+### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 ```c
 #include <stdio.h>
@@ -169,7 +169,7 @@ int main(void) {
 
 El contraste entre C y SQL revela dos formas de «contar». C no construye ninguna colección: lee token a token con `scanf("%255s", ...)` —el límite `255` es una defensa consciente contra el desbordamiento del buffer, tan característica del rigor de Kernighan y Ritchie— e incrementa un contador. SQL, en cambio, modela los commits como filas de una tabla y aplica `count(*)`: la operación de contar es primitiva en el modelo relacional que describe Date en *SQL and Relational Theory*, porque una relación es un conjunto de tuplas y su cardinalidad es un dato de primera clase. Ambos llegan al mismo número por caminos conceptualmente opuestos: uno imperativo y byte a byte, otro declarativo y sobre conjuntos.
 
-### SQL · `sqlite3 :memory: < main.sql`
+### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
 -- SQL: cuenta las filas (commits).
@@ -177,7 +177,7 @@ WITH commits(msg) AS (VALUES ('fix'), ('add'), ('refactor'))
 SELECT printf('commits=%d', count(*)) AS resultado FROM commits;
 ```
 
-### PHP · `php main.php`
+### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
 <?php

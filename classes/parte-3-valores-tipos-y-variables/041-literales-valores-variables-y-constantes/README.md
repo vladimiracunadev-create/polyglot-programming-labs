@@ -76,7 +76,7 @@ ESCRIBIR "Total: " + FORMATEAR(total, 2 decimales)
 
 Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`. Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
 
-### Python · `python main.py`
+### Python · [`python/main.py`](implementaciones/python/main.py) · `python main.py`
 
 ```python
 import sys
@@ -94,7 +94,7 @@ total = subtotal * (1 - DESCUENTO)
 print(f"Total: {total:.2f}")
 ```
 
-### JavaScript · `node main.mjs`
+### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
 import { readFileSync } from "node:fs";
@@ -111,7 +111,7 @@ const total = subtotal * (1 - descuento);
 console.log(`Total: ${total.toFixed(2)}`);
 ```
 
-### TypeScript · `pnpm exec tsx main.ts`
+### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
 import { readFileSync } from "node:fs";
@@ -128,7 +128,7 @@ const total: number = subtotal * (1 - descuento);
 console.log(`Total: ${total.toFixed(2)}`);
 ```
 
-### Java · `java Main.java`
+### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
 ```java
 import java.io.BufferedReader;
@@ -154,7 +154,7 @@ public class Main {
 }
 ```
 
-### C# · `dotnet run`
+### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
 using System;
@@ -174,7 +174,7 @@ double total = subtotal * (1 - descuento);
 Console.WriteLine("Total: " + total.ToString("F2", CultureInfo.InvariantCulture));
 ```
 
-### Go · `go run main.go`
+### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
 ```go
 package main
@@ -204,7 +204,7 @@ func main() {
 }
 ```
 
-### Rust · `rustc main.rs -o main && ./main`
+### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
 use std::io::Read;
@@ -226,7 +226,7 @@ fn main() {
 }
 ```
 
-### C · `cc main.c -o main && ./main`
+### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 ```c
 #include <stdio.h>
@@ -248,7 +248,7 @@ int main(void) {
 }
 ```
 
-### SQL · `sqlite3 :memory: < main.sql`
+### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
 -- SQL es declarativo: no lee stdin como los lenguajes imperativos. En vez de
@@ -263,7 +263,7 @@ SELECT printf('Total: %.2f', precio_unitario * cantidad * (1 - descuento)) AS re
 FROM ventas;
 ```
 
-### PHP · `php main.php`
+### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
 <?php

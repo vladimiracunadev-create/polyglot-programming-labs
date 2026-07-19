@@ -124,13 +124,24 @@ atlas/  rutas/  autoevaluaciones/  glosario/  labs/
 scripts/  docs/  .github/workflows/
 ```
 
-## 📖 Cómo estudiar
+## 👩‍🏫 Para instructores
+
+- 📅 **[Syllabus y cronograma](docs/syllabus.md)** — horas por parte, dependencias y un plan de ~41 semanas.
+- 📊 **[Rúbrica de evaluación](docs/rubrica-evaluacion.md)** — cómo puntuar retos de transferencia, laboratorios y el proyecto integrador.
+- 🎓 **[Examen final por perfil](docs/examen-final-por-perfil.md)** — teoría + transferencia verificada + explicación, para cada ruta.
+- 🧱 **[Currículo](docs/CURRICULO.md)** · **[Metodología](docs/METODOLOGIA.md)** · **[Ampliar lenguajes](docs/EXTENDER.md)**.
+
+## 🚀 Cómo estudiar
 
 ```text
 problema → concepto → pseudocódigo → implementaciones → comparación → transferencia
 ```
 
-Empieza por la [Parte 0](classes/parte-0-pensamiento-computacional-y-el-metodo-poliglota/README.md) y sigue el orden: la numeración es global y cada clase asume la anterior. Consulta el [currículo](docs/CURRICULO.md), la [metodología](docs/METODOLOGIA.md) y la [guía para ampliar lenguajes](docs/EXTENDER.md).
+1. **Sigue el orden.** La numeración es global y secuencial por diseño: cada clase asume la anterior. Empieza por la [Parte 0](classes/parte-0-pensamiento-computacional-y-el-metodo-poliglota/README.md), que fija el método de comparación.
+2. **Lee las 10 implementaciones, no solo la de tu lenguaje.** El valor de cada clase está en el contraste: ahí se ve qué es esencial y qué es accidente de la sintaxis.
+3. **Ejecuta el verificador.** Comprueba tú mismo que las implementaciones son equivalentes, y observa en qué se diferencian sus salidas cuando fuerzas un caso límite.
+4. **Haz el reto de transferencia.** Portar el concepto a un lenguaje que no dominas es donde se fija el aprendizaje.
+5. **Usa los libros de referencia** de cada parte para profundizar en lo que más te interese.
 
 ## Principios
 

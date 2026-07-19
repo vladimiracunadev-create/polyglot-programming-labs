@@ -67,9 +67,9 @@ viejo <- n*2 ; nuevo <- n+n ; equivalente <- (viejo==nuevo) ; ESCRIBIR
 ## 🌐 Implementaciones idiomáticas — el código a la vista
 
 Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
-Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/): el enlace de cada lenguaje abre su fuente, y el comando de al lado lo ejecuta.
 
-### Python · `python main.py`
+### Python · [`python/main.py`](implementaciones/python/main.py) · `python main.py`
 
 La versión de Python pone a la vista el patrón entero de una refactorización verificada. `viejo` guarda la forma antigua (`n * 2`), `nuevo` la refactorizada (`n + n`), y `viejo == nuevo` es la prueba en línea que confirma la equivalencia. Fíjate en que el programa nunca *asume* que son iguales: lo comprueba, igual que un test comprueba que la conducta sigue intacta tras reestructurar. La salida imprime tanto el veredicto (`equivalente=true`) como el resultado observable (`resultado=10`), separando limpiamente "la estructura cambió" de "el comportamiento se preservó".
 
@@ -85,7 +85,7 @@ print(f"equivalente={eq} resultado={nuevo}")
 
 Para `n=5`, `viejo` es 10 y `nuevo` es 10: iguales, así que `equivalente=true resultado=10`. Para `n=0`, ambos son 0. Para `n=7`, ambos 14. La equivalencia de `n*2` y `n+n` es cierta para todo entero, y por eso los tres casos dan `true`: la refactorización es siempre segura.
 
-### Java · `java Main.java`
+### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
 Java expresa el mismo patrón con un matiz importante que Bloch trata en *Effective Java*: la elección del tipo numérico. Aquí `n` es `long`, de 64 bits, lo que da margen frente al desbordamiento en `n * 2`. En una refactorización real esto no es trivial: si `viejo` y `nuevo` desbordaran de formas distintas dejarían de ser equivalentes, y una prueba con valores extremos lo cazaría. La declaración doble `long viejo = n * 2, nuevo = n + n;` mantiene ambas formas lado a lado, invitando a compararlas.
 
@@ -104,7 +104,7 @@ public class Main {
 }
 ```
 
-### SQL · `sqlite3 :memory: < main.sql`
+### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 SQL ofrece el paralelo más revelador de la clase, porque la refactorización que preserva el resultado es *el pan de cada día* de un motor de bases de datos: el optimizador reescribe tu consulta en otra equivalente y más rápida sin que el conjunto de filas devuelto cambie. Aquí la equivalencia `n * 2 = n + n` se evalúa dentro de un `CASE` sobre una fila, y el resultado observable se proyecta con `printf`. Date, en *SQL and Relational Theory*, dedica buena parte del libro precisamente a cuándo dos expresiones relacionales son equivalentes —el fundamento teórico de toda optimización—, que es la misma pregunta que se hace un refactorizador: ¿estas dos formas producen lo mismo?
 
@@ -114,7 +114,7 @@ WITH nums(n) AS (VALUES (5))
 SELECT printf('equivalente=%s resultado=%d', CASE WHEN n * 2 = n + n THEN 'true' ELSE 'false' END, n + n) AS resultado FROM nums;
 ```
 
-### JavaScript · `node main.mjs`
+### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
 import { readFileSync } from "node:fs";
@@ -124,7 +124,7 @@ const viejo = n * 2, nuevo = n + n;
 console.log(`equivalente=${viejo === nuevo ? "true" : "false"} resultado=${nuevo}`);
 ```
 
-### TypeScript · `pnpm exec tsx main.ts`
+### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
 import { readFileSync } from "node:fs";
@@ -134,7 +134,7 @@ const viejo = n * 2, nuevo = n + n;
 console.log(`equivalente=${viejo === nuevo ? "true" : "false"} resultado=${nuevo}`);
 ```
 
-### C# · `dotnet run`
+### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
 using System;
@@ -144,7 +144,7 @@ long viejo = n * 2, nuevo = n + n;
 Console.WriteLine($"equivalente={(viejo == nuevo ? "true" : "false")} resultado={nuevo}");
 ```
 
-### Go · `go run main.go`
+### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
 ```go
 package main
@@ -169,7 +169,7 @@ func main() {
 }
 ```
 
-### Rust · `rustc main.rs -o main && ./main`
+### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
 use std::io::Read;
@@ -184,7 +184,7 @@ fn main() {
 }
 ```
 
-### C · `cc main.c -o main && ./main`
+### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 ```c
 #include <stdio.h>
@@ -198,7 +198,7 @@ int main(void) {
 }
 ```
 
-### PHP · `php main.php`
+### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
 <?php

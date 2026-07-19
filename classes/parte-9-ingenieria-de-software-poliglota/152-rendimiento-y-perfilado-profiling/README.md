@@ -64,9 +64,9 @@ ops <- 0 ; suma <- 0 ; PARA i de 1 a n: suma+=i ; ops++
 ## 🌐 Implementaciones idiomáticas — el código a la vista
 
 Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
-Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/): el enlace de cada lenguaje abre su fuente, y el comando de al lado lo ejecuta.
 
-### Python · `python main.py`
+### Python · [`python/main.py`](implementaciones/python/main.py) · `python main.py`
 
 El bucle `for i in range(1, n + 1)` recorre 1..*n*; en cada vuelta suma `i` a `suma` y lleva la cuenta en `ops`. Al terminar, `ops` vale exactamente *n*: acabas de medir que el algoritmo es O(*n*). Un detalle de rendimiento que Ramalho subraya en *Fluent Python*: este bucle en Python puro es lento comparado con `sum(range(1, n+1))`, porque cada iteración pasa por el intérprete. La forma de descubrirlo no es adivinar, sino perfilar: `python -m cProfile main.py` te da el desglose por función, y `py-spy record -o perfil.svg -- python main.py` produce un **flamegraph** —un gráfico donde el ancho de cada barra es el tiempo acumulado, la manera más rápida de ver el cuello de botella de un vistazo.
 
@@ -82,7 +82,7 @@ for i in range(1, n + 1):
 print(f"operaciones={ops} resultado={suma}")
 ```
 
-### JavaScript · `node main.mjs`
+### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
 import { readFileSync } from "node:fs";
@@ -96,7 +96,7 @@ for (let i = 1; i <= n; i++) {
 console.log(`operaciones=${ops} resultado=${suma}`);
 ```
 
-### TypeScript · `pnpm exec tsx main.ts`
+### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
 import { readFileSync } from "node:fs";
@@ -110,7 +110,7 @@ for (let i = 1; i <= n; i++) {
 console.log(`operaciones=${ops} resultado=${suma}`);
 ```
 
-### Java · `java Main.java`
+### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
 En la JVM el perfilado es especialmente interesante porque el compilador JIT reescribe el código en caliente. Un bucle como este, tras miles de iteraciones, puede ser optimizado —incluso *vectorizado* o reducido a la fórmula cerrada— por el compilador C2. Por eso medir en Java exige cuidado: hay que «calentar» la JVM. Las herramientas idiomáticas son **JFR** (Java Flight Recorder, integrado en el JDK) y **async-profiler**, que producen flamegraphs de bajísimo coste. Para microbenchmarks fiables, Bloch y la comunidad recomiendan **JMH**, que gestiona el calentamiento y evita que el JIT elimine código «muerto» cuyo resultado no se usa.
 
@@ -133,7 +133,7 @@ public class Main {
 }
 ```
 
-### C# · `dotnet run`
+### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
 using System;
@@ -147,7 +147,7 @@ for (int i = 1; i <= n; i++) {
 Console.WriteLine($"operaciones={ops} resultado={suma}");
 ```
 
-### Go · `go run main.go`
+### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
 ```go
 package main
@@ -172,7 +172,7 @@ func main() {
 }
 ```
 
-### Rust · `rustc main.rs -o main && ./main`
+### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 Rust y C son los lenguajes donde las **constantes** brillan: sin recolector de basura ni intérprete, este bucle compila a instrucciones máquina casi directas, y el optimizador de LLVM probablemente lo reemplace por la fórmula *n*(*n*+1)/2. Para medir de verdad en Rust, la herramienta idiomática es **criterion**, una biblioteca de benchmarking estadístico que ejecuta muchas muestras, descarta valores atípicos y reporta intervalos de confianza —justo el rigor que *The Pragmatic Programmer* pide para no engañarte con una sola medición ruidosa. Para perfilar el binario ya compilado sirven `perf` y los flamegraphs, igual que en C.
 
@@ -193,7 +193,7 @@ fn main() {
 }
 ```
 
-### C · `cc main.c -o main && ./main`
+### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 C es donde nació la caja de herramientas clásica: **perf** (contadores de hardware de Linux: ciclos, fallos de caché, predicciones de salto erradas) y **valgrind** con su módulo *callgrind*, que instrumenta cada instrucción para darte un mapa exacto de dónde se gasta el tiempo, a costa de correr mucho más lento. Kernighan y Ritchie ya enseñaban en *The C Programming Language* a razonar sobre el coste de cada operación; hoy `perf stat ./main` te muestra esos ciclos reales. Aquí la lección de constantes es directa: el mismo O(*n*) corre órdenes de magnitud más rápido en C que en Python interpretado.
 
@@ -213,7 +213,7 @@ int main(void) {
 }
 ```
 
-### SQL · `sqlite3 :memory: < main.sql`
+### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
 -- SQL: se perfila con EXPLAIN; aquí, conteo y suma.
@@ -221,7 +221,7 @@ WITH RECURSIVE r(i) AS (VALUES (1) UNION ALL SELECT i + 1 FROM r WHERE i < 5)
 SELECT printf('operaciones=%d resultado=%d', count(*), sum(i)) AS resultado FROM r;
 ```
 
-### PHP · `php main.php`
+### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
 <?php

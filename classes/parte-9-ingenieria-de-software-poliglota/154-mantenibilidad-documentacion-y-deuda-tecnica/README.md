@@ -66,9 +66,9 @@ LEER módulos ; ESCRIBIR cantidad
 ## 🌐 Implementaciones idiomáticas — el código a la vista
 
 Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
-Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/): el enlace de cada lenguaje abre su fuente, y el comando de al lado lo ejecuta.
 
-### Python · `python main.py`
+### Python · [`python/main.py`](implementaciones/python/main.py) · `python main.py`
 
 La versión de Python es casi un aforismo: `sys.stdin.read().split()` parte la entrada en palabras y `len(...)` las cuenta. Su virtud es la que esta clase predica —legibilidad—: cualquiera la entiende de un vistazo, y esa transparencia *es* mantenibilidad. En un módulo real, aquí colocarías un **docstring**: la cadena entre triples comillas justo bajo la definición de una función o módulo, que herramientas como Sphinx o `pydoc` convierten en documentación navegable, y que `help()` muestra en el intérprete. Ramalho insiste en *Fluent Python* en que el docstring documenta el contrato, no la implementación: qué recibe, qué devuelve y por qué, no cómo lo hace línea a línea.
 
@@ -79,7 +79,7 @@ mods = sys.stdin.read().split()
 print(f"complejidad={len(mods)}")
 ```
 
-### JavaScript · `node main.mjs`
+### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
 import { readFileSync } from "node:fs";
@@ -88,7 +88,7 @@ const mods = readFileSync(0, "utf8").trim().split(/\s+/);
 console.log(`complejidad=${mods.length}`);
 ```
 
-### TypeScript · `pnpm exec tsx main.ts`
+### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 En el ecosistema JavaScript/TypeScript la documentación idiomática es **JSDoc/TSDoc**: comentarios `/** ... */` con etiquetas `@param` y `@returns` sobre cada función. En TypeScript hay una sinergia notable que Cherny destaca en *Programming TypeScript*: el propio sistema de tipos ya documenta las firmas —`mods: string[]` dice más que un párrafo—, así que el comentario queda libre para explicar el *porqué*. La anotación de tipo no es solo verificación: es documentación que el compilador garantiza que no miente.
 
@@ -99,7 +99,7 @@ const mods: string[] = readFileSync(0, "utf8").trim().split(/\s+/);
 console.log(`complejidad=${mods.length}`);
 ```
 
-### Java · `java Main.java`
+### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
 Java popularizó la documentación generada a partir del código con **Javadoc**: comentarios `/** ... */` con `@param`, `@return` y `@throws` que la herramienta `javadoc` convierte en el HTML de referencia que todo programador Java ha consultado. Bloch, en *Effective Java*, hace de esto un ítem propio: «escribe comentarios de documentación para todos los elementos de API expuestos», porque una API sin Javadoc es, en la práctica, una API que nadie puede usar con confianza. La disciplina de documentar la frontera pública es parte de lo que hace mantenible un sistema Java grande.
 
@@ -117,7 +117,7 @@ public class Main {
 }
 ```
 
-### C# · `dotnet run`
+### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
 using System;
@@ -127,7 +127,7 @@ string[] mods = Console.In.ReadToEnd()
 Console.WriteLine($"complejidad={mods.Length}");
 ```
 
-### Go · `go run main.go`
+### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
 Go convierte la documentación en un acto casi gratuito: **godoc** no usa etiquetas especiales, sino los comentarios normales escritos justo encima de cada declaración. La convención cultural, que Donovan y Kernighan describen en *The Go Programming Language*, es que un comentario de documentación empiece con el nombre de lo que documenta —«Fields divide la cadena…»— y sea una frase completa. Esa sencillez deliberada baja tanto la barrera que documentar se vuelve el camino por defecto, no una tarea aparte.
 
@@ -148,7 +148,7 @@ func main() {
 }
 ```
 
-### Rust · `rustc main.rs -o main && ./main`
+### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 Rust lleva la documentación un paso más allá con **rustdoc**: los comentarios `///` se escriben en Markdown y, extraordinariamente, los ejemplos de código que incluyas se **compilan y ejecutan como tests** (`cargo test` los corre). Esto cierra la brecha clásica entre documentación y realidad: en Rust, un ejemplo documentado que deja de funcionar rompe la compilación de pruebas, así que la documentación no puede envejecer en silencio. Klabnik y Nichols muestran en *The Rust Programming Language* que esta integración —docs que son tests— es una de las mejores defensas contra la entropía documental que aquejan a otros ecosistemas.
 
@@ -163,7 +163,7 @@ fn main() {
 }
 ```
 
-### C · `cc main.c -o main && ./main`
+### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 ```c
 #include <stdio.h>
@@ -177,7 +177,7 @@ int main(void) {
 }
 ```
 
-### SQL · `sqlite3 :memory: < main.sql`
+### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
 -- SQL: cuenta las filas (módulos).
@@ -185,7 +185,7 @@ WITH mods(nombre) AS (VALUES ('a'), ('b'), ('c'))
 SELECT printf('complejidad=%d', count(*)) AS resultado FROM mods;
 ```
 
-### PHP · `php main.php`
+### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
 <?php

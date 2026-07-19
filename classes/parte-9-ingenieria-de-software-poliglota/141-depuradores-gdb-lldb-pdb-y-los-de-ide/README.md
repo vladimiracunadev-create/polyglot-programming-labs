@@ -65,7 +65,7 @@ acc <- 0 ; PARA i de 1 a n: acc <- acc+i ; emitir acc
 Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
 Cada bloque es el archivo real de [`implementaciones/`](implementaciones/). Todos comparten la misma anatomía —una variable `acc` que arranca en cero, un bucle de `1` a `n`, y la captura del estado en cada vuelta—, que es justo lo que inspeccionarías con un depurador. Lee el bucle imaginando un *breakpoint* en la línea del `acc += i`.
 
-### Python · `python main.py`
+### Python · [`python/main.py`](implementaciones/python/main.py) · `python main.py`
 
 ```python
 import sys
@@ -81,7 +81,7 @@ print("traza=" + "-".join(str(x) for x in pasos))
 
 Esta versión hace explícito lo que un depurador te enseñaría implícitamente. Si abrieras este archivo con pdb (`python -m pdb main.py`), pondrías un *breakpoint* en `acc += i` con `break 7`, correrías con `continue` y en cada pausa consultarías el valor con `p acc`: verías `1`, luego `3`, luego `6`, la misma secuencia que `pasos` va acumulando. La lista `pasos` es, literalmente, el registro de lo que un *watch* sobre `acc` mostraría en cada iteración; y el `"-".join(...)` final solo la aplana a la cadena que el contrato exige. Depurar así, con la variable a la vista en cada paso, es lo que Hunt y Thomas llaman no dar nada por supuesto: en lugar de creer que `acc` vale lo que crees, lo compruebas.
 
-### JavaScript · `node main.mjs`
+### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
 import { readFileSync } from "node:fs";
@@ -96,7 +96,7 @@ for (let i = 1; i <= n; i++) {
 console.log(`traza=${pasos.join("-")}`);
 ```
 
-### TypeScript · `pnpm exec tsx main.ts`
+### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
 import { readFileSync } from "node:fs";
@@ -111,7 +111,7 @@ for (let i = 1; i <= n; i++) {
 console.log(`traza=${pasos.join("-")}`);
 ```
 
-### Java · `java Main.java`
+### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
 ```java
 import java.io.BufferedReader;
@@ -134,7 +134,7 @@ public class Main {
 }
 ```
 
-### C# · `dotnet run`
+### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
 using System;
@@ -151,7 +151,7 @@ for (int i = 1; i <= n; i++) {
 Console.WriteLine($"traza={sb}");
 ```
 
-### Go · `go run main.go`
+### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
 ```go
 package main
@@ -177,7 +177,7 @@ func main() {
 }
 ```
 
-### Rust · `rustc main.rs -o main && ./main`
+### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
 use std::io::Read;
@@ -196,7 +196,7 @@ fn main() {
 }
 ```
 
-### C · `cc main.c -o main && ./main`
+### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 ```c
 #include <stdio.h>
@@ -216,7 +216,7 @@ int main(void) {
 }
 ```
 
-### SQL · `sqlite3 :memory: < main.sql`
+### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
 -- SQL: sumas acumuladas con función de ventana (ilustrativo, n=3).
@@ -225,7 +225,7 @@ SELECT 'traza=' || group_concat(s, '-') AS resultado
 FROM (SELECT sum(i) OVER (ORDER BY i) AS s FROM r);
 ```
 
-### PHP · `php main.php`
+### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
 <?php

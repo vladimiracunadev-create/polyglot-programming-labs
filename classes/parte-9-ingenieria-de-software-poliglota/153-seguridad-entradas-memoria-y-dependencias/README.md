@@ -66,9 +66,9 @@ LEER entrada ; seguro <- todos los caracteres alfanuméricos
 ## 🌐 Implementaciones idiomáticas — el código a la vista
 
 Mismo algoritmo, forma idiomática en cada lenguaje. Todas producen la salida de `casos.json`.
-Cada bloque es el archivo real de [`implementaciones/`](implementaciones/):
+Cada bloque es el archivo real de [`implementaciones/`](implementaciones/): el enlace de cada lenguaje abre su fuente, y el comando de al lado lo ejecuta.
 
-### Python · `python main.py`
+### Python · [`python/main.py`](implementaciones/python/main.py) · `python main.py`
 
 Python ofrece la validación más directa: el método de cadena `str.isalnum()` devuelve `True` solo si la cadena no está vacía y todos sus caracteres son alfanuméricos. Es la lista blanca hecha primitiva del lenguaje. Un matiz que Ramalho subrayaría en *Fluent Python*: `isalnum()` es consciente de Unicode, así que `"café2".isalnum()` es `True` —la `é` cuenta como letra—. Para la seguridad esto puede ser deseable o no; si necesitas ASCII estricto, la comprobación debe ser explícita. La auditoría de dependencias en el ecosistema Python se hace con `pip-audit`, que contrasta tus paquetes contra la base de vulnerabilidades de la PyPA.
 
@@ -80,7 +80,7 @@ seguro = w.isalnum()
 print(f"seguro={'true' if seguro else 'false'}")
 ```
 
-### JavaScript · `node main.mjs`
+### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
 import { readFileSync } from "node:fs";
@@ -90,7 +90,7 @@ const seguro = /^[A-Za-z0-9]+$/.test(w);
 console.log(`seguro=${seguro ? "true" : "false"}`);
 ```
 
-### TypeScript · `pnpm exec tsx main.ts`
+### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 Tanto JavaScript como TypeScript expresan la lista blanca con una expresión regular anclada: `^[A-Za-z0-9]+$`. Los anclajes `^` y `$` son de seguridad crítica —sin ellos, la regex encontraría una coincidencia *parcial* y aceptaría `a;b` porque contiene una `a`—. El `+` exige al menos un carácter, replicando el rechazo de la cadena vacía. En estos ecosistemas la auditoría es `npm audit` (o `pnpm audit`), que revisa el árbol de dependencias del `package-lock.json`/`pnpm-lock.yaml` contra los avisos de seguridad del registro.
 
@@ -102,7 +102,7 @@ const seguro = /^[A-Za-z0-9]+$/.test(w);
 console.log(`seguro=${seguro ? "true" : "false"}`);
 ```
 
-### Java · `java Main.java`
+### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
 ```java
 import java.io.BufferedReader;
@@ -119,7 +119,7 @@ public class Main {
 }
 ```
 
-### C# · `dotnet run`
+### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
 using System;
@@ -130,7 +130,7 @@ bool seguro = w.Length > 0 && w.All(char.IsLetterOrDigit);
 Console.WriteLine($"seguro={(seguro ? "true" : "false")}");
 ```
 
-### Go · `go run main.go`
+### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
 ```go
 package main
@@ -160,7 +160,7 @@ func main() {
 }
 ```
 
-### Rust · `rustc main.rs -o main && ./main`
+### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 Rust es el lenguaje que mejor encarna la lección de seguridad de esta clase, y no por la validación en sí —`chars().all(|c| c.is_ascii_alphanumeric())` es un iterador limpio— sino por lo que representa. Klabnik y Nichols dedican *The Rust Programming Language* a explicar el *ownership*: el compilador garantiza que esta cadena `s` se libere exactamente una vez, que ninguna referencia la sobreviva y que no haya acceso concurrente sin sincronizar. Toda una categoría de vulnerabilidades —las de memoria, que Microsoft y Google estiman en torno al 70 % de sus CVE críticos— desaparece por construcción. Fíjate además en `is_ascii_alphanumeric`, que a diferencia del `isalnum` de Python restringe a ASCII: aquí la decisión Unicode es explícita. La auditoría de dependencias se hace con `cargo audit`, contra la base RustSec.
 
@@ -176,7 +176,7 @@ fn main() {
 }
 ```
 
-### C · `cc main.c -o main && ./main`
+### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 C muestra el otro polo del espectro de memoria. Observa `char w[256]` y `scanf("%255s", w)`: el `255` no es decorativo, es la defensa. Sin ese límite, una entrada más larga que el búfer lo desbordaría, sobrescribiendo memoria adyacente —el clásico *buffer overflow*, base histórica de innumerables exploits. Kernighan y Ritchie enseñan en *The C Programming Language* que en C la seguridad de memoria es responsabilidad del programador en cada línea: no hay red. El `isalnum` de `<ctype.h>` valida cada carácter, con la sutileza de convertir a `unsigned char` para evitar comportamiento indefinido con bytes altos. Herramientas como `valgrind` y los *sanitizers* (`-fsanitize=address`) ayudan a cazar estos fallos en pruebas.
 
@@ -196,7 +196,7 @@ int main(void) {
 }
 ```
 
-### SQL · `sqlite3 :memory: < main.sql`
+### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
 -- SQL: se evita la inyección con consultas parametrizadas; aquí, validación por patrón.
@@ -204,7 +204,7 @@ WITH t(w) AS (VALUES ('abc'))
 SELECT printf('seguro=%s', CASE WHEN w GLOB '*[^A-Za-z0-9]*' THEN 'false' ELSE 'true' END) AS resultado FROM t;
 ```
 
-### PHP · `php main.php`
+### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
 <?php

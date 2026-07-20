@@ -22,6 +22,11 @@ __pycache__/
 # Sitio generado
 site/
 
+# Guías PDF por clase: se generan bajo demanda con scripts/generar_material.py
+# y pesan ~1 MB cada una. El manual (manual/MANUAL.pdf) sí se versiona, para
+# que haya un enlace de descarga directo desde el README.
+material/
+
 # Rust
 target/
 

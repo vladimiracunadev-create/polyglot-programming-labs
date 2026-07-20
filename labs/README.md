@@ -33,6 +33,26 @@ Ejecutar el verificador es el paso mínimo. El laboratorio completo, tal como lo
 5. **Documenta una diferencia.** Anota al menos una diferencia observada entre dos salidas y
    clasifícala (sintáctica / semántica / paradigmática).
 
+## El segundo laboratorio: los primos del Atlas
+
+Cada clase de código trae además un [`primos.md`](../classes/parte-3-valores-tipos-y-variables/041-literales-valores-variables-y-constantes/primos.md)
+con el mismo programa resuelto en los lenguajes **primos** de su familia. Ese material nació como
+ilustrativo —nadie lo ejecutaba—, y ahora **Ruby, Perl y Lua sí se ejecutan** contra el mismo
+`casos.json` que el núcleo:
+
+```bash
+python scripts/verificar_primos.py 041                 # una clase
+python scripts/verificar_primos.py --all --lang perl   # un primo, todas las clases
+python scripts/verificar_primos.py --all --estricto    # falla si alguno falla (lo que hace CI)
+```
+
+Mereció la pena a la primera pasada: al ejecutarlos aparecieron 19 clases cuyo Perl no hacía
+`chomp`, de modo que el salto de línea se colaba en el dato y `"Ada"` medía 4 caracteres. Un
+material que nadie ejecuta acumula ese tipo de defecto sin que se note.
+
+Los otros 17 primos (Zig, Prolog, Objective-C, ActionScript…) siguen siendo **material de lectura**:
+verificar tres de veinte no es verificarlos todos, y cada página lo declara.
+
 ## Qué NO se verifica
 
 El texto de las clases, las comparaciones y el Atlas están escritos a mano y **no** se ejecutan en

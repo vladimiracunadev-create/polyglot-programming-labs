@@ -28,6 +28,10 @@ Scripts de apoyo:
 | [`validar_estructura.py`](../scripts/validar_estructura.py) | Comprueba que las 176 clases y sus enlaces están bien formados. |
 | [`generar_glosario.py`](../scripts/generar_glosario.py) | Deriva `glosario/README.md` de las definiciones de las clases. |
 | [`enlazar_codigo.py`](../scripts/enlazar_codigo.py) | Enlaza cada bloque de código a la vista con su archivo real. |
+| [`enlazar_primos.py`](../scripts/enlazar_primos.py) | Enlaza cada bloque con las versiones de su familia en `primos.md`. |
+| [`verificar_primos.py`](../scripts/verificar_primos.py) | Ejecuta los primos Ruby/Perl/Lua extraídos de `primos.md` contra `casos.json`. |
+| [`generar_manual.py`](../scripts/generar_manual.py) | Consolida las 176 clases en `manual/MANUAL.pdf` (se versiona). |
+| [`generar_material.py`](../scripts/generar_material.py) | Guías PDF imprimibles por clase en `material/` (no se versionan). |
 | [`generar_sitio.py`](../scripts/generar_sitio.py) | Construye el sitio de GitHub Pages. |
 
 > ⚠️ Los `gen_parteN.py` **regeneran** README de clase, y el contenido redactado a mano se
@@ -44,7 +48,11 @@ Scripts de apoyo:
    lenguajes del núcleo.
 4. Redacta el contenido siguiendo la [anatomía de clase](METODOLOGIA.md#anatomía-de-una-clase),
    con sus 🔗 referencias a los libros de la parte.
-5. Verifica: `python scripts/verificar_equivalencia.py <NNN>` y `python scripts/validar_estructura.py`.
+5. Escribe su `primos.md` (el mismo problema en los lenguajes primos de las 7 familias) tomando
+   como patrón el de la [clase 041](../classes/parte-3-valores-tipos-y-variables/041-literales-valores-variables-y-constantes/primos.md),
+   y ejecuta `python scripts/enlazar_primos.py` para insertar los enlaces bajo cada bloque.
+6. Verifica: `python scripts/verificar_equivalencia.py <NNN>`,
+   `python scripts/verificar_primos.py <NNN>` y `python scripts/validar_estructura.py`.
 
 ## Añadir un lenguaje al núcleo
 

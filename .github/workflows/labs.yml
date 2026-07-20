@@ -1,0 +1,90 @@
+name: Labs (primos del Atlas)
+
+# El CI principal verifica la equivalencia de los 10 lenguajes del NÚCLEO.
+# Este workflow va un paso más allá, sobre el material que hasta ahora era solo
+# ilustrativo: extrae de cada `primos.md` el código de los lenguajes PRIMOS cuyo
+# toolchain es barato de instalar y lo ejecuta contra el mismo `casos.json`.
+#
+# Por qué importa: al ejecutarlos por primera vez aparecieron 19 clases en las
+# que el Perl no hacía `chomp` y el salto de línea se colaba en el dato
+# ("Ada" medía 4). Un material que nadie ejecuta acumula ese tipo de defecto sin
+# que se note, y la corrección se apoya en que aquí falle de verdad.
+#
+# Lo que este workflow NO cubre, y conviene no vender de más: los otros 17
+# primos (Zig, Prolog, Objective-C, ActionScript, Dart…) siguen siendo material
+# ilustrativo, y así se declara en cada página. Verificar tres de veinte no es
+# verificarlos todos.
+
+on:
+  pull_request:
+    paths:
+      - "classes/**/primos.md"
+      - "classes/**/casos.json"
+      - "scripts/verificar_primos.py"
+      - ".github/workflows/labs.yml"
+  push:
+    branches: ["main"]
+    paths:
+      - "classes/**/primos.md"
+      - "classes/**/casos.json"
+      - "scripts/verificar_primos.py"
+      - ".github/workflows/labs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: labs-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  primos:
+    name: Primos (${{ matrix.lang }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        lang: [ruby, perl, lua]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Ruby y Perl vienen en el runner de Ubuntu; Lua no.
+      - name: Instalar Lua
+        if: matrix.lang == 'lua'
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends lua5.4
+          lua5.4 -v
+
+      - name: Versión del intérprete
+        run: |
+          set -euo pipefail
+          case "${{ matrix.lang }}" in
+            ruby) ruby --version ;;
+            perl) perl --version | sed -n '2p' ;;
+            lua)  lua5.4 -v ;;
+          esac
+
+      - name: Verificar los primos contra casos.json
+        run: python scripts/verificar_primos.py --all --lang ${{ matrix.lang }} --estricto
+
+      - name: Resumen
+        if: always()
+        run: |
+          {
+            echo "### 🧬 Primos verificados · ${{ matrix.lang }}"
+            echo ""
+            echo "Código extraído de los \`primos.md\` y ejecutado contra el mismo"
+            echo "\`casos.json\` que el núcleo. Clases con \`primos.md\`: **$(ls -d classes/parte-*/[0-9][0-9][0-9]-*/primos.md | wc -l)**."
+            echo ""
+            echo "Los primos sin toolchain en CI (Zig, Prolog, Objective-C, ActionScript…)"
+            echo "siguen siendo material ilustrativo y así se declara en cada página."
+          } >> "$GITHUB_STEP_SUMMARY"

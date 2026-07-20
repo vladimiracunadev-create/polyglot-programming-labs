@@ -70,17 +70,18 @@ puts "envuelto=#{envolver(STDIN.gets.to_i)}"
 ### Perl
 
 ```perl
-# El camino moderno: FFI::Platypus declara la firma en Perl puro.
+# El camino moderno: FFI::Platypus declara la firma en Perl puro. Es del CPAN,
+# no del núcleo, y pide libdoble.so al lado; queda como declaración y se simula:
+#     use FFI::Platypus 2.00;
+#     my $ffi = FFI::Platypus->new(api => 2, lib => './libdoble.so');
+#     $ffi->attach(doble => ['long'] => 'long');
 # El camino clásico, XS, generaría C con dXSARGS, ST(0) y newXS: un binding
 # de verdad, que hay que compilar contra los encabezados del intérprete.
-use FFI::Platypus 2.00;
-
-my $ffi = FFI::Platypus->new(api => 2, lib => './libdoble.so');
-$ffi->attach(doble => ['long'] => 'long');
+sub doble { $_[0] * 2 }   # simula la función nativa del otro lado
 
 sub envolver { return "wrap(" . doble($_[0]) . ")" }
 
-my $n = <STDIN>;
+chomp(my $n = <STDIN>);
 printf "envuelto=%s\n", envolver($n + 0);
 ```
 

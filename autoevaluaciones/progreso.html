@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mi progreso · Polyglot Programming Labs</title>
+<style>
+  :root{--acento:#7c5cff;--ok:#2e9e5b;
+    --bg:#fff;--bg2:#f5f4fb;--txt:#12181d;--muted:#5b6670;--card:#fff;--borde:#e6e2f2}
+  @media (prefers-color-scheme:dark){:root{--bg:#0d1117;--bg2:#12111c;--txt:#e6edf3;--muted:#9aa7b2;--card:#161b22;--borde:#272138}}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--txt);line-height:1.6}
+  a{color:var(--acento)}
+  .wrap{max-width:900px;margin:0 auto;padding:0 1.1rem 4rem}
+  header{background:linear-gradient(135deg,#7c5cff,#5b21b6);color:#fff;padding:2rem 1.1rem;text-align:center}
+  header h1{margin:.2rem 0;font-size:1.6rem}
+  header p{margin:0;opacity:.9;font-size:.95rem}
+  .nav{font-size:.9rem;margin:1rem 0;opacity:.85}
+  .global{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--borde);padding:.8rem 0;margin-bottom:1rem}
+  .barra{height:12px;background:var(--borde);border-radius:99px;overflow:hidden}
+  .barra i{display:block;height:100%;background:linear-gradient(90deg,var(--acento),#22d3ee);width:0;transition:width .3s}
+  .cifra{display:flex;justify-content:space-between;font-size:.9rem;color:var(--muted);margin-bottom:.3rem}
+  details{background:var(--card);border:1px solid var(--borde);border-radius:12px;margin:.6rem 0;overflow:hidden}
+  summary{cursor:pointer;padding:.8rem 1rem;font-weight:600;display:flex;align-items:center;gap:.6rem}
+  summary::-webkit-details-marker{display:none}
+  summary .mini{flex:1;height:6px;background:var(--borde);border-radius:99px;overflow:hidden;max-width:160px}
+  summary .mini i{display:block;height:100%;background:var(--acento);width:0}
+  summary .n{font-size:.82rem;color:var(--muted);font-weight:500;white-space:nowrap}
+  .lista{padding:.2rem .6rem .8rem}
+  .cl{display:flex;align-items:flex-start;gap:.55rem;padding:.3rem .5rem;border-radius:6px;font-size:.92rem}
+  .cl:hover{background:var(--bg2)}
+  .cl input{margin-top:.35rem;accent-color:var(--acento);width:16px;height:16px;flex:0 0 auto}
+  .cl.hecha label{opacity:.55;text-decoration:line-through}
+  .cl .num{color:var(--muted);font-variant-numeric:tabular-nums;flex:0 0 auto}
+  .btn{background:transparent;color:var(--acento);border:1px solid var(--acento);border-radius:8px;padding:.4rem .8rem;font:inherit;cursor:pointer}
+  footer{text-align:center;color:var(--muted);font-size:.85rem;padding:2rem 1rem}
+</style>
+</head>
+<body>
+<header>
+  <div style="font-size:2rem">✅</div>
+  <h1>Mi progreso</h1>
+  <p>Marca las clases que completes. Se guarda en tu navegador.</p>
+</header>
+
+<div class="wrap">
+  <div class="nav"><a href="../index.html">🌐 Inicio</a> · <a href="../classes/README.html">📚 Clases</a> · <a href="quiz.html">📝 Autoevaluación</a></div>
+
+  <div class="global">
+    <div class="cifra"><span id="txt">Cargando…</span><span id="pct"></span></div>
+    <div class="barra"><i id="barra"></i></div>
+  </div>
+
+  <div id="partes"></div>
+
+  <p style="text-align:center;margin-top:2rem">
+    <button class="btn" id="borrar">Reiniciar mi progreso</button>
+  </p>
+</div>
+
+<footer>
+  Tu progreso se guarda solo en este navegador (localStorage). No se envía a ningún servidor.<br>
+  <a href="https://github.com/vladimiracunadev-create/polyglot-programming-labs">Polyglot Programming Labs</a> · MIT
+</footer>
+
+<script>
+const CLAVE = 'ppl-progreso';
+const $ = id => document.getElementById(id);
+let hechas = new Set(JSON.parse(localStorage.getItem(CLAVE) || '[]'));
+let TOTAL = 0;
+
+fetch('../classes/_manifest.json')
+  .then(r => r.json())
+  .then(m => pintar(m.parts.filter(p => p.built)))
+  .catch(() => { $('partes').innerHTML = '<p>No se pudo cargar el índice de clases.</p>'; });
+
+function pintar(partes) {
+  TOTAL = partes.reduce((n, p) => n + p.classes.length, 0);
+  $('partes').innerHTML = partes.map(p => `
+    <details ${p.idx < 2 ? 'open' : ''}>
+      <summary>
+        <span>Parte ${p.idx} — ${esc(p.title)}</span>
+        <span class="mini"><i id="mini${p.idx}"></i></span>
+        <span class="n" id="n${p.idx}"></span>
+      </summary>
+      <div class="lista">
+        ${p.classes.map(c => `
+          <div class="cl" id="cl${c.num}">
+            <input type="checkbox" id="ch${c.num}" data-parte="${p.idx}" ${hechas.has(c.num) ? 'checked' : ''}>
+            <span class="num">${String(c.num).padStart(3, '0')}</span>
+            <label for="ch${c.num}">
+              <a href="../classes/${p.slug}/${c.slug}/README.html">${esc(c.title)}</a>
+            </label>
+          </div>`).join('')}
+      </div>
+    </details>`).join('');
+
+  document.querySelectorAll('.cl input').forEach(ch => {
+    ch.onchange = () => {
+      const n = +ch.id.slice(2);
+      ch.checked ? hechas.add(n) : hechas.delete(n);
+      localStorage.setItem(CLAVE, JSON.stringify([...hechas]));
+      refrescar(partes);
+    };
+  });
+  refrescar(partes);
+}
+
+function refrescar(partes) {
+  partes.forEach(p => {
+    const n = p.classes.filter(c => hechas.has(c.num)).length;
+    $('n' + p.idx).textContent = `${n}/${p.classes.length}`;
+    $('mini' + p.idx).style.width = (n / p.classes.length * 100) + '%';
+    p.classes.forEach(c => $('cl' + c.num).classList.toggle('hecha', hechas.has(c.num)));
+  });
+  const n = hechas.size, pct = TOTAL ? Math.round(n / TOTAL * 100) : 0;
+  $('txt').textContent = `${n} de ${TOTAL} clases completadas`;
+  $('pct').textContent = pct + '%';
+  $('barra').style.width = pct + '%';
+}
+
+$('borrar').onclick = () => {
+  if (!confirm('¿Seguro que quieres borrar todo tu progreso?')) return;
+  hechas = new Set();
+  localStorage.removeItem(CLAVE);
+  document.querySelectorAll('.cl input').forEach(ch => ch.checked = false);
+  location.reload();
+};
+
+function esc(s) {
+  return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+}
+</script>
+</body>
+</html>

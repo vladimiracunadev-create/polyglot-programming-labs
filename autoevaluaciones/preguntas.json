@@ -1,7 +1,7 @@
 {
   "meta": {
     "programa": "Polyglot Programming Labs",
-    "total_preguntas": 47,
+    "total_preguntas": 90,
     "partes": 12
   },
   "partes": [
@@ -41,6 +41,61 @@
           ],
           "correcta": 1,
           "exp": "El verificador degrada silenciosamente: si falta el toolchain, marca el lenguaje como omitido e informa, sin fallar. Solo falla si una implementación presente produce una salida distinta."
+        },
+        {
+          "q": "Un algoritmo O(n^2) escrito en C se vuelve más lento que uno O(n log n) escrito en Python cuando n crece lo suficiente. ¿Qué idea del pensamiento computacional ilustra este hecho?",
+          "opciones": [
+            "Que Python es en realidad más rápido que C",
+            "Que la complejidad solo importa en lenguajes interpretados",
+            "Que el orden de crecimiento domina sobre el factor constante del lenguaje: elegir el algoritmo pesa más que elegir el lenguaje",
+            "Que medir el tiempo de ejecución no sirve para nada"
+          ],
+          "correcta": 2,
+          "exp": "El lenguaje aporta un factor constante; la complejidad describe cómo escala el coste con el tamaño de la entrada. A partir de cierto n el término dominante gana siempre, así que la decisión algorítmica es la palanca principal."
+        },
+        {
+          "q": "El programa insiste en escribir primero pseudocódigo neutral, sin comprometerse con ningún lenguaje. ¿Cuál es la razón metodológica principal?",
+          "opciones": [
+            "Separar la decisión algorítmica de la decisión de forma, para que la solución pueda expresarse después en cualquier lenguaje y se vea qué cambia al traducirla",
+            "Porque el pseudocódigo se ejecuta más rápido que el código real",
+            "Porque los lenguajes reales no permiten expresar algoritmos complejos",
+            "Porque así se evita tener que probar el programa"
+          ],
+          "correcta": 0,
+          "exp": "El pseudocódigo aísla el QUÉ del CÓMO idiomático. Al no arrastrar los reflejos de un lenguaje concreto, la traducción posterior revela con nitidez qué diferencias son de forma y cuáles son de semántica."
+        },
+        {
+          "q": "Trazas a mano un algoritmo con una tabla de variables por iteración y descubres un error antes de ejecutarlo. ¿Por qué el trazado manual sigue siendo valioso teniendo depurador?",
+          "opciones": [
+            "Porque el depurador solo funciona en lenguajes compilados",
+            "Porque el trazado manual es siempre más rápido que ejecutar el programa",
+            "Porque evita tener que escribir pruebas",
+            "Porque obliga a construir un modelo mental del estado que el depurador solo te muestra: entiendes por qué falla, no solo dónde"
+          ],
+          "correcta": 3,
+          "exp": "El depurador informa del estado observado; el trazado obliga a predecirlo. La discrepancia entre lo que esperabas y lo que ocurre es la que localiza el error de razonamiento, y ese modelo mental es el que se transfiere a cualquier lenguaje."
+        },
+        {
+          "q": "Traduces un bucle índice-por-índice de C a Python conservando `for i in range(len(xs)): ...`. Funciona, pero se considera poco idiomático. ¿Qué se pierde con la traducción literal?",
+          "opciones": [
+            "Nada: si el resultado es correcto, el estilo es irrelevante",
+            "Se pierde legibilidad y seguridad: el idioma del lenguaje (iterar el elemento directamente) evita errores de índice y comunica la intención a quien lee",
+            "Se pierde la posibilidad de usar variables",
+            "Se pierde la corrección: el programa dará resultados distintos"
+          ],
+          "correcta": 1,
+          "exp": "La traducción literal produce código correcto pero ajeno: arrastra el andamiaje de un lenguaje a otro que ya lo resuelve. Lo idiomático reduce superficie de error (fuera de rango, off-by-one) y hace explícita la intención."
+        },
+        {
+          "q": "Antes de implementar, el método pide enumerar casos límite (entrada vacía, un solo elemento, valores negativos, desbordamiento). ¿Por qué ese paso pertenece al análisis y no a la fase de pruebas?",
+          "opciones": [
+            "Porque las pruebas se escriben siempre después de entregar",
+            "Porque los casos límite solo afectan a lenguajes con tipado estático",
+            "Porque los casos límite forman parte de la especificación: definen qué debe hacer el programa y a menudo cambian el diseño del algoritmo, no solo su verificación",
+            "Porque cada lenguaje maneja los casos límite automáticamente"
+          ],
+          "correcta": 2,
+          "exp": "Decidir qué ocurre con la entrada vacía o fuera de rango es definir el contrato del programa. Descubrirlo tarde obliga a rediseñar; hacerlo antes convierte las restricciones en parte del algoritmo y luego las pruebas solo confirman lo ya especificado."
         }
       ]
     },
@@ -91,6 +146,50 @@
           ],
           "correcta": 1,
           "exp": "SQL pertenece a la familia declarativa/lógica: el programador especifica el resultado deseado y el planificador de consultas elige la estrategia de ejecución. Es un paradigma de programación distinto al imperativo, no una carencia."
+        },
+        {
+          "q": "JavaScript se define por el estándar ECMAScript y C++ por una norma ISO, mientras que Python se define en la práctica por CPython más los PEP. ¿Qué consecuencia práctica tiene esta diferencia?",
+          "opciones": [
+            "Que los lenguajes con estándar no cambian nunca",
+            "Que un lenguaje sin estándar no puede usarse en producción",
+            "Que la norma ISO garantiza que todos los compiladores generen el mismo binario",
+            "Que con un estándar formal pueden coexistir varias implementaciones compatibles, mientras que con una implementación de referencia esta define de facto el comportamiento, incluidos sus detalles internos"
+          ],
+          "correcta": 3,
+          "exp": "El estándar describe el comportamiento exigible y habilita implementaciones alternativas (V8, SpiderMonkey; GCC, Clang, MSVC). Con implementación de referencia, detalles no especificados de CPython terminan siendo el contrato observado, lo que complica alternativas como PyPy."
+        },
+        {
+          "q": "C, C++ y Objective-C comparten la familia de las llaves y una base común, pero la compatibilidad entre ellos no es simétrica. ¿Qué afirmación describe mejor la relación?",
+          "opciones": [
+            "C++ y Objective-C extienden C tomando cada uno un modelo de objetos distinto (clases con plantillas y RAII frente a mensajes al estilo Smalltalk), por lo que casi todo C válido compila, pero el código de las extensiones no se cruza",
+            "Los tres son el mismo lenguaje con tres nombres comerciales",
+            "Objective-C es un subconjunto estricto de C++",
+            "C es una versión moderna simplificada de C++"
+          ],
+          "correcta": 0,
+          "exp": "Ambos parten de C y añaden objetos, pero por linajes distintos: C++ desde Simula (clases, plantillas, destructores deterministas) y Objective-C desde Smalltalk (envío dinámico de mensajes). La base C es común; las capas OO son incompatibles entre sí."
+        },
+        {
+          "q": "Python, Ruby, Perl y PHP se agrupan como scripting dinámico. ¿Qué rasgos compartidos justifican esa agrupación más allá del parecido superficial?",
+          "opciones": [
+            "Que los cuatro se compilan a código máquina nativo",
+            "Que los cuatro exigen declarar el tipo de cada variable",
+            "Tipado dinámico, gestión automática de memoria, ejecución sin paso de compilación explícito y una fuerte orientación a productividad y manipulación de texto",
+            "Que los cuatro fueron creados por la misma empresa"
+          ],
+          "correcta": 2,
+          "exp": "La familia se define por decisiones de diseño convergentes: dinamismo, memoria administrada, ciclo editar-ejecutar inmediato y raíces en automatización y procesamiento de texto. Reconocerlas permite anticipar cómo se comportará cualquier miembro nuevo de la familia."
+        },
+        {
+          "q": "TypeScript nace sobre el runtime de JavaScript y Kotlin sobre la JVM, en lugar de crear su propia plataforma. ¿Qué explica esta estrategia recurrente?",
+          "opciones": [
+            "Que crear un runtime nuevo es técnicamente imposible",
+            "Que heredar un runtime consolidado da acceso inmediato a su ecosistema de bibliotecas, herramientas y plataformas de despliegue, a cambio de aceptar sus límites semánticos",
+            "Que ambos lenguajes son idénticos a su anfitrión salvo por la sintaxis",
+            "Que los runtimes existentes son más rápidos que cualquier alternativa posible"
+          ],
+          "correcta": 1,
+          "exp": "El coste real de un lenguaje nuevo no es el compilador sino el ecosistema. Apoyarse en un runtime existente lo resuelve de golpe, pero obliga a convivir con su modelo de objetos, su recolector y sus rarezas (por eso TS no puede eliminar la coerción de JS en ejecución)."
         }
       ]
     },
@@ -141,6 +240,50 @@
           ],
           "correcta": 1,
           "exp": "La anatomía es: programa (`cargo`), subcomando (`build`), banderas (`--release`, `--target`) y el valor que acompaña a `--target`. Reconocer este esquema permite leer comandos de cualquier toolchain."
+        },
+        {
+          "q": "Casi todo lenguaje dinámico ofrece un REPL, y algunos compilados no. ¿Qué aporta realmente un REPL al aprendizaje y la depuración?",
+          "opciones": [
+            "Sustituye por completo a las pruebas automatizadas",
+            "Compila el programa a un binario optimizado",
+            "Permite un ciclo de retroalimentación inmediato: evaluar una expresión y ver su valor y su tipo sin escribir un programa completo ni pasar por el ciclo de compilación",
+            "Garantiza que el código escrito allí funcionará igual en producción"
+          ],
+          "correcta": 2,
+          "exp": "El valor del REPL es acortar el bucle hipótesis-experimento-resultado. Es una herramienta de exploración, no de verificación: lo que se aprende allí debe consolidarse en código y pruebas, porque el estado acumulado de la sesión puede engañar."
+        },
+        {
+          "q": "Un proyecto usa Black en Python, Prettier en JS y gofmt en Go, y además ejecuta un linter en CI. ¿Qué distingue a un formateador de un linter?",
+          "opciones": [
+            "El formateador reescribe la presentación del código (espaciado, saltos, comillas) sin alterar su significado; el linter analiza el código para señalar posibles errores, riesgos o malas prácticas",
+            "El formateador detecta bugs y el linter solo alinea el código",
+            "Son sinónimos: cambian de nombre según el lenguaje",
+            "El linter compila el código y el formateador lo ejecuta"
+          ],
+          "correcta": 0,
+          "exp": "El formateador normaliza la forma y elimina las discusiones de estilo del code review; el linter razona sobre el contenido (variables sin usar, comparaciones sospechosas, patrones peligrosos). Se complementan y ambos existen en prácticamente todo ecosistema."
+        },
+        {
+          "q": "Instalas un paquete y el gestor descarga otros veinte que no pediste. ¿Qué concepto explica esto y qué riesgo introduce?",
+          "opciones": [
+            "Es un fallo del gestor: solo debería instalar lo pedido",
+            "Son copias de seguridad del paquete principal",
+            "Son traducciones del paquete a otros lenguajes",
+            "Son dependencias transitivas: las dependencias de tus dependencias; amplían la superficie de confianza y de vulnerabilidades, y pueden entrar en conflicto de versiones entre sí"
+          ],
+          "correcta": 3,
+          "exp": "El grafo de dependencias es recursivo. Cada nodo transitivo es código de terceros que ejecutas y debes auditar, y dos ramas pueden exigir versiones incompatibles del mismo paquete: por eso existen los resolutores de versiones y los lockfiles."
+        },
+        {
+          "q": "Tras instalar una herramienta, la terminal responde \"command not found\" aunque el binario existe en el disco. ¿Cuál es la causa más probable y por qué es un problema transferible?",
+          "opciones": [
+            "El binario está corrupto y hay que recompilarlo desde el código fuente",
+            "El directorio del binario no está en la variable de entorno PATH, que es la lista de rutas donde el shell busca ejecutables en cualquier sistema operativo",
+            "El lenguaje no está soportado por ese sistema operativo",
+            "Falta ejecutar el programa como administrador"
+          ],
+          "correcta": 1,
+          "exp": "El shell no busca en todo el disco: recorre las rutas de PATH en orden. El síntoma y la solución son idénticos en Windows y en Unix aunque cambie el separador y la forma de editarlo; también explica por qué a veces se ejecuta una versión antigua que aparece antes en la lista."
         }
       ]
     },
@@ -191,6 +334,50 @@
           ],
           "correcta": 1,
           "exp": "El tamaño y la política ante desbordamiento son decisiones semánticas: Python usa enteros de precisión arbitraria, Java define wrap-around, C deja el desbordamiento con signo como indefinido. Ignorarlo produce bugs sutiles al portar."
+        },
+        {
+          "q": "En Rust escribes `let x = 5;` y en Go `x := 5` sin anotar el tipo, igual que en Python. ¿Significa eso que los tres tienen tipado dinámico?",
+          "opciones": [
+            "Sí: si no se escribe el tipo, el tipado es dinámico",
+            "Sí, pero solo dentro de funciones",
+            "No: Rust y Go infieren el tipo en compilación y queda fijo; Python asocia el tipo al valor en ejecución. La inferencia ahorra escritura, no elimina la verificación estática",
+            "No, porque Python tampoco tiene tipos"
+          ],
+          "correcta": 2,
+          "exp": "Inferencia y dinamismo son ejes distintos. El compilador de Rust deduce que `x` es `i32` y rechazará asignarle una cadena; en Python el nombre puede apuntar después a cualquier tipo. La ausencia de anotación no dice nada sobre cuándo se comprueban los tipos."
+        },
+        {
+          "q": "La longitud de la cadena \"ñ\" o de un emoji difiere entre Python, Java, Go y Rust. ¿Qué explica esas discrepancias?",
+          "opciones": [
+            "Cada lenguaje mide una unidad distinta: bytes de la codificación (UTF-8 en Go y Rust), unidades de código UTF-16 (Java, JS) o puntos de código (Python 3), y ninguna coincide con los caracteres percibidos",
+            "Algunos lenguajes tienen un bug en su función de longitud",
+            "La diferencia depende del idioma del sistema operativo",
+            "Solo las cadenas con acentos se comportan distinto; los emojis son siempre de longitud 1"
+          ],
+          "correcta": 0,
+          "exp": "Una cadena es una secuencia sobre alguna unidad, y cada lenguaje eligió la suya. Además, ni el punto de código equivale al carácter visible: un grafema puede componerse de varios (emojis con modificadores). Por eso indexar cadenas por posición es frágil al portar código."
+        },
+        {
+          "q": "En JavaScript `const cfg = {a: 1}` impide reasignar `cfg` pero permite `cfg.a = 2`. ¿Qué distinción conceptual revela?",
+          "opciones": [
+            "Que `const` no tiene ningún efecto en JavaScript",
+            "Que los objetos en JS son en realidad primitivos",
+            "Que `const` solo funciona con números",
+            "Que la constancia del enlace (el nombre no puede apuntar a otro valor) es distinta de la inmutabilidad del valor apuntado (el objeto sigue siendo mutable)"
+          ],
+          "correcta": 3,
+          "exp": "Son dos propiedades independientes que muchos lenguajes tratan por separado. Para inmutabilidad real hace falta congelar la estructura o usar tipos inmutables; confundir ambos conceptos hace creer que un dato está protegido cuando cualquier referencia puede mutarlo."
+        },
+        {
+          "q": "Asignar un `long` a un `int` o un `double` a un `float` requiere una conversión explícita en Java y C#, pero al revés no. ¿Qué regla de diseño hay detrás?",
+          "opciones": [
+            "Que las conversiones siempre son gratuitas en tiempo de ejecución",
+            "Que las conversiones que pueden perder información (estrechamiento) se exigen explícitas para que el programador declare que asume la pérdida, mientras que las que la preservan (ampliación) pueden ser implícitas",
+            "Que solo se puede convertir entre tipos con el mismo nombre",
+            "Que el compilador prohíbe cualquier conversión entre tipos numéricos"
+          ],
+          "correcta": 1,
+          "exp": "El criterio es la posible pérdida de información, no el tamaño en sí. Ampliar es seguro; estrechar puede truncar o desbordar, así que el lenguaje obliga a un cast que documenta la decisión. Los lenguajes con coerción débil hacen esto en silencio, y ahí nacen bugs difíciles de ver."
         }
       ]
     },
@@ -241,6 +428,50 @@
           ],
           "correcta": 1,
           "exp": "Las excepciones desvían el control implícitamente hacia el catch más cercano; los errores como valor obligan a chequear y propagar en cada punto. Portar entre ambos modelos reestructura el flujo, no solo la sintaxis."
+        },
+        {
+          "q": "Eliminar elementos de una lista mientras se itera sobre ella provoca elementos saltados en unos lenguajes y una excepción de modificación concurrente en otros. ¿Qué principio transferible se deduce?",
+          "opciones": [
+            "Que las listas no deben usarse en bucles",
+            "Que el problema desaparece si el bucle se recorre al revés en cualquier lenguaje",
+            "Que mutar una colección mientras un iterador la recorre invalida el estado del iterador; lo robusto es construir una colección nueva o recolectar los índices y aplicar los cambios después",
+            "Que solo ocurre en lenguajes con recolector de basura"
+          ],
+          "correcta": 2,
+          "exp": "El iterador mantiene una posición sobre una estructura que asume estable. Unos lenguajes lo detectan y fallan rápido, otros producen resultados silenciosamente incorrectos: la variante que falla es la amable. La solución idiomática (filtrar hacia una colección nueva) funciona en todos."
+        },
+        {
+          "q": "Una función recursiva de cola se convierte en un bucle en Scheme o Scala, pero desborda la pila en Python o Java aunque esté escrita igual. ¿Qué lo explica?",
+          "opciones": [
+            "La optimización de llamada de cola es una garantía del lenguaje o de su implementación, no una propiedad del código: si no la ofrece, cada llamada sigue apilando un marco",
+            "Python y Java no permiten la recursión",
+            "El código escrito así es incorrecto y por eso falla",
+            "La diferencia depende únicamente de la memoria RAM disponible"
+          ],
+          "correcta": 0,
+          "exp": "Escribir la recursión en posición de cola es condición necesaria pero no suficiente: alguien debe transformarla. Algunos lenguajes lo garantizan por especificación; otros lo rechazan explícitamente para conservar la traza de llamadas. Portar recursión profunda exige comprobarlo."
+        },
+        {
+          "q": "`try/finally` en Java, `defer` en Go, `with` en Python y los destructores RAII en C++ y Rust resuelven el mismo problema. ¿Cuál es?",
+          "opciones": [
+            "Convertir errores en valores de retorno",
+            "Acelerar la liberación de memoria del recolector de basura",
+            "Impedir que el programa lance excepciones",
+            "Garantizar que un recurso adquirido (archivo, conexión, bloqueo) se libere pase lo que pase, incluso si se sale del bloque por un error o un retorno anticipado"
+          ],
+          "correcta": 3,
+          "exp": "El riesgo es la ruta de salida no prevista: un return temprano o una excepción se saltan el `close()` escrito al final. Cada lenguaje ata la liberación al ámbito por un mecanismo distinto, pero la garantía buscada es idéntica y por eso el concepto se transfiere."
+        },
+        {
+          "q": "Capturar `catch (Exception e)` o `except Exception:` de forma genérica y continuar se considera mala práctica en todos los lenguajes con excepciones. ¿Por qué?",
+          "opciones": [
+            "Porque las excepciones genéricas son más lentas de capturar",
+            "Porque atrapa también errores que no sabes manejar (fallos de programación, interrupciones, errores de recursos), oculta la causa real y deja el programa en un estado inconsistente que fallará más tarde y más lejos",
+            "Porque el compilador lo prohíbe",
+            "Porque solo se puede capturar una excepción por función"
+          ],
+          "correcta": 1,
+          "exp": "Manejar un error significa saber qué hacer con él. Una captura genérica confunde lo esperable (archivo ausente) con lo imprevisto (un bug), y el síntoma reaparece desplazado, con la traza original perdida. Lo correcto es capturar el tipo concreto que sabes tratar."
         }
       ]
     },
@@ -291,6 +522,50 @@
           ],
           "correcta": 1,
           "exp": "El polimorfismo paramétrico permite una sola implementación reutilizable para múltiples tipos conservando el chequeo estático. Evita la duplicación y la pérdida de seguridad que implicaría usar un tipo \"cualquiera\" sin tipar."
+        },
+        {
+          "q": "Un bucle que acumula, otro que descarta elementos y otro que transforma se expresan en muchos lenguajes como `reduce`, `filter` y `map`. ¿Qué se gana al reconocer esos tres patrones?",
+          "opciones": [
+            "Siempre se ejecutan más rápido que un bucle explícito",
+            "Se elimina la necesidad de entender los bucles",
+            "Se nombra la intención de cada recorrido en lugar de dejarla implícita en la mecánica del bucle, lo que hace el código más legible y directamente traducible a cualquier lenguaje que ofrezca esas operaciones",
+            "Permiten recorrer colecciones sin costo computacional"
+          ],
+          "correcta": 2,
+          "exp": "Son abstracciones sobre la forma del recorrido: transformar, seleccionar, plegar. Al identificarlas, el lector sabe qué hace el bucle sin simularlo mentalmente, y la traducción entre lenguajes se vuelve mecánica porque el patrón, no la sintaxis, es lo que se transfiere."
+        },
+        {
+          "q": "Java y C# permiten varias funciones con el mismo nombre y distinta firma; Python no, pero ofrece argumentos por defecto y con nombre. ¿Qué compensación describe esto?",
+          "opciones": [
+            "La sobrecarga resuelve en compilación cuál función llamar según los tipos estáticos de los argumentos; los argumentos por defecto y con nombre logran flexibilidad similar con una sola función, decidiendo en ejecución",
+            "Son exactamente lo mismo con nombres distintos",
+            "Los argumentos con nombre solo existen en lenguajes compilados",
+            "La sobrecarga hace innecesario declarar los tipos"
+          ],
+          "correcta": 0,
+          "exp": "La sobrecarga necesita tipos estáticos para elegir la variante y por eso encaja mal en lenguajes dinámicos. Los parámetros opcionales y con nombre cubren el mismo caso de uso con un único punto de entrada, lo que suele dar mejor documentación y menos ambigüedad."
+        },
+        {
+          "q": "Go exporta un identificador si empieza con mayúscula, Java usa `public`/`private`, Python solo tiene la convención del guion bajo inicial. ¿Qué concepto común hay detrás?",
+          "opciones": [
+            "El estilo de nombres del equipo, sin consecuencia técnica",
+            "La velocidad de acceso a los miembros del módulo",
+            "La obligación de escribir documentación para cada símbolo",
+            "El control de visibilidad: separar la interfaz pública (contrato estable con el exterior) de los detalles internos que pueden cambiar sin romper a nadie"
+          ],
+          "correcta": 3,
+          "exp": "El objetivo es delimitar qué se compromete a mantener el módulo. Lo interesante es el grado de aplicación: unos lenguajes lo imponen en compilación y Python lo deja como convención, confiando en el programador. El principio de diseño es el mismo; la garantía, no."
+        },
+        {
+          "q": "Pasar una función como argumento es natural en Python, JS, Rust o Go, y en C se hace con punteros a función. ¿Qué significa que las funciones sean \"de primera clase\"?",
+          "opciones": [
+            "Que se ejecutan antes que el resto del programa",
+            "Que pueden tratarse como cualquier otro valor: asignarse a variables, pasarse como argumento, devolverse y almacenarse en estructuras de datos",
+            "Que están escritas en la biblioteca estándar del lenguaje",
+            "Que solo pueden definirse en el nivel superior del archivo"
+          ],
+          "correcta": 1,
+          "exp": "Ser de primera clase es no tener restricciones respecto a otros valores. El puntero a función de C cubre parte del caso, pero sin capturar el entorno: la diferencia con un closure real es que este arrastra su contexto, lo que habilita callbacks y currificación."
         }
       ]
     },
@@ -341,6 +616,39 @@
           ],
           "correcta": 1,
           "exp": "El orden de iteración de un mapa es una garantía específica de cada lenguaje/versión (Python 3.7+ preserva inserción; el map de Go no la garantiza y aleatoriza). Asumir orden portando código produce fallos no deterministas."
+        },
+        {
+          "q": "Añadir elementos a un vector dinámico es O(1) amortizado aunque a veces obligue a copiar todo el contenido. ¿Qué estrategia lo consigue y por qué importa al portar código?",
+          "opciones": [
+            "Duplicar (o multiplicar por un factor) la capacidad al llenarse, de modo que las copias caras se reparten entre muchas inserciones baratas; el coste puntual sigue existiendo y puede invalidar referencias al contenido anterior",
+            "Reservar de antemano memoria infinita para el vector",
+            "Insertar siempre al principio en lugar de al final",
+            "Convertir el vector en una lista enlazada cuando se llena"
+          ],
+          "correcta": 0,
+          "exp": "El crecimiento geométrico amortiza el coste, pero la reasignación mueve los datos: en C++ invalida iteradores y en Rust el verificador de préstamos impide guardar una referencia mientras se inserta. Un arreglo de tamaño fijo no tiene ese coste ni ese riesgo, a cambio de no crecer."
+        },
+        {
+          "q": "Serializas una estructura a JSON en Python y la lees en Go; una tupla llega como lista, una fecha como cadena y un entero muy grande pierde precisión al pasar por JavaScript. ¿Qué explica estas pérdidas?",
+          "opciones": [
+            "Que la biblioteca de JSON del lenguaje está mal implementada",
+            "Que JSON solo admite datos numéricos",
+            "Que JSON tiene un conjunto de tipos propio y reducido (objeto, arreglo, cadena, número, booleano, nulo): todo lo que no encaje se proyecta sobre él y el receptor debe reconstruir el significado según un contrato acordado",
+            "Que la codificación UTF-8 no soporta números grandes"
+          ],
+          "correcta": 2,
+          "exp": "Serializar es proyectar el modelo de tipos del lenguaje sobre el del formato, y esa proyección no siempre es reversible. Además, JSON no fija la precisión numérica y muchos lectores usan doble flotante. Por eso los contratos definen explícitamente formatos de fecha e identificadores como cadenas."
+        },
+        {
+          "q": "Un conjunto (set) comprueba la pertenencia en O(1) promedio, pero exige que sus elementos sean hashables o inmutables. ¿Por qué esa restricción?",
+          "opciones": [
+            "Para ahorrar memoria en la estructura interna",
+            "Porque los conjuntos solo pueden guardar números y cadenas",
+            "Porque los elementos deben poder ordenarse alfabéticamente",
+            "Porque la posición del elemento se deriva de su hash: si el elemento muta después de insertarse, su hash cambia y queda almacenado en un lugar donde ya no se le encontrará"
+          ],
+          "correcta": 3,
+          "exp": "El acceso rápido depende de que hash e igualdad sean estables durante la vida del elemento en la estructura. Mutar una clave la vuelve invisible sin lanzar error. Es el mismo motivo por el que las claves de un diccionario deben ser inmutables en cualquier lenguaje."
         }
       ]
     },
@@ -391,6 +699,39 @@
           ],
           "correcta": 1,
           "exp": "En el paradigma declarativo el programador expresa el QUÉ y el optimizador de consultas decide el CÓMO (índices, joins, orden). Esta separación es la esencia de lo declarativo y contrasta con el control explícito del código imperativo."
+        },
+        {
+          "q": "En Java un tipo declara `implements Comparable`; en Go basta con que tenga los métodos de la interfaz, sin mencionarla. ¿Qué consecuencia de diseño tiene la satisfacción implícita?",
+          "opciones": [
+            "Que Go no verifica los tipos en compilación",
+            "Que se puede definir una interfaz a posteriori que tipos ya escritos (incluso de bibliotecas ajenas) satisfagan sin modificarlos, moviendo la definición del contrato al consumidor y no al proveedor",
+            "Que las interfaces de Go solo funcionan con structs propios",
+            "Que Go no permite polimorfismo"
+          ],
+          "correcta": 1,
+          "exp": "Es tipado estructural verificado estáticamente: el compilador comprueba la forma, no una declaración de intención. Esto desacopla paquetes (quien usa define la interfaz mínima que necesita), a cambio de perder la declaración explícita que documenta el contrato en el tipo."
+        },
+        {
+          "q": "En Java todos los métodos de instancia son virtuales por defecto; en C++ solo lo son los marcados `virtual`. ¿Qué diferencia produce esto en tiempo de ejecución?",
+          "opciones": [
+            "Sin `virtual`, C++ resuelve la llamada según el tipo estático de la referencia en compilación; con `virtual` (y en Java siempre) se consulta una tabla de despacho y se ejecuta la implementación del tipo real del objeto",
+            "Ninguna: ambos lenguajes eligen siempre el método de la subclase",
+            "Java es más lento porque no usa tablas de métodos",
+            "C++ decide en ejecución y Java en compilación"
+          ],
+          "correcta": 0,
+          "exp": "Es la diferencia entre despacho estático y dinámico. En C++ llamar a un método no virtual desde una referencia a la clase base ejecuta la versión de la base aunque el objeto sea de la derivada, un resultado que sorprende a quien viene de Java. El polimorfismo tiene un coste que C++ deja opcional."
+        },
+        {
+          "q": "Python, Rust, JavaScript y C# permiten programar con objetos, con funciones de orden superior y de forma imperativa. ¿Qué implica que los lenguajes sean multiparadigma?",
+          "opciones": [
+            "Que ninguno de esos lenguajes tiene un diseño coherente",
+            "Que el paradigma lo elige el compilador según el rendimiento",
+            "Que el paradigma es una forma de estructurar la solución, no una etiqueta del lenguaje: se elige por problema (y a menudo por módulo), y lo que varía entre lenguajes es cuánto apoya e incentiva cada estilo",
+            "Que todos los paradigmas producen exactamente el mismo código máquina"
+          ],
+          "correcta": 2,
+          "exp": "Los paradigmas describen maneras de descomponer un problema y conviven en un mismo programa: un núcleo funcional puro, una capa de objetos para el dominio, código imperativo en los bordes. La pregunta útil no es de qué paradigma es el lenguaje, sino cuál conviene aquí y qué facilita el lenguaje."
         }
       ]
     },
@@ -441,6 +782,39 @@
           ],
           "correcta": 1,
           "exp": "El modelo de actores aísla el estado en cada proceso y prohíbe el acceso directo desde fuera: la única interacción es por mensajes. Sin estado mutable compartido desaparece la raíz de las condiciones de carrera."
+        },
+        {
+          "q": "Un programa en Python con cuatro hilos que hacen cálculo puro no va más rápido que con uno, pero cuatro procesos sí. ¿Qué explica esta asimetría?",
+          "opciones": [
+            "Que los hilos siempre son más lentos que los procesos en cualquier lenguaje",
+            "Que el cálculo puro no se puede paralelizar",
+            "Que Python no permite crear hilos",
+            "Que el bloqueo global del intérprete (GIL) de CPython permite ejecutar bytecode en un solo hilo a la vez; los procesos tienen intérpretes separados y sí usan varios núcleos"
+          ],
+          "correcta": 3,
+          "exp": "Es una decisión de la implementación, no del lenguaje: simplifica la gestión de memoria del intérprete a costa del paralelismo de CPU. Los hilos siguen sirviendo para E/S, donde el bloqueo se libera al esperar. Al portar código concurrente hay que preguntar siempre qué hace el runtime por debajo."
+        },
+        {
+          "q": "Un servidor `async` de un solo hilo atiende miles de conexiones simultáneas, pero una función que calcula durante dos segundos bloquea a todos los clientes. ¿Por qué?",
+          "opciones": [
+            "Porque async convierte el programa en secuencial al detectar cálculos",
+            "Porque async/await es concurrencia cooperativa sobre un bucle de eventos: las tareas ceden el control solo en los puntos de espera, así que una tarea que no espera nunca devuelve el control al planificador",
+            "Porque el sistema operativo limita el número de conexiones",
+            "Porque las funciones asíncronas no pueden hacer cálculos"
+          ],
+          "correcta": 1,
+          "exp": "Concurrencia no es paralelismo: el bucle de eventos entrelaza tareas que pasan la mayor parte del tiempo esperando E/S. Sin puntos de suspensión no hay entrelazado. La solución transferible es mover el trabajo intensivo de CPU a un hilo o proceso aparte."
+        },
+        {
+          "q": "Antes de ejecutar una sola línea, un intérprete convierte el texto fuente en tokens, luego en un árbol de sintaxis abstracta y a menudo en bytecode. ¿Por qué existen esas etapas intermedias?",
+          "opciones": [
+            "Porque cada etapa impone una estructura que la siguiente necesita: los tokens agrupan caracteres en unidades léxicas, el árbol captura la estructura y la precedencia, y el bytecode ofrece una forma compacta y ya analizada que se ejecuta muchas veces sin volver a analizar el texto",
+            "Porque el código fuente debe cifrarse antes de ejecutarse",
+            "Porque son un requisito del sistema operativo",
+            "Porque así el programa ocupa menos espacio en disco"
+          ],
+          "correcta": 0,
+          "exp": "Cada fase reduce ambigüedad y prepara la siguiente. El bytecode además amortiza el análisis: dentro de un bucle no se vuelve a parsear nada. Comprender el pipeline explica por qué un error de sintaxis aparece antes de ejecutar y un error de nombre solo al llegar a la línea."
         }
       ]
     },
@@ -491,6 +865,39 @@
           ],
           "correcta": 1,
           "exp": "Compara el comportamiento externo de múltiples implementaciones ante entradas comunes: es una prueba de equivalencia (de integración de salidas). Confirma que las versiones en distintos lenguajes son equivalentes en resultado, no memoriza sintaxis."
+        },
+        {
+          "q": "En producción se recomienda logging estructurado con niveles en lugar de imprimir por salida estándar. ¿Qué se gana?",
+          "opciones": [
+            "Que el programa se ejecute más rápido",
+            "Que los mensajes dejen de escribirse en disco",
+            "Control del destino y del volumen sin tocar el código (filtrar por nivel, enviar a distintos destinos) y registros con contexto y formato consistente que las herramientas pueden buscar, correlacionar y agregar",
+            "Que los errores desaparezcan del programa"
+          ],
+          "correcta": 2,
+          "exp": "Un `print` es un efecto fijo y sin metadatos. El logging separa la emisión del evento de la decisión de qué se conserva y dónde va, y añade marca de tiempo, nivel y contexto. En un sistema políglota eso permite correlacionar el rastro de una petición entre servicios de distintos lenguajes."
+        },
+        {
+          "q": "La regla \"medir antes de optimizar\" se repite en todos los ecosistemas. ¿Cuál es su fundamento?",
+          "opciones": [
+            "Que la intuición sobre dónde se consume el tiempo suele fallar: el coste se concentra en pocos puntos, y sin un perfilador se optimiza código irrelevante añadiendo complejidad sin beneficio",
+            "Que optimizar sin medir hace que el programa deje de compilar",
+            "Que los perfiladores hacen el programa más rápido por sí mismos",
+            "Que el rendimiento solo importa en lenguajes compilados"
+          ],
+          "correcta": 0,
+          "exp": "El perfilado sustituye la conjetura por evidencia, e incluso cambia el diagnóstico: muchas veces el cuello de botella es E/S, una consulta sin índice o una asignación en un bucle, no el algoritmo sospechoso. Optimizar a ciegas cuesta legibilidad y suele no mover la aguja."
+        },
+        {
+          "q": "Un proyecto políglota configura en CI una matriz que ejecuta el mismo flujo para cada lenguaje y cada versión soportada. ¿Qué garantiza ese diseño?",
+          "opciones": [
+            "Que el código se ejecute más rápido en producción",
+            "Que solo haga falta probar el lenguaje principal del proyecto",
+            "Que las dependencias se actualicen automáticamente",
+            "Que cada combinación declarada como soportada se verifique de forma reproducible y aislada, detectando roturas específicas de una versión o un lenguaje antes de fusionar"
+          ],
+          "correcta": 3,
+          "exp": "La matriz convierte la promesa de compatibilidad en algo comprobado en cada cambio, con trabajos independientes que aíslan el fallo. Es la versión automatizada del verificador de equivalencia: si soportas diez lenguajes, los diez deben pasar por la misma puerta."
         }
       ]
     },
@@ -541,6 +948,39 @@
           ],
           "correcta": 1,
           "exp": "Wasm es un objetivo de compilación portátil y aislado: distintos lenguajes compilan a él y corren en cualquier host que lo soporte, con un sandbox de seguridad. Es un punto de encuentro binario común, no un reemplazo de los lenguajes fuente."
+        },
+        {
+          "q": "Actualizas una biblioteca compartida en C y un programa que la usaba deja de funcionar, aunque su código fuente no cambió y las firmas siguen siendo las mismas. ¿Qué se rompió?",
+          "opciones": [
+            "La API, porque los nombres de las funciones cambiaron",
+            "La ABI: el contrato binario (disposición de las estructuras, tamaños, convención de llamada, símbolos) que la API a nivel de fuente no captura; el programa habría seguido funcionando si se recompilara contra la nueva versión",
+            "El sistema operativo dejó de soportar el enlace dinámico",
+            "El compilador del programa quedó obsoleto"
+          ],
+          "correcta": 1,
+          "exp": "API y ABI son compatibilidades distintas: la primera vive en el código fuente, la segunda en el binario ya compilado. Añadir un campo a una struct pública mantiene la API pero desplaza los desplazamientos de memoria. Por eso el enlace dinámico exige versionar la ABI con cuidado."
+        },
+        {
+          "q": "Dos componentes en lenguajes distintos se comunican lanzando uno al otro como subproceso e intercambiando líneas por entrada y salida estándar. ¿Qué virtud tiene esta frontera frente a una FFI?",
+          "opciones": [
+            "Es siempre más rápida que llamar a una función nativa",
+            "Permite compartir estructuras de datos en memoria entre ambos lenguajes",
+            "Aísla los procesos: cada uno tiene su propia memoria y su runtime, un fallo de uno no corrompe al otro, y el acoplamiento se reduce a un formato de texto que cualquier lenguaje sabe leer y escribir",
+            "Elimina la necesidad de definir un formato de datos"
+          ],
+          "correcta": 2,
+          "exp": "Cruzar por procesos cuesta latencia y serialización, pero compra aislamiento y simplicidad: no hay que compartir un modelo de memoria ni convivir con dos recolectores. La FFI es más rápida porque comparte espacio de direcciones, y por eso mismo un error de puntero derriba todo el proceso."
+        },
+        {
+          "q": "Un binding que expone una biblioteca de C a Python resulta lento cuando se llama millones de veces en un bucle, pese a que la función en C es rapidísima. ¿Qué explica la sobrecarga?",
+          "opciones": [
+            "El coste de cruzar la frontera en cada llamada: convertir tipos entre ambas representaciones (marshalling), gestionar la propiedad de la memoria y el bloqueo del intérprete; por eso conviene mover el bucle al lado nativo y cruzar una sola vez con todos los datos",
+            "Que el código en C se reinterpreta línea a línea desde Python",
+            "Que la biblioteca en C se recompila en cada llamada",
+            "Que Python traduce el código C a bytecode antes de ejecutarlo"
+          ],
+          "correcta": 0,
+          "exp": "La conversión de representaciones y el manejo de propiedad se pagan por llamada, no por unidad de trabajo. El patrón transferible es hacer la frontera gruesa: pocas llamadas que transporten mucho (arreglos completos) en vez de muchas llamadas triviales."
         }
       ]
     },
@@ -591,6 +1031,39 @@
           ],
           "correcta": 1,
           "exp": "El objetivo del programa es el conocimiento transferible: ante un lenguaje nuevo, identificar dónde encaja en el mapa de conceptos y preguntar qué difiere y por qué. Esa capacidad de mapeo, no la memoria de sintaxis, es el resultado buscado."
+        },
+        {
+          "q": "El equipo propone añadir un séptimo lenguaje al sistema para un componente pequeño. ¿Qué criterio debe pesar en la decisión más allá de la adecuación técnica?",
+          "opciones": [
+            "El coste operativo permanente que introduce: un toolchain más en CI, otro conjunto de dependencias que auditar, más contexto que mantener en el equipo y un lenguaje más en el que alguien deberá estar de guardia",
+            "Ninguno: si el lenguaje encaja técnicamente, siempre conviene añadirlo",
+            "Únicamente la popularidad del lenguaje en las encuestas del año",
+            "Solo el rendimiento en microbenchmarks del componente"
+          ],
+          "correcta": 0,
+          "exp": "El poliglotismo se justifica cuando la ventaja supera su coste continuo. Ese coste no aparece en la primera semana sino en el mantenimiento: builds, actualizaciones de seguridad, incidentes y rotación de personas. Por eso la elección se defiende por componente y no por gusto."
+        },
+        {
+          "q": "Un error en el servicio Rust debe llegar al frontend TypeScript pasando por una API. ¿Cómo se maneja correctamente esa propagación a través de la frontera?",
+          "opciones": [
+            "Reenviando la excepción o el `Result` nativo tal cual, ya que todos los lenguajes los entienden",
+            "Ignorando el error en la frontera y dejando que el cliente agote el tiempo de espera",
+            "Traduciéndolo a la representación que define el contrato (código de estado, tipo de error y mensaje acordados), porque los mecanismos de error nativos no cruzan la frontera y cada componente los reconstruye en su propio modelo",
+            "Escribiendo el error solo en el log del servidor y devolviendo siempre éxito"
+          ],
+          "correcta": 2,
+          "exp": "Las excepciones y los tipos `Result` viven dentro de un runtime; en la frontera solo viajan datos. El contrato debe incluir el vocabulario de errores igual que el de éxitos, y cada lado lo mapea a lo idiomático suyo: excepción en Python, `Result` en Rust, rechazo de promesa en TS."
+        },
+        {
+          "q": "El proyecto integrador empaqueta cada componente en un contenedor con su propio runtime en lugar de instalar todos los toolchains en la máquina de despliegue. ¿Qué problema resuelve?",
+          "opciones": [
+            "Hace que todos los componentes se ejecuten en el mismo lenguaje",
+            "Elimina la necesidad de definir contratos entre servicios",
+            "Reduce a cero la latencia de red entre componentes",
+            "Aísla y hace reproducible el entorno de cada pieza: sus versiones y dependencias no colisionan con las de las demás, y lo probado en CI es la misma imagen que se ejecuta en producción"
+          ],
+          "correcta": 3,
+          "exp": "El sistema políglota multiplica los entornos, y con ellos los conflictos de versiones y el clásico \"en mi máquina funciona\". El contenedor convierte el entorno en un artefacto versionado que acompaña al código, alineando desarrollo, CI y producción sin unificar los lenguajes."
         }
       ]
     }

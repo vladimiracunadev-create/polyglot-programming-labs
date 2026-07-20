@@ -7,6 +7,7 @@
 **El programa de programación comparada más completo en español — aprende el concepto una vez y reconócelo, compáralo y aplícalo en Python, JavaScript, TypeScript, Java, C#, Go, Rust, C, SQL y PHP, con un Atlas que te deja leer decenas de lenguajes más.**
 
 [![CI](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/ci.yml)
+[![Labs](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/labs.yml/badge.svg?branch=main)](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/labs.yml)
 [![Security](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/security.yml/badge.svg?branch=main)](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/security.yml)
 [![Deploy Pages](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/deploy-pages.yml/badge.svg?branch=main)](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/deploy-pages.yml)
 
@@ -16,7 +17,7 @@
 [![Idioma](https://img.shields.io/badge/idioma-español-blue?style=for-the-badge)](README.md)
 [![License](https://img.shields.io/badge/license-MIT-3fb950?style=for-the-badge)](LICENSE)
 
-[📚 Índice completo de clases](classes/README.md) · [🌐 Atlas de lenguajes](atlas/README.md) · [🧭 Rutas](rutas/README.md) · [📝 Autoevaluación](autoevaluaciones/README.md) · [🗺️ Roadmap](ROADMAP.md) · [🤝 Contribuir](CONTRIBUTING.md) · [🔐 Seguridad](SECURITY.md)
+[📚 Índice completo de clases](classes/README.md) · [📕 Manual completo (PDF)](manual/MANUAL.pdf) · [🌐 Atlas de lenguajes](atlas/README.md) · [🧭 Rutas](rutas/README.md) · [📝 Autoevaluación](autoevaluaciones/README.md) · [🗺️ Roadmap](ROADMAP.md) · [🤝 Contribuir](CONTRIBUTING.md) · [🔐 Seguridad](SECURITY.md)
 
 </div>
 
@@ -85,6 +86,26 @@ La idea: **aprende el representante, reconoce la familia entera.** Si dominas C,
 | 11 | Proyecto integrador políglota | 12 | 165–176 |
 
 ➡️ **[Ver el índice completo de las 176 clases](classes/README.md)**
+
+## 📕 Manual completo (todo el curso en un documento)
+
+¿Prefieres el curso entero en un solo sitio, para leer de corrido o estudiar sin conexión? El **manual** consolida las **176 clases** en orden, con portada e índice enlazado, y **con el código de los 10 lenguajes a la vista**, que es lo que hace que valga la pena en papel: se comparan sin saltar entre archivos.
+
+- 📥 **[Descargar el manual en PDF](manual/MANUAL.pdf)** — listo para imprimir o leer offline.
+
+> Se genera con `python scripts/generar_manual.py` a partir de las clases, así que siempre refleja el contenido actual del repositorio. Para guías sueltas por clase: `python scripts/generar_material.py --parte 3` deja los PDF en `material/` (no se versionan).
+
+## 🧬 Los primos: el mismo programa en toda la familia
+
+Cada muestra de código del núcleo enlaza, justo debajo, a las versiones del **mismo programa** en los lenguajes primos de su familia. Si lees el bloque de Python, ves de inmediato cómo lo escribirían Ruby, Perl, Lua, Tcl o R:
+
+```markdown
+🧬 El mismo programa en la familia Scripting dinámico: Ruby · Perl · Lua · Tcl · R
+```
+
+Son **2722 programas** repartidos en las 7 familias del Atlas, y lo que da valor a cada página no es el código sino el párrafo *«Qué reconocer»* que la cierra: que `0` es verdadero en Lua y Clojure, que Lua hace herencia por `__index` —el mismo modelo de prototipos de JavaScript—, o que el *name mangling* de C++ no está estandarizado entre compiladores.
+
+Ruby, Perl y Lua **se ejecutan en CI** contra el mismo `casos.json` que el núcleo ([workflow Labs](.github/workflows/labs.yml)); los otros 17 primos son material de lectura y así se declara en cada página.
 
 ## 🧪 El verificador de equivalencia
 

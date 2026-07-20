@@ -67,12 +67,14 @@ puts "resultado=#{Nativa.doble(n)}"
 
 ```perl
 # FFI::Platypus declara la firma en tiempo de ejecución; XS la compilaría.
-use FFI::Platypus 2.00;
+# El módulo es del CPAN, no del núcleo, y además hace falta libdoble.so al lado,
+# así que el puente va aquí como declaración y el otro lado se simula:
+#     use FFI::Platypus 2.00;
+#     my $ffi = FFI::Platypus->new(api => 2, lib => './libdoble.so');
+#     $ffi->attach(doble => ['long'] => 'long');
+sub doble { $_[0] * 2 }   # simula la función que vive en C
 
-my $ffi = FFI::Platypus->new(api => 2, lib => './libdoble.so');
-$ffi->attach(doble => ['long'] => 'long');
-
-my $n = <STDIN>;
+chomp(my $n = <STDIN>);
 printf "resultado=%d\n", doble($n);
 ```
 

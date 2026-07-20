@@ -1,12 +1,28 @@
 name: Deploy Pages
 
+# El sitio ya no es solo una portada con enlaces a GitHub: renderiza el
+# contenido entero (clases, primos, Atlas, portal) más el buscador. Por eso el
+# filtro de rutas cubre todo lo que acaba publicado — si solo mirara el
+# manifest, un arreglo en una clase no llegaría nunca al sitio.
+
 on:
   push:
     branches: ["main"]
     paths:
-      - "classes/_manifest.json"
-      - "scripts/generar_sitio.py"
+      - "classes/**"
+      - "atlas/**"
+      - "rutas/**"
+      - "labs/**"
+      - "glosario/**"
+      - "autoevaluaciones/**"
+      - "docs/**"
+      - "manual/**"
+      - "languages.json"
       - "README.md"
+      - "ROADMAP.md"
+      - "CONTRIBUTING.md"
+      - "SECURITY.md"
+      - "scripts/generar_sitio.py"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
@@ -28,8 +44,32 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Dependencias
+        run: python -m pip install --quiet "markdown>=3.6"
+
       - name: Generar HTML del portal
         run: python scripts/generar_sitio.py
+
+      - name: Comprobar que el sitio salió completo
+        run: |
+          set -euo pipefail
+          # Un sitio a medias se publica igual de bien que uno completo, así que
+          # conviene mirar antes de subirlo.
+          for f in site/index.html site/buscar.html site/busqueda.json \
+                   site/classes/README.html site/autoevaluaciones/quiz.html; do
+            [ -s "$f" ] || { echo "::error::falta o está vacío: $f"; exit 1; }
+          done
+          paginas=$(find site -name '*.html' | wc -l)
+          echo "Páginas HTML: $paginas"
+          [ "$paginas" -ge 300 ] || { echo "::error::solo $paginas páginas, esperaba 300+"; exit 1; }
+          {
+            echo "### 🌐 Sitio generado"
+            echo ""
+            echo "- Páginas HTML: **$paginas**"
+            echo "- Clases indexadas en el buscador: **$(python -c "import json;print(len(json.load(open('site/busqueda.json',encoding='utf-8'))))")**"
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - uses: actions/configure-pages@v5
         with:
           enablement: true

@@ -1,8 +1,49 @@
-# Normaliza saltos de línea a LF en el repositorio.
+# === Normalización de fin de línea ===
+# Por defecto, Git decide; el texto se normaliza a LF en el repositorio.
 * text=auto eol=lf
 
-# Binarios (por si se añaden en el futuro)
-*.png binary
-*.jpg binary
-*.pdf binary
-*.ico binary
+# Contenido y configuración: siempre LF.
+*.md    text eol=lf
+*.json  text eol=lf
+*.jsonc text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.toml  text eol=lf
+
+# Código de los 10 lenguajes del núcleo: siempre LF, para que el verificador
+# de equivalencia compare la misma salida en cualquier plataforma.
+*.py   text eol=lf
+*.js   text eol=lf
+*.mjs  text eol=lf
+*.ts   text eol=lf
+*.java text eol=lf
+*.cs   text eol=lf
+*.go   text eol=lf
+*.rs   text eol=lf
+*.c    text eol=lf
+*.h    text eol=lf
+*.sql  text eol=lf
+*.php  text eol=lf
+
+# Manifiestos de las implementaciones.
+*.csproj text eol=lf
+*.mod    text eol=lf
+*.sum    text eol=lf
+
+# Scripts de Windows: CRLF, o no se ejecutan bien.
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# === Binarios ===
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.pdf  binary
+*.zip  binary
+
+# === Estadísticas de lenguaje en GitHub ===
+# El manual y el sitio generado no son código del proyecto.
+manual/** linguist-documentation
+site/**   linguist-generated

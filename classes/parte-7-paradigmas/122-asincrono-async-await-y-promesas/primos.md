@@ -50,16 +50,19 @@ puts "resultado=#{tarea.value}"
 
 ```perl
 # Perl tampoco lo trae: las promesas vienen del ecosistema (Future, IO::Async,
-# Mojo::Promise). El `then` registra la continuación y `wait` corre el bucle.
-use Mojo::Promise;
+# Mojo::Promise), donde `then` registra la continuación y `wait` corre el bucle:
+#     my $promesa = Mojo::Promise->new;
+#     $promesa->then(sub { print "resultado=$_[0]\n" });
+#     $promesa->resolve($n * 2);
+#     $promesa->wait;
+# Sin CPAN el núcleo solo da la forma, no el motor: un trabajo diferido y una
+# cola de continuaciones que hay que vaciar a mano. No hay bucle de eventos.
+chomp(my $n = <STDIN>);
 
-my $n = <STDIN>;
-chomp $n;
+my $tarea = sub { $n * 2 };                        # lanzar: trabajo diferido
+my @continuaciones = (sub { print "resultado=$_[0]\n" });   # then
 
-my $promesa = Mojo::Promise->new;
-$promesa->then(sub { print "resultado=$_[0]\n" });
-$promesa->resolve($n * 2);
-$promesa->wait;
+$_->($tarea->()) for @continuaciones;              # wait: el planificador eres tú
 ```
 
 ### Lua
@@ -109,8 +112,10 @@ la misma forma: *lanzar* y luego *esperar*. Ruby usa un hilo y `value` bloquea h
 Tcl es el más interesante porque ya tenía la pieza que le falta a los demás —un bucle de eventos en
 el núcleo—, así que `vwait` es literalmente lo que un `await` hace por dentro: ceder el control al
 bucle hasta que alguien deje el valor. Lua no llega ni ahí: sin planificador, `resume` es una
-llamada a función con otro nombre. R lo declara sin rodeos: el objeto `future` existe, pero por
-defecto se evalúa en el momento.
+llamada a función con otro nombre. Perl deja la carencia a la vista: el núcleo da el trabajo
+diferido y la cola de continuaciones, pero nadie la vacía salvo tú, y ese bucle que falta es
+justo lo que `Mojo::Promise` trae del CPAN. R lo declara sin rodeos: el objeto `future` existe,
+pero por defecto se evalúa en el momento.
 
 ---
 

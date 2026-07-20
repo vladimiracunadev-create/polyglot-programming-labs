@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Autoevaluación · Polyglot Programming Labs</title>
+<style>
+  :root{--acento:#7c5cff;--ok:#2e9e5b;--mal:#d64545;
+    --bg:#fff;--bg2:#f5f4fb;--txt:#12181d;--muted:#5b6670;--card:#fff;--borde:#e6e2f2}
+  @media (prefers-color-scheme:dark){:root{--bg:#0d1117;--bg2:#12111c;--txt:#e6edf3;--muted:#9aa7b2;--card:#161b22;--borde:#272138}}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--txt);line-height:1.6}
+  a{color:var(--acento)}
+  .wrap{max-width:820px;margin:0 auto;padding:0 1.1rem 4rem}
+  header{background:linear-gradient(135deg,#7c5cff,#5b21b6);color:#fff;padding:2rem 1.1rem;text-align:center}
+  header h1{margin:.2rem 0;font-size:1.6rem}
+  header p{margin:0;opacity:.9;font-size:.95rem}
+  .nav{font-size:.9rem;margin:1rem 0;opacity:.85}
+  select,button{font:inherit}
+  select{padding:.5rem .7rem;border-radius:8px;border:1px solid var(--borde);background:var(--card);color:var(--txt);width:100%}
+  .btn{background:var(--acento);color:#fff;border:0;border-radius:8px;padding:.6rem 1.1rem;font-weight:700;cursor:pointer}
+  .btn:hover{filter:brightness(1.08)}
+  .btn.sec{background:transparent;color:var(--acento);border:1px solid var(--acento)}
+  .q{background:var(--card);border:1px solid var(--borde);border-radius:12px;padding:1rem 1.1rem;margin:1rem 0}
+  .q h3{margin:.2rem 0 .8rem;font-size:1.02rem;line-height:1.4}
+  .op{display:block;border:1px solid var(--borde);border-radius:8px;padding:.55rem .7rem;margin:.35rem 0;cursor:pointer}
+  .op:hover{border-color:var(--acento)}
+  .op input{margin-right:.5rem}
+  .op.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,transparent)}
+  .op.mal{border-color:var(--mal);background:color-mix(in srgb,var(--mal) 12%,transparent)}
+  .exp{font-size:.9rem;color:var(--muted);border-left:3px solid var(--acento);padding:.2rem .7rem;margin-top:.6rem;display:none}
+  .exp.ver{display:block}
+  .res{background:var(--bg2);border:1px solid var(--borde);border-radius:12px;padding:1.2rem;text-align:center;margin:1.2rem 0}
+  .res b{font-size:2rem;color:var(--acento);display:block}
+  .barra{height:8px;background:var(--borde);border-radius:99px;overflow:hidden;margin:.6rem 0}
+  .barra i{display:block;height:100%;background:var(--acento);width:0;transition:width .4s}
+  footer{text-align:center;color:var(--muted);font-size:.85rem;padding:2rem 1rem}
+</style>
+</head>
+<body>
+<header>
+  <div style="font-size:2rem">📝</div>
+  <h1>Autoevaluación</h1>
+  <p>Polyglot Programming Labs · 90 preguntas en 12 partes</p>
+</header>
+
+<div class="wrap">
+  <div class="nav"><a href="../index.html">🌐 Inicio</a> · <a href="../classes/README.html">📚 Clases</a> · <a href="progreso.html">✅ Progreso</a></div>
+
+  <p>Elige una parte y responde. Al corregir verás la explicación de cada pregunta. Las preguntas
+  evalúan <b>comprensión transferible</b>, no memoria de sintaxis: por qué una diferencia es
+  semántica y no solo cosmética, y qué se rompe al portar código entre lenguajes.</p>
+  <select id="sel" aria-label="Elegir parte"></select>
+  <p><button class="btn" id="empezar">Empezar</button></p>
+
+  <div id="quiz"></div>
+  <div id="pie" style="display:none">
+    <button class="btn" id="corregir">Corregir</button>
+    <button class="btn sec" id="otra">Otra parte</button>
+  </div>
+  <div class="res" id="res" style="display:none"></div>
+</div>
+
+<footer>
+  Las respuestas no se envían a ningún sitio: todo ocurre en tu navegador.<br>
+  <a href="https://github.com/vladimiracunadev-create/polyglot-programming-labs">Polyglot Programming Labs</a> · MIT
+</footer>
+
+<script>
+let DATOS = null, parte = null;
+const $ = id => document.getElementById(id);
+
+fetch('preguntas.json')
+  .then(r => r.json())
+  .then(d => {
+    DATOS = d;
+    $('sel').innerHTML = d.partes
+      .map(p => `<option value="${p.idx}">Parte ${p.idx} — ${p.titulo} (${p.preguntas.length} preguntas)</option>`)
+      .join('');
+  })
+  .catch(() => { $('quiz').innerHTML = '<p>No se pudieron cargar las preguntas.</p>'; });
+
+$('empezar').onclick = () => {
+  parte = DATOS.partes.find(p => p.idx === +$('sel').value);
+  $('res').style.display = 'none';
+  $('pie').style.display = 'block';
+  $('quiz').innerHTML = parte.preguntas.map((q, i) => `
+    <div class="q" id="q${i}">
+      <h3>${i + 1}. ${esc(q.q)}</h3>
+      ${q.opciones.map((o, j) => `
+        <label class="op" id="o${i}_${j}">
+          <input type="radio" name="q${i}" value="${j}">${esc(o)}
+        </label>`).join('')}
+      <div class="exp" id="e${i}">${esc(q.exp)}</div>
+    </div>`).join('');
+  $('quiz').scrollIntoView({ behavior: 'smooth' });
+};
+
+$('corregir').onclick = () => {
+  let bien = 0;
+  parte.preguntas.forEach((q, i) => {
+    const sel = document.querySelector(`input[name=q${i}]:checked`);
+    $('e' + i).classList.add('ver');
+    $(`o${i}_${q.correcta}`).classList.add('ok');
+    if (sel) {
+      if (+sel.value === q.correcta) bien++;
+      else $(`o${i}_${sel.value}`).classList.add('mal');
+    }
+    document.querySelectorAll(`input[name=q${i}]`).forEach(r => r.disabled = true);
+  });
+  const total = parte.preguntas.length, pct = Math.round(bien / total * 100);
+  $('res').style.display = 'block';
+  $('res').innerHTML = `<b>${bien}/${total}</b>
+    <div class="barra"><i style="width:${pct}%"></i></div>
+    <p>${pct >= 80 ? '¡Dominas esta parte! 🎉' : pct >= 50 ? 'Vas bien: repasa lo que fallaste.' : 'Toca repasar la parte antes de seguir.'}</p>
+    <p><a href="../classes/README.html">Ir al índice de clases</a></p>`;
+  $('res').scrollIntoView({ behavior: 'smooth' });
+};
+
+$('otra').onclick = () => {
+  $('quiz').innerHTML = ''; $('pie').style.display = 'none'; $('res').style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+function esc(s) {
+  return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+}
+</script>
+</body>
+</html>

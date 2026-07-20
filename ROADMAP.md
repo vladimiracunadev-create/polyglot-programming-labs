@@ -27,6 +27,18 @@ Leyenda: ✅ construida.
 2. **Partes 0–2** ✅ — método políglota, Atlas de familias y toolchains/comandos (clases de método).
 3. **Partes 3–11** ✅ — clases de código: valores, control, funciones, datos, paradigmas, runtime, ingeniería, interoperabilidad y proyecto integrador, cada una con 10 implementaciones verificadas.
 
+## Material y verificación (completado)
+
+| Pieza | Estado |
+|---|---|
+| **Manual completo** en PDF ([`manual/MANUAL.pdf`](manual/MANUAL.pdf), `scripts/generar_manual.py`) | ✅ las 176 clases en un documento, se versiona |
+| **Guías por clase** en PDF (`material/`, `scripts/generar_material.py`) | ✅ bajo demanda, no se versionan |
+| **Primos del Atlas** (`primos.md`, 2722 programas en 20 lenguajes) | ✅ en las 136 clases con código |
+| **Autoevaluaciones** | ✅ 90 preguntas, batería por parte |
+| **Glosario** derivado de las clases (`scripts/generar_glosario.py`) | ✅ 424 términos |
+| **Atlas** de familias | ✅ 39 cápsulas en 15 familias |
+| Workflows: `ci.yml`, `labs.yml`, `security.yml`, `deploy-pages.yml` | ✅ |
+
 ## Cómo seguir aprendiendo
 
 El programa termina en la [clase 176](classes/parte-11-proyecto-integrador-poliglota/176-cierre-retrospectiva-y-transferencia-a-nuevos-lenguajes/README.md) con una idea: el conocimiento es transferible. Elige un lenguaje del [Atlas](atlas/README.md) que no domines, léelo por su familia y resuelve una clase en él.

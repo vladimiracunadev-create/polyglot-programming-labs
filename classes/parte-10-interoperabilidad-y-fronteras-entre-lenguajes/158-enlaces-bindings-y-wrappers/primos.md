@@ -11,10 +11,11 @@ La pregunta que recorre los veinte programas es una sola y es muy práctica: **�
 cuesta envolver una biblioteca de C?** Va desde escribir C a medida contra la API interna del
 intérprete hasta no escribir nada porque el compilador lee la cabecera él solo.
 
-> ⚠️ **Material ilustrativo.** El [verificador de equivalencia](../../../labs/README.md) solo ejecuta
-> los **10 lenguajes del núcleo**; estos primos **no se ejecutan en CI** porque su toolchain no está
-> instalado en el workflow. Son código de lectura y comparación, escrito para ser correcto, pero sin
-> el sello de la máquina que sí tienen las implementaciones de la clase.
+> ⚠️ **Qué está verificado y qué no.** **Ruby, Perl y Lua se ejecutan en CI** contra el mismo
+> `casos.json` que el núcleo, igual que las diez implementaciones de la clase
+> ([workflow Labs](../../../labs/README.md)). Los **otros 17 primos son material de lectura**: su
+> toolchain no está en el workflow, así que están escritos para ser correctos pero sin el sello de
+> la máquina. Verificar tres de veinte no es verificarlos todos.
 
 Casi todos los bloques suponen esta biblioteca al lado, que es la función nativa que se quiere
 envolver:
@@ -49,14 +50,20 @@ conviven los dos caminos, y a veces en el mismo lenguaje.
 ### Ruby
 
 ```ruby
-# Fiddle está en la biblioteca estándar: se declara la firma, no se compila nada.
-require "fiddle"
-require "fiddle/import"
-
+# Fiddle está en la biblioteca estándar: se declara la firma y no se compila
+# binding, pero hace falta libdoble.so al lado. El puente queda como
+# declaración y el otro lado se simula:
+#     require "fiddle"
+#     require "fiddle/import"
+#     module Nativa
+#       extend Fiddle::Importer
+#       dlload "./libdoble.so"
+#       extern "long doble(long)"
+#     end
 module Nativa
-  extend Fiddle::Importer
-  dlload "./libdoble.so"
-  extern "long doble(long)"
+  def self.doble(x)           # simula la función que vive en C
+    x * 2
+  end
 end
 
 # El wrapper: la capa que hace que lo nativo parezca Ruby.
@@ -96,7 +103,8 @@ printf "envuelto=%s\n", envolver($n + 0);
 --   }
 --   static const luaL_Reg reg[] = {{"doble", l_doble}, {NULL, NULL}};
 --   int luaopen_doble(lua_State *L) { luaL_newlib(L, reg); return 1; }
-local nativa = require("doble")
+-- Ese módulo hay que compilarlo, así que aquí el otro lado se simula:
+local nativa = { doble = function(x) return x * 2 end }
 
 local function envolver(n)
   return string.format("wrap(%d)", nativa.doble(n))

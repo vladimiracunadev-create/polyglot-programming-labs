@@ -12,10 +12,11 @@ su biblioteca estándar**. Ni uno. Todos construyen el grafo con las dos piezas 
 diccionario y una lista— y la decisión real no es de lenguaje sino de representación: lista de
 aristas o lista de adyacencia.
 
-> ⚠️ **Material ilustrativo.** El [verificador de equivalencia](../../../labs/README.md) solo ejecuta
-> los **10 lenguajes del núcleo**; estos primos **no se ejecutan en CI** porque su toolchain no está
-> instalado en el workflow. Son código de lectura y comparación, escrito para ser correcto, pero sin
-> el sello de la máquina que sí tienen las implementaciones de la clase.
+> ⚠️ **Qué está verificado y qué no.** **Ruby, Perl y Lua se ejecutan en CI** contra el mismo
+> `casos.json` que el núcleo, igual que las diez implementaciones de la clase
+> ([workflow Labs](../../../labs/README.md)). Los **otros 17 primos son material de lectura**: su
+> toolchain no está en el workflow, así que están escritos para ser correctos pero sin el sello de
+> la máquina. Verificar tres de veinte no es verificarlos todos.
 
 ## El contrato, igual para todos
 

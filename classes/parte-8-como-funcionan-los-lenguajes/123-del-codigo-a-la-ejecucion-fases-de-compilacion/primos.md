@@ -11,10 +11,11 @@ Aquí la comparación tiene un premio extra: el programa simula las fases que **
 cada lenguaje aplicó a este archivo** antes de ejecutarlo. Leer los veinte es ver veinte veces el
 mismo circuito, una vez en el código y otra en la máquina que lo corre.
 
-> ⚠️ **Material ilustrativo.** El [verificador de equivalencia](../../../labs/README.md) solo ejecuta
-> los **10 lenguajes del núcleo**; estos primos **no se ejecutan en CI** porque su toolchain no está
-> instalado en el workflow. Son código de lectura y comparación, escrito para ser correcto, pero sin
-> el sello de la máquina que sí tienen las implementaciones de la clase.
+> ⚠️ **Qué está verificado y qué no.** **Ruby, Perl y Lua se ejecutan en CI** contra el mismo
+> `casos.json` que el núcleo, igual que las diez implementaciones de la clase
+> ([workflow Labs](../../../labs/README.md)). Los **otros 17 primos son material de lectura**: su
+> toolchain no está en el workflow, así que están escritos para ser correctos pero sin el sello de
+> la máquina. Verificar tres de veinte no es verificarlos todos.
 
 ## El contrato, igual para todos
 

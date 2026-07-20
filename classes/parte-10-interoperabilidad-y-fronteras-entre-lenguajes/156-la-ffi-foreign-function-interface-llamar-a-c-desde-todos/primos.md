@@ -11,10 +11,11 @@ Aquí hay algo que ninguna otra clase tiene: los veinte programas apuntan al **m
 el idioma franco de la interoperabilidad, y lo que cambia de un primo a otro no es el objetivo sino
 el puente. Léelos como veinte respuestas distintas a la misma pregunta: *¿cómo cruzo?*
 
-> ⚠️ **Material ilustrativo.** El [verificador de equivalencia](../../../labs/README.md) solo ejecuta
-> los **10 lenguajes del núcleo**; estos primos **no se ejecutan en CI** porque su toolchain no está
-> instalado en el workflow. Son código de lectura y comparación, escrito para ser correcto, pero sin
-> el sello de la máquina que sí tienen las implementaciones de la clase.
+> ⚠️ **Qué está verificado y qué no.** **Ruby, Perl y Lua se ejecutan en CI** contra el mismo
+> `casos.json` que el núcleo, igual que las diez implementaciones de la clase
+> ([workflow Labs](../../../labs/README.md)). Los **otros 17 primos son material de lectura**: su
+> toolchain no está en el workflow, así que están escritos para ser correctos pero sin el sello de
+> la máquina. Verificar tres de veinte no es verificarlos todos.
 
 Casi todos los bloques suponen esta biblioteca compartida al lado, que es la función "externa" que
 se quiere llamar:
@@ -49,18 +50,22 @@ rendimiento real depende de que las partes calientes estén del otro lado de la 
 ### Ruby
 
 ```ruby
-# Fiddle está en la biblioteca estándar: no hace falta compilar nada en C.
-require "fiddle"
-require "fiddle/import"
-
-module Nativa
-  extend Fiddle::Importer
-  dlload "./libdoble.so"
-  extern "long doble(long)"
+# Fiddle está en la biblioteca estándar: no hace falta compilar el binding,
+# pero sí que exista libdoble.so al lado, así que el puente va como
+# declaración y el otro lado se simula (igual que la versión del núcleo):
+#     require "fiddle"
+#     require "fiddle/import"
+#     module Nativa
+#       extend Fiddle::Importer
+#       dlload "./libdoble.so"
+#       extern "long doble(long)"
+#     end
+def doble(x)            # simula la función que vive en C
+  x * 2
 end
 
 n = STDIN.gets.to_i
-puts "resultado=#{Nativa.doble(n)}"
+puts "resultado=#{doble(n)}"
 ```
 
 ### Perl
@@ -87,7 +92,10 @@ printf "resultado=%d\n", doble($n);
 --       lua_pushinteger(L, x * 2);                 -- deja el resultado en la pila
 --       return 1;                                  -- cuántos valores devuelve
 --   }
-local nativa = require("doble")
+-- Ese módulo hay que compilarlo (`gcc -shared -o doble.so ...`), así que aquí
+-- el otro lado se simula, como en la versión del núcleo:
+local nativa = { doble = function(x) return x * 2 end }
+
 local n = tonumber(io.read("l"))
 print("resultado=" .. nativa.doble(n))
 ```

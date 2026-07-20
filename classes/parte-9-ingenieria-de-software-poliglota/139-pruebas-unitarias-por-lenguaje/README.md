@@ -73,6 +73,8 @@ a, b, esperado = map(int, sys.stdin.readline().split())
 print(f"test={'pasa' if a + b == esperado else 'falla'}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 Léelo despacio, porque condensa toda la clase en dos líneas. `sys.stdin.readline().split()` parte la línea `3 4 7` en tres cadenas; `map(int, …)` las convierte a enteros y el desempaquetado los ata a `a`, `b` y `esperado`. La segunda línea es la aserción: la expresión condicional `'pasa' if a + b == esperado else 'falla'` evalúa exactamente el mismo predicado que escribirías dentro de un `assert a + b == esperado` de pytest. La diferencia es que pytest, al fallar, te mostraría el valor real y el esperado con su *introspección de aserciones*; aquí lo reducimos a la palabra `pasa` o `falla` para que el verificador del curso pueda compararla carácter a carácter. Con la entrada `2 2 5` la suma da `4`, no `5`, y la salida es `test=falla`: una prueba en rojo, tal como Beck quiere verla antes de escribir el arreglo.
 
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
@@ -84,6 +86,8 @@ const [a, b, esperado] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number)
 console.log(`test=${a + b === esperado ? "pasa" : "falla"}`);
 ```
 
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
+
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
@@ -92,6 +96,8 @@ import { readFileSync } from "node:fs";
 const [a, b, esperado] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
 console.log(`test=${a + b === esperado ? "pasa" : "falla"}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
@@ -110,6 +116,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -119,6 +127,8 @@ int[] p = Array.ConvertAll(Console.In.ReadToEnd()
     .Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries), int.Parse);
 Console.WriteLine($"test={(p[0] + p[1] == p[2] ? "pasa" : "falla")}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -147,6 +157,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
@@ -161,6 +173,8 @@ fn main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 ```c
@@ -174,6 +188,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
@@ -182,6 +198,8 @@ WITH t(a, b, esperado) AS (VALUES (3, 4, 7))
 SELECT printf('test=%s', CASE WHEN a + b = esperado THEN 'pasa' ELSE 'falla' END) AS resultado FROM t;
 ```
 
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
+
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
@@ -189,6 +207,8 @@ SELECT printf('test=%s', CASE WHEN a + b = esperado THEN 'pasa' ELSE 'falla' END
 [$a, $b, $esperado] = array_map('intval', preg_split('/\s+/', trim(fgets(STDIN))));
 echo "test=" . ($a + $b === $esperado ? "pasa" : "falla") . "\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 Compara ahora tres contrastes reveladores. En **Rust**, `v[0] + v[1] == v[2]` opera sobre `i64` con desbordamiento comprobado en modo *debug*: si la suma se saliera del rango, el programa entraría en pánico en lugar de dar un resultado silenciosamente erróneo —una forma de aserción que el propio lenguaje impone, en la línea de lo que Klabnik y Nichols describen sobre la seguridad de Rust. En **C**, `scanf("%ld %ld %ld", …)` puede fallar si la entrada no trae tres números, y por eso el `if (… != 3) return 1;` es su propia mini-aserción de contrato: sin frameworks, la disciplina de comprobar el valor de retorno es lo que separa un programa robusto de uno que corrompe memoria, tal como enseñan Kernighan y Ritchie. En **SQL**, en cambio, no hay `stdin` ni bucle: la comprobación es una `CASE WHEN a + b = esperado` sobre una tabla de casos, la forma declarativa de expresar la misma verdad. El veredicto textual —`test=pasa`— es idéntico en los tres; lo que cambia es cómo cada lenguaje llega a él.
 

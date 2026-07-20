@@ -82,6 +82,8 @@ version = sys.stdin.readline().strip()
 print(f"desplegado=v{version}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 Para `1.2.3`, `version` vale `"1.2.3"` y la salida es `desplegado=v1.2.3`. El `strip()` es la parte silenciosamente importante: sin él, el `\n` de stdin viajaría dentro de la etiqueta y rompería la comparación con `casos.json`.
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
@@ -102,6 +104,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 SQL hace explícito el otro rostro de la misma operación: la concatenación como cómputo declarativo. El operador estándar `||` une el literal `'desplegado=v'` con la columna `v` de una tabla de una sola fila. No hay "leer una línea"; hay una relación con un valor y una proyección que lo transforma. Date, en *SQL and Relational Theory*, recuerda que en el modelo relacional todo es evaluación de expresiones sobre relaciones, y algo tan mundano como añadir un prefijo se piensa como un `SELECT` que proyecta una nueva columna.
@@ -112,6 +116,8 @@ WITH t(v) AS (VALUES ('1.2.3'))
 SELECT 'desplegado=v' || v AS resultado FROM t;
 ```
 
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
+
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
@@ -120,6 +126,8 @@ import { readFileSync } from "node:fs";
 const version = readFileSync(0, "utf8").trim();
 console.log(`desplegado=v${version}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
@@ -130,6 +138,8 @@ const version: string = readFileSync(0, "utf8").trim();
 console.log(`desplegado=v${version}`);
 ```
 
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -138,6 +148,8 @@ using System;
 string version = Console.In.ReadToEnd().Trim();
 Console.WriteLine($"desplegado=v{version}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -158,6 +170,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
@@ -170,6 +184,8 @@ fn main() {
     println!("desplegado=v{version}");
 }
 ```
+
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
 
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
@@ -184,6 +200,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
@@ -191,6 +209,8 @@ int main(void) {
 $version = trim(fgets(STDIN));
 echo "desplegado=v$version\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.

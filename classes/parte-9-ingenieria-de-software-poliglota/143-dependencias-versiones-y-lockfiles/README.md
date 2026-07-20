@@ -75,6 +75,8 @@ mayor, menor, parche = sys.stdin.readline().strip().split(".")
 print(f"mayor={int(mayor)} menor={int(menor)} parche={int(parche)}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 La versión de Python condensa todo en dos líneas y merece leerse con calma. `split(".")` parte la cadena por los puntos y devuelve una lista de tres cadenas; el desempaquetado `mayor, menor, parche = ...` las asigna en un solo gesto —una construcción que Ramalho, en *Fluent Python*, presenta como *unpacking* y considera una de las señas de identidad del código pitónico frente al indexado manual `v[0]`, `v[1]`, `v[2]`. El `int(...)` de cada componente no es cosmético: garantiza que `10` se imprima como el número `10` y no arrastre un espacio o un salto de línea. Aquí `f"..."` interpola directamente el valor evaluado. El resultado es exactamente el `esperado` de `casos.json`.
 
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
@@ -86,6 +88,8 @@ const [mayor, menor, parche] = readFileSync(0, "utf8").trim().split(".").map(Num
 console.log(`mayor=${mayor} menor=${menor} parche=${parche}`);
 ```
 
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
+
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
@@ -94,6 +98,8 @@ import { readFileSync } from "node:fs";
 const [mayor, menor, parche] = readFileSync(0, "utf8").trim().split(".").map(Number);
 console.log(`mayor=${mayor} menor=${menor} parche=${parche}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
@@ -111,6 +117,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -119,6 +127,8 @@ using System;
 string[] v = Console.In.ReadToEnd().Trim().Split('.');
 Console.WriteLine($"mayor={int.Parse(v[0])} menor={int.Parse(v[1])} parche={int.Parse(v[2])}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -143,6 +153,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
@@ -156,6 +168,8 @@ fn main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 ```c
@@ -168,6 +182,8 @@ int main(void) {
     return 0;
 }
 ```
+
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
 
 El contraste con C es instructivo. Donde Python separa y luego convierte, C hace ambas cosas a la vez: la cadena de formato `"%ld.%ld.%ld"` de `scanf` describe la estructura esperada —tres enteros largos con puntos entre ellos— y el parser la aplica en una sola llamada. Fiel al espíritu de Kernighan y Ritchie en *The C Programming Language*, el código comprueba el valor de retorno (`!= 3`) y aborta si no leyó los tres campos: en C nada valida por ti, el contrato lo verificas a mano. Rust ocupa un punto intermedio: `split('.').map(|x| x.parse().unwrap())` encadena separación y conversión en una expresión funcional, y el `unwrap()` hace explícito que un formato inválido debe interrumpir el programa —la filosofía de manejo de errores que Klabnik y Nichols describen en *The Rust Programming Language*, donde ignorar un `Result` es una decisión visible, no un descuido.
 
@@ -183,6 +199,8 @@ SELECT printf('mayor=%d menor=%d parche=%d',
 FROM v;
 ```
 
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
+
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
@@ -190,6 +208,8 @@ FROM v;
 [$ma, $me, $pa] = explode(".", trim(fgets(STDIN)));
 echo "mayor=" . (int) $ma . " menor=" . (int) $me . " parche=" . (int) $pa . "\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.

@@ -85,6 +85,8 @@ parcial2 = sum(nums[medio:])
 print(f"suma={parcial1 + parcial2}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
@@ -97,6 +99,8 @@ const p2 = nums.slice(medio).reduce((a, b) => a + b, 0);
 console.log(`suma=${p1 + p2}`);
 ```
 
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
+
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
@@ -108,6 +112,8 @@ const p1 = nums.slice(0, medio).reduce((a, b) => a + b, 0);
 const p2 = nums.slice(medio).reduce((a, b) => a + b, 0);
 console.log(`suma=${p1 + p2}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
@@ -131,6 +137,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -145,6 +153,8 @@ long p1 = nums.Take(medio).Sum(x => (long) x);
 long p2 = nums.Skip(medio).Sum(x => (long) x);
 Console.WriteLine($"suma={p1 + p2}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -183,6 +193,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
@@ -198,6 +210,8 @@ fn main() {
     println!("suma={}", p1 + p2);
 }
 ```
+
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
 
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
@@ -217,6 +231,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
@@ -224,6 +240,8 @@ int main(void) {
 WITH nums(x) AS (VALUES (1), (2), (3), (4))
 SELECT printf('suma=%d', sum(x)) AS resultado FROM nums;
 ```
+
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
 
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
@@ -235,6 +253,8 @@ $p1 = array_sum(array_slice($nums, 0, $medio));
 $p2 = array_sum(array_slice($nums, $medio));
 echo "suma=" . ($p1 + $p2) . "\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.

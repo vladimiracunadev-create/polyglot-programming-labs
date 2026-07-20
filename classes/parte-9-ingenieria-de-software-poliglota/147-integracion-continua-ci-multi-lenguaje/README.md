@@ -81,6 +81,8 @@ pasos = [int(x) for x in sys.stdin.read().split()]
 print(f"ci={'verde' if all(p == 1 for p in pasos) else 'rojo'}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 Para `1 1 1`, `all` recorre los tres unos y devuelve `True`, así que imprime `ci=verde`. Para `1 0 1`, se detiene en el `0` y produce `ci=rojo`. Para `1 1`, dos unos, verde. Exactamente los tres casos del contrato.
 
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
@@ -94,6 +96,8 @@ const pasos = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
 console.log(`ci=${pasos.every((p) => p === 1) ? "verde" : "rojo"}`);
 ```
 
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
+
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 TypeScript es, aquí, JavaScript con la red del tipado estático: la única diferencia visible es la anotación `pasos: number[]`, que documenta y hace comprobable en tiempo de compilación que trabajamos con un arreglo de números. Cherny, en *Programming TypeScript*, defiende justo este valor: los tipos son una forma de prueba que se ejecuta antes de correr el programa, otra capa de verificación temprana muy en el espíritu de la CI.
@@ -104,6 +108,8 @@ import { readFileSync } from "node:fs";
 const pasos: number[] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
 console.log(`ci=${pasos.every((p) => p === 1) ? "verde" : "rojo"}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
@@ -119,6 +125,8 @@ fn main() {
     println!("ci={}", if verde { "verde" } else { "rojo" });
 }
 ```
+
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
@@ -140,6 +148,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -151,6 +161,8 @@ bool verde = Console.In.ReadToEnd()
     .All(x => int.Parse(x) == 1);
 Console.WriteLine($"ci={(verde ? "verde" : "rojo")}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -182,6 +194,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 ```c
@@ -198,6 +212,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
@@ -205,6 +221,8 @@ int main(void) {
 WITH pasos(x) AS (VALUES (1), (1), (1))
 SELECT printf('ci=%s', CASE WHEN min(x) = 1 THEN 'verde' ELSE 'rojo' END) AS resultado FROM pasos;
 ```
+
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
 
 SQL merece una nota aparte: como es declarativo, no piensa en "recorrer y apagar un flag", sino en agregar. `min(x)` sobre una columna de ceros y unos vale 1 solo si *no hay ningún cero*; en cuanto aparece un cero, el mínimo cae a 0. Es una forma algebraica y elegante de expresar el mismo AND: verde ⇔ mínimo = 1. Date, en *SQL and Relational Theory*, subraya justo esto: en el modelo relacional razonas sobre conjuntos y agregados, no sobre iteraciones paso a paso.
 
@@ -216,6 +234,8 @@ $pasos = array_map('intval', preg_split('/\s+/', trim(fgets(STDIN))));
 $verde = !in_array(0, $pasos, true);
 echo "ci=" . ($verde ? "verde" : "rojo") . "\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.

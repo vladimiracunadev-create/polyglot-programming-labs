@@ -79,6 +79,8 @@ ops = {"suma": a + b, "resta": a - b, "producto": a * b}
 print(f"resultado={ops[estrategia]}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
@@ -89,6 +91,8 @@ const x = Number(a), y = Number(b);
 const ops = { suma: x + y, resta: x - y, producto: x * y };
 console.log(`resultado=${ops[estrategia]}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
@@ -102,6 +106,8 @@ const x = Number(a), y = Number(b);
 const ops: Record<string, number> = { suma: x + y, resta: x - y, producto: x * y };
 console.log(`resultado=${ops[estrategia]}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
@@ -128,6 +134,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 C# ofrece un tercer camino nativo: el **delegado**. Un `delegate` es un tipo que representa una función, y `Func<long, long, long>` es exactamente la firma de una estrategia binaria. Aquí, en cambio, la implementación usa una expresión `switch` moderna (`t[0] switch { ... }`), que Skeet en *C# in Depth* describe como el reemplazo idiomático del condicional: concisa, exhaustiva y sin `break`. En un diseño de producción registrarías `Func` en un diccionario y el patrón Estrategia se vería como una tabla de delegados.
@@ -141,6 +149,8 @@ long a = long.Parse(t[1]), b = long.Parse(t[2]);
 long r = t[0] switch { "suma" => a + b, "resta" => a - b, _ => a * b };
 Console.WriteLine($"resultado={r}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -167,6 +177,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 Rust brinda el contraste conceptual más rico. La Estrategia idiomática se expresa con un **trait** (un contrato de comportamiento) e implementaciones que se pasan como `Box<dyn Operacion>` o como genéricos monomorfizados. Pero aquí Klabnik y Nichols nos recordarían que el `match` exhaustivo es a menudo más claro: el compilador verifica que cubras todos los casos, y el patrón `_ => a * b` captura el resto. El `match` sobre `t[0]` es despacho estático; el trait sería despacho dinámico. Ambos son Estrategia.
@@ -189,6 +201,8 @@ fn main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 C no tiene mapas ni traits, pero sí **punteros a función**, que son la Estrategia de más bajo nivel: una tabla de `long (*)(long, long)` indexada por nombre. La implementación mínima usa `strcmp` encadenados —el despacho más elemental— porque para tres casos fijos no hace falta más. Kernighan y Ritchie muestran en *The C Programming Language* que los punteros a función son precisamente lo que permite pasar comportamiento como dato en un lenguaje sin objetos.
@@ -210,6 +224,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
@@ -217,6 +233,8 @@ int main(void) {
 WITH t(e, a, b) AS (VALUES ('suma', 3, 4))
 SELECT printf('resultado=%d', CASE e WHEN 'suma' THEN a + b WHEN 'resta' THEN a - b ELSE a * b END) AS resultado FROM t;
 ```
+
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
 
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
@@ -228,6 +246,8 @@ $b = (int) $b;
 $ops = ["suma" => $a + $b, "resta" => $a - $b, "producto" => $a * $b];
 echo "resultado=" . $ops[$e] . "\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.

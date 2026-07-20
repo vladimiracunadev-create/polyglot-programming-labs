@@ -76,6 +76,8 @@ valido = all("a" <= c <= "z" for c in w)
 print(f"valido={'true' if valido else 'false'}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 La versión de Python expresa la regla de forma casi verbal. `all("a" <= c <= "z" for c in w)` recorre cada carácter y comprueba que caiga en el rango de minúsculas ASCII; `all(...)` devuelve `True` solo si *todos* cumplen, que es exactamente la semántica de una regla de estilo: una sola violación invalida el identificador. La comparación encadenada `"a" <= c <= "z"` es una construcción que Ramalho destaca en *Fluent Python* como más legible que el `c >= "a" and c <= "z"` de otros lenguajes. El generador dentro de `all` es perezoso: en cuanto encuentra una mayúscula deja de evaluar, igual que un linter que reporta el primer fallo sin recorrer lo que ya sabe que está mal.
 
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
@@ -88,6 +90,8 @@ const valido = /^[a-z]+$/.test(w);
 console.log(`valido=${valido ? "true" : "false"}`);
 ```
 
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
+
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
@@ -97,6 +101,8 @@ const w: string = readFileSync(0, "utf8").trim();
 const valido = /^[a-z]+$/.test(w);
 console.log(`valido=${valido ? "true" : "false"}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
@@ -115,6 +121,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -125,6 +133,8 @@ string w = Console.In.ReadToEnd().Trim();
 bool valido = w.Length > 0 && w.All(c => c >= 'a' && c <= 'z');
 Console.WriteLine($"valido={(valido ? "true" : "false")}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -155,6 +165,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
@@ -168,6 +180,8 @@ fn main() {
     println!("valido={}", if valido { "true" } else { "false" });
 }
 ```
+
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
 
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
@@ -187,6 +201,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 Aquí aflora una división estilística que también existe entre linters reales. JavaScript, TypeScript, Java y PHP expresan la regla como una **expresión regular**, `/^[a-z]+$/`: una descripción declarativa del patrón «una o más minúsculas, nada más». C, Go y Rust prefieren el **recorrido carácter a carácter** con una comparación de rangos. Ambos enfoques son legítimos y la elección refleja el idioma de cada comunidad —un revisor no debería objetar ninguno—. Fíjate además en un detalle de corrección compartido: C recorre hasta el terminador nulo `w[i]`, mientras Rust y C# añaden `!w.is_empty()` / `w.Length > 0` para tratar la cadena vacía, que sin ese guardo daría `valido=true` de forma engañosa. Son exactamente las decisiones de borde que un buen linter, o un buen revisor humano, no dejan pasar.
 
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
@@ -197,6 +213,8 @@ WITH t(w) AS (VALUES ('total'))
 SELECT printf('valido=%s', CASE WHEN w = lower(w) THEN 'true' ELSE 'false' END) AS resultado FROM t;
 ```
 
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
+
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
@@ -205,6 +223,8 @@ $w = trim(fgets(STDIN));
 $valido = preg_match('/^[a-z]+$/', $w) === 1;
 echo "valido=" . ($valido ? "true" : "false") . "\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.

@@ -79,6 +79,8 @@ mods = sys.stdin.read().split()
 print(f"complejidad={len(mods)}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
@@ -87,6 +89,8 @@ import { readFileSync } from "node:fs";
 const mods = readFileSync(0, "utf8").trim().split(/\s+/);
 console.log(`complejidad=${mods.length}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
@@ -98,6 +102,8 @@ import { readFileSync } from "node:fs";
 const mods: string[] = readFileSync(0, "utf8").trim().split(/\s+/);
 console.log(`complejidad=${mods.length}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
@@ -117,6 +123,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -126,6 +134,8 @@ string[] mods = Console.In.ReadToEnd()
     .Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
 Console.WriteLine($"complejidad={mods.Length}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -148,6 +158,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 Rust lleva la documentación un paso más allá con **rustdoc**: los comentarios `///` se escriben en Markdown y, extraordinariamente, los ejemplos de código que incluyas se **compilan y ejecutan como tests** (`cargo test` los corre). Esto cierra la brecha clásica entre documentación y realidad: en Rust, un ejemplo documentado que deja de funcionar rompe la compilación de pruebas, así que la documentación no puede envejecer en silencio. Klabnik y Nichols muestran en *The Rust Programming Language* que esta integración —docs que son tests— es una de las mejores defensas contra la entropía documental que aquejan a otros ecosistemas.
@@ -163,6 +175,8 @@ fn main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 ```c
@@ -177,6 +191,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
@@ -185,6 +201,8 @@ WITH mods(nombre) AS (VALUES ('a'), ('b'), ('c'))
 SELECT printf('complejidad=%d', count(*)) AS resultado FROM mods;
 ```
 
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
+
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
@@ -192,6 +210,8 @@ SELECT printf('complejidad=%d', count(*)) AS resultado FROM mods;
 $mods = preg_split('/\s+/', trim(fgets(STDIN)));
 echo "complejidad=" . count($mods) . "\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.

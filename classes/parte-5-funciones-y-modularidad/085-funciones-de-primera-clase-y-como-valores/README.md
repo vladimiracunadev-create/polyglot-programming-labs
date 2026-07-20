@@ -65,6 +65,8 @@ a, b = map(int, sys.stdin.readline().split())
 print(f"suma={aplicar(suma, a, b)} producto={aplicar(producto, a, b)}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
@@ -77,6 +79,8 @@ const aplicar = (f, a, b) => f(a, b);
 const [a, b] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
 console.log(`suma=${aplicar(suma, a, b)} producto=${aplicar(producto, a, b)}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
@@ -91,6 +95,8 @@ const aplicar = (f: Op, a: number, b: number): number => f(a, b);
 const [a, b]: number[] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
 console.log(`suma=${aplicar(suma, a, b)} producto=${aplicar(producto, a, b)}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
@@ -117,6 +123,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -132,6 +140,8 @@ Func<int, int, int> suma = (x, y) => x + y;
 Func<int, int, int> producto = (x, y) => x * y;
 Console.WriteLine($"suma={Aplicar(suma, a, b)} producto={Aplicar(producto, a, b)}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -162,6 +172,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
@@ -187,6 +199,8 @@ fn main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 ```c
@@ -207,6 +221,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
@@ -214,6 +230,8 @@ int main(void) {
 WITH pares(a, b) AS (VALUES (3, 4), (5, 5), (0, 9))
 SELECT printf('suma=%d producto=%d', a + b, a * b) AS resultado FROM pares;
 ```
+
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
 
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
@@ -230,6 +248,8 @@ $a = (int) $a;
 $b = (int) $b;
 echo "suma=" . aplicar($suma, $a, $b) . " producto=" . aplicar($producto, $a, $b) . "\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.

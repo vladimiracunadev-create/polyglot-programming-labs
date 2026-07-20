@@ -70,6 +70,8 @@ r = list(range(a, b + 1))
 print(f"rango={'-'.join(str(x) for x in r)} suma={sum(r)}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
@@ -81,6 +83,8 @@ for (let i = a; i <= b; i++) r.push(i);
 console.log(`rango=${r.join("-")} suma=${r.reduce((x, y) => x + y, 0)}`);
 ```
 
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
+
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
@@ -91,6 +95,8 @@ const r: number[] = [];
 for (let i = a; i <= b; i++) r.push(i);
 console.log(`rango=${r.join("-")} suma=${r.reduce((x, y) => x + y, 0)}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
@@ -117,6 +123,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -130,6 +138,8 @@ int b = int.Parse(p[1]);
 var r = Enumerable.Range(a, b - a + 1).ToList();
 Console.WriteLine($"rango={string.Join("-", r)} suma={r.Sum()}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -159,6 +169,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
@@ -174,6 +186,8 @@ fn main() {
     println!("rango={} suma={}", texto.join("-"), suma);
 }
 ```
+
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
 
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
@@ -195,6 +209,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
@@ -202,6 +218,8 @@ int main(void) {
 WITH RECURSIVE r(i) AS (VALUES (2) UNION ALL SELECT i + 1 FROM r WHERE i < 5)
 SELECT 'rango=' || group_concat(i, '-') || printf(' suma=%d', sum(i)) AS resultado FROM r;
 ```
+
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
 
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
@@ -211,6 +229,8 @@ SELECT 'rango=' || group_concat(i, '-') || printf(' suma=%d', sum(i)) AS resulta
 $r = range((int) $a, (int) $b);
 echo "rango=" . implode("-", $r) . " suma=" . array_sum($r) . "\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.

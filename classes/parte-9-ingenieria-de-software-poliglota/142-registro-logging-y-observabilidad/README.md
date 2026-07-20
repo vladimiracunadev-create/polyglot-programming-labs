@@ -74,6 +74,8 @@ n = int(sys.stdin.readline())
 print(f"log=[INFO] procesados={n}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 La línea `f"log=[INFO] procesados={n}"` es un log estructurado en miniatura: `[INFO]` es el nivel y `procesados={n}` es un campo con clave y valor. En un servicio real no lo escribirías así, sino con el módulo estándar `logging`: `logging.info("procesados=%d", n)`, que además añadiría el *timestamp*, el nombre del módulo y respetaría el nivel configurado —si el umbral fuera WARNING, este INFO ni se emitiría—. Esa es la ventaja de una biblioteca frente al `print`: el mismo código de aplicación produce más o menos detalle según la configuración del entorno, sin tocar la lógica. Ramalho, en *Fluent Python*, recomienda `logging` sobre `print` justo por eso: separa *qué* quieres registrar de *cuánto* se registra en cada despliegue.
 
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
@@ -85,6 +87,8 @@ const n = parseInt(readFileSync(0, "utf8").trim(), 10);
 console.log(`log=[INFO] procesados=${n}`);
 ```
 
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
+
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
@@ -93,6 +97,8 @@ import { readFileSync } from "node:fs";
 const n: number = parseInt(readFileSync(0, "utf8").trim(), 10);
 console.log(`log=[INFO] procesados=${n}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
@@ -110,6 +116,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -118,6 +126,8 @@ using System;
 int n = int.Parse(Console.In.ReadToEnd().Trim());
 Console.WriteLine($"log=[INFO] procesados={n}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -139,6 +149,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
@@ -151,6 +163,8 @@ fn main() {
     println!("log=[INFO] procesados={n}");
 }
 ```
+
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
 
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
@@ -165,6 +179,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
@@ -173,6 +189,8 @@ WITH t(n) AS (VALUES (5))
 SELECT printf('log=[INFO] procesados=%d', n) AS resultado FROM t;
 ```
 
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
+
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
@@ -180,6 +198,8 @@ SELECT printf('log=[INFO] procesados=%d', n) AS resultado FROM t;
 $n = (int) trim(fgets(STDIN));
 echo "log=[INFO] procesados=$n\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 En un sistema real, cada uno de estos programas delegaría el registro en la biblioteca canónica de su ecosistema, y el contraste es instructivo. **Java** rara vez usa `System.out.println` para logs: emplea la fachada **SLF4J** con una implementación como **Logback** por debajo, de modo que el código depende de una interfaz y la configuración decide el destino y el formato —una aplicación directa del principio de programar contra abstracciones que defiende Bloch. **Go** incorpora desde la versión 1.21 el paquete **`log/slog`** en la biblioteca estándar, con logging estructurado nativo (`slog.Info("procesado", "n", n)`), superando al viejo `log` de solo texto. **Rust** favorece la fachada **`tracing`** (o `log`), que unifica logs y trazas de spans en un mismo modelo, muy alineado con la observabilidad moderna. **JavaScript** va de `console.log` en desarrollo a bibliotecas como **pino** o **winston** en producción, que serializan a JSON de alto rendimiento. Distintas casas, la misma idea: nivel, campos estructurados y un destino configurable.
 

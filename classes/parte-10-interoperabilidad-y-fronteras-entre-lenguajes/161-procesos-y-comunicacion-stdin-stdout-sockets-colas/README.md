@@ -83,6 +83,8 @@ for m in nums:  # consumidor de la cola
 print(f"recibido={recibido}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
@@ -94,6 +96,8 @@ for (const m of nums) recibido += m;
 console.log(`recibido=${recibido}`);
 ```
 
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
+
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
@@ -104,6 +108,8 @@ let recibido = 0;
 for (const m of nums) recibido += m;
 console.log(`recibido=${recibido}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
@@ -123,6 +129,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -134,6 +142,8 @@ long recibido = Console.In.ReadToEnd()
     .Sum(x => (long) int.Parse(x));
 Console.WriteLine($"recibido={recibido}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -159,6 +169,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
@@ -171,6 +183,8 @@ fn main() {
     println!("recibido={recibido}");
 }
 ```
+
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
 
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
@@ -185,6 +199,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
@@ -193,6 +209,8 @@ WITH cola(x) AS (VALUES (1), (2), (3))
 SELECT printf('recibido=%d', sum(x)) AS resultado FROM cola;
 ```
 
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
+
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
@@ -200,6 +218,8 @@ SELECT printf('recibido=%d', sum(x)) AS resultado FROM cola;
 $nums = array_map('intval', preg_split('/\s+/', trim(fgets(STDIN))));
 echo "recibido=" . array_sum($nums) . "\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.

@@ -93,6 +93,8 @@ t = sys.stdin.read().split()
 print(f"comando={t[0]} args={len(t) - 1}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
@@ -102,6 +104,8 @@ const t = readFileSync(0, "utf8").trim().split(/\s+/);
 console.log(`comando=${t[0]} args=${t.length - 1}`);
 ```
 
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
+
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
@@ -110,6 +114,8 @@ import { readFileSync } from "node:fs";
 const t: string[] = readFileSync(0, "utf8").trim().split(/\s+/);
 console.log(`comando=${t[0]} args=${t.length - 1}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
@@ -127,6 +133,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -136,6 +144,8 @@ string[] t = Console.In.ReadToEnd()
     .Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
 Console.WriteLine($"comando={t[0]} args={t.Length - 1}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -156,6 +166,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
@@ -168,6 +180,8 @@ fn main() {
     println!("comando={} args={}", t[0], t.len() - 1);
 }
 ```
+
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
 
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
@@ -184,6 +198,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
@@ -192,6 +208,8 @@ WITH t(comando, args) AS (VALUES ('run', 2))
 SELECT printf('comando=%s args=%d', comando, args) AS resultado FROM t;
 ```
 
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
+
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
@@ -199,6 +217,8 @@ SELECT printf('comando=%s args=%d', comando, args) AS resultado FROM t;
 $t = preg_split('/\s+/', trim(fgets(STDIN)));
 echo "comando={$t[0]} args=" . (count($t) - 1) . "\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.

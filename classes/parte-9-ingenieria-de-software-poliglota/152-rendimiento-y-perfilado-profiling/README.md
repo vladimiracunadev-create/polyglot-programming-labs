@@ -82,6 +82,8 @@ for i in range(1, n + 1):
 print(f"operaciones={ops} resultado={suma}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
@@ -96,6 +98,8 @@ for (let i = 1; i <= n; i++) {
 console.log(`operaciones=${ops} resultado=${suma}`);
 ```
 
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
+
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
@@ -109,6 +113,8 @@ for (let i = 1; i <= n; i++) {
 }
 console.log(`operaciones=${ops} resultado=${suma}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
@@ -133,6 +139,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -146,6 +154,8 @@ for (int i = 1; i <= n; i++) {
 }
 Console.WriteLine($"operaciones={ops} resultado={suma}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -172,6 +182,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 Rust y C son los lenguajes donde las **constantes** brillan: sin recolector de basura ni intérprete, este bucle compila a instrucciones máquina casi directas, y el optimizador de LLVM probablemente lo reemplace por la fórmula *n*(*n*+1)/2. Para medir de verdad en Rust, la herramienta idiomática es **criterion**, una biblioteca de benchmarking estadístico que ejecuta muchas muestras, descarta valores atípicos y reporta intervalos de confianza —justo el rigor que *The Pragmatic Programmer* pide para no engañarte con una sola medición ruidosa. Para perfilar el binario ya compilado sirven `perf` y los flamegraphs, igual que en C.
@@ -193,6 +205,8 @@ fn main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 C es donde nació la caja de herramientas clásica: **perf** (contadores de hardware de Linux: ciclos, fallos de caché, predicciones de salto erradas) y **valgrind** con su módulo *callgrind*, que instrumenta cada instrucción para darte un mapa exacto de dónde se gasta el tiempo, a costa de correr mucho más lento. Kernighan y Ritchie ya enseñaban en *The C Programming Language* a razonar sobre el coste de cada operación; hoy `perf stat ./main` te muestra esos ciclos reales. Aquí la lección de constantes es directa: el mismo O(*n*) corre órdenes de magnitud más rápido en C que en Python interpretado.
@@ -213,6 +227,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
@@ -220,6 +236,8 @@ int main(void) {
 WITH RECURSIVE r(i) AS (VALUES (1) UNION ALL SELECT i + 1 FROM r WHERE i < 5)
 SELECT printf('operaciones=%d resultado=%d', count(*), sum(i)) AS resultado FROM r;
 ```
+
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
 
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
@@ -234,6 +252,8 @@ for ($i = 1; $i <= $n; $i++) {
 }
 echo "operaciones=$ops resultado=$suma\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.

@@ -79,6 +79,8 @@ for i in range(1, n + 1):
 print("traza=" + "-".join(str(x) for x in pasos))
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 Esta versión hace explícito lo que un depurador te enseñaría implícitamente. Si abrieras este archivo con pdb (`python -m pdb main.py`), pondrías un *breakpoint* en `acc += i` con `break 7`, correrías con `continue` y en cada pausa consultarías el valor con `p acc`: verías `1`, luego `3`, luego `6`, la misma secuencia que `pasos` va acumulando. La lista `pasos` es, literalmente, el registro de lo que un *watch* sobre `acc` mostraría en cada iteración; y el `"-".join(...)` final solo la aplana a la cadena que el contrato exige. Depurar así, con la variable a la vista en cada paso, es lo que Hunt y Thomas llaman no dar nada por supuesto: en lugar de creer que `acc` vale lo que crees, lo compruebas.
 
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
@@ -96,6 +98,8 @@ for (let i = 1; i <= n; i++) {
 console.log(`traza=${pasos.join("-")}`);
 ```
 
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
+
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
@@ -110,6 +114,8 @@ for (let i = 1; i <= n; i++) {
 }
 console.log(`traza=${pasos.join("-")}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
@@ -134,6 +140,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -150,6 +158,8 @@ for (int i = 1; i <= n; i++) {
 }
 Console.WriteLine($"traza={sb}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -177,6 +187,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
@@ -195,6 +207,8 @@ fn main() {
     println!("traza={}", pasos.join("-"));
 }
 ```
+
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
 
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
@@ -216,6 +230,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
@@ -224,6 +240,8 @@ WITH RECURSIVE r(i) AS (VALUES (1) UNION ALL SELECT i + 1 FROM r WHERE i < 3)
 SELECT 'traza=' || group_concat(s, '-') AS resultado
 FROM (SELECT sum(i) OVER (ORDER BY i) AS s FROM r);
 ```
+
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
 
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
@@ -238,6 +256,8 @@ for ($i = 1; $i <= $n; $i++) {
 }
 echo "traza=" . implode("-", $pasos) . "\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 El contraste entre runtimes es aquí más que sintáctico: determina *qué depurador* usas. La versión en **C** compila a un binario nativo, así que la depurarías con gdb o lldb tras compilar con símbolos (`cc -g main.c`); pondrías `break main.c:8`, avanzarías con `next` e inspeccionarías con `print acc`. La de **Go** usa acumulador `int` y se depura con **delve** (`dlv debug`), que entiende las goroutines y el runtime del lenguaje mejor que gdb. La de **Java** corre en la JVM: se depura con JDB o, en la práctica, con el depurador de IntelliJ o VS Code hablando por JDWP; nota que usa `long acc` porque Bloch, en *Effective Java*, recuerda vigilar el desbordamiento de `int` en sumatorias. **C#** se depura con el motor de Visual Studio o Rider. Un solo algoritmo, cinco instrumentos distintos, pero el gesto —pausar, mirar `acc`, avanzar— es idéntico en todos.
 

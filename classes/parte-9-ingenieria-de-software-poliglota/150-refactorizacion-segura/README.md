@@ -83,6 +83,8 @@ eq = "true" if viejo == nuevo else "false"
 print(f"equivalente={eq} resultado={nuevo}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 Para `n=5`, `viejo` es 10 y `nuevo` es 10: iguales, así que `equivalente=true resultado=10`. Para `n=0`, ambos son 0. Para `n=7`, ambos 14. La equivalencia de `n*2` y `n+n` es cierta para todo entero, y por eso los tres casos dan `true`: la refactorización es siempre segura.
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
@@ -104,6 +106,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 SQL ofrece el paralelo más revelador de la clase, porque la refactorización que preserva el resultado es *el pan de cada día* de un motor de bases de datos: el optimizador reescribe tu consulta en otra equivalente y más rápida sin que el conjunto de filas devuelto cambie. Aquí la equivalencia `n * 2 = n + n` se evalúa dentro de un `CASE` sobre una fila, y el resultado observable se proyecta con `printf`. Date, en *SQL and Relational Theory*, dedica buena parte del libro precisamente a cuándo dos expresiones relacionales son equivalentes —el fundamento teórico de toda optimización—, que es la misma pregunta que se hace un refactorizador: ¿estas dos formas producen lo mismo?
@@ -113,6 +117,8 @@ SQL ofrece el paralelo más revelador de la clase, porque la refactorización qu
 WITH nums(n) AS (VALUES (5))
 SELECT printf('equivalente=%s resultado=%d', CASE WHEN n * 2 = n + n THEN 'true' ELSE 'false' END, n + n) AS resultado FROM nums;
 ```
+
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
 
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
@@ -124,6 +130,8 @@ const viejo = n * 2, nuevo = n + n;
 console.log(`equivalente=${viejo === nuevo ? "true" : "false"} resultado=${nuevo}`);
 ```
 
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
+
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
@@ -134,6 +142,8 @@ const viejo = n * 2, nuevo = n + n;
 console.log(`equivalente=${viejo === nuevo ? "true" : "false"} resultado=${nuevo}`);
 ```
 
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -143,6 +153,8 @@ long n = long.Parse(Console.In.ReadToEnd().Trim());
 long viejo = n * 2, nuevo = n + n;
 Console.WriteLine($"equivalente={(viejo == nuevo ? "true" : "false")} resultado={nuevo}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -169,6 +181,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
@@ -184,6 +198,8 @@ fn main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
 ```c
@@ -198,6 +214,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
@@ -207,6 +225,8 @@ $viejo = $n * 2;
 $nuevo = $n + $n;
 echo "equivalente=" . ($viejo === $nuevo ? "true" : "false") . " resultado=$nuevo\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.

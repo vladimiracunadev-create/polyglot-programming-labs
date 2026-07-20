@@ -110,6 +110,8 @@ version = sys.stdin.readline().strip()
 print(f"imagen=app:{version}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
@@ -119,6 +121,8 @@ const version = readFileSync(0, "utf8").trim();
 console.log(`imagen=app:${version}`);
 ```
 
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
+
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
@@ -127,6 +131,8 @@ import { readFileSync } from "node:fs";
 const version: string = readFileSync(0, "utf8").trim();
 console.log(`imagen=app:${version}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
@@ -144,6 +150,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -152,6 +160,8 @@ using System;
 string version = Console.In.ReadToEnd().Trim();
 Console.WriteLine($"imagen=app:{version}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -172,6 +182,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
@@ -184,6 +196,8 @@ fn main() {
     println!("imagen=app:{version}");
 }
 ```
+
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
 
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
@@ -198,6 +212,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
@@ -206,6 +222,8 @@ WITH t(v) AS (VALUES ('1.2.3'))
 SELECT 'imagen=app:' || v AS resultado FROM t;
 ```
 
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
+
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
@@ -213,6 +231,8 @@ SELECT 'imagen=app:' || v AS resultado FROM t;
 $version = trim(fgets(STDIN));
 echo "imagen=app:$version\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.

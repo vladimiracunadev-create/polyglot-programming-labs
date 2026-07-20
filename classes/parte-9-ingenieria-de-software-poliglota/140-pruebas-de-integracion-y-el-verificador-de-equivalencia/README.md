@@ -73,6 +73,8 @@ x, y = sys.stdin.readline().split()
 print(f"equivalente={'true' if x == y else 'false'}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 Aquí `split()` deja `x` e `y` como cadenas —`"6"` y `"6"` para la entrada `6 6`— y `x == y` compara texto. El resultado se serializa en minúsculas, `true` o `false`, porque ese es el contrato fijado en `casos.json`. Un detalle que parece trivial encierra la lección de la clase: si Python devolviera `True` (con mayúscula, como es su literal booleano nativo) la comparación con la cadena esperada `equivalente=true` fallaría, aunque la *lógica* fuese correcta. El contrato no es "acierta el booleano"; es "emite estos bytes exactos". Por eso el verificador es un juez tan estricto: no interpreta, compara.
 
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
@@ -84,6 +86,8 @@ const [x, y] = readFileSync(0, "utf8").trim().split(/\s+/);
 console.log(`equivalente=${x === y ? "true" : "false"}`);
 ```
 
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
+
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
@@ -92,6 +96,8 @@ import { readFileSync } from "node:fs";
 const [x, y] = readFileSync(0, "utf8").trim().split(/\s+/);
 console.log(`equivalente=${x === y ? "true" : "false"}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
@@ -109,6 +115,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -118,6 +126,8 @@ string[] p = Console.In.ReadToEnd()
     .Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
 Console.WriteLine($"equivalente={(p[0] == p[1] ? "true" : "false")}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -142,6 +152,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
@@ -155,6 +167,8 @@ fn main() {
     println!("equivalente={res}");
 }
 ```
+
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
 
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
@@ -170,6 +184,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
@@ -178,6 +194,8 @@ WITH t(x, y) AS (VALUES (6, 6))
 SELECT printf('equivalente=%s', CASE WHEN x = y THEN 'true' ELSE 'false' END) AS resultado FROM t;
 ```
 
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
+
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
@@ -185,6 +203,8 @@ SELECT printf('equivalente=%s', CASE WHEN x = y THEN 'true' ELSE 'false' END) AS
 [$x, $y] = preg_split('/\s+/', trim(fgets(STDIN)));
 echo "equivalente=" . ($x === $y ? "true" : "false") . "\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 Observa cómo cada lenguaje llega al mismo contrato por caminos que reflejan su naturaleza. **C** no puede comparar cadenas con `==` (eso compararía punteros), así que usa `strcmp(x, y) == 0`, un recordatorio de Kernighan y Ritchie de que en C una cadena es un puntero a bytes y la igualdad debe recorrerse a mano. **Java** evita la trampa clásica del `==` entre objetos y usa `p[0].equals(p[1])`, comparación de contenido y no de referencia. **PHP** elige `===`, el operador estricto que compara valor *y* tipo, frente al laxo `==` que haría conversiones sorpresa. Tres decisiones distintas, un único `stdout`: esa convergencia sobre lo observable, pese a la divergencia interna, es precisamente lo que el verificador de equivalencia certifica.
 

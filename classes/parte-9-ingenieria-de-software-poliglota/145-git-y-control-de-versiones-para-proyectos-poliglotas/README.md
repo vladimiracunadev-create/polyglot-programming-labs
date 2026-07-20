@@ -75,6 +75,8 @@ msgs = sys.stdin.read().split()
 print(f"commits={len(msgs)}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 La solución de Python es casi telegráfica y por eso ilustra bien la operación. `sys.stdin.read().split()` lee toda la entrada y la trocea por espacios en una lista de tokens; `len(...)` cuenta cuántos hay. Cada token representa un commit, así que su longitud es el número de commits del historial —exactamente lo que devuelve `git rev-list --count HEAD` sobre un repositorio real. Que `.split()` sin argumentos colapse múltiples espacios es una comodidad deliberada: hace que un historial con separación irregular se cuente igual de bien, sin tokens vacíos que inflen el resultado.
 
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
@@ -86,6 +88,8 @@ const msgs = readFileSync(0, "utf8").trim().split(/\s+/);
 console.log(`commits=${msgs.length}`);
 ```
 
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
+
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
@@ -94,6 +98,8 @@ import { readFileSync } from "node:fs";
 const msgs: string[] = readFileSync(0, "utf8").trim().split(/\s+/);
 console.log(`commits=${msgs.length}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
@@ -111,6 +117,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -120,6 +128,8 @@ string[] msgs = Console.In.ReadToEnd()
     .Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
 Console.WriteLine($"commits={msgs.Length}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -140,6 +150,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
@@ -152,6 +164,8 @@ fn main() {
     println!("commits={n}");
 }
 ```
+
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
 
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
@@ -167,6 +181,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 El contraste entre C y SQL revela dos formas de «contar». C no construye ninguna colección: lee token a token con `scanf("%255s", ...)` —el límite `255` es una defensa consciente contra el desbordamiento del buffer, tan característica del rigor de Kernighan y Ritchie— e incrementa un contador. SQL, en cambio, modela los commits como filas de una tabla y aplica `count(*)`: la operación de contar es primitiva en el modelo relacional que describe Date en *SQL and Relational Theory*, porque una relación es un conjunto de tuplas y su cardinalidad es un dato de primera clase. Ambos llegan al mismo número por caminos conceptualmente opuestos: uno imperativo y byte a byte, otro declarativo y sobre conjuntos.
 
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
@@ -177,6 +193,8 @@ WITH commits(msg) AS (VALUES ('fix'), ('add'), ('refactor'))
 SELECT printf('commits=%d', count(*)) AS resultado FROM commits;
 ```
 
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
+
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
@@ -184,6 +202,8 @@ SELECT printf('commits=%d', count(*)) AS resultado FROM commits;
 $msgs = preg_split('/\s+/', trim(fgets(STDIN)));
 echo "commits=" . count($msgs) . "\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.

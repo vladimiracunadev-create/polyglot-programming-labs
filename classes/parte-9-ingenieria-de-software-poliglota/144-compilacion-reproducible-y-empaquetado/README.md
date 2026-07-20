@@ -75,6 +75,8 @@ nums = [int(x) for x in sys.stdin.read().split()]
 print(f"checksum={sum(nums)}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 La versión de Python es la más compacta y expresa con claridad el patrón «leer todo, tokenizar, reducir». `sys.stdin.read()` consume la entrada completa; `.split()` sin argumentos parte por cualquier bloque de espacios (incluidos saltos de línea), lo que hace al programa robusto ante entradas con formato irregular. La comprensión de lista `[int(x) for x in ...]` convierte cada token a entero de una vez —Ramalho, en *Fluent Python*, defiende estas comprensiones como la forma legible de expresar transformaciones sobre secuencias— y `sum(...)` hace la reducción. La suma es la operación reproducible por excelencia: no depende del orden en que se recorran los sumandos, así que dos ejecuciones con la misma entrada dan el mismo resultado, que es justo la propiedad que se busca en un build.
 
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
@@ -86,6 +88,8 @@ const nums = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
 console.log(`checksum=${nums.reduce((a, b) => a + b, 0)}`);
 ```
 
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
+
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
 ```typescript
@@ -94,6 +98,8 @@ import { readFileSync } from "node:fs";
 const nums: number[] = readFileSync(0, "utf8").trim().split(/\s+/).map(Number);
 console.log(`checksum=${nums.reduce((a, b) => a + b, 0)}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
@@ -113,6 +119,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -124,6 +132,8 @@ long c = Console.In.ReadToEnd()
     .Sum(x => (long) int.Parse(x));
 Console.WriteLine($"checksum={c}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -149,6 +159,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 ```rust
@@ -161,6 +173,8 @@ fn main() {
     println!("checksum={c}");
 }
 ```
+
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
 
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
@@ -175,6 +189,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 Merece contrastar dos filosofías. C acumula en un bucle `while (scanf(...) == 1)`: no construye ninguna lista intermedia, va sumando token a token hasta que `scanf` deja de leer un entero. Es la aproximación de mínimo consumo de memoria que caracteriza el estilo de Kernighan y Ritchie, y usa `long` para el acumulador anticipando que la suma puede desbordar el rango de un entero pequeño. Go y C# eligen el camino opuesto pero igual de deliberado: Go recorre `strings.Fields(line)` sumando explícitamente, mientras que C# encadena `.Split(...).Sum(x => (long) int.Parse(x))` en estilo LINQ declarativo. Fíjate en que ambos, como el C, promocionan a `long` antes de sumar: es una decisión de ingeniería para evitar el desbordamiento silencioso, un no-determinismo tan real como una marca de tiempo, porque un checksum que desborda deja de representar fielmente su entrada.
 
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
@@ -185,6 +201,8 @@ WITH nums(x) AS (VALUES (1), (2), (3))
 SELECT printf('checksum=%d', sum(x)) AS resultado FROM nums;
 ```
 
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
+
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
 ```php
@@ -192,6 +210,8 @@ SELECT printf('checksum=%d', sum(x)) AS resultado FROM nums;
 $nums = array_map('intval', preg_split('/\s+/', trim(fgets(STDIN))));
 echo "checksum=" . array_sum($nums) . "\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.

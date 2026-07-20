@@ -80,6 +80,8 @@ seguro = w.isalnum()
 print(f"seguro={'true' if seguro else 'false'}")
 ```
 
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
+
 ### JavaScript · [`javascript/main.mjs`](implementaciones/javascript/main.mjs) · `node main.mjs`
 
 ```javascript
@@ -89,6 +91,8 @@ const w = readFileSync(0, "utf8").trim();
 const seguro = /^[A-Za-z0-9]+$/.test(w);
 console.log(`seguro=${seguro ? "true" : "false"}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### TypeScript · [`typescript/main.ts`](implementaciones/typescript/main.ts) · `pnpm exec tsx main.ts`
 
@@ -101,6 +105,8 @@ const w: string = readFileSync(0, "utf8").trim();
 const seguro = /^[A-Za-z0-9]+$/.test(w);
 console.log(`seguro=${seguro ? "true" : "false"}`);
 ```
+
+🧬 **El mismo programa en la familia JavaScript / web:** [Dart · ActionScript](primos.md#javascript-web)
 
 ### Java · [`java/Main.java`](implementaciones/java/Main.java) · `java Main.java`
 
@@ -119,6 +125,8 @@ public class Main {
 }
 ```
 
+🧬 **El mismo programa en la familia JVM:** [Kotlin · Scala · Groovy · Clojure](primos.md#jvm)
+
 ### C# · [`csharp/Program.cs`](implementaciones/csharp/Program.cs) · `dotnet run`
 
 ```csharp
@@ -129,6 +137,8 @@ string w = Console.In.ReadToEnd().Trim();
 bool seguro = w.Length > 0 && w.All(char.IsLetterOrDigit);
 Console.WriteLine($"seguro={(seguro ? "true" : "false")}");
 ```
+
+🧬 **El mismo programa en la familia .NET:** [F# · VB.NET](primos.md#dotnet)
 
 ### Go · [`go/main.go`](implementaciones/go/main.go) · `go run main.go`
 
@@ -160,6 +170,8 @@ func main() {
 }
 ```
 
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
+
 ### Rust · [`rust/main.rs`](implementaciones/rust/main.rs) · `rustc main.rs -o main && ./main`
 
 Rust es el lenguaje que mejor encarna la lección de seguridad de esta clase, y no por la validación en sí —`chars().all(|c| c.is_ascii_alphanumeric())` es un iterador limpio— sino por lo que representa. Klabnik y Nichols dedican *The Rust Programming Language* a explicar el *ownership*: el compilador garantiza que esta cadena `s` se libere exactamente una vez, que ninguna referencia la sobreviva y que no haya acceso concurrente sin sincronizar. Toda una categoría de vulnerabilidades —las de memoria, que Microsoft y Google estiman en torno al 70 % de sus CVE críticos— desaparece por construcción. Fíjate además en `is_ascii_alphanumeric`, que a diferencia del `isalnum` de Python restringe a ASCII: aquí la decisión Unicode es explícita. La auditoría de dependencias se hace con `cargo audit`, contra la base RustSec.
@@ -175,6 +187,8 @@ fn main() {
     println!("seguro={}", if seguro { "true" } else { "false" });
 }
 ```
+
+🧬 **El mismo programa en la familia Sistemas:** [Zig · Nim · D](primos.md#sistemas)
 
 ### C · [`c/main.c`](implementaciones/c/main.c) · `cc main.c -o main && ./main`
 
@@ -196,6 +210,8 @@ int main(void) {
 }
 ```
 
+🧬 **El mismo programa en la familia C / llaves:** [C++ · Objective-C](primos.md#c-llaves)
+
 ### SQL · [`sql/main.sql`](implementaciones/sql/main.sql) · `sqlite3 :memory: < main.sql`
 
 ```sql
@@ -203,6 +219,8 @@ int main(void) {
 WITH t(w) AS (VALUES ('abc'))
 SELECT printf('seguro=%s', CASE WHEN w GLOB '*[^A-Za-z0-9]*' THEN 'false' ELSE 'true' END) AS resultado FROM t;
 ```
+
+🧬 **El mismo programa en la familia Lógica y declarativa:** [Prolog · Datalog](primos.md#logica-declarativa)
 
 ### PHP · [`php/main.php`](implementaciones/php/main.php) · `php main.php`
 
@@ -212,6 +230,8 @@ $w = trim(fgets(STDIN));
 $seguro = ctype_alnum($w);
 echo "seguro=" . ($seguro ? "true" : "false") . "\n";
 ```
+
+🧬 **El mismo programa en la familia Scripting dinámico:** [Ruby · Perl · Lua · Tcl · R](primos.md#scripting-dinamico)
 
 > SQL es declarativo: no lee de stdin como los demás; su implementación muestra la misma idea sobre
 > una tabla de casos, y el verificador la marca como *ilustrativa*.

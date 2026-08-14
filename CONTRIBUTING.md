@@ -10,6 +10,24 @@ Gracias por querer mejorar **Polyglot Programming Labs**. Este es un programa **
 - **Mejora de una clase** — una explicación más clara, un mejor ejemplo, una comparación más precisa, una referencia a un libro.
 - **Implementaciones del núcleo** — arreglar o hacer más idiomática una de las 10 implementaciones de una clase de código.
 - **Portal, documentación o scripts** — rutas, atlas, glosario, autoevaluaciones, el verificador.
+- **Apps** — la de [Android](apps/android/README.md) y la de [escritorio](apps/desktop/README.md), que empaquetan el mismo sitio generado.
+
+## Qué se edita a mano y qué se genera
+
+Editar un archivo generado es trabajo perdido: la siguiente ejecución del generador lo
+sobrescribe. Antes de tocar nada, mira en qué columna cae.
+
+| Archivo | ¿Se edita a mano? |
+|---|---|
+| `classes/parte-N/NNN-*/README.md` y sus `concepto/comparacion/reto/primos/casos.json` | ✅ sí, es el contenido del curso |
+| `classes/parte-N/README.md` (README de parte) | ❌ **no** — se genera; el texto vive en [`scripts/guias.py`](scripts/guias.py) |
+| `classes/README.md` (índice) y `classes/_manifest.json` | ❌ no — los genera `scripts/build.py` |
+| `glosario/README.md` | ❌ no — lo genera `scripts/generar_glosario.py` desde las clases |
+| `site/`, `manual/MANUAL.pdf`, `material/` | ❌ no — artefactos generados |
+| `atlas/`, `rutas/`, `autoevaluaciones/`, `labs/`, `docs/` | ✅ sí |
+
+Para cambiar la narrativa de una parte o la descripción de una clase en su índice, edita
+`scripts/guias.py` y ejecuta `python scripts/build.py`.
 
 ## Lista de comprobación
 
@@ -30,6 +48,9 @@ python scripts/verificar_equivalencia.py <clase>
 
 # Comprueba la estructura y los enlaces
 python scripts/validar_estructura.py
+
+# Si tocaste scripts/guias.py o el currículo, regenera partes e índice
+python scripts/build.py
 
 # Lint de los .md que modificaste
 npx markdownlint-cli2 "ruta/al/archivo.md"

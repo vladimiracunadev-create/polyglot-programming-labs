@@ -16,9 +16,10 @@ C#, Go, Rust, C, SQL y PHP, con un Atlas que te deja leer decenas de lenguajes m
 [![Security](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/security.yml/badge.svg?branch=main)](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/security.yml)
 [![Deploy Pages](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/deploy-pages.yml/badge.svg?branch=main)](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/deploy-pages.yml)
 
+[![Versión](https://img.shields.io/badge/versión-1.0.0-e8590c?style=for-the-badge)](CHANGELOG.md)
 [![Clases](https://img.shields.io/badge/clases-176%20·%2012%20partes-7c5cff?style=for-the-badge)](classes/README.md)
 [![Núcleo](https://img.shields.io/badge/núcleo-10%20lenguajes-2e8b57?style=for-the-badge)](languages.json)
-[![Implementaciones](https://img.shields.io/badge/implementaciones-1360%20verificadas-e8590c?style=for-the-badge)](scripts/verificar_equivalencia.py)
+[![Implementaciones](https://img.shields.io/badge/implementaciones-1360%20verificadas-2f81f7?style=for-the-badge)](scripts/verificar_equivalencia.py)
 [![Atlas](https://img.shields.io/badge/atlas-39%20cápsulas%20·%2015%20familias-8957e5?style=for-the-badge)](atlas/README.md)
 [![Idioma](https://img.shields.io/badge/idioma-español-1f6feb?style=for-the-badge)](classes/README.md)
 [![License](https://img.shields.io/badge/license-MIT-3fb950?style=for-the-badge)](LICENSE)
@@ -36,12 +37,14 @@ C#, Go, Rust, C, SQL y PHP, con un Atlas que te deja leer decenas de lenguajes m
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-sitio%20vivo-222?style=flat-square&logo=githubpages&logoColor=white)](https://vladimiracunadev-create.github.io/polyglot-programming-labs/)
 
 [🌐 **Sitio del curso (vivo)**](https://vladimiracunadev-create.github.io/polyglot-programming-labs/) ·
+[📥 **Descargas**](https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases/latest) ·
 [📚 Índice de clases](classes/README.md) ·
 [🌐 Atlas](atlas/README.md) ·
 [🧭 Rutas](rutas/README.md) ·
 [📖 Glosario](glosario/README.md) ·
 [📕 Manual PDF](manual/MANUAL.pdf) ·
 [📅 Syllabus](docs/syllabus.md) ·
+[📓 Changelog](CHANGELOG.md) ·
 [🗺️ Roadmap](ROADMAP.md) ·
 [🤝 Contribuir](CONTRIBUTING.md) ·
 [🔐 Seguridad](SECURITY.md)
@@ -71,10 +74,11 @@ C#, Go, Rust, C, SQL y PHP, con un Atlas que te deja leer decenas de lenguajes m
 | Equivalencia | ✅ verificada en CI: cada implementación se ejecuta contra el `casos.json` de su clase |
 | Primos del Atlas | 🟡 2722 programas en 20 lenguajes; Ruby, Perl y Lua se **ejecutan** en CI, los otros 17 son lectura declarada |
 | Atlas de familias | ⚪ 39 cápsulas en 15 familias — material de lectura fechado (rev. 2026-07); no se ejecuta |
-| Manual | ✅ ~1306 páginas en PDF, generadas desde las mismas clases |
+| Manual | ✅ ~1306 páginas en PDF, generadas desde las mismas clases (~2420 con los primos) |
 | Glosario | ✅ 424 términos derivados de las clases y enlazados a su clase de origen |
 | Autoevaluaciones | ✅ 90 preguntas, batería por cada una de las 12 partes |
 | Sitio | ✅ portal estático en GitHub Pages con índice, búsqueda y rutas |
+| Apps | ✅ APK de Android y ejecutable de Windows, **con el contenido contado dentro del binario** en CI |
 | CI | ✅ estructura y manifest, markdownlint, equivalencia por lenguaje, secretos (gitleaks) y SAST (bandit) |
 | SQL | ⚪ declarativo: se marca como *ilustrativo* en el verificador, no se fuerza a imitar un lenguaje imperativo |
 
@@ -207,18 +211,31 @@ python scripts/verificar_primos.py --all --lang ruby    # los primos del Atlas q
 Los lenguajes cuyo toolchain no esté instalado se **omiten e informan** (degradación
 silenciosa, nunca un falso verde); SQL, al ser declarativo, se marca como *ilustrativo*.
 
-## 📕 Manual completo en PDF
+## 📥 El curso en cuatro formatos
 
-El mismo contenido de las clases, en un solo documento con portada e índice enlazado y
-**con el código de los diez lenguajes a la vista** — que es lo que hace que valga la pena
-en papel: se comparan sin saltar entre archivos.
+El mismo contenido, generado siempre desde las mismas clases. Todo en el
+**[último release](https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases/latest)**.
 
-- 📥 **[Manual completo (~1306 páginas)](manual/MANUAL.pdf)** — listo para imprimir o leer offline.
+| Formato | Qué es | Dónde |
+|---|---|---|
+| 🌐 **Web** | El portal con búsqueda, rutas y progreso local. Siempre al día. | [Sitio del curso](https://vladimiracunadev-create.github.io/polyglot-programming-labs/) |
+| 📱 **Android** | Las 344 páginas embebidas, sin conexión ni cuenta. | [`.apk`](https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases/latest) · [cómo está hecha](apps/android/README.md) |
+| 💻 **Windows** | Ejecutable único: sirve el curso en `127.0.0.1` y lo abre en tu navegador. | [`.exe`](https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases/latest) · [cómo está hecha](apps/desktop/README.md) |
+| 📕 **PDF** | Para imprimir o leer de corrido, con el código de los diez lenguajes a la vista. | [Manual (~1306 pág.)](manual/MANUAL.pdf) · [Completo con primos (~2420 pág.)](https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases/latest) |
+
+> 🔍 **Las apps se verifican por dentro.** Un APK sin curso compila igual y un `.exe` sin
+> datos arranca igual: todas las señales de build quedan verdes. Por eso
+> [`android.yml`](.github/workflows/android.yml) descomprime el APK y
+> [`desktop.yml`](.github/workflows/desktop.yml) lee el índice del ejecutable, y **cuentan**
+> las 176 páginas de clase y los 136 anexos antes de publicar nada.
+
+Regenerar cualquiera de ellos desde el repositorio:
 
 ```bash
-python scripts/generar_manual.py               # regenera el manual desde las clases
-python scripts/generar_manual.py --con-primos  # incluye los 2722 programas primos
-python scripts/generar_material.py --parte 3   # guías sueltas por clase en material/ (no se versionan)
+python scripts/generar_sitio.py                # el portal HTML (site/), base de las apps
+python scripts/generar_manual.py               # manual/MANUAL.pdf
+python scripts/generar_manual.py --con-primos --salida manual/MANUAL-COMPLETO.pdf
+python scripts/generar_material.py --parte 3   # guías sueltas por clase en material/
 ```
 
 ## 📦 Contrato de una clase
@@ -295,7 +312,9 @@ así se declara en cada página. Verificar tres de veinte no es verificarlos tod
 - 📖 **[Glosario](glosario/README.md)** — 424 términos enlazados a la clase donde se explican.
 - 🧪 **[Laboratorios](labs/README.md)** — la equivalencia demostrada: el verificador sobre las implementaciones.
 
-🌐 Todo navegable en el **[sitio del curso](https://vladimiracunadev-create.github.io/polyglot-programming-labs/)** (GitHub Pages).
+🌐 Todo navegable en el **[sitio del curso](https://vladimiracunadev-create.github.io/polyglot-programming-labs/)** (GitHub Pages),
+y el mismo portal completo dentro de la **[app de Android](apps/android/README.md)** y del
+**[ejecutable de escritorio](apps/desktop/README.md)**, sin conexión.
 
 ## 👩‍🏫 Para instructores
 
@@ -311,16 +330,19 @@ classes/
   _manifest.json          # fuente de verdad (176 clases)
   README.md               # índice completo
   parte-N-.../
-    README.md             # README de la parte (con sus libros de referencia)
+    README.md             # README docente de la parte (generado desde scripts/guias.py)
     NNN-.../              # la clase (ver «Contrato de una clase»)
-atlas/  rutas/  autoevaluaciones/  glosario/  labs/
-manual/  material/  docs/  site/
+atlas/  rutas/  autoevaluaciones/  glosario/  labs/   # portal
+apps/android/  apps/desktop/                          # el curso empaquetado
+manual/  material/  docs/  site/                      # PDF, guías y portal HTML
 scripts/  .github/workflows/
 ```
 
 Todo deriva de [`classes/_manifest.json`](classes/_manifest.json), producido por
-[`scripts/build.py`](scripts/build.py) a partir de [`scripts/curriculo.py`](scripts/curriculo.py).
-Re-ejecutar `python scripts/build.py` actualiza índice y README sin pisar el contenido escrito a mano.
+[`scripts/build.py`](scripts/build.py) a partir de [`scripts/curriculo.py`](scripts/curriculo.py)
+y [`scripts/guias.py`](scripts/guias.py). Re-ejecutar `python scripts/build.py` actualiza
+índice y README de parte sin tocar las clases, que se escriben a mano. Qué se edita y qué
+se genera está en la [guía de contribución](CONTRIBUTING.md#qué-se-edita-a-mano-y-qué-se-genera).
 
 ## 🚀 Cómo estudiar
 

@@ -17,4 +17,5 @@
 - [ ] Si toqué una implementación, el verificador pasa: `python scripts/verificar_equivalencia.py <clase>`
 - [ ] `markdownlint-cli2` no reporta problemas en los `.md` que modifiqué
 - [ ] La estructura sigue siendo válida: `python scripts/validar_estructura.py`
+- [ ] **No edité archivos generados** ([cuáles son](../CONTRIBUTING.md#qué-se-edita-a-mano-y-qué-se-genera)): para cambiar un README de parte o el índice, edité `scripts/guias.py` y ejecuté `python scripts/build.py`
 - [ ] El contenido está en español y cita sus fuentes cuando corresponde

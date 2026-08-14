@@ -283,6 +283,24 @@ def escribir_landing(partes: list[dict], n_primos: int, n_terminos: int, n_pregu
     langs_html = "".join(f'<span class="lang">{l}</span>' for l in nucleo)
     primos_html = "".join(f'<span class="lang atlas">{l}</span>' for l in primos)
 
+    # Descargas: el mismo curso en los otros tres formatos. Los binarios viven en el
+    # release (no en el repo), así que se enlaza a «latest», que siempre apunta al
+    # último publicado sin tener que tocar el generador en cada versión.
+    ultimo = f"{REPO_URL}/releases/latest"
+    descargas = [
+        ("📱", "Android (APK)", "Las 344 páginas embebidas: se estudia sin conexión, "
+         "sin cuenta y sin telemetría.", ultimo),
+        ("💻", "Windows (.exe)", "Ejecutable único: abre el curso en tu navegador "
+         "desde tu propio equipo, sin instalar nada.", ultimo),
+        ("📕", "PDF completo", f"Las {total} clases más los {n_primos:,} programas primos "
+         "(~2420 páginas) en un solo documento.".replace(",", " "), ultimo),
+        ("🗜️", "Sitio offline (ZIP)", "Este mismo portal HTML para servirlo donde "
+         "quieras: aula, intranet o memoria USB.", ultimo),
+    ]
+    descargas_html = "".join(
+        f'<a class="feat" href="{u}"><div class="ic">{i}</div><h3>{t}</h3><p>{d}</p></a>'
+        for i, t, d, u in descargas)
+
     parts_html = "".join(
         f'<a class="part" href="classes/{p["slug"]}/README.html">'
         f'<div class="num">{p["idx"]}</div>'
@@ -328,6 +346,13 @@ las 10 implementaciones de cada clase se <a href="labs/README.html">ejecutan en 
     <a href="atlas/README.html" style="color:var(--acento)">Atlas</a> y aparecen resolviendo
     el mismo problema bajo cada bloque de código:</p>
   <div class="langs">{primos_html}</div>
+
+  <h2 class="sec">Llévate el curso</h2>
+  <p style="color:var(--muted);font-size:.92rem;margin:-.4rem 0 .9rem">
+    El mismo contenido, generado siempre desde las mismas clases. Las apps se verifican
+    <b>por dentro</b>: antes de publicarlas se abre el binario y se cuentan las
+    {total} páginas de clase que lleva — un paquete vacío también compila.</p>
+  <div class="grid">{descargas_html}</div>
 
   <h2 class="sec">Las {len(partes)} partes</h2>
   <div class="parts">{parts_html}</div>

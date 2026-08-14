@@ -1,8 +1,8 @@
 # 🗺️ Roadmap
 
-> [⬅️ Volver al programa](README.md) · [📚 Índice completo](classes/README.md)
+> [⬅️ Volver al programa](README.md) · [📚 Índice completo](classes/README.md) · [📓 Changelog](CHANGELOG.md) · [📥 Releases](https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases)
 
-Estado del programa **Polyglot Programming Labs**: **completo — las 176 clases en 12 partes están construidas.** Las clases de código (Partes 3–11) traen sus 10 implementaciones del núcleo verificadas en CI; las de método (Partes 0–2) son conceptuales.
+Estado del programa **Polyglot Programming Labs**: **completo y publicado en la versión [1.0.0](CHANGELOG.md) — las 176 clases en 12 partes están construidas.** Las clases de código (Partes 3–11) traen sus 10 implementaciones del núcleo verificadas en CI; las de método (Partes 0–2) son conceptuales.
 
 Leyenda: ✅ construida.
 
@@ -38,7 +38,10 @@ Leyenda: ✅ construida.
 | **Autoevaluaciones** | ✅ 90 preguntas, batería por parte |
 | **Glosario** derivado de las clases (`scripts/generar_glosario.py`) | ✅ 424 términos |
 | **Atlas** de familias | ✅ 39 cápsulas en 15 familias |
-| Workflows: `ci.yml`, `labs.yml`, `security.yml`, `deploy-pages.yml` | ✅ |
+| **PDF completo** (manual + los 2722 primos, ~2420 páginas) | ✅ bajo demanda, se publica como asset del release |
+| **App Android** ([`apps/android`](apps/android/README.md)) | ✅ APK con las 344 páginas embebidas, contenido contado dentro del binario |
+| **App de escritorio** ([`apps/desktop`](apps/desktop/README.md)) | ✅ ejecutable único que sirve el curso en `127.0.0.1` |
+| Workflows: `ci.yml`, `labs.yml`, `security.yml`, `deploy-pages.yml`, `android.yml`, `desktop.yml` | ✅ 6 |
 
 ## Cómo seguir aprendiendo
 

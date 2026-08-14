@@ -14,6 +14,24 @@ El código de ejemplo está pensado para **aprender**, no para ejecutarse en pro
   revisión**.
 - El **tooling** (`scripts/`) se analiza con `bandit` y el repositorio se escanea con
   `gitleaks` en cada push (workflow [Security](.github/workflows/security.yml)).
+- Las **apps** ([Android](apps/android/README.md) y [escritorio](apps/desktop/README.md))
+  solo muestran contenido: no ejecutan el código de las clases, no piden permisos de red
+  y no envían nada a ningún servidor. La de escritorio levanta un servidor **únicamente en
+  `127.0.0.1`**, que es lo que permite que funcione el buscador del portal (bajo `file://`
+  el navegador bloquea la petición de `busqueda.json`).
+
+## Versiones con soporte
+
+| Versión | Soporte |
+|---|---|
+| 1.0.x | ✅ correcciones de contenido y de tooling |
+| < 1.0 | ❌ preliminar, sin soporte |
+
+Los binarios publicados en los [releases](https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases)
+se compilan **en GitHub Actions**, no en una máquina personal, y cada release incluye un
+`SHA256SUMS.txt` para comprobar que el archivo descargado es el que produjo CI. El APK va
+firmado con la clave de depuración de Android y el `.exe` no lleva firma de código
+comercial: ambos son artefactos de un proyecto abierto, no software comercial firmado.
 
 ## Reportar un problema
 

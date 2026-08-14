@@ -117,22 +117,14 @@ adaptar el comportamiento sin tocar el código— que es para lo que los prototi
 [Ficha completa](../../../atlas/fortran.md) · HPC, clima, física, BLAS/LAPACK · `gfortran -O2 prog.f90`
 
 ```fortran
-program proto
+module objetom
    implicit none
 
    type :: objeto
       integer :: valor = 0
    contains
-      procedure :: doble
+      procedure :: doble          ! ligado al tipo: exige estar en un MÓDULO
    end type objeto
-
-   type(objeto) :: o
-   integer :: n
-
-   read(*, *) n
-   o%valor = n
-
-   write(*, '(A,I0)') 'resultado=', o%doble()
 
 contains
 
@@ -142,6 +134,20 @@ contains
       r = self%valor * 2
    end function doble
 
+end module objetom
+
+
+program proto
+   use objetom
+   implicit none
+
+   type(objeto) :: o
+   integer :: n
+
+   read(*, *) n
+   o%valor = n
+
+   write(*, '(A,I0)') 'resultado=', o%doble()
 end program proto
 ```
 
@@ -187,6 +193,23 @@ antigüedad, es el precio de su ventaja**. Es el lenguaje más rápido de esta p
 precisamente porque no permite nada que impida al compilador saberlo todo de antemano.
 
 Cambiar eso para tener prototipos sería cambiar Fortran por otro lenguaje.
+
+**Un tropiezo real de este programa.** La primera versión declaraba el tipo con su `procedure ::
+doble` dentro del programa principal, y gfortran lo rechazó: **un tipo derivado con procedimientos
+ligados debe estar en un MÓDULO**.
+
+Es exactamente el mismo tropiezo que la clase 111 documenta en Ada —donde las operaciones primitivas
+solo despachan si se declaran en la especificación de un paquete— y la causa de fondo es la misma:
+**la tabla de métodos de un tipo se construye al compilar la unidad donde el tipo se declara**, y esa
+unidad tiene que ser algo que otros puedan usar.
+
+Que los dos lenguajes más orientados a la fiabilidad de esta página impongan la misma restricción, por
+caminos independientes y con veinte años de diferencia, dice bastante sobre lo que cuesta el despacho
+dinámico cuando se quiere que sea predecible.
+
+Y explica de paso por qué el consejo de la clase 109 —**mete los procedimientos en módulos**— vale
+también aquí: en Fortran moderno, **el módulo no es organización, es la unidad donde el compilador
+puede comprobar y construir cosas**.
 
 ### Ada
 

@@ -249,17 +249,29 @@ está mal repartida**.
 with Ada.Text_IO; use Ada.Text_IO;
 
 procedure Poli is
-   type Animal is abstract tagged null record;
-   function Sonido (A : Animal) return String is abstract;
 
-   type Perro is new Animal with null record;
-   overriding function Sonido (A : Perro) return String is ("guau");
+   --  La jerarquía va en un PAQUETE: solo así las operaciones despachan.
+   package Animales is
+      type Animal is abstract tagged null record;
+      function Sonido (A : Animal) return String is abstract;
 
-   type Gato is new Animal with null record;
-   overriding function Sonido (A : Gato) return String is ("miau");
+      type Perro is new Animal with null record;
+      overriding function Sonido (A : Perro) return String;
 
-   type Vaca is new Animal with null record;
-   overriding function Sonido (A : Vaca) return String is ("muu");
+      type Gato is new Animal with null record;
+      overriding function Sonido (A : Gato) return String;
+
+      type Vaca is new Animal with null record;
+      overriding function Sonido (A : Vaca) return String;
+   end Animales;
+
+   package body Animales is
+      overriding function Sonido (A : Perro) return String is ("guau");
+      overriding function Sonido (A : Gato)  return String is ("miau");
+      overriding function Sonido (A : Vaca)  return String is ("muu");
+   end Animales;
+
+   use Animales;
 
    type Ref is access all Animal'Class;      --  acceso a la CLASE ENTERA
 
@@ -322,6 +334,27 @@ Ada 2012 añade además que **los contratos se heredan**: la precondición de un
 puede ser más fuerte** que la del padre, y la postcondición no puede ser más débil. Es el principio de
 sustitución de Liskov **comprobado por el compilador**, y no lo hace ningún otro lenguaje de esta
 página.
+
+**Un tropiezo real de este programa.** La primera versión declaraba la jerarquía directamente en la
+parte declarativa del procedimiento, y GNAT respondió:
+
+```text
+poli.adb:5:13: warning: not dispatching (must be defined in a package spec)
+```
+
+**Una operación primitiva solo despacha si se declara en la ESPECIFICACIÓN de un paquete.** Declarada
+en el cuerpo de un subprograma, es una función normal con un parámetro de tipo etiquetado: el
+compilador la resuelve estáticamente, y la llamada sobre `Animal'Class` no compila.
+
+De ahí el `package Animales is ... end Animales;` anidado que lleva el programa.
+
+La regla parece burocrática y tiene un motivo de fondo: **la tabla de despacho de un tipo se congela
+al terminar la especificación donde se declara**. Si se pudieran añadir primitivas después, en
+cualquier ámbito, esa tabla tendría que ser dinámica — y Ada garantiza que el despacho tiene coste
+constante y acotado, que es lo que exige un sistema de tiempo real.
+
+Es un buen ejemplo de una decisión que molesta al escribir un programa de veinte líneas y que existe
+por lo que Ada promete en programas de un millón.
 
 ### Pascal
 

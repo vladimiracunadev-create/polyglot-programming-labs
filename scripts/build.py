@@ -20,6 +20,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from curriculo import PARTES, slug, iter_clases, total_clases, NUCLEO, BIBLIO  # noqa: E402
+from guias import GUIA, CLASES, HORAS, TIPO, ESTUDIAR  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 CLASSES = ROOT / "classes"
@@ -204,40 +205,97 @@ concepto en los primos de cada familia. Consulta el [Atlas](../../../atlas/READM
 """
 
 
+def _titulos_parte(idx):
+    """{número global: título} de las clases de una parte."""
+    ini = part_ranges()[idx][3]
+    out, n = {}, ini
+    for c in PARTES[idx][2]:
+        out[n] = c[0] if isinstance(c, tuple) else c
+        n += 1
+    return out
+
+
+def _recorrido(idx):
+    """El cuerpo docente del README de parte: bloques con la descripción de cada clase.
+
+    Cada clase se presenta con lo que se aprende en ella y por qué importa, no
+    solo con su título: un índice de enlaces no enseña nada que el nombre de la
+    carpeta no dijera ya.
+    """
+    titulos = _titulos_parte(idx)
+    guia = GUIA.get(idx)
+    if not guia:  # sin guía escrita: se degrada al listado simple, nunca a texto inventado.
+        filas = [f"| {'✅' if n in BUILT else '🚧'} {n:03d} | [{t}]({class_slug(n, t)}/README.md) |"
+                 for n, t in titulos.items()]
+        return "| # | Clase |\n|---|---|\n" + "\n".join(filas)
+
+    partes = []
+    for titulo_bloque, porque, ini_b, fin_b in guia["bloques"]:
+        rango = f"clase {ini_b:03d}" if ini_b == fin_b else f"clases {ini_b:03d}–{fin_b:03d}"
+        partes.append(f"### 🔹 {titulo_bloque} · {rango}\n\n{porque}\n")
+        for n in range(ini_b, fin_b + 1):
+            t = titulos[n]
+            estado = "" if n in BUILT else "🚧 "
+            desc = CLASES.get(n, "")
+            enlace = f"[{n:03d} · {t}]({class_slug(n, t)}/README.md)"
+            partes.append(f"- {estado}**{enlace}** — {desc}" if desc else f"- {estado}**{enlace}**")
+        partes.append("")
+    return "\n".join(partes).rstrip()
+
+
 def part_readme(idx, t, sub, ini, fin, count):
     prev = f"[⏮️ Parte {idx-1}](../{part_slug(idx-1, PARTES[idx-1][0])}/README.md) · " if idx > 0 else ""
     nxt = f" · [⏭️ Parte {idx+1}](../{part_slug(idx+1, PARTES[idx+1][0])}/README.md)" if idx < len(PARTES)-1 else ""
-    filas, n = [], ini
-    for c in PARTES[idx][2]:
-        titulo = c[0] if isinstance(c, tuple) else c
-        estado = "✅" if n in BUILT else "🚧"
-        filas.append(f"| {estado} {n:03d} | [{titulo}]({class_slug(n, titulo)}/README.md) |")
-        n += 1
     libros = "\n".join(f"- {b}" for b in BIBLIO.get(idx, []))
-    return f"""# Parte {idx} — {t}
+    guia = GUIA.get(idx, {})
+    tipo, horas, nivel = TIPO.get(idx, "código"), HORAS.get(idx), NIVELES[idx]
+    cab = f"**{count} clases** · rango {ini:03d}–{fin:03d} · clases de **{tipo}** · nivel {nivel.lower()}"
+    if horas:
+        cab += f" · **~{horas} h** ([cronograma](../../docs/syllabus.md))"
 
-> {prev}[⬅️ Programa](../../README.md) · [📚 Índice](../README.md){nxt}
+    secciones = [f"# Parte {idx} — {t}",
+                 f"> {prev}[⬅️ Programa](../../README.md) · [📚 Índice](../README.md){nxt}",
+                 cab]
+    if guia.get("gancho"):
+        secciones.append(f"> 🧭 **{guia['gancho']}**")
+    secciones.append("---")
 
-**{count} clases** · rango {ini:03d}–{fin:03d}
+    resumen = guia.get("resumen") or [sub]
+    secciones.append("## 🧭 De qué trata esta parte\n\n" + "\n\n".join(resumen))
 
-{sub}
+    if guia.get("asume"):
+        secciones.append("## 🎒 Qué necesitas traer\n\n" + guia["asume"])
 
-**Fuentes de referencia de esta parte:**
+    if guia.get("logros"):
+        logros = "\n".join(f"{i}. {x}" for i, x in enumerate(guia["logros"], 1))
+        secciones.append("## 🎯 Qué sabrás hacer al terminar\n\n"
+                         "Resultados comprobables: si no puedes hacerlos, la parte no está cerrada.\n\n" + logros)
 
-{libros}
+    secciones.append("## 🗺️ El recorrido, clase a clase\n\n"
+                     "Las clases están agrupadas en bloques por la razón que las une. "
+                     "El orden es secuencial: cada una asume la anterior.\n\n" + _recorrido(idx))
 
----
+    if guia.get("malentendidos"):
+        filas = "\n".join(f"| {a} | {b} |" for a, b in guia["malentendidos"])
+        secciones.append("## ⚠️ Los malentendidos que esta parte corrige\n\n"
+                         "| Se suele creer | Lo que ocurre en realidad |\n|---|---|\n" + filas)
 
-## 📚 Clases de esta parte
+    pasos = ESTUDIAR.get(tipo)
+    if pasos:
+        secciones.append("## 🧪 Cómo estudiar esta parte\n\n"
+                         + "\n".join(f"{i}. {p}" for i, p in enumerate(pasos, 1)))
 
-| # | Clase |
-|---|---|
-{chr(10).join(filas)}
+    if libros:
+        secciones.append("## 📚 Fuentes de referencia de esta parte\n\n"
+                         "Cada clase cita estos libros en su sección de referencias. "
+                         "No se reproduce su contenido: la redacción es original.\n\n" + libros)
 
----
+    if guia.get("abre"):
+        secciones.append("## 🔗 Qué abre esta parte\n\n" + guia["abre"])
 
-> {prev}[⬅️ Programa](../../README.md) · [📚 Índice](../README.md){nxt}
-"""
+    secciones.append("---")
+    secciones.append(f"> {prev}[⬅️ Programa](../../README.md) · [📚 Índice](../README.md){nxt}")
+    return "\n\n".join(secciones) + "\n"
 
 
 def build_manifest():
@@ -263,23 +321,53 @@ def build_manifest():
 
 
 def index_readme(manifest):
+    """Índice general: el mapa. La docencia de cada parte vive en su README."""
     built, planned = manifest["total_built"], manifest["total_planned"]
-    bloques = []
+    bloques, resumen = [], []
     for p in manifest["parts"]:
-        head = (f"## Parte {p['idx']} — {p['title']} · clases {p['start']:03d}–{p['end']:03d}\n\n"
-                f"> [📂 README de la parte]({p['slug']}/README.md)\n\n| # | Clase |\n|---|---|")
-        filas = [f"| {'✅' if c['built'] else '🚧'} {c['num']:03d} | [{c['title']}]({p['slug']}/{c['slug']}/README.md) |"
-                 for c in p["classes"]]
-        bloques.append(head + "\n" + "\n".join(filas))
+        idx = p["idx"]
+        guia = GUIA.get(idx, {})
+        gancho = guia.get("gancho", p["subtitle"])
+        resumen.append(f"| {idx} | [{p['title']}]({p['slug']}/README.md) | {p['count']} | "
+                       f"{p['start']:03d}–{p['end']:03d} | {TIPO.get(idx, '—')} | ~{HORAS.get(idx, '—')} h |")
+
+        head = (f"## Parte {idx} — {p['title']} · clases {p['start']:03d}–{p['end']:03d}\n\n"
+                f"> 🧭 {gancho}\n>\n"
+                f"> [📂 Abrir el README de la parte]({p['slug']}/README.md) — de qué trata, "
+                f"qué necesitas traer, qué sabrás hacer al terminar y qué se aprende en cada clase.\n")
+        # Los bloques temáticos de la parte, para que el índice muestre la estructura
+        # y no solo una lista plana de dieciséis títulos seguidos.
+        if guia.get("bloques"):
+            for titulo_bloque, _porque, ini_b, fin_b in guia["bloques"]:
+                rango = f"{ini_b:03d}" if ini_b == fin_b else f"{ini_b:03d}–{fin_b:03d}"
+                filas = [f"| {'✅' if c['built'] else '🚧'} {c['num']:03d} | [{c['title']}]({p['slug']}/{c['slug']}/README.md) |"
+                         for c in p["classes"] if ini_b <= c["num"] <= fin_b]
+                head += f"\n**{titulo_bloque}** · {rango}\n\n| # | Clase |\n|---|---|\n" + "\n".join(filas) + "\n"
+            bloques.append(head.rstrip())
+        else:
+            filas = [f"| {'✅' if c['built'] else '🚧'} {c['num']:03d} | [{c['title']}]({p['slug']}/{c['slug']}/README.md) |"
+                     for c in p["classes"]]
+            bloques.append(head + "\n| # | Clase |\n|---|---|\n" + "\n".join(filas))
+
     return f"""# 📚 Índice completo de clases
 
-> [⬅️ Volver al programa](../README.md) · [🗺️ Roadmap](../ROADMAP.md) · [🌐 Atlas](../atlas/README.md)
+> [⬅️ Volver al programa](../README.md) · [🗺️ Roadmap](../ROADMAP.md) · [🌐 Atlas](../atlas/README.md) · [📅 Syllabus](../docs/syllabus.md)
 
 Programa secuencial de **{planned} clases** en **{len(manifest['parts'])} partes**. La numeración es
 global (001→…) y el orden importa: cada clase asume la anterior.
 
 **Estado:** {built} de {planned} clases construidas · núcleo de {len(NUCLEO)} lenguajes.
 {"Programa completo ✅." if built >= planned else "Leyenda: ✅ construida · 🚧 planificada."}
+
+Este índice es el **mapa**: cada parte con su gancho y sus bloques temáticos. La
+explicación de qué se aprende en cada clase está en el **README de cada parte**,
+que es donde conviene entrar antes de abrir la primera clase.
+
+## 🗂️ Las {len(manifest['parts'])} partes de un vistazo
+
+| # | Parte | Clases | Rango | Tipo | Horas |
+|---:|---|---:|---|---|---:|
+{chr(10).join(resumen)}
 
 ---
 

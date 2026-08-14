@@ -71,7 +71,7 @@ C#, Go, Rust, C, SQL y PHP, con un Atlas que te deja leer decenas de lenguajes m
 | Equivalencia | ✅ verificada en CI: cada implementación se ejecuta contra el `casos.json` de su clase |
 | Primos del Atlas | 🟡 2722 programas en 20 lenguajes; Ruby, Perl y Lua se **ejecutan** en CI, los otros 17 son lectura declarada |
 | Atlas de familias | ⚪ 39 cápsulas en 15 familias — material de lectura fechado (rev. 2026-07); no se ejecuta |
-| Manual | ✅ ~1276 páginas en PDF, generadas desde las mismas clases |
+| Manual | ✅ ~1306 páginas en PDF, generadas desde las mismas clases |
 | Glosario | ✅ 424 términos derivados de las clases y enlazados a su clase de origen |
 | Autoevaluaciones | ✅ 90 preguntas, batería por cada una de las 12 partes |
 | Sitio | ✅ portal estático en GitHub Pages con índice, búsqueda y rutas |
@@ -109,7 +109,9 @@ flowchart LR
 
 ## 🗂️ Las 12 partes, en 5 etapas
 
-Cada parte tiene su **propio README** con la secuencia de sus clases y los libros que la
+Cada parte tiene su **propio README docente**, y no un índice de enlaces: de qué trata,
+qué necesitas traer, qué sabrás hacer al terminar, **qué se aprende en cada una de sus
+clases** agrupadas por bloques, los malentendidos que corrige y los libros que la
 sostienen. La numeración es **global y secuencial** por diseño: lo que enseña cada parte
 es el prerrequisito real de la siguiente.
 
@@ -211,7 +213,7 @@ El mismo contenido de las clases, en un solo documento con portada e índice enl
 **con el código de los diez lenguajes a la vista** — que es lo que hace que valga la pena
 en papel: se comparan sin saltar entre archivos.
 
-- 📥 **[Manual completo (~1276 páginas)](manual/MANUAL.pdf)** — listo para imprimir o leer offline.
+- 📥 **[Manual completo (~1306 páginas)](manual/MANUAL.pdf)** — listo para imprimir o leer offline.
 
 ```bash
 python scripts/generar_manual.py               # regenera el manual desde las clases
@@ -351,7 +353,7 @@ problema → concepto → pseudocódigo → implementaciones → comparación �
 
 - 🧬 un **currículo comparado completo**: 176 clases donde cada concepto se enseña una vez y se contrasta entre diez lenguajes;
 - 🧪 material **ejecutable y verificable**: 1360 implementaciones que CI corre contra un `casos.json` común hasta que coinciden;
-- 📖 contenido **abierto y gratuito en español**, legible en GitHub, en el sitio del curso o en un manual de ~1276 páginas;
+- 📖 contenido **abierto y gratuito en español**, legible en GitHub, en el sitio del curso o en un manual de ~1306 páginas;
 - 🌐 una capa de **amplitud honesta**: el Atlas explica ~40 lenguajes por sus características, sin fingir que se implementan;
 - 🔍 material **honesto sobre sus límites**: cada página declara si lo que lees se ejecuta o se lee.
 

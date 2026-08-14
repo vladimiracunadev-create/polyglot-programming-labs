@@ -31,6 +31,7 @@ Leyenda: ✅ construida.
 
 | Pieza | Estado |
 |---|---|
+| **README docente por parte** (`scripts/guias.py` → `scripts/build.py`) | ✅ las 12 partes con narrativa, prerrequisitos, resultados, bloques y la descripción de las 176 clases |
 | **Manual completo** en PDF ([`manual/MANUAL.pdf`](manual/MANUAL.pdf), `scripts/generar_manual.py`) | ✅ las 176 clases en un documento, se versiona |
 | **Guías por clase** en PDF (`material/`, `scripts/generar_material.py`) | ✅ bajo demanda, no se versionan |
 | **Primos del Atlas** (`primos.md`, 2722 programas en 20 lenguajes) | ✅ en las 136 clases con código |

@@ -27,6 +27,9 @@ import unicodedata
 
 import markdown
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from guias import GUIA, HORAS, TIPO  # noqa: E402
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "site")
 REPO_URL = "https://github.com/vladimiracunadev-create/polyglot-programming-labs"
@@ -141,15 +144,16 @@ h2.sec{font-size:1.5rem;margin:2.6rem 0 1.1rem;font-weight:800}
   padding:.3rem .85rem;font-size:.88rem;font-weight:600}
 .lang.atlas{border-style:dashed;color:var(--muted);font-weight:500}
 /* Partes */
-.parts{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.8rem}
-.part{position:relative;display:flex;gap:.75rem;align-items:center;background:var(--card);
-  border:1px solid var(--borde);border-radius:12px;padding:.8rem .9rem;
+.parts{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.8rem}
+.part{position:relative;display:flex;gap:.75rem;align-items:flex-start;background:var(--card);
+  border:1px solid var(--borde);border-radius:12px;padding:.85rem .95rem;
   transition:border-color .2s,transform .08s}
 .part:hover{border-color:var(--acento);transform:translateY(-2px)}
 .part .num{flex:0 0 auto;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;
   font-weight:800;color:#fff;background:linear-gradient(135deg,var(--acento),#5b21b6)}
-.part .t{font-size:.92rem;font-weight:600;line-height:1.25}
-.part .c{font-size:.78rem;color:var(--muted)}
+.part .t{font-size:.92rem;font-weight:600;line-height:1.25;padding-right:1.2rem}
+.part .c{font-size:.78rem;color:var(--muted);margin-top:.15rem}
+.part .d{font-size:.82rem;color:var(--texto);opacity:.85;line-height:1.4;margin-top:.4rem}
 .part .estado{position:absolute;top:.5rem;right:.6rem;font-size:.7rem}
 /* Footer */
 footer{margin-top:3rem;border-top:1px solid var(--borde);background:var(--bg2)}
@@ -215,8 +219,13 @@ def partes_info() -> list[dict]:
                       for c in glob.glob(os.path.join(pdir, "[0-9][0-9][0-9]-*"))
                       if os.path.isdir(c))
         if nums:
+            guia = GUIA.get(idx, {})
             out.append({"idx": idx, "slug": os.path.basename(pdir), "titulo": titulo,
-                        "n": len(nums), "ini": nums[0], "fin": nums[-1]})
+                        "n": len(nums), "ini": nums[0], "fin": nums[-1],
+                        # El gancho y el tipo vienen de scripts/guias.py, la misma fuente
+                        # que escribe el README de la parte: portal y markdown no se separan.
+                        "gancho": guia.get("gancho", ""),
+                        "tipo": TIPO.get(idx, ""), "horas": HORAS.get(idx)})
     return out
 
 
@@ -278,7 +287,12 @@ def escribir_landing(partes: list[dict], n_primos: int, n_terminos: int, n_pregu
         f'<a class="part" href="classes/{p["slug"]}/README.html">'
         f'<div class="num">{p["idx"]}</div>'
         f'<div><div class="t">{htmllib.escape(p["titulo"])}</div>'
-        f'<div class="c">{p["n"]} clases · {p["ini"]:03d}–{p["fin"]:03d}</div></div>'
+        f'<div class="c">{p["n"]} clases · {p["ini"]:03d}–{p["fin"]:03d}'
+        + (f' · {p["tipo"]}' if p.get("tipo") else "")
+        + (f' · ~{p["horas"]} h' if p.get("horas") else "")
+        + "</div>"
+        + (f'<div class="d">{htmllib.escape(p["gancho"])}</div>' if p.get("gancho") else "")
+        + "</div>"
         f'<span class="estado">✅</span></a>'
         for p in partes)
 

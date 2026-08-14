@@ -7,7 +7,7 @@ según [SemVer](https://semver.org/lang/es/). Para un curso, la lectura de SemVe
 **MAJOR** = cambia la estructura del currículo (numeración o partes); **MINOR** = contenido
 o herramientas nuevas sin mover la numeración; **PATCH** = correcciones.
 
-## [1.0.0] — 2026-08-13
+## [1.0.0] — 2026-08-14
 
 Primer release. El programa está completo y empaquetado: las 176 clases construidas, la
 equivalencia verificada por máquina y el curso distribuido en cuatro formatos (web, APK,
@@ -55,7 +55,7 @@ ejecutable de Windows y PDF).
 | Equivalencia entre lenguajes | `ci.yml` — un job por lenguaje, cada implementación contra `casos.json` |
 | Primos ejecutables | `labs.yml` — Ruby, Perl y Lua contra el mismo contrato |
 | Estructura y manifest | `scripts/validar_estructura.py` en CI |
-| Markdown | `markdownlint-cli2` sobre los 750 ficheros |
+| Markdown | `markdownlint-cli2` sobre los 754 ficheros del repositorio |
 | Secretos y código de los scripts | `gitleaks` y `bandit` en `security.yml` |
 | Contenido dentro del APK y del `.exe` | `android.yml` y `desktop.yml` (recuento dentro del binario) |
 

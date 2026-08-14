@@ -22,6 +22,11 @@ __pycache__/
 # Sitio generado
 site/
 
+# El volumen completo (manual + los 2722 primos, ~2420 páginas y 40 MB) se
+# genera bajo demanda y se publica como asset del release, no en el repo:
+#   python scripts/generar_manual.py --con-primos --salida manual/MANUAL-COMPLETO.pdf
+manual/MANUAL-COMPLETO.pdf
+
 # Guías PDF por clase: se generan bajo demanda con scripts/generar_material.py
 # y pesan ~1 MB cada una. El manual (manual/MANUAL.pdf) sí se versiona, para
 # que haya un enlace de descarga directo desde el README.
@@ -29,6 +34,24 @@ material/
 
 # Rust
 target/
+
+# Apps: artefactos de build. Lo que se versiona es la RECETA (capacitor.config.json,
+# package.json, main.py, los generadores); el proyecto nativo y el sitio copiado se
+# regeneran en cada compilación desde site/, para que ningún binario pueda quedarse
+# con una copia vieja del curso. Los binarios van como assets del release, nunca al
+# repo: GitHub rechaza blobs de más de 100 MB.
+apps/android/www/
+apps/android/android/
+apps/android/ios/
+apps/android/package-lock.json
+dist/
+dist_local/
+build/
+build_local/
+artefactos/
+*.spec
+*.apk
+*.aab
 
 # Sistema
 .DS_Store

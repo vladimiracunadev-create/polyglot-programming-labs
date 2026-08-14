@@ -1,0 +1,91 @@
+name: Escritorio (ejecutable del curso)
+
+# Empaqueta el sitio del curso (site/, generado desde las clases) dentro de un
+# ejecutable único con PyInstaller. La app sirve ese sitio en 127.0.0.1 y lo abre
+# en el navegador: el curso se lee como HTML real, no como texto plano.
+#
+# El paso que importa es el de verificación: lee el índice del archivo que
+# PyInstaller pega al final del binario y CUENTA las páginas de clase. Un
+# ejecutable compilado sin `--add-data` arranca igual y no lleva ni una clase.
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: desktop-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  windows:
+    name: Ejecutable de Windows
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Dependencias
+        run: python -m pip install --quiet pyinstaller "markdown>=3.6"
+
+      - name: Generar el sitio desde las clases
+        run: |
+          python scripts/generar_sitio.py
+          $clases = (Get-ChildItem site/classes -Recurse -Filter README.html |
+                     Where-Object { $_.Directory.Name -match '^\d{3}-' }).Count
+          Write-Host "Paginas de clase generadas: $clases"
+          if ($clases -ne 176) { exit 1 }
+
+      - name: Compilar el ejecutable
+        run: >
+          pyinstaller --noconfirm --onefile --windowed
+          --name PolyglotProgrammingLabs
+          --add-data "site;site"
+          apps/desktop/main.py
+
+      - name: Verificar el contenido del ejecutable (anti-vacío)
+        run: python apps/desktop/verificar_exe.py dist/PolyglotProgrammingLabs.exe
+
+      - name: Comprobar que arranca y sirve el curso
+        run: |
+          $p = Start-Process -FilePath dist/PolyglotProgrammingLabs.exe `
+                             -ArgumentList '--no-gui','--no-abrir','--puerto','8799' -PassThru
+          Start-Sleep -Seconds 12
+          try {
+            $inicio = Invoke-WebRequest -Uri http://127.0.0.1:8799/ -UseBasicParsing -TimeoutSec 20
+            $clase  = Invoke-WebRequest -UseBasicParsing -TimeoutSec 20 `
+              -Uri http://127.0.0.1:8799/classes/parte-3-valores-tipos-y-variables/044-enteros-tamano-signo-desbordamiento-y-bases/README.html
+            if ($inicio.StatusCode -ne 200) { throw "la portada no responde 200" }
+            if ($clase.StatusCode  -ne 200) { throw "una clase no responde 200" }
+            if ($clase.Content -notmatch 'import sys') { throw "la clase no trae el codigo a la vista" }
+            Write-Host "OK: portada y clase 044 servidas con su codigo."
+          } finally {
+            Stop-Process -Id $p.Id -Force -ErrorAction SilentlyContinue
+          }
+
+      - name: Renombrar el artefacto y calcular el hash
+        run: |
+          New-Item -ItemType Directory -Force -Path artefactos | Out-Null
+          Copy-Item dist/PolyglotProgrammingLabs.exe artefactos/PolyglotProgrammingLabs-windows.exe
+          (Get-FileHash artefactos/PolyglotProgrammingLabs-windows.exe -Algorithm SHA256).Hash
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PolyglotProgrammingLabs-windows
+          path: artefactos/PolyglotProgrammingLabs-windows.exe
+          if-no-files-found: error
+
+      - name: Resumen
+        if: always()
+        run: |
+          "### 💻 Ejecutable del curso"                                            | Out-File -Append $env:GITHUB_STEP_SUMMARY
+          ""                                                                        | Out-File -Append $env:GITHUB_STEP_SUMMARY
+          "Verificado por dentro (recuento de páginas en el binario) y por fuera"    | Out-File -Append $env:GITHUB_STEP_SUMMARY
+          "(arranca, sirve la portada y una clase con su código a la vista)."        | Out-File -Append $env:GITHUB_STEP_SUMMARY

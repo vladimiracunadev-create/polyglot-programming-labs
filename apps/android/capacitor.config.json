@@ -1,0 +1,11 @@
+{
+  "appId": "dev.vladimiracuna.polyglotlabs",
+  "appName": "Polyglot Programming Labs",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": false
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}

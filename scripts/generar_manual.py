@@ -21,7 +21,7 @@ no un adorno. Los anexos `primos.md` quedan fuera por tamaño — se añaden con
 `--con-primos` si quieres el volumen completo.
 
 Uso:  python scripts/generar_manual.py                 # genera manual/MANUAL.pdf
-      python scripts/generar_manual.py --con-primos    # incluye los 2722 primos
+      python scripts/generar_manual.py --con-primos --salida manual/MANUAL-COMPLETO.pdf
       python scripts/generar_manual.py --volcar-md R   # además escribe el MD en R (debug)
 Requiere: pip install "markdown>=3.6" y Chrome o Edge (headless).
 """
@@ -101,9 +101,13 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Genera el manual del curso en PDF.")
     ap.add_argument("--con-primos", action="store_true",
                     help="incluir los anexos primos.md (manual mucho más largo)")
+    ap.add_argument("--salida", metavar="RUTA", default=MANUAL_PDF,
+                    help="PDF de destino (por defecto manual/MANUAL.pdf). Úsalo con "
+                         "--con-primos para no pisar el manual versionado.")
     ap.add_argument("--volcar-md", metavar="RUTA",
                     help="además, escribe el Markdown intermedio ahí (para depurar)")
     args = ap.parse_args()
+    destino = os.path.abspath(args.salida)
 
     try:
         import markdown
@@ -137,7 +141,7 @@ def main() -> int:
         print("No encontré Chrome ni Edge (hacen falta para el PDF).")
         return 1
 
-    os.makedirs(MANUAL_DIR, exist_ok=True)
+    os.makedirs(os.path.dirname(destino) or MANUAL_DIR, exist_ok=True)
     with tempfile.NamedTemporaryFile("w", suffix=".html", delete=False, encoding="utf-8") as tmp:
         tmp.write(html)
         ruta_tmp = tmp.name
@@ -145,7 +149,7 @@ def main() -> int:
         print("Generando el PDF (son cientos de páginas: puede tardar unos minutos)...")
         subprocess.run(
             [navegador, "--headless=new", "--disable-gpu", "--no-sandbox",
-             "--no-pdf-header-footer", f"--print-to-pdf={MANUAL_PDF}",
+             "--no-pdf-header-footer", f"--print-to-pdf={destino}",
              "file:///" + ruta_tmp.replace("\\", "/")],
             check=True, timeout=900,
             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -155,8 +159,11 @@ def main() -> int:
     finally:
         os.unlink(ruta_tmp)
 
-    print(f"  {os.path.relpath(MANUAL_PDF, ROOT)} ({os.path.getsize(MANUAL_PDF) // 1024} KB)")
-    print("\nOK: manual generado. Recuerda commitearlo (se versiona).")
+    print(f"  {os.path.relpath(destino, ROOT)} ({os.path.getsize(destino) // 1024} KB)")
+    if destino == MANUAL_PDF:
+        print("\nOK: manual generado. Recuerda commitearlo (se versiona).")
+    else:
+        print("\nOK: manual generado. Este PDF NO se versiona: publícalo como asset del release.")
     return 0
 
 

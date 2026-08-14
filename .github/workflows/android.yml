@@ -1,0 +1,122 @@
+name: Android (APK del curso)
+
+# Empaqueta el sitio estático del curso (site/, generado desde las clases) en una
+# app Android con Capacitor. No hay código de app propio: la app ES el sitio.
+#
+# Lo que de verdad importa aquí no es que el APK compile, sino que lleve el curso
+# dentro. Un APK vacío compila perfectamente: la WebView arranca, muestra un 404 y
+# todas las señales de build siguen en verde. Por eso el paso de verificación
+# descomprime el APK y CUENTA las páginas de clase antes de publicar nada.
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CLASES_ESPERADAS: 176
+  PRIMOS_ESPERADOS: 136
+
+jobs:
+  apk:
+    name: Compilar y verificar el APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Generar el sitio desde las clases
+        run: |
+          set -euo pipefail
+          python -m pip install --quiet "markdown>=3.6"
+          python scripts/generar_sitio.py
+          CLASES=$(find site/classes -path '*[0-9][0-9][0-9]-*' -name 'README.html' | wc -l)
+          echo "Páginas de clase generadas: $CLASES"
+          test "$CLASES" -eq "$CLASES_ESPERADAS"
+
+      - name: Preparar el proyecto Capacitor
+        working-directory: apps/android
+        run: |
+          set -euo pipefail
+          mkdir -p www
+          cp -r ../../site/. www/
+          test -s www/index.html
+          npm install
+          npx cap add android
+          npx capacitor-assets generate --android
+          npx cap sync android
+
+      - name: Compilar el APK
+        working-directory: apps/android/android
+        run: ./gradlew assembleDebug --no-daemon
+
+      - name: Verificar el contenido del APK (anti-vacío)
+        run: |
+          set -euo pipefail
+          APK=apps/android/android/app/build/outputs/apk/debug/app-debug.apk
+          test -s "$APK"
+
+          # unzip -l lista una ruta por línea: contamos rutas, no ocurrencias sueltas.
+          # El patrón NNN-slug/README.html deja fuera los README de parte, que se
+          # llaman igual pero cuelgan un nivel más arriba.
+          RUTAS=$(unzip -l "$APK" 'assets/public/classes/*')
+          CLASES=$(echo "$RUTAS" | grep -cE '/[0-9]{3}-[^/]+/README\.html$' || true)
+          PRIMOS=$(echo "$RUTAS" | grep -cE '/[0-9]{3}-[^/]+/primos\.html$' || true)
+          TAM=$(du -m "$APK" | cut -f1)
+
+          echo "APK: ${TAM} MB · páginas de clase: $CLASES · anexos de primos: $PRIMOS"
+
+          if [ "$CLASES" -ne "$CLASES_ESPERADAS" ]; then
+            echo "ERROR: el APK no contiene las $CLASES_ESPERADAS clases (encontradas: $CLASES)."
+            exit 1
+          fi
+          if [ "$PRIMOS" -ne "$PRIMOS_ESPERADOS" ]; then
+            echo "ERROR: faltan anexos de primos (esperados $PRIMOS_ESPERADOS, encontrados $PRIMOS)."
+            exit 1
+          fi
+          unzip -p "$APK" assets/public/index.html | grep -q "Polyglot Programming Labs"
+
+      - name: Renombrar el artefacto
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          cp apps/android/android/app/build/outputs/apk/debug/app-debug.apk \
+             dist/PolyglotProgrammingLabs-android.apk
+          sha256sum dist/PolyglotProgrammingLabs-android.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PolyglotProgrammingLabs-android
+          path: dist/PolyglotProgrammingLabs-android.apk
+          if-no-files-found: error
+
+      - name: Resumen
+        if: always()
+        run: |
+          {
+            echo "### 📱 APK del curso"
+            echo ""
+            echo "El APK se verifica **por dentro**: se descomprime y se cuentan las páginas"
+            echo "de clase antes de publicarlo. Un build en verde no prueba que el curso esté"
+            echo "dentro; este recuento sí."
+          } >> "$GITHUB_STEP_SUMMARY"

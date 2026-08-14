@@ -16,7 +16,7 @@ C#, Go, Rust, C, SQL y PHP, con un Atlas que te deja leer decenas de lenguajes m
 [![Security](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/security.yml/badge.svg?branch=main)](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/security.yml)
 [![Deploy Pages](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/deploy-pages.yml/badge.svg?branch=main)](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/deploy-pages.yml)
 
-[![Versión](https://img.shields.io/badge/versión-1.0.0-e8590c?style=for-the-badge)](CHANGELOG.md)
+[![Versión](https://img.shields.io/badge/versión-1.0.1-e8590c?style=for-the-badge)](CHANGELOG.md)
 [![Clases](https://img.shields.io/badge/clases-176%20·%2012%20partes-7c5cff?style=for-the-badge)](classes/README.md)
 [![Núcleo](https://img.shields.io/badge/núcleo-10%20lenguajes-2e8b57?style=for-the-badge)](languages.json)
 [![Implementaciones](https://img.shields.io/badge/implementaciones-1360%20verificadas-2f81f7?style=for-the-badge)](scripts/verificar_equivalencia.py)

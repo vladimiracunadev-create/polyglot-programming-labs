@@ -24,6 +24,7 @@ import re
 import shutil
 import sys
 import unicodedata
+import urllib.parse
 
 import markdown
 
@@ -41,9 +42,11 @@ except Exception:
 
 # Markdown del nivel superior que se publican.
 INCLUIR_TOP = [
-    "README.md", "ROADMAP.md", "CONTRIBUTING.md", "SECURITY.md",
+    "README.md", "ROADMAP.md", "CHANGELOG.md", "CONTRIBUTING.md",
+    "CODE_OF_CONDUCT.md", "SECURITY.md",
     "atlas/README.md", "rutas/README.md", "labs/README.md",
     "glosario/README.md", "autoevaluaciones/README.md",
+    "apps/android/README.md", "apps/desktop/README.md",
     "docs/CURRICULO.md", "docs/METODOLOGIA.md", "docs/EXTENDER.md",
     "docs/syllabus.md", "docs/rubrica-evaluacion.md", "docs/examen-final-por-perfil.md",
 ]
@@ -203,6 +206,69 @@ def escribir(rel: str, contenido: str) -> None:
     os.makedirs(os.path.dirname(destino), exist_ok=True)
     with open(destino, "w", encoding="utf-8") as f:
         f.write(contenido)
+
+
+HREF = re.compile(r'href="([^"]+)"')
+
+
+def reparar_enlaces() -> tuple[int, list[str]]:
+    """Reapunta a GitHub los enlaces a archivos que el sitio NO publica.
+
+    Las clases enlazan a su `casos.json`, a `implementaciones/<lenguaje>/main.*`,
+    a los scripts y a los workflows. Todo eso vive en el repositorio pero no se
+    copia al sitio: en GitHub Pages daban 404. En vez de borrar los enlaces
+    —que son parte del contenido: «este bloque es el archivo real»— se reescriben
+    a la URL del repositorio, donde el archivo sí existe y se ve resaltado.
+
+    Se hace como pasada final, sobre el HTML ya escrito, para que el criterio sea
+    el único fiable: *¿existe el destino en el sitio recién generado?* Devuelve
+    cuántos se reapuntaron y los que siguen rotos (que serían un error real).
+    """
+    reapuntados, rotos = 0, []
+    for base, _dirs, ficheros in os.walk(OUT):
+        for fichero in ficheros:
+            if not fichero.endswith(".html"):
+                continue
+            ruta = os.path.join(base, fichero)
+            rel_pagina = os.path.relpath(ruta, OUT).replace("\\", "/")
+            with open(ruta, encoding="utf-8") as f:
+                html = f.read()
+
+            cambios = []
+
+            def resolver(m: re.Match) -> str:
+                href = m.group(1)
+                # Absolutos, anclas y plantillas de JavaScript (`${...}`): no se tocan.
+                if href.startswith(("http", "mailto:", "#", "data:", "/")) or "${" in href:
+                    return m.group(0)
+                camino, _, ancla = href.partition("#")
+                if not camino:
+                    return m.group(0)
+                destino = os.path.normpath(os.path.join(
+                    os.path.dirname(rel_pagina), urllib.parse.unquote(camino))).replace("\\", "/")
+                if os.path.exists(os.path.join(OUT, destino)):
+                    return m.group(0)          # el sitio sí lo publica: se deja
+
+                # No está en el sitio: ¿existe en el repositorio? Las páginas .html
+                # vienen de un .md, así que se prueba primero esa forma.
+                candidatos = [destino[:-5] + ".md"] if destino.endswith(".html") else []
+                candidatos.append(destino)
+                for cand in candidatos:
+                    absoluto = os.path.join(ROOT, cand)
+                    if os.path.exists(absoluto):
+                        tipo = "tree" if os.path.isdir(absoluto) else "blob"
+                        cambios.append(cand)
+                        sufijo = f"#{ancla}" if ancla else ""
+                        return f'href="{REPO_URL}/{tipo}/main/{cand}{sufijo}"'
+                rotos.append(f"{rel_pagina} -> {href}")
+                return m.group(0)
+
+            nuevo = HREF.sub(resolver, html)
+            if cambios:
+                reapuntados += len(cambios)
+                with open(ruta, "w", encoding="utf-8") as f:
+                    f.write(nuevo)
+    return reapuntados, rotos
 
 
 # ---------------------------------------------------------------- portada
@@ -546,8 +612,16 @@ def main() -> int:
     # GitHub Pages con Jekyll ignora lo que empieza por guion bajo (_manifest.json).
     escribir(".nojekyll", "")
 
+    reapuntados, rotos = reparar_enlaces()
+
     print(f"Sitio generado en site/ ({generados} páginas HTML + portada + buscador)")
     print(f"  {len(partes)} partes · {n_indexadas} clases indexadas · {n_primos} programas primos")
+    print(f"  {reapuntados} enlaces a archivos del repo reapuntados a GitHub")
+    if rotos:
+        print(f"  ATENCIÓN: {len(rotos)} enlaces rotos (no están ni en el sitio ni en el repo):")
+        for r in rotos[:10]:
+            print(f"    {r}")
+        return 1
     return 0
 
 

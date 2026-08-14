@@ -7,6 +7,24 @@ según [SemVer](https://semver.org/lang/es/). Para un curso, la lectura de SemVe
 **MAJOR** = cambia la estructura del currículo (numeración o partes); **MINOR** = contenido
 o herramientas nuevas sin mover la numeración; **PATCH** = correcciones.
 
+## [1.0.1] — 2026-08-14
+
+### Corregido
+
+- **Los enlaces del sitio a los archivos del repositorio daban 404.** Cada clase enlaza a
+  su `casos.json` y a sus diez `implementaciones/<lenguaje>/main.*` —son parte del
+  contenido: «este bloque es el archivo real»—, pero el portal no copia esos archivos, así
+  que en GitHub Pages y **dentro de las apps** no llevaban a ninguna parte. Eran 1806
+  enlaces. Ahora `scripts/generar_sitio.py` hace una pasada final: todo enlace cuyo destino
+  no publique el sitio se reapunta a la URL del repositorio, donde el archivo sí existe
+  (1969 reapuntados), y **el generador falla si queda alguno roto**, de modo que el
+  problema no puede volver sin que CI se entere.
+- El sitio publica también `CHANGELOG`, `CODE_OF_CONDUCT` y los README de las dos apps,
+  que estaban enlazados desde la portada pero no se generaban.
+
+> Los binarios de la v1.0.0 llevan dentro el sitio con esos enlaces rotos. Se sustituyen
+> por los de esta versión; los `.pdf` no cambian (en papel los enlaces ya iban a texto).
+
 ## [1.0.0] — 2026-08-14
 
 Primer release. El programa está completo y empaquetado: las 176 clases construidas, la
@@ -70,4 +88,5 @@ ejecutable de Windows y PDF).
 | `sitio-offline.zip` | El portal HTML completo, para servir donde quieras |
 | `SHA256SUMS.txt` | Hashes de todo lo anterior |
 
+[1.0.1]: https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases/tag/v1.0.1
 [1.0.0]: https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases/tag/v1.0.0

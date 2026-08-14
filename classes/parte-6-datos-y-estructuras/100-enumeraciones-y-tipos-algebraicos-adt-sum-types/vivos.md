@@ -65,7 +65,7 @@ WORKING-STORAGE SECTION.
 01  T2      PIC X(20).
 01  A       PIC S9(9)  COMP-3 VALUE 0.
 01  B       PIC S9(9)  COMP-3 VALUE 0.
-01  AREA    PIC S9(18) COMP-3 VALUE 0.
+01  SUPERF  PIC S9(18) COMP-3 VALUE 0.
 01  ED-A    PIC -(17)9.
 01  CLASE   PIC X(12).
     88  ES-CUADRADO    VALUE "cuadrado".
@@ -82,12 +82,12 @@ PROCEDURE DIVISION.
     END-IF
 
     EVALUATE TRUE
-        WHEN ES-CUADRADO    COMPUTE AREA = A * A
-        WHEN ES-RECTANGULO  COMPUTE AREA = A * B
-        WHEN OTHER          MOVE 0 TO AREA
+        WHEN ES-CUADRADO    COMPUTE SUPERF = A * A
+        WHEN ES-RECTANGULO  COMPUTE SUPERF = A * B
+        WHEN OTHER          MOVE 0 TO SUPERF
     END-EVALUATE
 
-    MOVE AREA TO ED-A
+    MOVE SUPERF TO ED-A
     DISPLAY "area=" FUNCTION TRIM(ED-A)
     STOP RUN.
 ```
@@ -135,6 +135,17 @@ Y hay un detalle que hace esto menos temerario de lo que suena en contexto: **el
 fichero**, donde la etiqueta y los datos llegan juntos y consistentes desde el sistema que los
 escribió. El problema no es leer la variante equivocada por accidente; es que dos programas discrepen
 sobre qué significa la etiqueta — que es un problema de gestión de copybooks (clase 088).
+
+**Un tropiezo real de este programa.** La primera versión llamaba `AREA` a la variable del resultado,
+y GnuCOBOL respondió `syntax error, unexpected AREA`: **`AREA` es palabra reservada de COBOL**, de la
+cláusula `SAME AREA` que compartía búferes entre ficheros en los años sesenta. De ahí el `SUPERF` del
+código.
+
+Es el mismo tropiezo que en la clase 044 con `POS`, y por la misma causa: **COBOL tiene más de
+quinientas palabras reservadas**, muchas de ellas nombres tan naturales que se eligen sin pensar —
+`COUNT`, `DATE`, `LENGTH`, `STATUS`, `NUMBER`, `KEY`, `END`, `AREA`, `CLASS`, `ORDER`. Por eso la
+convención de prefijos de la clase 086 —`WS-IMPORTE`, `CLI-NOMBRE`— no es solo organización: **es la
+defensa práctica contra el espacio de nombres reservado**.
 
 ### Fortran
 

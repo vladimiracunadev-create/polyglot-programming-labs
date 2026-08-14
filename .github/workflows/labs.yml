@@ -1,4 +1,4 @@
-name: Labs (primos del Atlas)
+name: Labs (primos del Atlas y lenguajes vivos)
 
 # El CI principal verifica la equivalencia de los 10 lenguajes del NÚCLEO.
 # Este workflow va un paso más allá, sobre el material que hasta ahora era solo
@@ -19,15 +19,19 @@ on:
   pull_request:
     paths:
       - "classes/**/primos.md"
+      - "classes/**/vivos.md"
       - "classes/**/casos.json"
       - "scripts/verificar_primos.py"
+      - "scripts/verificar_vivos.py"
       - ".github/workflows/labs.yml"
   push:
     branches: ["main"]
     paths:
       - "classes/**/primos.md"
+      - "classes/**/vivos.md"
       - "classes/**/casos.json"
       - "scripts/verificar_primos.py"
+      - "scripts/verificar_vivos.py"
       - ".github/workflows/labs.yml"
   workflow_dispatch:
 
@@ -87,4 +91,79 @@ jobs:
             echo ""
             echo "Los primos sin toolchain en CI (Zig, Prolog, Objective-C, ActionScript…)"
             echo "siguen siendo material ilustrativo y así se declara en cada página."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  # ---------------------------------------------------------------------------
+  # Los LENGUAJES VIVOS de cada `vivos.md`: lenguajes antiguos que siguen en
+  # producción (COBOL en banca, Fortran en HPC, Ada en aviónica…) resolviendo el
+  # problema de cada clase. Aquí se ejecutan los ocho cuyo toolchain es barato de
+  # instalar; el resto se declara como no verificado en la propia página, con su
+  # motivo (RPG y VBA no leen stdin, JCL no calcula, PL/I necesita z/OS).
+  vivos:
+    name: Vivos (${{ matrix.lang }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        lang: [cobol, fortran, ada, pascal, lisp, tcl, perl, cpp]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar el toolchain del lenguaje
+        run: |
+          set -euo pipefail
+          case "${{ matrix.lang }}" in
+            cobol)
+              sudo apt-get update -qq
+              # El nombre del paquete cambió entre versiones de Ubuntu.
+              sudo apt-get install -y --no-install-recommends gnucobol4 \
+                || sudo apt-get install -y --no-install-recommends gnucobol \
+                || sudo apt-get install -y --no-install-recommends open-cobol
+              ;;
+            fortran) sudo apt-get update -qq; sudo apt-get install -y --no-install-recommends gfortran ;;
+            ada)     sudo apt-get update -qq; sudo apt-get install -y --no-install-recommends gnat ;;
+            pascal)  sudo apt-get update -qq; sudo apt-get install -y --no-install-recommends fpc ;;
+            lisp)    sudo apt-get update -qq; sudo apt-get install -y --no-install-recommends sbcl ;;
+            tcl)     sudo apt-get update -qq; sudo apt-get install -y --no-install-recommends tcl ;;
+            perl)    : ;;   # viene en el runner
+            cpp)     : ;;   # g++ viene en el runner
+          esac
+
+      - name: Versión del compilador o intérprete
+        run: |
+          set -euo pipefail
+          case "${{ matrix.lang }}" in
+            cobol)   cobc --version | head -1 ;;
+            fortran) gfortran --version | head -1 ;;
+            ada)     gnatmake --version | head -1 ;;
+            pascal)  fpc -iV ;;
+            lisp)    sbcl --version ;;
+            tcl)     echo 'puts [info patchlevel]' | tclsh ;;
+            perl)    perl --version | sed -n '2p' ;;
+            cpp)     g++ --version | head -1 ;;
+          esac
+
+      - name: Verificar los lenguajes vivos contra casos.json
+        run: python scripts/verificar_vivos.py --all --lang ${{ matrix.lang }} --estricto
+
+      - name: Resumen
+        if: always()
+        run: |
+          {
+            echo "### 🧟 Lenguajes vivos verificados · ${{ matrix.lang }}"
+            echo ""
+            echo "Código extraído de los \`vivos.md\` y ejecutado contra el mismo"
+            echo "\`casos.json\` que el núcleo. Clases con \`vivos.md\`:"
+            echo "**$(ls -d classes/parte-*/[0-9][0-9][0-9]-*/vivos.md 2>/dev/null | wc -l)**."
+            echo ""
+            echo "Lo que NO pasa por aquí, y se declara en cada página: RPG y VBA no leen"
+            echo "stdin, JCL no calcula (orquesta el COBOL que sí lo hace), AutoLISP vive"
+            echo "dentro de AutoCAD, y PL/I, MUMPS, Smalltalk y el ensamblador no tienen"
+            echo "toolchain en el runner."
           } >> "$GITHUB_STEP_SUMMARY"

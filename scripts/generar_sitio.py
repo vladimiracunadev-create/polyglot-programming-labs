@@ -576,7 +576,7 @@ def main() -> int:
         generados += 1
         for cdir in sorted(glob.glob(os.path.join(pdir, "[0-9][0-9][0-9]-*"))):
             base = os.path.basename(cdir)
-            for nombre in ("README", "primos"):
+            for nombre in ("README", "primos", "vivos"):
                 origen = os.path.join(cdir, nombre + ".md")
                 if os.path.isfile(origen):
                     rel = f'classes/{p["slug"]}/{base}/{nombre}.html'

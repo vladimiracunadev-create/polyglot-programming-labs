@@ -3,6 +3,11 @@
 > Parte **3 — Valores, tipos y variables** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
 > ✅ **Clase construida** — clase insignia con las 10 implementaciones del núcleo verificadas en CI.
 
+📄 **Páginas de esta clase:** [🧬 Primos del Atlas](primos.md) — el mismo programa en las familias ·
+[🧟 Lenguajes que siguen vivos](vivos.md) — el mismo problema en COBOL, Fortran, Ada, Pascal,
+Common Lisp, Tcl, Perl, C++, PL/I, MUMPS, Smalltalk y RPG, con lo que cada uno enseña **sobre esta
+clase**.
+
 ---
 
 ## 🎯 Objetivo

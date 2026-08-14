@@ -1,6 +1,7 @@
 # 🧬 El mismo programa en las familias de lenguajes — Clase 041
 
-> [⬅️ Volver a la clase 041](README.md) · [🌐 Atlas de familias](../../../atlas/README.md) · [📚 Índice](../../README.md)
+> [⬅️ Volver a la clase 041](README.md) · [🌐 Atlas de familias](../../../atlas/README.md) ·
+> [🧟 Lenguajes que siguen vivos](vivos.md) · [📚 Índice](../../README.md)
 
 Esta página lleva la tesis del programa hasta el final: **aprende el representante, reconoce la
 familia entera**. El mismo problema de la clase —el total de una venta— resuelto por los **primos**

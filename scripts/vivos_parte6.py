@@ -13,7 +13,9 @@ import vivos_p6c
 import vivos_p6d
 import vivos_p6e
 import vivos_p6f
+import vivos_p6g
 
 SPECS: dict[str, dict] = {}
-for _lote in (vivos_p6a, vivos_p6b, vivos_p6c, vivos_p6d, vivos_p6e, vivos_p6f):
+for _lote in (vivos_p6a, vivos_p6b, vivos_p6c, vivos_p6d, vivos_p6e,
+              vivos_p6f, vivos_p6g):
     SPECS.update(_lote.SPECS)

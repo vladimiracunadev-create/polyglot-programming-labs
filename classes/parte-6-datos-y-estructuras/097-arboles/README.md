@@ -3,6 +3,11 @@
 > Parte **6 — Datos y estructuras** · ⏱️ Duración estimada: **90 min** · Nivel: **Intermedio**
 > ✅ **Clase construida** — 10 implementaciones del núcleo verificadas contra `casos.json`.
 
+📄 **Páginas de esta clase:** [🧬 Primos del Atlas](primos.md) — el mismo programa en las
+familias · [🧟 Lenguajes que siguen vivos](vivos.md) — el mismo problema en COBOL · Fortran · Ada · Pascal · Common Lisp · Tcl · Perl · C++ · RPG · PL/I · M / MUMPS · Smalltalk,
+con lo que cada uno enseña **sobre esta clase**.
+
+
 ---
 
 ## 🎯 Objetivo

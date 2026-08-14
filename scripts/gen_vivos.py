@@ -83,6 +83,32 @@ LANGS = {
         run="CRTBNDRPG sobre IBM i",
         motivo="En IBM i un programa recibe sus datos por **parámetros**, por un "
                "**fichero** o por una **pantalla**, nunca por la entrada estándar."),
+    "jcl": dict(
+        nombre="JCL", ficha="jcl", fence="text", nivel="adaptado",
+        sector="z/OS: proceso por lotes de banca, seguros y administración",
+        run="SUBMIT desde ISPF, o zowe jobs submit",
+        motivo="JCL **no calcula**: describe qué programa se ejecuta y a qué ficheros reales se "
+               "conectan sus nombres lógicos. Aparece en las clases donde ese reparto de "
+               "responsabilidades es justamente lo que se estudia."),
+    "vba": dict(
+        nombre="VBA", ficha="vba", fence="vba", nivel="adaptado",
+        sector="Excel, Word, Access, AutoCAD, SolidWorks",
+        run="Alt+F11 dentro del anfitrión",
+        motivo="VBA no tiene `stdin` ni `stdout`: su entrada son las **celdas** y el usuario, y su "
+               "salida son las celdas, la Ventana Inmediato o un cuadro de diálogo."),
+    "autolisp": dict(
+        nombre="AutoLISP", ficha="autolisp", fence="lisp", nivel="adaptado",
+        sector="AutoCAD: arquitectura, ingeniería, construcción",
+        run="APPLOAD o `(load \"fichero.lsp\")` dentro de AutoCAD",
+        motivo="AutoLISP vive dentro de AutoCAD: pregunta al usuario por la línea de comandos o le "
+               "deja señalar un objeto del dibujo, y su salida es el dibujo o esa misma línea."),
+    "assembler": dict(
+        nombre="Assembler", ficha="assembler", fence="gas", nivel="lectura",
+        sector="Firmware, núcleos, criptografía, SIMD, embebidos",
+        run="gcc -no-pie prog.s",
+        motivo="El ensamblador es **específico de una arquitectura**: este código es x86-64 con la "
+               "ABI System V de Linux. En ARM64 o RISC-V sería otro programa, y esa dependencia es "
+               "precisamente su característica."),
     "pli": dict(
         nombre="PL/I", ficha="pl-i", fence="pli", nivel="lectura",
         sector="Mainframe z/OS: banca, seguros",
@@ -98,7 +124,8 @@ LANGS = {
 }
 
 ORDEN = ["cobol", "fortran", "ada", "pascal", "lisp", "tcl", "perl", "cpp",
-         "rpg", "pli", "mumps", "smalltalk"]
+         "rpg", "jcl", "vba", "autolisp",
+         "pli", "mumps", "smalltalk", "assembler"]
 
 SECCIONES = [
     ("ci", "## 🟢 Se ejecutan en CI", None),

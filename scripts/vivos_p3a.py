@@ -903,7 +903,7 @@ WORKING-STORAGE SECTION.
 01  BASE      PIC 9(2) COMP-3.
 01  RESTO     PIC 9(2) COMP-3.
 01  IDX       PIC 9(2) COMP-3.
-01  POS       PIC 9(2) COMP-3.
+01  PUNTERO   PIC 9(2) COMP-3.
 01  BUFFER    PIC X(40).
 01  HEX-TXT   PIC X(40).
 01  OCT-TXT   PIC X(40).
@@ -935,15 +935,15 @@ PROCEDURE DIVISION.
 CONVERTIR.
     MOVE SPACES TO BUFFER
     MOVE N TO VALOR
-    MOVE 40 TO POS
+    MOVE 40 TO PUNTERO
     IF VALOR = 0
         MOVE "0" TO BUFFER(40:1)
     ELSE
         PERFORM UNTIL VALOR = 0
             COMPUTE RESTO = FUNCTION MOD(VALOR, BASE)
             COMPUTE IDX = RESTO + 1
-            MOVE DIGITOS(IDX:1) TO BUFFER(POS:1)
-            SUBTRACT 1 FROM POS
+            MOVE DIGITOS(IDX:1) TO BUFFER(PUNTERO:1)
+            SUBTRACT 1 FROM PUNTERO
             COMPUTE VALOR = VALOR / BASE
         END-PERFORM
     END-IF.
@@ -955,8 +955,16 @@ pregunta "¿cómo se ve esto en base 16?" simplemente no se plantea cuando el da
 cuenta.
 
 Así que el algoritmo hay que escribirlo, y al escribirlo se ve lo que `%x` esconde: **divisiones
-sucesivas quedándose con el resto**, llenando el resultado de derecha a izquierda. `BUFFER(POS:1)` es
-**modificación de referencia**, la forma de COBOL de indexar dentro de un campo: `campo(inicio:largo)`.
+sucesivas quedándose con el resto**, llenando el resultado de derecha a izquierda.
+`BUFFER(PUNTERO:1)` es **modificación de referencia**, la forma de COBOL de indexar dentro de un
+campo: `campo(inicio:largo)`.
+
+> **Por qué la variable se llama `PUNTERO` y no `POS`.** Porque `POS` es **palabra reservada** en
+> COBOL —forma parte de `ACCEPT … AT POS` en la sección de pantalla— y usarla como nombre de dato da
+> un `syntax error` desconcertante. COBOL tiene **más de 500 palabras reservadas**, muchas con
+> nombres tan cotidianos como `COUNT`, `DATE`, `LENGTH`, `STATUS`, `NUMBER`, `KEY` o `END`. Es una
+> consecuencia directa de haber querido una sintaxis en inglés: cuantas más palabras normales usa el
+> lenguaje, menos te quedan a ti. Este error salió al ejecutar esta misma página en CI.
 
 Y hay un detalle de esta clase que COBOL trata mejor que casi nadie: **el desbordamiento**. Un
 `PIC 9(9)` que recibe mil millones **trunca por la izquierda en silencio** —igual que C—, salvo que

@@ -51,6 +51,14 @@ INCLUIR_TOP = [
     "docs/syllabus.md", "docs/rubrica-evaluacion.md", "docs/examen-final-por-perfil.md",
 ]
 
+# Fichas del Atlas: `vivos.md` (índice de lenguajes vivos) y una por lenguaje.
+# Se descubren por glob para que añadir una ficha no obligue a tocar este fichero.
+INCLUIR_TOP += sorted(
+    "atlas/" + os.path.basename(p)
+    for p in glob.glob(os.path.join(ROOT, "atlas", "*.md"))
+    if os.path.basename(p) != "README.md"
+)
+
 # Enlaces internos: .md -> .html (conservando el ancla).
 LINK_MD = re.compile(r"\]\(([^)]+?)\.md((?:#[^)]*)?)\)")
 

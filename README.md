@@ -21,6 +21,7 @@ C#, Go, Rust, C, SQL y PHP, con un Atlas que te deja leer decenas de lenguajes m
 [![Núcleo](https://img.shields.io/badge/núcleo-10%20lenguajes-2e8b57?style=for-the-badge)](languages.json)
 [![Implementaciones](https://img.shields.io/badge/implementaciones-1360%20verificadas-2f81f7?style=for-the-badge)](scripts/verificar_equivalencia.py)
 [![Atlas](https://img.shields.io/badge/atlas-39%20cápsulas%20·%2015%20familias-8957e5?style=for-the-badge)](atlas/README.md)
+[![Lenguajes vivos](https://img.shields.io/badge/lenguajes%20vivos-18%20fichas-b45309?style=for-the-badge)](atlas/vivos.md)
 [![Idioma](https://img.shields.io/badge/idioma-español-1f6feb?style=for-the-badge)](classes/README.md)
 [![License](https://img.shields.io/badge/license-MIT-3fb950?style=for-the-badge)](LICENSE)
 
@@ -40,6 +41,7 @@ C#, Go, Rust, C, SQL y PHP, con un Atlas que te deja leer decenas de lenguajes m
 [📥 **Descargas**](https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases/latest) ·
 [📚 Índice de clases](classes/README.md) ·
 [🌐 Atlas](atlas/README.md) ·
+[🧟 Lenguajes vivos](atlas/vivos.md) ·
 [🧭 Rutas](rutas/README.md) ·
 [📖 Glosario](glosario/README.md) ·
 [📕 Manual PDF](manual/MANUAL.pdf) ·
@@ -74,6 +76,7 @@ C#, Go, Rust, C, SQL y PHP, con un Atlas que te deja leer decenas de lenguajes m
 | Equivalencia | ✅ verificada en CI: cada implementación se ejecuta contra el `casos.json` de su clase |
 | Primos del Atlas | 🟡 2722 programas en 20 lenguajes; Ruby, Perl y Lua se **ejecutan** en CI, los otros 17 son lectura declarada |
 | Atlas de familias | ⚪ 39 cápsulas en 15 familias — material de lectura fechado (rev. 2026-07); no se ejecuta |
+| Lenguajes vivos | 🟡 18 fichas de lenguajes antiguos **en producción hoy** (COBOL, Fortran, Ada, RPG, PL/I, MUMPS, Smalltalk, Lisp, AutoLISP, Tcl, Perl, Delphi, VBA, Pascal, JCL, Assembler, C, C++), con historia, uso actual, lo modernizado y bibliografía |
 | Manual | ✅ ~1306 páginas en PDF, generadas desde las mismas clases (~2420 con los primos) |
 | Glosario | ✅ 424 términos derivados de las clases y enlazados a su clase de origen |
 | Autoevaluaciones | ✅ 90 preguntas, batería por cada una de las 12 partes |
@@ -274,16 +277,38 @@ redacción es original y cada clase cita el libro correspondiente).
 | **Toolchains y entorno** | Shotts — *The Linux Command Line* · Kernighan/Pike — *The Unix Programming Environment* |
 | **Por lenguaje (núcleo)** | Ramalho — *Fluent Python* · Bloch — *Effective Java* · Donovan/Kernighan — *The Go Programming Language* · Klabnik/Nichols — *The Rust Programming Language* · Kernighan/Ritchie — *K&R* · Haverbeke — *Eloquent JavaScript* · Cherny — *Programming TypeScript* · Skeet — *C# in Depth* · Date — *SQL and Relational Theory* · Lockhart — *Modern PHP* |
 
-## 🧩 Núcleo y Atlas: dos capas
+## 🧩 Núcleo, Atlas y lenguajes vivos: tres capas
 
 | Capa | Qué es | Alcance |
 |---|---|---|
 | **Núcleo** | Se implementa, se muestra a la vista y **se verifica en CI** | Python, JavaScript, TypeScript, Java, C#, Go, Rust, C, SQL, PHP |
 | **Atlas** | Se **comprende por características** (historia, paradigma, memoria, toolchain) | 39 cápsulas en 15 familias: Ruby, Kotlin, Haskell, Clojure, Prolog, Zig, Lua, Scala, Dart… |
+| **[Lenguajes vivos](atlas/vivos.md)** | Lenguajes antiguos que **siguen en producción**, con ficha propia y código en las clases | 18 fichas: COBOL, Fortran, Ada, RPG, PL/I, MUMPS, Smalltalk, Lisp, AutoLISP, Tcl, Perl, Delphi, VBA, Pascal, JCL, Assembler, C, C++ |
 
 La idea: **aprende el representante, reconoce la familia entera.** Si dominas C, ya lees el
 80 % de la sintaxis de Java, C#, JS, Go y PHP. El **[Atlas](atlas/README.md)** cubre esa
 amplitud sin multiplicar el mantenimiento.
+
+### 🧟 Por qué hay una capa de lenguajes vivos
+
+**No es nostalgia: es profundidad.** Cada uno de esos dieciocho se incluye por dos motivos
+verificables — que **se ejecuta hoy en producción** (banca, sanidad, aviónica, diseño de chips,
+ERP, CAD, hojas de cálculo) y que **deja a la vista un concepto que el núcleo esconde**: la
+aritmética decimal exacta en [COBOL](atlas/cobol.md), el tipo que lleva una regla de negocio en
+[Ada](atlas/ada.md), la base de datos que *es* el lenguaje en [MUMPS](atlas/mumps.md), el `if` que
+resulta ser un mensaje en [Smalltalk](atlas/smalltalk.md), el código que es un dato en
+[Lisp](atlas/common-lisp.md), el bucle principal que escribe el runtime en [RPG](atlas/rpg.md).
+
+Y **muchos se han actualizado para resolver problemas actuales**: COBOL genera JSON con sentencias
+del lenguaje, Fortran descarga bucles a la GPU, RPG consume APIs REST, Ada 2022 comprueba contratos,
+Perl 5.40 tiene `try/catch`, Delphi compila para iOS y Android. Cada ficha lo detalla en su sección
+`🔄 Lo que se ha modernizado`.
+
+Donde un lenguaje **no puede** expresar el problema de una clase —[JCL](atlas/jcl.md) no calcula,
+[VBA](atlas/vba.md) vive dentro de Excel, [AutoLISP](atlas/autolisp.md) dentro de AutoCAD— **el
+contrato se adapta y la adaptación se declara**, en lugar de inventar un programa falso.
+
+👉 **[Índice de lenguajes que siguen vivos](atlas/vivos.md)**
 
 ### 🧬 Los primos: el mismo programa en toda la familia
 
@@ -308,6 +333,7 @@ así se declara en cada página. Verificar tres de veinte no es verificarlos tod
 
 - 🧭 **[Rutas por perfil](rutas/README.md)** — "vengo de Python", "quiero sistemas (C/Rust)", "web (JS/TS)", "backend (Java/C#/Go)", "datos (SQL)".
 - 🌐 **[Atlas de lenguajes](atlas/README.md)** — genealogía, historia, características y toolchain de cada familia.
+- 🧟 **[Lenguajes que siguen vivos](atlas/vivos.md)** — 18 fichas de lenguajes antiguos en producción hoy: dónde se usan, qué han modernizado y qué concepto enseñan.
 - 📝 **[Autoevaluaciones](autoevaluaciones/README.md)** — 90 preguntas, una batería por parte, con quiz y progreso local.
 - 📖 **[Glosario](glosario/README.md)** — 424 términos enlazados a la clase donde se explican.
 - 🧪 **[Laboratorios](labs/README.md)** — la equivalencia demostrada: el verificador sobre las implementaciones.

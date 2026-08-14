@@ -14,6 +14,28 @@ su familia, su paradigma, su modelo de memoria y con qué software se ejecutan. 
 herramientas y versiones no. Ante cualquier detalle operativo, la fuente de verdad es siempre la
 documentación oficial enlazada en cada cápsula.
 
+## 🧟 Lenguajes que siguen vivos — la tercera capa
+
+Además de estas cápsulas, el Atlas tiene **dieciocho fichas completas** de lenguajes antiguos que
+**siguen en producción hoy**: [COBOL](cobol.md), [Fortran](fortran.md), [Ada](ada.md),
+[RPG](rpg.md), [PL/I](pl-i.md), [M/MUMPS](mumps.md), [Smalltalk](smalltalk.md),
+[Common Lisp](common-lisp.md), [AutoLISP](autolisp.md), [Tcl/Tk](tcl.md), [Perl](perl.md),
+[Delphi](delphi.md), [VBA](vba.md), [Pascal](pascal.md), [JCL](jcl.md),
+[Assembler](assembler.md), [C](c.md) y [C++](cpp.md).
+
+**No están por nostalgia: están porque se usan.** El criterio de inclusión es doble y se declara en
+cada ficha — **uso actual verificable** (fabricante que mantiene el compilador, documentación
+fechada, sectores identificables) y **aporte pedagógico propio** (un concepto que los diez del
+núcleo esconden). Cada ficha lleva además una sección **`🔄 Lo que se ha modernizado`**, porque
+muchos de estos lenguajes han incorporado JSON, REST, GPU, contenedores, Unicode o Git para resolver
+problemas actuales: no son fotos fijas.
+
+Diez de los dieciocho se **ejecutan en CI** contra el mismo `casos.json` que el núcleo. En los que
+**no pueden** expresar el contrato de una clase —JCL no calcula, VBA vive dentro de Excel— la
+adaptación se explica en la página en lugar de inventar un programa falso.
+
+👉 **[Índice de lenguajes que siguen vivos](vivos.md)**
+
 ## 🌳 El árbol, en una tabla
 
 | Familia | Representante del núcleo | Primos (se comprenden por características) | Idea que aporta |
@@ -29,7 +51,8 @@ documentación oficial enlazada en cada cápsula.
 | Concurrente / actor | — (CSP en **Go**) | Erlang, Elixir | Procesos, mensajes, tolerancia a fallos |
 | Array / científica | — | APL, J, Julia, Fortran, MATLAB | Operar sobre vectores completos |
 | Móvil / moderno | — | Swift, Dart | Apps nativas y multiplataforma |
-| Históricos / shell | — | COBOL, Pascal, BASIC, Bash, PowerShell | Contexto histórico y automatización |
+| Históricos / shell | — | BASIC, Bash, PowerShell | Contexto histórico y automatización |
+| **[Vivos en producción](vivos.md)** | — | **COBOL, Fortran, Ada, RPG, PL/I, MUMPS, Smalltalk, Lisp, AutoLISP, Tcl, Perl, Delphi, VBA, Pascal, JCL, Assembler** | **Lenguajes antiguos que siguen ejecutándose hoy — ficha propia cada uno** |
 
 ## 📇 Fichas de lenguaje
 

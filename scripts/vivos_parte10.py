@@ -8,7 +8,8 @@ Ver `gen_vivos.py`.
 from __future__ import annotations
 
 import vivos_p10a
+import vivos_p10b
 
 SPECS: dict[str, dict] = {}
-for _lote in (vivos_p10a,):
+for _lote in (vivos_p10a, vivos_p10b):
     SPECS.update(_lote.SPECS)

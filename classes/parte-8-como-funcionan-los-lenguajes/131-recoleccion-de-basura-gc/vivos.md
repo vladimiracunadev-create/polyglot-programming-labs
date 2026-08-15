@@ -251,31 +251,31 @@ program Recolec;
 uses SysUtils;
 
 type
-  ITemporal = interface
-    ['{B2C3D4E5-0000-0000-0000-000000000002}']
-  end;
-
-  TTemporal = class(TInterfacedObject, ITemporal)
+  TTemporal = class
+    Valor: Integer;
   end;
 
 var
   N, I: Integer;
+  T: TTemporal;
 
 begin
   Read(N);
 
   for I := 1 to N do
   begin
-    var T: ITemporal := TTemporal.Create;   { conteo de referencias }
-    { al salir de la vuelta, T se libera SOLA }
+    T := TTemporal.Create;       { sin recolector: hay que liberar a mano }
+    T.Valor := I;
+    T.Free;
   end;
 
   WriteLn('creados=', IntToStr(N), ' estado=recolectado');
 end.
 ```
 
-**Lo que esta clase enseña en Pascal.** Pascal tiene **conteo de referencias, y solo para tres cosas**:
-cadenas largas, arreglos dinámicos e **interfaces**.
+**Lo que esta clase enseña en Pascal.** El programa libera a mano con `Free` porque **una clase normal
+de Pascal no tiene gestión automática**. Y esa es la mitad de la historia: Pascal tiene **conteo de
+referencias, y solo para tres cosas**: cadenas largas, arreglos dinámicos e **interfaces**.
 
 ```pascal
 S: string;              { contada por referencia, con copia al escribir }

@@ -23,6 +23,8 @@ concurrency:
 env:
   CLASES_ESPERADAS: 176
   PRIMOS_ESPERADOS: 136
+  VIVOS_ESPERADOS: 136
+  FICHAS_ESPERADAS: 60
 
 jobs:
   apk:
@@ -82,18 +84,29 @@ jobs:
           RUTAS=$(unzip -l "$APK" 'assets/public/classes/*')
           CLASES=$(echo "$RUTAS" | grep -cE '/[0-9]{3}-[^/]+/README\.html$' || true)
           PRIMOS=$(echo "$RUTAS" | grep -cE '/[0-9]{3}-[^/]+/primos\.html$' || true)
+          VIVOS=$(echo "$RUTAS" | grep -cE '/[0-9]{3}-[^/]+/vivos\.html$' || true)
+          # Las fichas del Atlas: todo `atlas/*.html` menos sus tres índices
+          # (README, lenguajes, vivos), que no son fichas de lenguaje.
+          FICHAS=$(unzip -l "$APK" 'assets/public/atlas/*' \
+            | grep -cE '/atlas/[^/]+\.html$' || true)
+          FICHAS=$((FICHAS - 3))
           TAM=$(du -m "$APK" | cut -f1)
 
-          echo "APK: ${TAM} MB · páginas de clase: $CLASES · anexos de primos: $PRIMOS"
+          echo "APK: ${TAM} MB · clases: $CLASES · primos: $PRIMOS · vivos: $VIVOS · fichas: $FICHAS"
 
-          if [ "$CLASES" -ne "$CLASES_ESPERADAS" ]; then
-            echo "ERROR: el APK no contiene las $CLASES_ESPERADAS clases (encontradas: $CLASES)."
-            exit 1
-          fi
-          if [ "$PRIMOS" -ne "$PRIMOS_ESPERADOS" ]; then
-            echo "ERROR: faltan anexos de primos (esperados $PRIMOS_ESPERADOS, encontrados $PRIMOS)."
-            exit 1
-          fi
+          fallo=0
+          comprobar() {  # nombre, encontrado, esperado
+            if [ "$2" -ne "$3" ]; then
+              echo "ERROR: $1 — esperados $3, encontrados $2."
+              fallo=1
+            fi
+          }
+          comprobar "páginas de clase"     "$CLASES" "$CLASES_ESPERADAS"
+          comprobar "anexos de primos"     "$PRIMOS" "$PRIMOS_ESPERADOS"
+          comprobar "anexos de vivos"      "$VIVOS"  "$VIVOS_ESPERADOS"
+          comprobar "fichas de lenguaje"   "$FICHAS" "$FICHAS_ESPERADAS"
+          [ "$fallo" -eq 0 ] || exit 1
+
           unzip -p "$APK" assets/public/index.html | grep -q "Polyglot Programming Labs"
 
       - name: Renombrar el artefacto
@@ -117,6 +130,7 @@ jobs:
             echo "### 📱 APK del curso"
             echo ""
             echo "El APK se verifica **por dentro**: se descomprime y se cuentan las páginas"
-            echo "de clase antes de publicarlo. Un build en verde no prueba que el curso esté"
-            echo "dentro; este recuento sí."
+            echo "de clase, los anexos de primos y de lenguajes vivos y las fichas del Atlas"
+            echo "antes de publicarlo. Un build en verde no prueba que el curso esté dentro;"
+            echo "este recuento sí."
           } >> "$GITHUB_STEP_SUMMARY"

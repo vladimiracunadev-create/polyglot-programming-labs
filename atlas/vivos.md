@@ -118,6 +118,18 @@ clase** en los lenguajes vivos que aporten algo a **ese concepto concreto**, con
 No es el mismo texto repetido 136 veces: la nulabilidad en COBOL (que no tiene `null`, y usa niveles
 `88`) no se parece en nada a la nulabilidad en Ada (que tiene `not null access`), y ahí está el valor.
 
+**Son 1632 programas**, y cada página los agrupa por el rigor con que están respaldados:
+
+| Nivel | Lenguajes | Qué significa |
+|---|---|---|
+| 🟢 Se ejecuta en CI | COBOL, Fortran, Ada, Pascal, Common Lisp, Tcl, Perl, C++ | Se compila y se ejecuta contra el mismo `casos.json` que las diez implementaciones del núcleo |
+| 🟡 Contrato adaptado | [RPG](rpg.md), [JCL](jcl.md), [VBA](vba.md), [AutoLISP](autolisp.md) | El lenguaje no puede expresar `stdin→stdout`; la adaptación se declara |
+| ⚪ Sin sello de máquina | [PL/I](pl-i.md), [MUMPS](mumps.md), [Smalltalk](smalltalk.md), [ensamblador](assembler.md) | Correctos y revisados, pero ningún compilador libre los verifica aquí |
+
+> 🗂️ **Y más allá de estos dieciocho**, todos los lenguajes del repositorio tienen ficha con esta
+> misma anatomía: **[el índice de las 60 fichas](lenguajes.md)** incluye los diez del núcleo y los
+> primos del Atlas.
+
 ---
 
 ## 🧭 Por dónde empezar

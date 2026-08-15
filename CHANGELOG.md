@@ -7,6 +7,56 @@ según [SemVer](https://semver.org/lang/es/). Para un curso, la lectura de SemVe
 **MAJOR** = cambia la estructura del currículo (numeración o partes); **MINOR** = contenido
 o herramientas nuevas sin mover la numeración; **PATCH** = correcciones.
 
+## [1.1.0] — 2026-08-15
+
+La capa de **lenguajes vivos** deja de ser un anexo del Atlas y pasa a estar en cada clase,
+y **todos los lenguajes del repositorio tienen ficha propia**. No cambia ni una numeración:
+el currículo sigue siendo el mismo 001→176.
+
+### Añadido
+
+- **1632 programas en los lenguajes que siguen vivos.** Las 136 clases de código traen ahora
+  un anexo `vivos.md` con el problema de la clase resuelto en **COBOL, Fortran, Ada, Pascal,
+  Common Lisp, Tcl, Perl, C++, RPG, PL/I, MUMPS y Smalltalk** —y en JCL, VBA, AutoLISP o
+  ensamblador cuando el tema lo justifica—, cada uno con su explicación de qué enseña ese
+  lenguaje que ningún otro del curso enseña igual.
+- **Tres niveles de rigor, declarados en la propia página.** 🟢 COBOL, Fortran, Ada, Pascal,
+  Lisp, Tcl, Perl y C++ **se compilan y se ejecutan en CI** contra el mismo `casos.json` que
+  el núcleo (nuevo *job* `vivos` en [`labs.yml`](.github/workflows/labs.yml)); 🟡 RPG, JCL,
+  VBA y AutoLISP **declaran su adaptación** del contrato `stdin→stdout` en lugar de fingir un
+  programa que ese lenguaje no puede escribir; ⚪ PL/I, MUMPS, Smalltalk y ensamblador van
+  **sin sello de máquina**, y se dice.
+- **60 fichas de lenguaje** en [`atlas/lenguajes.md`](atlas/lenguajes.md) — una por cada
+  lenguaje del repositorio. Antes solo tenían ficha los 18 vivos; los diez del núcleo no
+  tenían ninguna. Cada una sigue la misma anatomía de nueve secciones: historia, dónde vive
+  hoy, **lo que enseña**, lo que se ha modernizado, cómo se ejecuta con órdenes reales, **el
+  programa de la clase 041 explicado línea a línea** y bibliografía. El código de esa clase
+  es literal del repositorio; donde no existía, el programa nuevo se marca como no
+  verificado en CI.
+- **`manual/ATLAS.pdf`** (238 páginas): las 60 fichas con sus dos índices, en un volumen
+  aparte. `generar_manual.py` aprende `--atlas` y `--con-vivos`.
+
+### Cambiado
+
+- El **manual completo** pasa de ~2420 a **4094 páginas**: incluye los anexos de lenguajes
+  vivos además de los primos. Se sigue publicando como asset del release, no en el repo.
+- El **portal** muestra la tercera capa en la portada y publica las 60 fichas y los 136
+  anexos de vivos (542 páginas HTML, frente a 406).
+- Las **apps se verifican por dentro con más detalle**: además de las 176 páginas de clase,
+  [`android.yml`](.github/workflows/android.yml) y
+  [`verificar_exe.py`](apps/desktop/verificar_exe.py) cuentan los 136 anexos de primos, los
+  136 de vivos y las 60 fichas antes de publicar nada.
+
+### Corregido
+
+- Referencias cruzadas erróneas en las fichas: la aritmética decimal es la **clase 045** (no
+  la 072) y la metaprogramación la **123** (no la 122); 26 enlaces a clases apuntaban a
+  directorios que no existían. **12 223 enlaces relativos comprobados, 0 rotos.**
+- Trampas de compilación reales encontradas al ejecutar los programas en CI —la lectura
+  posicionada de Fortran, `'Image` en Ada, `SplitString` en Pascal, los programas anidados
+  de COBOL— **corregidas y escritas dentro de la clase como contenido**, no parcheadas en
+  silencio.
+
 ## [1.0.1] — 2026-08-14
 
 ### Corregido
@@ -88,5 +138,6 @@ ejecutable de Windows y PDF).
 | `sitio-offline.zip` | El portal HTML completo, para servir donde quieras |
 | `SHA256SUMS.txt` | Hashes de todo lo anterior |
 
+[1.1.0]: https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases/tag/v1.1.0
 [1.0.1]: https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases/tag/v1.0.1
 [1.0.0]: https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases/tag/v1.0.0

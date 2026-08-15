@@ -1,6 +1,6 @@
 {
   "name": "polyglot-programming-labs-app",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "private": true,
   "description": "App Android de Polyglot Programming Labs: las 176 clases y el Atlas embebidos, sin conexión",
   "dependencies": {

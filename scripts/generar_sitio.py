@@ -303,19 +303,25 @@ def partes_info() -> list[dict]:
     return out
 
 
-def escribir_landing(partes: list[dict], n_primos: int, n_terminos: int, n_preguntas: int) -> None:
+def escribir_landing(partes: list[dict], n_primos: int, n_vivos: int, n_fichas: int,
+                     n_terminos: int, n_preguntas: int) -> None:
     total = sum(p["n"] for p in partes)
     hay_manual = os.path.isfile(os.path.join(ROOT, "manual", "MANUAL.pdf"))
+    hay_atlas = os.path.isfile(os.path.join(ROOT, "manual", "ATLAS.pdf"))
 
     nucleo = ["Python", "JavaScript", "TypeScript", "Java", "C#", "Go", "Rust", "C", "SQL", "PHP"]
     primos = ["Ruby", "Perl", "Lua", "Tcl", "R", "Kotlin", "Scala", "Clojure", "F#",
               "C++", "Zig", "Nim", "Prolog", "…"]
+    vivos = ["COBOL", "Fortran", "Ada", "Pascal", "Common Lisp", "Tcl", "Perl", "C++",
+             "RPG", "PL/I", "MUMPS", "Smalltalk"]
 
     stats = [
         (str(total), "clases"),
         (str(len(partes)), "partes"),
         ("10", "lenguajes del núcleo"),
+        (f"{n_vivos:,}".replace(",", " "), "programas en lenguajes vivos"),
         (f"{n_primos:,}".replace(",", " "), "programas primos"),
+        (str(n_fichas), "fichas de lenguaje"),
         (str(n_terminos), "términos de glosario"),
     ]
     stats_html = "".join(f'<div class="stat"><b>{v}</b><span>{k}</span></div>' for v, k in stats)
@@ -330,6 +336,14 @@ def escribir_landing(partes: list[dict], n_primos: int, n_terminos: int, n_pregu
         ("🧬", "Atlas de familias",
          "39 cápsulas de ~40 lenguajes: historia, paradigma, memoria y toolchain. "
          "Aprende el representante, reconoce la familia entera.", "atlas/README.html"),
+        ("🗂️", f"{n_fichas} fichas de lenguaje",
+         "Una por cada lenguaje del repositorio, los diez del núcleo incluidos: historia, "
+         "dónde vive hoy, lo que enseña, lo modernizado y el programa de la clase 041 "
+         "explicado línea a línea.", "atlas/lenguajes.html"),
+        ("🧟", "Los lenguajes que siguen vivos",
+         f"{n_vivos:,} programas: cada clase de código resuelta también en los 12 lenguajes "
+         "antiguos que siguen en producción — banca, sanidad, aviónica, ERP.".replace(",", " "),
+         "atlas/vivos.html"),
         ("🧭", "Rutas por perfil",
          "Recorridos para quien viene de Python, quiere sistemas, web, backend de empresa o datos.",
          "rutas/README.html"),
@@ -350,24 +364,31 @@ def escribir_landing(partes: list[dict], n_primos: int, n_terminos: int, n_pregu
         feats.append(("📕", "Manual en PDF",
                       f"Las {total} clases en un único PDF, en orden y con el código, "
                       "para leer de corrido o estudiar sin conexión.", "manual/MANUAL.pdf"))
+    if hay_atlas:
+        feats.append(("🗺️", "Atlas en PDF",
+                      f"Las {n_fichas} fichas de lenguaje en un volumen aparte, "
+                      "con sus dos índices.", "manual/ATLAS.pdf"))
     feats_html = "".join(
         f'<a class="feat" href="{u}"><div class="ic">{i}</div><h3>{t}</h3><p>{d}</p></a>'
         for i, t, d, u in feats)
 
     langs_html = "".join(f'<span class="lang">{l}</span>' for l in nucleo)
     primos_html = "".join(f'<span class="lang atlas">{l}</span>' for l in primos)
+    vivos_html = "".join(f'<span class="lang atlas">{l}</span>' for l in vivos)
+    vivos_txt = f"{n_vivos:,}".replace(",", " ")
 
     # Descargas: el mismo curso en los otros tres formatos. Los binarios viven en el
     # release (no en el repo), así que se enlaza a «latest», que siempre apunta al
     # último publicado sin tener que tocar el generador en cada versión.
     ultimo = f"{REPO_URL}/releases/latest"
     descargas = [
-        ("📱", "Android (APK)", "Las 344 páginas embebidas: se estudia sin conexión, "
-         "sin cuenta y sin telemetría.", ultimo),
+        ("📱", "Android (APK)", f"Las {total} clases con sus anexos de primos y de lenguajes "
+         "vivos, embebidas: se estudia sin conexión, sin cuenta y sin telemetría.", ultimo),
         ("💻", "Windows (.exe)", "Ejecutable único: abre el curso en tu navegador "
          "desde tu propio equipo, sin instalar nada.", ultimo),
-        ("📕", "PDF completo", f"Las {total} clases más los {n_primos:,} programas primos "
-         "(~2420 páginas) en un solo documento.".replace(",", " "), ultimo),
+        ("📕", "PDF completo", f"Las {total} clases más los {n_vivos:,} programas en lenguajes "
+         f"vivos y los {n_primos:,} primos (4094 páginas) en un solo documento.".replace(",", " "),
+         ultimo),
         ("🗜️", "Sitio offline (ZIP)", "Este mismo portal HTML para servirlo donde "
          "quieras: aula, intranet o memoria USB.", ultimo),
     ]
@@ -393,10 +414,12 @@ def escribir_landing(partes: list[dict], n_primos: int, n_terminos: int, n_pregu
   <div class="escudo">🌐</div>
   <h1>Polyglot Programming Labs</h1>
   <p class="sub">Aprende el concepto una vez. Reconócelo, compáralo y aplícalo en
-  10 lenguajes y ~40 familias — en español, con el código a la vista.</p>
+  10 lenguajes del núcleo, {n_fichas} fichas de lenguaje y ~40 familias — en español,
+  con el código a la vista.</p>
   <div class="chips">
     <span class="chip">{total} clases</span><span class="chip">{len(partes)} partes</span>
     <span class="chip">10 del núcleo · ~40 familias</span>
+    <span class="chip">{n_fichas} fichas de lenguaje</span>
     <span class="chip">Equivalencia verificada en CI</span><span class="chip">MIT</span>
   </div>
   <div class="cta">
@@ -420,12 +443,18 @@ las 10 implementaciones de cada clase se <a href="labs/README.html">ejecutan en 
     <a href="atlas/README.html" style="color:var(--acento)">Atlas</a> y aparecen resolviendo
     el mismo problema bajo cada bloque de código:</p>
   <div class="langs">{primos_html}</div>
+  <p style="color:var(--muted);font-size:.92rem;margin:1.4rem 0 .3rem">
+    Y los <b>que siguen vivos</b>: lenguajes antiguos que hoy mueven bancos, hospitales y
+    aviones. Cada clase de código trae el mismo problema resuelto también en los doce
+    (<a href="atlas/vivos.html" style="color:var(--acento)">{vivos_txt} programas</a>), y ocho
+    de ellos se compilan y ejecutan en CI contra el mismo <code>casos.json</code>:</p>
+  <div class="langs">{vivos_html}</div>
 
   <h2 class="sec">Llévate el curso</h2>
   <p style="color:var(--muted);font-size:.92rem;margin:-.4rem 0 .9rem">
     El mismo contenido, generado siempre desde las mismas clases. Las apps se verifican
     <b>por dentro</b>: antes de publicarlas se abre el binario y se cuentan las
-    {total} páginas de clase que lleva — un paquete vacío también compila.</p>
+    {total} páginas de clase y sus anexos — un paquete vacío también compila.</p>
   <div class="grid">{descargas_html}</div>
 
   <h2 class="sec">Las {len(partes)} partes</h2>
@@ -590,6 +619,7 @@ def main() -> int:
         ("autoevaluaciones/quiz.html", "autoevaluaciones/quiz.html"),
         ("autoevaluaciones/progreso.html", "autoevaluaciones/progreso.html"),
         ("manual/MANUAL.pdf", "manual/MANUAL.pdf"),
+        ("manual/ATLAS.pdf", "manual/ATLAS.pdf"),
         ("languages.json", "languages.json"),
     ]
     for origen_rel, destino_rel in copias:
@@ -607,6 +637,14 @@ def main() -> int:
     n_primos = sum(len(re.findall(r"^```[a-z+#]", leer(f), re.M))
                    for f in glob.glob(os.path.join(ROOT, "classes", "parte-*",
                                                    "[0-9][0-9][0-9]-*", "primos.md")))
+    # En `vivos.md` cada lenguaje es una sección `### Nombre`: hay más bloques de código
+    # que programas (explicaciones, órdenes de compilación), así que se cuentan secciones.
+    n_vivos = sum(len(re.findall(r"^### ", leer(f), re.M))
+                  for f in glob.glob(os.path.join(ROOT, "classes", "parte-*",
+                                                  "[0-9][0-9][0-9]-*", "vivos.md")))
+    indices_atlas = {"README.md", "lenguajes.md", "vivos.md"}
+    n_fichas = len([p for p in glob.glob(os.path.join(ROOT, "atlas", "*.md"))
+                    if os.path.basename(p) not in indices_atlas])
     glosario = os.path.join(ROOT, "glosario", "README.md")
     n_terminos = len(re.findall(r"^- \*\*", leer(glosario), re.M)) if os.path.isfile(glosario) else 0
     preguntas = os.path.join(ROOT, "autoevaluaciones", "preguntas.json")
@@ -615,7 +653,7 @@ def main() -> int:
         d = json.loads(leer(preguntas))
         n_preguntas = sum(len(p["preguntas"]) for p in d["partes"])
 
-    escribir_landing(partes, n_primos, n_terminos, n_preguntas)
+    escribir_landing(partes, n_primos, n_vivos, n_fichas, n_terminos, n_preguntas)
 
     # GitHub Pages con Jekyll ignora lo que empieza por guion bajo (_manifest.json).
     escribir(".nojekyll", "")
@@ -623,7 +661,8 @@ def main() -> int:
     reapuntados, rotos = reparar_enlaces()
 
     print(f"Sitio generado en site/ ({generados} páginas HTML + portada + buscador)")
-    print(f"  {len(partes)} partes · {n_indexadas} clases indexadas · {n_primos} programas primos")
+    print(f"  {len(partes)} partes · {n_indexadas} clases indexadas · "
+          f"{n_vivos} programas en lenguajes vivos · {n_primos} primos · {n_fichas} fichas")
     print(f"  {reapuntados} enlaces a archivos del repo reapuntados a GitHub")
     if rotos:
         print(f"  ATENCIÓN: {len(rotos)} enlaces rotos (no están ni en el sitio ni en el repo):")

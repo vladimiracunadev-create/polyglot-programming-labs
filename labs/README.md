@@ -53,8 +53,32 @@ material que nadie ejecuta acumula ese tipo de defecto sin que se note.
 Los otros 17 primos (Zig, Prolog, Objective-C, ActionScript…) siguen siendo **material de lectura**:
 verificar tres de veinte no es verificarlos todos, y cada página lo declara.
 
+## El tercer laboratorio: los lenguajes que siguen vivos
+
+Cada clase de código trae también un [`vivos.md`](../classes/parte-3-valores-tipos-y-variables/041-literales-valores-variables-y-constantes/vivos.md)
+con el mismo problema resuelto en los doce lenguajes antiguos que hoy mueven bancos, hospitales,
+aviones y fábricas. Son **1632 programas**, y la página declara en qué nivel está cada uno:
+
+| Nivel | Lenguajes | Qué significa |
+|---|---|---|
+| 🟢 Se ejecuta en CI | COBOL, Fortran, Ada, Pascal, Common Lisp, Tcl, Perl, C++ | Se compila y se ejecuta contra el mismo `casos.json` que el núcleo |
+| 🟡 Contrato adaptado | RPG, JCL, VBA, AutoLISP | El lenguaje **no puede** expresar `stdin→stdout` tal cual; la adaptación se declara en vez de inventar un programa falso |
+| ⚪ Sin sello de máquina | PL/I, MUMPS, Smalltalk, ensamblador | Correctos y revisados, pero ningún compilador libre los verifica aquí |
+
+```bash
+python scripts/verificar_vivos.py 041                    # una clase
+python scripts/verificar_vivos.py --all --lang cobol     # un lenguaje, todas las clases
+python scripts/verificar_vivos.py --all --estricto       # falla si alguno falla (lo que hace CI)
+```
+
+Ejecutarlos también mereció la pena: aparecieron trampas reales —la lectura posicionada de
+Fortran, que avanza de registro en cada `read`; `'Image` de Ada, que deja un espacio delante;
+`SplitString` de Pascal, que no existe en todas las versiones— y **cada una está escrita dentro de
+la clase como contenido**, no parcheada en silencio.
+
 ## Qué NO se verifica
 
-El texto de las clases, las comparaciones y el Atlas están escritos a mano y **no** se ejecutan en
-CI. Son material de lectura. El badge verde garantiza la equivalencia de las implementaciones, no la
+El texto de las clases, las comparaciones, el Atlas y las
+[60 fichas de lenguaje](../atlas/lenguajes.md) están escritos a mano y **no** se ejecutan en CI.
+Son material de lectura. El badge verde garantiza la equivalencia de las implementaciones, no la
 prosa.

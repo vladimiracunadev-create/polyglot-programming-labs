@@ -13,7 +13,8 @@ viven en el TOC en claro, así que basta con recorrerlo.
 
 Uso:
     python apps/desktop/verificar_exe.py dist/PolyglotProgrammingLabs.exe
-    python apps/desktop/verificar_exe.py <exe> --clases 176 --primos 136
+    python apps/desktop/verificar_exe.py <exe> --clases 176 --primos 136 \
+        --vivos 136 --fichas 60
 
 Salida 0 si el recuento cuadra; 1 si falta contenido (para usarlo como gate).
 """
@@ -70,6 +71,8 @@ def main() -> int:
     ap.add_argument("ejecutable")
     ap.add_argument("--clases", type=int, default=176, help="páginas de clase esperadas")
     ap.add_argument("--primos", type=int, default=136, help="anexos de primos esperados")
+    ap.add_argument("--vivos", type=int, default=136, help="anexos de lenguajes vivos esperados")
+    ap.add_argument("--fichas", type=int, default=60, help="fichas de lenguaje del Atlas")
     args = ap.parse_args()
 
     if not os.path.isfile(args.ejecutable):
@@ -80,20 +83,29 @@ def main() -> int:
     nombres = [n.replace("\\", "/") for n in leer_toc(args.ejecutable)]
     clases = [n for n in nombres if re.search(r"/[0-9]{3}-[^/]+/README\.html$", n)]
     primos = [n for n in nombres if re.search(r"/[0-9]{3}-[^/]+/primos\.html$", n)]
+    vivos = [n for n in nombres if re.search(r"/[0-9]{3}-[^/]+/vivos\.html$", n)]
     partes = [n for n in nombres if re.search(r"/parte-[0-9]+-[^/]+/README\.html$", n)]
+    # Las fichas del Atlas: `atlas/*.html` menos sus tres índices, que no son fichas.
+    fichas = [n for n in nombres
+              if re.search(r"/atlas/[^/]+\.html$", n)
+              and os.path.basename(n) not in ("README.html", "lenguajes.html", "vivos.html")]
     paginas = [n for n in nombres if n.endswith(".html")]
     mb = os.path.getsize(args.ejecutable) / (1024 * 1024)
 
     print(f"Ejecutable : {args.ejecutable} ({mb:.1f} MB)")
     print(f"Recursos   : {len(nombres)}")
-    print(f"Páginas    : {len(paginas)} HTML · {len(clases)} clases · "
-          f"{len(partes)} partes · {len(primos)} anexos de primos")
+    print(f"Páginas    : {len(paginas)} HTML · {len(clases)} clases · {len(partes)} partes · "
+          f"{len(primos)} primos · {len(vivos)} vivos · {len(fichas)} fichas")
 
     fallos = []
     if len(clases) != args.clases:
         fallos.append(f"clases: esperadas {args.clases}, encontradas {len(clases)}")
     if len(primos) != args.primos:
         fallos.append(f"primos: esperados {args.primos}, encontrados {len(primos)}")
+    if len(vivos) != args.vivos:
+        fallos.append(f"vivos: esperados {args.vivos}, encontrados {len(vivos)}")
+    if len(fichas) != args.fichas:
+        fallos.append(f"fichas: esperadas {args.fichas}, encontradas {len(fichas)}")
     if not any(n.endswith("site/index.html") for n in nombres):
         fallos.append("falta site/index.html (la portada del curso)")
 

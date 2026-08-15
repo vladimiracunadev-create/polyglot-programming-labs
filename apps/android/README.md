@@ -3,23 +3,28 @@
 > [⬅️ Volver al programa](../../README.md) · [💻 App de Windows](../desktop/README.md) · [📥 Descargas](https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases/latest)
 
 El curso entero en el móvil, **sin conexión**: las 176 clases con el código de los diez
-lenguajes a la vista, los 136 anexos de primos, el Atlas, las rutas, el glosario, el
-buscador y la autoevaluación. No hay servidor, no hay cuenta y no se envía nada a ningún
-sitio: la app **es** el sitio de GitHub Pages empaquetado dentro del APK.
+lenguajes a la vista, los 136 anexos de primos, los 136 de lenguajes vivos, las 60 fichas
+de lenguaje del Atlas, las rutas, el glosario, el buscador y la autoevaluación. No hay
+servidor, no hay cuenta y no se envía nada a ningún sitio: la app **es** el sitio de
+GitHub Pages empaquetado dentro del APK.
 
 ## Qué lleva dentro
 
 | Contenido | Cantidad |
 |---|---:|
-| Páginas HTML totales | 344 |
+| Páginas HTML totales | 542 |
 | README de clase | 176 |
 | Anexos `primos.md` | 136 |
+| Anexos `vivos.md` | 136 |
+| Fichas de lenguaje del Atlas | 60 |
 | README de parte | 12 |
-| Portal (Atlas, rutas, glosario, labs, autoevaluación, buscador) | 20 |
+| Portal (índice, Atlas, rutas, glosario, labs, autoevaluación, docs) | 22 |
+
+Más la portada y el buscador, que se generan aparte.
 
 El [workflow de build](../../.github/workflows/android.yml) **cuenta esas páginas dentro
-del APK ya compilado** y falla si no están. Un APK que compila no prueba que lleve el
-curso dentro; esa comprobación sí.
+del APK ya compilado** —las de clase, los dos tipos de anexo y las fichas— y falla si no
+están. Un APK que compila no prueba que lleve el curso dentro; esa comprobación sí.
 
 ## Cómo está hecho
 

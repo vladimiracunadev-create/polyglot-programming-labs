@@ -46,6 +46,7 @@ Toda clase sigue la misma estructura, para que estudiar la número 150 cueste lo
 | 📐 Algoritmo | Pseudocódigo neutral: la solución antes del lenguaje. |
 | 🌐 Implementaciones | El código **a la vista** en los 10 lenguajes, enlazado a su archivo real. |
 | 🧬 Primos | Bajo cada bloque, el mismo programa en los primos de esa familia (`primos.md`). |
+| 🧟 Vivos | El mismo problema en los 12 lenguajes antiguos que siguen en producción (`vivos.md`), con lo que cada uno enseña y no enseña ningún otro. |
 | 🔬 Comparación · 🧬 Familia | Las diferencias, clasificadas; y cómo lo hace el resto de la familia. |
 | ✅ Prueba común | El `casos.json` que verifica la equivalencia. |
 | 🧪 Reto · ⚠️ Errores · ❓ FAQ | Transferencia, trampas conocidas y dudas frecuentes. |
@@ -68,7 +69,8 @@ Es una distinción que el programa mantiene explícita para no prometer de más:
 |---|---|
 | Que las 10 implementaciones de cada clase de código producen **la misma salida** ante el mismo `casos.json` | El texto de las clases y las comparaciones |
 | Que los primos **Ruby, Perl y Lua** de `primos.md` producen esa misma salida | Los otros 17 primos (Zig, Prolog, Objective-C…) |
-| Que la estructura del repositorio y los enlaces son válidos | El [Atlas](../atlas/README.md) de familias |
+| Que **COBOL, Fortran, Ada, Pascal, Lisp, Tcl, Perl y C++** de `vivos.md` compilan, se ejecutan y dan esa misma salida | PL/I, MUMPS, Smalltalk y ensamblador, correctos pero **sin sello de máquina**; RPG, JCL, VBA y AutoLISP, con el contrato **adaptado y declarado** |
+| Que la estructura del repositorio y los enlaces son válidos | El [Atlas](../atlas/README.md) de familias y las [60 fichas de lenguaje](../atlas/lenguajes.md) |
 | Que el Markdown pasa el linter | Las autoevaluaciones |
 
 Si el badge de CI está verde, garantiza la **equivalencia demostrada** de las implementaciones,

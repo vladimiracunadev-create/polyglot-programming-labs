@@ -30,7 +30,8 @@ Scripts de apoyo:
 | [`enlazar_codigo.py`](../scripts/enlazar_codigo.py) | Enlaza cada bloque de código a la vista con su archivo real. |
 | [`enlazar_primos.py`](../scripts/enlazar_primos.py) | Enlaza cada bloque con las versiones de su familia en `primos.md`. |
 | [`verificar_primos.py`](../scripts/verificar_primos.py) | Ejecuta los primos Ruby/Perl/Lua extraídos de `primos.md` contra `casos.json`. |
-| [`generar_manual.py`](../scripts/generar_manual.py) | Consolida las 176 clases en `manual/MANUAL.pdf` (se versiona). |
+| [`verificar_vivos.py`](../scripts/verificar_vivos.py) | Compila y ejecuta los ocho lenguajes vivos verificables (COBOL, Fortran, Ada, Pascal, Lisp, Tcl, Perl, C++) extraídos de `vivos.md`. |
+| [`generar_manual.py`](../scripts/generar_manual.py) | Consolida las 176 clases en `manual/MANUAL.pdf`, y con `--atlas` las 60 fichas en `manual/ATLAS.pdf` (ambos se versionan). |
 | [`generar_material.py`](../scripts/generar_material.py) | Guías PDF imprimibles por clase en `material/` (no se versionan). |
 | [`generar_sitio.py`](../scripts/generar_sitio.py) | Construye el sitio de GitHub Pages. |
 
@@ -51,8 +52,13 @@ Scripts de apoyo:
 5. Escribe su `primos.md` (el mismo problema en los lenguajes primos de las 7 familias) tomando
    como patrón el de la [clase 041](../classes/parte-3-valores-tipos-y-variables/041-literales-valores-variables-y-constantes/primos.md),
    y ejecuta `python scripts/enlazar_primos.py` para insertar los enlaces bajo cada bloque.
-6. Verifica: `python scripts/verificar_equivalencia.py <NNN>`,
-   `python scripts/verificar_primos.py <NNN>` y `python scripts/validar_estructura.py`.
+6. Escribe su `vivos.md` (el mismo problema en los 12 lenguajes que siguen en producción),
+   agrupando por los tres niveles de rigor —🟢 se ejecuta en CI, 🟡 contrato adaptado y
+   declarado, ⚪ correcto sin sello de máquina— y **sin inventar un programa** donde el
+   lenguaje no pueda expresar el contrato: ahí se declara la adaptación.
+7. Verifica: `python scripts/verificar_equivalencia.py <NNN>`,
+   `python scripts/verificar_primos.py <NNN>`, `python scripts/verificar_vivos.py <NNN>`
+   y `python scripts/validar_estructura.py`.
 
 ## Añadir un lenguaje al núcleo
 

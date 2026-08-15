@@ -95,7 +95,16 @@ Definido en [`languages.json`](../languages.json), con su comando de ejecución 
 
 Los ~40 lenguajes restantes se comprenden **por características** en el
 [Atlas](../atlas/README.md), sin implementarse: así el programa cubre amplitud sin multiplicar
-el mantenimiento.
+el mantenimiento. Cada uno tiene además su
+**[ficha de lenguaje](../atlas/lenguajes.md)** —60 en total, los diez del núcleo incluidos—
+con historia, dónde vive hoy, lo que enseña, lo que se ha modernizado y el programa de la
+clase 041 explicado línea a línea.
+
+Y una capa más: los **[lenguajes que siguen vivos](../atlas/vivos.md)**. Las 136 clases de
+código traen un `vivos.md` con el mismo problema resuelto en COBOL, Fortran, Ada, Pascal,
+Common Lisp, Tcl, Perl, C++, RPG, PL/I, MUMPS y Smalltalk —1632 programas, de los que ocho
+lenguajes se compilan y ejecutan en CI—, porque cada uno deja a la vista un concepto que el
+núcleo esconde.
 
 ## Cómo se amplía
 

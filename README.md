@@ -9,19 +9,20 @@
 programación: pensamiento computacional, valores y tipos, control, funciones, datos,
 paradigmas, runtime, ingeniería, interoperabilidad y un proyecto integrador —
 cada concepto mostrado una vez y comparado en Python, JavaScript, TypeScript, Java,
-C#, Go, Rust, C, SQL y PHP, con un Atlas que te deja leer decenas de lenguajes más.**
+C#, Go, Rust, C, SQL y PHP, con un Atlas de 60 fichas de lenguaje y el mismo problema
+resuelto además en los 12 lenguajes antiguos que siguen en producción hoy.**
 
 [![CI](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/ci.yml)
 [![Labs](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/labs.yml/badge.svg?branch=main)](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/labs.yml)
 [![Security](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/security.yml/badge.svg?branch=main)](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/security.yml)
 [![Deploy Pages](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/deploy-pages.yml/badge.svg?branch=main)](https://github.com/vladimiracunadev-create/polyglot-programming-labs/actions/workflows/deploy-pages.yml)
 
-[![Versión](https://img.shields.io/badge/versión-1.0.1-e8590c?style=for-the-badge)](CHANGELOG.md)
+[![Versión](https://img.shields.io/badge/versión-1.1.0-e8590c?style=for-the-badge)](CHANGELOG.md)
 [![Clases](https://img.shields.io/badge/clases-176%20·%2012%20partes-7c5cff?style=for-the-badge)](classes/README.md)
 [![Núcleo](https://img.shields.io/badge/núcleo-10%20lenguajes-2e8b57?style=for-the-badge)](languages.json)
 [![Implementaciones](https://img.shields.io/badge/implementaciones-1360%20verificadas-2f81f7?style=for-the-badge)](scripts/verificar_equivalencia.py)
-[![Atlas](https://img.shields.io/badge/atlas-39%20cápsulas%20·%2015%20familias-8957e5?style=for-the-badge)](atlas/README.md)
-[![Lenguajes vivos](https://img.shields.io/badge/lenguajes%20vivos-18%20fichas-b45309?style=for-the-badge)](atlas/vivos.md)
+[![Atlas](https://img.shields.io/badge/atlas-60%20fichas%20·%2015%20familias-8957e5?style=for-the-badge)](atlas/lenguajes.md)
+[![Lenguajes vivos](https://img.shields.io/badge/lenguajes%20vivos-1632%20programas-b45309?style=for-the-badge)](atlas/vivos.md)
 [![Idioma](https://img.shields.io/badge/idioma-español-1f6feb?style=for-the-badge)](classes/README.md)
 [![License](https://img.shields.io/badge/license-MIT-3fb950?style=for-the-badge)](LICENSE)
 
@@ -41,10 +42,12 @@ C#, Go, Rust, C, SQL y PHP, con un Atlas que te deja leer decenas de lenguajes m
 [📥 **Descargas**](https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases/latest) ·
 [📚 Índice de clases](classes/README.md) ·
 [🌐 Atlas](atlas/README.md) ·
+[🗂️ Las 60 fichas](atlas/lenguajes.md) ·
 [🧟 Lenguajes vivos](atlas/vivos.md) ·
 [🧭 Rutas](rutas/README.md) ·
 [📖 Glosario](glosario/README.md) ·
 [📕 Manual PDF](manual/MANUAL.pdf) ·
+[🗺️ Atlas PDF](manual/ATLAS.pdf) ·
 [📅 Syllabus](docs/syllabus.md) ·
 [📓 Changelog](CHANGELOG.md) ·
 [🗺️ Roadmap](ROADMAP.md) ·
@@ -53,9 +56,9 @@ C#, Go, Rust, C, SQL y PHP, con un Atlas que te deja leer decenas de lenguajes m
 
 <br>
 
-| 📘 Clases | 🌐 Implementaciones | 🧬 Primos | 🧩 Partes | 📖 Glosario | 📝 Preguntas |
-|:---:|:---:|:---:|:---:|:---:|:---:|
-| **176** | **1360** | **2722** | **12** | **424** | **90** |
+| 📘 Clases | 🌐 Implementaciones | 🧟 Vivos | 🧬 Primos | 🗂️ Fichas | 🧩 Partes | 📖 Glosario | 📝 Preguntas |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **176** | **1360** | **1632** | **2722** | **60** | **12** | **424** | **90** |
 
 </div>
 
@@ -75,9 +78,10 @@ C#, Go, Rust, C, SQL y PHP, con un Atlas que te deja leer decenas de lenguajes m
 | Implementaciones | ✅ 1360 del núcleo (136 clases × 10 lenguajes), con el código a la vista en la clase |
 | Equivalencia | ✅ verificada en CI: cada implementación se ejecuta contra el `casos.json` de su clase |
 | Primos del Atlas | 🟡 2722 programas en 20 lenguajes; Ruby, Perl y Lua se **ejecutan** en CI, los otros 17 son lectura declarada |
+| Lenguajes vivos | 🟡 **1632 programas** en las 136 clases de código (12 lenguajes antiguos × 136); COBOL, Fortran, Ada, Pascal, Lisp, Tcl, Perl y C++ se **compilan y ejecutan** en CI contra el mismo `casos.json`, RPG/JCL/VBA/AutoLISP declaran su adaptación del contrato y PL/I, MUMPS, Smalltalk y ensamblador van sin sello de máquina |
+| Fichas de lenguaje | 🟡 **60 fichas** en el [Atlas](atlas/lenguajes.md): historia, dónde vive hoy, lo que enseña, lo modernizado, cómo se ejecuta, el programa de la clase 041 explicado y bibliografía — material de lectura, no se ejecuta |
 | Atlas de familias | ⚪ 39 cápsulas en 15 familias — material de lectura fechado (rev. 2026-07); no se ejecuta |
-| Lenguajes vivos | 🟡 18 fichas de lenguajes antiguos **en producción hoy** (COBOL, Fortran, Ada, RPG, PL/I, MUMPS, Smalltalk, Lisp, AutoLISP, Tcl, Perl, Delphi, VBA, Pascal, JCL, Assembler, C, C++), con historia, uso actual, lo modernizado y bibliografía |
-| Manual | ✅ ~1306 páginas en PDF, generadas desde las mismas clases (~2420 con los primos) |
+| Manual | ✅ 1150 páginas en PDF generadas desde las mismas clases (**4094** con los vivos y los primos), más 238 del volumen del [Atlas](manual/ATLAS.pdf) con las 60 fichas |
 | Glosario | ✅ 424 términos derivados de las clases y enlazados a su clase de origen |
 | Autoevaluaciones | ✅ 90 preguntas, batería por cada una de las 12 partes |
 | Sitio | ✅ portal estático en GitHub Pages con índice, búsqueda y rutas |
@@ -214,7 +218,7 @@ python scripts/verificar_primos.py --all --lang ruby    # los primos del Atlas q
 Los lenguajes cuyo toolchain no esté instalado se **omiten e informan** (degradación
 silenciosa, nunca un falso verde); SQL, al ser declarativo, se marca como *ilustrativo*.
 
-## 📥 El curso en cuatro formatos
+## 📥 El curso en cinco formatos
 
 El mismo contenido, generado siempre desde las mismas clases. Todo en el
 **[último release](https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases/latest)**.
@@ -224,7 +228,8 @@ El mismo contenido, generado siempre desde las mismas clases. Todo en el
 | 🌐 **Web** | El portal con búsqueda, rutas y progreso local. Siempre al día. | [Sitio del curso](https://vladimiracunadev-create.github.io/polyglot-programming-labs/) |
 | 📱 **Android** | Las 344 páginas embebidas, sin conexión ni cuenta. | [`.apk`](https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases/latest) · [cómo está hecha](apps/android/README.md) |
 | 💻 **Windows** | Ejecutable único: sirve el curso en `127.0.0.1` y lo abre en tu navegador. | [`.exe`](https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases/latest) · [cómo está hecha](apps/desktop/README.md) |
-| 📕 **PDF** | Para imprimir o leer de corrido, con el código de los diez lenguajes a la vista. | [Manual (~1306 pág.)](manual/MANUAL.pdf) · [Completo con primos (~2420 pág.)](https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases/latest) |
+| 📕 **PDF del curso** | Para imprimir o leer de corrido, con el código de los diez lenguajes a la vista. | [Manual (1150 pág.)](manual/MANUAL.pdf) · [Completo, con vivos y primos (4094 pág.)](https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases/latest) |
+| 🗺️ **PDF del Atlas** | Las 60 fichas de lenguaje en un volumen aparte, con sus dos índices. | [Atlas (238 pág.)](manual/ATLAS.pdf) |
 
 > 🔍 **Las apps se verifican por dentro.** Un APK sin curso compila igual y un `.exe` sin
 > datos arranca igual: todas las señales de build quedan verdes. Por eso
@@ -237,7 +242,8 @@ Regenerar cualquiera de ellos desde el repositorio:
 ```bash
 python scripts/generar_sitio.py                # el portal HTML (site/), base de las apps
 python scripts/generar_manual.py               # manual/MANUAL.pdf
-python scripts/generar_manual.py --con-primos --salida manual/MANUAL-COMPLETO.pdf
+python scripts/generar_manual.py --atlas       # manual/ATLAS.pdf, las 60 fichas
+python scripts/generar_manual.py --con-vivos --con-primos --salida manual/MANUAL-COMPLETO.pdf
 python scripts/generar_material.py --parte 3   # guías sueltas por clase en material/
 ```
 
@@ -250,6 +256,7 @@ classes/parte-N-slug/NNN-topic/
 ├── comparacion.md       ← sintáctica · semántica · paradigmática
 ├── reto.md              ← reto de transferencia
 ├── primos.md            ← el mismo programa en los lenguajes primos de cada familia
+├── vivos.md             ← el mismo programa en los 12 lenguajes que siguen en producción
 ├── casos.json           ← la prueba común que ejecuta el verificador
 └── implementaciones/<lenguaje>/...
 ```
@@ -282,12 +289,18 @@ redacción es original y cada clase cita el libro correspondiente).
 | Capa | Qué es | Alcance |
 |---|---|---|
 | **Núcleo** | Se implementa, se muestra a la vista y **se verifica en CI** | Python, JavaScript, TypeScript, Java, C#, Go, Rust, C, SQL, PHP |
-| **Atlas** | Se **comprende por características** (historia, paradigma, memoria, toolchain) | 39 cápsulas en 15 familias: Ruby, Kotlin, Haskell, Clojure, Prolog, Zig, Lua, Scala, Dart… |
-| **[Lenguajes vivos](atlas/vivos.md)** | Lenguajes antiguos que **siguen en producción**, con ficha propia y código en las clases | 18 fichas: COBOL, Fortran, Ada, RPG, PL/I, MUMPS, Smalltalk, Lisp, AutoLISP, Tcl, Perl, Delphi, VBA, Pascal, JCL, Assembler, C, C++ |
+| **Atlas** | Se **comprende por características** (historia, paradigma, memoria, toolchain) | 39 cápsulas en 15 familias + **[60 fichas de lenguaje](atlas/lenguajes.md)**, una por cada lenguaje del repositorio |
+| **[Lenguajes vivos](atlas/vivos.md)** | Lenguajes antiguos que **siguen en producción**, con ficha propia y **el programa de cada clase** | 18 fichas y **1632 programas**: COBOL, Fortran, Ada, RPG, PL/I, MUMPS, Smalltalk, Lisp, AutoLISP, Tcl, Perl, Delphi, VBA, Pascal, JCL, Assembler, C, C++ |
 
 La idea: **aprende el representante, reconoce la familia entera.** Si dominas C, ya lees el
 80 % de la sintaxis de Java, C#, JS, Go y PHP. El **[Atlas](atlas/README.md)** cubre esa
 amplitud sin multiplicar el mantenimiento.
+
+> 🗂️ **Cada lenguaje del repositorio tiene ficha propia.** Las
+> **[60 fichas](atlas/lenguajes.md)** —los 10 del núcleo incluidos— siguen la misma anatomía:
+> historia, dónde vive hoy, **lo que enseña y no enseña ningún otro**, lo que se ha
+> modernizado, cómo se ejecuta con órdenes reales, **el programa de la clase 041 explicado
+> línea a línea** y bibliografía.
 
 ### 🧟 Por qué hay una capa de lenguajes vivos
 

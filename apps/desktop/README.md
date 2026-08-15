@@ -4,7 +4,8 @@
 
 Un ejecutable único que lleva **el curso entero dentro** y lo abre en tu navegador sin
 conexión: las 176 clases con el código de los diez lenguajes resaltado, los 136 anexos de
-primos, el Atlas, las rutas, el glosario, el buscador y la autoevaluación.
+primos, los 136 de lenguajes vivos, las 60 fichas de lenguaje del Atlas, las rutas, el
+glosario, el buscador y la autoevaluación.
 
 ## Cómo funciona
 
@@ -68,8 +69,10 @@ lleve el curso dentro:
 python apps/desktop/verificar_exe.py dist/PolyglotProgrammingLabs.exe
 ```
 
-Cuenta las páginas de clase **dentro del binario**; falla si no están las 176. Es el mismo
-control que ejecuta el [workflow de build](../../.github/workflows/desktop.yml).
+Cuenta **dentro del binario** las 176 páginas de clase, los 136 anexos de primos, los 136
+de lenguajes vivos y las 60 fichas del Atlas; falla si falta cualquiera de los cuatro
+recuentos. Es el mismo control que ejecuta el
+[workflow de build](../../.github/workflows/desktop.yml).
 
 ## Lo que esta app no hace
 

@@ -19,7 +19,7 @@ sobrescribe. Antes de tocar nada, mira en qué columna cae.
 
 | Archivo | ¿Se edita a mano? |
 |---|---|
-| `classes/parte-N/NNN-*/README.md` y sus `concepto/comparacion/reto/primos/casos.json` | ✅ sí, es el contenido del curso |
+| `classes/parte-N/NNN-*/README.md` y sus `concepto/comparacion/reto/primos/vivos/casos.json` | ✅ sí, es el contenido del curso |
 | `classes/parte-N/README.md` (README de parte) | ❌ **no** — se genera; el texto vive en [`scripts/guias.py`](scripts/guias.py) |
 | `classes/README.md` (índice) y `classes/_manifest.json` | ❌ no — los genera `scripts/build.py` |
 | `glosario/README.md` | ❌ no — lo genera `scripts/generar_glosario.py` desde las clases |

@@ -2,7 +2,7 @@
 
 > [⬅️ Volver al programa](README.md) · [📚 Índice completo](classes/README.md) · [📓 Changelog](CHANGELOG.md) · [📥 Releases](https://github.com/vladimiracunadev-create/polyglot-programming-labs/releases)
 
-Estado del programa **Polyglot Programming Labs**: **completo y publicado en la versión [1.0.1](CHANGELOG.md) — las 176 clases en 12 partes están construidas.** Las clases de código (Partes 3–11) traen sus 10 implementaciones del núcleo verificadas en CI; las de método (Partes 0–2) son conceptuales.
+Estado del programa **Polyglot Programming Labs**: **completo y publicado en la versión [1.1.0](CHANGELOG.md) — las 176 clases en 12 partes están construidas.** Las clases de código (Partes 3–11) traen sus 10 implementaciones del núcleo verificadas en CI, más el mismo problema resuelto en los 12 lenguajes antiguos que siguen en producción; las de método (Partes 0–2) son conceptuales.
 
 Leyenda: ✅ construida.
 
@@ -35,17 +35,20 @@ Leyenda: ✅ construida.
 | **Manual completo** en PDF ([`manual/MANUAL.pdf`](manual/MANUAL.pdf), `scripts/generar_manual.py`) | ✅ las 176 clases en un documento, se versiona |
 | **Guías por clase** en PDF (`material/`, `scripts/generar_material.py`) | ✅ bajo demanda, no se versionan |
 | **Primos del Atlas** (`primos.md`, 2722 programas en 20 lenguajes) | ✅ en las 136 clases con código |
+| **Lenguajes vivos** ([`vivos.md`](atlas/vivos.md), 1632 programas en 12 lenguajes) | ✅ en las 136 clases con código; 8 de los 12 se ejecutan en CI |
+| **Fichas de lenguaje** ([`atlas/lenguajes.md`](atlas/lenguajes.md)) | ✅ 60, una por cada lenguaje del repositorio |
 | **Autoevaluaciones** | ✅ 90 preguntas, batería por parte |
 | **Glosario** derivado de las clases (`scripts/generar_glosario.py`) | ✅ 424 términos |
 | **Atlas** de familias | ✅ 39 cápsulas en 15 familias |
-| **PDF completo** (manual + los 2722 primos, ~2420 páginas) | ✅ bajo demanda, se publica como asset del release |
-| **App Android** ([`apps/android`](apps/android/README.md)) | ✅ APK con las 344 páginas embebidas, contenido contado dentro del binario |
+| **PDF del Atlas** ([`manual/ATLAS.pdf`](manual/ATLAS.pdf), 238 páginas) | ✅ las 60 fichas, se versiona |
+| **PDF completo** (manual + vivos + primos, 4094 páginas) | ✅ bajo demanda, se publica como asset del release |
+| **App Android** ([`apps/android`](apps/android/README.md)) | ✅ APK con las 542 páginas embebidas, contenido contado dentro del binario |
 | **App de escritorio** ([`apps/desktop`](apps/desktop/README.md)) | ✅ ejecutable único que sirve el curso en `127.0.0.1` |
 | Workflows: `ci.yml`, `labs.yml`, `security.yml`, `deploy-pages.yml`, `android.yml`, `desktop.yml` | ✅ 6 |
 
 ## Cómo seguir aprendiendo
 
-El programa termina en la [clase 176](classes/parte-11-proyecto-integrador-poliglota/176-cierre-retrospectiva-y-transferencia-a-nuevos-lenguajes/README.md) con una idea: el conocimiento es transferible. Elige un lenguaje del [Atlas](atlas/README.md) que no domines, léelo por su familia y resuelve una clase en él.
+El programa termina en la [clase 176](classes/parte-11-proyecto-integrador-poliglota/176-cierre-retrospectiva-y-transferencia-a-nuevos-lenguajes/README.md) con una idea: el conocimiento es transferible. Elige un lenguaje que no domines de las [60 fichas](atlas/lenguajes.md), léelo por su familia y resuelve una clase en él.
 
 ## Cómo se genera todo
 

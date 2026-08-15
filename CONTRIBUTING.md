@@ -46,6 +46,10 @@ Para cambiar la narrativa de una parte o la descripción de una clase en su índ
 # Si tocaste una implementación, verifica la equivalencia
 python scripts/verificar_equivalencia.py <clase>
 
+# Si tocaste un primos.md o un vivos.md, ejecútalos también
+python scripts/verificar_primos.py <clase>
+python scripts/verificar_vivos.py <clase>
+
 # Comprueba la estructura y los enlaces
 python scripts/validar_estructura.py
 
@@ -57,3 +61,10 @@ npx markdownlint-cli2 "ruta/al/archivo.md"
 ```
 
 Rellena la [plantilla de pull request](.github/PULL_REQUEST_TEMPLATE.md). La CI ejecutará la estructura, el markdown y el verificador de equivalencia por lenguaje; el workflow de seguridad escanea secretos con `gitleaks` y el tooling con `bandit`.
+
+## Cómo está protegida `main`
+
+`main` **no acepta `force push` ni borrado**, exige **historial lineal** y no se puede
+fusionar nada cuyo lint de Markdown, validación de estructura, equivalencia de Python, Java
+o Rust, o escaneo de secretos esté en rojo. El historial del curso es su documentación: una
+reescritura destruiría la trazabilidad de por qué cada clase dice lo que dice.

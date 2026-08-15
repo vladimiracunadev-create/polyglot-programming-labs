@@ -61,7 +61,7 @@ DATA DIVISION.
 WORKING-STORAGE SECTION.
 01  LINEA   PIC X(80).
 01  T1      PIC X(20).
-01  TOP     PIC X(20).
+01  T-OP    PIC X(20).
 01  T2      PIC X(20).
 01  A       PIC S9(9)  COMP-3.
 01  B       PIC S9(9)  COMP-3.
@@ -70,12 +70,12 @@ WORKING-STORAGE SECTION.
 
 PROCEDURE DIVISION.
     ACCEPT LINEA
-    UNSTRING LINEA DELIMITED BY ALL SPACES INTO T1 TOP T2
+    UNSTRING LINEA DELIMITED BY ALL SPACES INTO T1 T-OP T2
 
     COMPUTE A = FUNCTION NUMVAL(T1)
     COMPUTE B = FUNCTION NUMVAL(T2)
 
-    EVALUATE FUNCTION TRIM(TOP)
+    EVALUATE FUNCTION TRIM(T-OP)
         WHEN "+"  COMPUTE R = A + B
         WHEN "-"  COMPUTE R = A - B
         WHEN "*"  COMPUTE R = A * B
@@ -121,6 +121,19 @@ Y una anécdota que explica la sintaxis del lenguaje: **COBOL se diseñó para c
 pasada en máquinas con memoria mínima**. De ahí las divisiones en orden fijo —identificación, entorno,
 datos, procedimiento—: **cuando el compilador llega al código, ya conoce todos los datos**. La
 estructura del lenguaje es la estructura del compilador de 1959.
+
+**Un tropiezo real de este programa, y ya van tres.** La primera versión llamaba `TOP` a la variable
+del operador, y GnuCOBOL respondió `syntax error, unexpected TOP`: **`TOP` es palabra reservada**, de
+la cláusula `LINAGE ... LINES AT TOP` que controla las cabeceras de página al imprimir en papel
+continuo. De ahí el `T-OP` del código.
+
+Sumado a `POS` en la clase 044 y a `AREA` en la 100, la conclusión es la misma y merece repetirse en
+esta clase sobre compiladores: **el analizador léxico de COBOL tiene más de quinientas palabras
+reservadas**, muchas de ellas sustantivos corrientes.
+
+Y el guion de `T-OP` es la solución idiomática: **los nombres COBOL admiten guiones**, así que la
+convención de prefijos y nombres compuestos (clase 086) no es solo organización — **es la forma de
+salir del espacio de nombres reservado**.
 
 ### Fortran
 

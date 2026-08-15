@@ -12,7 +12,7 @@ Escribir Prolog exige desaprender casi todo lo demás — y por eso enseña tant
 > cuyo representante en el núcleo es [SQL](sql.md).
 >
 > Aporta al programa el paradigma lógico en su forma pura
-> ([clase 119](../classes/parte-7-paradigmas-de-programacion/119-programacion-logica/README.md)):
+> ([clase 119](../classes/parte-7-paradigmas/118-logico-reglas-hechos-y-unificacion-prolog/README.md)):
 > **unificación** en lugar de asignación, **vuelta atrás** en lugar de bucles, y **una relación que se
 > puede recorrer en las dos direcciones**. Es el contraste más fuerte de todo el Atlas frente a los
 > lenguajes imperativos.

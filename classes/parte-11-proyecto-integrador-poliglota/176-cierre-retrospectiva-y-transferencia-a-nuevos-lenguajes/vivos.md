@@ -72,7 +72,7 @@ PROCEDURE DIVISION.
 
 **Lo que se lleva de COBOL.** Tres cosas, y ninguna es sintaxis.
 
-**Una, que los números decimales no son coma flotante** (clase 072). COBOL lo tuvo claro en 1959 porque
+**Una, que los números decimales no son coma flotante** (clase 045). COBOL lo tuvo claro en 1959 porque
 su dominio era el dinero, y **cualquier lenguaje moderno tiene un tipo decimal** —`BigDecimal`,
 `decimal`, `Decimal`— **que casi nadie usa hasta que llega el primer céntimo descuadrado**.
 

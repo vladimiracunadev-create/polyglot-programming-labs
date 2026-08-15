@@ -351,7 +351,7 @@ Query.SQL.Text := 'SELECT SUM(saldo) FROM clientes WHERE zona = :zona';
 
 Y `Currency` merece la mención porque es una decisión acertada del lenguaje: **es un entero de 64 bits
 escalado por 10.000**, así que **es decimal exacto con cuatro decimales** — el tipo correcto para dinero
-(clase 072), y encaja con `DECIMAL` de SQL sin pérdida.
+(clase 045), y encaja con `DECIMAL` de SQL sin pérdida.
 
 Y el ecosistema moderno:
 

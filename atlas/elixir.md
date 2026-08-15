@@ -102,7 +102,7 @@ end
 ```
 
 **`if`, `unless`, `def` y `defmodule` son macros**, no palabras clave del lenguaje. Es la
-homoiconicidad de [Lisp](common-lisp.md) (clase 122) aplicada con una sintaxis convencional — y es lo
+homoiconicidad de [Lisp](common-lisp.md) (clase 123) aplicada con una sintaxis convencional — y es lo
 que permite que Phoenix y Ecto tengan las API que tienen.
 
 Y merece señalar lo que **no** cambió: **el modelo de procesos, la supervisión y "déjalo fallar" son

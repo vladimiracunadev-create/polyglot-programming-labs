@@ -16,7 +16,7 @@ lenguaje: **cada decisión responde a un problema concreto que habían visto mil
 > máquina virtual, con la misma biblioteca — y la mitad de líneas**. Y aporta dos conceptos concretos:
 > **la nulabilidad en el sistema de tipos** (clase 100) y **las corrutinas con concurrencia
 > estructurada**
-> ([clase 134](../classes/parte-8-como-funcionan-los-lenguajes/134-corrutinas-generadores-y-canales/README.md)).
+> ([clase 134](../classes/parte-8-como-funcionan-los-lenguajes/134-tareas-corrutinas-y-canales/README.md)).
 
 | | |
 |---|---|

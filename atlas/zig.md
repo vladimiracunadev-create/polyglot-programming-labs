@@ -15,7 +15,7 @@ puede fallar y cada rama del flujo de control aparecen escritas — y a cambio n
 > memoria como parámetro explícito** —quien llama decide de dónde sale la memoria (clases 128 y
 > 130)— y **`comptime`**, ejecutar código del propio lenguaje en tiempo de compilación en lugar de
 > tener un lenguaje de macros aparte
-> ([clase 122](../classes/parte-7-paradigmas-de-programacion/122-metaprogramacion/README.md)).
+> ([clase 122](../classes/parte-8-como-funcionan-los-lenguajes/123-del-codigo-a-la-ejecucion-fases-de-compilacion/README.md)).
 
 | | |
 |---|---|
@@ -95,7 +95,7 @@ fn Lista(comptime T: type) type {          // los genéricos son FUNCIONES sobre
 ```
 
 **El mismo lenguaje se ejecuta en tiempo de compilación** para generar tipos, desplegar bucles o
-calcular tablas. Es la metaprogramación de la clase 122 **sin un lenguaje de macros aparte** — lo
+calcular tablas. Es la metaprogramación de la clase 123 **sin un lenguaje de macros aparte** — lo
 contrario del preprocesador de C y de las plantillas de [C++](cpp.md).
 
 > **Y la comparación con [Rust](rust.md) es la que importa** (clase 164): **Rust hace imposible el

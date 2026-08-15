@@ -14,7 +14,7 @@ ejecución**.
 > [APL](apl.md), [J](j.md), [R](r.md), [MATLAB](matlab.md) y [Fortran](fortran.md).
 >
 > Aporta al programa **el despacho múltiple como paradigma central**
-> ([clase 111](../classes/parte-7-paradigmas-de-programacion/111-despacho-dinamico/README.md)) — la
+> ([clase 111](../classes/parte-7-paradigmas/111-herencia-composicion-y-polimorfismo/README.md)) — la
 > idea que [Common Lisp](common-lisp.md) tenía con CLOS, aquí convertida en la forma normal de
 > organizar el código. Y aporta el ejemplo más claro de **JIT especializante** (clase 126).
 

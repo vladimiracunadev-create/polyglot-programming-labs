@@ -82,7 +82,7 @@ CONTEXTO
     incluidas 30 años de normativa acumulada y sus excepciones.
   - No existe especificación escrita: el código ES la especificación (clase 154).
   - El sistema procesa el cierre diario en una ventana de 4 horas.
-  - La aritmética es decimal exacta y auditada por el regulador (clase 072).
+  - La aritmética es decimal exacta y auditada por el regulador (clase 045).
 
 DECISIÓN
   Mantener el motor en COBOL y exponerlo como servicio (clases 149 y 160).

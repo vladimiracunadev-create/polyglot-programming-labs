@@ -165,7 +165,7 @@ print(string.format("Total: %.2f", total))
   biblioteca lo refleja.
 - **Y el detalle que no se ve**: hasta Lua 5.3, **todos los números eran reales de 64 bits**, como en
   [JavaScript](javascript.md). Desde 5.3 hay enteros separados, y esa distinción importa en índices y
-  en identificadores grandes (clase 072).
+  en identificadores grandes (clase 045).
 
 ## 📚 Fuentes y bibliografía
 

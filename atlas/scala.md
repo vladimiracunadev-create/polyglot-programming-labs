@@ -14,7 +14,7 @@ de complejidad.
 >
 > Aporta al programa el sistema de tipos más expresivo de todos los lenguajes de esta lista, y en
 > particular dos conceptos: **el emparejamiento de patrones sobre tipos algebraicos**
-> ([clase 100](../classes/parte-6-datos-y-estructuras/100-igualdad-e-identidad/README.md) y clase 116)
+> ([clase 100](../classes/parte-6-datos-y-estructuras/100-enumeraciones-y-tipos-algebraicos-adt-sum-types/README.md) y clase 116)
 > y **las colecciones inmutables persistentes** (clase 102). Y aporta un caso de estudio de la clase
 > 175: **Scala 3 rompió la compatibilidad para simplificarse**, y eso tiene un coste.
 

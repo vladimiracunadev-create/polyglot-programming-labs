@@ -801,8 +801,8 @@ Y PL/I tiene además su propio lenguaje incrustado, y es del propio lenguaje: **
 **El preprocesador de PL/I es un lenguaje completo** —con variables, condicionales, bucles y
 procedimientos— **que se ejecuta en tiempo de compilación y genera código PL/I**.
 
-Es exactamente lo que la clase 122 llamaba metaprogramación, y **es de 1964**: mucho antes que las
-plantillas de C++ y las macros de Rust, y con la misma tensión que la clase 122 señalaba — **potentísimo
+Es exactamente lo que la clase 123 llamaba metaprogramación, y **es de 1964**: mucho antes que las
+plantillas de C++ y las macros de Rust, y con la misma tensión que la clase 123 señalaba — **potentísimo
 y capaz de hacer el programa ilegible**.
 
 Y por eso los estándares de instalación (clase 146) solían restringirlo severamente: **un programa cuyo

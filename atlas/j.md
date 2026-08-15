@@ -14,7 +14,7 @@ evocador.
 >
 > Aporta al programa **la programación tácita** —componer funciones **sin nombrar los argumentos**—,
 > que es una idea que solo esta familia y [Haskell](haskell.md) llevan al extremo
-> ([clase 115](../classes/parte-7-paradigmas-de-programacion/115-funciones-de-orden-superior/README.md)).
+> ([clase 115](../classes/parte-7-paradigmas/115-funcional-ii-composicion-currying-y-aplicacion-parcial/README.md)).
 > Y aporta un caso de estudio de la clase 175: **qué se gana y qué se pierde al cambiar la notación de
 > un lenguaje**.
 

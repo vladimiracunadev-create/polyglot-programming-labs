@@ -12,7 +12,7 @@ sintaxis es una operación normal**.
 > Racket es un **primo de la familia Lisp** ([Atlas](README.md#lisp)).
 >
 > Aporta al programa la forma más extrema de **metaprogramación**
-> ([clase 122](../classes/parte-7-paradigmas-de-programacion/122-metaprogramacion/README.md)) y de
+> ([clase 122](../classes/parte-8-como-funcionan-los-lenguajes/123-del-codigo-a-la-ejecucion-fases-de-compilacion/README.md)) y de
 > **lenguaje de dominio** (clase 163): no ya macros que añaden construcciones, sino **lenguajes
 > completos con otra sintaxis y otra semántica**, definidos como bibliotecas. Y aporta **los contratos
 > en ejecución** (clase 118) en un lenguaje dinámico.

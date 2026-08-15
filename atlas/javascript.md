@@ -14,9 +14,9 @@ poder romper nada.
 >
 > Aporta al programa tres conceptos que ningún otro del núcleo enseña igual: **la herencia por
 > prototipos** en vez de por clases
-> ([clase 112](../classes/parte-7-paradigmas-de-programacion/112-prototipos-frente-a-clases/README.md)),
+> ([clase 112](../classes/parte-7-paradigmas/113-oo-basado-en-prototipos-javascript/README.md)),
 > **el bucle de eventos con un solo hilo**
-> ([clase 134](../classes/parte-8-como-funcionan-los-lenguajes/134-corrutinas-generadores-y-canales/README.md))
+> ([clase 134](../classes/parte-8-como-funcionan-los-lenguajes/134-tareas-corrutinas-y-canales/README.md))
 > y **la coerción débil de tipos**, que es el mejor ejemplo posible de por qué la igualdad es un tema
 > (clase 100).
 
@@ -140,7 +140,7 @@ console.log(`Total: ${total.toFixed(2)}`);
 **Lo que hay que ver.**
 
 - **Hay un solo tipo numérico.** No existe `int`: `cantidad` es un **doble de 64 bits**, igual que el
-  precio. Eso simplifica el lenguaje y trae la consecuencia de la clase 072: **los enteros por encima
+  precio. Eso simplifica el lenguaje y trae la consecuencia de la clase 045: **los enteros por encima
   de 2⁵³ pierden precisión**, que es la razón de que las APIs envíen los identificadores grandes como
   cadenas (clase 159).
 - **`const` no significa constante**: significa que **el nombre no se reasigna**. Un objeto declarado

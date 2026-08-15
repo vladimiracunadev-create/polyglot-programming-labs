@@ -15,7 +15,7 @@ técnica no basta** (clase 164).
 > Aporta al programa una idea que hoy está en todas partes y que D tuvo primero: **ejecutar código
 > del propio lenguaje en tiempo de compilación** —CTFE, de 2007—, que es lo que
 > [Zig](zig.md) llama `comptime`, [C++](cpp.md) llama `constexpr` y [Rust](rust.md) llama `const fn`
-> ([clase 122](../classes/parte-7-paradigmas-de-programacion/122-metaprogramacion/README.md)). Y
+> ([clase 122](../classes/parte-8-como-funcionan-los-lenguajes/123-del-codigo-a-la-ejecucion-fases-de-compilacion/README.md)). Y
 > aporta el ejemplo más didáctico de **cómo una decisión de gobernanza puede hundir un lenguaje**.
 
 | | |

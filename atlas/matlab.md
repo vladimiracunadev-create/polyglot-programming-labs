@@ -13,7 +13,7 @@ producto comercial**, y esa dualidad explica sus fortalezas y su principal debil
 > a [APL](apl.md), [J](j.md), [R](r.md), [Julia](julia.md) y [Fortran](fortran.md).
 >
 > Aporta al programa dos cosas: **la programación vectorizada aplicada a la ingeniería**
-> ([clase 089](../classes/parte-6-datos-y-estructuras/089-arreglos-y-vectores/README.md)) y el caso de
+> ([clase 089](../classes/parte-6-datos-y-estructuras/089-arreglos-de-tamano-fijo/README.md)) y el caso de
 > estudio más claro de **generación de código desde un modelo** —Simulink— que la clase 155 nombra
 > como cuarta capa de un sistema poliglota, y que en aviación y automoción es donde de verdad se
 > escribe el software.
@@ -143,7 +143,7 @@ fprintf('Total: %.2f\n', total);
   entrada y salida lo refleja.
 - **Y el detalle que delata al lenguaje**: `v` es un `double` de 64 bits **aunque los tres valores
   fueran enteros**. En MATLAB **todo es coma flotante salvo que se pida lo contrario**, con las
-  consecuencias de la clase 072.
+  consecuencias de la clase 045.
 
 ## 📚 Fuentes y bibliografía
 

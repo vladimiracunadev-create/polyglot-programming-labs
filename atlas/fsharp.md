@@ -14,7 +14,7 @@ llegaron desde aquí**.
 >
 > Aporta al programa la **inferencia de tipos completa al estilo Hindley-Milner** —tipado estático sin
 > escribir casi ningún tipo— y **los tipos de datos algebraicos con emparejamiento exhaustivo**
-> ([clase 100](../classes/parte-6-datos-y-estructuras/100-igualdad-e-identidad/README.md)), que son las
+> ([clase 100](../classes/parte-6-datos-y-estructuras/100-enumeraciones-y-tipos-algebraicos-adt-sum-types/README.md)), que son las
 > dos ideas de ML que hoy están llegando a todos los lenguajes.
 
 | | |
@@ -110,7 +110,7 @@ filas.Rows |> Seq.sumBy (fun r -> r.Importe)   // con autocompletado y comprobac
 ```
 
 **Los proveedores de tipos** leen un esquema —CSV, JSON, SQL, un servicio web— **en tiempo de
-compilación** y generan los tipos. Es metaprogramación (clase 122) aplicada al problema de la
+compilación** y generan los tipos. Es metaprogramación (clase 123) aplicada al problema de la
 clase 170: **el desajuste de impedancia resuelto generando el tipo desde el esquema**.
 
 ## 🔄 Lo que se ha modernizado

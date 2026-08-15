@@ -14,7 +14,7 @@ macros higiénicas.
 > lenguajes vivos.
 >
 > Aporta al programa tres conceptos concretos: **las continuaciones de primera clase**
-> ([clase 127](../classes/parte-8-como-funcionan-los-lenguajes/127-la-pila-y-el-marco-de-llamada/README.md)),
+> ([clase 127](../classes/parte-8-como-funcionan-los-lenguajes/127-la-pila-stack-y-el-marco-de-llamada/README.md)),
 > **la recursión de cola garantizada por el estándar** (clase 083) y **las macros higiénicas**
 > (clase 122). Y aporta la demostración de que **un lenguaje puede ser minúsculo y completo a la vez**.
 
@@ -110,7 +110,7 @@ Es la demostración más pura de la tesis de los *Lambda Papers*, y es la razón
 ```
 
 **"Higiénicas" significa que las variables de la macro no capturan las de quien la usa** —el problema
-clásico de las macros de [Common Lisp](common-lisp.md) y del preprocesador de [C](c.md) (clase 122)—.
+clásico de las macros de [Common Lisp](common-lisp.md) y del preprocesador de [C](c.md) (clase 123)—.
 Scheme lo resolvió con `syntax-rules`, y es la solución que después adoptaron
 [Rust](rust.md) y [Racket](racket.md).
 

@@ -15,9 +15,9 @@ mayoritario** — y su lema no oficial lo resume: *"evitar el éxito a toda cost
 >
 > Aporta al programa dos conceptos que ningún otro lenguaje del Atlas enseña igual: **la evaluación
 > perezosa por defecto**
-> ([clase 115](../classes/parte-7-paradigmas-de-programacion/115-funciones-de-orden-superior/README.md))
+> ([clase 115](../classes/parte-7-paradigmas/115-funcional-ii-composicion-currying-y-aplicacion-parcial/README.md))
 > y **la pureza con efectos en el sistema de tipos**
-> ([clase 118](../classes/parte-7-paradigmas-de-programacion/118-programacion-declarativa/README.md)).
+> ([clase 118](../classes/parte-7-paradigmas/116-funcional-iii-functores-monadas-y-efectos-vision-practica/README.md)).
 
 | | |
 |---|---|

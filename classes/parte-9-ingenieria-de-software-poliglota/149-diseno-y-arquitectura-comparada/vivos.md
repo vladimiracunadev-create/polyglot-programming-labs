@@ -414,7 +414,7 @@ La idea, formulada por Paul Graham y practicada desde los años setenta:
 ;; capa 1: Common Lisp
 ```
 
-**`definir-flujo` no existe en Lisp: se define con `defmacro`** (clase 122), y a partir de ahí es
+**`definir-flujo` no existe en Lisp: se define con `defmacro`** (clase 123), y a partir de ahí es
 sintaxis del lenguaje.
 
 Y las consecuencias arquitectónicas son reales, en los dos sentidos:

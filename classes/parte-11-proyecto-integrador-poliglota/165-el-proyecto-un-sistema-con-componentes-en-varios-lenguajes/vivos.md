@@ -113,7 +113,7 @@ lógica de negocio validada**.
 | Responsabilidad | Por qué COBOL |
 |---|---|
 | **Cierre diario, mensual y anual** | procesa millones de registros en una ventana fija (clase 152) |
-| **Cálculo de intereses, comisiones y saldos** | decimal exacto (clase 072) |
+| **Cálculo de intereses, comisiones y saldos** | decimal exacto (clase 045) |
 | **Aplicación de las reglas normativas** | están implementadas y auditadas ahí |
 | **Conciliación y contabilidad** | idem, con treinta años de casos particulares |
 

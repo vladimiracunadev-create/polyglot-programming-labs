@@ -117,7 +117,7 @@ mismo motivo: **el enlace es por nombre y por posición, sin tipos**.
            05  FECHA   PIC 9(8).
 ```
 
-**COBOL empaqueta los campos sin relleno**, y **`COMP-3` es decimal empaquetado** (clase 072): dos
+**COBOL empaqueta los campos sin relleno**, y **`COMP-3` es decimal empaquetado** (clase 045): dos
 dígitos por byte, con el signo en el último medio byte.
 
 **Un `struct` de C con esos campos tendría relleno y otros tipos**, así que **la traducción de registros

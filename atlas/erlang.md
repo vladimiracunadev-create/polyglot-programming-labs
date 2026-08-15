@@ -13,7 +13,7 @@ a fallos tan distinto del resto que **su lema es "déjalo fallar"** — y funcio
 > [Go](go.md).
 >
 > Aporta al programa **el modelo de actores**
-> ([clase 133](../classes/parte-8-como-funcionan-los-lenguajes/133-actores-y-paso-de-mensajes/README.md))
+> ([clase 133](../classes/parte-8-como-funcionan-los-lenguajes/135-actores-y-paso-de-mensajes-modelo-beam/README.md))
 > y, sobre todo, **una filosofía de tolerancia a fallos distinta de todo lo demás del curso**: no
 > intentar que el código no falle, sino **organizar el sistema para que fallar no importe** (clases
 > 116 y 148).

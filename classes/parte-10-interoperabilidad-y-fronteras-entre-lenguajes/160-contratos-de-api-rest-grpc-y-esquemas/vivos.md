@@ -378,7 +378,7 @@ hace natural y que merece destacarse: **el contrato puede ser un dato del que se
    :respuesta (:id integer)))
 ```
 
-**Y de esa única declaración se puede generar, con macros** (clase 122):
+**Y de esa única declaración se puede generar, con macros** (clase 123):
 
 - **Las rutas del servidor y la validación de la entrada.**
 - **El cliente**, con funciones tipadas.

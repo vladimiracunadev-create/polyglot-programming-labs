@@ -13,7 +13,7 @@ llegar de otro sitio — y también por qué sigue siendo insustituible en su te
 >
 > Aporta al programa la **programación vectorizada**: en R, la unidad de trabajo **no es el valor,
 > es el vector**, y casi ningún programa lleva bucles
-> ([clase 089](../classes/parte-6-datos-y-estructuras/089-arreglos-y-vectores/README.md)). Es la misma
+> ([clase 089](../classes/parte-6-datos-y-estructuras/089-arreglos-de-tamano-fijo/README.md)). Es la misma
 > idea que [APL](apl.md), [J](j.md), [Fortran](fortran.md) moderno y NumPy, y quien la entiende aquí
 > la reconoce en los cuatro.
 

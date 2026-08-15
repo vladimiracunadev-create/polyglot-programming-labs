@@ -455,7 +455,7 @@ Y el ecosistema:
 Y Lisp aporta a esta clase una forma de deuda técnica muy propia y que merece explicarse: **la deuda de
 macros**.
 
-Una macro bien elegida hace el código más claro (clase 122). **Y una macro innecesaria crea un lenguaje
+Una macro bien elegida hace el código más claro (clase 123). **Y una macro innecesaria crea un lenguaje
 privado que solo su autor entiende** — y que las herramientas no entienden en absoluto (clase 150).
 
 La regla que la comunidad consolidó, y que es un buen ejemplo de la primera práctica del cierre: **si se

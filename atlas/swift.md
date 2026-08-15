@@ -13,7 +13,7 @@ defecto y concurrencia estructurada — con la interfaz gráfica de Apple detrá
 > [Dart](dart.md), y desciende directamente de [Objective-C](objective-c.md).
 >
 > Aporta al programa **la gestión de memoria por conteo automático de referencias sin recolector**
-> ([clase 131](../classes/parte-8-como-funcionan-los-lenguajes/131-recoleccion-de-basura/README.md)),
+> ([clase 131](../classes/parte-8-como-funcionan-los-lenguajes/131-recoleccion-de-basura-gc/README.md)),
 > con el problema de los ciclos a la vista; y **la concurrencia estructurada con actores integrados en
 > el sistema de tipos** (clases 133 y 136), que es de las implementaciones más completas que existen.
 
@@ -119,7 +119,7 @@ guard let a = apodo else { return }
 
 - **Swift 6 con concurrencia estricta**: las carreras de datos pasan a ser errores de compilación.
 - **Macros** (5.9): metaprogramación con transformación del árbol sintáctico, comprobada y depurable
-  (clase 122) — a diferencia de las macros de texto de [C](c.md).
+  (clase 123) — a diferencia de las macros de texto de [C](c.md).
 - **SwiftUI y Observation**: interfaz declarativa con estado observable (clase 169).
 - **Embedded Swift**: sin recolector, sin reflexión y sin metadatos, para microcontroladores.
 - **Interoperabilidad con C++** bidireccional, y **Swift en Windows y Linux** con soporte oficial.

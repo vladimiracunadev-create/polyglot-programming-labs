@@ -14,7 +14,7 @@ escritas en él como para que desaparezca**.
 >
 > Aporta al programa algo que ningún otro lenguaje de la lista enseña con tanta claridad: **el
 > despacho dinámico de mensajes en un lenguaje compilado**
-> ([clases 111 y 112](../classes/parte-7-paradigmas-de-programacion/README.md)). En Objective-C
+> ([clases 111 y 112](../classes/parte-7-paradigmas/README.md)). En Objective-C
 > **cualquier objeto puede recibir cualquier mensaje**, y eso se decide en ejecución — el modelo de
 > Smalltalk, sobre memoria y punteros de C.
 

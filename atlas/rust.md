@@ -13,10 +13,10 @@ que no existía en ningún lenguaje mayoritario, y que hoy están copiando todos
 >
 > Aporta al programa el concepto que da nombre a una clase entera: **propiedad, movimiento y
 > préstamo**
-> ([clase 081](../classes/parte-5-funciones-y-modularidad/081-paso-por-valor-y-paso-por-referencia/README.md)
-> y [clase 132](../classes/parte-8-como-funcionan-los-lenguajes/132-raii-propiedad-y-tiempos-de-vida/README.md)),
+> ([clase 081](../classes/parte-5-funciones-y-modularidad/081-semantica-de-movimiento-y-prestamo-rust/README.md)
+> y [clase 132](../classes/parte-8-como-funcionan-los-lenguajes/132-raii-propiedad-y-prestamos-rust-c-plus-plus/README.md)),
 > y el de **concurrencia sin carreras garantizada por el compilador**
-> ([clase 136](../classes/parte-8-como-funcionan-los-lenguajes/136-modelo-de-memoria-y-carreras-de-datos/README.md)).
+> ([clase 136](../classes/parte-8-como-funcionan-los-lenguajes/136-el-modelo-de-memoria-y-las-condiciones-de-carrera/README.md)).
 > Es el contrapunto exacto de [C++](cpp.md) y el complemento de [Go](go.md).
 
 | | |

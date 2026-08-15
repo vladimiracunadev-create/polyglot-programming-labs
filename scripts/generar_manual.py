@@ -17,11 +17,18 @@ título de su parte, y los enlaces relativos pasan a texto (en papel no llevan a
 ningún sitio).
 
 El código de los 10 lenguajes del núcleo va incluido: es el contenido del curso,
-no un adorno. Los anexos `primos.md` quedan fuera por tamaño — se añaden con
-`--con-primos` si quieres el volumen completo.
+no un adorno. Los anexos `vivos.md` (los 12 lenguajes que siguen vivos) y
+`primos.md` (los primos del Atlas) quedan fuera por tamaño — se añaden con
+`--con-vivos` y `--con-primos` para el volumen completo.
 
-Uso:  python scripts/generar_manual.py                 # genera manual/MANUAL.pdf
-      python scripts/generar_manual.py --con-primos --salida manual/MANUAL-COMPLETO.pdf
+Con `--atlas` genera el otro volumen que se versiona:
+
+  manual/ATLAS.pdf    las 60 fichas de lenguaje, con sus dos índices
+
+Uso:  python scripts/generar_manual.py                 # manual/MANUAL.pdf
+      python scripts/generar_manual.py --atlas          # manual/ATLAS.pdf
+      python scripts/generar_manual.py --con-vivos --con-primos \
+             --salida manual/MANUAL-COMPLETO.pdf        # el volumen completo
       python scripts/generar_manual.py --volcar-md R   # además escribe el MD en R (debug)
 Requiere: pip install "markdown>=3.6" y Chrome o Edge (headless).
 """
@@ -39,6 +46,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CLASSES = os.path.join(ROOT, "classes")
 MANUAL_DIR = os.path.join(ROOT, "manual")
 MANUAL_PDF = os.path.join(MANUAL_DIR, "MANUAL.pdf")
+ATLAS_PDF = os.path.join(MANUAL_DIR, "ATLAS.pdf")
 
 RE_H1 = re.compile(r"^#\s+(.+?)\s*$", re.M)
 
@@ -61,13 +69,19 @@ def partes() -> list[tuple[int, str, list[str]]]:
     return out
 
 
-def construir_markdown(gm, con_primos: bool) -> str:
+def construir_markdown(gm, con_primos: bool, con_vivos: bool = False) -> str:
     lista = partes()
     total = sum(len(c) for _, _, c in lista)
+    extras = []
+    if con_vivos:
+        extras.append("los lenguajes que siguen vivos")
+    if con_primos:
+        extras.append("los primos del Atlas")
+    coletilla = f" · con {' y '.join(extras)}" if extras else ""
     doc = [
         "# Manual completo — Polyglot Programming Labs",
         "",
-        f"*{total} clases · {len(lista)} partes · un concepto, 10 lenguajes, ~40 familias*  ",
+        f"*{total} clases · {len(lista)} partes · un concepto, 10 lenguajes, ~40 familias{coletilla}*  ",
         "*github.com/vladimiracunadev-create/polyglot-programming-labs · Licencia MIT*",
         "",
         "[TOC]",
@@ -89,11 +103,51 @@ def construir_markdown(gm, con_primos: bool) -> str:
                 cuerpo = gm.demotar(gm.quitar_nav(f.read()), 2).strip()  # H1 clase -> H3
             doc.append(cuerpo)
             doc.append("")
-            primos = os.path.join(os.path.dirname(ruta), "primos.md")
-            if con_primos and os.path.isfile(primos):
-                with open(primos, encoding="utf-8") as f:
-                    doc.append(gm.demotar(gm.quitar_nav(f.read()), 3).strip())
-                doc.append("")
+            for anexo, incluir in (("vivos.md", con_vivos), ("primos.md", con_primos)):
+                camino = os.path.join(os.path.dirname(ruta), anexo)
+                if incluir and os.path.isfile(camino):
+                    with open(camino, encoding="utf-8") as f:
+                        doc.append(gm.demotar(gm.quitar_nav(f.read()), 3).strip())
+                    doc.append("")
+    return "\n".join(doc)
+
+
+def construir_atlas(gm) -> str:
+    """El volumen del Atlas: los dos índices y las 60 fichas de lenguaje."""
+    atlas_dir = os.path.join(ROOT, "atlas")
+    indices = ["lenguajes.md", "vivos.md", "README.md"]
+    fichas = sorted(
+        os.path.basename(p) for p in glob.glob(os.path.join(atlas_dir, "*.md"))
+        if os.path.basename(p) not in indices
+    )
+
+    doc = [
+        "# Atlas de lenguajes — Polyglot Programming Labs",
+        "",
+        f"*{len(fichas)} fichas de lenguaje · historia, características y el programa "
+        "de la clase 041 en cada uno*  ",
+        "*github.com/vladimiracunadev-create/polyglot-programming-labs · Licencia MIT*",
+        "",
+        "[TOC]",
+        "",
+    ]
+
+    for nombre, titulo in (("lenguajes.md", "Índice de las fichas"),
+                           ("vivos.md", "Los lenguajes que siguen vivos"),
+                           ("README.md", "El árbol de familias")):
+        with open(os.path.join(atlas_dir, nombre), encoding="utf-8") as f:
+            cuerpo = f.read()
+        doc.append(f"## {titulo}")
+        doc.append("")
+        doc.append(gm.demotar(gm.quitar_nav(RE_H1.sub("", cuerpo, count=1)), 1).strip())
+        doc.append("")
+
+    doc.append("## Fichas de lenguaje")
+    doc.append("")
+    for nombre in fichas:
+        with open(os.path.join(atlas_dir, nombre), encoding="utf-8") as f:
+            doc.append(gm.demotar(gm.quitar_nav(f.read()), 2).strip())
+        doc.append("")
     return "\n".join(doc)
 
 
@@ -101,13 +155,20 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Genera el manual del curso en PDF.")
     ap.add_argument("--con-primos", action="store_true",
                     help="incluir los anexos primos.md (manual mucho más largo)")
-    ap.add_argument("--salida", metavar="RUTA", default=MANUAL_PDF,
-                    help="PDF de destino (por defecto manual/MANUAL.pdf). Úsalo con "
-                         "--con-primos para no pisar el manual versionado.")
+    ap.add_argument("--con-vivos", action="store_true",
+                    help="incluir los anexos vivos.md (los 12 lenguajes que siguen vivos)")
+    ap.add_argument("--atlas", action="store_true",
+                    help="generar el volumen del Atlas (las 60 fichas de lenguaje) "
+                         "en lugar del manual de clases")
+    ap.add_argument("--salida", metavar="RUTA", default=None,
+                    help="PDF de destino (por defecto manual/MANUAL.pdf, o "
+                         "manual/ATLAS.pdf con --atlas). Úsalo con --con-primos "
+                         "para no pisar el manual versionado.")
     ap.add_argument("--volcar-md", metavar="RUTA",
                     help="además, escribe el Markdown intermedio ahí (para depurar)")
     args = ap.parse_args()
-    destino = os.path.abspath(args.salida)
+    predeterminado = ATLAS_PDF if args.atlas else MANUAL_PDF
+    destino = os.path.abspath(args.salida or predeterminado)
 
     try:
         import markdown
@@ -117,12 +178,20 @@ def main() -> int:
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import generar_material as gm  # reutiliza el CSS B/N, la plantilla y buscar_navegador
 
-    lista = partes()
-    total = sum(len(c) for _, _, c in lista)
-    print(f"== Manual: {len(lista)} partes, {total} clases"
-          f"{' (con primos)' if args.con_primos else ''} ==")
-
-    md = construir_markdown(gm, args.con_primos)
+    if args.atlas:
+        n = len(glob.glob(os.path.join(ROOT, "atlas", "*.md"))) - 3
+        print(f"== Atlas: {n} fichas de lenguaje ==")
+        md = construir_atlas(gm)
+        titulo_html = "Atlas de lenguajes"
+    else:
+        lista = partes()
+        total = sum(len(c) for _, _, c in lista)
+        anexos = [n for n, v in (("vivos", args.con_vivos),
+                                 ("primos", args.con_primos)) if v]
+        print(f"== Manual: {len(lista)} partes, {total} clases"
+              f"{' (con ' + ' y ' .join(anexos) + ')' if anexos else ''} ==")
+        md = construir_markdown(gm, args.con_primos, args.con_vivos)
+        titulo_html = "Manual completo"
     if args.volcar_md:
         with open(args.volcar_md, "w", encoding="utf-8", newline="\n") as f:
             f.write(md)
@@ -134,7 +203,7 @@ def main() -> int:
     cuerpo = markdown.markdown(
         md, extensions=["tables", "fenced_code", "sane_lists", "toc"],
         extension_configs={"toc": {"toc_depth": "2-3"}})
-    html = gm.PLANTILLA.format(title="Manual completo", css=gm.CSS_PRINT, body=cuerpo)
+    html = gm.PLANTILLA.format(title=titulo_html, css=gm.CSS_PRINT, body=cuerpo)
 
     navegador = gm.buscar_navegador()
     if navegador is None:
@@ -160,10 +229,10 @@ def main() -> int:
         os.unlink(ruta_tmp)
 
     print(f"  {os.path.relpath(destino, ROOT)} ({os.path.getsize(destino) // 1024} KB)")
-    if destino == MANUAL_PDF:
-        print("\nOK: manual generado. Recuerda commitearlo (se versiona).")
+    if destino in (MANUAL_PDF, ATLAS_PDF):
+        print("\nOK: generado. Recuerda commitearlo (se versiona).")
     else:
-        print("\nOK: manual generado. Este PDF NO se versiona: publícalo como asset del release.")
+        print("\nOK: generado. Este PDF NO se versiona: publícalo como asset del release.")
     return 0
 
 

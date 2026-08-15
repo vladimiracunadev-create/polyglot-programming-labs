@@ -14,7 +14,7 @@ pregunta cosas a sus datos**.
 >
 > Está en el núcleo porque enseña el paradigma que ningún otro del curso enseña: **describir el
 > resultado y dejar que otro decida cómo obtenerlo**
-> ([clase 118](../classes/parte-7-paradigmas-de-programacion/118-programacion-declarativa/README.md)).
+> ([clase 118](../classes/parte-7-paradigmas/117-declarativo-consultas-y-transformacion-sql/README.md)).
 > Y porque **es la frontera con los datos de casi cualquier sistema real** (clase 170): quien
 > programa cualquier cosa acaba escribiendo SQL.
 

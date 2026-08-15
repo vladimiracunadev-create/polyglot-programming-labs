@@ -387,7 +387,7 @@ es una transformación de listas**.
 ```
 
 **No hace falta un analizador**, porque no hay texto que analizar. Es la misma propiedad que hace
-posibles las macros (clase 122), aplicada a las herramientas.
+posibles las macros (clase 123), aplicada a las herramientas.
 
 Y Lisp tiene una capacidad de refactorización que ningún lenguaje compilado de esta página iguala, y
 viene de la Parte 8: **se puede refactorizar con el sistema en marcha y comprobar cada paso al

@@ -14,7 +14,7 @@ esa densidad es a la vez su virtud y la razón de su marginalidad.
 > [Julia](julia.md), [MATLAB](matlab.md) y el [Fortran](fortran.md) moderno.
 >
 > Aporta al programa **la programación por arreglos en su forma original y más pura**
-> ([clase 089](../classes/parte-6-datos-y-estructuras/089-arreglos-y-vectores/README.md)): el
+> ([clase 089](../classes/parte-6-datos-y-estructuras/089-arreglos-de-tamano-fijo/README.md)): el
 > pensamiento sin bucles, con operadores que se combinan. Es el antepasado directo de todo lo
 > vectorizado que se hace hoy.
 

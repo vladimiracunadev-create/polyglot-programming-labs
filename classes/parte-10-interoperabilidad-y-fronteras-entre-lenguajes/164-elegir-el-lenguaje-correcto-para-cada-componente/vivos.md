@@ -101,7 +101,7 @@ Y donde COBOL sigue siendo **objetivamente bueno** merece decirse, porque suele 
 
 | Fortaleza | Por qué |
 |---|---|
-| **Aritmética decimal exacta** | `COMP-3` y `PIC S9(9)V99` (clase 072): sin sorpresas de redondeo |
+| **Aritmética decimal exacta** | `COMP-3` y `PIC S9(9)V99` (clase 045): sin sorpresas de redondeo |
 | **Procesamiento de lotes enormes** | el modelo de fichero y el `SORT` son insuperables (clase 152) |
 | **Legibilidad para no programadores** | un analista de negocio puede leer la regla |
 | **Estabilidad** | código de 1985 compila hoy |
@@ -501,7 +501,7 @@ nuevos**, y merece decir con precisión cuándo y cuándo no.
 
 | Caso | Por qué |
 |---|---|
-| **Rendimiento con abstracción** | plantillas y `constexpr`: cero coste en ejecución (clase 122) |
+| **Rendimiento con abstracción** | plantillas y `constexpr`: cero coste en ejecución (clase 123) |
 | **Motores de juego y gráficos** | Unreal, y todo el ecosistema de renderizado |
 | **Sistemas embebidos potentes** | automoción, robótica, imagen médica |
 | **Alta frecuencia y baja latencia** | control total sobre memoria y disposición (clase 152) |
@@ -665,7 +665,7 @@ decimales modernos; el cálculo lo hace Fortran; la programación de sistemas la
 PL/I tenía, en 1964, cosas que otros lenguajes tardaron décadas en tener:
   - manejo de excepciones con reanudación (clase 116)
   - concurrencia en el lenguaje
-  - decimal exacto con precisión declarada (clase 072)
+  - decimal exacto con precisión declarada (clase 045)
   - punteros y gestión de almacenamiento explícita
   - un preprocesador programable (clase 163)
   - y una biblioteca de funciones de arreglos y cadenas muy rica

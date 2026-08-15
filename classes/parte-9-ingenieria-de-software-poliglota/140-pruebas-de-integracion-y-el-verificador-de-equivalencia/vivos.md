@@ -99,7 +99,7 @@ hay que decidir si el sistema nuevo debe **reproducir el error**.
 
 La respuesta, casi siempre, es que sí. Es lo que se llama *bug-for-bug compatibility*.
 
-Y COBOL aporta a esta clase el motivo técnico más frecuente de discrepancia, que es de la clase 072:
+Y COBOL aporta a esta clase el motivo técnico más frecuente de discrepancia, que es de la clase 045:
 **la aritmética decimal**.
 
 ```cobol

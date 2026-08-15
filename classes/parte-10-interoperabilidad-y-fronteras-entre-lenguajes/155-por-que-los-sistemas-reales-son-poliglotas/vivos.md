@@ -254,7 +254,7 @@ with Interfaces.Fortran;
 
 **`Interfaces.Fortran` incluye el tipo `Fortran_Integer`, los complejos y —lo importante— la convención
 de matrices por columnas** (clase 089). **`Interfaces.COBOL` incluye tipos decimales empaquetados y
-cadenas con formato de imagen** (clase 072).
+cadenas con formato de imagen** (clase 045).
 
 Es la única de esta página que trata la interoperabilidad como parte del lenguaje y no como una
 biblioteca añadida, y viene de su origen: **Ada se diseñó para sistemas de defensa donde había que

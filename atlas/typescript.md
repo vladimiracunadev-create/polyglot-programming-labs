@@ -16,7 +16,7 @@ que un lenguaje nuevo no habría tomado, y esas decisiones son exactamente lo qu
 > Aporta al programa el concepto de **tipado gradual** —tipos donde compensan, dinámico donde no— y
 > el de **borrado de tipos**: en TypeScript los tipos **desaparecen al compilar** y no existen en
 > ejecución
-> ([clase 108](../classes/parte-6-datos-y-estructuras/108-reflexion-e-introspeccion/README.md)),
+> ([clase 108](../classes/parte-8-como-funcionan-los-lenguajes/123-del-codigo-a-la-ejecucion-fases-de-compilacion/README.md)),
 > que es una decisión con consecuencias muy visibles.
 
 | | |
@@ -150,7 +150,7 @@ console.log(`Total: ${total.toFixed(2)}`);
 - **`number[]` es una promesa que el compilador no puede cumplir del todo**: con
   `noUncheckedIndexedAccess`, `precio` sería `number | undefined`, porque **el compilador no sabe que
   la línea trae tres campos**. Esa opción, que casi nadie activa, es la que hace honesto el tipo.
-- **Sigue habiendo un solo tipo numérico**, con lo que las consecuencias de la clase 072 son las de
+- **Sigue habiendo un solo tipo numérico**, con lo que las consecuencias de la clase 045 son las de
   JavaScript: TypeScript **no añade enteros**, añade comprobación.
 - **Y todas las anotaciones desaparecen** al compilar: el `.js` resultante es exactamente el de la
   ficha de JavaScript.

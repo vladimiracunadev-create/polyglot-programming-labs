@@ -92,7 +92,7 @@ binaria**.
 **Eso define, sin ambigüedad, cada byte del registro**: dónde empieza cada campo, cuántos bytes ocupa,
 qué codificación tiene y cuántas repeticiones hay.
 
-Y **`COMP-3` merece la explicación** porque es la razón de que este formato siga en uso (clase 072):
+Y **`COMP-3` merece la explicación** porque es la razón de que este formato siga en uso (clase 045):
 **decimal empaquetado, dos dígitos por byte, con el signo en el último medio byte**.
 
 ```text
@@ -806,7 +806,7 @@ en JSON depende de cómo lo lea el receptor.
 
 Es la misma razón por la que Protobuf tiene `decimal` en algunas variantes, por la que las APIs
 financieras envían los importes como cadenas, y por la que existen tipos decimales en todos los
-lenguajes serios (clase 072).
+lenguajes serios (clase 045).
 
 Y PL/I aporta también el formato binario declarado, que es el de COBOL en esta página:
 
@@ -921,7 +921,7 @@ Compiler evaluate: p storeString.     "→ una colección igual"
 ```
 
 **Y el detalle que lo hace notable: `3/4` sobrevive como fracción exacta**, no como `0.75`. Smalltalk
-tiene números racionales y enteros de precisión arbitraria (clase 072), y **la serialización los
+tiene números racionales y enteros de precisión arbitraria (clase 045), y **la serialización los
 conserva**.
 
 Es una propiedad que casi ningún formato de intercambio tiene, y que la columna de la izquierda de esta

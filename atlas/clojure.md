@@ -147,7 +147,7 @@ clj-kondo --lint src                      # análisis estático, muy bueno (clas
 - **`let` con desestructuración `[[a b c] ...]`** liga tres nombres de una vez, y **no son variables:
   son enlaces que no se reasignan**. En todo el programa **no hay una sola mutación** (clase 102).
 - **`(double total)` no sobra**: `read-string` puede devolver un entero o una **fracción exacta**
-  —Clojure tiene racionales, como [Smalltalk](smalltalk.md) (clase 072)— y `%.2f` necesita un doble.
+  —Clojure tiene racionales, como [Smalltalk](smalltalk.md) (clase 045)— y `%.2f` necesita un doble.
   Ese detalle es un buen recordatorio de que **el modelo numérico varía mucho entre lenguajes**.
 - **Y compárese con [Java](java.md), en la misma máquina virtual**: la diferencia no es de sintaxis,
   es de paradigma. Clojure no crea ningún objeto ni declara ninguna clase.

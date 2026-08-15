@@ -59,12 +59,20 @@ adaptación se explica en la página en lugar de inventar un programa falso.
 Cada cápsula resume **historia** (autor, año, motivo, de quién hereda), **características**
 (paradigma, tipos, memoria y ejecución), **con qué se ejecuta** (compilador o intérprete y gestor
 de paquetes), el mapa **"si ya sabes X…"** hacia un lenguaje del núcleo, y su **estado** actual.
-El núcleo (Python, JavaScript, TypeScript, Java, C#, Go, Rust, C, SQL, PHP) no lleva ficha aquí:
-se estudia a fondo en las clases.
+
+> 🗂️ **Y cada lenguaje tiene además su ficha completa.** Las cápsulas de abajo son el resumen; la
+> ficha desarrolla la **historia**, dónde vive hoy, **lo que enseña y no enseña ningún otro**, lo que
+> se ha modernizado, cómo se ejecuta con órdenes reales, **el programa de la clase 041 explicado línea
+> a línea** y la bibliografía.
+>
+> 👉 **[Índice de las 60 fichas de lenguaje](lenguajes.md)** — incluidos los **diez del núcleo**
+> (Python, JavaScript, TypeScript, Java, C#, Go, Rust, C, SQL, PHP), que antes no la tenían.
 
 ## 🧱 Familia C / llaves
 
 ### C++
+
+> 🗂️ **[Ficha completa de C++](cpp.md)**
 
 Bjarne Stroustrup empezó en 1979 en Bell Labs un proyecto llamado "C con clases", que en 1985 se
 publicó como **C++**. La meta era añadir abstracción orientada a objetos a C sin sacrificar su
@@ -80,6 +88,8 @@ finanzas. El estándar lo mantiene ISO ([isocpp.org](https://isocpp.org/)).
 
 ### Objective-C
 
+> 🗂️ **[Ficha completa de Objective-C](objective-c.md)**
+
 Brad Cox y Tom Love lo crearon a inicios de los años 80 (hacia 1984) fusionando el modelo de
 **mensajería de Smalltalk** con el lenguaje C. NeXT lo adoptó y, tras la compra por Apple, fue
 durante décadas el lenguaje oficial de macOS e iOS. Es un **superconjunto estricto de C**: cualquier
@@ -93,6 +103,8 @@ Apple heredadas, pero Swift lo ha reemplazado como lenguaje recomendado
 ([documentación de Apple](https://developer.apple.com/documentation/objectivec)).
 
 ### Zig
+
+> 🗂️ **[Ficha completa de Zig](zig.md)**
 
 Andrew Kelley presentó Zig en 2016 como un lenguaje de sistemas moderno que pretende ser **"un mejor
 C"** sin la complejidad de C++. Su lema es la ausencia de comportamientos ocultos: no hay
@@ -108,6 +120,8 @@ genéricos tradicionales. Trae **compilador propio** (que además puede compilar
 
 ### Nim
 
+> 🗂️ **[Ficha completa de Nim](nim.md)**
+
 Andreas Rumpf comenzó Nim en 2008 (bajo el nombre *Nimrod*) buscando un lenguaje tan expresivo como
 Python pero tan eficiente como C. Su sintaxis usa **indentación significativa** al estilo Python,
 pero **compila a C, C++ o JavaScript** y de ahí a un binario nativo veloz. Es **multiparadigma**
@@ -120,6 +134,8 @@ de **nicho pero maduro y estable**, con comunidad pequeña y dedicada
 ([nim-lang.org](https://nim-lang.org/)).
 
 ### D
+
+> 🗂️ **[Ficha completa de D](d.md)**
 
 Walter Bright, autor del primer compilador nativo de C++, diseñó D en 2001 en Digital Mars como un
 rediseño de C++ que conservara su potencia eliminando su carga histórica. Es **multiparadigma**
@@ -136,6 +152,8 @@ ya sabes **C++**, D se siente como su versión ordenada y más rápida de escrib
 
 ### Ruby
 
+> 🗂️ **[Ficha completa de Ruby](ruby.md)**
+
 Yukihiro "Matz" Matsumoto publicó Ruby en Japón en 1995, buscando un lenguaje **optimizado para la
 felicidad del programador**: elegante, consistente y agradable de leer. Es **totalmente orientado a
 objetos** (hasta los números son objetos), con fuerte influencia de Smalltalk, Perl y Lisp. Su
@@ -148,6 +166,8 @@ orientado a expresiones y con una cultura de DSLs muy marcada. Sigue **vivo**, s
 desarrollo web y automatización ([ruby-lang.org](https://www.ruby-lang.org/)).
 
 ### Perl
+
+> 🗂️ **[Ficha completa de Perl](perl.md)**
 
 Larry Wall creó Perl en 1987 como una "navaja suiza" para procesar texto y administrar sistemas
 Unix, combinando ideas de C, sed, awk y los shells. Su filosofía es "hay más de una forma de
@@ -162,6 +182,8 @@ y scripts heredados ([perl.org](https://www.perl.org/)).
 
 ### Lua
 
+> 🗂️ **[Ficha completa de Lua](lua.md)**
+
 Roberto Ierusalimschy, Luiz Henrique de Figueiredo y Waldemar Celes crearon Lua en 1993 en la
 PUC-Rio de Brasil como un **lenguaje de scripting embebible**, ligero y portable. Su diseño prioriza
 un intérprete diminuto que se incrusta fácilmente dentro de aplicaciones escritas en C. Es
@@ -174,6 +196,8 @@ lenguaje incrustado: videojuegos (Roblox, World of Warcraft), Redis, Nginx y Neo
 ([lua.org](https://www.lua.org/)).
 
 ### Tcl
+
+> 🗂️ **[Ficha completa de Tcl](tcl.md)**
 
 John Ousterhout diseñó Tcl (*Tool Command Language*) en 1988 como un lenguaje de comandos simple y
 embebible para dar scripting a herramientas de ingeniería. Su principio radical es que **todo es una
@@ -188,6 +212,8 @@ modelo de "todo texto" peculiar. Su estado es **legado de nicho**: automatizaci�
 ([tcl-lang.org](https://www.tcl-lang.org/)).
 
 ### R
+
+> 🗂️ **[Ficha completa de R](r.md)**
 
 Ross Ihaka y Robert Gentleman crearon R en 1993 en la Universidad de Auckland como una
 implementación libre del lenguaje **S** de Bell Labs, orientada a **estadística y análisis de
@@ -205,6 +231,8 @@ academia, ciencia de datos, bioestadística y análisis
 
 ### Kotlin
 
+> 🗂️ **[Ficha completa de Kotlin](kotlin.md)**
+
 JetBrains anunció Kotlin en 2011 y lanzó la versión 1.0 en 2016 como un lenguaje moderno para la
 **JVM** que corrigiera las asperezas de Java manteniendo interoperabilidad total con él. Google lo
 adoptó como lenguaje preferente para Android en 2017. Es **multiparadigma** (OO y funcional), de
@@ -217,6 +245,8 @@ segura; la migración es gradual porque conviven en el mismo proyecto. Está **m
 en Android y creciente en backend ([kotlinlang.org](https://kotlinlang.org/)).
 
 ### Scala
+
+> 🗂️ **[Ficha completa de Scala](scala.md)**
 
 Martin Odersky creó Scala en 2004 en la EPFL para **fusionar programación orientada a objetos y
 funcional** de forma elegante sobre la JVM. Su nombre viene de "scalable language". Es
@@ -231,6 +261,8 @@ programación funcional tipada sin salir de la JVM, aunque su curva es más pron
 
 ### Groovy
 
+> 🗂️ **[Ficha completa de Groovy](groovy.md)**
+
 James Strachan propuso Groovy en 2003 (versión 1.0 en 2007) como un lenguaje **dinámico para la
 JVM** con sintaxis cercana a Java pero mucho más ágil, inspirado en Ruby y Python. Es
 **multiparadigma**, con **tipado dinámico opcionalmente estático**, ejecutado sobre la **JVM** con
@@ -243,6 +275,8 @@ plataforma sin recompilar todo. Su estado es **vivo de nicho**: build scripts, p
 testing (Spock) ([groovy-lang.org](https://groovy-lang.org/)).
 
 ### Clojure
+
+> 🗂️ **[Ficha completa de Clojure](clojure.md)**
 
 Rich Hickey creó Clojure en 2007 como un **Lisp moderno para la JVM**, centrado en la
 **inmutabilidad** y la programación funcional práctica. Es un dialecto de Lisp: código
@@ -260,6 +294,8 @@ fintech y equipos que valoran el enfoque funcional
 
 ### F\#
 
+> 🗂️ **[Ficha completa de F#](fsharp.md)**
+
 Don Syme y Microsoft Research desarrollaron F#, lanzado en 2005, para llevar la tradición **ML** al
 ecosistema **.NET**. Es un lenguaje **funcional primero** (aunque multiparadigma) con **tipado
 estático e inferencia fuerte**, ejecutado sobre el **CLR** con **recolector de basura**. Ofrece
@@ -273,6 +309,8 @@ finanzas, análisis de datos y equipos .NET que buscan robustez funcional
 ([fsharp.org](https://fsharp.org/)).
 
 ### VB.NET
+
+> 🗂️ **[Ficha completa de VB.NET](vbnet.md)**
 
 Microsoft lanzó Visual Basic .NET en 2002 como la reencarnación del clásico Visual Basic (1991)
 sobre la plataforma **.NET**, rompiendo la compatibilidad con el VB6 anterior a cambio de un modelo
@@ -290,6 +328,8 @@ empresariales existentes
 
 ### Haskell
 
+> 🗂️ **[Ficha completa de Haskell](haskell.md)**
+
 Haskell nació en 1990 del trabajo de un comité académico que buscaba unificar los lenguajes
 funcionales perezosos en un estándar común; lleva el nombre del lógico **Haskell Curry**. Es el
 lenguaje funcional puro por excelencia: **evaluación perezosa** por defecto, **funciones puras** y
@@ -304,6 +344,8 @@ Su estado es **vivo de nicho**: investigación, compiladores, fintech y verifica
 
 ### OCaml
 
+> 🗂️ **[Ficha completa de OCaml](ocaml.md)**
+
 OCaml procede del linaje **ML** desarrollado en el INRIA francés; la versión con objetos data de
 1996 (Caml existía desde finales de los 80). Combina programación **funcional, imperativa y
 orientada a objetos** con un énfasis en la practicidad y la velocidad de compilación. Su tipado es
@@ -317,6 +359,8 @@ nicho**: finanzas, compiladores y herramientas formales
 ([ocaml.org](https://ocaml.org/)).
 
 ### Elm
+
+> 🗂️ **[Ficha completa de Elm](elm.md)**
 
 Evan Czaplicki presentó Elm en 2012 como su tesis: un lenguaje **funcional puro dedicado a
 interfaces web** que compila a JavaScript y promete **cero excepciones en tiempo de ejecución**. Es
@@ -334,6 +378,8 @@ estado es **vivo de nicho**, con desarrollo pausado pero comunidad fiel
 
 ### Scheme
 
+> 🗂️ **[Ficha completa de Scheme](scheme.md)**
+
 Guy Steele y Gerald Sussman crearon Scheme en 1975 en el MIT como un dialecto **minimalista y
 elegante de Lisp**, diseñado para ser conceptualmente limpio y fácil de razonar. Su filosofía es
 dar pocas primitivas muy poderosas en lugar de muchas características. Es **funcional primero** (con
@@ -348,6 +394,8 @@ investigación y scripting embebido (GNU Guile)
 
 ### Racket
 
+> 🗂️ **[Ficha completa de Racket](racket.md)**
+
 Racket comenzó en 1995 como *PLT Scheme* y se renombró en 2010; es un descendiente de Scheme
 convertido en **plataforma para crear lenguajes**. Su gran idea es que construir lenguajes de
 dominio específico es una actividad de primera clase: incluye herramientas para definir tu propia
@@ -360,6 +408,8 @@ Está **vivo de nicho**: enseñanza de programación (libro *How to Design Progr
 lenguajes y prototipado ([racket-lang.org](https://racket-lang.org/)).
 
 ### Common Lisp
+
+> 🗂️ **[Ficha completa de Common Lisp](common-lisp.md)**
 
 Common Lisp surgió a mediados de los 80 (estandarizado por ANSI en 1994) para **unificar la dispersa
 familia de dialectos Lisp** en un estándar industrial común. Es un Lisp grande y pragmático,
@@ -374,6 +424,8 @@ expertos, aviación (antes), y una comunidad pequeña muy productiva
 ([common-lisp.net](https://common-lisp.net/)).
 
 ### Emacs Lisp
+
+> 🗂️ **[Ficha completa de Emacs Lisp](emacs-lisp.md)**
 
 Richard Stallman escribió Emacs Lisp en 1985 como el lenguaje de extensión del editor **GNU Emacs**.
 Es un dialecto de Lisp diseñado no para programas autónomos, sino para **configurar y programar el
@@ -390,6 +442,8 @@ mientras Emacs lo esté: sigue siendo el corazón de uno de los editores más lo
 
 ### Prolog
 
+> 🗂️ **[Ficha completa de Prolog](prolog.md)**
+
 Alain Colmerauer y Philippe Roussel crearon Prolog en 1972 en Marsella como el lenguaje insignia de
 la **programación lógica**. En lugar de describir pasos, el programador declara **hechos y reglas**,
 y el motor busca soluciones mediante **unificación** y **backtracking** automático. Es
@@ -403,6 +457,8 @@ lógica general. Está **vivo de nicho**: procesamiento de lenguaje, razonamient
 ([swi-prolog.org](https://www.swi-prolog.org/)).
 
 ### Datalog
+
+> 🗂️ **[Ficha completa de Datalog](datalog.md)**
 
 Datalog surgió en la comunidad de bases de datos deductivas a finales de los años 70 y 80 como un
 **subconjunto de Prolog** deliberadamente restringido para garantizar **terminación y consultas
@@ -420,6 +476,8 @@ sobre datos ([Soufflé, un motor Datalog](https://souffle-lang.github.io/)).
 
 ### Erlang
 
+> 🗂️ **[Ficha completa de Erlang](erlang.md)**
+
 Joe Armstrong, Robert Virding y Mike Williams crearon Erlang en Ericsson en 1986 (liberado como
 software libre en 1998) para construir **sistemas de telecomunicaciones** con alta disponibilidad y
 tolerancia a fallos. Su modelo es el de **actores**: procesos ligerísimos y aislados que solo se
@@ -433,6 +491,8 @@ mensajería (WhatsApp), telecomunicaciones y sistemas de alta disponibilidad
 ([erlang.org](https://www.erlang.org/)).
 
 ### Elixir
+
+> 🗂️ **[Ficha completa de Elixir](elixir.md)**
 
 José Valim creó Elixir en 2011 para llevar la **robustez de la plataforma Erlang/BEAM** a una
 sintaxis moderna y productiva inspirada en Ruby. Compila a la máquina virtual **BEAM** y hereda todo
@@ -449,6 +509,8 @@ real, sistemas distribuidos y streaming ([elixir-lang.org](https://elixir-lang.o
 
 ### APL
 
+> 🗂️ **[Ficha completa de APL](apl.md)**
+
 Kenneth Iverson desarrolló APL (*A Programming Language*) en IBM; su notación es de 1962 y la
 implementación ejecutable llegó hacia 1966. Es el pionero de la **programación de arrays**: las
 operaciones se aplican a **matrices y vectores completos** de una vez, sin bucles explícitos. Su
@@ -462,6 +524,8 @@ numpy en **Python**), APL es la raíz filosófica de todo eso, llevada al extrem
 ([dyalog.com](https://www.dyalog.com/)).
 
 ### J
+
+> 🗂️ **[Ficha completa de J](j.md)**
 
 Kenneth Iverson (autor de APL) y Roger Hui diseñaron J en 1990 como sucesor de APL que usara
 únicamente **caracteres ASCII** en lugar de los símbolos especiales, para portabilidad. Conserva la
@@ -477,6 +541,8 @@ recreativa, con una comunidad pequeña y entusiasta
 
 ### Julia
 
+> 🗂️ **[Ficha completa de Julia](julia.md)**
+
 Jeff Bezanson, Stefan Karpinski, Viral Shah y Alan Edelman presentaron Julia en 2012 (desde el MIT)
 para resolver el "problema de los dos lenguajes": tener la **facilidad de Python** y la **velocidad
 de C** en uno solo, orientado a la **computación científica**. Es **multiparadigma** con un modelo
@@ -489,6 +555,8 @@ una sintaxis parecida pero sin el cuello de botella de rendimiento que obliga a 
 ([julialang.org](https://julialang.org/)).
 
 ### Fortran
+
+> 🗂️ **[Ficha completa de Fortran](fortran.md)**
 
 John Backus dirigió en IBM la creación de Fortran (*Formula Translation*) en 1957, el **primer
 lenguaje de alto nivel** ampliamente usado y compilado. Nació para expresar **fórmulas matemáticas**
@@ -503,6 +571,8 @@ menos a punteros. Su estado es **legado muy vivo**: supercomputación, clima, f�
 ([fortran-lang.org](https://fortran-lang.org/)).
 
 ### MATLAB
+
+> 🗂️ **[Ficha completa de MATLAB](matlab.md)**
 
 Cleve Moler creó MATLAB (*Matrix Laboratory*) a finales de los años 70 como interfaz sencilla a las
 librerías de álgebra lineal LINPACK/EISPACK, y en 1984 se fundó **MathWorks** para comercializarlo.
@@ -520,6 +590,8 @@ y la academia de ingeniería, biomédica y control
 
 ### Swift
 
+> 🗂️ **[Ficha completa de Swift](swift.md)**
+
 Apple presentó Swift en 2014, liderado por Chris Lattner (creador de LLVM), como el **sucesor de
 Objective-C** para desarrollar en todo su ecosistema, con una sintaxis moderna, segura y agradable.
 Es **multiparadigma** (OO, funcional y protocolar), de **tipado estático con inferencia**, con
@@ -532,6 +604,8 @@ con una ergonomía muy pulida. Está **muy vivo**: es el lenguaje principal de i
 plataformas Apple, además de algo de backend ([swift.org](https://www.swift.org/)).
 
 ### Dart
+
+> 🗂️ **[Ficha completa de Dart](dart.md)**
 
 Lars Bak y Kasper Lund crearon Dart en Google en 2011, inicialmente como alternativa a JavaScript
 para la web. Encontró su verdadero propósito con **Flutter**, el framework de UI multiplataforma que
@@ -548,6 +622,8 @@ Flutter ([dart.dev](https://dart.dev/)).
 
 ### COBOL
 
+> 🗂️ **[Ficha completa de COBOL](cobol.md)**
+
 COBOL (*Common Business-Oriented Language*) fue definido en 1959 por el comité CODASYL, con fuerte
 influencia del trabajo de **Grace Hopper**, para estandarizar el **procesamiento de datos de
 negocio** en un lenguaje legible por gestores. Su sintaxis es **verbosa y parecida al inglés**
@@ -563,6 +639,8 @@ infraestructura financiera esencial y hay demanda de mantenimiento
 
 ### Pascal
 
+> 🗂️ **[Ficha completa de Pascal](pascal.md)**
+
 Niklaus Wirth diseñó Pascal en 1970 como un lenguaje **para enseñar buena programación
 estructurada**, claro y disciplinado, en reacción a la permisividad de otros lenguajes de la época.
 Es **imperativo y procedimental**, de **tipado estático fuerte**, **compilado a nativo** y con
@@ -576,6 +654,8 @@ reconocerás el modelo compilado y los punteros, pero Pascal es más estricto y 
 nuevos con Free Pascal/Lazarus ([freepascal.org](https://www.freepascal.org/)).
 
 ### BASIC
+
+> 🗂️ **[Ficha completa de BASIC](basic.md)**
 
 John Kemeny y Thomas Kurtz crearon BASIC en el Dartmouth College en 1964 con un objetivo explícito:
 un lenguaje **fácil para principiantes** de cualquier disciplina, no solo para ingenieros. Es
@@ -591,6 +671,8 @@ su forma clásica, pero vivo en VBA para automatización de ofimática
 
 ### Bash
 
+> 🗂️ **[Ficha completa de Bash](bash.md)**
+
 Brian Fox escribió Bash (*Bourne Again SHell*) en 1989 para el proyecto GNU como reemplazo libre del
 shell **Bourne** (`sh`) de Unix. Es a la vez el **intérprete de comandos interactivo** por defecto
 en la mayoría de sistemas Linux y macOS (durante años) y un **lenguaje de scripting** para
@@ -604,6 +686,8 @@ CI/CD, despliegues y administración de sistemas
 ([manual de GNU Bash](https://www.gnu.org/software/bash/manual/)).
 
 ### PowerShell
+
+> 🗂️ **[Ficha completa de PowerShell](powershell.md)**
 
 Microsoft lanzó PowerShell en 2006, diseñado por Jeffrey Snover, como un shell de automatización
 moderno para Windows y, desde 2016 en su versión **multiplataforma y de código abierto**, también

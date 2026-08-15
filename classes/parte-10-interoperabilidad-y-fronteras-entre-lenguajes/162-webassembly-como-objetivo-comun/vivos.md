@@ -110,7 +110,7 @@ Y las limitaciones hay que decirlas, y son las del cierre:
 | Decimal empaquetado | **sí**: es aritmética; GnuCOBOL lo implementa en software |
 | Ficheros secuenciales | **sí, con WASI** o con el sistema de ficheros virtual de Emscripten |
 
-**La tercera fila merece destacarse** y conecta con la clase 072: **el decimal exacto de COBOL no
+**La tercera fila merece destacarse** y conecta con la clase 045: **el decimal exacto de COBOL no
 depende del hardware**, así que **se conserva perfectamente** — que es justo lo que hace que valga la
 pena portar cálculos financieros y no reescribirlos con `double`.
 

@@ -9,7 +9,8 @@ from __future__ import annotations
 
 import vivos_p8a
 import vivos_p8b
+import vivos_p8c
 
 SPECS: dict[str, dict] = {}
-for _lote in (vivos_p8a, vivos_p8b):
+for _lote in (vivos_p8a, vivos_p8b, vivos_p8c):
     SPECS.update(_lote.SPECS)

@@ -14,8 +14,9 @@ import vivos_p8d
 import vivos_p8e
 import vivos_p8f
 import vivos_p8g
+import vivos_p8h
 
 SPECS: dict[str, dict] = {}
 for _lote in (vivos_p8a, vivos_p8b, vivos_p8c, vivos_p8d, vivos_p8e, vivos_p8f,
-              vivos_p8g):
+              vivos_p8g, vivos_p8h):
     SPECS.update(_lote.SPECS)

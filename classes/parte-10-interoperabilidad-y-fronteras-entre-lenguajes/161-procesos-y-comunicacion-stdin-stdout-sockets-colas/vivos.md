@@ -145,20 +145,29 @@ que la respuesta a "¿cómo desacoplo esto?" sigue siendo la misma que en 1993.
 ```fortran
 program recibir
    implicit none
-   integer :: valor, total, ios
+   character(len=200) :: linea
+   integer :: valor, total, ios, pos
 
+   read(*, '(A)') linea
    total = 0
+   pos = 1
+
    do
-      read(*, *, iostat=ios) valor
+      read(linea(pos:), *, iostat=ios) valor
       if (ios /= 0) exit
       total = total + valor
+      pos = pos + index(linea(pos:), ' ')
+      if (pos > len_trim(linea)) exit
    end do
 
    write(*, '(A,I0)') 'recibido=', total
 end program recibir
 ```
 
-**Lo que esta clase enseña en Fortran.** Fortran practica la comunicación entre procesos a una escala que
+**Lo que esta clase enseña en Fortran.** El programa lee **la línea entera** y luego la recorre con
+lectura interna, y ese detalle es una trampa real de Fortran que merece señalar: **cada sentencia `read`
+con formato de lista avanza al registro siguiente**, así que tres `read` consecutivos leen tres líneas,
+no tres números de la misma línea. Fortran practica la comunicación entre procesos a una escala que
 ningún otro lenguaje de esta página alcanza: **MPI, con decenas o cientos de miles de procesos**.
 
 ```fortran

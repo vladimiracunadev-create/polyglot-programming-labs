@@ -23,6 +23,18 @@ jobs:
       - name: Comprobar totales del currículo
         run: python scripts/build.py --stats
 
+  fuentes:
+    name: Fuentes y bibliografia
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # Capa offline y determinista: no toca la red, por eso puede bloquear.
+      - name: Verificar registro de fuentes y citas
+        run: python scripts/verificar_fuentes.py
+
   markdown:
     name: Markdown lint
     runs-on: ubuntu-latest

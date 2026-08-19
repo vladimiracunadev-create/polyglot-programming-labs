@@ -50,16 +50,42 @@ Toda clase sigue la misma estructura, para que estudiar la número 150 cueste lo
 | 🔬 Comparación · 🧬 Familia | Las diferencias, clasificadas; y cómo lo hace el resto de la familia. |
 | ✅ Prueba común | El `casos.json` que verifica la equivalencia. |
 | 🧪 Reto · ⚠️ Errores · ❓ FAQ | Transferencia, trampas conocidas y dudas frecuentes. |
-| 🔗 Referencias | Los libros de la parte y el libro del lenguaje. |
+| 🔗 Referencias | Los libros de la parte y el libro de cada lenguaje, **y qué uso hace de ellos esta clase**. |
 
 ## El contenido se ancla en libros
 
-Cada parte tiene una **bibliografía real** (definida en [`scripts/curriculo.py`](../scripts/curriculo.py))
-y cada clase cita las obras de su área y el libro de referencia de cada lenguaje. Las
-explicaciones se apoyan en esa literatura —Sebesta y Scott para semántica de lenguajes, Pierce
-para tipos, Cormen y Sedgewick para estructuras, McConnell, Martin y Fowler para ingeniería,
-Kleppmann y Newman para sistemas— pero **la redacción es original**: se explica la idea, no se
-reproduce el texto.
+Cada parte tiene una **bibliografía real** y cada clase cita las obras de su área y el libro de
+referencia de cada lenguaje. Las explicaciones se apoyan en esa literatura —Sebesta y Scott para
+semántica de lenguajes, Pierce para tipos, Cormen y Sedgewick para estructuras, McConnell, Martin
+y Fowler para ingeniería, Kleppmann y Newman para sistemas— pero **la redacción es original**: se
+explica la idea, no se reproduce el texto.
+
+### El registro de fuentes
+
+Citar el nombre de un libro no basta para que alguien lo compruebe. La fuente de verdad de la
+bibliografía es **[`sources/bibliography.json`](../sources/bibliography.json)**: una entrada por
+obra, cada una con **localizador resoluble** —ISBN-13 para los libros, DOI para los artículos, URL
+https de la fuente primaria para normas y documentación oficial— y con la lista de clases que la
+citan. Lo que no se pudo resolver se marca `"status": "pendiente"`; no se borra ni se rellena por
+intuición.
+
+Además, **cada cita declara el uso que esa clase hace de la obra**, no solo su nombre: para qué
+sirve ahí, no que exista.
+
+### Dos capas de verificación, separadas a propósito
+
+| Herramienta | Red | ¿Bloquea? | Qué comprueba |
+|---|---|---|---|
+| [`scripts/verificar_fuentes.py`](../scripts/verificar_fuentes.py) | no | **sí, en CI** | Que el registro cumple el esquema; que todo ISBN-13 tiene dígito de control válido y todo artículo su DOI; que el `locator` es canónico; que toda obra citada está en el registro y ninguna entrada queda sin usar; que cada cita declara su uso; que ningún bloque de fuentes se repite entre clases; y que las cifras del README salen del recuento, no de la mano. |
+| [`scripts/refrescar_fuentes.py`](../scripts/refrescar_fuentes.py) | sí | no | Resuelve cada ISBN contra Open Library y cada DOI contra Crossref comparando título y autores, hace GET a las ediciones libres, actualiza `verified_on` y `accessed`, y **reporta lo que dejó de resolver sin borrarlo**. |
+
+Están separadas por una razón práctica: si la red entra en el CI, el CI se vuelve inestable y se
+acaba ignorando. La capa que bloquea es determinista y offline; la que consulta al mundo se
+ejecuta a mano o programada.
+
+> Los generadores históricos de partes (`scripts/gen_parte*.py`) producen el bloque de referencias
+> en su formato antiguo, sin nota de uso. Si se vuelve a ejecutar alguno, `verificar_fuentes.py`
+> lo detendrá en CI: es justo para eso.
 
 ## Qué verifica la máquina y qué no
 

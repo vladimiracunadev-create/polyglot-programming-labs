@@ -80,10 +80,10 @@ Compara la interpolación de cadenas en Python (`f"{x}"`), Ruby (`#{x}`) y PHP (
 
 ## 🔗 Referencias
 
-- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly). El lugar de Python en la genealogía: qué heredó y de quién.
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. 2 (scripting languages) y cap. 5-6 (nombres y tipos).
 - B. A. Tate — *Seven Languages in Seven Weeks* (Pragmatic Bookshelf), cap. de Ruby.
-- P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press).
+- P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press). El mapa de modelos con el que el Atlas agrupa las familias.
 
 ---
 

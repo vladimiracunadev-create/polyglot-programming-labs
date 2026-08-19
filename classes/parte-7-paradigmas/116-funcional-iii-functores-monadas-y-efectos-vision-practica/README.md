@@ -291,24 +291,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Funcional III: functores, mónadas y efectos (visión práctica)»:
 
 - P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press) — secuenciación de cómputos con contexto (ausencia, error, estado).
 - H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press) — abstracción con procedimientos de orden superior.
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson) — cap. 15, tipos y construcciones de los lenguajes funcionales.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
-- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
-- B. Cherny — *Programming TypeScript* (O'Reilly).
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly). Cómo Python mezcla paradigmas dentro de un mismo módulo.
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/). Cómo JavaScript hace funcional y orientado a objetos con las mismas piezas.
+- B. Cherny — *Programming TypeScript* (O'Reilly). El tipado estructural como forma de expresar interfaces sin herencia.
 - J. Bloch — *Effective Java* (3ª ed., Addison-Wesley) — ítem 55, devolver `Optional` con criterio.
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
-- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Cómo C# admite orientación a objetos, funcional y asíncrono a la vez.
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley). Interfaces implícitas y composición en lugar de herencia.
 - S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/) — cap. 6, `enum` y `Option`.
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). El imperativo procedimental en su forma más desnuda.
 - C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly) — tratamiento de `NULL`.
-- J. Lockhart — *Modern PHP* (O'Reilly).
+- J. Lockhart — *Modern PHP* (O'Reilly). Cómo PHP moderno admite objetos, funciones y rasgos.
 
 ---
 

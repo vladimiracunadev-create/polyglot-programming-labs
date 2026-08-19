@@ -91,7 +91,7 @@ Repite el ejercicio con Haskell y notarás algo interesante: la analogía rinde 
 ## 🔗 Referencias
 
 - G. Polya — *How to Solve It* (Princeton University Press), sobre resolver un problema recordando otro parecido ya resuelto.
-- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press) — [gratis online](https://mitpress.mit.edu/9780262510875/).
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press) — [gratis online](https://mitpress.mit.edu/9780262510875/). Programas escritos para que los lean personas: la tesis que abre el curso.
 - A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley), sobre ampliar la cartera de conocimiento con un lenguaje nuevo al año.
 - T. Cormen, C. Leiserson, R. Rivest y C. Stein — *Introduction to Algorithms* (4ª ed., MIT Press), sobre el pseudocódigo como forma neutral que cualquiera puede leer.
 

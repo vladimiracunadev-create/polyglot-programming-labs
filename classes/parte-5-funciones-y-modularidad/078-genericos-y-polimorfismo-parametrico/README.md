@@ -300,24 +300,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Genéricos y polimorfismo paramétrico»:
 
 - R. W. Sebesta — *Concepts of Programming Languages* (11ª ed., Pearson), cap. 9 «Subprograms» y §9.9 sobre polimorfismo paramétrico.
 - B. C. Pierce — *Types and Programming Languages* (MIT Press), cap. 23 «Universal Types» (polimorfismo paramétrico y parametricidad).
 - R. C. Martin — *Clean Code* (Prentice Hall), cap. 3 «Functions».
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
 - L. Ramalho — *Fluent Python* (2ª ed., O'Reilly), cap. sobre *type hints* y `TypeVar`.
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/). Funciones, clausuras y ámbito léxico en JavaScript.
 - B. Cherny — *Programming TypeScript* (O'Reilly), cap. 6 «Advanced Types» (genéricos).
 - J. Bloch — *Effective Java* (3ª ed., Addison-Wesley), ítems 26-31 «Generics».
 - J. Skeet — *C# in Depth* (4ª ed., Manning), cap. sobre genéricos y reificación.
 - A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley); genéricos añadidos en Go 1.18.
 - S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/), cap. 10 «Generic Types, Traits, and Lifetimes».
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
-- J. Lockhart — *Modern PHP* (O'Reilly).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). Funciones, paso por valor y punteros como único mecanismo de salida.
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). Vistas y expresiones con nombre como forma de modularidad en SQL.
+- J. Lockhart — *Modern PHP* (O'Reilly). Funciones, espacios de nombres y autocarga en PHP moderno.
 
 ---
 

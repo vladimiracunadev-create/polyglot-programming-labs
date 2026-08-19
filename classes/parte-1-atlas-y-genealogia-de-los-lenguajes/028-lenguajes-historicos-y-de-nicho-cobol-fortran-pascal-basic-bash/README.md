@@ -87,8 +87,8 @@ Escribe una tubería de Bash que, dado un archivo de texto, cuente cuántas lín
 ## 🔗 Referencias
 
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. 2: evolución de los lenguajes principales.
-- M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann).
-- B. A. Tate — *Seven Languages in Seven Weeks* (Pragmatic Bookshelf).
+- M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann). La lectura histórica de por qué cada familia decidió lo que decidió.
+- B. A. Tate — *Seven Languages in Seven Weeks* (Pragmatic Bookshelf). El método de leer un lenguaje por sus rasgos, que es el del Atlas.
 - P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press), sobre la composición como modelo de programación.
 
 ---

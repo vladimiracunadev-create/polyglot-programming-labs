@@ -309,24 +309,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Mutabilidad e inmutabilidad»:
 
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), asignación y variables (l-values, r-values).
 - B. C. Pierce — *Types and Programming Languages* (MIT Press), referencias y estado mutable.
 - M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann), modelo de referencias y aliasing.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
-- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly) (inmutabilidad de tuplas y cadenas; mutable vs. inmutable).
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/) (`const`, objetos mutables).
-- B. Cherny — *Programming TypeScript* (O'Reilly) (`readonly`, tipos inmutables).
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley) (minimizar la mutabilidad; clases inmutables; `StringBuilder`).
-- J. Skeet — *C# in Depth* (4ª ed., Manning) (`readonly`, tipos inmutables).
-- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley) (`strings.Builder`).
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/) (inmutable por defecto, `mut`, ownership).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall) (`const`).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly) (CTE recursivo, agregación).
-- J. Lockhart — *Modern PHP* (O'Reilly) (arrays y cadenas).
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly) (inmutabilidad de tuplas y cadenas; mutable vs. inmutable). El modelo de valores de Python: nombre, objeto y qué se copia al asignar.
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/) (`const`, objetos mutables). Los tipos primitivos de JavaScript y sus conversiones implícitas.
+- B. Cherny — *Programming TypeScript* (O'Reilly) (`readonly`, tipos inmutables). Cómo el sistema de tipos anota valores que JavaScript deja sin declarar.
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley) (minimizar la mutabilidad; clases inmutables; `StringBuilder`). Primitivos frente a envoltorios, y por qué la elección cambia el comportamiento.
+- J. Skeet — *C# in Depth* (4ª ed., Manning) (`readonly`, tipos inmutables). Tipos por valor y por referencia, nulabilidad y lo que garantiza el compilador.
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley) (`strings.Builder`). El juego de tipos básicos de Go y su regla de conversión explícita.
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/) (inmutable por defecto, `mut`, ownership). Declaración, inmutabilidad por defecto y el tipo que decide la propiedad del valor.
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall) (`const`). Los tipos de máquina de C: tamaños, promoción y lo que el estándar deja abierto.
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly) (CTE recursivo, agregación). El dominio como tipo y el papel de `NULL` en el modelo relacional.
+- J. Lockhart — *Modern PHP* (O'Reilly) (arrays y cadenas). El tipado dinámico de PHP y las declaraciones de tipo que la versión moderna añade.
 
 ---
 

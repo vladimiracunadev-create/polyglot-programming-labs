@@ -87,7 +87,7 @@ Busca en material de Rust (o en la clase 041 del curso) un `Option` o un `Result
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. 15 "Functional Programming Languages".
 - P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press), cap. 3-4 (modelo declarativo).
 - B. A. Tate — *Seven Languages in Seven Weeks* (Pragmatic Bookshelf), cap. de Haskell.
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/) (cap. de `enum`, `match` y `Option`).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/) (cap. de `enum`, `match` y `Option`). El lugar de Rust en la genealogía: qué heredó y de quién.
 
 ---
 

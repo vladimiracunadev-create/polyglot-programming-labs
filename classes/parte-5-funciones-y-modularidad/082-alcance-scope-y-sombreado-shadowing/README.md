@@ -285,25 +285,25 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Alcance (scope) y sombreado (shadowing)»:
 
 - H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press), §3.2 «The Environment Model of Evaluation».
 - R. W. Sebesta — *Concepts of Programming Languages* (11ª ed., Pearson), cap. 5 «Scope» (alcance estático/léxico vs. dinámico).
 - R. C. Martin — *Clean Code* (Prentice Hall), cap. 2 sobre nombres y su ámbito de significado.
 - S. McConnell — *Code Complete* (2ª ed., Microsoft Press), cap. 10 «General Issues in Using Variables» (minimizar el alcance).
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
-- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
-- B. Cherny — *Programming TypeScript* (O'Reilly).
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
-- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
-- J. Lockhart — *Modern PHP* (O'Reilly).
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly). Funciones como objetos de primera clase, argumentos y ámbitos en Python.
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/). Funciones, clausuras y ámbito léxico en JavaScript.
+- B. Cherny — *Programming TypeScript* (O'Reilly). Firmas de función, sobrecarga y genéricos en TypeScript.
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley). Diseño de métodos: firmas, parámetros y contratos.
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Métodos, delegados y expresiones lambda en C#.
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley). Funciones, valores de retorno múltiples y `defer`.
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/). Funciones, préstamos en los parámetros y tiempos de vida.
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). Funciones, paso por valor y punteros como único mecanismo de salida.
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). Vistas y expresiones con nombre como forma de modularidad en SQL.
+- J. Lockhart — *Modern PHP* (O'Reilly). Funciones, espacios de nombres y autocarga en PHP moderno.
 
 ---
 

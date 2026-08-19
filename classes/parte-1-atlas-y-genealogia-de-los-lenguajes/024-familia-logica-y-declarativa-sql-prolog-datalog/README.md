@@ -85,10 +85,10 @@ Toma un problema cotidiano —por ejemplo, "los alumnos que aprobaron todas las 
 
 ## 🔗 Referencias
 
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). El lugar de SQL en la genealogía: por qué es declarativo y no imperativo.
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. 16 "Logic Programming Languages".
 - P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press), cap. 9 (programación relacional).
-- M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann).
+- M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann). La lectura histórica de por qué cada familia decidió lo que decidió.
 
 ---
 

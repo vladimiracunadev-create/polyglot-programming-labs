@@ -90,7 +90,7 @@ Ejecuta `python scripts/verificar_equivalencia.py 041` en tu máquina y responde
 ## 🔗 Referencias
 
 - G. Polya — *How to Solve It* (Princeton University Press), cuarta fase: revisar la solución obtenida.
-- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press) — [gratis online](https://mitpress.mit.edu/9780262510875/).
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press) — [gratis online](https://mitpress.mit.edu/9780262510875/). Programas escritos para que los lean personas: la tesis que abre el curso.
 - A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley), sobre automatizar toda comprobación repetible.
 - T. Cormen, C. Leiserson, R. Rivest y C. Stein — *Introduction to Algorithms* (4ª ed., MIT Press), cap. 1: especificación de un problema frente a algoritmo.
 

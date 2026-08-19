@@ -79,10 +79,10 @@ Toma un bucle `for` de un lenguaje que conozcas y reescríbelo mentalmente en C.
 
 ## 🔗 Referencias
 
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). El lugar de C en la genealogía: la raíz de la que descienden casi todos.
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. 2 (linaje BCPL → B → C → C++).
-- M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann).
-- B. A. Tate — *Seven Languages in Seven Weeks* (Pragmatic Bookshelf).
+- M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann). La lectura histórica de por qué cada familia decidió lo que decidió.
+- B. A. Tate — *Seven Languages in Seven Weeks* (Pragmatic Bookshelf). El método de leer un lenguaje por sus rasgos, que es el del Atlas.
 
 ---
 

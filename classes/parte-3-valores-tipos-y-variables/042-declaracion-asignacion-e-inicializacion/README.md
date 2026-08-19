@@ -322,24 +322,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Declaración, asignación e inicialización»:
 
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. de variables (declaración, inicialización, ámbito y tiempo de vida).
 - B. C. Pierce — *Types and Programming Languages* (MIT Press), introducción (seguridad de tipos: el compilador descarta programas mal formados).
 - M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann), cap. de asignación, l-value/r-value y orden de evaluación.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
 - L. Ramalho — *Fluent Python* (2ª ed., O'Reilly), cap. sobre nombres, referencias y desempaquetado de tuplas.
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
-- B. Cherny — *Programming TypeScript* (O'Reilly).
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
-- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
-- J. Lockhart — *Modern PHP* (O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/). Los tipos primitivos de JavaScript y sus conversiones implícitas.
+- B. Cherny — *Programming TypeScript* (O'Reilly). Cómo el sistema de tipos anota valores que JavaScript deja sin declarar.
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley). Primitivos frente a envoltorios, y por qué la elección cambia el comportamiento.
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Tipos por valor y por referencia, nulabilidad y lo que garantiza el compilador.
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley). El juego de tipos básicos de Go y su regla de conversión explícita.
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/). Declaración, inmutabilidad por defecto y el tipo que decide la propiedad del valor.
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). Los tipos de máquina de C: tamaños, promoción y lo que el estándar deja abierto.
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). El dominio como tipo y el papel de `NULL` en el modelo relacional.
+- J. Lockhart — *Modern PHP* (O'Reilly). El tipado dinámico de PHP y las declaraciones de tipo que la versión moderna añade.
 
 ---
 

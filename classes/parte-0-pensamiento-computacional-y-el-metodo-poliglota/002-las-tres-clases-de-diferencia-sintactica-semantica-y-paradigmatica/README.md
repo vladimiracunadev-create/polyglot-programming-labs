@@ -88,8 +88,8 @@ Las respuestas son, respectivamente: sintáctica (solo cambia el nombre de la op
 
 ## 🔗 Referencias
 
-- R. W. Sebesta — *Concepts of Programming Languages* (Pearson), caps. de sintaxis y semántica.
-- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press) — [gratis online](https://mitpress.mit.edu/9780262510875/).
+- R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), caps. de sintaxis y semántica.
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press) — [gratis online](https://mitpress.mit.edu/9780262510875/). Programas escritos para que los lean personas: la tesis que abre el curso.
 - A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley), sobre escribir código idiomático.
 - P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press), sobre paradigmas.
 

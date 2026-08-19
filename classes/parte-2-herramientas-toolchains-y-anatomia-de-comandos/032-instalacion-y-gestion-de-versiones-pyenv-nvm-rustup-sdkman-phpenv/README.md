@@ -103,7 +103,7 @@ Averigua qué versión de un lenguaje del núcleo tienes ahora mismo con `--vers
 ## 🔗 Referencias
 
 - W. Shotts — *The Linux Command Line* (2ª ed., No Starch Press), sobre el entorno y el `PATH` — [gratis online](https://linuxcommand.org/tlcl.php).
-- B. W. Kernighan y R. Pike — *The Unix Programming Environment* (Prentice Hall).
+- B. W. Kernighan y R. Pike — *The Unix Programming Environment* (Prentice Hall). La filosofía de herramientas pequeñas que se componen.
 - A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley), sobre reproducibilidad y entornos de trabajo.
 
 ---

@@ -273,23 +273,23 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Semántica de movimiento y préstamo (Rust)»:
 
 - S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/), cap. 4 «Understanding Ownership» (4.1 Ownership, 4.2 References and Borrowing).
 - R. W. Sebesta — *Concepts of Programming Languages* (11ª ed., Pearson), cap. 6 sobre gestión de memoria y tipos, cap. 9 sobre paso de parámetros.
 - S. McConnell — *Code Complete* (2ª ed., Microsoft Press), cap. sobre gestión de recursos.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
 - L. Ramalho — *Fluent Python* (2ª ed., O'Reilly), cap. sobre gestión de memoria y recolección.
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
-- B. Cherny — *Programming TypeScript* (O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/). Funciones, clausuras y ámbito léxico en JavaScript.
+- B. Cherny — *Programming TypeScript* (O'Reilly). Firmas de función, sobrecarga y genéricos en TypeScript.
 - J. Bloch — *Effective Java* (3ª ed., Addison-Wesley); ítems sobre el recolector y liberación de recursos.
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Métodos, delegados y expresiones lambda en C#.
 - A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley); recolección de basura.
 - B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall), §7.8.5 sobre `malloc`/`free`.
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
-- J. Lockhart — *Modern PHP* (O'Reilly).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). Vistas y expresiones con nombre como forma de modularidad en SQL.
+- J. Lockhart — *Modern PHP* (O'Reilly). Funciones, espacios de nombres y autocarga en PHP moderno.
 
 ---
 

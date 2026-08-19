@@ -320,25 +320,25 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Concurrente: hilos, tareas y canales»:
 
 - P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press). Cap. 4: concurrencia declarativa; cap. 5: concurrencia por paso de mensajes y agentes.
 - H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press). Cap. 3: estado mutable y el problema de la asignación concurrente.
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson). Cap. 13: concurrencia, hilos, monitores y paso de mensajes.
-- C. A. R. Hoare — *Communicating Sequential Processes* (CSP), Comm. ACM (1978): raíz teórica de los canales y las goroutines de Go.
+- C. A. R. Hoare — *Communicating Sequential Processes* (Communications of the ACM 21(8), 1978). Raíz teórica de los canales y las goroutines de Go, que es el modelo que compara esta clase.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
 - L. Ramalho — *Fluent Python* (2ª ed., O'Reilly). Concurrencia, el GIL y `concurrent.futures`.
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
-- B. Cherny — *Programming TypeScript* (O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/). Cómo JavaScript hace funcional y orientado a objetos con las mismas piezas.
+- B. Cherny — *Programming TypeScript* (O'Reilly). El tipado estructural como forma de expresar interfaces sin herencia.
 - J. Bloch — *Effective Java* (3ª ed., Addison-Wesley). Ítems sobre concurrencia y `java.util.concurrent`.
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Cómo C# admite orientación a objetos, funcional y asíncrono a la vez.
 - A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley). Caps. 8–9: goroutines, canales y memoria compartida.
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
-- J. Lockhart — *Modern PHP* (O'Reilly).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/). Los *traits* y los genéricos como forma de polimorfismo sin herencia.
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). El imperativo procedimental en su forma más desnuda.
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). El paradigma declarativo: describir el resultado en vez del procedimiento.
+- J. Lockhart — *Modern PHP* (O'Reilly). Cómo PHP moderno admite objetos, funciones y rasgos.
 
 ---
 

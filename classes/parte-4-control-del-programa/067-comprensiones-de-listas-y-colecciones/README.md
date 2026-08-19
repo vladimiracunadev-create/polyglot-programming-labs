@@ -300,23 +300,23 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Comprensiones de listas y colecciones»:
 
 - O.-J. Dahl, E. W. Dijkstra y C. A. R. Hoare — *Structured Programming* (Academic Press). Su defensa de las construcciones que se leen como una descripción del resultado, y no como una secuencia de pasos con estado, es el argumento de fondo a favor de la comprensión frente al bucle con acumulador.
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. control de flujo. Sitúa la comprensión entre las construcciones de iteración basadas en estructuras de datos y traza su ascendencia en la notación de conjuntos, SETL y Haskell.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
-- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
-- B. Cherny — *Programming TypeScript* (O'Reilly).
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
-- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
-- J. Lockhart — *Modern PHP* (O'Reilly).
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly). Las formas de bucle y condicional de Python y cuál es la idiomática.
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/). Las estructuras de control de JavaScript y su uso al hilo de un programa real.
+- B. Cherny — *Programming TypeScript* (O'Reilly). Cómo el control de flujo estrecha los tipos (narrowing) en TypeScript.
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley). Las construcciones de control de Java y las trampas que Bloch documenta.
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Las construcciones de control de C# y lo que aportó cada versión del lenguaje.
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley). El control de flujo minimalista de Go: un solo `for`, `switch` sin caída.
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/). Control de flujo como expresión y exhaustividad obligatoria en `match`.
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). Las construcciones de control originales de las que descienden casi todas las demás.
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). Por qué el modelo relacional resuelve por conjuntos lo que otros resuelven iterando.
+- J. Lockhart — *Modern PHP* (O'Reilly). Las estructuras de control de PHP y su forma recomendada hoy.
 
 ---
 

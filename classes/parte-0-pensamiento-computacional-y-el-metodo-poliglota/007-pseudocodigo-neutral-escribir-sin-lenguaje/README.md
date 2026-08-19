@@ -77,7 +77,7 @@ Escribe en pseudocódigo neutral el algoritmo "invertir una cadena de texto" (da
 ## 🔗 Referencias
 
 - T. Cormen, C. Leiserson, R. Rivest y C. Stein — *Introduction to Algorithms* (4ª ed., MIT Press), convenciones de pseudocódigo.
-- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press) — [gratis online](https://mitpress.mit.edu/9780262510875/).
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press) — [gratis online](https://mitpress.mit.edu/9780262510875/). Programas escritos para que los lean personas: la tesis que abre el curso.
 - G. Polya — *How to Solve It* (Princeton University Press), sobre expresar el plan antes de ejecutarlo.
 - A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley), sobre prototipar la lógica.
 

@@ -278,23 +278,23 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Conversión de tipos: casting explícito vs. coerción implícita»:
 
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. 6 "Data Types" (conversión, coerción, *widening*/*narrowing*).
 - B. C. Pierce — *Types and Programming Languages* (MIT Press), cap. 1 (qué prueba y qué no un sistema de tipos) y cap. 15 (subtipado y coerciones).
 - M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann), cap. 7 (type conversion y casting).
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
 - L. Ramalho — *Fluent Python* (2ª ed., O'Reilly), cap. sobre números y tipos numéricos.
 - M. Haverbeke — *Eloquent JavaScript* (3ª ed.), cap. 1 "Values, Types, and Operators" (coerción) — [gratis online](https://eloquentjavascript.net/).
-- B. Cherny — *Programming TypeScript* (O'Reilly).
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- B. Cherny — *Programming TypeScript* (O'Reilly). Cómo el sistema de tipos anota valores que JavaScript deja sin declarar.
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley). Primitivos frente a envoltorios, y por qué la elección cambia el comportamiento.
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Tipos por valor y por referencia, nulabilidad y lo que garantiza el compilador.
 - A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley), §3 (conversiones numéricas explícitas).
 - S. Klabnik y C. Nichols — *The Rust Programming Language*, cap. 3 (tipos escalares y `as`) — [gratis online](https://doc.rust-lang.org/book/).
 - B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall), §2.7 (conversiones de tipo).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). El dominio como tipo y el papel de `NULL` en el modelo relacional.
 - J. Lockhart — *Modern PHP* (O'Reilly), sobre *type juggling*.
 
 ---

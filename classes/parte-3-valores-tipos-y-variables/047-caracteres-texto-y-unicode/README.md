@@ -272,13 +272,13 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Caracteres, texto y Unicode»:
 
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. tipos de datos (tipo carácter y cadenas).
 - B. C. Pierce — *Types and Programming Languages* (MIT Press), tipos base.
 - M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann), representación de caracteres y cadenas en memoria.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
 - L. Ramalho — *Fluent Python* (2ª ed., O'Reilly), `str` como secuencia de puntos de código, `ord`/`chr` y Unicode.
 - M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — strings UTF-16, `charCodeAt`/`codePointAt` — [gratis online](https://eloquentjavascript.net/).

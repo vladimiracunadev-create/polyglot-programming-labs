@@ -273,22 +273,22 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Tipado fuerte vs. débil»:
 
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. 6 (tipado fuerte/débil como espectro y coerción).
 - B. C. Pierce — *Types and Programming Languages* (MIT Press), cap. 8 (seguridad de tipos: progreso y preservación).
 - M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann), cap. 7 (coerción y comprobación de tipos).
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
 - L. Ramalho — *Fluent Python* (2ª ed., O'Reilly), sobre *duck typing* y tipado dinámico fuerte.
 - M. Haverbeke — *Eloquent JavaScript* (3ª ed.), cap. 1 (coerción, `==` vs. `===`) — [gratis online](https://eloquentjavascript.net/).
-- B. Cherny — *Programming TypeScript* (O'Reilly).
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
-- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- B. Cherny — *Programming TypeScript* (O'Reilly). Cómo el sistema de tipos anota valores que JavaScript deja sin declarar.
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley). Primitivos frente a envoltorios, y por qué la elección cambia el comportamiento.
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Tipos por valor y por referencia, nulabilidad y lo que garantiza el compilador.
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley). El juego de tipos básicos de Go y su regla de conversión explícita.
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/). Declaración, inmutabilidad por defecto y el tipo que decide la propiedad del valor.
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). Los tipos de máquina de C: tamaños, promoción y lo que el estándar deja abierto.
 - C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly), sobre operadores y tipos.
 - J. Lockhart — *Modern PHP* (O'Reilly), sobre *type juggling* y coerción.
 

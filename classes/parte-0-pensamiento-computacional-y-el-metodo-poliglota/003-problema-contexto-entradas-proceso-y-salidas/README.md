@@ -86,7 +86,7 @@ Especifica por completo, sin escribir código, el problema "contar cuántas pala
 - G. Polya — *How to Solve It* (Princeton University Press), primera fase: "Understanding the Problem".
 - T. Cormen, C. Leiserson, R. Rivest y C. Stein — *Introduction to Algorithms* (4ª ed., MIT Press), cap. 1: definición formal de un problema.
 - A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley), sobre especificar el dominio.
-- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press) — [gratis online](https://mitpress.mit.edu/9780262510875/).
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press) — [gratis online](https://mitpress.mit.edu/9780262510875/). Programas escritos para que los lean personas: la tesis que abre el curso.
 
 ---
 

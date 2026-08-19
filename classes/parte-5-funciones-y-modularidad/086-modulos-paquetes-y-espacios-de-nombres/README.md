@@ -307,23 +307,23 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Módulos, paquetes y espacios de nombres»:
 
 - S. McConnell — *Code Complete* (2ª ed., Microsoft Press), cap. 5 «Design in Construction» y cap. 6 «Working Classes» (ocultamiento de información y fronteras de módulo).
-- A. Hunt y D. Thomas — *The Pragmatic Programmer* (Addison-Wesley), tema «Orthogonality» y «Decoupling».
+- A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley), tema «Orthogonality» y «Decoupling».
 - H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press), §1.1 sobre la abstracción por nombres.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
 - L. Ramalho — *Fluent Python* (2ª ed., O'Reilly), cap. sobre paquetes y módulos.
 - M. Haverbeke — *Eloquent JavaScript* (3ª ed.), cap. «Modules» — [gratis online](https://eloquentjavascript.net/).
 - B. Cherny — *Programming TypeScript* (O'Reilly), cap. «Namespaces and Modules».
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley). Diseño de métodos: firmas, parámetros y contratos.
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Métodos, delegados y expresiones lambda en C#.
 - A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley), cap. 10 «Packages and the Go Tool».
 - S. Klabnik y C. Nichols — *The Rust Programming Language*, cap. 7 «Managing Growing Projects with Packages, Crates, and Modules» — [gratis online](https://doc.rust-lang.org/book/).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). Funciones, paso por valor y punteros como único mecanismo de salida.
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). Vistas y expresiones con nombre como forma de modularidad en SQL.
 - J. Lockhart — *Modern PHP* (O'Reilly), cap. sobre namespaces y Composer.
 
 ---

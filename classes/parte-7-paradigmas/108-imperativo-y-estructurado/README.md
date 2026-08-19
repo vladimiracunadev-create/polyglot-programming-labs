@@ -287,25 +287,26 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Imperativo y estructurado»:
 
 - P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press). El modelo con estado y la semántica de la asignación.
 - H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press). Capítulo 3, sección 3.1: asignación, estado local y sus consecuencias sobre el razonamiento.
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson). Capítulos 7 y 8: expresiones, asignación y estructuras de control estructuradas.
-- E. W. Dijkstra — "Go To Statement Considered Harmful" (*Communications of the ACM*, 1968); O.-J. Dahl, E. W. Dijkstra y C. A. R. Hoare — *Structured Programming* (Academic Press, 1972).
+- E. W. Dijkstra — *Go To Statement Considered Harmful* (Communications of the ACM 11(3), 1968). La carta que esta clase toma como origen del imperativo estructurado.
+- O.-J. Dahl, E. W. Dijkstra y C. A. R. Hoare — *Structured Programming* (Academic Press). Secuencia, selección e iteración como base suficiente: el argumento que esta clase desarrolla.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
-- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
-- B. Cherny — *Programming TypeScript* (O'Reilly).
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
-- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
-- J. Lockhart — *Modern PHP* (O'Reilly).
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly). Cómo Python mezcla paradigmas dentro de un mismo módulo.
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/). Cómo JavaScript hace funcional y orientado a objetos con las mismas piezas.
+- B. Cherny — *Programming TypeScript* (O'Reilly). El tipado estructural como forma de expresar interfaces sin herencia.
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley). Clases, interfaces y composición frente a herencia.
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Cómo C# admite orientación a objetos, funcional y asíncrono a la vez.
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley). Interfaces implícitas y composición en lugar de herencia.
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/). Los *traits* y los genéricos como forma de polimorfismo sin herencia.
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). El imperativo procedimental en su forma más desnuda.
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). El paradigma declarativo: describir el resultado en vez del procedimiento.
+- J. Lockhart — *Modern PHP* (O'Reilly). Cómo PHP moderno admite objetos, funciones y rasgos.
 
 ---
 

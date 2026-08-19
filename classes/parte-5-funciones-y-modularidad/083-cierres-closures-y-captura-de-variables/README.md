@@ -285,24 +285,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Cierres (closures) y captura de variables»:
 
 - H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press), §3.2 (procedimientos que capturan su entorno de definición).
 - R. C. Martin — *Clean Code* (Prentice Hall), cap. 3 «Functions».
 - S. McConnell — *Code Complete* (2ª ed., Microsoft Press), cap. 7 «High-Quality Routines».
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
 - L. Ramalho — *Fluent Python* (2ª ed., O'Reilly), cap. 7 «Funciones como objetos» y §sobre cierres.
 - M. Haverbeke — *Eloquent JavaScript* (3ª ed.), cap. 3 «Functions» (cierres) — [gratis online](https://eloquentjavascript.net/).
-- B. Cherny — *Programming TypeScript* (O'Reilly).
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
-- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/) (cap. 13, cierres `Fn`/`FnMut`/`FnOnce`).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
-- J. Lockhart — *Modern PHP* (O'Reilly).
+- B. Cherny — *Programming TypeScript* (O'Reilly). Firmas de función, sobrecarga y genéricos en TypeScript.
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley). Diseño de métodos: firmas, parámetros y contratos.
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Métodos, delegados y expresiones lambda en C#.
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley). Funciones, valores de retorno múltiples y `defer`.
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/) (cap. 13, cierres `Fn`/`FnMut`/`FnOnce`). Funciones, préstamos en los parámetros y tiempos de vida.
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). Funciones, paso por valor y punteros como único mecanismo de salida.
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). Vistas y expresiones con nombre como forma de modularidad en SQL.
+- J. Lockhart — *Modern PHP* (O'Reilly). Funciones, espacios de nombres y autocarga en PHP moderno.
 
 ---
 

@@ -263,24 +263,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Componente de automatización/scripting»:
 
-- S. Newman — *Building Microservices* (2ª ed., O'Reilly).
-- M. Nygard — *Release It!* (2ª ed., Pragmatic Bookshelf).
-- A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley).
+- S. Newman — *Building Microservices* (2ª ed., O'Reilly). La descomposición en componentes que estructura el proyecto integrador.
+- M. Nygard — *Release It!* (2ª ed., Pragmatic Bookshelf). Los patrones de estabilidad exigibles al sistema que se entrega.
+- A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley). La disciplina de proyecto que ordena el trabajo del integrador.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
-- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
-- B. Cherny — *Programming TypeScript* (O'Reilly).
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
-- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
-- J. Lockhart — *Modern PHP* (O'Reilly).
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly). El idioma de Python en el componente que le toca del proyecto integrador.
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/). El idioma de JavaScript en el componente que le toca del proyecto integrador.
+- B. Cherny — *Programming TypeScript* (O'Reilly). El idioma de TypeScript en el componente que le toca del proyecto integrador.
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley). El idioma de Java en el componente que le toca del proyecto integrador.
+- J. Skeet — *C# in Depth* (4ª ed., Manning). El idioma de C# en el componente que le toca del proyecto integrador.
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley). El idioma de Go en el componente que le toca del proyecto integrador.
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/). El idioma de Rust en el componente que le toca del proyecto integrador.
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). El idioma de C en el componente que le toca del proyecto integrador.
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). El idioma de SQL en el componente que le toca del proyecto integrador.
+- J. Lockhart — *Modern PHP* (O'Reilly). El idioma de PHP en el componente que le toca del proyecto integrador.
 
 ---
 

@@ -81,9 +81,9 @@ Piensa cómo calcular el promedio de un millón de números "a la manera de bucl
 ## 🔗 Referencias
 
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. 2 (Fortran y APL).
-- P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press).
-- M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann).
-- B. A. Tate — *Seven Languages in Seven Weeks* (Pragmatic Bookshelf).
+- P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press). El mapa de modelos con el que el Atlas agrupa las familias.
+- M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann). La lectura histórica de por qué cada familia decidió lo que decidió.
+- B. A. Tate — *Seven Languages in Seven Weeks* (Pragmatic Bookshelf). El método de leer un lenguaje por sus rasgos, que es el del Atlas.
 
 ---
 

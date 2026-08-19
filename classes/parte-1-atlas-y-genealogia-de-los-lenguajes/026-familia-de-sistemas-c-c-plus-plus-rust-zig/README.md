@@ -79,8 +79,8 @@ Busca en la implementación en C de la clase 041 (o en cualquier programa en C) 
 
 ## 🔗 Referencias
 
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/) (cap. de propiedad y préstamos).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/) (cap. de propiedad y préstamos). El lugar de Rust en la genealogía: qué heredó y de quién.
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). El lugar de C en la genealogía: la raíz de la que descienden casi todos.
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. 6 (tipos de datos) y cap. 2.
 - M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann), cap. 8 (gestión de memoria).
 

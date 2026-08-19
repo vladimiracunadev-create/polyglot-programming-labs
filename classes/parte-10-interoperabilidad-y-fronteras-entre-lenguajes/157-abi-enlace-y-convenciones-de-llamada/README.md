@@ -270,24 +270,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «ABI, enlace y convenciones de llamada»:
 
 - M. Kleppmann — *Designing Data-Intensive Applications* (O'Reilly). Cap. 4: formatos de codificación y compatibilidad hacia atrás/adelante, análogo directo de la estabilidad de ABI.
 - S. Newman — *Building Microservices* (2ª ed., O'Reilly). Sobre versionar contratos sin romper a los consumidores.
 - A. Tanenbaum y M. van Steen — *Distributed Systems* (3ª ed.). Cap. 4: heterogeneidad de representación de datos entre plataformas.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
-- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
-- B. Cherny — *Programming TypeScript* (O'Reilly).
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
-- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
-- J. Lockhart — *Modern PHP* (O'Reilly).
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly). Cómo Python cruza su frontera: serialización, C-API y procesos.
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/). JSON, módulos y el navegador como frontera de JavaScript.
+- B. Cherny — *Programming TypeScript* (O'Reilly). Tipar la frontera: datos externos, `unknown` y validación en el límite.
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley). Serialización, APIs públicas y compatibilidad entre versiones.
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Interoperabilidad de C#: P/Invoke, serialización y contratos de servicio.
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley). Codificación, red y `cgo` como frontera de Go.
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/). FFI, `unsafe` y serialización: la frontera de Rust.
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). C como lengua franca: ABI, enlazado y la interfaz que todos hablan.
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). SQL como frontera de datos entre componentes escritos en otros lenguajes.
+- J. Lockhart — *Modern PHP* (O'Reilly). PHP en la frontera web: JSON, HTTP y extensiones nativas.
 
 ---
 

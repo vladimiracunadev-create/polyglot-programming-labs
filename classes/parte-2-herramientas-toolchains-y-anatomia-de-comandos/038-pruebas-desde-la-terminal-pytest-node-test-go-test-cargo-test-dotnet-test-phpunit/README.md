@@ -93,7 +93,7 @@ Ejecuta el verificador de equivalencia sobre la clase 041 con `python scripts/ve
 
 ## 🔗 Referencias
 
-- W. Shotts — *The Linux Command Line* (2ª ed., No Starch Press) — [gratis online](https://linuxcommand.org/tlcl.php).
+- W. Shotts — *The Linux Command Line* (2ª ed., No Starch Press) — [gratis online](https://linuxcommand.org/tlcl.php). El intérprete de órdenes y la anatomía de un comando.
 - B. W. Kernighan y R. Pike — *The Unix Programming Environment* (Prentice Hall), sobre comprobar programas de forma automatizada.
 - A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley), sobre pruebas como red de seguridad para el cambio.
 

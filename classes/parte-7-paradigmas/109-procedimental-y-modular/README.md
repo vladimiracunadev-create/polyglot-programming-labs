@@ -316,25 +316,25 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Procedimental y modular»:
 
 - P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press). La construcción de abstracciones y el enriquecimiento del vocabulario del programa.
 - H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press). Secciones 1.1 y 1.2: abstracción procedimental y evolución de procesos.
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson). Capítulo 9: subprogramas, paso de parámetros, ámbito y valores de retorno.
-- D. L. Parnas — "On the Criteria to Be Used in Decomposing Systems into Modules" (*Communications of the ACM*, 1972), sobre el ocultamiento de información.
+- D. L. Parnas — *On the Criteria To Be Used in Decomposing Systems into Modules* (Communications of the ACM 15(12), 1972). El ocultamiento de información como criterio de descomposición modular, que es el que esta clase aplica al separar módulos.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
-- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
-- B. Cherny — *Programming TypeScript* (O'Reilly).
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
-- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
-- J. Lockhart — *Modern PHP* (O'Reilly).
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly). Cómo Python mezcla paradigmas dentro de un mismo módulo.
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/). Cómo JavaScript hace funcional y orientado a objetos con las mismas piezas.
+- B. Cherny — *Programming TypeScript* (O'Reilly). El tipado estructural como forma de expresar interfaces sin herencia.
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley). Clases, interfaces y composición frente a herencia.
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Cómo C# admite orientación a objetos, funcional y asíncrono a la vez.
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley). Interfaces implícitas y composición en lugar de herencia.
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/). Los *traits* y los genéricos como forma de polimorfismo sin herencia.
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). El imperativo procedimental en su forma más desnuda.
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). El paradigma declarativo: describir el resultado en vez del procedimiento.
+- J. Lockhart — *Modern PHP* (O'Reilly). Cómo PHP moderno admite objetos, funciones y rasgos.
 
 ---
 

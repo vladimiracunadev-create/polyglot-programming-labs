@@ -286,24 +286,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Nulabilidad: null, nil, None, Option y valores ausentes»:
 
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. tipos y variables (referencias y punteros; problema del dangling/null).
 - B. C. Pierce — *Types and Programming Languages* (MIT Press), tipos suma / variantes (Option como forma segura de modelar la ausencia).
 - M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann), modelo de referencias y valores.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
-- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly) (`None`, `is` vs `==`).
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/) (`null` vs `undefined`, `??`).
-- B. Cherny — *Programming TypeScript* (O'Reilly) (`strictNullChecks`, uniones con `null`).
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley) (evita null; usa `Optional` con criterio).
-- J. Skeet — *C# in Depth* (4ª ed., Manning) (nullable reference types, `?`).
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly) (`None`, `is` vs `==`). El modelo de valores de Python: nombre, objeto y qué se copia al asignar.
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/) (`null` vs `undefined`, `??`). Los tipos primitivos de JavaScript y sus conversiones implícitas.
+- B. Cherny — *Programming TypeScript* (O'Reilly) (`strictNullChecks`, uniones con `null`). Cómo el sistema de tipos anota valores que JavaScript deja sin declarar.
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley) (evita null; usa `Optional` con criterio). Primitivos frente a envoltorios, y por qué la elección cambia el comportamiento.
+- J. Skeet — *C# in Depth* (4ª ed., Manning) (nullable reference types, `?`). Tipos por valor y por referencia, nulabilidad y lo que garantiza el compilador.
 - A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley) (`nil`, valores cero, `(valor, error)`).
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/) (`Option<T>`, `match`).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall) (punteros nulos).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly) (`NULL` y lógica trivaluada).
-- J. Lockhart — *Modern PHP* (O'Reilly) (`null`, `??`).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/) (`Option<T>`, `match`). Declaración, inmutabilidad por defecto y el tipo que decide la propiedad del valor.
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall) (punteros nulos). Los tipos de máquina de C: tamaños, promoción y lo que el estándar deja abierto.
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly) (`NULL` y lógica trivaluada). El dominio como tipo y el papel de `NULL` en el modelo relacional.
+- J. Lockhart — *Modern PHP* (O'Reilly) (`null`, `??`). El tipado dinámico de PHP y las declaraciones de tipo que la versión moderna añade.
 
 ---
 

@@ -289,13 +289,13 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Números reales: punto flotante, precisión y decimales»:
 
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. tipos de datos primitivos (tipos numéricos de punto flotante).
 - B. C. Pierce — *Types and Programming Languages* (MIT Press), tipos base y su semántica.
 - M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann), representación en memoria y valores de punto flotante.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
 - L. Ramalho — *Fluent Python* (2ª ed., O'Reilly), cap. de números (`float` vs. `Decimal`, precisión).
 - M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — un único tipo `Number` IEEE 754 — [gratis online](https://eloquentjavascript.net/).

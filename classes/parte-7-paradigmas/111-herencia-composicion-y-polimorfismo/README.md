@@ -368,25 +368,25 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Herencia, composición y polimorfismo»:
 
 - P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press). Cap. 7 (herencia y sus riesgos; "prefiere composición").
-- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press).
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press). Los paradigmas vistos como formas distintas de organizar la abstracción.
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson). Cap. 12 (soporte para OO, herencia, enlace dinámico y polimorfismo).
-- E. Gamma, R. Helm, R. Johnson y J. Vlissides (GoF) — *Design Patterns* (Addison-Wesley). Principio "favorecer la composición sobre la herencia".
+- E. Gamma, R. Helm, R. Johnson y J. Vlissides — *Design Patterns* (Addison-Wesley; «GoF»). Principio "favorecer la composición sobre la herencia".
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
-- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
-- B. Cherny — *Programming TypeScript* (O'Reilly).
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly). Cómo Python mezcla paradigmas dentro de un mismo módulo.
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/). Cómo JavaScript hace funcional y orientado a objetos con las mismas piezas.
+- B. Cherny — *Programming TypeScript* (O'Reilly). El tipado estructural como forma de expresar interfaces sin herencia.
 - J. Bloch — *Effective Java* (3ª ed., Addison-Wesley). Ítem 18: "prefiere composición a herencia".
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
-- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
-- J. Lockhart — *Modern PHP* (O'Reilly).
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Cómo C# admite orientación a objetos, funcional y asíncrono a la vez.
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley). Interfaces implícitas y composición en lugar de herencia.
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/). Los *traits* y los genéricos como forma de polimorfismo sin herencia.
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). El imperativo procedimental en su forma más desnuda.
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). El paradigma declarativo: describir el resultado en vez del procedimiento.
+- J. Lockhart — *Modern PHP* (O'Reilly). Cómo PHP moderno admite objetos, funciones y rasgos.
 
 ---
 

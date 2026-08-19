@@ -260,23 +260,23 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Importar, exportar y organizar un proyecto»:
 
-- A. Hunt y D. Thomas — *The Pragmatic Programmer* (Addison-Wesley), tema «DRY — The Evils of Duplication».
+- A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley), tema «DRY — The Evils of Duplication».
 - S. McConnell — *Code Complete* (2ª ed., Microsoft Press), cap. sobre la estructura y organización de programas.
 - H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press), sobre construir apoyándose en abstracciones existentes.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
 - L. Ramalho — *Fluent Python* (2ª ed., O'Reilly), cap. sobre la biblioteca estándar y los *builtins*.
 - M. Haverbeke — *Eloquent JavaScript* (3ª ed.), cap. «Modules» — [gratis online](https://eloquentjavascript.net/).
 - B. Cherny — *Programming TypeScript* (O'Reilly), cap. sobre `import`/`export`.
 - J. Bloch — *Effective Java* (3ª ed., Addison-Wesley), ítem sobre preferir las bibliotecas estándar.
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Métodos, delegados y expresiones lambda en C#.
 - A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley), cap. 10 «Packages and the Go Tool».
 - S. Klabnik y C. Nichols — *The Rust Programming Language*, cap. 7 sobre `use` y rutas — [gratis online](https://doc.rust-lang.org/book/).
 - B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall), apéndice sobre la biblioteca estándar.
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). Vistas y expresiones con nombre como forma de modularidad en SQL.
 - J. Lockhart — *Modern PHP* (O'Reilly), cap. sobre Composer y autoload.
 
 ---

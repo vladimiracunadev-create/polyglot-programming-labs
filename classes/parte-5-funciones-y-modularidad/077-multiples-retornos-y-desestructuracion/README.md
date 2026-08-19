@@ -301,24 +301,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Múltiples retornos y desestructuración»:
 
 - H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press), §2.1 sobre valores compuestos y abstracción de datos.
 - R. C. Martin — *Clean Code* (Prentice Hall), cap. 3 «Functions», sobre evitar argumentos de salida.
 - S. McConnell — *Code Complete* (2ª ed., Microsoft Press), cap. 7 «High-Quality Routines».
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
 - L. Ramalho — *Fluent Python* (2ª ed., O'Reilly), cap. 2 sobre tuplas y desempaquetado.
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/). Funciones, clausuras y ámbito léxico en JavaScript.
 - B. Cherny — *Programming TypeScript* (O'Reilly), sobre tipos tupla.
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley). Diseño de métodos: firmas, parámetros y contratos.
 - J. Skeet — *C# in Depth* (4ª ed., Manning), sobre tuplas de valor.
 - A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley), sobre retorno múltiple y la convención `(valor, error)`.
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/). Funciones, préstamos en los parámetros y tiempos de vida.
 - B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall), sobre punteros como argumentos de salida.
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
-- J. Lockhart — *Modern PHP* (O'Reilly).
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). Vistas y expresiones con nombre como forma de modularidad en SQL.
+- J. Lockhart — *Modern PHP* (O'Reilly). Funciones, espacios de nombres y autocarga en PHP moderno.
 
 ---
 

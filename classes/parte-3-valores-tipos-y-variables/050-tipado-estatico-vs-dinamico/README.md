@@ -292,24 +292,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Tipado estático vs. dinámico»:
 
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. 5 (ligadura de tipo y su tiempo) y cap. 6 (comprobación estática vs. dinámica).
 - B. C. Pierce — *Types and Programming Languages* (MIT Press), cap. 1 (el tipado como método sintáctico previo a la ejecución).
 - M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann), cap. 7 (type checking estático y dinámico).
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
 - L. Ramalho — *Fluent Python* (2ª ed., O'Reilly), sobre tipado dinámico y *type hints*.
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
-- B. Cherny — *Programming TypeScript* (O'Reilly).
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/). Los tipos primitivos de JavaScript y sus conversiones implícitas.
+- B. Cherny — *Programming TypeScript* (O'Reilly). Cómo el sistema de tipos anota valores que JavaScript deja sin declarar.
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley). Primitivos frente a envoltorios, y por qué la elección cambia el comportamiento.
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Tipos por valor y por referencia, nulabilidad y lo que garantiza el compilador.
 - A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley), §3.1 (sin conversiones numéricas implícitas).
 - S. Klabnik y C. Nichols — *The Rust Programming Language*, cap. 3 (tipos fijados en compilación) — [gratis online](https://doc.rust-lang.org/book/).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
-- J. Lockhart — *Modern PHP* (O'Reilly).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). Los tipos de máquina de C: tamaños, promoción y lo que el estándar deja abierto.
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). El dominio como tipo y el papel de `NULL` en el modelo relacional.
+- J. Lockhart — *Modern PHP* (O'Reilly). El tipado dinámico de PHP y las declaraciones de tipo que la versión moderna añade.
 
 ---
 

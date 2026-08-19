@@ -85,8 +85,8 @@ Escribe un «hola mundo» en dos lenguajes que tengas instalados, uno interpreta
 ## 🔗 Referencias
 
 - W. Shotts — *The Linux Command Line* (2ª ed., No Starch Press), sobre redirección (`<`, `>`) y ejecución de programas — [gratis online](https://linuxcommand.org/tlcl.php).
-- B. W. Kernighan y R. Pike — *The Unix Programming Environment* (Prentice Hall).
-- A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley).
+- B. W. Kernighan y R. Pike — *The Unix Programming Environment* (Prentice Hall). La filosofía de herramientas pequeñas que se componen.
+- A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley). El criterio de dominar las herramientas del oficio antes que un lenguaje.
 
 ---
 

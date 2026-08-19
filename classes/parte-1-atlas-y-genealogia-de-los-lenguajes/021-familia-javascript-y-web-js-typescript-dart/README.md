@@ -76,10 +76,10 @@ TypeScript infiere y comprueba tipos como Java o Rust, pero —a diferencia de e
 
 ## 🔗 Referencias
 
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
-- B. Cherny — *Programming TypeScript* (O'Reilly).
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/). El lugar de JavaScript en la genealogía: qué heredó y de quién.
+- B. Cherny — *Programming TypeScript* (O'Reilly). El lugar de TypeScript en la genealogía: qué heredó y de quién.
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. 2 (origen de JavaScript) y cap. 12 (soporte para OO y prototipos).
-- M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann).
+- M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann). La lectura histórica de por qué cada familia decidió lo que decidió.
 
 ---
 

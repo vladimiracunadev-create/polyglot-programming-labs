@@ -93,7 +93,7 @@ Toma este enunciado: *una app móvil con sincronización en la nube*. Propón un
 ## 🔗 Referencias
 
 - G. Polya — *How to Solve It* (Princeton University Press), sobre entender el problema antes de elegir el método.
-- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press) — [gratis online](https://mitpress.mit.edu/9780262510875/).
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press) — [gratis online](https://mitpress.mit.edu/9780262510875/). Programas escritos para que los lean personas: la tesis que abre el curso.
 - A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley), sobre la caja de herramientas y las decisiones reversibles.
 - T. Cormen, C. Leiserson, R. Rivest y C. Stein — *Introduction to Algorithms* (4ª ed., MIT Press), sobre cuándo el coste computacional es realmente el criterio dominante.
 

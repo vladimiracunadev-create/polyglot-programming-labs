@@ -275,13 +275,13 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Cadenas: representación, inmutabilidad e interpolación»:
 
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. tipos de datos (tipo cadena, longitud y diseño).
 - B. C. Pierce — *Types and Programming Languages* (MIT Press), tipos base y su semántica.
 - M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann), representación de cadenas en memoria (longitud explícita vs. terminada en NUL).
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
 - L. Ramalho — *Fluent Python* (2ª ed., O'Reilly), inmutabilidad de `str`, `bytes` vs. `str` e interpolación.
 - M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — strings inmutables UTF-16 y plantillas — [gratis online](https://eloquentjavascript.net/).

@@ -80,10 +80,10 @@ Traduce `(* (+ 2 3) (- 10 4))` a notación infija y calcula el resultado a mano.
 
 ## 🔗 Referencias
 
-- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press) — [gratis online](https://mitpress.mit.edu/9780262510875/).
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press) — [gratis online](https://mitpress.mit.edu/9780262510875/). La idea de que un lenguaje se juzga por lo que permite abstraer.
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. 2 (Lisp) y cap. 15 (funcional).
 - B. A. Tate — *Seven Languages in Seven Weeks* (Pragmatic Bookshelf), cap. de Clojure.
-- P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press).
+- P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press). El mapa de modelos con el que el Atlas agrupa las familias.
 
 ---
 

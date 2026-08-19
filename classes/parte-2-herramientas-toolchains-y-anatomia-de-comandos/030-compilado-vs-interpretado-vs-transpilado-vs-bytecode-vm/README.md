@@ -109,8 +109,8 @@ Toma un programa corto con un cálculo repetitivo (por ejemplo, sumar los primer
 
 ## 🔗 Referencias
 
-- W. Shotts — *The Linux Command Line* (2ª ed., No Starch Press) — [gratis online](https://linuxcommand.org/tlcl.php).
-- B. W. Kernighan y R. Pike — *The Unix Programming Environment* (Prentice Hall).
+- W. Shotts — *The Linux Command Line* (2ª ed., No Starch Press) — [gratis online](https://linuxcommand.org/tlcl.php). El intérprete de órdenes y la anatomía de un comando.
+- B. W. Kernighan y R. Pike — *The Unix Programming Environment* (Prentice Hall). La filosofía de herramientas pequeñas que se componen.
 - A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley), sobre elegir la herramienta adecuada al problema.
 
 ---

@@ -276,23 +276,23 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Tuplas y registros posicionales»:
 
-- T. Cormen, C. Leiserson, R. Rivest y C. Stein — *Introduction to Algorithms* (4ª ed., MIT Press).
-- R. Sedgewick y K. Wayne — *Algorithms* (4ª ed., Addison-Wesley).
+- T. Cormen, C. Leiserson, R. Rivest y C. Stein — *Introduction to Algorithms* (4ª ed., MIT Press). El coste asintótico de cada estructura, que es el criterio para elegirla.
+- R. Sedgewick y K. Wayne — *Algorithms* (4ª ed., Addison-Wesley). Las implementaciones de referencia con las que se contrastan las del curso.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
-- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
-- B. Cherny — *Programming TypeScript* (O'Reilly).
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
-- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
-- J. Lockhart — *Modern PHP* (O'Reilly).
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly). Las estructuras integradas de Python y el protocolo de secuencia que las unifica.
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/). Arrays y objetos como las dos estructuras que sostienen todo lo demás.
+- B. Cherny — *Programming TypeScript* (O'Reilly). Cómo se tipan las estructuras de datos: tuplas, uniones y tipos literales.
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley). Colecciones, arrays y genéricos: qué elegir y por qué.
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Colecciones genéricas y LINQ como forma de recorrer datos.
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley). Los *slices*, los mapas y los *structs*: las tres estructuras que Go ofrece, y sus costes.
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/). Colecciones de la biblioteca estándar bajo la regla de propiedad.
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). Arrays, punteros y `struct`: la estructura de datos vista como memoria.
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). La relación como estructura de datos y la diferencia con una tabla.
+- J. Lockhart — *Modern PHP* (O'Reilly). El array de PHP: una sola estructura que hace de lista y de diccionario.
 
 ---
 

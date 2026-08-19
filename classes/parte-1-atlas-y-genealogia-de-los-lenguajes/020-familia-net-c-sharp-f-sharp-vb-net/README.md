@@ -77,10 +77,10 @@ F# es a .NET lo que Kotlin y Clojure son a la JVM: otro paradigma sobre el mismo
 
 ## 🔗 Referencias
 
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- J. Skeet — *C# in Depth* (4ª ed., Manning). El lugar de C# en la genealogía: qué heredó y de quién.
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. 1-2 (el CLR como respuesta a la JVM).
-- M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann).
-- P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press).
+- M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann). La lectura histórica de por qué cada familia decidió lo que decidió.
+- P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press). El mapa de modelos con el que el Atlas agrupa las familias.
 
 ---
 

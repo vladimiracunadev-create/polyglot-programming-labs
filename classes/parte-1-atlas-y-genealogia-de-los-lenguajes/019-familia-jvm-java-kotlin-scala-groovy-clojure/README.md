@@ -80,10 +80,10 @@ Kotlin distingue `val` (inmutable, no reasignable) de `var` (mutable). ¿A qué 
 
 ## 🔗 Referencias
 
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley). El lugar de Java en la genealogía: qué heredó y de quién.
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. 1 (compilación híbrida y máquinas virtuales) y cap. 2.
 - B. A. Tate — *Seven Languages in Seven Weeks* (Pragmatic Bookshelf), cap. de Scala y Clojure.
-- P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press).
+- P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press). El mapa de modelos con el que el Atlas agrupa las familias.
 
 ---
 

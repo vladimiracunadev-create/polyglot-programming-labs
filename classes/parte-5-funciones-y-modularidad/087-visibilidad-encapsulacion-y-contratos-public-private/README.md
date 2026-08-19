@@ -386,23 +386,23 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Visibilidad, encapsulación y contratos (public/private)»:
 
 - S. McConnell — *Code Complete* (2ª ed., Microsoft Press), cap. 6 «Working Classes» (encapsulación e interfaces de clase).
 - J. Bloch — *Effective Java* (3ª ed., Addison-Wesley), ítem «Minimize the accessibility of classes and members».
-- D. Parnas — «On the Criteria To Be Used in Decomposing Systems into Modules» (CACM, 1972), origen del ocultamiento de información, citado por McConnell.
+- D. L. Parnas — *On the Criteria To Be Used in Decomposing Systems into Modules* (Communications of the ACM 15(12), 1972). Origen del ocultamiento de información, citado por McConnell: el criterio con que esta clase justifica qué se declara público y qué no.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
 - L. Ramalho — *Fluent Python* (2ª ed., O'Reilly), cap. sobre atributos privados y *name mangling*.
 - M. Haverbeke — *Eloquent JavaScript* (3ª ed.), cap. «Objects» — [gratis online](https://eloquentjavascript.net/).
 - B. Cherny — *Programming TypeScript* (O'Reilly), cap. sobre clases y modificadores de acceso.
 - A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley), §6 sobre métodos y visibilidad exportada.
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Métodos, delegados y expresiones lambda en C#.
 - S. Klabnik y C. Nichols — *The Rust Programming Language*, cap. 7 sobre `pub` y visibilidad — [gratis online](https://doc.rust-lang.org/book/).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
-- J. Lockhart — *Modern PHP* (O'Reilly).
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). Funciones, paso por valor y punteros como único mecanismo de salida.
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). Vistas y expresiones con nombre como forma de modularidad en SQL.
+- J. Lockhart — *Modern PHP* (O'Reilly). Funciones, espacios de nombres y autocarga en PHP moderno.
 
 ---
 

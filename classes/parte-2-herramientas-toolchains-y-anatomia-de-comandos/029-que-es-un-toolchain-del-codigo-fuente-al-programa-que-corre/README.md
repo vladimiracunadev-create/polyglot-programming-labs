@@ -103,7 +103,7 @@ Elige un lenguaje que tengas instalado y traza su toolchain completo con comando
 
 ## 🔗 Referencias
 
-- W. Shotts — *The Linux Command Line* (2ª ed., No Starch Press) — [gratis online](https://linuxcommand.org/tlcl.php).
+- W. Shotts — *The Linux Command Line* (2ª ed., No Starch Press) — [gratis online](https://linuxcommand.org/tlcl.php). El intérprete de órdenes y la anatomía de un comando.
 - B. W. Kernighan y R. Pike — *The Unix Programming Environment* (Prentice Hall), cap. sobre herramientas y su composición.
 - A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley), tema del poder del texto plano y las herramientas de línea de comandos.
 

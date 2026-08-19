@@ -270,26 +270,26 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Pruebas unitarias por lenguaje»:
 
-- S. McConnell — *Code Complete* (2ª ed., Microsoft Press).
-- A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley).
-- M. Fowler — *Refactoring* (2ª ed., Addison-Wesley).
-- E. Gamma, R. Helm, R. Johnson y J. Vlissides — *Design Patterns* (Addison-Wesley; «GoF»).
-- K. Beck — *Test-Driven Development: By Example* (Addison-Wesley).
+- S. McConnell — *Code Complete* (2ª ed., Microsoft Press). El catálogo de prácticas de construcción que esta parte aplica.
+- A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley). Las prácticas de ingeniería que esta parte traduce a los diez lenguajes.
+- M. Fowler — *Refactoring* (2ª ed., Addison-Wesley). El catálogo de refactorizaciones y el olor de código que las dispara.
+- E. Gamma, R. Helm, R. Johnson y J. Vlissides — *Design Patterns* (Addison-Wesley; «GoF»). El patrón como unidad de diseño reutilizable entre lenguajes.
+- K. Beck — *Test-Driven Development: By Example* (Addison-Wesley). El ciclo rojo-verde-refactor tal como esta parte lo aplica.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
-- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
-- B. Cherny — *Programming TypeScript* (O'Reilly).
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
-- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
-- J. Lockhart — *Modern PHP* (O'Reilly).
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly). Las prácticas de ingeniería que Ramalho da por sentadas en código Python de producción.
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/). Las prácticas de escritura y prueba que el libro aplica a su propio código.
+- B. Cherny — *Programming TypeScript* (O'Reilly). El tipo como red de seguridad en refactor y prueba.
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley). Las reglas de Bloch como norma de calidad para el Java del curso.
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Las prácticas que Skeet asocia a cada versión del lenguaje.
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley). Las herramientas del propio Go como disciplina de ingeniería.
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/). Pruebas, documentación y Cargo como parte del lenguaje.
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). El estilo de K&R como origen de las convenciones que siguen los demás.
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). Corrección del código SQL: qué garantiza la teoría y qué no garantiza el dialecto.
+- J. Lockhart — *Modern PHP* (O'Reilly). PSR, Composer y prueba: la disciplina del PHP moderno.
 
 ---
 

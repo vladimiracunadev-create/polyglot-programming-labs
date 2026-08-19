@@ -293,24 +293,24 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «RAII, propiedad y préstamos (Rust/C++)»:
 
-- R. Nystrom — *Crafting Interpreters* (Genever Benning) — [gratis online](https://craftinginterpreters.com/).
-- A. Aho, M. Lam, R. Sethi y J. Ullman — *Compilers: Principles, Techniques, and Tools* (2ª ed., Pearson; «Dragon Book»).
-- R. Bryant y D. O'Hallaron — *Computer Systems: A Programmer's Perspective* (3ª ed., Pearson).
+- R. Nystrom — *Crafting Interpreters* (Genever Benning) — [gratis online](https://craftinginterpreters.com/). El intérprete construido a mano como forma de ver la ejecución por dentro.
+- A. Aho, M. Lam, R. Sethi y J. Ullman — *Compilers: Principles, Techniques, and Tools* (2ª ed., Pearson; «Dragon Book»). Las fases de compilación que esta parte recorre una a una.
+- R. Bryant y D. O'Hallaron — *Computer Systems: A Programmer's Perspective* (3ª ed., Pearson). Qué hace la máquina con el programa una vez compilado.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
-- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly).
-- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/).
-- B. Cherny — *Programming TypeScript* (O'Reilly).
-- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley).
-- J. Skeet — *C# in Depth* (4ª ed., Manning).
-- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley).
-- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/).
-- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall).
-- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly).
-- J. Lockhart — *Modern PHP* (O'Reilly).
+- L. Ramalho — *Fluent Python* (2ª ed., O'Reilly). Qué hace CPython por debajo: bytecode, referencias y coste real.
+- M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — [gratis online](https://eloquentjavascript.net/). Qué ocurre entre el texto del programa y su ejecución en el motor.
+- B. Cherny — *Programming TypeScript* (O'Reilly). Qué hace el compilador y qué desaparece al emitir JavaScript.
+- J. Bloch — *Effective Java* (3ª ed., Addison-Wesley). Qué hace la JVM con el código: carga, compilación JIT y recolección.
+- J. Skeet — *C# in Depth* (4ª ed., Manning). Qué hace el CLR: IL, JIT y modelo de memoria.
+- A. Donovan y B. Kernighan — *The Go Programming Language* (Addison-Wesley). Compilación, enlazado estático y el planificador de goroutines.
+- S. Klabnik y C. Nichols — *The Rust Programming Language* — [gratis online](https://doc.rust-lang.org/book/). Qué comprueba el *borrow checker* y qué queda en tiempo de ejecución.
+- B. Kernighan y D. Ritchie — *The C Programming Language* (2ª ed., Prentice Hall). Qué hace el compilador y qué queda en la memoria del proceso.
+- C. J. Date — *SQL and Relational Theory* (3ª ed., O'Reilly). Qué hace el optimizador entre la consulta escrita y el plan ejecutado.
+- J. Lockhart — *Modern PHP* (O'Reilly). El ciclo de petición: qué hace el intérprete en cada ejecución.
 
 ---
 

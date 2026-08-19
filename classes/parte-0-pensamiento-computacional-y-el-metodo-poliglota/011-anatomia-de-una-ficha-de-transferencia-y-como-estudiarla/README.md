@@ -80,7 +80,7 @@ Abre la clase 041 y estúdiala siguiendo los seis pasos, en orden y sin saltarte
 
 - A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley), sobre gestionar el aprendizaje y las herramientas.
 - G. Polya — *How to Solve It* (Princeton University Press), las cuatro fases aplicadas al estudio.
-- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press) — [gratis online](https://mitpress.mit.edu/9780262510875/).
+- H. Abelson y G. J. Sussman — *Structure and Interpretation of Computer Programs* (2ª ed., MIT Press) — [gratis online](https://mitpress.mit.edu/9780262510875/). Programas escritos para que los lean personas: la tesis que abre el curso.
 - T. Cormen, C. Leiserson, R. Rivest y C. Stein — *Introduction to Algorithms* (4ª ed., MIT Press), separar problema, algoritmo e implementación.
 
 ---

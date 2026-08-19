@@ -322,13 +322,13 @@ Detalle en [`reto.md`](reto.md).
 
 ## 🔗 Referencias
 
-**Libros de la parte:**
+**Libros de la parte** — el marco conceptual con el que esta clase trata «Booleanos y valores de verdad»:
 
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. tipos de datos (tipo booleano) y expresiones (operadores relacionales y booleanos, cortocircuito).
 - B. C. Pierce — *Types and Programming Languages* (MIT Press), el tipo `Bool` y el condicional en el cálculo lambda tipado.
 - M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann), evaluación en cortocircuito de operadores booleanos.
 
-**Libros de los lenguajes del núcleo:**
+**Libros de los lenguajes del núcleo** — la forma que ese mismo concepto toma en cada lenguaje:
 
 - L. Ramalho — *Fluent Python* (2ª ed., O'Reilly), objetos verdaderos y falsos (`bool` y `__bool__`).
 - M. Haverbeke — *Eloquent JavaScript* (3ª ed.) — valores truthy/falsy y operadores lógicos — [gratis online](https://eloquentjavascript.net/).

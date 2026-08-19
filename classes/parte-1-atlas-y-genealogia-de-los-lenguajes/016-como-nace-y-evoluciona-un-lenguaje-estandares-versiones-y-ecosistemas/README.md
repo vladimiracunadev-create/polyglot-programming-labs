@@ -83,8 +83,8 @@ Elige dos lenguajes del núcleo. Para cada uno, averigua su última versión est
 
 - M. L. Scott — *Programming Language Pragmatics* (4ª ed., Morgan Kaufmann), cap. 1 "Introduction" (lenguaje vs. implementación).
 - R. W. Sebesta — *Concepts of Programming Languages* (12ª ed., Pearson), cap. 1 "Preliminaries" y cap. 2.
-- B. A. Tate — *Seven Languages in Seven Weeks* (Pragmatic Bookshelf).
-- P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press).
+- B. A. Tate — *Seven Languages in Seven Weeks* (Pragmatic Bookshelf). El método de leer un lenguaje por sus rasgos, que es el del Atlas.
+- P. Van Roy y S. Haridi — *Concepts, Techniques, and Models of Computer Programming* (MIT Press). El mapa de modelos con el que el Atlas agrupa las familias.
 
 ---
 

@@ -95,7 +95,7 @@ Para cada uno, responde por escrito tres preguntas: qué formato elegirías, qu�
 
 ## 🔗 Referencias
 
-- W. Shotts — *The Linux Command Line* (2ª ed., No Starch Press) — [gratis online](https://linuxcommand.org/tlcl.php).
+- W. Shotts — *The Linux Command Line* (2ª ed., No Starch Press) — [gratis online](https://linuxcommand.org/tlcl.php). El intérprete de órdenes y la anatomía de un comando.
 - B. W. Kernighan y R. Pike — *The Unix Programming Environment* (Prentice Hall), sobre programas como componentes que se entregan y combinan.
 - A. Hunt y D. Thomas — *The Pragmatic Programmer* (2ª ed., Addison-Wesley), sobre automatizar la construcción y hacer reproducible todo lo repetible.
 

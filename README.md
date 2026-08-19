@@ -68,7 +68,9 @@ resuelto además en los 12 lenguajes antiguos que siguen en producción hoy.**
 > Este repositorio **no reemplaza** los cursos de cada lenguaje. Es el mapa de lo que
 > **permanece** al cambiar de lenguaje. `Fluent Python`, `Effective Java`,
 > `The Rust Programming Language` y compañía aparecen como referencias de profundización
-> en cada clase, sin copiar ni falsear su contenido: la redacción aquí es original.
+> en cada clase, sin copiar ni falsear su contenido: la redacción aquí es original. Cada
+> obra citada está en el [registro de fuentes](sources/bibliography.json) con su ISBN-13 o
+> su DOI, para que cualquiera pueda ir a comprobarla.
 
 ## ✅ Estado verificable
 
@@ -86,7 +88,8 @@ resuelto además en los 12 lenguajes antiguos que siguen en producción hoy.**
 | Autoevaluaciones | ✅ 90 preguntas, batería por cada una de las 12 partes |
 | Sitio | ✅ portal estático en GitHub Pages con índice, búsqueda y rutas |
 | Apps | ✅ APK de Android y ejecutable de Windows, **con el contenido contado dentro del binario** en CI |
-| CI | ✅ estructura y manifest, markdownlint, equivalencia por lenguaje, secretos (gitleaks) y SAST (bandit) |
+| Fuentes | ✅ **41 obras** con localizador resoluble en [`sources/bibliography.json`](sources/bibliography.json) —ISBN-13 o DOI—, **cobertura 100 %**: toda obra citada está en el registro y ninguna entrada sobra; cada una de las 1922 citas declara el uso que hace la clase |
+| CI | ✅ estructura y manifest, markdownlint, **fuentes y bibliografía**, equivalencia por lenguaje, secretos (gitleaks) y SAST (bandit) |
 | SQL | ⚪ declarativo: se marca como *ilustrativo* en el verificador, no se fuerza a imitar un lenguaje imperativo |
 
 ## 🌟 Qué hace diferente a este programa
@@ -270,7 +273,46 @@ su porqué · 📖 definiciones · 🧮 modelo (entradas/salidas/reglas) · 📐
 
 El contenido no sale de una plantilla: cada parte sigue la literatura de referencia de su
 tema. Estas son las obras que sostienen el programa (**no se reproduce su contenido**; la
-redacción es original y cada clase cita el libro correspondiente).
+redacción es original, cada clase cita el libro correspondiente **y declara qué uso hace de
+él**).
+
+Ninguna cita se queda en el nombre de la obra: cada una tiene entrada con **localizador
+resoluble** en el registro **[`sources/bibliography.json`](sources/bibliography.json)**
+—ISBN-13 para los libros, DOI para los artículos—, y
+[`scripts/verificar_fuentes.py`](scripts/verificar_fuentes.py) comprueba en CI que registro y
+citas cuadran. **Las cifras de esta sección las produce ese verificador; no se escriben a
+mano.**
+
+<!-- FUENTES:INICIO — generado por scripts/verificar_fuentes.py; no editar a mano -->
+
+| Cifra | Valor |
+|---|---:|
+| Clases con apartado de fuentes | **176** |
+| Citas en total | **1922** |
+| Obras distintas citadas | **41** |
+| Obras presentes en el registro | **41** |
+| **Cobertura del registro** | **100.0 %** |
+| Entradas del registro (libros / artículos) | **41** (37 / 4) |
+| Entradas verificadas / pendientes | **41** / **0** |
+
+### Obra rectora de cada lenguaje del núcleo
+
+| Lenguaje | Obra rectora | ISBN-13 |
+|---|---|---|
+| **Python** | Ramalho — *Fluent Python* (2ª ed.) | [`9781492056355`](https://openlibrary.org/isbn/9781492056355) |
+| **JavaScript** | Haverbeke — *Eloquent JavaScript* (3ª ed.) | [`9781593279509`](https://openlibrary.org/isbn/9781593279509) · [edición libre](https://eloquentjavascript.net/) |
+| **TypeScript** | Cherny — *Programming TypeScript* | [`9781492037651`](https://openlibrary.org/isbn/9781492037651) |
+| **Java** | Bloch — *Effective Java* (3ª ed.) | [`9780134685991`](https://openlibrary.org/isbn/9780134685991) |
+| **C#** | Skeet — *C# in Depth* (4ª ed.) | [`9781617294532`](https://openlibrary.org/isbn/9781617294532) |
+| **Go** | Donovan; Kernighan — *The Go Programming Language* | [`9780134190440`](https://openlibrary.org/isbn/9780134190440) |
+| **Rust** | Klabnik; Nichols — *The Rust Programming Language* (2ª ed.) | [`9781718503106`](https://openlibrary.org/isbn/9781718503106) · [edición libre](https://doc.rust-lang.org/book/) |
+| **C** | Kernighan; Ritchie — *The C Programming Language* (2ª ed.) | [`9780131103627`](https://openlibrary.org/isbn/9780131103627) |
+| **SQL** | Date — *SQL and Relational Theory* (3ª ed.) | [`9781491941171`](https://openlibrary.org/isbn/9781491941171) |
+| **PHP** | Lockhart — *Modern PHP* | [`9781491905012`](https://openlibrary.org/isbn/9781491905012) |
+
+<!-- FUENTES:FIN -->
+
+### Las obras que sostienen cada área
 
 | Área | Libros de referencia |
 |---|---|
@@ -282,7 +324,6 @@ redacción es original y cada clase cita el libro correspondiente).
 | **Ingeniería de software** | McConnell — *Code Complete* · Martin — *Clean Code* · Fowler — *Refactoring* · Gamma et al. — *Design Patterns* (GoF) · Beck — *TDD by Example* |
 | **Interoperabilidad y sistemas** | Kleppmann — *Designing Data-Intensive Applications* · Newman — *Building Microservices* · Tanenbaum — *Distributed Systems* · Nygard — *Release It!* |
 | **Toolchains y entorno** | Shotts — *The Linux Command Line* · Kernighan/Pike — *The Unix Programming Environment* |
-| **Por lenguaje (núcleo)** | Ramalho — *Fluent Python* · Bloch — *Effective Java* · Donovan/Kernighan — *The Go Programming Language* · Klabnik/Nichols — *The Rust Programming Language* · Kernighan/Ritchie — *K&R* · Haverbeke — *Eloquent JavaScript* · Cherny — *Programming TypeScript* · Skeet — *C# in Depth* · Date — *SQL and Relational Theory* · Lockhart — *Modern PHP* |
 
 ## 🧩 Núcleo, Atlas y lenguajes vivos: tres capas
 

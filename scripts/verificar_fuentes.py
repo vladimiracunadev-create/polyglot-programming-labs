@@ -244,36 +244,88 @@ def calcular(doc: dict, citas: list[dict]) -> dict:
     }
 
 
+def _autores(e: dict) -> str:
+    """«Kernighan y Ritchie», «Cormen et al.» — apellidos, como se citan de viva voz."""
+    ap = [a.split(",")[0].strip() for a in e["authors"]]
+    if len(ap) == 1:
+        return ap[0]
+    if len(ap) == 2:
+        return f"{ap[0]} y {ap[1]}"
+    return f"{ap[0]} et al."
+
+
+def _partes(e: dict) -> str:
+    """En qué partes del programa se usa la obra, deducido de used_in."""
+    nums = sorted({int(m.group(1)) for c in e.get("used_in", [])
+                   if (m := re.search(r"/parte-(\d+)-", c))})
+    if not nums:
+        return "—"
+    # Comprime tramos consecutivos: [3,4,5,9] → «3–5, 9».
+    tramos, ini, prev = [], nums[0], nums[0]
+    for n in nums[1:] + [None]:
+        if n != prev + 1:
+            tramos.append(str(ini) if ini == prev else
+                          (f"{ini}, {prev}" if prev - ini == 1 else f"{ini}–{prev}"))
+            ini = n
+        prev = n if n is not None else prev
+    return ", ".join(tramos)
+
+
+def _localizador(e: dict) -> str:
+    if e.get("isbn13"):
+        return f"ISBN [`{e['isbn13']}`]({e['locator']})"
+    if e.get("doi"):
+        return f"DOI [`{e['doi']}`]({e['locator']})"
+    return f"[fuente primaria]({e['locator']})"
+
+
 def bloque_readme(doc: dict, cif: dict) -> str:
     por_lang = {e.get("lang"): e for e in doc["entries"] if e.get("lang")}
-    filas = []
+
+    nucleo = []
     for clave, nombre in LENGUAJES:
         e = por_lang.get(clave)
         if not e:
             continue
-        autores = "; ".join(a.split(",")[0] for a in e["authors"])
-        ed = f" ({e['edition']})" if e.get("edition") else ""
-        libre = f" · [edición libre]({e['online']})" if e.get("online") else ""
-        filas.append(f"| **{nombre}** | {autores} — *{e['title']}*{ed} | "
-                     f"[`{e['isbn13']}`]({e['locator']}){libre} |")
+        libre = f"<br>[edición libre]({e['online']})" if e.get("online") else ""
+        nucleo.append(f"| **{nombre}** | {_autores(e)} — *{e['title']}* | "
+                      f"{e.get('edition') or '—'} | {e['published']} | {e['publisher']} | "
+                      f"{_localizador(e)}{libre} |")
+
+    resto = [e for e in doc["entries"] if not e.get("lang")]
+    libros, articulos = [], []
+    for e in sorted(resto, key=lambda x: (x["type"] != "book", x["title"])):
+        libre = f"<br>[edición libre]({e['online']})" if e.get("online") else ""
+        fila = (f"| {_autores(e)} — *{e['title']}* | {e.get('edition') or '—'} | "
+                f"{e['published']} | {e['publisher']} | {_localizador(e)}{libre} | "
+                f"{_partes(e)} |")
+        (libros if e["type"] == "book" else articulos).append(fila)
+
     return "\n".join([
         MARCA_INI,
         "",
-        f"| Cifra | Valor |",
-        f"|---|---:|",
-        f"| Clases con apartado de fuentes | **{cif['clases']}** |",
-        f"| Citas en total | **{cif['citas']}** |",
-        f"| Obras distintas citadas | **{cif['obras_citadas']}** |",
-        f"| Obras presentes en el registro | **{cif['obras_declaradas']}** |",
-        f"| **Cobertura del registro** | **{cif['cobertura_pct']:.1f} %** |",
-        f"| Entradas del registro (libros / artículos) | **{cif['entradas']}** ({cif['libros']} / {cif['articulos']}) |",
-        f"| Entradas verificadas / pendientes | **{cif['verificadas']}** / **{cif['pendientes']}** |",
+        "### La obra rectora de cada lenguaje del núcleo",
         "",
-        "### Obra rectora de cada lenguaje del núcleo",
+        "| Lenguaje | Obra rectora | Edición | Año | Editorial | Localizador |",
+        "|---|---|---|---|---|---|",
+        *nucleo,
         "",
-        "| Lenguaje | Obra rectora | ISBN-13 |",
-        "|---|---|---|",
-        *filas,
+        "### Las obras de área, y en qué partes se usan",
+        "",
+        "| Obra | Edición | Año | Editorial | Localizador | Partes |",
+        "|---|---|---|---|---|---|",
+        *libros,
+        "",
+        "### Los artículos fundacionales que se citan",
+        "",
+        "| Artículo | Edición | Año | Publicado en | Localizador | Partes |",
+        "|---|---|---|---|---|---|",
+        *articulos,
+        "",
+        f"> Estas tablas no se teclean: las escribe `scripts/verificar_fuentes.py` leyendo el "
+        f"registro y las {cif['clases']} clases. En cada cambio, el CI comprueba que las "
+        f"**{cif['obras_citadas']} obras citadas están todas en el registro** y que ninguna "
+        f"entrada sobra, y que cada una de las {cif['citas']} citas dice para qué sirve.",
         "",
         MARCA_FIN,
     ])

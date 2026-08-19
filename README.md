@@ -88,7 +88,7 @@ resuelto además en los 12 lenguajes antiguos que siguen en producción hoy.**
 | Autoevaluaciones | ✅ 90 preguntas, batería por cada una de las 12 partes |
 | Sitio | ✅ portal estático en GitHub Pages con índice, búsqueda y rutas |
 | Apps | ✅ APK de Android y ejecutable de Windows, **con el contenido contado dentro del binario** en CI |
-| Fuentes | ✅ **41 obras** con localizador resoluble en [`sources/bibliography.json`](sources/bibliography.json) —ISBN-13 o DOI—, **cobertura 100 %**: toda obra citada está en el registro y ninguna entrada sobra; cada una de las 1922 citas declara el uso que hace la clase |
+| Fuentes | ✅ toda obra citada tiene ISBN-13 o DOI en [`sources/bibliography.json`](sources/bibliography.json), y cada cita declara para qué usa la clase esa obra |
 | CI | ✅ estructura y manifest, markdownlint, **fuentes y bibliografía**, equivalencia por lenguaje, secretos (gitleaks) y SAST (bandit) |
 | SQL | ⚪ declarativo: se marca como *ilustrativo* en el verificador, no se fuerza a imitar un lenguaje imperativo |
 
@@ -269,61 +269,77 @@ su porqué · 📖 definiciones · 🧮 modelo (entradas/salidas/reglas) · 📐
 🌐 las 10 implementaciones · 🔬 comparación · 🧬 el concepto en la familia · ✅ prueba común ·
 🧪 reto · ⚠️ errores comunes · ❓ FAQ · 🔗 referencias a los libros del área y del lenguaje.
 
-## 📚 Pauta derivada de los mejores libros
+## 📚 Las fuentes: qué se ha leído para escribir esto
 
 El contenido no sale de una plantilla: cada parte sigue la literatura de referencia de su
-tema. Estas son las obras que sostienen el programa (**no se reproduce su contenido**; la
-redacción es original, cada clase cita el libro correspondiente **y declara qué uso hace de
-él**).
+tema. **No se reproduce el contenido de ninguna obra**: la redacción es original, cada clase
+cita el libro que corresponde y **declara para qué lo usa** —no basta con nombrarlo—.
 
-Ninguna cita se queda en el nombre de la obra: cada una tiene entrada con **localizador
-resoluble** en el registro **[`sources/bibliography.json`](sources/bibliography.json)**
-—ISBN-13 para los libros, DOI para los artículos—, y
-[`scripts/verificar_fuentes.py`](scripts/verificar_fuentes.py) comprueba en CI que registro y
-citas cuadran. **Las cifras de esta sección las produce ese verificador; no se escriben a
-mano.**
+Aquí están **todas** las obras, una por una, con su edición y su localizador, para que
+cualquiera pueda ir a comprobarlas. El registro completo, con la lista de clases que citan
+cada obra, está en **[`sources/bibliography.json`](sources/bibliography.json)**.
 
 <!-- FUENTES:INICIO — generado por scripts/verificar_fuentes.py; no editar a mano -->
 
-| Cifra | Valor |
-|---|---:|
-| Clases con apartado de fuentes | **176** |
-| Citas en total | **1922** |
-| Obras distintas citadas | **41** |
-| Obras presentes en el registro | **41** |
-| **Cobertura del registro** | **100.0 %** |
-| Entradas del registro (libros / artículos) | **41** (37 / 4) |
-| Entradas verificadas / pendientes | **41** / **0** |
+### La obra rectora de cada lenguaje del núcleo
 
-### Obra rectora de cada lenguaje del núcleo
+| Lenguaje | Obra rectora | Edición | Año | Editorial | Localizador |
+|---|---|---|---|---|---|
+| **Python** | Ramalho — *Fluent Python* | 2ª ed. | 2021 | O'Reilly Media | ISBN [`9781492056355`](https://openlibrary.org/isbn/9781492056355) |
+| **JavaScript** | Haverbeke — *Eloquent JavaScript* | 3ª ed. | 2018 | No Starch Press | ISBN [`9781593279509`](https://openlibrary.org/isbn/9781593279509)<br>[edición libre](https://eloquentjavascript.net/) |
+| **TypeScript** | Cherny — *Programming TypeScript* | — | 2019 | O'Reilly Media | ISBN [`9781492037651`](https://openlibrary.org/isbn/9781492037651) |
+| **Java** | Bloch — *Effective Java* | 3ª ed. | 2017 | Addison-Wesley Professional | ISBN [`9780134685991`](https://openlibrary.org/isbn/9780134685991) |
+| **C#** | Skeet — *C# in Depth* | 4ª ed. | 2019 | Manning Publications | ISBN [`9781617294532`](https://openlibrary.org/isbn/9781617294532) |
+| **Go** | Donovan y Kernighan — *The Go Programming Language* | — | 2016 | Addison-Wesley | ISBN [`9780134190440`](https://openlibrary.org/isbn/9780134190440) |
+| **Rust** | Klabnik y Nichols — *The Rust Programming Language* | 2ª ed. | 2023 | No Starch Press | ISBN [`9781718503106`](https://openlibrary.org/isbn/9781718503106)<br>[edición libre](https://doc.rust-lang.org/book/) |
+| **C** | Kernighan y Ritchie — *The C Programming Language* | 2ª ed. | 1988 | Prentice Hall | ISBN [`9780131103627`](https://openlibrary.org/isbn/9780131103627) |
+| **SQL** | Date — *SQL and Relational Theory* | 3ª ed. | 2015 | O'Reilly Media | ISBN [`9781491941171`](https://openlibrary.org/isbn/9781491941171) |
+| **PHP** | Lockhart — *Modern PHP* | — | 2015 | O'Reilly Media | ISBN [`9781491905012`](https://openlibrary.org/isbn/9781491905012) |
 
-| Lenguaje | Obra rectora | ISBN-13 |
-|---|---|---|
-| **Python** | Ramalho — *Fluent Python* (2ª ed.) | [`9781492056355`](https://openlibrary.org/isbn/9781492056355) |
-| **JavaScript** | Haverbeke — *Eloquent JavaScript* (3ª ed.) | [`9781593279509`](https://openlibrary.org/isbn/9781593279509) · [edición libre](https://eloquentjavascript.net/) |
-| **TypeScript** | Cherny — *Programming TypeScript* | [`9781492037651`](https://openlibrary.org/isbn/9781492037651) |
-| **Java** | Bloch — *Effective Java* (3ª ed.) | [`9780134685991`](https://openlibrary.org/isbn/9780134685991) |
-| **C#** | Skeet — *C# in Depth* (4ª ed.) | [`9781617294532`](https://openlibrary.org/isbn/9781617294532) |
-| **Go** | Donovan; Kernighan — *The Go Programming Language* | [`9780134190440`](https://openlibrary.org/isbn/9780134190440) |
-| **Rust** | Klabnik; Nichols — *The Rust Programming Language* (2ª ed.) | [`9781718503106`](https://openlibrary.org/isbn/9781718503106) · [edición libre](https://doc.rust-lang.org/book/) |
-| **C** | Kernighan; Ritchie — *The C Programming Language* (2ª ed.) | [`9780131103627`](https://openlibrary.org/isbn/9780131103627) |
-| **SQL** | Date — *SQL and Relational Theory* (3ª ed.) | [`9781491941171`](https://openlibrary.org/isbn/9781491941171) |
-| **PHP** | Lockhart — *Modern PHP* | [`9781491905012`](https://openlibrary.org/isbn/9781491905012) |
+### Las obras de área, y en qué partes se usan
+
+| Obra | Edición | Año | Editorial | Localizador | Partes |
+|---|---|---|---|---|---|
+| Sedgewick y Wayne — *Algorithms* | 4ª ed. | 2011 | Addison-Wesley | ISBN [`9780321573513`](https://openlibrary.org/isbn/9780321573513) | 6 |
+| Newman — *Building Microservices* | 2ª ed. | 2020 | O'Reilly Media | ISBN [`9781492034025`](https://openlibrary.org/isbn/9781492034025) | 10, 11 |
+| Martin — *Clean Code* | — | 2008 | Prentice Hall | ISBN [`9780132350884`](https://openlibrary.org/isbn/9780132350884) | 0, 5 |
+| McConnell — *Code Complete* | 2ª ed. | 2004 | Microsoft Press | ISBN [`9780735619678`](https://openlibrary.org/isbn/9780735619678) | 0, 5, 9 |
+| Aho et al. — *Compilers: Principles, Techniques, and Tools* | 2ª ed. | 2006 | Pearson/Addison-Wesley | ISBN [`9780321486813`](https://openlibrary.org/isbn/9780321486813) | 8 |
+| Bryant y O'Hallaron — *Computer Systems: A Programmer's Perspective* | 3ª ed. | 2015 | Pearson | ISBN [`9780134092669`](https://openlibrary.org/isbn/9780134092669) | 8 |
+| Sebesta — *Concepts of Programming Languages* | 12ª ed. | 2018 | Pearson | ISBN [`9780134997186`](https://openlibrary.org/isbn/9780134997186) | 0, 1, 3, 4, 7 |
+| Sebesta — *Concepts of Programming Languages* | 11ª ed. | 2015 | Pearson Education | ISBN [`9780133943023`](https://openlibrary.org/isbn/9780133943023) | 5 |
+| Van Roy y Haridi — *Concepts, Techniques, and Models of Computer Programming* | — | 2004 | MIT Press | ISBN [`9780262220699`](https://openlibrary.org/isbn/9780262220699) | 0, 1, 7 |
+| Nystrom — *Crafting Interpreters* | — | 2021 | Genever Benning | ISBN [`9780990582939`](https://openlibrary.org/isbn/9780990582939)<br>[edición libre](https://craftinginterpreters.com/) | 8 |
+| Gamma et al. — *Design Patterns* | — | 1995 | Addison-Wesley Professional | ISBN [`9780201633610`](https://openlibrary.org/isbn/9780201633610) | 7, 9 |
+| Kleppmann — *Designing Data-Intensive Applications* | — | 2017 | O'Reilly Media | ISBN [`9781449373320`](https://openlibrary.org/isbn/9781449373320) | 10 |
+| Tanenbaum y Steen — *Distributed Systems* | 3ª ed. | 2017 | Maarten van Steen (edición de autor) | ISBN [`9781543057386`](https://openlibrary.org/isbn/9781543057386) | 10 |
+| Polya — *How to Solve It* | — | 2004 | Princeton University Press | ISBN [`9780691119663`](https://openlibrary.org/isbn/9780691119663) | 0 |
+| Cormen et al. — *Introduction to Algorithms* | 4ª ed. | 2022 | MIT Press | ISBN [`9780262046305`](https://openlibrary.org/isbn/9780262046305) | 0, 6 |
+| Liskov y Guttag — *Program Development in Java: Abstraction, Specification, and Object-Oriented Design* | — | 2000 | Addison-Wesley Professional | ISBN [`9780201657685`](https://openlibrary.org/isbn/9780201657685) | 7 |
+| Scott — *Programming Language Pragmatics* | 4ª ed. | 2015 | Morgan Kaufmann | ISBN [`9780124104099`](https://openlibrary.org/isbn/9780124104099) | 1, 3 |
+| Fowler — *Refactoring* | 2ª ed. | 2018 | Addison-Wesley | ISBN [`9780134757599`](https://openlibrary.org/isbn/9780134757599) | 9 |
+| Nygard — *Release It!* | 2ª ed. | 2018 | Pragmatic Bookshelf | ISBN [`9781680502398`](https://openlibrary.org/isbn/9781680502398) | 10, 11 |
+| Tate — *Seven Languages in Seven Weeks* | — | 2010 | Pragmatic Bookshelf | ISBN [`9781934356593`](https://openlibrary.org/isbn/9781934356593) | 1 |
+| Abelson et al. — *Structure and Interpretation of Computer Programs* | 2ª ed. | 1996 | MIT Press | ISBN [`9780262510875`](https://openlibrary.org/isbn/9780262510875)<br>[edición libre](https://mitpress.mit.edu/9780262510875/) | 0, 1, 5, 7 |
+| Dahl et al. — *Structured Programming* | — | 1972 | Academic Press | ISBN [`9780122005503`](https://openlibrary.org/isbn/9780122005503) | 4, 7 |
+| Beck — *Test-Driven Development: By Example* | — | 2002 | Addison-Wesley | ISBN [`9780321146533`](https://openlibrary.org/isbn/9780321146533) | 9 |
+| Shotts — *The Linux Command Line* | 2ª ed. | 2019 | No Starch Press | ISBN [`9781593279523`](https://openlibrary.org/isbn/9781593279523)<br>[edición libre](https://linuxcommand.org/tlcl.php) | 2 |
+| Hunt y Thomas — *The Pragmatic Programmer* | 2ª ed. | 2019 | Addison-Wesley | ISBN [`9780135957059`](https://openlibrary.org/isbn/9780135957059) | 0, 2, 5, 9, 11 |
+| Kernighan y Pike — *The Unix Programming Environment* | — | 1984 | Prentice-Hall | ISBN [`9780139376818`](https://openlibrary.org/isbn/9780139376818) | 2 |
+| Pierce — *Types and Programming Languages* | — | 2002 | MIT Press | ISBN [`9780262162098`](https://openlibrary.org/isbn/9780262162098) | 3, 5 |
+
+### Los artículos fundacionales que se citan
+
+| Artículo | Edición | Año | Publicado en | Localizador | Partes |
+|---|---|---|---|---|---|
+| Hoare — *Communicating Sequential Processes* | — | 1978 | Communications of the ACM 21(8) | DOI [`10.1145/359576.359585`](https://doi.org/10.1145/359576.359585) | 7 |
+| Dijkstra — *Go To Statement Considered Harmful* | — | 1968 | Communications of the ACM 11(3) | DOI [`10.1145/362929.362947`](https://doi.org/10.1145/362929.362947) | 7 |
+| Parnas — *On the Criteria To Be Used in Decomposing Systems into Modules* | — | 1972 | Communications of the ACM 15(12) | DOI [`10.1145/361598.361623`](https://doi.org/10.1145/361598.361623) | 5, 7 |
+| Ungar y Smith — *Self: The Power of Simplicity* | — | 1987 | OOPSLA '87 (ACM) | DOI [`10.1145/38765.38828`](https://doi.org/10.1145/38765.38828) | 7 |
+
+> Estas tablas no se teclean: las escribe `scripts/verificar_fuentes.py` leyendo el registro y las 176 clases. En cada cambio, el CI comprueba que las **41 obras citadas están todas en el registro** y que ninguna entrada sobra, y que cada una de las 1922 citas dice para qué sirve.
 
 <!-- FUENTES:FIN -->
-
-### Las obras que sostienen cada área
-
-| Área | Libros de referencia |
-|---|---|
-| **Pensamiento y algoritmos** | Polya — *How to Solve It* · Abelson/Sussman — *SICP* · Cormen et al. — *Introduction to Algorithms* · Hunt/Thomas — *The Pragmatic Programmer* |
-| **Lenguajes y paradigmas** | Sebesta — *Concepts of Programming Languages* · Scott — *Programming Language Pragmatics* · Van Roy/Haridi — *Concepts, Techniques, and Models…* · Tate — *Seven Languages in Seven Weeks* |
-| **Tipos y semántica** | Pierce — *Types and Programming Languages* · Dahl/Dijkstra/Hoare — *Structured Programming* |
-| **Datos y estructuras** | Cormen et al. — *Introduction to Algorithms* · Sedgewick/Wayne — *Algorithms* |
-| **Runtime y compilación** | Nystrom — *Crafting Interpreters* · Aho et al. — *Compilers* («Dragon Book») · Bryant/O'Hallaron — *Computer Systems: A Programmer's Perspective* |
-| **Ingeniería de software** | McConnell — *Code Complete* · Martin — *Clean Code* · Fowler — *Refactoring* · Gamma et al. — *Design Patterns* (GoF) · Beck — *TDD by Example* |
-| **Interoperabilidad y sistemas** | Kleppmann — *Designing Data-Intensive Applications* · Newman — *Building Microservices* · Tanenbaum — *Distributed Systems* · Nygard — *Release It!* |
-| **Toolchains y entorno** | Shotts — *The Linux Command Line* · Kernighan/Pike — *The Unix Programming Environment* |
 
 ## 🧩 Núcleo, Atlas y lenguajes vivos: tres capas
 

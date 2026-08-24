@@ -26,9 +26,9 @@ jobs:
     runs-on: windows-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
 
@@ -76,7 +76,7 @@ jobs:
           Copy-Item dist/PolyglotProgrammingLabs.exe artefactos/PolyglotProgrammingLabs-windows.exe
           (Get-FileHash artefactos/PolyglotProgrammingLabs-windows.exe -Algorithm SHA256).Hash
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: PolyglotProgrammingLabs-windows
           path: artefactos/PolyglotProgrammingLabs-windows.exe
